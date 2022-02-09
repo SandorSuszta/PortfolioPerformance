@@ -9,23 +9,29 @@
 /* Begin PBXBuildFile section */
 		79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */; };
 		79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */; };
-		79EAFD1E27B3DCDA008A6062 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1D27B3DCDA008A6062 /* ViewController.swift */; };
+		79EAFD1E27B3DCDA008A6062 /* MarketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */; };
 		79EAFD2127B3DCDA008A6062 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EAFD1F27B3DCDA008A6062 /* Main.storyboard */; };
 		79EAFD2427B3DCDA008A6062 /* PortfolioPerformance.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD2227B3DCDA008A6062 /* PortfolioPerformance.xcdatamodeld */; };
 		79EAFD2627B3DCDE008A6062 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79EAFD2527B3DCDE008A6062 /* Assets.xcassets */; };
 		79EAFD2927B3DCDE008A6062 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */; };
+		79EAFD3327B3E177008A6062 /* MarketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD3227B3E177008A6062 /* MarketTableViewCell.swift */; };
+		79EAFD3527B3FDC8008A6062 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD3427B3FDC7008A6062 /* CoinModel.swift */; };
+		79EAFD3727B3FE02008A6062 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD3627B3FE02008A6062 /* APICaller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		79EAFD1627B3DCD9008A6062 /* PortfolioPerformance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PortfolioPerformance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		79EAFD1D27B3DCDA008A6062 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewController.swift; sourceTree = "<group>"; };
 		79EAFD2027B3DCDA008A6062 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		79EAFD2327B3DCDA008A6062 /* PortfolioPerformance.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PortfolioPerformance.xcdatamodel; sourceTree = "<group>"; };
 		79EAFD2527B3DCDE008A6062 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79EAFD2827B3DCDE008A6062 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79EAFD2A27B3DCDE008A6062 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79EAFD3227B3E177008A6062 /* MarketTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTableViewCell.swift; sourceTree = "<group>"; };
+		79EAFD3427B3FDC7008A6062 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
+		79EAFD3627B3FE02008A6062 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,11 +66,14 @@
 			children = (
 				79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */,
 				79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */,
-				79EAFD1D27B3DCDA008A6062 /* ViewController.swift */,
+				79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */,
+				79EAFD3427B3FDC7008A6062 /* CoinModel.swift */,
+				79EAFD3627B3FE02008A6062 /* APICaller.swift */,
 				79EAFD1F27B3DCDA008A6062 /* Main.storyboard */,
 				79EAFD2527B3DCDE008A6062 /* Assets.xcassets */,
 				79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */,
 				79EAFD2A27B3DCDE008A6062 /* Info.plist */,
+				79EAFD3227B3E177008A6062 /* MarketTableViewCell.swift */,
 				79EAFD2227B3DCDA008A6062 /* PortfolioPerformance.xcdatamodeld */,
 			);
 			path = PortfolioPerformance;
@@ -141,9 +150,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79EAFD1E27B3DCDA008A6062 /* ViewController.swift in Sources */,
+				79EAFD1E27B3DCDA008A6062 /* MarketViewController.swift in Sources */,
 				79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */,
 				79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */,
+				79EAFD3727B3FE02008A6062 /* APICaller.swift in Sources */,
+				79EAFD3327B3E177008A6062 /* MarketTableViewCell.swift in Sources */,
+				79EAFD3527B3FDC8008A6062 /* CoinModel.swift in Sources */,
 				79EAFD2427B3DCDA008A6062 /* PortfolioPerformance.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
