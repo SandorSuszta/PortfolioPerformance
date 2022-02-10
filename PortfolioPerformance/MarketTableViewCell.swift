@@ -13,6 +13,7 @@ class MarketTableViewCell: UITableViewCell {
     @IBOutlet weak var symbol: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var change: UILabel!
+    @IBOutlet weak var logo: UIImageView!
     
     static let cellIdentifier = "marketTableViewCell"
 

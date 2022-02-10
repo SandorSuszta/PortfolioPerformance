@@ -11,9 +11,11 @@ class MarketViewController: UIViewController {
     
     private var tableViewArray = [CoinModel]()
     
-    private var favourites = ["btc","eth","ada","sol"]
-    
     @IBOutlet weak var marketTableView: UITableView!
+    @IBAction func refreshClicked(_ sender: Any) {
+        loadMarketData()
+        marketTableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,17 +54,48 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = marketTableView.dequeueReusableCell(withIdentifier: "marketTableViewCell", for: indexPath) as! MarketTableViewCell
-        cell.name.text = self.tableViewArray[indexPath.row].name
-        cell.symbol.text = self.tableViewArray[indexPath.row].symbol.uppercased()
-        cell.price.text = "$\(self.tableViewArray[indexPath.row].currentPrice ?? 0)"
-        cell.change.text = "\(self.tableViewArray[indexPath.row].priceChangePercentage24H ?? 0)"
-        cell.change.textColor = self.tableViewArray[indexPath.row].priceChangePercentage24H ?? 0 >= 0 ? UIColor.green : UIColor.red
-        return  cell
+        
+        return  configureCell(cell: cell, indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        60
+        75
     }
+    
+    func configureCell(cell: MarketTableViewCell, indexPath: IndexPath) -> MarketTableViewCell {
+        
+        cell.name.text = self.tableViewArray[indexPath.row].name
+        
+        cell.symbol.text = self.tableViewArray[indexPath.row].symbol.uppercased()
+        
+        cell.price.text = "$\(self.tableViewArray[indexPath.row].currentPrice ?? 0)"
+        
+        cell.change.text = "\(self.tableViewArray[indexPath.row].priceChangePercentage24H ?? 0)%"
+        cell.change.textColor = self.tableViewArray[indexPath.row].priceChangePercentage24H ?? 0 >= 0 ? UIColor.green : UIColor.red
+        
+        // Set image
+
+        if let imageData = self.tableViewArray[indexPath.row].imageData {
+            cell.logo.image = UIImage(data: imageData)
+        } else {
+            if let url = URL(string: tableViewArray[indexPath.row].image) {
+                let task = URLSession.shared.dataTask(with: url) { data, _, _ in
+                    if let data = data {
+                        self.tableViewArray[indexPath.row].imageData = data
+                        DispatchQueue.main.async {
+                            cell.logo.image = UIImage(data: data)
+                        }
+                    } else {
+                        print("Error getting image")
+                    }
+                }
+                task.resume()
+            }
+        }
+        
+        return cell
+    }
+    
 }
 
 
