@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		791F3E1827B543BD008A7693 /* CoinDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */; };
 		79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */; };
 		79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */; };
 		79EAFD1E27B3DCDA008A6062 /* MarketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsViewController.swift; sourceTree = "<group>"; };
 		79EAFD1627B3DCD9008A6062 /* PortfolioPerformance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PortfolioPerformance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */,
 				79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */,
 				79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */,
+				791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */,
 				79EAFD3427B3FDC7008A6062 /* CoinModel.swift */,
 				79EAFD3627B3FE02008A6062 /* APICaller.swift */,
 				79EAFD1F27B3DCDA008A6062 /* Main.storyboard */,
@@ -150,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				791F3E1827B543BD008A7693 /* CoinDetailsViewController.swift in Sources */,
 				79EAFD1E27B3DCDA008A6062 /* MarketViewController.swift in Sources */,
 				79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */,
 				79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */,

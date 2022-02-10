@@ -9,7 +9,9 @@ import UIKit
 
 class MarketViewController: UIViewController {
     
+    private var clickedIndexPath = IndexPath()
     private var tableViewArray = [CoinModel]()
+    private let marketToCoinDetailsSegue = "marketToCoinDetails"
     
     @IBOutlet weak var marketTableView: UITableView!
     @IBAction func refreshClicked(_ sender: Any) {
@@ -25,6 +27,11 @@ class MarketViewController: UIViewController {
         
         loadMarketData()
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! CoinDetailsViewController
+        destinationVC.coinModel = tableViewArray[clickedIndexPath.row]
     }
     
     private func loadMarketData() {
@@ -62,7 +69,12 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
         75
     }
     
-    func configureCell(cell: MarketTableViewCell, indexPath: IndexPath) -> MarketTableViewCell {
+    func  tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        clickedIndexPath = indexPath
+        performSegue(withIdentifier: marketToCoinDetailsSegue, sender: self)
+    }
+    
+    private func configureCell(cell: MarketTableViewCell, indexPath: IndexPath) -> MarketTableViewCell {
         
         cell.name.text = self.tableViewArray[indexPath.row].name
         
@@ -70,7 +82,7 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.price.text = "$\(self.tableViewArray[indexPath.row].currentPrice ?? 0)"
         
-        cell.change.text = "\(self.tableViewArray[indexPath.row].priceChangePercentage24H ?? 0)%"
+        cell.change.text = String(format: "%.2f", self.tableViewArray[indexPath.row].priceChangePercentage24H ?? 0)+"%"
         cell.change.textColor = self.tableViewArray[indexPath.row].priceChangePercentage24H ?? 0 >= 0 ? UIColor.green : UIColor.red
         
         // Set image
