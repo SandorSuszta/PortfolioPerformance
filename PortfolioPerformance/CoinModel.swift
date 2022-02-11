@@ -54,6 +54,7 @@ struct CoinModel: Identifiable, Codable {
     let atl, atlChangePercentage: Double?
     let atlDate: String?
     let lastUpdated: String?
+    var isFavourite: Bool? = false
     
     enum CodingKeys: String, CodingKey {
         case id, symbol, name, image

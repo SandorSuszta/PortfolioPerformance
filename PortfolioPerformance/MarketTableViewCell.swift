@@ -9,6 +9,8 @@ import UIKit
 
 class MarketTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var logoViewShadow: UIView!
+    @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var symbol: UILabel!
     @IBOutlet weak var price: UILabel!
@@ -16,5 +18,6 @@ class MarketTableViewCell: UITableViewCell {
     @IBOutlet weak var logo: UIImageView!
     
     static let cellIdentifier = "marketTableViewCell"
+
 
 }

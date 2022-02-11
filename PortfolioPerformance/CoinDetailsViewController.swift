@@ -14,12 +14,30 @@ class CoinDetailsViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var priceChangeLabel: UILabel!
     @IBOutlet weak var priceChangeInPercentageLabel: UILabel!
+    @IBOutlet weak var coinLogoView: UIView!
+    @IBOutlet weak var isFavouriteButton: UIBarButtonItem!
+    @IBAction func isFavouriteButtonClicked(_ sender: Any) {
+        
+       // if let coinSymbol = coinModel.symbol {MarketViewController.favouritesArray.append(coinSymbol}
+        
+    }
     
     public var coinModel:CoinModel? = nil
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //view
+        coinLogoView.layer.cornerRadius = 15
+        
+        coinLogoView.layer.shadowColor = UIColor.lightGray.cgColor
+        coinLogoView.layer.shadowOffset = .zero
+        coinLogoView.layer.shadowOpacity = 0.5
+        coinLogoView.layer.shadowRadius = 5.0
+        coinLogo.layer.cornerRadius = 15
+        coinLogo.layer.masksToBounds = true
+        
+        
 
         title = coinModel?.name
         

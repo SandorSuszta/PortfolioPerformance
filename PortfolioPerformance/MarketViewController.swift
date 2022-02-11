@@ -8,7 +8,7 @@
 import UIKit
 
 class MarketViewController: UIViewController {
-    
+    static var favouritesArray = [String]()
     private var clickedIndexPath = IndexPath()
     private var tableViewArray = [CoinModel]()
     private let marketToCoinDetailsSegue = "marketToCoinDetails"
@@ -24,9 +24,19 @@ class MarketViewController: UIViewController {
         
         marketTableView.dataSource = self
         marketTableView.delegate = self
+        //marketTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         loadMarketData()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        guard !tableViewArray.isEmpty else { return }
+        
+        let topIndex = IndexPath(row: 0, section: 0)
+        marketTableView.scrollToRow(at: topIndex, at: .top, animated: false)
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -104,6 +114,20 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
                 task.resume()
             }
         }
+    
+       
+        cell.logoViewShadow.layer.cornerRadius = 15
+        cell.logoViewShadow.layer.shadowColor = UIColor.lightGray.cgColor
+        cell.logoViewShadow.layer.shadowOffset = .zero
+        cell.logoViewShadow.layer.shadowOpacity = 0.5
+        cell.logoViewShadow.layer.shadowRadius = 5.0
+        
+        cell.logoView.layer.cornerRadius = 15
+        cell.logoView.layer.masksToBounds = true
+        
+        cell.logo.layer.masksToBounds = true
+        
+        
         
         return cell
     }
