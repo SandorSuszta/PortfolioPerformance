@@ -18,6 +18,13 @@ class MarketTableViewCell: UITableViewCell {
     @IBOutlet weak var logo: UIImageView!
     
     static let cellIdentifier = "marketTableViewCell"
+    
+    // Increase spacing between cells
+    override  func layoutSubviews() {
+        super.layoutSubviews()
+        
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
+    }
 
 
 }
