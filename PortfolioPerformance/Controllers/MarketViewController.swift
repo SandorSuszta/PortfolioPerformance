@@ -14,7 +14,11 @@ class MarketViewController: UIViewController {
     private let marketToCoinDetailsSegue = "marketToCoinDetails"
     
     @IBOutlet weak var dominanceView: UIView!
+    @IBOutlet weak var dominanceLabel: UILabel!
+    @IBOutlet weak var dominanceChangeLabel: UILabel!
     @IBOutlet weak var marketCapView: UIView!
+    @IBOutlet weak var marketCapLabel: UILabel!
+    @IBOutlet weak var marketCapChangeLabel: UILabel!
     @IBOutlet weak var greedAndFearView: UIView!
     @IBOutlet weak var marketTableViewHeader: UIView!
     @IBOutlet weak var marketTableView: UITableView!
@@ -28,12 +32,10 @@ class MarketViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        PersistanceManager.loadTransactions()
-        
         marketTableView.dataSource = self
         marketTableView.delegate = self
         //marketTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        
+        MarketData.loadMarketData()
         loadMarketData()
         loadGreedAndFearIndex()
         

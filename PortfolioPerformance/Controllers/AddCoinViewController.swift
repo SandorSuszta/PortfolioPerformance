@@ -13,6 +13,7 @@ class AddCoinViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var addCoinCollectionView: UICollectionView!
     
     public var collectionViewCoins = [CoinModel]()
+    
     private let segueIdentifier = "addCoinToAddTransaction"
     private let cellIdentifier = "addCoinCell"
     
@@ -86,6 +87,7 @@ class AddCoinViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        AddTransactionViewController.selectedCoin = collectionViewCoins[indexPath.row]
         performSegue(withIdentifier: segueIdentifier, sender: self)
     }
 }

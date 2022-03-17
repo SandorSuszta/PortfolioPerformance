@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SellTransactionViewController: UIViewController {
     
@@ -17,34 +18,20 @@ class SellTransactionViewController: UIViewController {
     
     @IBOutlet weak var addTransactionButton: UIButton!
     
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
     @IBAction func sellAllClicked(_ sender: Any) {
 
     }
     
     @IBAction func AddSellTransactionClicked(_ sender: Any) {
         
-        let newTransaction = Transaction(context: PersistanceManager.context)
-        
-       
-        if let sellPrice = sellPriceTextField.text,
-           let sellAmmount = sellAmmountTextField.text {
-            newTransaction.type = "sell"
-            newTransaction.ammount = Double(sellAmmount) ?? 0
-            newTransaction.sellPrice = Double(sellPrice) ?? 0
-            
-            PersistanceManager.saveTransaction()
-            
-        }
-      
-        
+        saveSellTransaction()
         
         //Return to addCoin screen
         if let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "addCoin") {
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }
-        
-    
-        
     }
     
     
@@ -55,5 +42,18 @@ class SellTransactionViewController: UIViewController {
         addTransactionButton.layer.cornerRadius = 10
     }
     
-
+    func saveSellTransaction() {
+        let newTransaction = Transaction(context: PersistanceManager.context)
+        let selectedCoin = AddTransactionViewController.selectedCoin
+        
+        newTransaction.type = "sell"
+        newTransaction.ammount = Double(sellAmmountTextField.text!) ?? 0
+        newTransaction.price = Double(sellPriceTextField.text!) ?? 0
+        newTransaction.dateAndTime = datePicker.date
+        newTransaction.boughtCurrency =  selectedCoin?.symbol.uppercased()
+        newTransaction.soldCurrency = AddTransactionViewController.tradingPairCoinSymbol.uppercased()
+        newTransaction.logoData = selectedCoin?.imageData
+        
+        PersistanceManager.saveTransaction()
+    }
 }

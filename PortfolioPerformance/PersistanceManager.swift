@@ -22,9 +22,9 @@ struct PersistanceManager {
         
     }
     
-    static func loadTransactions() {
+    static func loadTransactions() -> [Transaction]{
         
-        var transactions: [NSManagedObject] = []
+        var transactions: [Transaction] = []
         
         let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         
@@ -34,7 +34,7 @@ struct PersistanceManager {
             print("error fetching data")
         }
         
-        print(transactions)
+        return transactions
     }
     
     

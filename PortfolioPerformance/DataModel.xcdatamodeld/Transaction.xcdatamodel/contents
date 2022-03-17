@@ -3,15 +3,14 @@
     <entity name="Transaction" representedClassName="Transaction" syncable="YES" codeGenerationType="class">
         <attribute name="ammount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="boughtCurrency" optional="YES" attributeType="String"/>
-        <attribute name="boughtWith" optional="YES" attributeType="String"/>
         <attribute name="dateAndTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="logoData" optional="YES" attributeType="Binary"/>
+        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="profitOrLoss" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="sellPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="soldCurrency" optional="YES" attributeType="String"/>
-        <attribute name="soldFor" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Transaction" positionX="-63" positionY="-18" width="128" height="164"/>
+        <element name="Transaction" positionX="-63" positionY="-18" width="128" height="149"/>
     </elements>
 </model>

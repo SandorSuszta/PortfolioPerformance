@@ -10,17 +10,25 @@ import UIKit
 class TransactionHistoryTableViewCell: UITableViewCell {
     
     @IBOutlet weak var transactionView: UIView!
+    @IBOutlet weak var logo: UIImageView!
     
-    @IBOutlet weak var sellLabel: UILabel!
+    @IBOutlet weak var transactionType: UILabel!
+    @IBOutlet weak var transactionPairLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var profitOrLossLabel: UILabel!
+    @IBOutlet weak var ammountLabel: UILabel!
+    @IBOutlet weak var currentValueLabel: UILabel!
     
     override func awakeFromNib() {
         
         super.awakeFromNib()
-        sellLabel.layer.cornerRadius = 10
-        sellLabel.layer.masksToBounds = true
-        
+        transactionType.layer.cornerRadius = 10
+        transactionType.layer.masksToBounds = true
         transactionView.layer.cornerRadius = 10
         transactionView.layer.masksToBounds = true
+        
+        transactionView.layer.cornerRadius = 10
         
     }
     

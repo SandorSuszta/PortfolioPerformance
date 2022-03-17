@@ -11,8 +11,15 @@
 		790C30C527CEA7620021658F /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C427CEA7620021658F /* PersistanceManager.swift */; };
 		790C30C827CEAA200021658F /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C627CEAA200021658F /* DataModel.xcdatamodeld */; };
 		791F3E1827B543BD008A7693 /* CoinDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */; };
+		79397C7527E203FD00B04EDA /* TransactionHistorySellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79397C7327E203FD00B04EDA /* TransactionHistorySellTableViewCell.swift */; };
+		79397C7627E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */; };
+		79397C7927E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79397C7727E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift */; };
+		79397C7A27E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79397C7827E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.xib */; };
+		79397C7C27E3541700B04EDA /* MarketData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79397C7B27E3541700B04EDA /* MarketData.swift */; };
 		7941060A27DA0A11009B4B8C /* SF-Pro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7941060827DA0A10009B4B8C /* SF-Pro-Italic.ttf */; };
 		7941060B27DA0A11009B4B8C /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7941060927DA0A11009B4B8C /* SF-Pro.ttf */; };
+		7941061027E0D0EB009B4B8C /* MyColours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7941060F27E0D0EB009B4B8C /* MyColours.swift */; };
+		7941061227E0D84F009B4B8C /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7941061127E0D84F009B4B8C /* DateFormatter.swift */; };
 		79619A1427BD374C0080CB01 /* AddTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79619A1327BD374C0080CB01 /* AddTransactionViewController.swift */; };
 		79619A1627C4E8200080CB01 /* BuyTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79619A1527C4E8200080CB01 /* BuyTransactionViewController.swift */; };
 		79619A1827C4EAC00080CB01 /* TransferTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79619A1727C4EAC00080CB01 /* TransferTransactionViewController.swift */; };
@@ -20,7 +27,6 @@
 		79C8DE6F27BAA7F400C4F3CC /* AddCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C8DE6E27BAA7F400C4F3CC /* AddCoinViewController.swift */; };
 		79C8DE7127BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C8DE7027BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift */; };
 		79E2763727CF955A005FB139 /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E2763627CF955A005FB139 /* TransactionHistoryViewController.swift */; };
-		79E2763927CF9722005FB139 /* TransactionHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E2763827CF9722005FB139 /* TransactionHistoryTableViewCell.swift */; };
 		79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */; };
 		79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */; };
 		79EAFD1E27B3DCDA008A6062 /* MarketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */; };
@@ -37,8 +43,15 @@
 		790C30C427CEA7620021658F /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		790C30C727CEAA200021658F /* Transaction.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Transaction.xcdatamodel; sourceTree = "<group>"; };
 		791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsViewController.swift; sourceTree = "<group>"; };
+		79397C7327E203FD00B04EDA /* TransactionHistorySellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistorySellTableViewCell.swift; sourceTree = "<group>"; };
+		79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistorySellTableViewCell.xib; sourceTree = "<group>"; };
+		79397C7727E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryBuyTableViewCell.swift; sourceTree = "<group>"; };
+		79397C7827E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistoryBuyTableViewCell.xib; sourceTree = "<group>"; };
+		79397C7B27E3541700B04EDA /* MarketData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketData.swift; sourceTree = "<group>"; };
 		7941060827DA0A10009B4B8C /* SF-Pro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Italic.ttf"; sourceTree = "<group>"; };
 		7941060927DA0A11009B4B8C /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
+		7941060F27E0D0EB009B4B8C /* MyColours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColours.swift; sourceTree = "<group>"; };
+		7941061127E0D84F009B4B8C /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		79619A1327BD374C0080CB01 /* AddTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionViewController.swift; sourceTree = "<group>"; };
 		79619A1527C4E8200080CB01 /* BuyTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyTransactionViewController.swift; sourceTree = "<group>"; };
 		79619A1727C4EAC00080CB01 /* TransferTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferTransactionViewController.swift; sourceTree = "<group>"; };
@@ -46,7 +59,6 @@
 		79C8DE6E27BAA7F400C4F3CC /* AddCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoinViewController.swift; sourceTree = "<group>"; };
 		79C8DE7027BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoinCollectionViewCell.swift; sourceTree = "<group>"; };
 		79E2763627CF955A005FB139 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
-		79E2763827CF9722005FB139 /* TransactionHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		79EAFD1627B3DCD9008A6062 /* PortfolioPerformance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PortfolioPerformance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,13 +88,25 @@
 			children = (
 				79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */,
 				79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */,
+				7941060F27E0D0EB009B4B8C /* MyColours.swift */,
+				7941061127E0D84F009B4B8C /* DateFormatter.swift */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		79397C7227E1134C00B04EDA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				79C8DE7027BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift */,
+				79EAFD3227B3E177008A6062 /* MarketTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		79619A1927C4EAD80080CB01 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				79E2763627CF955A005FB139 /* TransactionHistoryViewController.swift */,
 				79619A1A27C4EB080080CB01 /* AddTransactionsVC */,
 				79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */,
 				791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */,
@@ -121,16 +145,18 @@
 		79EAFD1827B3DCD9008A6062 /* PortfolioPerformance */ = {
 			isa = PBXGroup;
 			children = (
+				79397C7227E1134C00B04EDA /* Cells */,
 				790C30C327CEA71A0021658F /* Supporting Files */,
 				79619A1927C4EAD80080CB01 /* Controllers */,
 				79EAFD3427B3FDC7008A6062 /* CoinModel.swift */,
 				790C30C127C78E930021658F /* GreedAndFearModel.swift */,
 				79EAFD3627B3FE02008A6062 /* APICaller.swift */,
 				79EAFD1F27B3DCDA008A6062 /* Main.storyboard */,
-				79E2763827CF9722005FB139 /* TransactionHistoryTableViewCell.swift */,
-				79E2763627CF955A005FB139 /* TransactionHistoryViewController.swift */,
-				79C8DE7027BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift */,
-				79EAFD3227B3E177008A6062 /* MarketTableViewCell.swift */,
+				79397C7327E203FD00B04EDA /* TransactionHistorySellTableViewCell.swift */,
+				79397C7727E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift */,
+				79397C7B27E3541700B04EDA /* MarketData.swift */,
+				79397C7827E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.xib */,
+				79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */,
 				79EAFD2527B3DCDE008A6062 /* Assets.xcassets */,
 				79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */,
 				79EAFD2A27B3DCDE008A6062 /* Info.plist */,
@@ -200,11 +226,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79397C7627E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib in Resources */,
 				79EAFD2927B3DCDE008A6062 /* LaunchScreen.storyboard in Resources */,
 				79EAFD2627B3DCDE008A6062 /* Assets.xcassets in Resources */,
 				79EAFD2127B3DCDA008A6062 /* Main.storyboard in Resources */,
 				7941060A27DA0A11009B4B8C /* SF-Pro-Italic.ttf in Resources */,
 				7941060B27DA0A11009B4B8C /* SF-Pro.ttf in Resources */,
+				79397C7A27E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +247,7 @@
 				79C8DE7127BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift in Sources */,
 				790C30C827CEAA200021658F /* DataModel.xcdatamodeld in Sources */,
 				79C8DE6F27BAA7F400C4F3CC /* AddCoinViewController.swift in Sources */,
+				7941061227E0D84F009B4B8C /* DateFormatter.swift in Sources */,
 				79619A1427BD374C0080CB01 /* AddTransactionViewController.swift in Sources */,
 				79EAFD1E27B3DCDA008A6062 /* MarketViewController.swift in Sources */,
 				79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */,
@@ -226,9 +255,12 @@
 				790C30C227C78E930021658F /* GreedAndFearModel.swift in Sources */,
 				79E2763727CF955A005FB139 /* TransactionHistoryViewController.swift in Sources */,
 				79619A1C27C4F4850080CB01 /* SellTransactionViewController.swift in Sources */,
-				79E2763927CF9722005FB139 /* TransactionHistoryTableViewCell.swift in Sources */,
+				79397C7927E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift in Sources */,
+				79397C7527E203FD00B04EDA /* TransactionHistorySellTableViewCell.swift in Sources */,
 				79EAFD3727B3FE02008A6062 /* APICaller.swift in Sources */,
+				79397C7C27E3541700B04EDA /* MarketData.swift in Sources */,
 				79EAFD3327B3E177008A6062 /* MarketTableViewCell.swift in Sources */,
+				7941061027E0D0EB009B4B8C /* MyColours.swift in Sources */,
 				79EAFD3527B3FDC8008A6062 /* CoinModel.swift in Sources */,
 				79619A1827C4EAC00080CB01 /* TransferTransactionViewController.swift in Sources */,
 				79619A1627C4E8200080CB01 /* BuyTransactionViewController.swift in Sources */,
@@ -309,7 +341,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -364,7 +396,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
