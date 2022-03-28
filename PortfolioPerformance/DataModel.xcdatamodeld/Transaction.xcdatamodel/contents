@@ -3,14 +3,18 @@
     <entity name="Transaction" representedClassName="Transaction" syncable="YES" codeGenerationType="class">
         <attribute name="ammount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="boughtCurrency" optional="YES" attributeType="String"/>
+        <attribute name="convertedCoinLogo" optional="YES" attributeType="Binary"/>
+        <attribute name="convertedCoinWorthThen" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="convertedCurrency" optional="YES" attributeType="String"/>
         <attribute name="dateAndTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="logoData" optional="YES" attributeType="Binary"/>
+        <attribute name="logo" optional="YES" attributeType="Binary"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="priceThen" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="profitOrLoss" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="soldCurrency" optional="YES" attributeType="String"/>
+        <attribute name="transferType" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Transaction" positionX="-63" positionY="-18" width="128" height="149"/>
+        <element name="Transaction" positionX="-63" positionY="-18" width="128" height="209"/>
     </elements>
 </model>

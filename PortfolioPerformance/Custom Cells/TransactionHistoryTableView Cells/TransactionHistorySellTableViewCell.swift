@@ -21,34 +21,36 @@ class TransactionHistorySellTableViewCell: UITableViewCell {
     
     static let identifier = "TransactionHistorySellTableViewCell"
     
-    static func configureSellCell(cell: TransactionHistorySellTableViewCell , transaction: Transaction) -> TransactionHistorySellTableViewCell {
+    static func nib() -> UINib {
+        return UINib(nibName: TransactionHistorySellTableViewCell.identifier, bundle: nil)
+    }
+    
+    func configureSellCell(with transaction: Transaction) -> TransactionHistorySellTableViewCell {
         
         // Transaction type label
-           
-            cell.transactionType.backgroundColor = UIColor.red.withAlphaComponent(0.3)
-            cell.transactionType.text = "Sell"
-      
+            self.transactionType.backgroundColor = UIColor.red.withAlphaComponent(0.3)
+            self.transactionType.text = "Sell"
         
         //Transaction pair label
-        cell.transactionPairLabel.text = "\(transaction.boughtCurrency ?? "") / \(transaction.soldCurrency ?? "")"
+        self.transactionPairLabel.text = "\(transaction.boughtCurrency ?? "") / \(transaction.convertedCurrency ?? "")"
         
         // Date label
         if let date = transaction.dateAndTime {
-            cell.dateLabel.text = Formatter.formatDate(from: date)
+            self.dateLabel.text = Formatter.formatDate(from: date)
         }
         
         // Ammount label
-        cell.ammountLabel.text = String(transaction.ammount)
+        self.ammountLabel.text = String(transaction.ammount)
         
         // Price label
-        cell.priceLabel.text = String(transaction.price)
+        self.priceLabel.text = String(transaction.price)
         
         //Logo
-        if let logoData = transaction.logoData {
-            cell.logo.image = UIImage(data: logoData)
+        if let logoData = transaction.logo {
+            self.logo.image = UIImage(data: logoData)
         }
-       
-        return cell
+        
+        return self
     }
     
     override func awakeFromNib() {

@@ -55,7 +55,7 @@ class MarketViewController: UIViewController {
         greedAndFearView.layer.shadowColor = UIColor.systemRed.cgColor
         greedAndFearView.layer.shadowOffset = .zero
         greedAndFearView.layer.shadowOpacity = 1
-        greedAndFearView.layer.shadowRadius = 15.0
+        greedAndFearView.layer.shadowRadius = 12.5
         
         marketTableViewHeader.layer.cornerRadius = 15
         marketTableViewHeader.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -107,8 +107,32 @@ class MarketViewController: UIViewController {
             case .success(let index):
                 DispatchQueue.main.async {
                     self.greedAndFearIndexValue.text = index.data[0].value
+                    
+                    guard let indexValue = Int(index.data[0].value) else {fatalError()}
+                    
+                    switch indexValue {
+                    case 0...24:
+                        self.greedAndFearView.layer.shadowColor = UIColor.extremeFear.cgColor
+                        self.greedAndFearIndexValueClassification.textColor = UIColor.extremeFear
+                    case 25...44:
+                        self.greedAndFearView.layer.shadowColor = UIColor.fear.cgColor
+                        self.greedAndFearIndexValueClassification.textColor = UIColor.fear
+                    case 45...59:
+                        self.greedAndFearView.layer.shadowColor = UIColor.neutal.cgColor
+                        self.greedAndFearIndexValueClassification.textColor = UIColor.neutal
+                    case 60...74:
+                        self.greedAndFearView.layer.shadowColor = UIColor.greed.cgColor
+                        self.greedAndFearIndexValueClassification.textColor = UIColor.greed
+                    case 75...100:
+                        self.greedAndFearView.layer.shadowColor = UIColor.extremeGreed.cgColor
+                        self.greedAndFearIndexValueClassification.textColor = UIColor.extremeGreed
+                    default:
+                        fatalError()
+                    }
+                    
+                    
                     self.greedAndFearIndexValueClassification.text = index.data[0].valueClassification
-                    print(index)
+                    
                 }
                 
             case .failure(let error):
@@ -132,7 +156,7 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        75
+        60
     }
     
     func  tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

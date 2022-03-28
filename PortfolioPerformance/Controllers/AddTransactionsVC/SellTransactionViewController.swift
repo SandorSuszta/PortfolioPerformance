@@ -34,7 +34,7 @@ class SellTransactionViewController: UIViewController {
         }
     }
     
-    
+    let selectedCoin = AddTransactionViewController.selectedCoin
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,15 +44,15 @@ class SellTransactionViewController: UIViewController {
     
     func saveSellTransaction() {
         let newTransaction = Transaction(context: PersistanceManager.context)
-        let selectedCoin = AddTransactionViewController.selectedCoin
+        
         
         newTransaction.type = "sell"
         newTransaction.ammount = Double(sellAmmountTextField.text!) ?? 0
         newTransaction.price = Double(sellPriceTextField.text!) ?? 0
         newTransaction.dateAndTime = datePicker.date
         newTransaction.boughtCurrency =  selectedCoin?.symbol.uppercased()
-        newTransaction.soldCurrency = AddTransactionViewController.tradingPairCoinSymbol.uppercased()
-        newTransaction.logoData = selectedCoin?.imageData
+        newTransaction.convertedCurrency = AddTransactionViewController.tradingPairCoinSymbol.uppercased()
+        newTransaction.logo = selectedCoin?.imageData
         
         PersistanceManager.saveTransaction()
     }

@@ -8,7 +8,7 @@
 import UIKit
 
 class TransactionHistoryBuyTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var transactionView: UIView!
     @IBOutlet weak var transactionType: UILabel!
@@ -23,35 +23,39 @@ class TransactionHistoryBuyTableViewCell: UITableViewCell {
     
     static let identifier = "TransactionHistoryBuyTableViewCell"
     
-    static func configureBuyCell(cell: TransactionHistoryBuyTableViewCell , transaction: Transaction) -> TransactionHistoryBuyTableViewCell {
-        
+    static func nib() -> UINib {
+        return UINib(nibName: TransactionHistoryBuyTableViewCell.identifier, bundle: nil)
+    }
+    
+    func configureBuyCell(with transaction: Transaction) -> TransactionHistoryBuyTableViewCell {
         // Transaction type label
-        cell.transactionType.backgroundColor = UIColor(named: MyColours.nephritis)?.withAlphaComponent(0.3)
-            cell.transactionType.text = "Buy"
-      
+        self.transactionType.backgroundColor = UIColor .nephritis.withAlphaComponent(0.3)
+        self.transactionType.text = "Buy"
+        
         //Transaction pair label
-        cell.transactionPairLabel.text = "\(transaction.boughtCurrency ?? "") / \(transaction.soldCurrency ?? "")"
+        self.transactionPairLabel.text = "\(transaction.boughtCurrency ?? "") / \(transaction.convertedCurrency ?? "")"
         
         // Date label
         if let date = transaction.dateAndTime {
-            cell.dateLabel.text = Formatter.formatDate(from: date)
+            self.dateLabel.text = date.formatedString()
         }
         
         // Ammount label
-        cell.ammountLabel.text = String(transaction.ammount)
+        self.ammountLabel.text = String(transaction.ammount)
         
         // Price label
-        cell.priceLabel.text = String(transaction.price)
+        self.priceLabel.text = transaction.price.string2f()
         
         //Cost label
         let cost = transaction.ammount * transaction.price
-        cell.costLabel.text = String(cost)
+        self.costLabel.text = cost.string2f()
         
         //Value label
         var value = 0.0
+        MarketData.loadMarketData()
         if let currentPrice = MarketData.allCoinsArray.filter({$0.symbol == transaction.boughtCurrency?.lowercased()}).first?.currentPrice {
             value = transaction.ammount * currentPrice
-            cell.currentValueLabel.text = String(value)
+            self.currentValueLabel.text = value.string2f()
         }
         
         //ProfitOrLoss and Percentage labels
@@ -59,21 +63,21 @@ class TransactionHistoryBuyTableViewCell: UITableViewCell {
         let percentage = profitOrLoss/cost * 100
         
         if profitOrLoss >= 0 {
-            cell.profitOrLossLabel.textColor = UIColor(named: MyColours.nephritis)
-            cell.percentageLabel.textColor = UIColor(named: MyColours.nephritis)
+            self.profitOrLossLabel.textColor = .nephritis
+            self.percentageLabel.textColor = .nephritis
         } else {
-            cell.profitOrLossLabel.textColor = UIColor(named: MyColours.pomergranate)
-            cell.percentageLabel.textColor = UIColor(named: MyColours.pomergranate)
+            self.profitOrLossLabel.textColor = .pomergranate
+            self.percentageLabel.textColor = .pomergranate
         }
-        cell.profitOrLossLabel.text = String(format: "%.2f", profitOrLoss)
-        cell.percentageLabel.text = String(format: "%.2f", percentage) + " %"
+        self.profitOrLossLabel.text =  profitOrLoss.string2f()
+        self.percentageLabel.text = percentage.string2f() + " %"
         
         //Logo
-        if let logoData = transaction.logoData {
-            cell.logo.image = UIImage(data: logoData)
+        if let logoData = transaction.logo {
+            self.logo.image = UIImage(data: logoData)
         }
-       
-        return cell
+        
+        return self
     }
     
     override func awakeFromNib() {

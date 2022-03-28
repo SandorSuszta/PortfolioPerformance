@@ -16,23 +16,37 @@ class AddTransactionViewController: UIViewController {
     @IBOutlet weak var sellView: UIView!
     @IBOutlet weak var buyView: UIView!
     @IBOutlet weak var transferView: UIView!
+    @IBOutlet weak var convertView: UIView!
+    
     
     static var selectedCoin: CoinModel?
     static var tradingPairCoinSymbol: String = "USDT"
     
     @IBAction func transactionTypeSegment(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
             sellView.alpha = 0
             buyView.alpha = 1
             transferView.alpha = 0
-        } else if sender.selectedSegmentIndex == 1 {
+            convertView.alpha = 0
+        case 1:
             sellView.alpha = 1
             buyView.alpha = 0
             transferView.alpha = 0
-        } else if sender.selectedSegmentIndex == 2 {
+            convertView.alpha = 0
+        case 2:
+            sellView.alpha = 0
+            buyView.alpha = 0
+            transferView.alpha = 0
+            convertView.alpha = 1
+        case 3:
             sellView.alpha = 0
             buyView.alpha = 0
             transferView.alpha = 1
+            convertView.alpha = 0
+        default:
+            fatalError()
         }
     }
     
@@ -43,11 +57,14 @@ class AddTransactionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         updateUI()
         
         sellView.alpha = 0
         transferView.alpha = 0
-        
+        convertView.alpha = 0
+
     }
     
     func updateUI() {
@@ -64,3 +81,4 @@ class AddTransactionViewController: UIViewController {
         }
     }
 }
+

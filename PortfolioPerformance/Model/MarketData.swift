@@ -20,7 +20,6 @@ class MarketData {
                 
             case .failure(let error):
                 print(error)
-                
             }
         }
     }

@@ -17,7 +17,6 @@ class BuyTransactionViewController: UIViewController {
     @IBOutlet weak var buyDatePicker: UIDatePicker!
     
     @IBAction func addTransactionPressed(_ sender: Any) {
-        
         saveBuyTransaction()
         
         //Back to root
@@ -26,10 +25,23 @@ class BuyTransactionViewController: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addTransactionButton.layer.cornerRadius = 10
+        buyPriceTextField.delegate = self
+        buyAmmountTextField.delegate = self
+        
+        configureTextFields()
+    }
+    
+    func configureTextFields() {
+        buyPriceTextField.keyboardType = .numberPad
+        buyPriceTextField.borderStyle = .none
+        buyPriceTextField.becomeFirstResponder()
+        
+        buyAmmountTextField.returnKeyType = .done
+        buyAmmountTextField.borderStyle = .none
+        buyAmmountTextField.keyboardType = .asciiCapableNumberPad
     }
     
     func saveBuyTransaction() {
@@ -41,10 +53,16 @@ class BuyTransactionViewController: UIViewController {
         newTransaction.price = Double(buyPriceTextField.text!) ?? 0
         newTransaction.dateAndTime = buyDatePicker.date
         newTransaction.boughtCurrency =  selectedCoin?.symbol.uppercased()
-        newTransaction.soldCurrency = AddTransactionViewController.tradingPairCoinSymbol.uppercased()
-        newTransaction.logoData = selectedCoin?.imageData
+        newTransaction.convertedCurrency = AddTransactionViewController.tradingPairCoinSymbol.uppercased()
+        newTransaction.logo = selectedCoin?.imageData
         
         PersistanceManager.saveTransaction()
     }
+}
 
+
+    // MARK: - Text field delegate methods
+    extension BuyTransactionViewController: UITextFieldDelegate {
+        
+        
 }

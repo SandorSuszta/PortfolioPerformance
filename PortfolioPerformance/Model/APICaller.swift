@@ -20,7 +20,7 @@ class APICaller {
         completion: @escaping (Result<[CoinModel], Error>) -> Void
     ) {
         guard let url = URL(string: Constants.getMarketDataEndpoint) else {
-            return
+            fatalError()
         }
         
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
@@ -32,6 +32,30 @@ class APICaller {
                 } catch {
                     completion(.failure(error))
                     
+            }
+        }
+        task.resume()
+    }
+    
+    public func getPriceOnDate(
+        coinID: String,
+        date: String,
+        completion: @escaping (Result<Double, Error>) -> Void
+    ){
+        let endpoint = "https://api.coingecko.com/api/v3/coins/\(coinID)/history?date=\(date)"
+        
+        guard let url = URL(string: endpoint) else { return }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            
+            guard let data = data, error == nil else { return }
+            
+            do {
+                let coinPrice = try JSONDecoder().decode(CoinPriceOnDate.self, from: data)
+                guard let price = coinPrice.market_data.current_price["usd"] else { fatalError()}
+                completion(.success(price))
+            } catch {
+                completion(.failure(error))
             }
         }
         task.resume()

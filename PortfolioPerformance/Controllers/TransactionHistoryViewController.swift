@@ -45,25 +45,57 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
             
         case "sell":
             let cell = transactionHistoryTableView.dequeueReusableCell(withIdentifier: TransactionHistorySellTableViewCell.identifier, for: indexPath) as! TransactionHistorySellTableViewCell
-            let configuredCell = TransactionHistorySellTableViewCell.configureSellCell(cell: cell, transaction: transactionHistory[indexPath.row])
+            let configuredCell = cell.configureSellCell(with: transactionHistory[indexPath.row])
             return  configuredCell
             
         case "buy":
             let cell = transactionHistoryTableView.dequeueReusableCell(withIdentifier: TransactionHistoryBuyTableViewCell.identifier, for: indexPath) as! TransactionHistoryBuyTableViewCell
-            let configuredCell = TransactionHistoryBuyTableViewCell.configureBuyCell(cell: cell, transaction: transactionHistory[indexPath.row])
+            let configuredCell = cell.configureBuyCell(with: transactionHistory[indexPath.row])
+            return  configuredCell
+            
+        case "convert":
+            let cell = transactionHistoryTableView.dequeueReusableCell(withIdentifier: TransactionHistoryConvertTableViewCell.identifier, for: indexPath) as! TransactionHistoryConvertTableViewCell
+            let configuredCell = cell.configureConvertCell(with: transactionHistory[indexPath.row])
+            return configuredCell
+            
+        case "transfer":
+            let cell = transactionHistoryTableView.dequeueReusableCell(withIdentifier: TransactionHistoryTransferTableViewCell.identifier, for: indexPath) as! TransactionHistoryTransferTableViewCell
+            let configuredCell = TransactionHistoryTransferTableViewCell.configureTransferCell(cell: cell, transaction: transactionHistory[indexPath.row])
             return  configuredCell
             
         default:
             fatalError()
         }
-       
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let transactionType = transactionHistory[indexPath.row].type
+        var size: CGFloat
+        switch transactionType {
+        case "buy":
+            size = 175
+        case "sell":
+            size = 175
+        case "convert":
+            size = 250
+        case "transfer":
+            size = 150
+        default:
+            fatalError()
+        }
+        return size
     }
     
    private func registerTableViewCells() {
-       let sellCell = UINib(nibName: TransactionHistorySellTableViewCell.identifier, bundle: nil)
-       self.transactionHistoryTableView.register(sellCell, forCellReuseIdentifier: TransactionHistorySellTableViewCell.identifier)
-       let buyCell = UINib(nibName: TransactionHistoryBuyTableViewCell.identifier, bundle: nil)
-       self.transactionHistoryTableView.register(buyCell, forCellReuseIdentifier: TransactionHistoryBuyTableViewCell.identifier)
+
+       self.transactionHistoryTableView.register(TransactionHistorySellTableViewCell.nib(), forCellReuseIdentifier: TransactionHistorySellTableViewCell.identifier)
+       
+       self.transactionHistoryTableView.register(TransactionHistoryBuyTableViewCell.nib(), forCellReuseIdentifier: TransactionHistoryBuyTableViewCell.identifier)
+       
+       self.transactionHistoryTableView.register(TransactionHistoryConvertTableViewCell.nib(), forCellReuseIdentifier: TransactionHistoryConvertTableViewCell.identifier)
+       
+       let transferCell = UINib(nibName: TransactionHistoryTransferTableViewCell.identifier, bundle: nil)
+       self.transactionHistoryTableView.register(transferCell, forCellReuseIdentifier: TransactionHistoryTransferTableViewCell.identifier)
     }
     
    
