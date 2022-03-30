@@ -13,6 +13,10 @@ class MarketViewController: UIViewController {
     private var tableViewArray = [CoinModel]()
     private let marketToCoinDetailsSegue = "marketToCoinDetails"
     
+    private var btcData: CoinModel? {
+        self.tableViewArray.filter({$0.symbol == "btc"}).first
+    }
+    
     @IBOutlet weak var dominanceView: UIView!
     @IBOutlet weak var dominanceLabel: UILabel!
     @IBOutlet weak var dominanceChangeLabel: UILabel!
@@ -22,11 +26,10 @@ class MarketViewController: UIViewController {
     @IBOutlet weak var greedAndFearView: UIView!
     @IBOutlet weak var marketTableViewHeader: UIView!
     @IBOutlet weak var marketTableView: UITableView!
+    
     @IBAction func refreshClicked(_ sender: Any) {
         loadMarketData()
         marketTableView.reloadData()
-        
-        
     }
     
     override func viewDidLoad() {
@@ -35,21 +38,15 @@ class MarketViewController: UIViewController {
         marketTableView.dataSource = self
         marketTableView.delegate = self
         //marketTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        MarketData.loadMarketData()
+        
+        MarketData.getMarketData()
         loadMarketData()
         loadGreedAndFearIndex()
         
-        marketCapView.layer.cornerRadius = 15
-        marketCapView.layer.shadowColor = UIColor.lightGray.cgColor
-        marketCapView.layer.shadowOffset = .zero
-        marketCapView.layer.shadowOpacity = 0.5
-        marketCapView.layer.shadowRadius = 5.0
         
-        dominanceView.layer.cornerRadius = 15
-        dominanceView.layer.shadowColor = UIColor.lightGray.cgColor
-        dominanceView.layer.shadowOffset = .zero
-        dominanceView.layer.shadowOpacity = 0.5
-        dominanceView.layer.shadowRadius = 5.0
+        marketCapView.configureWithShadow()
+        dominanceView.configureWithShadow()
+        
         
         greedAndFearView.layer.cornerRadius = 15
         greedAndFearView.layer.shadowColor = UIColor.systemRed.cgColor
@@ -57,9 +54,10 @@ class MarketViewController: UIViewController {
         greedAndFearView.layer.shadowOpacity = 1
         greedAndFearView.layer.shadowRadius = 12.5
         
+        
+        
         marketTableViewHeader.layer.cornerRadius = 15
         marketTableViewHeader.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,6 +80,7 @@ class MarketViewController: UIViewController {
                 
             case .success(let coinArray):
                 self.tableViewArray = coinArray
+                self.loadGlobalData()
                 
                 DispatchQueue.main.async {
                     self.marketTableView.reloadData()
@@ -89,7 +88,53 @@ class MarketViewController: UIViewController {
                 
             case .failure(let error):
                 print(error)
+            }
+        }
+    }
+    
+    //MARK: - Load Global Data
+    
+    private func loadGlobalData() {
+        APICaller.shared.getGlobalData { result in
+            switch result {
+            case .success(let globalData):
+                let marketCap = globalData.totalMarketCap["usd"]
+                let marketCapChange = globalData.marketCapChangePercentage24HUsd
+                let btcDominance = globalData.marketCapPercentage["btc"]
                 
+                let btcDominanceChange = GlobalData.calculateDominanceChange(
+                    todayDominance: btcDominance ?? 0,
+                    totalMarketCap: marketCap ?? 0,
+                    totalMarketCapChange: marketCapChange,
+                    btcMarketCap: self.btcData?.marketCap ?? 0,
+                    btcMarketCapChange: self.btcData?.marketCapChange24H ?? 0)
+                
+                DispatchQueue.main.async {
+                    
+                    self.marketCapLabel.text = ((marketCap ?? 0)/1000000000000).string2f() + " T"
+                    if marketCapChange >= 0 {
+                        self.marketCapChangeLabel.text = "+" + marketCapChange.string2f() + "%"
+                        self.marketCapChangeLabel.textColor = .nephritis
+                    } else {
+                        self.marketCapChangeLabel.text = marketCapChange.string2f() + "%"
+                        self.marketCapChangeLabel.textColor = .pomergranate
+                    }
+            
+                    self.dominanceLabel.text = btcDominance?.string2f() ?? "" + "%"
+                    
+                    if btcDominanceChange >= 0 {
+                        
+                        self.dominanceChangeLabel.text = "+" + btcDominanceChange.string2f() + "%"
+                        self.dominanceChangeLabel.textColor = .nephritis
+                    } else {
+                        self.dominanceChangeLabel.text = btcDominanceChange.string2f() + "%"
+                        self.dominanceChangeLabel.textColor = .pomergranate
+                    }
+                }
+                
+                
+            case .failure(let error):
+                fatalError("\(error)")
             }
         }
     }
@@ -112,20 +157,20 @@ class MarketViewController: UIViewController {
                     
                     switch indexValue {
                     case 0...24:
-                        self.greedAndFearView.layer.shadowColor = UIColor.extremeFear.cgColor
-                        self.greedAndFearIndexValueClassification.textColor = UIColor.extremeFear
+                        self.greedAndFearView.layer.shadowColor = UIColor.pomergranate.cgColor
+                        self.greedAndFearIndexValueClassification.textColor = .pomergranate
                     case 25...44:
-                        self.greedAndFearView.layer.shadowColor = UIColor.fear.cgColor
-                        self.greedAndFearIndexValueClassification.textColor = UIColor.fear
-                    case 45...59:
-                        self.greedAndFearView.layer.shadowColor = UIColor.neutal.cgColor
-                        self.greedAndFearIndexValueClassification.textColor = UIColor.neutal
-                    case 60...74:
-                        self.greedAndFearView.layer.shadowColor = UIColor.greed.cgColor
-                        self.greedAndFearIndexValueClassification.textColor = UIColor.greed
+                        self.greedAndFearView.layer.shadowColor = UIColor.alizarin.cgColor
+                        self.greedAndFearIndexValueClassification.textColor = .alizarin
+                    case 45...54:
+                        self.greedAndFearView.layer.shadowColor = UIColor.carrot.cgColor
+                        self.greedAndFearIndexValueClassification.textColor = .carrot
+                    case 55...74:
+                        self.greedAndFearView.layer.shadowColor = UIColor.emerald.cgColor
+                        self.greedAndFearIndexValueClassification.textColor = .emerald
                     case 75...100:
-                        self.greedAndFearView.layer.shadowColor = UIColor.extremeGreed.cgColor
-                        self.greedAndFearIndexValueClassification.textColor = UIColor.extremeGreed
+                        self.greedAndFearView.layer.shadowColor = UIColor.nephritis.cgColor
+                        self.greedAndFearIndexValueClassification.textColor = .nephritis
                     default:
                         fatalError()
                     }
@@ -137,12 +182,12 @@ class MarketViewController: UIViewController {
                 
             case .failure(let error):
                 print(error)
-                
             }
         }
     }
 }
 
+//MARK: - Table View Delegate and Data Source
 extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -195,7 +240,6 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     
-       
         cell.logoViewShadow.layer.cornerRadius = 15
         cell.logoViewShadow.layer.shadowColor = UIColor.lightGray.cgColor
         cell.logoViewShadow.layer.shadowOffset = .zero
@@ -206,8 +250,6 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
         cell.logoView.layer.masksToBounds = true
         
         cell.logo.layer.masksToBounds = true
-        
-        
         
         return cell
     }

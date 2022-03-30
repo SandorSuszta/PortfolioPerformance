@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CoinPriceOnDate: Codable {
+struct CoinPriceOnGivenDate: Codable {
     let market_data: MarketDataOnDate
 }
 

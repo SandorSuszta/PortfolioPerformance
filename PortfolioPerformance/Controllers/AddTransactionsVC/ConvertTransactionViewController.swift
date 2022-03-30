@@ -64,8 +64,10 @@ class ConvertTransactionViewController: UIViewController {
     }
     
     func getPriceOnTransactionDate() {
-        APICaller.shared.getPriceOnDate(
-            coinID: selectedCoin?.id ?? "", date: datePicker.date.stringForAPI()) { result in
+        APICaller.shared.getPriceOnGivenDate(
+            for: selectedCoin?.id ?? "",
+            on: datePicker.date.stringForAPI()
+        ) { result in
             switch result {
             case .success(let price):
                 self.priceThen = price

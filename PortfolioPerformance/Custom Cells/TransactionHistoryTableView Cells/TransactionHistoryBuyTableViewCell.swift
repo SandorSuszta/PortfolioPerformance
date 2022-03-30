@@ -52,7 +52,7 @@ class TransactionHistoryBuyTableViewCell: UITableViewCell {
         
         //Value label
         var value = 0.0
-        MarketData.loadMarketData()
+        MarketData.getMarketData()
         if let currentPrice = MarketData.allCoinsArray.filter({$0.symbol == transaction.boughtCurrency?.lowercased()}).first?.currentPrice {
             value = transaction.ammount * currentPrice
             self.currentValueLabel.text = value.string2f()

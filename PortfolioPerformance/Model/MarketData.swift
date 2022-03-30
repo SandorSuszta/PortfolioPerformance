@@ -11,7 +11,8 @@ class MarketData {
     
     static var allCoinsArray: [CoinModel] = []
     
-    static func loadMarketData() {
+    static func getMarketData() {
+        
         APICaller.shared.getMarketData { result in
             switch result {
                 

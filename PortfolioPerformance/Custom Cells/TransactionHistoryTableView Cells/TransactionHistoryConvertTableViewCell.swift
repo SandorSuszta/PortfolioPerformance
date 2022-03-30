@@ -62,7 +62,7 @@ class TransactionHistoryConvertTableViewCell: UITableViewCell {
         
         //Worth now label
         var value = 0.0
-        MarketData.loadMarketData()
+        MarketData.getMarketData()
         if let currentPrice = MarketData.allCoinsArray.filter({$0.symbol == transaction.boughtCurrency?.lowercased()}).first?.currentPrice {
             value = transaction.ammount * currentPrice
             self.worthNow.text = value.string2f()
