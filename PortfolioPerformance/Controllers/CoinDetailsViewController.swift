@@ -16,17 +16,33 @@ class CoinDetailsViewController: UIViewController {
     @IBOutlet weak var priceChangeInPercentageLabel: UILabel!
     @IBOutlet weak var coinLogoView: UIView!
     @IBOutlet weak var isFavouriteButton: UIBarButtonItem!
+    
     @IBAction func isFavouriteButtonClicked(_ sender: Any) {
         
-       // if let coinSymbol = coinModel.symbol {MarketViewController.favouritesArray.append(coinSymbol}
+        guard let symbol = coinModel?.symbol else { return }
         
+        if WatchlistViewController.watchlistCoins.contains(symbol)
+        {
+            WatchlistViewController.watchlistCoins.removeAll { $0 == symbol }
+            isFavouriteButton.image = UIImage(named: "favourite")
+        } else {
+            WatchlistViewController.watchlistCoins.append(symbol)
+            isFavouriteButton.image = UIImage(named: "favourite.fill")
+        }
     }
     
     public var coinModel:CoinModel? = nil
-
-
+    
+    private var isFavourite: Bool {
+        WatchlistViewController.watchlistCoins.contains(coinModel?.symbol ?? "")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        isFavouriteButton.image = isFavourite ? UIImage(named: "favourite.fill") : UIImage(named: "favourite")
+        
         //view
         coinLogoView.layer.cornerRadius = 15
         
@@ -37,8 +53,6 @@ class CoinDetailsViewController: UIViewController {
         coinLogo.layer.cornerRadius = 15
         coinLogo.layer.masksToBounds = true
         
-        
-
         title = coinModel?.name
         
         symbolLabel.text = coinModel?.symbol.uppercased()
@@ -56,10 +70,27 @@ class CoinDetailsViewController: UIViewController {
             priceChangeInPercentageLabel.text = String(format: "(+%.2f", coinModel?.priceChangePercentage24H ?? 0)+"%)"
             priceChangeInPercentageLabel.textColor = UIColor.green
         }
-    
+        
         if let imageData = coinModel?.imageData {
             coinLogo.image = UIImage(data: imageData)
+        } else {
+            if let url = URL(string: coinModel?.image ?? "") {
+                let task = URLSession.shared.dataTask(with: url) { data, _, _ in
+                    if let data = data {
+//                            coin.imageData = data
+                        DispatchQueue.main.async {
+                            self.coinLogo.image = UIImage(data: data)
+                        }
+                    } else {
+                        print("Error getting image")
+                    }
+                }
+                task.resume()
+            }
         }
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        isFavouriteButton.image = isFavourite ? UIImage(named: "favourite.fill") : UIImage(named: "favourite")
+    }
 }

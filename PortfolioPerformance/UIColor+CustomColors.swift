@@ -14,4 +14,5 @@ extension UIColor {
     static let alizarin = UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1)
     static let carrot = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
     static let emerald = UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1)
+    static let clouds = UIColor(red: 251/255, green: 251/255, blue: 251/255, alpha: 1)
 }

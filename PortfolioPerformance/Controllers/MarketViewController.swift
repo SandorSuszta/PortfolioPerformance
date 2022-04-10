@@ -14,7 +14,7 @@ class MarketViewController: UIViewController {
     private let marketToCoinDetailsSegue = "marketToCoinDetails"
     
     private var btcData: CoinModel? {
-        self.tableViewArray.filter({$0.symbol == "btc"}).first
+        didSet{ self.loadGlobalData() }
     }
     
     @IBOutlet weak var dominanceView: UIView!
@@ -37,27 +37,34 @@ class MarketViewController: UIViewController {
         
         marketTableView.dataSource = self
         marketTableView.delegate = self
-        //marketTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        
+        marketTableView.register(MarketTableCell.nib(), forCellReuseIdentifier: MarketTableCell.identifier)
         
         MarketData.getMarketData()
+        
         loadMarketData()
+        
         loadGreedAndFearIndex()
         
         
         marketCapView.configureWithShadow()
+        
         dominanceView.configureWithShadow()
         
         
         greedAndFearView.layer.cornerRadius = 15
-        greedAndFearView.layer.shadowColor = UIColor.systemRed.cgColor
+        greedAndFearView.backgroundColor = .clouds
         greedAndFearView.layer.shadowOffset = .zero
         greedAndFearView.layer.shadowOpacity = 1
         greedAndFearView.layer.shadowRadius = 12.5
+        
+        marketTableView.backgroundColor = .clouds
         
         
         
         marketTableViewHeader.layer.cornerRadius = 15
         marketTableViewHeader.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        marketTableViewHeader.backgroundColor = .clouds
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +87,7 @@ class MarketViewController: UIViewController {
                 
             case .success(let coinArray):
                 self.tableViewArray = coinArray
-                self.loadGlobalData()
+                self.btcData = self.tableViewArray.filter({$0.symbol == "btc"}).first
                 
                 DispatchQueue.main.async {
                     self.marketTableView.reloadData()
@@ -175,7 +182,6 @@ class MarketViewController: UIViewController {
                         fatalError()
                     }
                     
-                    
                     self.greedAndFearIndexValueClassification.text = index.data[0].valueClassification
                     
                 }
@@ -195,65 +201,21 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = marketTableView.dequeueReusableCell(withIdentifier: "marketTableViewCell", for: indexPath) as! MarketTableViewCell
+        let cell = marketTableView.dequeueReusableCell(withIdentifier: MarketTableCell.identifier, for: indexPath) as! MarketTableCell
         
-        return  configureCell(cell: cell, indexPath: indexPath)
+        let configuredCell = cell.configureCell(with: tableViewArray[indexPath.row])
+        
+        return  configuredCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        60
+        75
     }
     
     func  tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         clickedIndexPath = indexPath
         performSegue(withIdentifier: marketToCoinDetailsSegue, sender: self)
     }
-    
-    private func configureCell(cell: MarketTableViewCell, indexPath: IndexPath) -> MarketTableViewCell {
-        
-        cell.name.text = self.tableViewArray[indexPath.row].name
-        
-        cell.symbol.text = self.tableViewArray[indexPath.row].symbol.uppercased()
-        
-        cell.price.text = "$\(self.tableViewArray[indexPath.row].currentPrice ?? 0)"
-        
-        cell.change.text = String(format: "%.2f", self.tableViewArray[indexPath.row].priceChangePercentage24H ?? 0) + "%"
-        cell.change.textColor = self.tableViewArray[indexPath.row].priceChangePercentage24H ?? 0 >= 0 ? UIColor(named: "Nephritis") : UIColor(named: "Pomergranate")
-        
-        // Set image
-
-        if let imageData = self.tableViewArray[indexPath.row].imageData {
-            cell.logo.image = UIImage(data: imageData)
-        } else {
-            if let url = URL(string: tableViewArray[indexPath.row].image) {
-                let task = URLSession.shared.dataTask(with: url) { data, _, _ in
-                    if let data = data {
-                        self.tableViewArray[indexPath.row].imageData = data
-                        DispatchQueue.main.async {
-                            cell.logo.image = UIImage(data: data)
-                        }
-                    } else {
-                        print("Error getting image")
-                    }
-                }
-                task.resume()
-            }
-        }
-    
-        cell.logoViewShadow.layer.cornerRadius = 15
-        cell.logoViewShadow.layer.shadowColor = UIColor.lightGray.cgColor
-        cell.logoViewShadow.layer.shadowOffset = .zero
-        cell.logoViewShadow.layer.shadowOpacity = 0.5
-        cell.logoViewShadow.layer.shadowRadius = 5.0
-        
-        cell.logoView.layer.cornerRadius = 15
-        cell.logoView.layer.masksToBounds = true
-        
-        cell.logo.layer.masksToBounds = true
-        
-        return cell
-    }
-    
 }
 
 

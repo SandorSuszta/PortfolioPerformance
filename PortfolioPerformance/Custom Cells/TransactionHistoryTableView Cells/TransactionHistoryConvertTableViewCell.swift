@@ -32,7 +32,7 @@ class TransactionHistoryConvertTableViewCell: UITableViewCell {
     static let identifier = "TransactionHistoryConvertTableViewCell"
     
     static func nib() -> UINib {
-        return UINib(nibName: TransactionHistoryConvertTableViewCell.identifier, bundle: nil)
+        UINib(nibName: TransactionHistoryConvertTableViewCell.identifier, bundle: nil)
     }
     
     func configureConvertCell(with transaction: Transaction) -> TransactionHistoryConvertTableViewCell {

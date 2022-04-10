@@ -14,6 +14,7 @@ extension UIView {
         shadowColor: UIColor = .lightGray,
         shadowRadius: CGFloat = 5.0
     ){
+        self.backgroundColor = .clouds
         self.layer.cornerRadius = 15
         self.layer.shadowColor = shadowColor.cgColor
         self.layer.shadowOffset = .zero

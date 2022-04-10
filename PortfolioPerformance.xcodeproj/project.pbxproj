@@ -11,6 +11,9 @@
 		790C30C527CEA7620021658F /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C427CEA7620021658F /* PersistanceManager.swift */; };
 		790C30C827CEAA200021658F /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C627CEAA200021658F /* DataModel.xcdatamodeld */; };
 		791F3E1827B543BD008A7693 /* CoinDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */; };
+		7932629327FCAFBC005E4D2E /* MarketTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932629127FCAFBC005E4D2E /* MarketTableCell.swift */; };
+		7932629427FCAFBC005E4D2E /* MarketTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7932629227FCAFBC005E4D2E /* MarketTableCell.xib */; };
+		7932629627FDA782005E4D2E /* WatchlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932629527FDA782005E4D2E /* WatchlistViewController.swift */; };
 		79397C7527E203FD00B04EDA /* TransactionHistorySellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79397C7327E203FD00B04EDA /* TransactionHistorySellTableViewCell.swift */; };
 		79397C7627E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */; };
 		79397C7927E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79397C7727E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift */; };
@@ -44,7 +47,6 @@
 		79EAFD2127B3DCDA008A6062 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EAFD1F27B3DCDA008A6062 /* Main.storyboard */; };
 		79EAFD2627B3DCDE008A6062 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79EAFD2527B3DCDE008A6062 /* Assets.xcassets */; };
 		79EAFD2927B3DCDE008A6062 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */; };
-		79EAFD3327B3E177008A6062 /* MarketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD3227B3E177008A6062 /* MarketTableViewCell.swift */; };
 		79EAFD3527B3FDC8008A6062 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD3427B3FDC7008A6062 /* CoinModel.swift */; };
 		79EAFD3727B3FE02008A6062 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD3627B3FE02008A6062 /* APICaller.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +56,9 @@
 		790C30C427CEA7620021658F /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		790C30C727CEAA200021658F /* Transaction.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Transaction.xcdatamodel; sourceTree = "<group>"; };
 		791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsViewController.swift; sourceTree = "<group>"; };
+		7932629127FCAFBC005E4D2E /* MarketTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTableCell.swift; sourceTree = "<group>"; };
+		7932629227FCAFBC005E4D2E /* MarketTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarketTableCell.xib; sourceTree = "<group>"; };
+		7932629527FDA782005E4D2E /* WatchlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistViewController.swift; sourceTree = "<group>"; };
 		79397C7327E203FD00B04EDA /* TransactionHistorySellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistorySellTableViewCell.swift; sourceTree = "<group>"; };
 		79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistorySellTableViewCell.xib; sourceTree = "<group>"; };
 		79397C7727E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryBuyTableViewCell.swift; sourceTree = "<group>"; };
@@ -84,12 +89,11 @@
 		79EAFD1627B3DCD9008A6062 /* PortfolioPerformance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PortfolioPerformance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewController.swift; sourceTree = "<group>"; };
+		79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarketViewController.swift; path = PortfolioPerformance/Controllers/MarketViewController.swift; sourceTree = SOURCE_ROOT; };
 		79EAFD2027B3DCDA008A6062 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		79EAFD2527B3DCDE008A6062 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79EAFD2827B3DCDE008A6062 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79EAFD2A27B3DCDE008A6062 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		79EAFD3227B3E177008A6062 /* MarketTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTableViewCell.swift; sourceTree = "<group>"; };
 		79EAFD3427B3FDC7008A6062 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 		79EAFD3627B3FE02008A6062 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,7 +125,7 @@
 			children = (
 				79397C8127E36FC800B04EDA /* TransactionHistoryTableView Cells */,
 				79C8DE7027BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift */,
-				79EAFD3227B3E177008A6062 /* MarketTableViewCell.swift */,
+				7932629127FCAFBC005E4D2E /* MarketTableCell.swift */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -142,6 +146,7 @@
 			children = (
 				79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */,
 				791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */,
+				7932629527FDA782005E4D2E /* WatchlistViewController.swift */,
 				79C8DE6E27BAA7F400C4F3CC /* AddCoinViewController.swift */,
 				79619A1A27C4EB080080CB01 /* AddTransactionsVC */,
 				79E2763627CF955A005FB139 /* TransactionHistoryViewController.swift */,
@@ -166,6 +171,7 @@
 			children = (
 				79EAFD1F27B3DCDA008A6062 /* Main.storyboard */,
 				79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */,
+				7932629227FCAFBC005E4D2E /* MarketTableCell.xib */,
 				79397C7827E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.xib */,
 				79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */,
 				79397C8327E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.xib */,
@@ -289,6 +295,7 @@
 				79EAFD2627B3DCDE008A6062 /* Assets.xcassets in Resources */,
 				79EAFD2127B3DCDA008A6062 /* Main.storyboard in Resources */,
 				79397C8027E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.xib in Resources */,
+				7932629427FCAFBC005E4D2E /* MarketTableCell.xib in Resources */,
 				7941060A27DA0A11009B4B8C /* SF-Pro-Italic.ttf in Resources */,
 				7941060B27DA0A11009B4B8C /* SF-Pro.ttf in Resources */,
 				79397C7A27E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.xib in Resources */,
@@ -312,6 +319,7 @@
 				79619A1427BD374C0080CB01 /* AddTransactionViewController.swift in Sources */,
 				798957C827F479DD0074CA38 /* UIView+Shadow.swift in Sources */,
 				79397C7F27E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.swift in Sources */,
+				7932629627FDA782005E4D2E /* WatchlistViewController.swift in Sources */,
 				79EAFD1E27B3DCDA008A6062 /* MarketViewController.swift in Sources */,
 				79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */,
 				79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */,
@@ -326,10 +334,10 @@
 				79C2109227E7B979001B2D80 /* ConvertTransactionViewController.swift in Sources */,
 				79397C7C27E3541700B04EDA /* MarketData.swift in Sources */,
 				79C2109627EB5523001B2D80 /* CoinPriceOnGivenDate.swift in Sources */,
-				79EAFD3327B3E177008A6062 /* MarketTableViewCell.swift in Sources */,
 				7941061027E0D0EB009B4B8C /* MyColours.swift in Sources */,
 				79397C8427E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.swift in Sources */,
 				79EAFD3527B3FDC8008A6062 /* CoinModel.swift in Sources */,
+				7932629327FCAFBC005E4D2E /* MarketTableCell.swift in Sources */,
 				79619A1827C4EAC00080CB01 /* TransferTransactionViewController.swift in Sources */,
 				79619A1627C4E8200080CB01 /* BuyTransactionViewController.swift in Sources */,
 				790C30C527CEA7620021658F /* PersistanceManager.swift in Sources */,

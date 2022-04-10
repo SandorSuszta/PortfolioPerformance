@@ -26,9 +26,17 @@ struct GlobalData: Codable {
     }
     
     static func calculateDominanceChange(todayDominance: Double, totalMarketCap: Double, totalMarketCapChange: Double, btcMarketCap: Double, btcMarketCapChange: Double) -> Double {
-        let yesterdayTotalMarketCap = totalMarketCap/(1 + totalMarketCapChange/100)
-        let yesterdayBtcMarketCap = btcMarketCap - btcMarketCapChange
-        let yesterdayDominance = (yesterdayBtcMarketCap/yesterdayTotalMarketCap) * 100
+        
+        var yesterdayTotalMarketCap: Double {
+            totalMarketCap/(1 + totalMarketCapChange/100)
+        }
+        
+        var yesterdayBtcMarketCap: Double {
+            btcMarketCap - btcMarketCapChange
+        }
+        var yesterdayDominance: Double {
+            (yesterdayBtcMarketCap/yesterdayTotalMarketCap) * 100
+        }
         return todayDominance - yesterdayDominance
     }
 }
