@@ -19,7 +19,6 @@ struct PersistanceManager {
         } catch {
             print("Error saving Transaction")
         }
-        
     }
     
     static func loadTransactions() -> [Transaction]{
@@ -33,10 +32,6 @@ struct PersistanceManager {
         } catch {
             print("error fetching data")
         }
-        
         return transactions
     }
-    
-    
-    
 }

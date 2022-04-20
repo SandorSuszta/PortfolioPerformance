@@ -46,12 +46,10 @@ class MarketViewController: UIViewController {
         
         loadGreedAndFearIndex()
         
-        
         marketCapView.configureWithShadow()
         
         dominanceView.configureWithShadow()
-        
-        
+    
         greedAndFearView.layer.cornerRadius = 15
         greedAndFearView.backgroundColor = .clouds
         greedAndFearView.layer.shadowOffset = .zero
@@ -60,11 +58,14 @@ class MarketViewController: UIViewController {
         
         marketTableView.backgroundColor = .clouds
         
-        
-        
         marketTableViewHeader.layer.cornerRadius = 15
         marketTableViewHeader.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         marketTableViewHeader.backgroundColor = .clouds
+        
+        //Remove NavBar Border
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.layoutIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,12 +76,7 @@ class MarketViewController: UIViewController {
         marketTableView.scrollToRow(at: topIndex, at: .top, animated: false)
 
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! CoinDetailsViewController
-        destinationVC.coinModel = tableViewArray[clickedIndexPath.row]
-    }
-    
+ 
     private func loadMarketData() {
         APICaller.shared.getMarketData { result in
             switch result {
@@ -209,12 +205,17 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        75
+        60
     }
     
     func  tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         clickedIndexPath = indexPath
         performSegue(withIdentifier: marketToCoinDetailsSegue, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! CoinDetailsViewController
+        destinationVC.coinModel = tableViewArray[clickedIndexPath.row]
     }
 }
 

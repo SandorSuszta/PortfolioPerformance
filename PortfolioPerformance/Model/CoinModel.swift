@@ -7,38 +7,38 @@
 
 import Foundation
 
+/*  API response example
+ 
+ "id": "bitcoin",
+ "symbol": "btc",
+ "name": "Bitcoin",
+ "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+ "current_price": 44350,
+ "market_cap": 838968949746,
+ "market_cap_rank": 1,
+ "fully_diluted_valuation": 929659147435,
+ "total_volume": 23802231978,
+ "high_24h": 44377,
+ "low_24h": 41635,
+ "price_change_24h": 2625.59,
+ "price_change_percentage_24h": 6.29264,
+ "market_cap_change_24h": 49825394904,
+ "market_cap_change_percentage_24h": 6.31386,
+ "circulating_supply": 18951406,
+ "total_supply": 21000000,
+ "max_supply": 21000000,
+ "ath": 69045,
+ "ath_change_percentage": -35.88293,
+ "ath_date": "2021-11-10T14:24:11.849Z",
+ "atl": 67.81,
+ "atl_change_percentage": 65185.5568,
+ "atl_date": "2013-07-06T00:00:00.000Z",
+ "roi": null,
+ "last_updated": "2022-02-07T19:25:00.004Z"
+ 
+ */
+
 struct CoinModel: Identifiable, Codable {
-    
-    /*  API response example
-     
-     "id": "bitcoin",
-     "symbol": "btc",
-     "name": "Bitcoin",
-     "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
-     "current_price": 44350,
-     "market_cap": 838968949746,
-     "market_cap_rank": 1,
-     "fully_diluted_valuation": 929659147435,
-     "total_volume": 23802231978,
-     "high_24h": 44377,
-     "low_24h": 41635,
-     "price_change_24h": 2625.59,
-     "price_change_percentage_24h": 6.29264,
-     "market_cap_change_24h": 49825394904,
-     "market_cap_change_percentage_24h": 6.31386,
-     "circulating_supply": 18951406,
-     "total_supply": 21000000,
-     "max_supply": 21000000,
-     "ath": 69045,
-     "ath_change_percentage": -35.88293,
-     "ath_date": "2021-11-10T14:24:11.849Z",
-     "atl": 67.81,
-     "atl_change_percentage": 65185.5568,
-     "atl_date": "2013-07-06T00:00:00.000Z",
-     "roi": null,
-     "last_updated": "2022-02-07T19:25:00.004Z"
-     
-     */
     
     let id, symbol, name: String
     let image: String

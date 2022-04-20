@@ -7,6 +7,6 @@ target 'PortfolioPerformance' do
 
   # Pods for PortfolioPerformance
 
-pod 'MicrosoftFluentUI'
-
+pod 'Charts'
+ 
 end

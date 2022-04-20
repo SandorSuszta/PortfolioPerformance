@@ -6,25 +6,23 @@
 //
 
 import Foundation
-
+/* API response example
+ {
+     "name": "Fear and Greed Index",
+     "data": [
+         {
+             "value": "25",
+             "value_classification": "Extreme Fear",
+             "timestamp": "1645574400",
+             "time_until_update": "5500"
+         }
+     ],
+     "metadata": {
+         "error": null
+     }
+ } */
+ 
 struct GreedAndFearModel: Codable {
-    
-   /* {
-        "name": "Fear and Greed Index",
-        "data": [
-            {
-                "value": "25",
-                "value_classification": "Extreme Fear",
-                "timestamp": "1645574400",
-                "time_until_update": "5500"
-            }
-        ],
-        "metadata": {
-            "error": null
-        }
-    } */
-    
-    
     let name: String
     let data: [Index]
 }

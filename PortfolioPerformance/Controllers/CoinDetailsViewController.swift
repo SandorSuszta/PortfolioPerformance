@@ -61,14 +61,14 @@ class CoinDetailsViewController: UIViewController {
         
         if coinModel?.priceChange24H ?? 0 < 0 {
             priceChangeLabel.text = String(format:"%.3f", coinModel?.priceChange24H ?? 0)
-            priceChangeLabel.textColor = UIColor.red
+            priceChangeLabel.textColor = UIColor.pomergranate
             priceChangeInPercentageLabel.text = String(format:"(%.2f", coinModel?.priceChangePercentage24H ?? 0)+"%)"
-            priceChangeInPercentageLabel.textColor = UIColor.red
+            priceChangeInPercentageLabel.textColor = UIColor.pomergranate
         } else {
             priceChangeLabel.text = String(format:"+%.3f", coinModel?.priceChange24H ?? 0)
-            priceChangeLabel.textColor = UIColor.green
+            priceChangeLabel.textColor = UIColor.nephritis
             priceChangeInPercentageLabel.text = String(format: "(+%.2f", coinModel?.priceChangePercentage24H ?? 0)+"%)"
-            priceChangeInPercentageLabel.textColor = UIColor.green
+            priceChangeInPercentageLabel.textColor = UIColor.nephritis
         }
         
         if let imageData = coinModel?.imageData {

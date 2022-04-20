@@ -98,8 +98,8 @@ extension AddCoinViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(
-            width: (view.frame.width - 40)/4,
-            height: (view.frame.width - 40)/4 * 1.4
+            width: (view.frame.width - 50)/5,
+            height: (view.frame.width - 50)/5 * 1.4
         )
     }
     

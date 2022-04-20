@@ -7,15 +7,7 @@
 
 import Foundation
 
-struct CoinPriceOnGivenDate: Codable {
-    let market_data: MarketDataOnDate
-}
-
-struct MarketDataOnDate: Codable {
-    let current_price: [String: Double]
-}
-
-/* Response example
+/* API Response example
  {
  "id": "bitcoin",
  "symbol": "btc",
@@ -224,3 +216,12 @@ struct MarketDataOnDate: Codable {
  "bing_matches": null
  }
  } */
+
+struct CoinPriceOnGivenDate: Codable {
+    let market_data: MarketDataOnDate
+}
+
+struct MarketDataOnDate: Codable {
+    let current_price: [String: Double]
+}
+

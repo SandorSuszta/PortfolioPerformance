@@ -14,6 +14,10 @@
 		7932629327FCAFBC005E4D2E /* MarketTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932629127FCAFBC005E4D2E /* MarketTableCell.swift */; };
 		7932629427FCAFBC005E4D2E /* MarketTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7932629227FCAFBC005E4D2E /* MarketTableCell.xib */; };
 		7932629627FDA782005E4D2E /* WatchlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932629527FDA782005E4D2E /* WatchlistViewController.swift */; };
+		79326299280423E1005E4D2E /* HoldingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */; };
+		7932629A280423E1005E4D2E /* HoldingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79326298280423E1005E4D2E /* HoldingsTableViewCell.xib */; };
+		7932629C28048291005E4D2E /* PortfolioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932629B28048291005E4D2E /* PortfolioViewController.swift */; };
+		793262C128061136005E4D2E /* GraphEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793262C028061135005E4D2E /* GraphEntries.swift */; };
 		79397C7527E203FD00B04EDA /* TransactionHistorySellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79397C7327E203FD00B04EDA /* TransactionHistorySellTableViewCell.swift */; };
 		79397C7627E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */; };
 		79397C7927E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79397C7727E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift */; };
@@ -49,9 +53,12 @@
 		79EAFD2927B3DCDE008A6062 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */; };
 		79EAFD3527B3FDC8008A6062 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD3427B3FDC7008A6062 /* CoinModel.swift */; };
 		79EAFD3727B3FE02008A6062 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD3627B3FE02008A6062 /* APICaller.swift */; };
+		7D0B06BAD8E02CC99B5C7BB5 /* Pods_PortfolioPerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BDECDAA83ECC22DF03AB629 /* Pods_PortfolioPerformance.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16F6ACFC027E269968DA0AFF /* Pods-PortfolioPerformance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioPerformance.release.xcconfig"; path = "Target Support Files/Pods-PortfolioPerformance/Pods-PortfolioPerformance.release.xcconfig"; sourceTree = "<group>"; };
+		5BDECDAA83ECC22DF03AB629 /* Pods_PortfolioPerformance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PortfolioPerformance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		790C30C127C78E930021658F /* GreedAndFearModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedAndFearModel.swift; sourceTree = "<group>"; };
 		790C30C427CEA7620021658F /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		790C30C727CEAA200021658F /* Transaction.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Transaction.xcdatamodel; sourceTree = "<group>"; };
@@ -59,6 +66,10 @@
 		7932629127FCAFBC005E4D2E /* MarketTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTableCell.swift; sourceTree = "<group>"; };
 		7932629227FCAFBC005E4D2E /* MarketTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarketTableCell.xib; sourceTree = "<group>"; };
 		7932629527FDA782005E4D2E /* WatchlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistViewController.swift; sourceTree = "<group>"; };
+		79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsTableViewCell.swift; sourceTree = "<group>"; };
+		79326298280423E1005E4D2E /* HoldingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HoldingsTableViewCell.xib; sourceTree = "<group>"; };
+		7932629B28048291005E4D2E /* PortfolioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioViewController.swift; sourceTree = "<group>"; };
+		793262C028061135005E4D2E /* GraphEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphEntries.swift; sourceTree = "<group>"; };
 		79397C7327E203FD00B04EDA /* TransactionHistorySellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistorySellTableViewCell.swift; sourceTree = "<group>"; };
 		79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistorySellTableViewCell.xib; sourceTree = "<group>"; };
 		79397C7727E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryBuyTableViewCell.swift; sourceTree = "<group>"; };
@@ -96,6 +107,7 @@
 		79EAFD2A27B3DCDE008A6062 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79EAFD3427B3FDC7008A6062 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 		79EAFD3627B3FE02008A6062 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		7C51FFC2FB780C01DED1D527 /* Pods-PortfolioPerformance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioPerformance.debug.xcconfig"; path = "Target Support Files/Pods-PortfolioPerformance/Pods-PortfolioPerformance.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D0B06BAD8E02CC99B5C7BB5 /* Pods_PortfolioPerformance.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,9 +157,11 @@
 		79619A1927C4EAD80080CB01 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */,
-				791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */,
+				7932629B28048291005E4D2E /* PortfolioViewController.swift */,
 				7932629527FDA782005E4D2E /* WatchlistViewController.swift */,
+				79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */,
+				79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */,
+				791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */,
 				79C8DE6E27BAA7F400C4F3CC /* AddCoinViewController.swift */,
 				79619A1A27C4EB080080CB01 /* AddTransactionsVC */,
 				79E2763627CF955A005FB139 /* TransactionHistoryViewController.swift */,
@@ -172,6 +187,7 @@
 				79EAFD1F27B3DCDA008A6062 /* Main.storyboard */,
 				79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */,
 				7932629227FCAFBC005E4D2E /* MarketTableCell.xib */,
+				79326298280423E1005E4D2E /* HoldingsTableViewCell.xib */,
 				79397C7827E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.xib */,
 				79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */,
 				79397C8327E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.xib */,
@@ -188,8 +204,9 @@
 				798957C127F31AE00074CA38 /* GlobalData.swift */,
 				79EAFD3427B3FDC7008A6062 /* CoinModel.swift */,
 				79EAFD3627B3FE02008A6062 /* APICaller.swift */,
-				790C30C427CEA7620021658F /* PersistanceManager.swift */,
 				79C2109527EB5523001B2D80 /* CoinPriceOnGivenDate.swift */,
+				793262C028061135005E4D2E /* GraphEntries.swift */,
+				790C30C427CEA7620021658F /* PersistanceManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -199,6 +216,8 @@
 			children = (
 				79EAFD1827B3DCD9008A6062 /* PortfolioPerformance */,
 				79EAFD1727B3DCD9008A6062 /* Products */,
+				B0174BFFD78187AFD4C31C8F /* Pods */,
+				DCD69FC6AFA902DAF93A7DA7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -231,6 +250,23 @@
 			path = PortfolioPerformance;
 			sourceTree = "<group>";
 		};
+		B0174BFFD78187AFD4C31C8F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7C51FFC2FB780C01DED1D527 /* Pods-PortfolioPerformance.debug.xcconfig */,
+				16F6ACFC027E269968DA0AFF /* Pods-PortfolioPerformance.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DCD69FC6AFA902DAF93A7DA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5BDECDAA83ECC22DF03AB629 /* Pods_PortfolioPerformance.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -238,9 +274,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 79EAFD2D27B3DCDE008A6062 /* Build configuration list for PBXNativeTarget "PortfolioPerformance" */;
 			buildPhases = (
+				7AEF6572AE36B03B1379F52C /* [CP] Check Pods Manifest.lock */,
 				79EAFD1227B3DCD9008A6062 /* Sources */,
 				79EAFD1327B3DCD9008A6062 /* Frameworks */,
 				79EAFD1427B3DCD9008A6062 /* Resources */,
+				029154D5CC95AC45A23D8AF2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -296,6 +334,7 @@
 				79EAFD2127B3DCDA008A6062 /* Main.storyboard in Resources */,
 				79397C8027E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.xib in Resources */,
 				7932629427FCAFBC005E4D2E /* MarketTableCell.xib in Resources */,
+				7932629A280423E1005E4D2E /* HoldingsTableViewCell.xib in Resources */,
 				7941060A27DA0A11009B4B8C /* SF-Pro-Italic.ttf in Resources */,
 				7941060B27DA0A11009B4B8C /* SF-Pro.ttf in Resources */,
 				79397C7A27E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.xib in Resources */,
@@ -303,6 +342,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		029154D5CC95AC45A23D8AF2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PortfolioPerformance/Pods-PortfolioPerformance-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PortfolioPerformance/Pods-PortfolioPerformance-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PortfolioPerformance/Pods-PortfolioPerformance-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7AEF6572AE36B03B1379F52C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PortfolioPerformance-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		79EAFD1227B3DCD9008A6062 /* Sources */ = {
@@ -323,6 +404,7 @@
 				79EAFD1E27B3DCDA008A6062 /* MarketViewController.swift in Sources */,
 				79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */,
 				79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */,
+				79326299280423E1005E4D2E /* HoldingsTableViewCell.swift in Sources */,
 				790C30C227C78E930021658F /* GreedAndFearModel.swift in Sources */,
 				7982923427E678A5007ECCCD /* Double+String.swift in Sources */,
 				79E2763727CF955A005FB139 /* TransactionHistoryViewController.swift in Sources */,
@@ -332,6 +414,7 @@
 				79EAFD3727B3FE02008A6062 /* APICaller.swift in Sources */,
 				7982923227E673E6007ECCCD /* UIColor+CustomColors.swift in Sources */,
 				79C2109227E7B979001B2D80 /* ConvertTransactionViewController.swift in Sources */,
+				793262C128061136005E4D2E /* GraphEntries.swift in Sources */,
 				79397C7C27E3541700B04EDA /* MarketData.swift in Sources */,
 				79C2109627EB5523001B2D80 /* CoinPriceOnGivenDate.swift in Sources */,
 				7941061027E0D0EB009B4B8C /* MyColours.swift in Sources */,
@@ -341,6 +424,7 @@
 				79619A1827C4EAC00080CB01 /* TransferTransactionViewController.swift in Sources */,
 				79619A1627C4E8200080CB01 /* BuyTransactionViewController.swift in Sources */,
 				790C30C527CEA7620021658F /* PersistanceManager.swift in Sources */,
+				7932629C28048291005E4D2E /* PortfolioViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +568,7 @@
 		};
 		79EAFD2E27B3DCDE008A6062 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C51FFC2FB780C01DED1D527 /* Pods-PortfolioPerformance.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -512,6 +597,7 @@
 		};
 		79EAFD2F27B3DCDE008A6062 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16F6ACFC027E269968DA0AFF /* Pods-PortfolioPerformance.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

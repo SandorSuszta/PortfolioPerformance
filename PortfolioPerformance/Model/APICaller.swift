@@ -22,12 +22,13 @@ class APICaller {
     public func getMarketData(
         completion: @escaping (Result<[CoinModel], Error>) -> Void
     ) {
-        guard let url = URL(string: Constants.getMarketDataEndpoint) else {
-            fatalError()
-        }
-        
+        guard let url = URL(string: Constants.getMarketDataEndpoint) else { fatalError() }
+            
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data , error == nil else { return }
+            guard
+                let data = data,
+                error == nil
+            else { return }
             
             do {
                 let coinArray = try JSONDecoder().decode([CoinModel].self, from: data)
@@ -51,7 +52,9 @@ class APICaller {
         guard let url = URL(string: endpoint) else { return }
         
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else { return }
+            guard let data = data,
+                  error == nil
+            else { return }
             
             do {
                 let coinPrice = try JSONDecoder().decode(CoinPriceOnGivenDate.self, from: data)
@@ -104,9 +107,36 @@ class APICaller {
             } catch {
                 completion(.failure(error))
             }
-            
         }
         task.resume()
+    }
+    
+    //MARK: - Get Graph Entries
+    
+    public func getHistoricalPrices(for coinID: String,
+                                intervalInDays: Int,
+                                completion: @escaping (Result<GraphEntries, Error>) -> Void
+    ){
+        
+        let unixTimeNow = Int(Date().timeIntervalSince1970)
+        let unixTimeThen = unixTimeNow - (86400 * intervalInDays)
+        
+        let endPoint = "https://api.coingecko.com/api/v3/coins/\(coinID)/market_chart/range?vs_currency=usd&from=\(unixTimeThen)&to=\(unixTimeNow)"
+        
+        guard let url = URL(string: endPoint) else { fatalError("Wrong url")}
+        
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            
+            guard let data = data, error == nil else { fatalError() }
+            
+            do {
+                let entries = try JSONDecoder().decode(GraphEntries.self, from: data)
+                completion(.success(entries))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+        task.resume() 
     }
 }
 

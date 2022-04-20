@@ -54,22 +54,22 @@
                                                     <rect key="frame" x="0.0" y="10" width="128" height="139"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cardano" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1km-KA-Rit" userLabel="Name">
-                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="20"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="18.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Oj-nh-dpE" userLabel="Symbol">
-                                                            <rect key="frame" x="0.0" y="24" width="128" height="12"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="0.0" y="22.5" width="128" height="20"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4mx-rz-l6O">
-                                                            <rect key="frame" x="0.0" y="40" width="128" height="99"/>
+                                                            <rect key="frame" x="0.0" y="46.5" width="128" height="92.5"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btc" translatesAutoresizingMaskIntoConstraints="NO" id="dnq-64-9ih">
-                                                                    <rect key="frame" x="25.5" y="11" width="77" height="77"/>
+                                                                    <rect key="frame" x="29" y="11" width="70" height="70.5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="dnq-64-9ih" secondAttribute="height" multiplier="1:1" id="jN1-Wm-2wf"/>
                                                                     </constraints>
@@ -79,7 +79,7 @@
                                                                 <constraint firstItem="dnq-64-9ih" firstAttribute="top" secondItem="4mx-rz-l6O" secondAttribute="top" constant="11" id="21J-C0-dMl"/>
                                                                 <constraint firstItem="dnq-64-9ih" firstAttribute="centerX" secondItem="4mx-rz-l6O" secondAttribute="centerX" id="PH3-z9-09k"/>
                                                                 <constraint firstItem="dnq-64-9ih" firstAttribute="centerY" secondItem="4mx-rz-l6O" secondAttribute="centerY" id="U2t-5U-xa7"/>
-                                                                <constraint firstItem="dnq-64-9ih" firstAttribute="width" secondItem="4mx-rz-l6O" secondAttribute="width" multiplier="0.6" id="ovH-sN-0Ql"/>
+                                                                <constraint firstItem="dnq-64-9ih" firstAttribute="width" secondItem="4mx-rz-l6O" secondAttribute="width" multiplier="0.55" id="ovH-sN-0Ql"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -133,7 +133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jwe-zt-PM5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="682.60869565217399" y="396.42857142857139"/>
+            <point key="canvasLocation" x="-668" y="1205"/>
         </scene>
         <!--Bitcoin-->
         <scene sceneID="zjU-5H-cBW">
@@ -214,7 +214,6 @@
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="GhJ-FX-hch" firstAttribute="leading" secondItem="Tjd-Zt-TuV" secondAttribute="centerX" id="CTS-me-Pv3"/>
                                                     <constraint firstItem="GhJ-FX-hch" firstAttribute="centerY" secondItem="Tjd-Zt-TuV" secondAttribute="centerY" id="Q1Z-lL-Tg0"/>
@@ -254,7 +253,7 @@
                             </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rZd-Cc-ufM"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <color key="tintColor" systemColor="labelColor"/>
                         <constraints>
                             <constraint firstItem="VWU-vm-ZAG" firstAttribute="top" secondItem="GL1-ce-WCX" secondAttribute="bottom" constant="25" id="0Be-nO-bvW"/>
@@ -299,7 +298,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yqR-LQ-7pT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1528.985507246377" y="395.75892857142856"/>
+            <point key="canvasLocation" x="209" y="1205"/>
         </scene>
         <!--Portfolio Perfomance-->
         <scene sceneID="Pag-8j-10U">
@@ -328,7 +327,7 @@
                                                                         <rect key="frame" x="10" y="5" width="157" height="118"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lG-t7-FbX" userLabel="Global Market  Cap">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="157" height="42"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="157" height="43"/>
                                                                                 <string key="text">Global Market 
 Cap</string>
                                                                                 <fontDescription key="fontDescription" name="SFPro-Regular" family="SF Pro" pointSize="18"/>
@@ -336,10 +335,10 @@ Cap</string>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYT-Ls-voD" userLabel="Logo+CapView">
-                                                                                <rect key="frame" x="0.0" y="52" width="157" height="66"/>
+                                                                                <rect key="frame" x="0.0" y="53" width="157" height="65"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="RcP-4a-sTB">
-                                                                                        <rect key="frame" x="11.5" y="5.5" width="134" height="55"/>
+                                                                                        <rect key="frame" x="12.5" y="5" width="132" height="55"/>
                                                                                         <subviews>
                                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marketCap" translatesAutoresizingMaskIntoConstraints="NO" id="3jN-Xj-lX4">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="55"/>
@@ -349,16 +348,16 @@ Cap</string>
                                                                                                 </constraints>
                                                                                             </imageView>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZiT-0E-BOw">
-                                                                                                <rect key="frame" x="70" y="0.0" width="64" height="55"/>
+                                                                                                <rect key="frame" x="70" y="0.0" width="62" height="55"/>
                                                                                                 <subviews>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$1.67 T" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZB-Ef-zbE">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="64" height="27.5"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="62" height="27.5"/>
                                                                                                         <fontDescription key="fontDescription" name="SFPro-Regular" family="SF Pro" pointSize="19"/>
                                                                                                         <nil key="textColor"/>
                                                                                                         <nil key="highlightedColor"/>
                                                                                                     </label>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+2.4%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kd3-tf-Eex">
-                                                                                                        <rect key="frame" x="0.0" y="27.5" width="64" height="27.5"/>
+                                                                                                        <rect key="frame" x="0.0" y="27.5" width="62" height="27.5"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                                         <color key="textColor" red="0.1269134975" green="0.49453625239999999" blue="0.21881918619999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -402,7 +401,7 @@ Cap</string>
                                                                         <rect key="frame" x="10" y="5" width="157" height="118"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Yz-FK-5ic">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="157" height="42"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="157" height="43"/>
                                                                                 <string key="text">Bitcoin 
 Dominance</string>
                                                                                 <fontDescription key="fontDescription" name="SFPro-Regular" family="SF Pro" pointSize="18"/>
@@ -410,10 +409,10 @@ Dominance</string>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X0y-47-Num" userLabel="Logo+CapView">
-                                                                                <rect key="frame" x="0.0" y="52" width="157" height="66"/>
+                                                                                <rect key="frame" x="0.0" y="53" width="157" height="65"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Old-dZ-09U">
-                                                                                        <rect key="frame" x="8.5" y="3" width="140" height="60"/>
+                                                                                        <rect key="frame" x="8.5" y="2.5" width="140" height="60"/>
                                                                                         <subviews>
                                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitcoinDominance" translatesAutoresizingMaskIntoConstraints="NO" id="Zhi-ce-Y7P">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -487,7 +486,7 @@ Dominance</string>
                                                                 <rect key="frame" x="10" y="10" width="354" height="61.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wx9-CA-HUs" userLabel="Greed And Fear Index">
-                                                                        <rect key="frame" x="0.0" y="10" width="141.5" height="42"/>
+                                                                        <rect key="frame" x="0.0" y="9.5" width="141.5" height="43"/>
                                                                         <string key="text">Greed And Fear
 Index</string>
                                                                         <fontDescription key="fontDescription" name="SFPro-Regular" family="SF Pro" pointSize="18"/>
@@ -502,16 +501,16 @@ Index</string>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SyH-fR-4rh">
-                                                                        <rect key="frame" x="221.5" y="10" width="132.5" height="41.5"/>
+                                                                        <rect key="frame" x="221.5" y="10" width="132.5" height="42"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Extreme Fear" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wcq-5v-Itt">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="132.5" height="21"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="132.5" height="21.5"/>
                                                                                 <fontDescription key="fontDescription" name="SFPro-Regular" family="SF Pro" pointSize="18"/>
                                                                                 <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="26" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDG-sy-Pjg">
-                                                                                <rect key="frame" x="0.0" y="21" width="132.5" height="20.5"/>
+                                                                                <rect key="frame" x="0.0" y="21.5" width="132.5" height="20.5"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
@@ -773,7 +772,7 @@ Index</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aw0-9n-GeO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="682.60869565217399" y="-520.3125"/>
+            <point key="canvasLocation" x="-667" y="-267"/>
         </scene>
         <!--Bitcoin-->
         <scene sceneID="wox-eh-eIG">
@@ -898,7 +897,7 @@ Index</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7EF-RE-MFP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1881" y="-519"/>
+            <point key="canvasLocation" x="155" y="-267"/>
         </scene>
         <!--Transaction History-->
         <scene sceneID="qLP-xE-d5o">
@@ -969,7 +968,7 @@ Index</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q4I-4P-nNv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-699" y="1556"/>
+            <point key="canvasLocation" x="-1546" y="2060"/>
         </scene>
         <!--Watchlist-->
         <scene sceneID="k73-gL-3Ke">
@@ -1052,25 +1051,121 @@ Index</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X0F-Pt-Sla" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-362.31884057971018" y="-1165.1785714285713"/>
+            <point key="canvasLocation" x="-668" y="447"/>
         </scene>
-        <!--View Controller-->
+        <!--My Portfolio-->
         <scene sceneID="kEz-SX-RB4">
             <objects>
-                <viewController id="EaT-cD-1FY" sceneMemberID="viewController">
+                <viewController id="EaT-cD-1FY" customClass="PortfolioViewController" customModule="PortfolioPerformance" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tj6-AK-42W">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="Shz-ID-7nM">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$50176.32" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55z-aL-eLs">
+                                        <rect key="frame" x="127" y="0.0" width="160.5" height="39.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+$10345 ( +18%)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XiF-ft-jCP">
+                                        <rect key="frame" x="140.5" y="57.5" width="133.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7gC-HI-njQ" userLabel="ShadowView">
+                                        <rect key="frame" x="20" y="96" width="374" height="215"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lf7-E1-GJU">
+                                                <rect key="frame" x="5" y="5" width="364" height="205"/>
+                                                <subviews>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="U5W-AZ-Cjn">
+                                                        <rect key="frame" x="35.5" y="0.0" width="293" height="32"/>
+                                                        <segments>
+                                                            <segment title="1 D"/>
+                                                            <segment title="1 W"/>
+                                                            <segment title="1M"/>
+                                                            <segment title="6M"/>
+                                                            <segment title="1Y"/>
+                                                            <segment title="MAX"/>
+                                                        </segments>
+                                                        <connections>
+                                                            <action selector="timeIntervalChanged:" destination="EaT-cD-1FY" eventType="valueChanged" id="RNb-Pk-5EA"/>
+                                                        </connections>
+                                                    </segmentedControl>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u9D-nE-ErN">
+                                                        <rect key="frame" x="0.0" y="31" width="364" height="174"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="u9D-nE-ErN" secondAttribute="trailing" id="MeI-z3-gOK"/>
+                                                    <constraint firstItem="u9D-nE-ErN" firstAttribute="top" secondItem="U5W-AZ-Cjn" secondAttribute="bottom" id="UIq-7L-2JW"/>
+                                                    <constraint firstItem="u9D-nE-ErN" firstAttribute="leading" secondItem="lf7-E1-GJU" secondAttribute="leading" id="ZIR-OB-BUH"/>
+                                                    <constraint firstAttribute="bottom" secondItem="u9D-nE-ErN" secondAttribute="bottom" id="fB6-75-bE2"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="lf7-E1-GJU" secondAttribute="trailing" constant="5" id="Iik-V0-Noi"/>
+                                            <constraint firstAttribute="height" constant="215" id="OBh-8h-ada"/>
+                                            <constraint firstAttribute="bottom" secondItem="lf7-E1-GJU" secondAttribute="bottom" constant="5" id="gvS-my-NgQ"/>
+                                            <constraint firstItem="lf7-E1-GJU" firstAttribute="top" secondItem="7gC-HI-njQ" secondAttribute="top" constant="5" id="h8o-Xm-ZzB"/>
+                                            <constraint firstItem="lf7-E1-GJU" firstAttribute="leading" secondItem="7gC-HI-njQ" secondAttribute="leading" constant="5" id="nfv-qY-9ld"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hs0-pF-Yo3">
+                                        <rect key="frame" x="146" y="329" width="122" height="216.5"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="My Investment">
+                                                    <attributes>
+                                                        <font key="NSFont" size="15" name="Helvetica"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Fqu-nU-JZs">
+                                        <rect key="frame" x="20" y="563.5" width="374" height="244.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="244.5" id="Fb7-cK-Zme"/>
+                                        </constraints>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="7gC-HI-njQ" secondAttribute="trailing" constant="20" id="3bp-hm-6fG"/>
+                                    <constraint firstItem="7gC-HI-njQ" firstAttribute="leading" secondItem="Shz-ID-7nM" secondAttribute="leading" constant="20" id="ayg-PX-9pW"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="i6m-2s-wGa"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <constraints>
+                            <constraint firstItem="Shz-ID-7nM" firstAttribute="top" secondItem="i6m-2s-wGa" secondAttribute="top" id="UDA-SW-DPQ"/>
+                            <constraint firstItem="Shz-ID-7nM" firstAttribute="leading" secondItem="tj6-AK-42W" secondAttribute="leading" id="VXG-Ec-fEz"/>
+                            <constraint firstItem="i6m-2s-wGa" firstAttribute="trailing" secondItem="Shz-ID-7nM" secondAttribute="trailing" id="scy-Vo-uGr"/>
+                            <constraint firstAttribute="bottom" secondItem="Shz-ID-7nM" secondAttribute="bottom" id="svb-fE-a1G"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="portfolio" selectedImage="portfolioFill" id="6bt-d7-cN2">
-                        <inset key="imageInsets" minX="0.0" minY="12" maxX="0.0" maxY="-6"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" title="My Portfolio" id="lXB-Se-X7Z"/>
+                    <connections>
+                        <outlet property="graphView" destination="u9D-nE-ErN" id="KGW-ad-yCt"/>
+                        <outlet property="shadowView" destination="7gC-HI-njQ" id="uu1-YC-Qfo"/>
+                        <outlet property="timeIntervalSegmentedControl" destination="U5W-AZ-Cjn" id="Hnf-KE-csA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDw-e2-x61" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2275" y="842"/>
+            <point key="canvasLocation" x="-668.11594202898561" y="2807.8125"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1Wn-uo-iBI">
@@ -1086,12 +1181,12 @@ Index</string>
                         <segue destination="SPC-rE-Y6m" kind="relationship" relationship="viewControllers" id="Zi5-sX-avS"/>
                         <segue destination="DtS-Dm-d1O" kind="relationship" relationship="viewControllers" id="4Nv-e4-iRJ"/>
                         <segue destination="DwP-tu-aLG" kind="relationship" relationship="viewControllers" id="OFo-YH-4ai"/>
-                        <segue destination="EaT-cD-1FY" kind="relationship" relationship="viewControllers" id="3Ql-42-HT0"/>
+                        <segue destination="FAv-2M-DjY" kind="relationship" relationship="viewControllers" id="3Ql-42-HT0"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yyV-CV-n4V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1272" y="-73"/>
+            <point key="canvasLocation" x="-2651" y="1205"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1uD-w5-Fh3">
@@ -1104,6 +1199,7 @@ Index</string>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ERs-uR-RDP">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" systemColor="systemGray6Color"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="SFPro-Regular" family="SF Pro" pointSize="27"/>
                         </textAttributes>
@@ -1115,7 +1211,7 @@ Index</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6hc-CK-cqL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-226.08695652173915" y="-477.45535714285711"/>
+            <point key="canvasLocation" x="-1546" y="-267"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="l3f-hO-b39">
@@ -1140,7 +1236,7 @@ Index</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="txi-3q-odN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-226.08695652173915" y="396.42857142857139"/>
+            <point key="canvasLocation" x="-1546" y="1205"/>
         </scene>
         <!--Buy Transaction View Controller-->
         <scene sceneID="05b-eL-tgk">
@@ -1256,7 +1352,7 @@ Index</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X4a-g0-jcH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2745" y="1007"/>
+            <point key="canvasLocation" x="901" y="1818"/>
         </scene>
         <!--Sell Transaction View Controller-->
         <scene sceneID="h6i-hB-HPn">
@@ -1389,7 +1485,7 @@ Index</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="awq-dh-n2Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1296" y="1007"/>
+            <point key="canvasLocation" x="-497" y="1818"/>
         </scene>
         <!--Transfer Transaction View Controller-->
         <scene sceneID="by5-Gt-iie">
@@ -1499,7 +1595,7 @@ Index</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="beR-OY-3za" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="568" y="1007"/>
+            <point key="canvasLocation" x="1580" y="1818"/>
         </scene>
         <!--Convert Transaction View Controller-->
         <scene sceneID="osZ-d1-44M">
@@ -1636,7 +1732,7 @@ Index</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g4r-6n-DdG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2017" y="1007"/>
+            <point key="canvasLocation" x="210" y="1818"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9jw-Ya-2Xm">
@@ -1658,11 +1754,32 @@ Index</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BNd-zW-bye" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1272.4637681159422" y="-1165.1785714285713"/>
+            <point key="canvasLocation" x="-1546" y="447"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Kg5-Ws-32v">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FAv-2M-DjY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="portfolio" selectedImage="portfolioFill" id="6bt-d7-cN2">
+                        <inset key="imageInsets" minX="0.0" minY="12" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V0Q-mL-7eR">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EaT-cD-1FY" kind="relationship" relationship="rootViewController" id="Nbg-oR-vtP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x9s-it-B7g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1546" y="2808"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5SR-e7-bqX"/>
+        <segue reference="6eC-F7-8Gy"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="add" width="32" height="32"/>

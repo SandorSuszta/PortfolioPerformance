@@ -70,7 +70,7 @@ extension WatchlistViewController: UITableViewDataSource, UITableViewDelegate {
     //MARK: - Table View Delegate Methods
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        75
+        60
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
