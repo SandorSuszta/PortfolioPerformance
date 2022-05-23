@@ -10,6 +10,8 @@ import CoreData
 
 class SellTransactionViewController: UIViewController {
     
+    @IBOutlet weak var shadowView: UIView!
+    
     @IBOutlet weak var sellPriceTextField: UITextField!
     
     @IBOutlet weak var sellAmmountTextField: UITextField!
@@ -39,7 +41,9 @@ class SellTransactionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        shadowView.configureWithShadow()
         addTransactionButton.layer.cornerRadius = 10
+        
     }
     
     func saveSellTransaction() {

@@ -13,7 +13,7 @@ extension Date {
     
     func formatedString() -> String {
         let df = DateFormatter()
-        df.dateStyle = .medium
+        df.dateFormat = "d MMM yyyy"
         return df.string(from: self)
     }
     

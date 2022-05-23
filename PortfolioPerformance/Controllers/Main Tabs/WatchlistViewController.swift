@@ -24,7 +24,13 @@ class WatchlistViewController: UIViewController {
         
         watchlistTableView.dataSource = self
         watchlistTableView.delegate = self
-        watchlistTableView.register(MarketTableCell.nib(), forCellReuseIdentifier: MarketTableCell.identifier)
+        
+        watchlistTableView.register(
+            MarketTableViewCell.self,
+            forCellReuseIdentifier: MarketTableViewCell.identifier
+        )
+        
+        watchlistTableView.layer.cornerRadius = 15
         
     }
     
@@ -61,16 +67,23 @@ extension WatchlistViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = watchlistTableView.dequeueReusableCell(withIdentifier: MarketTableCell.identifier, for: indexPath) as! MarketTableCell
-        let configuredCell = cell.configureCell(with: self.watchlistTableViewArray[indexPath.row])
+        guard let cell = watchlistTableView.dequeueReusableCell(
+            withIdentifier: MarketTableViewCell.identifier,
+            for: indexPath
+        ) as? MarketTableViewCell else {
+            fatalError()
+        }
         
-        return configuredCell
+        cell.configureCell(with: .init(
+            model: watchlistTableViewArray[indexPath.row])
+        )
+        return cell
     }
     
     //MARK: - Table View Delegate Methods
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        60
+        MarketTableViewCell.prefferedHeight
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

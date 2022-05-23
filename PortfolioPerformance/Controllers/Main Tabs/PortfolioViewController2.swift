@@ -81,14 +81,11 @@ class PortfolioViewController: UIViewController {
                                                         height: self.graphView.frame.height))
         self.graphView.addSubview(lineChartView)
         
-        var graphEntries:[ChartDataEntry] = []
-        var i: Int = 1
+        var graphEntries: [ChartDataEntry] = []
+        
         for price in self.priceArray {
-            if i%1 == 0 {
                 let entry = ChartDataEntry(x: price[0], y: price[1])
                 graphEntries.append(entry)
-            }
-            i = i + 1
         }
         
         let dataSet = LineChartDataSet(entries: graphEntries)
@@ -103,13 +100,12 @@ class PortfolioViewController: UIViewController {
         dataSet.setColor(.nephritis)
     
         
-        let gradientColors = [UIColor.nephritis.cgColor, UIColor.white.cgColor] as CFArray // Colors of the gradient
+        let gradientColors = [UIColor.nephritis.cgColor, UIColor.clear.cgColor] as CFArray // Colors of the gradient
         let colorLocations:[CGFloat] = [1.0, 0.0] // Positioning of the gradient
         let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: gradientColors, locations: colorLocations) // Gradient Object
         dataSet.fill = LinearGradientFill(gradient: gradient!, angle: 90.0) // Set gradient
         dataSet.drawFilledEnabled = true // Draw the Gradient
-    
-
+   
         lineChartView.data = LineChartData(dataSet: dataSet)
         lineChartView.data?.setDrawValues(false)
 
@@ -137,7 +133,6 @@ class PortfolioViewController: UIViewController {
 }
 
 extension PortfolioViewController: AxisValueFormatter, ChartViewDelegate {
-    
     
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         

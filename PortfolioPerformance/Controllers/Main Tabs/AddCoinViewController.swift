@@ -51,10 +51,13 @@ class AddCoinViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! AddCoinCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: cellIdentifier,
+            for: indexPath
+        ) as! AddCoinCollectionViewCell
         
-        cell.nameLabel.text = collectionViewCoins[indexPath.row].name
         cell.symbolLabel.text = collectionViewCoins[indexPath.row].symbol.uppercased()
+        cell.nameLabel.text = collectionViewCoins[indexPath.row].name
         
         // Set image
         
@@ -77,11 +80,13 @@ class AddCoinViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
         
         cell.layer.cornerRadius = 15
-        cell.layer.shadowColor = UIColor.lightGray.cgColor
-        cell.layer.shadowOffset = .zero
-        cell.layer.shadowOpacity = 0.5
-        cell.layer.shadowRadius = 5.0
+//        cell.layer.shadowColor = UIColor.lightGray.cgColor
+//        cell.layer.shadowOffset = .zero
+//        cell.layer.shadowOpacity = 0.5
+//        cell.layer.shadowRadius = 5.0
         cell.layer.masksToBounds = false
+        cell.layer.borderColor = UIColor.clouds.cgColor
+        cell.layer.borderWidth = 1
     
         return cell
     }

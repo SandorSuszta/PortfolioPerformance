@@ -8,10 +8,14 @@
 import UIKit
 
 class MarketViewController: UIViewController {
+    
+    static let shared = MarketViewController()
+    
     static var favouritesArray = [String]()
     private var clickedIndexPath = IndexPath()
-    private var tableViewArray = [CoinModel]()
+    public var tableViewArray = [CoinModel]()
     private let marketToCoinDetailsSegue = "marketToCoinDetails"
+    private let marketToSearchSegueID = "marketToSearch"
     
     private var btcData: CoinModel? {
         didSet{ self.loadGlobalData() }
@@ -24,13 +28,23 @@ class MarketViewController: UIViewController {
     @IBOutlet weak var marketCapLabel: UILabel!
     @IBOutlet weak var marketCapChangeLabel: UILabel!
     @IBOutlet weak var greedAndFearView: UIView!
-    @IBOutlet weak var marketTableViewHeader: UIView!
+    
+    
+    @IBOutlet weak var sortCollectionView: UICollectionView!
     @IBOutlet weak var marketTableView: UITableView!
+    
+    @IBAction func didClickSearch(_ sender: Any) {
+//        //let searchVC = SearchScreenViewController()
+//        let searchVC = CurrentPortfolioViewController()
+//        self.navigationController?.pushViewController(searchVC, animated: true)
+    }
     
     @IBAction func refreshClicked(_ sender: Any) {
         loadMarketData()
         marketTableView.reloadData()
     }
+    
+    private let sortCategories = ["Highest Cap", "Top Winners", "Top Losers", "Top Volume"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +52,24 @@ class MarketViewController: UIViewController {
         marketTableView.dataSource = self
         marketTableView.delegate = self
         
-        marketTableView.register(MarketTableCell.nib(), forCellReuseIdentifier: MarketTableCell.identifier)
+        sortCollectionView.dataSource = self
+        sortCollectionView.delegate = self
+        
+        // Set first cell as selected
+        sortCollectionView.selectItem(
+            at: IndexPath(row: 0, section: 0),
+            animated: false,
+            scrollPosition: .left
+        )
+        
+        sortCollectionView.showsHorizontalScrollIndicator = false
+        
+        marketTableView.register(MarketTableViewCell.self, forCellReuseIdentifier: MarketTableViewCell.identifier)
+        
+//        sortCollectionView.register(
+//            MarketSortCollectionViewCell.self,
+//            forCellWithReuseIdentifier: MarketSortCollectionViewCell.identifier
+//        )
         
         MarketData.getMarketData()
         
@@ -49,23 +80,27 @@ class MarketViewController: UIViewController {
         marketCapView.configureWithShadow()
         
         dominanceView.configureWithShadow()
-    
-        greedAndFearView.layer.cornerRadius = 15
-        greedAndFearView.backgroundColor = .clouds
-        greedAndFearView.layer.shadowOffset = .zero
-        greedAndFearView.layer.shadowOpacity = 1
-        greedAndFearView.layer.shadowRadius = 12.5
         
-        marketTableView.backgroundColor = .clouds
+        greedAndFearView.configureWithShadow()
         
-        marketTableViewHeader.layer.cornerRadius = 15
-        marketTableViewHeader.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        marketTableViewHeader.backgroundColor = .clouds
+       
+        
+//        greedAndFearView.layer.cornerRadius = 15
+//        greedAndFearView.backgroundColor = .white
+//        greedAndFearView.layer.shadowOffset = .zero
+//        greedAndFearView.layer.shadowOpacity = 1
+//        greedAndFearView.layer.shadowRadius = 12.5
+        
+        marketTableView.backgroundColor = .white
+        marketTableView.layer.cornerRadius = 15
+        marketTableView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
         //Remove NavBar Border
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.layoutIfNeeded()
+        
+        view.backgroundColor = .secondarySystemBackground
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,7 +145,8 @@ class MarketViewController: UIViewController {
                     totalMarketCap: marketCap ?? 0,
                     totalMarketCapChange: marketCapChange,
                     btcMarketCap: self.btcData?.marketCap ?? 0,
-                    btcMarketCapChange: self.btcData?.marketCapChange24H ?? 0)
+                    btcMarketCapChange: self.btcData?.marketCapChange24H ?? 0
+                )
                 
                 DispatchQueue.main.async {
                     
@@ -197,20 +233,24 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = marketTableView.dequeueReusableCell(withIdentifier: MarketTableCell.identifier, for: indexPath) as! MarketTableCell
-        
-        let configuredCell = cell.configureCell(with: tableViewArray[indexPath.row])
-        
-        return  configuredCell
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: MarketTableViewCell.identifier,
+            for: indexPath
+        ) as? MarketTableViewCell else {
+            fatalError()
+        }
+        cell.configureCell(with: .init(model: tableViewArray[indexPath.row]))
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        60
+        MarketTableViewCell.prefferedHeight
     }
     
     func  tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         clickedIndexPath = indexPath
         performSegue(withIdentifier: marketToCoinDetailsSegue, sender: self)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -218,5 +258,59 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
         destinationVC.coinModel = tableViewArray[clickedIndexPath.row]
     }
 }
+
+//MARK: - Collection View Delegate And Data Source
+
+extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        sortCategories.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = sortCollectionView.dequeueReusableCell(
+            withReuseIdentifier: "marketSortCell",
+            for: indexPath
+        ) as! MarketSortCollectionViewCell
+        
+        cell.sortNameLabel.text = sortCategories[indexPath.row]
+        cell.sortCellView.layer.cornerRadius = 15
+//        cell.sortCellView.backgroundColor = .white
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            tableViewArray = tableViewArray.sorted { $0.marketCapRank ?? 0 < $1.marketCapRank ?? 0 }
+        case 1:
+            tableViewArray = tableViewArray.sorted { $0.priceChangePercentage24H ?? 0 > $1.priceChangePercentage24H ?? 0
+            }
+        case 2:
+            tableViewArray = tableViewArray.sorted { $0.priceChangePercentage24H ?? 0 < $1.priceChangePercentage24H ?? 0 }
+        case 3:
+            tableViewArray = tableViewArray.sorted { $0.totalVolume ?? 0 > $1.totalVolume ?? 0 }
+        default:
+            fatalError()
+        }
+        
+        marketTableView.reloadData()
+        
+        marketTableView.scrollToRow(
+            at: IndexPath(row: 0, section: 0),
+            at: .top,
+            animated: false
+        )
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        2
+    }
+    
+    
+}
+
 
 

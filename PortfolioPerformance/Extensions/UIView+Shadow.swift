@@ -10,7 +10,7 @@ import UIKit
 
 extension UIView {
     
-    func configureWithShadow(
+    public func configureWithShadow(
         shadowColor: UIColor = .lightGray,
         shadowRadius: CGFloat = 5.0
     ){

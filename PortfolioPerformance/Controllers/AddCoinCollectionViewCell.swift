@@ -11,8 +11,8 @@ class AddCoinCollectionViewCell:
     UICollectionViewCell {
     
     @IBOutlet weak var cellView: UIView!
-    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var symbolLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var logoImage: UIImageView!
 
 }

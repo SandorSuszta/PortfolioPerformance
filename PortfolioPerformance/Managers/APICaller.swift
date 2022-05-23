@@ -12,9 +12,10 @@ class APICaller {
     static let shared = APICaller()
     
     private struct Constants {
-        static let getMarketDataEndpoint  = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+        static let getMarketDataEndpoint  = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=500&page=1&sparkline=false"
         static let getGreedAndFearIndexEndpoint = "https://api.alternative.me/fng/"
         static let getGlobalDataEndpoint = "https://api.coingecko.com/api/v3/global"
+        static let searchEndpoint = "https://api.coingecko.com/api/v3/search?query="
     }
     
     // MARK: - Get Market Data
@@ -23,7 +24,7 @@ class APICaller {
         completion: @escaping (Result<[CoinModel], Error>) -> Void
     ) {
         guard let url = URL(string: Constants.getMarketDataEndpoint) else { fatalError() }
-            
+        
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard
                 let data = data,
@@ -113,9 +114,10 @@ class APICaller {
     
     //MARK: - Get Graph Entries
     
-    public func getHistoricalPrices(for coinID: String,
-                                intervalInDays: Int,
-                                completion: @escaping (Result<GraphEntries, Error>) -> Void
+    public func getHistoricalPrices(
+        for coinID: String,
+        intervalInDays: Int,
+        completion: @escaping (Result<GraphEntries, Error>) -> Void
     ){
         
         let unixTimeNow = Int(Date().timeIntervalSince1970)
@@ -136,7 +138,26 @@ class APICaller {
                 completion(.failure(error))
             }
         }
-        task.resume() 
+        task.resume()
+    }
+    
+    public func searchForCoin(
+        query: String,
+        completion: @escaping (Result<SearchResponse, Error>) -> Void
+    ){
+        guard let url = URL(string: Constants.searchEndpoint + query) else { fatalError() }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            
+            guard let data = data, error == nil else { fatalError() }
+            
+            do {
+                let response = try JSONDecoder().decode(SearchResponse.self, from: data)
+                completion(.success(response))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+        task.resume()
     }
 }
-

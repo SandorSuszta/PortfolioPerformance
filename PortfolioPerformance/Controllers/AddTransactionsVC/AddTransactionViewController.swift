@@ -11,6 +11,7 @@ class AddTransactionViewController: UIViewController {
     
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var selectTradingPairButton: UIButton!
+    @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var logo: UIImageView!
     
     @IBOutlet weak var sellView: UIView!
@@ -57,9 +58,8 @@ class AddTransactionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         updateUI()
+        logoView.configureWithShadow()
         
         sellView.alpha = 0
         transferView.alpha = 0
