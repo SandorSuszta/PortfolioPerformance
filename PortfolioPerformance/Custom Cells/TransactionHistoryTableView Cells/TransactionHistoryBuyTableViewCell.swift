@@ -33,7 +33,7 @@ class TransactionHistoryBuyTableViewCell: UITableViewCell {
         self.transactionType.text = "Buy"
         
         //Transaction pair label
-        self.transactionPairLabel.text = "\(transaction.boughtCurrency ?? "") / \(transaction.convertedCurrency ?? "")"
+        self.transactionPairLabel.text = "\(transaction.boughtCurrency?.uppercased() ?? "") / \(transaction.convertedCurrency ?? "")"
         
         // Date label
         if let date = transaction.dateAndTime {
@@ -52,8 +52,9 @@ class TransactionHistoryBuyTableViewCell: UITableViewCell {
         
         //Value label
         var value = 0.0
-        MarketData.getMarketData()
-        if let currentPrice = MarketData.allCoinsArray.filter({$0.symbol == transaction.boughtCurrency?.lowercased()}).first?.currentPrice {
+        MarketData.shared.getMarketData()
+        if let currentPrice = MarketData.shared.allCoinsArray.first(where:{ $0.symbol == transaction.boughtCurrency?.lowercased()
+        })?.currentPrice {
             value = transaction.ammount * currentPrice
             self.currentValueLabel.text = value.string2f()
         }

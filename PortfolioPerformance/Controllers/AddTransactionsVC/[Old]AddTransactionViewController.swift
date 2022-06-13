@@ -61,9 +61,13 @@ class AddTransactionViewController: UIViewController {
         updateUI()
         logoView.configureWithShadow()
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain , target: nil, action: nil)
+        
         sellView.alpha = 0
         transferView.alpha = 0
         convertView.alpha = 0
+        
+        self.navigationItem.backBarButtonItem?.title = ""
 
     }
     

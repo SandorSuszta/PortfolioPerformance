@@ -11,13 +11,15 @@ class MarketTableViewCell: UITableViewCell {
         let price: String
         let change: String
         let imageUrl: String
+        let imageData: Data?
         let changeIsGreaterThenZero: Bool
         
         init(model: CoinModel) {
             self.name = model.name
             self.symbol = model.symbol.uppercased()
-            self.price = model.currentPrice?.string2f() ?? ""
-            self.change = model.priceChangePercentage24H?.string2f() ?? "" + "%"
+            self.price = model.currentPrice.string2f()
+            self.change = (model.priceChangePercentage24H ?? 0).string2f() + "%"
+            self.imageData = model.imageData
             self.imageUrl = model.image
             self.changeIsGreaterThenZero = model.priceChangePercentage24H ?? 0 >= 0 ? true : false
         }
@@ -140,9 +142,10 @@ class MarketTableViewCell: UITableViewCell {
             let text = prefix + viewModel.change + "%"
             return text
         }()
-        changeLabel.textColor = viewModel.changeIsGreaterThenZero ? .systemGreen : .systemRed
         
-       logoImageView.setImage(from: viewModel.imageUrl)
+        changeLabel.textColor = viewModel.changeIsGreaterThenZero ? .nephritis : .pomergranate
+        
+        logoImageView.setImage(imageData: viewModel.imageData, imageUrl: viewModel.imageUrl)
     }
 }
 

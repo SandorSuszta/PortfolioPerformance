@@ -9,15 +9,17 @@ import Foundation
 
 class MarketData {
     
-    static var allCoinsArray: [CoinModel] = []
+    static let shared = MarketData()
     
-    static func getMarketData() {
+    public var allCoinsArray: [CoinModel] = []
+    
+    public func getMarketData() {
         
         APICaller.shared.getMarketData { result in
             switch result {
                 
             case .success(let coinArray):
-                MarketData.allCoinsArray = coinArray
+                self.allCoinsArray = coinArray
                 
             case .failure(let error):
                 print(error)

@@ -52,12 +52,28 @@ class BuyTransactionViewController: UIViewController {
         newTransaction.ammount = Double(buyAmmountTextField.text!) ?? 0
         newTransaction.price = Double(buyPriceTextField.text!) ?? 0
         newTransaction.dateAndTime = buyDatePicker.date
-        newTransaction.boughtCurrency =  selectedCoin?.symbol.uppercased()
-        newTransaction.convertedCurrency = AddTransactionViewController.tradingPairCoinSymbol.uppercased()
+        newTransaction.boughtCurrency =  selectedCoin?.symbol
+        newTransaction.convertedCurrency = AddTransactionViewController.tradingPairCoinSymbol
         newTransaction.logo = selectedCoin?.imageData
         
-        PersistanceManager.saveTransaction()
+        PersistanceManager.updateHoldingsWithNewTransaction(transaction: newTransaction)
     }
+    
+//    func updateHoldings() {
+//        let selectedCoin = AddTransactionViewController.selectedCoin
+//        let holdings = PersistanceManager.loadHoldings()
+//        if let holdingToUpdate = holdings.first(where: {
+//            $0.symbol == selectedCoin?.symbol
+//        }) {
+//            holdingToUpdate.ammount += Double(buyAmmountTextField.text!) ?? 0
+//            PersistanceManager.saveUpdates()
+//        } else {
+//            let newHolding = HoldingModel(context: PersistanceManager.context)
+//            newHolding.symbol = selectedCoin?.symbol
+//            newHolding.ammount = Double(buyAmmountTextField.text!) ?? 0
+//            PersistanceManager.saveUpdates()
+//        }
+//    }
 }
 
 

@@ -55,6 +55,6 @@ class TransferTransactionViewController: UIViewController {
         newTransaction.logo = selectedCoin?.imageData
         newTransaction.transferType = transferType
         
-        PersistanceManager.saveTransaction()
+        PersistanceManager.saveUpdates()
     }
 }

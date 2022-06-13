@@ -86,6 +86,33 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         return size
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            let symbol = transactionHistory[indexPath.row].boughtCurrency
+            
+            PersistanceManager.updateHoldingsWithDeletedTransaction(
+                transaction: transactionHistory[indexPath.row]
+            )
+            
+            PersistanceManager.context.delete(
+                transactionHistory[indexPath.row]
+            )
+            
+            transactionHistory.remove(at: indexPath.row)
+            
+            PersistanceManager.saveUpdates()
+            
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            //Delete holding if user deletes all transactions
+            if !transactionHistory.contains(where: { $0.boughtCurrency == symbol
+            }) {
+                PersistanceManager.deleteHolding(symbol: symbol ?? "")
+            }
+        }
+    }
+    
    private func registerTableViewCells() {
 
        self.transactionHistoryTableView.register(TransactionHistorySellTableViewCell.nib(), forCellReuseIdentifier: TransactionHistorySellTableViewCell.identifier)

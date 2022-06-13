@@ -38,7 +38,7 @@ class TransactionHistoryTransferTableViewCell: UITableViewCell {
         cell.ammountLabel.text = String(transaction.ammount)
         
         //Value now label
-        if let currentPrice = MarketData.allCoinsArray.filter ({
+        if let currentPrice = MarketData.shared.allCoinsArray.filter ({
             $0.symbol == transaction.boughtCurrency?.lowercased()
         }).first?.currentPrice {
             let valueNow = transaction.ammount * currentPrice

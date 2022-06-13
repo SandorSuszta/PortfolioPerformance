@@ -49,7 +49,6 @@ class SellTransactionViewController: UIViewController {
     func saveSellTransaction() {
         let newTransaction = Transaction(context: PersistanceManager.context)
         
-        
         newTransaction.type = "sell"
         newTransaction.ammount = Double(sellAmmountTextField.text!) ?? 0
         newTransaction.price = Double(sellPriceTextField.text!) ?? 0
@@ -58,6 +57,6 @@ class SellTransactionViewController: UIViewController {
         newTransaction.convertedCurrency = AddTransactionViewController.tradingPairCoinSymbol.uppercased()
         newTransaction.logo = selectedCoin?.imageData
         
-        PersistanceManager.saveTransaction()
+        PersistanceManager.saveUpdates()
     }
 }

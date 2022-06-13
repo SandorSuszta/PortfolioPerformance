@@ -14,13 +14,14 @@ class WatchlistViewController: UIViewController {
     static var watchlistCoins: [String] = ["ada","eth","btc"]
     
     var watchlistTableViewArray: [CoinModel] = []
+    
     private var clickedIndexPath = IndexPath()
     private let segueID = "watchlistToCoinDetails"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MarketData.getMarketData()
+        MarketData.shared.getMarketData()
         
         watchlistTableView.dataSource = self
         watchlistTableView.delegate = self
@@ -43,7 +44,7 @@ class WatchlistViewController: UIViewController {
     private func getCoinModelsForWatchlist() {
         
         for coin in WatchlistViewController.watchlistCoins {
-            if let coinModel = MarketData.allCoinsArray.filter({
+            if let coinModel = MarketData.shared.allCoinsArray.filter({
                 $0.symbol == coin
             }).first
             {

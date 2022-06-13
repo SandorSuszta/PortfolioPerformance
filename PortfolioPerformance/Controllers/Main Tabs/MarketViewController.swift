@@ -34,9 +34,10 @@ class MarketViewController: UIViewController {
     @IBOutlet weak var marketTableView: UITableView!
     
     @IBAction func didClickSearch(_ sender: Any) {
-//        //let searchVC = SearchScreenViewController()
-//        let searchVC = CurrentPortfolioViewController()
-//        self.navigationController?.pushViewController(searchVC, animated: true)
+        
+        //let searchVC = SearchScreenViewController()
+        let searchVC = SearchScreenViewController()
+        self.navigationController?.pushViewController(searchVC, animated: true)
     }
     
     @IBAction func refreshClicked(_ sender: Any) {
@@ -48,9 +49,12 @@ class MarketViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+        self.tabBarController?.viewControllers![4] = MyPortfolioViewController()
         
         marketTableView.dataSource = self
         marketTableView.delegate = self
+        marketTableView.separatorStyle = .none
         
         sortCollectionView.dataSource = self
         sortCollectionView.delegate = self
@@ -71,7 +75,7 @@ class MarketViewController: UIViewController {
 //            forCellWithReuseIdentifier: MarketSortCollectionViewCell.identifier
 //        )
         
-        MarketData.getMarketData()
+        MarketData.shared.getMarketData()
         
         loadMarketData()
         

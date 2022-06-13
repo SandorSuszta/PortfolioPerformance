@@ -80,20 +80,22 @@ class AddCoinViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
         
         cell.layer.cornerRadius = 15
-//        cell.layer.shadowColor = UIColor.lightGray.cgColor
-//        cell.layer.shadowOffset = .zero
-//        cell.layer.shadowOpacity = 0.5
-//        cell.layer.shadowRadius = 5.0
+        //        cell.layer.shadowColor = UIColor.lightGray.cgColor
+        //        cell.layer.shadowOffset = .zero
+        //        cell.layer.shadowOpacity = 0.5
+        //        cell.layer.shadowRadius = 5.0
         cell.layer.masksToBounds = false
         cell.layer.borderColor = UIColor.clouds.cgColor
         cell.layer.borderWidth = 1
-    
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        AddTransactionViewController.selectedCoin = collectionViewCoins[indexPath.row]
-        performSegue(withIdentifier: segueIdentifier, sender: self)
+       
+        let vc = AddTransactionDetailsViewController()
+        vc.viewModel = .init(coinModel: collectionViewCoins[indexPath.row])
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

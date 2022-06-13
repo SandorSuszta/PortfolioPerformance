@@ -60,7 +60,7 @@ class ConvertTransactionViewController: UIViewController {
         transaction.convertedCoinWorthThen = transaction.ammount * transaction.priceThen
         transaction.logo = selectedCoin?.imageData
         
-        PersistanceManager.saveTransaction()
+        PersistanceManager.saveUpdates()
     }
     
     func getPriceOnTransactionDate() {

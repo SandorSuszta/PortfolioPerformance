@@ -41,7 +41,7 @@ class ResultsTableViewCell: UITableViewCell {
         
         symbolLabel.text = searchResult.symbol
         nameLabel.text = searchResult.name
-        logoView.setImage(from: searchResult.large)
+        logoView.setImage(imageData: nil, imageUrl: searchResult.large)
         
     }
     

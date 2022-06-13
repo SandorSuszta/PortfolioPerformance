@@ -291,7 +291,6 @@ class CoinDetailsViewController: UIViewController  {
         
         guard let coinModel = coinModel,
               let priceLow = sortedPriceArray.first?[1],
-              let coinPrice = coinModel.currentPrice,
               let priceHigh = sortedPriceArray.last?[1],
               let ath = coinModel.ath,
               let athDate = coinModel.athDate
@@ -300,20 +299,20 @@ class CoinDetailsViewController: UIViewController  {
         
         coinRankLabel.text = "#\(Int(coinModel.marketCapRank ?? 0))"
         coinMarketCapLabel.text = "$\(coinModel.marketCap ?? 0)"
-        coinVolumeLabel.text = "\(coinModel.totalVolume ?? 0)"
+        coinVolumeLabel.text = "\(coinModel.totalVolume)"
         
         rangeLowLabel.text = priceLow.string2f()
         rangeHigh.text = priceHigh.string2f()
         
-        let rangeProgress = Float((coinPrice - priceLow) / (priceHigh - priceLow))
+        let rangeProgress = Float((coinModel.currentPrice - priceLow) / (priceHigh - priceLow))
         rangeProgressView.setProgress(rangeProgress, animated: true)
         
-        let percentSinceLow = 100 - (coinPrice / priceLow * 100)
-        let percentSinceHigh = 100 - (coinPrice / priceHigh * 100)
+        let percentSinceLow = 100 - (coinModel.currentPrice / priceLow * 100)
+        let percentSinceHigh = 100 - (coinModel.currentPrice / priceHigh * 100)
         percentSinceLowLabel.text = "+" + percentSinceLow.string2f() + "%"
         percentSinceHighLabel.text = "-" + percentSinceHigh.string2f() + "%"
         
-        let percentSinceAllTimeHigh = coinPrice / ath * 100 - 100
+        let percentSinceAllTimeHigh = coinModel.currentPrice / ath * 100 - 100
         
         //Convert ISO8601 Date from API
         let isoFormatter = ISO8601DateFormatter()
@@ -324,7 +323,7 @@ class CoinDetailsViewController: UIViewController  {
         percentSinceAllTimeHighLabel.text = percentSinceAllTimeHigh.string2f() + "%"
         allTimeHighDateLabel.text = convertedDate?.formatedString()
         
-        allTimeHighProgressView.progress = Float(coinPrice / ath)
+        allTimeHighProgressView.progress = Float(coinModel.currentPrice / ath)
     }
 }
 

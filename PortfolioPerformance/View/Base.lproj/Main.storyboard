@@ -797,8 +797,8 @@ Index</string>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jRy-h7-C7S">
                                         <rect key="frame" x="0.0" y="129" width="414" height="596"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qjZ-aG-0rL" userLabel="ContentView">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qjZ-aG-0rL" userLabel="ContentView">
+                                                <rect key="frame" x="8" y="25" width="414" height="1000"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="50p-Qo-7iU">
                                                         <rect key="frame" x="20" y="10" width="374" height="1030"/>
@@ -2145,7 +2145,7 @@ Index</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6eC-F7-8Gy"/>
+        <segue reference="5SR-e7-bqX"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="add" width="32" height="32"/>
