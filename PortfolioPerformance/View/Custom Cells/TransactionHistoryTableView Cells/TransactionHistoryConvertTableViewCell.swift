@@ -73,11 +73,11 @@ class TransactionHistoryConvertTableViewCell: UITableViewCell {
         let percentage = profitOrLoss/transaction.convertedCoinWorthThen * 100
         
         if profitOrLoss >= 0 {
-            self.profitOrLoss.textColor = UIColor(named: MyColours.nephritis)
-            self.percentage.textColor = UIColor(named: MyColours.nephritis)
+            self.profitOrLoss.textColor = UIColor.nephritis
+            self.percentage.textColor = UIColor.nephritis
         } else {
-            self.profitOrLoss.textColor = UIColor(named: MyColours.pomergranate)
-            self.percentage.textColor = UIColor(named: MyColours.pomergranate)
+            self.profitOrLoss.textColor = .pomergranate
+            self.percentage.textColor = .pomergranate
         }
         
         self.profitOrLoss.text = profitOrLoss.string2f()

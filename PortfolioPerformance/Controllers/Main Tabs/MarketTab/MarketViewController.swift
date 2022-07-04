@@ -34,9 +34,9 @@ class MarketViewController: UIViewController {
     @IBOutlet weak var marketTableView: UITableView!
     
     @IBAction func didClickSearch(_ sender: Any) {
-        
         //let searchVC = SearchScreenViewController()
-        let searchVC = SearchScreenViewController()
+        //let searchVC = TestVC()
+        let searchVC = _New_MarketViewController()
         self.navigationController?.pushViewController(searchVC, animated: true)
     }
     

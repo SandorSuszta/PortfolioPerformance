@@ -3,7 +3,9 @@
 //  PortfolioPerformance
 //
 //  Created by Nataliia Shusta on 30/05/2022.
-//
+//TODO: Add Chevron To Button
+//TODO: Animate UIButton
+//TODO: Show Error When Empty Field
 
 import Foundation
 import UIKit
@@ -44,6 +46,8 @@ class AddTransactionDetailsViewController: UIViewController {
     
     let tradingPairButton: UIButton = {
         let button = UIButton()
+        button.contentHorizontalAlignment = .left
+        button.addTarget(self, action: #selector(didClickTradingPairButton), for: .touchUpInside)
         return button
     }()
     
@@ -81,7 +85,8 @@ class AddTransactionDetailsViewController: UIViewController {
     
     let addButton: AddTransactionButton = {
         let button = AddTransactionButton(color: .nephritis)
-        button.addTarget(self, action: #selector(didPressAddTransaction), for: .touchUpInside)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        button.addTarget(self, action: #selector(didPressAddTransactionButton), for: .touchUpInside)
         return button
     }()
     
@@ -145,25 +150,25 @@ class AddTransactionDetailsViewController: UIViewController {
             height: 75
         )
         
+        transactionTypeSegmentedContol.frame = CGRect(
+            x: view.width/2 - (transactionTypeSegmentedContol.width + 20)/2,
+            y: logoContainerView.bottom + 30,
+            width: transactionTypeSegmentedContol.width + 20,
+            height: transactionTypeSegmentedContol.height
+        )
+        
         tradingPairLabel.frame = CGRect(
-            x: 40,
+            x: transactionTypeSegmentedContol.left,
             y: logoContainerView.top + logoContainerView.height/2 - (tradingPairLabel.height + tradingPairButton.height)/2,
             width: tradingPairLabel.width,
             height: tradingPairLabel.height
         )
 
         tradingPairButton.frame = CGRect(
-            x: 40,
+            x: tradingPairLabel.left,
             y: tradingPairLabel.bottom,
-            width: tradingPairButton.width,
+            width: tradingPairButton.width + 20,
             height: tradingPairButton.height)
-        
-        transactionTypeSegmentedContol.frame = CGRect(
-            x: view.width/2 - (transactionTypeSegmentedContol.width + 20)/2,
-            y: logoContainerView.bottom + 20,
-            width: transactionTypeSegmentedContol.width + 20,
-            height: transactionTypeSegmentedContol.height
-        )
         
         transactionDetailsView.frame = CGRect(
             x: 20,
@@ -249,10 +254,17 @@ class AddTransactionDetailsViewController: UIViewController {
         }
     }
     
-    @objc private func didPressAddTransaction(_ sender: UIButton) {
+    @objc private func didPressAddTransactionButton(_ sender: UIButton) {
         let newTransaction = createTransactionModel()
         PersistanceManager.updateHoldingsWithNewTransaction(transaction: newTransaction)
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func didClickTradingPairButton(_ sender: UIButton) {
+        let vc = SearchScreenViewController()
+        vc.delegate = self
+        vc.rootViewController = .transactionDetails
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func createTransactionModel() -> Transaction {
@@ -265,5 +277,18 @@ class AddTransactionDetailsViewController: UIViewController {
         transaction.convertedCurrency = viewModel?.tradingPair
         transaction.logo = viewModel?.coinLogoData
         return transaction
+    }
+}
+
+//MARK: - Search Controller Delegate Method
+
+extension AddTransactionDetailsViewController: SearchViewControllerDelegate {
+    func didSelectCoin(coinName: String) {
+        DispatchQueue.main.async {
+            self.tradingPairButton.setTitle(
+                (self.viewModel?.coinSymbol ?? "") + " / " + coinName,
+                for: .normal
+            )
+        }
     }
 }

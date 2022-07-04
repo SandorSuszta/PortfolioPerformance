@@ -8,9 +8,22 @@
 import Foundation
 import UIKit
 
+protocol SearchViewControllerDelegate {
+    func didSelectCoin(coinName: String)
+}
+
+enum RootViewControllersForSearch {
+    case marketTableView
+    case transactionDetails
+}
+
 class SearchScreenViewController: UIViewController {
     
-    private var searchResultsArray: [SearchResult] = []
+    public var delegate: SearchViewControllerDelegate?
+    
+    public var rootViewController: RootViewControllersForSearch?
+    
+    private var searchResultsArray: [SearchResult] = [SearchResult(id: "", name: "Bitcoin", symbol: "BTC", large: "")]
     
     let resultsTableView: UITableView = {
         let table = UITableView()
@@ -64,7 +77,7 @@ class SearchScreenViewController: UIViewController {
                 height: titleView.height
             )
         )
-        label.text = "Portfolio Perfomance"
+        label.text = "Select Coin"
         label.font = .systemFont(ofSize: 28, weight: .medium)
         
         titleView.addSubview(label)
@@ -80,6 +93,7 @@ class SearchScreenViewController: UIViewController {
 
     //MARK: - TableView delegate methods
 extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResultsArray.count
     }
@@ -96,7 +110,15 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        switch rootViewController {
+        case .transactionDetails:
+            delegate?.didSelectCoin(coinName: searchResultsArray[indexPath.row].symbol)
+            navigationController?.popViewController(animated: true)
+        case .marketTableView:
+            fatalError()
+        default:
+            fatalError()
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
