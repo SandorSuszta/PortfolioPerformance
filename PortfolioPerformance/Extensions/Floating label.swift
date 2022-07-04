@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 
-class FloatingLabelInputView : UIView, UITextFieldDelegate {
+class FloatingLabelInputView : UIView {
+    
+    //MARK: - Properties
     
     private var isLabelFloating: Bool = false {
         didSet {
@@ -35,16 +37,23 @@ class FloatingLabelInputView : UIView, UITextFieldDelegate {
         return label
     }()
     
+    //MARK: - Lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubviews(textField, floatingLabel, bottomLine)
-        //textField.layer.addSublayer(bottomLine)
+        addSubviews(
+            textField,
+            floatingLabel,
+            bottomLine
+        )
         textField.delegate = self
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - Layout
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -71,18 +80,7 @@ class FloatingLabelInputView : UIView, UITextFieldDelegate {
             height: floatingLabel.height
         )
     }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        isLabelFloating = true
-        self.bottomLine.backgroundColor = .systemGray
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        if textField.text == "" {
-            isLabelFloating = false
-        }
-        self.bottomLine.backgroundColor = .systemGray4
-    }
+    //MARK: - Methods
     
     private func transformLabel(isFloating: Bool) {
         if isFloating == true {
@@ -108,5 +106,22 @@ class FloatingLabelInputView : UIView, UITextFieldDelegate {
                 completion: nil
             )
         }
+    }
+}
+
+//MARK: - Text Field Delegate Methods
+
+extension FloatingLabelInputView: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        isLabelFloating = true
+        self.bottomLine.backgroundColor = .systemGray
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        if textField.text == "" {
+            isLabelFloating = false
+        }
+        self.bottomLine.backgroundColor = .systemGray4
     }
 }

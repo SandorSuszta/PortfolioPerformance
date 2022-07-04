@@ -24,7 +24,7 @@
 		7934EFAA28352A1A00CE7FD0 /* UIImageView+SetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFA928352A1A00CE7FD0 /* UIImageView+SetImage.swift */; };
 		7934EFAC28365AB700CE7FD0 /* CurrentPortfolioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFAB28365AB600CE7FD0 /* CurrentPortfolioViewController.swift */; };
 		7934EFB0283BE06E00CE7FD0 /* MyPortfolioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFAF283BE06E00CE7FD0 /* MyPortfolioViewController.swift */; };
-		7934EFB2283E295200CE7FD0 /* HoldingsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFB1283E295200CE7FD0 /* HoldingsTableViewCellViewModel.swift */; };
+		7934EFB2283E295200CE7FD0 /* HoldingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFB1283E295200CE7FD0 /* HoldingsCellViewModel.swift */; };
 		7934EFB6283E45A700CE7FD0 /* HoldingPerfomanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFB5283E45A700CE7FD0 /* HoldingPerfomanceModel.swift */; };
 		7934EFB8283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFB7283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift */; };
 		7934EFBA2841600A00CE7FD0 /* UIProgressView+Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFB92841600A00CE7FD0 /* UIProgressView+Height.swift */; };
@@ -41,7 +41,6 @@
 		79397C8527E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79397C8327E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.xib */; };
 		7941060A27DA0A11009B4B8C /* SF-Pro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7941060827DA0A10009B4B8C /* SF-Pro-Italic.ttf */; };
 		7941060B27DA0A11009B4B8C /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7941060927DA0A11009B4B8C /* SF-Pro.ttf */; };
-		7941061027E0D0EB009B4B8C /* MyColours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7941060F27E0D0EB009B4B8C /* MyColours.swift */; };
 		7941061227E0D84F009B4B8C /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7941061127E0D84F009B4B8C /* DateFormatter.swift */; };
 		79410D8D2823D3E700BD9EA4 /* UIView+Framing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79410D8C2823D3E700BD9EA4 /* UIView+Framing.swift */; };
 		79410D8F282416C000BD9EA4 /* SearchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79410D8E282416C000BD9EA4 /* SearchScreenViewController.swift */; };
@@ -50,9 +49,18 @@
 		79619A1827C4EAC00080CB01 /* TransferTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79619A1727C4EAC00080CB01 /* TransferTransactionViewController.swift */; };
 		79619A1C27C4F4850080CB01 /* SellTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79619A1B27C4F4850080CB01 /* SellTransactionViewController.swift */; };
 		79628DCB281939E600497D97 /* MarketSortCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79628DCA281939E600497D97 /* MarketSortCollectionViewCell.swift */; };
-		796EFA1E284771C3005E24AF /* UITextField + Floating label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA1D284771C3005E24AF /* UITextField + Floating label.swift */; };
+		796EFA1E284771C3005E24AF /* Floating label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA1D284771C3005E24AF /* Floating label.swift */; };
 		796EFA22284E65D9005E24AF /* [Delete]AddTransactionChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA21284E65D9005E24AF /* [Delete]AddTransactionChildViewController.swift */; };
 		796EFA252853A1CD005E24AF /* UIButton+AddTransactionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA242853A1CD005E24AF /* UIButton+AddTransactionButton.swift */; };
+		796EFA27285A1FF9005E24AF /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA26285A1FF9005E24AF /* CircularProgressBar.swift */; };
+		796EFA2B285A21F1005E24AF /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA2A285A21F1005E24AF /* Test.swift */; };
+		796EFA2D285B8A98005E24AF /* [New]MarketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA2C285B8A98005E24AF /* [New]MarketViewController.swift */; };
+		796EFA2F285B8B64005E24AF /* MarketCardsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA2E285B8B64005E24AF /* MarketCardsCollectionViewCell.swift */; };
+		796EFA3128690062005E24AF /* MarketCerdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA3028690062005E24AF /* MarketCerdModel.swift */; };
+		796EFA3328697A91005E24AF /* MarketCardsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA3228697A90005E24AF /* MarketCardsCellViewModel.swift */; };
+		796EFA3A286DDD60005E24AF /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA39286DDD60005E24AF /* ObservableObject.swift */; };
+		796EFA3C286DF594005E24AF /* MarketCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA3B286DF594005E24AF /* MarketCardsViewModel.swift */; };
+		796EFA4128733AF2005E24AF /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA4028733AF2005E24AF /* NetworkingManager.swift */; };
 		7982923227E673E6007ECCCD /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982923127E673E6007ECCCD /* UIColor+CustomColors.swift */; };
 		7982923427E678A5007ECCCD /* Double+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982923327E678A5007ECCCD /* Double+String.swift */; };
 		7982923627E67ABB007ECCCD /* Date+FormatedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982923527E67ABB007ECCCD /* Date+FormatedString.swift */; };
@@ -94,7 +102,7 @@
 		7934EFA928352A1A00CE7FD0 /* UIImageView+SetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+SetImage.swift"; sourceTree = "<group>"; };
 		7934EFAB28365AB600CE7FD0 /* CurrentPortfolioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPortfolioViewController.swift; sourceTree = "<group>"; };
 		7934EFAF283BE06E00CE7FD0 /* MyPortfolioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPortfolioViewController.swift; sourceTree = "<group>"; };
-		7934EFB1283E295200CE7FD0 /* HoldingsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		7934EFB1283E295200CE7FD0 /* HoldingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsCellViewModel.swift; sourceTree = "<group>"; };
 		7934EFB5283E45A700CE7FD0 /* HoldingPerfomanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingPerfomanceModel.swift; sourceTree = "<group>"; };
 		7934EFB7283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioPerfomanceModel.swift; sourceTree = "<group>"; };
 		7934EFB92841600A00CE7FD0 /* UIProgressView+Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIProgressView+Height.swift"; sourceTree = "<group>"; };
@@ -111,7 +119,6 @@
 		79397C8327E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistoryConvertTableViewCell.xib; sourceTree = "<group>"; };
 		7941060827DA0A10009B4B8C /* SF-Pro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Italic.ttf"; sourceTree = "<group>"; };
 		7941060927DA0A11009B4B8C /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
-		7941060F27E0D0EB009B4B8C /* MyColours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColours.swift; sourceTree = "<group>"; };
 		7941061127E0D84F009B4B8C /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		79410D8C2823D3E700BD9EA4 /* UIView+Framing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Framing.swift"; sourceTree = "<group>"; };
 		79410D8E282416C000BD9EA4 /* SearchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenViewController.swift; sourceTree = "<group>"; };
@@ -120,9 +127,18 @@
 		79619A1727C4EAC00080CB01 /* TransferTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferTransactionViewController.swift; sourceTree = "<group>"; };
 		79619A1B27C4F4850080CB01 /* SellTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellTransactionViewController.swift; sourceTree = "<group>"; };
 		79628DCA281939E600497D97 /* MarketSortCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketSortCollectionViewCell.swift; sourceTree = "<group>"; };
-		796EFA1D284771C3005E24AF /* UITextField + Floating label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Floating label.swift"; sourceTree = "<group>"; };
+		796EFA1D284771C3005E24AF /* Floating label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Floating label.swift"; sourceTree = "<group>"; };
 		796EFA21284E65D9005E24AF /* [Delete]AddTransactionChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "[Delete]AddTransactionChildViewController.swift"; sourceTree = "<group>"; };
 		796EFA242853A1CD005E24AF /* UIButton+AddTransactionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+AddTransactionButton.swift"; sourceTree = "<group>"; };
+		796EFA26285A1FF9005E24AF /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		796EFA2A285A21F1005E24AF /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		796EFA2C285B8A98005E24AF /* [New]MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "[New]MarketViewController.swift"; path = "PortfolioPerformance/Controllers/Main Tabs/MarketTab/[New]MarketViewController.swift"; sourceTree = SOURCE_ROOT; };
+		796EFA2E285B8B64005E24AF /* MarketCardsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardsCollectionViewCell.swift; sourceTree = "<group>"; };
+		796EFA3028690062005E24AF /* MarketCerdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCerdModel.swift; sourceTree = "<group>"; };
+		796EFA3228697A90005E24AF /* MarketCardsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardsCellViewModel.swift; sourceTree = "<group>"; };
+		796EFA39286DDD60005E24AF /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
+		796EFA3B286DF594005E24AF /* MarketCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardsViewModel.swift; sourceTree = "<group>"; };
+		796EFA4028733AF2005E24AF /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		7982923127E673E6007ECCCD /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		7982923327E678A5007ECCCD /* Double+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+String.swift"; sourceTree = "<group>"; };
 		7982923527E67ABB007ECCCD /* Date+FormatedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+FormatedString.swift"; sourceTree = "<group>"; };
@@ -136,7 +152,7 @@
 		79EAFD1627B3DCD9008A6062 /* PortfolioPerformance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PortfolioPerformance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarketViewController.swift; path = "PortfolioPerformance/Controllers/Main Tabs/MarketViewController.swift"; sourceTree = SOURCE_ROOT; };
+		79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarketViewController.swift; path = "PortfolioPerformance/Controllers/Main Tabs/MarketTab/MarketViewController.swift"; sourceTree = SOURCE_ROOT; };
 		79EAFD2027B3DCDA008A6062 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		79EAFD2527B3DCDE008A6062 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79EAFD2827B3DCDE008A6062 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -163,8 +179,8 @@
 			children = (
 				79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */,
 				79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */,
-				7941060F27E0D0EB009B4B8C /* MyColours.swift */,
 				7941061127E0D84F009B4B8C /* DateFormatter.swift */,
+				796EFA39286DDD60005E24AF /* ObservableObject.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -172,7 +188,8 @@
 		7934EFA2282A72DD00CE7FD0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				796EFA1D284771C3005E24AF /* UITextField + Floating label.swift */,
+				796EFA1D284771C3005E24AF /* Floating label.swift */,
+				796EFA26285A1FF9005E24AF /* CircularProgressBar.swift */,
 				79410D8C2823D3E700BD9EA4 /* UIView+Framing.swift */,
 				7934EFA72835172200CE7FD0 /* UIView+Addsubviews.swift */,
 				798957C727F479DD0074CA38 /* UIView+Shadow.swift */,
@@ -189,8 +206,9 @@
 		7934EFBF28453D7200CE7FD0 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				7934EFBD28453D3800CE7FD0 /* AddTransactionParentViewControllerViewModel.swift */,
-				7934EFB1283E295200CE7FD0 /* HoldingsTableViewCellViewModel.swift */,
+				796EFA3B286DF594005E24AF /* MarketCardsViewModel.swift */,
+				796EFA3228697A90005E24AF /* MarketCardsCellViewModel.swift */,
+				7934EFB1283E295200CE7FD0 /* HoldingsCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -199,9 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				79397C8127E36FC800B04EDA /* TransactionHistoryTableView Cells */,
-				79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */,
 				7932629127FCAFBC005E4D2E /* MarketTableViewCell.swift */,
-				79628DCA281939E600497D97 /* MarketSortCollectionViewCell.swift */,
+				79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */,
 				7934EFA3282A824E00CE7FD0 /* ResultsTableViewCell.swift */,
 			);
 			path = "Custom Cells";
@@ -223,6 +240,8 @@
 			children = (
 				790C30C427CEA7620021658F /* PersistanceManager.swift */,
 				79EAFD3627B3FE02008A6062 /* APICaller.swift */,
+				796EFA2A285A21F1005E24AF /* Test.swift */,
+				796EFA4028733AF2005E24AF /* NetworkingManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -230,10 +249,9 @@
 		79410D8B282293A900BD9EA4 /* Main Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */,
-				7932629527FDA782005E4D2E /* WatchlistViewController.swift */,
-				79C8DE6E27BAA7F400C4F3CC /* AddCoinViewController.swift */,
-				7934EFBB2845113200CE7FD0 /* AddTransactionDetailsViewController.swift */,
+				796EFA342869F4E8005E24AF /* MarketTab */,
+				796EFA352869F586005E24AF /* WatchlistTab */,
+				796EFA362869F5C3005E24AF /* AddTransactionTab */,
 				79E2763627CF955A005FB139 /* TransactionHistoryViewController.swift */,
 				7932629B28048291005E4D2E /* PortfolioViewController2.swift */,
 				7934EFAB28365AB600CE7FD0 /* CurrentPortfolioViewController.swift */,
@@ -246,10 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				79410D8B282293A900BD9EA4 /* Main Tabs */,
-				791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */,
-				79C8DE7027BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift */,
-				79410D8E282416C000BD9EA4 /* SearchScreenViewController.swift */,
-				79619A1A27C4EB080080CB01 /* AddTransactionsVC */,
+				796EFA3F28733239005E24AF /* Other */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -267,6 +282,67 @@
 			path = AddTransactionsVC;
 			sourceTree = "<group>";
 		};
+		796EFA342869F4E8005E24AF /* MarketTab */ = {
+			isa = PBXGroup;
+			children = (
+				796EFA2C285B8A98005E24AF /* [New]MarketViewController.swift */,
+				79EAFD1D27B3DCDA008A6062 /* MarketViewController.swift */,
+			);
+			path = MarketTab;
+			sourceTree = "<group>";
+		};
+		796EFA352869F586005E24AF /* WatchlistTab */ = {
+			isa = PBXGroup;
+			children = (
+				7932629527FDA782005E4D2E /* WatchlistViewController.swift */,
+			);
+			path = WatchlistTab;
+			sourceTree = "<group>";
+		};
+		796EFA362869F5C3005E24AF /* AddTransactionTab */ = {
+			isa = PBXGroup;
+			children = (
+				79619A1A27C4EB080080CB01 /* AddTransactionsVC */,
+				796EFA382869F5E5005E24AF /* TransactionDetails */,
+				796EFA372869F5D4005E24AF /* SelectCoin */,
+			);
+			path = AddTransactionTab;
+			sourceTree = "<group>";
+		};
+		796EFA372869F5D4005E24AF /* SelectCoin */ = {
+			isa = PBXGroup;
+			children = (
+				79C8DE6E27BAA7F400C4F3CC /* AddCoinViewController.swift */,
+				79C8DE7027BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift */,
+			);
+			path = SelectCoin;
+			sourceTree = "<group>";
+		};
+		796EFA382869F5E5005E24AF /* TransactionDetails */ = {
+			isa = PBXGroup;
+			children = (
+				7934EFBD28453D3800CE7FD0 /* AddTransactionParentViewControllerViewModel.swift */,
+				7934EFBB2845113200CE7FD0 /* AddTransactionDetailsViewController.swift */,
+			);
+			path = TransactionDetails;
+			sourceTree = "<group>";
+		};
+		796EFA3E287331D9005E24AF /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		796EFA3F28733239005E24AF /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */,
+				79410D8E282416C000BD9EA4 /* SearchScreenViewController.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		7982922F27E3D829007ECCCD /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +354,9 @@
 				79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */,
 				79397C8327E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.xib */,
 				79397C7E27E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.xib */,
+				796EFA2E285B8B64005E24AF /* MarketCardsCollectionViewCell.swift */,
+				79628DCA281939E600497D97 /* MarketSortCollectionViewCell.swift */,
+				79397C7227E1134C00B04EDA /* Custom Cells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -294,6 +373,7 @@
 				7934EFA5282D141B00CE7FD0 /* SearchResponse.swift */,
 				7934EFB5283E45A700CE7FD0 /* HoldingPerfomanceModel.swift */,
 				7934EFB7283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift */,
+				796EFA3028690062005E24AF /* MarketCerdModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -319,12 +399,12 @@
 		79EAFD1827B3DCD9008A6062 /* PortfolioPerformance */ = {
 			isa = PBXGroup;
 			children = (
+				796EFA3E287331D9005E24AF /* New Group */,
 				79410D8A2822938100BD9EA4 /* Managers */,
 				7982923027E3D87C007ECCCD /* Model */,
 				7982922F27E3D829007ECCCD /* View */,
 				79619A1927C4EAD80080CB01 /* Controllers */,
 				7934EFBF28453D7200CE7FD0 /* ViewModels */,
-				79397C7227E1134C00B04EDA /* Custom Cells */,
 				7934EFA2282A72DD00CE7FD0 /* Extensions */,
 				790C30C327CEA71A0021658F /* Supporting Files */,
 				79EAFD2527B3DCDE008A6062 /* Assets.xcassets */,
@@ -481,6 +561,7 @@
 				7934EFA4282A824E00CE7FD0 /* ResultsTableViewCell.swift in Sources */,
 				7934EFAA28352A1A00CE7FD0 /* UIImageView+SetImage.swift in Sources */,
 				79C8DE7127BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift in Sources */,
+				796EFA3A286DDD60005E24AF /* ObservableObject.swift in Sources */,
 				790C30C827CEAA200021658F /* DataModel.xcdatamodeld in Sources */,
 				79410D8F282416C000BD9EA4 /* SearchScreenViewController.swift in Sources */,
 				79C8DE6F27BAA7F400C4F3CC /* AddCoinViewController.swift in Sources */,
@@ -491,7 +572,9 @@
 				7982923627E67ABB007ECCCD /* Date+FormatedString.swift in Sources */,
 				798957C227F31AE00074CA38 /* GlobalData.swift in Sources */,
 				79619A1427BD374C0080CB01 /* [Old]AddTransactionViewController.swift in Sources */,
+				796EFA2B285A21F1005E24AF /* Test.swift in Sources */,
 				796EFA22284E65D9005E24AF /* [Delete]AddTransactionChildViewController.swift in Sources */,
+				796EFA3128690062005E24AF /* MarketCerdModel.swift in Sources */,
 				798957C827F479DD0074CA38 /* UIView+Shadow.swift in Sources */,
 				79397C7F27E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.swift in Sources */,
 				7932629627FDA782005E4D2E /* WatchlistViewController.swift in Sources */,
@@ -505,6 +588,7 @@
 				79E2763727CF955A005FB139 /* TransactionHistoryViewController.swift in Sources */,
 				79619A1C27C4F4850080CB01 /* SellTransactionViewController.swift in Sources */,
 				79397C7927E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift in Sources */,
+				796EFA27285A1FF9005E24AF /* CircularProgressBar.swift in Sources */,
 				796EFA252853A1CD005E24AF /* UIButton+AddTransactionButton.swift in Sources */,
 				79397C7527E203FD00B04EDA /* TransactionHistorySellTableViewCell.swift in Sources */,
 				79EAFD3727B3FE02008A6062 /* APICaller.swift in Sources */,
@@ -513,10 +597,11 @@
 				793262C128061136005E4D2E /* GraphEntries.swift in Sources */,
 				7934EFB8283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift in Sources */,
 				7934EFB6283E45A700CE7FD0 /* HoldingPerfomanceModel.swift in Sources */,
+				796EFA2D285B8A98005E24AF /* [New]MarketViewController.swift in Sources */,
 				79397C7C27E3541700B04EDA /* MarketData.swift in Sources */,
-				796EFA1E284771C3005E24AF /* UITextField + Floating label.swift in Sources */,
+				796EFA3C286DF594005E24AF /* MarketCardsViewModel.swift in Sources */,
+				796EFA1E284771C3005E24AF /* Floating label.swift in Sources */,
 				79C2109627EB5523001B2D80 /* CoinPriceOnGivenDate.swift in Sources */,
-				7941061027E0D0EB009B4B8C /* MyColours.swift in Sources */,
 				79397C8427E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.swift in Sources */,
 				79EAFD3527B3FDC8008A6062 /* CoinModel.swift in Sources */,
 				7932629327FCAFBC005E4D2E /* MarketTableViewCell.swift in Sources */,
@@ -526,9 +611,12 @@
 				79619A1627C4E8200080CB01 /* BuyTransactionViewController.swift in Sources */,
 				7934EFAC28365AB700CE7FD0 /* CurrentPortfolioViewController.swift in Sources */,
 				790C30C527CEA7620021658F /* PersistanceManager.swift in Sources */,
+				796EFA2F285B8B64005E24AF /* MarketCardsCollectionViewCell.swift in Sources */,
+				796EFA3328697A91005E24AF /* MarketCardsCellViewModel.swift in Sources */,
+				796EFA4128733AF2005E24AF /* NetworkingManager.swift in Sources */,
 				7934EFBC2845113300CE7FD0 /* AddTransactionDetailsViewController.swift in Sources */,
 				7932629C28048291005E4D2E /* PortfolioViewController2.swift in Sources */,
-				7934EFB2283E295200CE7FD0 /* HoldingsTableViewCellViewModel.swift in Sources */,
+				7934EFB2283E295200CE7FD0 /* HoldingsCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@ import UIKit
 class _New_MarketViewController: UIViewController {
     
     //MARK: - Properties
+    var marketCardsViewModel = MarketCardsCollectionViewViewModel()
     
     let marketCardsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -32,6 +33,13 @@ class _New_MarketViewController: UIViewController {
         super.viewDidLoad()
         setupMarketCardsCollectionView()
         view.backgroundColor = .white
+        
+        marketCardsViewModel.cardViewModels.bind {[weak self] _ in
+            DispatchQueue.main.async {
+                self?.marketCardsCollectionView.reloadData()
+            }
+        }
+        marketCardsViewModel.loadGreedAndFearIndex()
     }
     
     override func viewDidLayoutSubviews() {
@@ -59,7 +67,9 @@ class _New_MarketViewController: UIViewController {
 extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        3
+        
+        marketCardsViewModel.cardViewModels.value?.count ?? 0
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,6 +77,10 @@ extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewD
             withReuseIdentifier: MarketCardsCollectionViewCell.identifier,
             for: indexPath
         ) as? MarketCardsCollectionViewCell else { return UICollectionViewCell() }
+        
+        
+        guard let cellViewModel = marketCardsViewModel.cardViewModels.value?[indexPath.row] else { fatalError()}
+        cell.configureCard(with: cellViewModel)
         cell.configureWithShadow()
         return cell
     }

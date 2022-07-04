@@ -9,15 +9,6 @@ import UIKit
 
 class TestVC: UIViewController {
     
-    let circle = CircularProgressBar()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        view.layer.addSublayer(circle)
-        circle.frame = CGRect(x: view.width / 2 , y: view.height/2, width: 100, height: 100)
-        
-    }
     
 
     /*
