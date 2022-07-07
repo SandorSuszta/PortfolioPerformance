@@ -24,14 +24,13 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
     
     let mainTitle: UILabel = {
         let title = UILabel()
-        title.font = .systemFont(ofSize: 14, weight: .semibold)
+        title.font = .systemFont(ofSize: 16, weight: .semibold)
         return title
     }()
     
     let secondaryTitle: UILabel = {
         let title = UILabel()
         title.font = .systemFont(ofSize: 10, weight: .semibold)
-        title.text = "Extreme Fear"
         title.textColor = .pomergranate
         return title
     }()
@@ -80,10 +79,9 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
             height: secondaryTitle.height
         )
         
-        //Gradient Type
-        
+        //Gradient Type semicircle for GreedAndFear Index presentation
         if progressBar.type == .gradient {
-            mainTitle.font = .systemFont(ofSize: 20, weight: .semibold)
+            mainTitle.font = .systemFont(ofSize: 18, weight: .semibold)
             secondaryTitle.font = .systemFont(ofSize: 14, weight: .semibold)
             
             mainTitle.sizeToFit()
@@ -112,16 +110,18 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
         
         headerTitle.text = viewModel.headerTitle
         mainTitle.text = viewModel.mainTitle
-        secondaryTitle.text = viewModel.secondaryTitle + "%"
+        secondaryTitle.text = viewModel.secondaryTitle
         
         switch progressBar.type {
+            
         case .round:
             secondaryTitle.textColor = viewModel.changeColour
-            secondaryTitle.text = viewModel.secondaryTitle + "%"
+            secondaryTitle.text = viewModel.secondaryTitle
             
         case .gradient:
-            
             secondaryTitle.text = viewModel.secondaryTitle
+            
+            //Change label color based on the GreedAbdFear index value
             switch Int(viewModel.mainTitle) ?? 0 {
             case 0...20:
                 secondaryTitle.textColor = .pomergranate

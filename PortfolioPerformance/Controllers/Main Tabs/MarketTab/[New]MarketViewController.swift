@@ -10,36 +10,42 @@ import UIKit
 class _New_MarketViewController: UIViewController {
     
     //MARK: - Properties
-    var marketCardsViewModel = MarketCardsCollectionViewViewModel()
     
-    let marketCardsCollectionView: UICollectionView = {
+    private let marketCardsViewModel = MarketCardsCollectionViewViewModel()
+    private let cryptoCurrencyTableViewModel = CryptoCurrencyTableViewModel()
+    private let sortOptionsArray = ["Highest Cap", "Top Winners", "Top Losers", "Top Volume"]
+    
+    
+    private var marketCardsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         layout.scrollDirection = .horizontal
-        collection.backgroundColor = .clear
-        collection.showsHorizontalScrollIndicator = false
-        collection.register(
-            MarketCardsCollectionViewCell.self,
-            forCellWithReuseIdentifier: MarketCardsCollectionViewCell.identifier
-        )
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collection
-        
     }()
+    
+    private var sortOptionsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return collection
+    }()
+    
+    
+    private let cryptoCurrencyTableView = UITableView()
 
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemGray6
         setupMarketCardsCollectionView()
-        view.backgroundColor = .white
-        
-        marketCardsViewModel.cardViewModels.bind {[weak self] _ in
-            DispatchQueue.main.async {
-                self?.marketCardsCollectionView.reloadData()
-            }
-        }
+        setupSortOptionsCollectionView()
+        setupTableView()
+        bindViewModels()
+        cryptoCurrencyTableViewModel.loadAllCryptoCurrenciesData()
         marketCardsViewModel.loadGreedAndFearIndex()
+        marketCardsViewModel.loadGlobalData()
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -49,16 +55,85 @@ class _New_MarketViewController: UIViewController {
             x: 0,
             y: 100,
             width: view.width,
-            height: 200
+            height: 170
+        )
+        
+        sortOptionsCollectionView.frame = CGRect(
+            x: 0,
+            y: marketCardsCollectionView.bottom,
+            width: view.width,
+            height: 30
+        )
+        
+        cryptoCurrencyTableView.frame = CGRect(
+            x: 15,
+            y: sortOptionsCollectionView.bottom + 5,
+            width: view.width - 30,
+            height: view.height - marketCardsCollectionView.height - sortOptionsCollectionView.height -
+            (self.tabBarController?.tabBar.frame.height ?? 0) - 105
         )
     }
     
     //MARK: - Methods
     
+    //Market Cards Setup
     private func setupMarketCardsCollectionView() {
         marketCardsCollectionView.delegate = self
         marketCardsCollectionView.dataSource = self
+        marketCardsCollectionView.backgroundColor = .clear
+        marketCardsCollectionView.showsHorizontalScrollIndicator = false
+        marketCardsCollectionView.register(
+            MarketCardsCollectionViewCell.self,
+            forCellWithReuseIdentifier: MarketCardsCollectionViewCell.identifier
+        )
         view.addSubview(marketCardsCollectionView)
+    }
+    
+    //Sort Options Setup
+    private func setupSortOptionsCollectionView() {
+        sortOptionsCollectionView.delegate = self
+        sortOptionsCollectionView.dataSource = self
+        sortOptionsCollectionView.backgroundColor = .clear
+        sortOptionsCollectionView.showsHorizontalScrollIndicator = false
+        // Set first cell as selected
+        sortOptionsCollectionView.selectItem(
+            at: IndexPath(row: 0, section: 0),
+            animated: false,
+            scrollPosition: .left
+        )
+        sortOptionsCollectionView.register(
+            SortOptionsCollectionViewCell.self,
+            forCellWithReuseIdentifier: SortOptionsCollectionViewCell.identifier
+        )
+        view.addSubview(sortOptionsCollectionView)
+    }
+    
+    //Table View Setup
+    private func setupTableView() {
+        cryptoCurrencyTableView.delegate = self
+        cryptoCurrencyTableView.dataSource = self
+        cryptoCurrencyTableView.separatorStyle = .none
+        cryptoCurrencyTableView.configureWithShadow()
+        cryptoCurrencyTableView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        cryptoCurrencyTableView.register(
+            CryptoCurrenciesTableViewCell.self,
+            forCellReuseIdentifier: CryptoCurrenciesTableViewCell.identifier
+        )
+        view.addSubview(cryptoCurrencyTableView)
+    }
+                                                       
+                                                       
+    private func bindViewModels() {
+        cryptoCurrencyTableViewModel.cellViewModels.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.cryptoCurrencyTableView.reloadData()
+            }
+        }
+        marketCardsViewModel.cardViewModels.bind {[weak self] _ in
+            DispatchQueue.main.async {
+                self?.marketCardsCollectionView.reloadData()
+            }
+        }
     }
 }
     
@@ -67,12 +142,27 @@ class _New_MarketViewController: UIViewController {
 extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == sortOptionsCollectionView {
+            return sortOptionsArray.count
+        }
         
-        marketCardsViewModel.cardViewModels.value?.count ?? 0
-        
+        //Market card collection view case
+        return marketCardsViewModel.cardViewModels.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if collectionView == sortOptionsCollectionView {
+            guard let cell = sortOptionsCollectionView.dequeueReusableCell(
+                withReuseIdentifier: SortOptionsCollectionViewCell.identifier,
+                for: indexPath
+            ) as? SortOptionsCollectionViewCell else { return UICollectionViewCell() }
+            
+            cell.sortingNameLabel.text = sortOptionsArray[indexPath.row]
+            return cell
+        }
+        
+        //Market card collection view case
         guard let cell = marketCardsCollectionView.dequeueReusableCell(
             withReuseIdentifier: MarketCardsCollectionViewCell.identifier,
             for: indexPath
@@ -86,7 +176,10 @@ extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: view.width/2 - 70, height: (view.width/2 - 40) )
+        if collectionView == marketCardsCollectionView {
+            return CGSize(width: view.width/2 - 70, height: (view.width/2 - 40) )
+        }
+        return CGSize(width: 90, height: 25)
     }
     
     //Distance between the cells
@@ -98,7 +191,31 @@ extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
     }
-    
-    
 }
+    //MARK: - Table View Delegate and Data Source Methods
+    
+extension _New_MarketViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        cryptoCurrencyTableViewModel.cellViewModels.value?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: CryptoCurrenciesTableViewCell.identifier,
+            for: indexPath
+        ) as? CryptoCurrenciesTableViewCell else { return UITableViewCell() }
+        
+        guard let cellViewModel = cryptoCurrencyTableViewModel.cellViewModels.value?[indexPath.row] else { fatalError() }
+        cell.configureCell(with: cellViewModel)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        CryptoCurrenciesTableViewCell.prefferedHeight
+    }
+}
+    
+    
+
 

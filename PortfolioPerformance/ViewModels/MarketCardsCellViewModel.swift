@@ -10,7 +10,7 @@ import UIKit
 
 class MarketCardsCollectionViewCellViewModel {
     
-    var model: MarketCardCellModel
+    let model: MarketCardCellModel
     
     var headerTitle: String {
         model.headerTitle
@@ -33,8 +33,8 @@ class MarketCardsCollectionViewCellViewModel {
     }
     
     var changeColour: UIColor {
-        if let value = Float(model.secondaryTitle) {
-            return value > 0 ? .nephritis : .pomergranate
+        if let isGrowing = model.isGrowing {
+            return isGrowing ? .nephritis : .pomergranate
         } else {
             return .clouds
         }

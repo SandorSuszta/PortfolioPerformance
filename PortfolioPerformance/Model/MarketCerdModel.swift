@@ -14,6 +14,7 @@ struct MarketCardCellModel {
     let secondaryTitle: String
     let circularProgressBarType: CircularProgressBarType
     let progress: Float
+    let isGrowing: Bool?
 }
 
 
