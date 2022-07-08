@@ -228,8 +228,10 @@
 			children = (
 				79397C8127E36FC800B04EDA /* TransactionHistoryTableView Cells */,
 				7932629127FCAFBC005E4D2E /* [OLD]MarketTableViewCell.swift */,
-				796EFA4828770D26005E24AF /* CryptoCurrenciesTableViewCell.swift */,
+				796EFA2E285B8B64005E24AF /* MarketCardsCollectionViewCell.swift */,
+				79628DCA281939E600497D97 /* MarketSortlCollectionViewCell.swift */,
 				7955694828773472003E8A13 /* SortOptionsCollectionViewCell.swift */,
+				796EFA4828770D26005E24AF /* CryptoCurrenciesTableViewCell.swift */,
 				79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */,
 				7934EFA3282A824E00CE7FD0 /* ResultsTableViewCell.swift */,
 			);
@@ -359,8 +361,6 @@
 				79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */,
 				79397C8327E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.xib */,
 				79397C7E27E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.xib */,
-				796EFA2E285B8B64005E24AF /* MarketCardsCollectionViewCell.swift */,
-				79628DCA281939E600497D97 /* MarketSortlCollectionViewCell.swift */,
 				79397C7227E1134C00B04EDA /* Custom Cells */,
 			);
 			path = View;

@@ -59,15 +59,13 @@ class MarketViewController: UIViewController {
         sortCollectionView.dataSource = self
         sortCollectionView.delegate = self
         
-        // Set first cell as selected
+        // Set first option as selected
         sortCollectionView.selectItem(
             at: IndexPath(row: 0, section: 0),
             animated: false,
             scrollPosition: .left
         )
-        
         sortCollectionView.showsHorizontalScrollIndicator = false
-        
         marketTableView.register(MarketTableViewCell.self, forCellReuseIdentifier: MarketTableViewCell.identifier)
         
 //        sortCollectionView.register(

@@ -48,7 +48,7 @@ class CircularProgressBar: UIView {
         case .round:
             circularPath = UIBezierPath(
                 arcCenter: CGPoint(x: width/2, y: height/2),
-                radius: width/2 - 5,
+                radius: width/2 - 4,
                 startAngle: -CGFloat.pi / 2,
                 endAngle: CGFloat.pi + CGFloat.pi / 2,
                 clockwise: true
@@ -58,7 +58,7 @@ class CircularProgressBar: UIView {
         case .gradient:
             circularPath = UIBezierPath(
                 arcCenter: CGPoint(x: width/2, y: height/2),
-                radius: width/2 - 5,
+                radius: width/2 - 4,
                 startAngle: CGFloat.pi - CGFloat.pi / 8,
                 endAngle:  2 * CGFloat.pi + CGFloat.pi / 8,
                 clockwise: true
@@ -71,14 +71,14 @@ class CircularProgressBar: UIView {
         trackLayer.path = circularPath.cgPath
         trackLayer.fillColor = UIColor.clear.cgColor
         trackLayer.strokeColor = UIColor.systemGray5.cgColor
-        trackLayer.lineWidth = 7
+        trackLayer.lineWidth = 5
         trackLayer.lineCap = CAShapeLayerLineCap.round
         
         //BarLayer
         shapeLayer.path = circularPath.cgPath
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeColor = color ?? UIColor.clouds.cgColor
-        shapeLayer.lineWidth = 7
+        shapeLayer.lineWidth = 5
         shapeLayer.strokeEnd = CGFloat(progress)
         shapeLayer.lineCap = CAShapeLayerLineCap.round
  

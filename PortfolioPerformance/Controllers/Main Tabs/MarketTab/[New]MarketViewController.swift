@@ -55,7 +55,7 @@ class _New_MarketViewController: UIViewController {
             x: 0,
             y: 100,
             width: view.width,
-            height: 170
+            height: 150
         )
         
         sortOptionsCollectionView.frame = CGRect(
@@ -95,7 +95,7 @@ class _New_MarketViewController: UIViewController {
         sortOptionsCollectionView.dataSource = self
         sortOptionsCollectionView.backgroundColor = .clear
         sortOptionsCollectionView.showsHorizontalScrollIndicator = false
-        // Set first cell as selected
+        // Set first option as selected
         sortOptionsCollectionView.selectItem(
             at: IndexPath(row: 0, section: 0),
             animated: false,
@@ -112,9 +112,9 @@ class _New_MarketViewController: UIViewController {
     private func setupTableView() {
         cryptoCurrencyTableView.delegate = self
         cryptoCurrencyTableView.dataSource = self
+        cryptoCurrencyTableView.backgroundColor = .systemGray6
         cryptoCurrencyTableView.separatorStyle = .none
-        cryptoCurrencyTableView.configureWithShadow()
-        cryptoCurrencyTableView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        //cryptoCurrencyTableView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         cryptoCurrencyTableView.register(
             CryptoCurrenciesTableViewCell.self,
             forCellReuseIdentifier: CryptoCurrenciesTableViewCell.identifier
@@ -142,17 +142,20 @@ class _New_MarketViewController: UIViewController {
 extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         if collectionView == sortOptionsCollectionView {
+            //Sort options collection case
             return sortOptionsArray.count
         }
         
-        //Market card collection view case
+        //Market card collection case
         return marketCardsViewModel.cardViewModels.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == sortOptionsCollectionView {
+            //Sort options collection case
             guard let cell = sortOptionsCollectionView.dequeueReusableCell(
                 withReuseIdentifier: SortOptionsCollectionViewCell.identifier,
                 for: indexPath
@@ -162,12 +165,11 @@ extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewD
             return cell
         }
         
-        //Market card collection view case
+        //Market card collection case
         guard let cell = marketCardsCollectionView.dequeueReusableCell(
             withReuseIdentifier: MarketCardsCollectionViewCell.identifier,
             for: indexPath
         ) as? MarketCardsCollectionViewCell else { return UICollectionViewCell() }
-        
         
         guard let cellViewModel = marketCardsViewModel.cardViewModels.value?[indexPath.row] else { fatalError()}
         cell.configureCard(with: cellViewModel)
@@ -177,9 +179,18 @@ extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == marketCardsCollectionView {
-            return CGSize(width: view.width/2 - 70, height: (view.width/2 - 40) )
+            //Sort options collection case
+            return CGSize(width: view.width/3 - 20, height: (view.width/3 + 10) )
         }
+        //Market card collection case
         return CGSize(width: 90, height: 25)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == sortOptionsCollectionView {
+            //Sort options collection case
+            sortTableview(option: indexPath.row)
+        }
     }
     
     //Distance between the cells
@@ -190,6 +201,29 @@ extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewD
     //Left inset
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+    }
+    
+    func sortTableview(option: Int) {
+        switch option {
+        case 0: //Top Market Cap
+            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
+                $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0
+            })
+        case 1: //Top Winners
+            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
+                $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0
+            })
+        case 2: //Top Losers
+            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
+                $0.coinModel.priceChangePercentage24H ?? 0 < $1.coinModel.priceChangePercentage24H ?? 0
+            })
+        case 3: //Top Volume
+            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
+                $0.coinModel.totalVolume ?? 0 > $1.coinModel.totalVolume ?? 0
+            })
+        default:
+            fatalError()
+        }
     }
 }
     //MARK: - Table View Delegate and Data Source Methods
