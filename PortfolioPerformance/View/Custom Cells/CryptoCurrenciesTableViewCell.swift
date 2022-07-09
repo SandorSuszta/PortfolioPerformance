@@ -23,7 +23,7 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
     private let symbolLabel: UILabel = {
         let label = UILabel()
         label.textColor = .secondaryLabel
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 12, weight: .regular)
         return label
     }()
     
@@ -37,7 +37,7 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
     
     private let changeLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 12, weight: .regular)
         label.textAlignment = .right
         return label
     }()
@@ -74,15 +74,15 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         //Add distance between the cells
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 3, right: 0))
-        contentView.layer.cornerRadius = 10
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 7, right: 0))
+        contentView.layer.cornerRadius = 25
         contentView.backgroundColor = .clouds
         backgroundColor = .clear
         
-        let imageSize: CGFloat = contentView.height - 20
+        let imageSize: CGFloat = contentView.height - 14
         logoContainerView.frame = CGRect(
             x: contentView.left + 10,
-            y: 10,
+            y: 7,
             width: imageSize,
             height: imageSize
         )
@@ -108,7 +108,7 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
             height: 20)
         
         priceLabel.frame = CGRect(
-            x: contentView.right - priceLabel.width - 15,
+            x: contentView.right - priceLabel.width - 20,
             y: nameLabel.top,
             width: symbolLabel.width - 10,
             height: 20)

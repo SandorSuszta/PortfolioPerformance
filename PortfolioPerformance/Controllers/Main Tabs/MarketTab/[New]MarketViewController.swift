@@ -55,7 +55,7 @@ class _New_MarketViewController: UIViewController {
             x: 0,
             y: 100,
             width: view.width,
-            height: 150
+            height: 170
         )
         
         sortOptionsCollectionView.frame = CGRect(
@@ -66,9 +66,9 @@ class _New_MarketViewController: UIViewController {
         )
         
         cryptoCurrencyTableView.frame = CGRect(
-            x: 15,
+            x: 10,
             y: sortOptionsCollectionView.bottom + 5,
-            width: view.width - 30,
+            width: view.width - 20,
             height: view.height - marketCardsCollectionView.height - sortOptionsCollectionView.height -
             (self.tabBarController?.tabBar.frame.height ?? 0) - 105
         )
@@ -180,10 +180,10 @@ extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == marketCardsCollectionView {
             //Sort options collection case
-            return CGSize(width: view.width/3 - 20, height: (view.width/3 + 10) )
+            return CGSize(width: view.width/3 , height: (view.width/3 + 30) )
         }
         //Market card collection case
-        return CGSize(width: 90, height: 25)
+        return CGSize(width: 90, height: 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

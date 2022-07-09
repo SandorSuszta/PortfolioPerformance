@@ -16,7 +16,7 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
     
     let headerTitle: UILabel = {
         let title = UILabel()
-        title.font = .systemFont(ofSize: 12, weight: .semibold)
+        title.font = .systemFont(ofSize: 14, weight: .semibold)
         title.textAlignment = .center
         title.numberOfLines = 2
         return title
@@ -24,13 +24,13 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
     
     let mainTitle: UILabel = {
         let title = UILabel()
-        title.font = .systemFont(ofSize: 12, weight: .semibold)
+        title.font = .systemFont(ofSize: 16, weight: .semibold)
         return title
     }()
     
     let secondaryTitle: UILabel = {
         let title = UILabel()
-        title.font = .systemFont(ofSize: 8, weight: .semibold)
+        title.font = .systemFont(ofSize: 12, weight: .semibold)
         title.textColor = .pomergranate
         return title
     }()
@@ -81,8 +81,8 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
         
         //Gradient Type semicircle for GreedAndFear Index presentation
         if progressBar.type == .gradient {
-            mainTitle.font = .systemFont(ofSize: 16, weight: .semibold)
-            secondaryTitle.font = .systemFont(ofSize: 12, weight: .semibold)
+            mainTitle.font = .systemFont(ofSize: 18, weight: .semibold)
+            secondaryTitle.font = .systemFont(ofSize: 14, weight: .semibold)
             
             mainTitle.sizeToFit()
             secondaryTitle.sizeToFit()

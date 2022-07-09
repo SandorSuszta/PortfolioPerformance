@@ -17,6 +17,9 @@ extension UIColor {
     static let clouds = UIColor(red: 251/255, green: 251/255, blue: 251/255, alpha: 1)
     static let darkClouds = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)
     static let pinkGlamour = UIColor(red: 255/255, green: 153/255, blue: 153/255, alpha: 1)
+    static let lightIndigo = UIColor(red: 230/255, green: 237/255, blue: 243/255, alpha: 1)
+    static let lightOrange = UIColor(red: 255/255, green: 249/255, blue: 235/255, alpha: 1)
+    static let lightBrown = UIColor(red: 240/255, green: 237/255, blue: 232/255, alpha: 1)
     static let navy = UIColor(red: 0.01, green: 0.66, blue: 0.96, alpha: 1.00)
 }
 
