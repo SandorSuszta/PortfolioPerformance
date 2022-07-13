@@ -48,7 +48,7 @@ class CircularProgressBar: UIView {
         case .round:
             circularPath = UIBezierPath(
                 arcCenter: CGPoint(x: width/2, y: height/2),
-                radius: width/2 - 4,
+                radius: width/2 - 5,
                 startAngle: -CGFloat.pi / 2,
                 endAngle: CGFloat.pi + CGFloat.pi / 2,
                 clockwise: true
@@ -58,7 +58,7 @@ class CircularProgressBar: UIView {
         case .gradient:
             circularPath = UIBezierPath(
                 arcCenter: CGPoint(x: width/2, y: height/2),
-                radius: width/2 - 4,
+                radius: width/2 - 5,
                 startAngle: CGFloat.pi - CGFloat.pi / 8,
                 endAngle:  2 * CGFloat.pi + CGFloat.pi / 8,
                 clockwise: true

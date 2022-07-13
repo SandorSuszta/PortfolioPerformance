@@ -114,7 +114,6 @@ class _New_MarketViewController: UIViewController {
         cryptoCurrencyTableView.dataSource = self
         cryptoCurrencyTableView.backgroundColor = .systemGray6
         cryptoCurrencyTableView.separatorStyle = .none
-        //cryptoCurrencyTableView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         cryptoCurrencyTableView.register(
             CryptoCurrenciesTableViewCell.self,
             forCellReuseIdentifier: CryptoCurrenciesTableViewCell.identifier
@@ -180,7 +179,7 @@ extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == marketCardsCollectionView {
             //Sort options collection case
-            return CGSize(width: view.width/3 , height: (view.width/3 + 30) )
+            return CGSize(width: view.width/3 - 10 , height: (view.width/3 + 20) )
         }
         //Market card collection case
         return CGSize(width: 90, height: 20)
@@ -229,6 +228,7 @@ extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewD
     //MARK: - Table View Delegate and Data Source Methods
     
 extension _New_MarketViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         cryptoCurrencyTableViewModel.cellViewModels.value?.count ?? 0
     }

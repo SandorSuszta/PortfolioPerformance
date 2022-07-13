@@ -35,8 +35,10 @@ class MarketViewController: UIViewController {
     
     @IBAction func didClickSearch(_ sender: Any) {
         //let searchVC = SearchScreenViewController()
-        //let searchVC = TestVC()
-        let searchVC = _New_MarketViewController()
+        //let searchVC = TestVC
+        //let searchVC = _New_MarketViewController()
+        //let searchVC = WatchlistViewController2()
+        let searchVC = MainTabBarController()
         self.navigationController?.pushViewController(searchVC, animated: true)
     }
     

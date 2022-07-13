@@ -9,7 +9,7 @@ import Foundation
 
 class CryptoCurrencyTableViewModel {
     
-    var cellViewModels: ObservableObject<[CryptoCurrencyTableCellViewModel]> = ObservableObject(value:[] )
+    var cellViewModels: ObservableObject<[CryptoCurrencyTableCellViewModel]> = ObservableObject(value:[])
     
     public func loadAllCryptoCurrenciesData() {
         NetworkingManager.shared.requestCryptoCurrenciesData { result in

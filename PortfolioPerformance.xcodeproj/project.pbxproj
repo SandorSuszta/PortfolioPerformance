@@ -11,6 +11,9 @@
 		790C30C527CEA7620021658F /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C427CEA7620021658F /* PersistanceManager.swift */; };
 		790C30C827CEAA200021658F /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C627CEAA200021658F /* DataModel.xcdatamodeld */; };
 		791F3E1827B543BD008A7693 /* CoinDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */; };
+		792B0FC3287B3C6C0040B461 /* WatchlistViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC2287B3C6C0040B461 /* WatchlistViewController2.swift */; };
+		792B0FC5287C85EF0040B461 /* WatchlistTableViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC4287C85EF0040B461 /* WatchlistTableViewViewModel.swift */; };
+		792B0FC7287F03080040B461 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC6287F03080040B461 /* MainTabBarController.swift */; };
 		7932629327FCAFBC005E4D2E /* [OLD]MarketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932629127FCAFBC005E4D2E /* [OLD]MarketTableViewCell.swift */; };
 		7932629427FCAFBC005E4D2E /* MarketTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7932629227FCAFBC005E4D2E /* MarketTableCell.xib */; };
 		7932629627FDA782005E4D2E /* WatchlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932629527FDA782005E4D2E /* WatchlistViewController.swift */; };
@@ -93,6 +96,9 @@
 		790C30C427CEA7620021658F /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		790C30C727CEAA200021658F /* Transaction.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Transaction.xcdatamodel; sourceTree = "<group>"; };
 		791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsViewController.swift; sourceTree = "<group>"; };
+		792B0FC2287B3C6C0040B461 /* WatchlistViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistViewController2.swift; sourceTree = "<group>"; };
+		792B0FC4287C85EF0040B461 /* WatchlistTableViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistTableViewViewModel.swift; sourceTree = "<group>"; };
+		792B0FC6287F03080040B461 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7932629127FCAFBC005E4D2E /* [OLD]MarketTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "[OLD]MarketTableViewCell.swift"; sourceTree = "<group>"; };
 		7932629227FCAFBC005E4D2E /* MarketTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarketTableCell.xib; sourceTree = "<group>"; };
 		7932629527FDA782005E4D2E /* WatchlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +224,7 @@
 				796EFA3228697A90005E24AF /* MarketCardsCellViewModel.swift */,
 				7934EFB1283E295200CE7FD0 /* HoldingsCellViewModel.swift */,
 				796EFA422876EFBB005E24AF /* CryptoCurrencyTableViewModel.swift */,
+				792B0FC4287C85EF0040B461 /* WatchlistTableViewViewModel.swift */,
 				796EFA442876F076005E24AF /* CryptoCurrencyTableCellViewModel.swift */,
 			);
 			path = ViewModels;
@@ -270,6 +277,7 @@
 				7932629B28048291005E4D2E /* PortfolioViewController2.swift */,
 				7934EFAB28365AB600CE7FD0 /* CurrentPortfolioViewController.swift */,
 				7934EFAF283BE06E00CE7FD0 /* MyPortfolioViewController.swift */,
+				792B0FC6287F03080040B461 /* MainTabBarController.swift */,
 			);
 			path = "Main Tabs";
 			sourceTree = "<group>";
@@ -309,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				7932629527FDA782005E4D2E /* WatchlistViewController.swift */,
+				792B0FC2287B3C6C0040B461 /* WatchlistViewController2.swift */,
 			);
 			path = WatchlistTab;
 			sourceTree = "<group>";
@@ -593,6 +602,7 @@
 				7982923427E678A5007ECCCD /* Double+String.swift in Sources */,
 				79E2763727CF955A005FB139 /* TransactionHistoryViewController.swift in Sources */,
 				79619A1C27C4F4850080CB01 /* SellTransactionViewController.swift in Sources */,
+				792B0FC3287B3C6C0040B461 /* WatchlistViewController2.swift in Sources */,
 				79397C7927E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift in Sources */,
 				796EFA27285A1FF9005E24AF /* CircularProgressBar.swift in Sources */,
 				796EFA252853A1CD005E24AF /* UIButton+AddTransactionButton.swift in Sources */,
@@ -605,9 +615,11 @@
 				7934EFB8283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift in Sources */,
 				7934EFB6283E45A700CE7FD0 /* HoldingPerfomanceModel.swift in Sources */,
 				796EFA2D285B8A98005E24AF /* [New]MarketViewController.swift in Sources */,
+				792B0FC5287C85EF0040B461 /* WatchlistTableViewViewModel.swift in Sources */,
 				79397C7C27E3541700B04EDA /* MarketData.swift in Sources */,
 				796EFA3C286DF594005E24AF /* MarketCardsViewModel.swift in Sources */,
 				796EFA1E284771C3005E24AF /* Floating label.swift in Sources */,
+				792B0FC7287F03080040B461 /* MainTabBarController.swift in Sources */,
 				79C2109627EB5523001B2D80 /* CoinPriceOnGivenDate.swift in Sources */,
 				79397C8427E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.swift in Sources */,
 				79EAFD3527B3FDC8008A6062 /* CoinModel.swift in Sources */,
