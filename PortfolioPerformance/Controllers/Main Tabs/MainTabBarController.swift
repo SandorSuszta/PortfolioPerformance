@@ -27,7 +27,6 @@ class MainTabBarController: UITabBarController {
         let navController4 = UINavigationController(rootViewController: _New_MarketViewController())
         let navController5 = UINavigationController(rootViewController: _New_MarketViewController())
         
-        
         setViewControllers([
             navController1,
             navController2,
@@ -35,5 +34,20 @@ class MainTabBarController: UITabBarController {
             navController4,
             navController5
         ], animated: false)
+        
+        tabBar.items?[0].image = UIImage(named: "market")
+        tabBar.items?[0].title = "Market"
+    
+        tabBar.items?[1].image = UIImage(named: "star")
+        tabBar.items?[1].title = "Watchlist"
+        
+        tabBar.items?[2].image = UIImage(named: "add")
+        tabBar.items?[2].title = "Add"
+        
+        tabBar.items?[3].image = UIImage(named: "transaction")
+        tabBar.items?[3].title = "History"
+        
+        tabBar.items?[4].image = UIImage(named: "portfolio")
+        tabBar.items?[4].title = "Portfolio"
     }
 }
