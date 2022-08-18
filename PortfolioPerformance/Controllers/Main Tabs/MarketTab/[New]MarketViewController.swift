@@ -15,7 +15,6 @@ class _New_MarketViewController: UIViewController {
     private let cryptoCurrencyTableViewModel = CryptoCurrencyTableViewModel()
     private let sortOptionsArray = ["Highest Cap", "Top Winners", "Top Losers", "Top Volume"]
     
-    
     private var marketCardsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -38,6 +37,7 @@ class _New_MarketViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
+        setupTitle()
         setupMarketCardsCollectionView()
         setupSortOptionsCollectionView()
         setupTableView()
@@ -53,7 +53,7 @@ class _New_MarketViewController: UIViewController {
         
         marketCardsCollectionView.frame = CGRect(
             x: 0,
-            y: 100,
+            y: 80,
             width: view.width,
             height: 170
         )
@@ -75,6 +75,11 @@ class _New_MarketViewController: UIViewController {
     }
     
     //MARK: - Methods
+    
+    //Title
+    private func setupTitle() {
+        self.title = "Market"
+    }
     
     //Market Cards Setup
     private func setupMarketCardsCollectionView() {

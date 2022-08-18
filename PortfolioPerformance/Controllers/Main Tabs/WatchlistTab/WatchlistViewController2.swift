@@ -17,6 +17,7 @@ class WatchlistViewController2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
+        self.title = "Watchlist"
         
         setupTableView()
         tableViewModel.loadWatchlistCryptoCurrenciesData()
@@ -31,9 +32,9 @@ class WatchlistViewController2: UIViewController {
     override func viewDidLayoutSubviews() {
         watchlistTableView.frame = CGRect(
             x: 15,
-            y: 5,
+            y: 100,
             width: view.width - 30,
-            height: view.height
+            height: view.height - 80
         )
     }
     
