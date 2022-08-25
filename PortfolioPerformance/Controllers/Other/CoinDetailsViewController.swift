@@ -75,19 +75,19 @@ class CoinDetailsViewController: UIViewController  {
         rangeNameLabel.text = rangeName
     }
     
-    @IBAction func isFavouriteButtonClicked(_ sender: Any) {
-        
-        guard let symbol = coinModel?.symbol else { return }
-        
-        if WatchlistViewController.watchlistCoins.contains(symbol)
-        {
-            WatchlistViewController.watchlistCoins.removeAll { $0 == symbol }
-            isFavouriteButton.image = UIImage(named: "favourite")
-        } else {
-            WatchlistViewController.watchlistCoins.append(symbol)
-            isFavouriteButton.image = UIImage(named: "favourite.fill")
-        }
-    }
+//    @IBAction func isFavouriteButtonClicked(_ sender: Any) {
+//
+//        guard let symbol = coinModel?.symbol else { return }
+//
+//        if WatchlistViewController.watchlistCoins.contains(symbol)
+//        {
+//            WatchlistViewController.watchlistCoins.removeAll { $0 == symbol }
+//            isFavouriteButton.image = UIImage(named: "favourite")
+//        } else {
+//            WatchlistViewController.watchlistCoins.append(symbol)
+//            isFavouriteButton.image = UIImage(named: "favourite.fill")
+//        }
+//    }
     
     var chartPriceArray: [[Double]] = [] {
         didSet{
@@ -104,7 +104,8 @@ class CoinDetailsViewController: UIViewController  {
     }
     
     private var isFavourite: Bool {
-        WatchlistViewController.watchlistCoins.contains(coinModel?.symbol ?? "")
+//        WatchlistViewController.watchlistCoins.contains(coinModel?.symbol ?? "")
+        true
     }
     
     override func viewWillAppear(_ animated: Bool) {

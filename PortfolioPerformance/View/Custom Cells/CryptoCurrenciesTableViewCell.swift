@@ -135,6 +135,8 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
         changeLabel.textColor = viewModel.coinModel.priceChange24H ?? 0 >= 0 ? .nephritis : .pomergranate
         
         logoImageView.setImage(imageData: viewModel.imageData, imageUrl: viewModel.imageUrl)
+        
+        selectionStyle = .none //dont highlight selected cell
     }
 }
 

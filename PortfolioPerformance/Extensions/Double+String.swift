@@ -49,7 +49,6 @@ extension String {
     }
     
     static func percentageString(from number: Double, positivePrefix: String = "+") -> String {
-        print(number)
         let formatter = NumberFormatter()
         formatter.numberStyle = .percent
         formatter.positivePrefix = positivePrefix

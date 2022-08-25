@@ -16,7 +16,7 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
     
     let headerTitle: UILabel = {
         let title = UILabel()
-        title.font = .systemFont(ofSize: 14, weight: .semibold)
+        title.font = .systemFont(ofSize: 12, weight: .semibold)
         title.textAlignment = .center
         title.numberOfLines = 2
         return title
@@ -24,13 +24,13 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
     
     let mainTitle: UILabel = {
         let title = UILabel()
-        title.font = .systemFont(ofSize: 16, weight: .semibold)
+        title.font = .systemFont(ofSize: 14, weight: .semibold)
         return title
     }()
     
     let secondaryTitle: UILabel = {
         let title = UILabel()
-        title.font = .systemFont(ofSize: 12, weight: .semibold)
+        title.font = .systemFont(ofSize: 10, weight: .semibold)
         title.textColor = .pomergranate
         return title
     }()

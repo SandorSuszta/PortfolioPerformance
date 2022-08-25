@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class WatchlistViewController2: UIViewController {
+class WatchlistViewController: UIViewController {
 
     private let tableViewModel = WatchlistTableViewModel()
 
@@ -52,7 +52,7 @@ class WatchlistViewController2: UIViewController {
 }
 
     //MARK: - Table view delegate and data source
-    extension WatchlistViewController2: UITableViewDelegate, UITableViewDataSource {
+    extension WatchlistViewController: UITableViewDelegate, UITableViewDataSource {
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             tableViewModel.cellViewModels.value?.count ?? 0
         }

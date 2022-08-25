@@ -1,13 +1,6 @@
-//
-//  [New]MarketViewController.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 16/06/2022.
-//
-
 import UIKit
 
-class _New_MarketViewController: UIViewController {
+class MarketViewController: UIViewController {
     
     //MARK: - Properties
     
@@ -29,7 +22,6 @@ class _New_MarketViewController: UIViewController {
         return collection
     }()
     
-    
     private let cryptoCurrencyTableView = UITableView()
 
     //MARK: - Lifecycle
@@ -45,7 +37,9 @@ class _New_MarketViewController: UIViewController {
         cryptoCurrencyTableViewModel.loadAllCryptoCurrenciesData()
         marketCardsViewModel.loadGreedAndFearIndex()
         marketCardsViewModel.loadGlobalData()
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
     }
     
     override func viewDidLayoutSubviews() {
@@ -70,7 +64,7 @@ class _New_MarketViewController: UIViewController {
             y: sortOptionsCollectionView.bottom + 5,
             width: view.width - 20,
             height: view.height - marketCardsCollectionView.height - sortOptionsCollectionView.height -
-            (self.tabBarController?.tabBar.frame.height ?? 0) - 105
+            (self.tabBarController?.tabBar.frame.height ?? 0) - 90
         )
     }
     
@@ -139,11 +133,20 @@ class _New_MarketViewController: UIViewController {
             }
         }
     }
-}
     
+    private func scrollToTop() {
+        let topRow = IndexPath(row: 0, section: 0)
+        self.cryptoCurrencyTableView.scrollToRow(
+            at: topRow,
+            at: .top,
+            animated: false
+        )
+    }
+}
+
     //MARK: - Collection View methods
 
-extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -194,6 +197,7 @@ extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewD
         if collectionView == sortOptionsCollectionView {
             //Sort options collection case
             sortTableview(option: indexPath.row)
+            scrollToTop()
         }
     }
     
@@ -232,7 +236,7 @@ extension _New_MarketViewController: UICollectionViewDelegate, UICollectionViewD
 }
     //MARK: - Table View Delegate and Data Source Methods
     
-extension _New_MarketViewController: UITableViewDelegate, UITableViewDataSource {
+extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         cryptoCurrencyTableViewModel.cellViewModels.value?.count ?? 0
@@ -246,6 +250,7 @@ extension _New_MarketViewController: UITableViewDelegate, UITableViewDataSource 
         
         guard let cellViewModel = cryptoCurrencyTableViewModel.cellViewModels.value?[indexPath.row] else { fatalError() }
         cell.configureCell(with: cellViewModel)
+        
         
         return cell
     }

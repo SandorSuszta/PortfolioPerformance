@@ -18,15 +18,14 @@ class MainTabBarController: UITabBarController {
     private func setupTabBar() {
         
         
-        let market = _New_MarketViewController()
-        let watchlist = WatchlistViewController2()
-        
+        let market = MarketViewController()
+        let watchlist = WatchlistViewController()
         
         let navController1 = UINavigationController(rootViewController: market)
         let navController2 = UINavigationController(rootViewController: watchlist)
-        let navController3 = UINavigationController(rootViewController: _New_MarketViewController())
-        let navController4 = UINavigationController(rootViewController: _New_MarketViewController())
-        let navController5 = UINavigationController(rootViewController: _New_MarketViewController())
+        let navController3 = UINavigationController(rootViewController: MarketViewController())
+        let navController4 = UINavigationController(rootViewController: MarketViewController())
+        let navController5 = UINavigationController(rootViewController: MarketViewController())
         
         
         setViewControllers([
