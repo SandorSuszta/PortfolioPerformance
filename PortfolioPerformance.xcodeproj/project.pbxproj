@@ -66,7 +66,7 @@
 		796EFA3C286DF594005E24AF /* MarketCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA3B286DF594005E24AF /* MarketCardsViewModel.swift */; };
 		796EFA4128733AF2005E24AF /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA4028733AF2005E24AF /* NetworkingManager.swift */; };
 		796EFA432876EFBB005E24AF /* CryptoCurrencyTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA422876EFBB005E24AF /* CryptoCurrencyTableViewModel.swift */; };
-		796EFA452876F076005E24AF /* CryptoCurrencyTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA442876F076005E24AF /* CryptoCurrencyTableCellViewModel.swift */; };
+		796EFA452876F076005E24AF /* CryptoCurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA442876F076005E24AF /* CryptoCurrencyViewModel.swift */; };
 		796EFA4928770D26005E24AF /* CryptoCurrenciesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA4828770D26005E24AF /* CryptoCurrenciesTableViewCell.swift */; };
 		7982923227E673E6007ECCCD /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982923127E673E6007ECCCD /* UIColor+CustomColors.swift */; };
 		7982923427E678A5007ECCCD /* Double+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982923327E678A5007ECCCD /* Double+String.swift */; };
@@ -149,7 +149,7 @@
 		796EFA3B286DF594005E24AF /* MarketCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardsViewModel.swift; sourceTree = "<group>"; };
 		796EFA4028733AF2005E24AF /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		796EFA422876EFBB005E24AF /* CryptoCurrencyTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCurrencyTableViewModel.swift; sourceTree = "<group>"; };
-		796EFA442876F076005E24AF /* CryptoCurrencyTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCurrencyTableCellViewModel.swift; sourceTree = "<group>"; };
+		796EFA442876F076005E24AF /* CryptoCurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCurrencyViewModel.swift; sourceTree = "<group>"; };
 		796EFA4828770D26005E24AF /* CryptoCurrenciesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCurrenciesTableViewCell.swift; sourceTree = "<group>"; };
 		7982923127E673E6007ECCCD /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		7982923327E678A5007ECCCD /* Double+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+String.swift"; sourceTree = "<group>"; };
@@ -221,7 +221,7 @@
 				7934EFB1283E295200CE7FD0 /* HoldingsCellViewModel.swift */,
 				796EFA422876EFBB005E24AF /* CryptoCurrencyTableViewModel.swift */,
 				792B0FC4287C85EF0040B461 /* WatchlistTableViewViewModel.swift */,
-				796EFA442876F076005E24AF /* CryptoCurrencyTableCellViewModel.swift */,
+				796EFA442876F076005E24AF /* CryptoCurrencyViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -607,7 +607,7 @@
 				7934EFAC28365AB700CE7FD0 /* CurrentPortfolioViewController.swift in Sources */,
 				790C30C527CEA7620021658F /* PersistanceManager.swift in Sources */,
 				796EFA2F285B8B64005E24AF /* MarketCardsCollectionViewCell.swift in Sources */,
-				796EFA452876F076005E24AF /* CryptoCurrencyTableCellViewModel.swift in Sources */,
+				796EFA452876F076005E24AF /* CryptoCurrencyViewModel.swift in Sources */,
 				796EFA3328697A91005E24AF /* MarketCardsCellViewModel.swift in Sources */,
 				796EFA4128733AF2005E24AF /* NetworkingManager.swift in Sources */,
 				7934EFBC2845113300CE7FD0 /* AddTransactionDetailsViewController.swift in Sources */,

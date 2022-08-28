@@ -127,7 +127,7 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
         super.prepareForReuse()
     }
     
-    public func configureCell(with viewModel: CryptoCurrencyTableCellViewModel) {
+    public func configureCell(with viewModel: CryptoCurrencyViewModel) {
         nameLabel.text = viewModel.name
         symbolLabel.text = viewModel.symbol
         priceLabel.text = viewModel.currentPrice

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CryptoCurrencyTableCellViewModel {
+class CryptoCurrencyViewModel {
 
     public let coinModel: CoinModel
     
@@ -26,13 +26,17 @@ class CryptoCurrencyTableCellViewModel {
         .priceString(from: coinModel.currentPrice)
     }
     public var priceChange24H: String {
-        .priceString(from: coinModel.priceChange24H ?? 0)
+        .priceString(from: coinModel.priceChange24H)
     }
     public var priceChangePercentage24H: String {
-        .percentageString(from: coinModel.priceChangePercentage24H ?? 0)
+        .percentageString(from: coinModel.priceChangePercentage24H)
     }
     
     public var isFavourite: Bool = false
+    
+    public var isPriceChangeNegative: Bool {
+        coinModel.priceChange24H > 0 ? false : true
+    }
     
     init (coinModel: CoinModel) {
         self.coinModel = coinModel

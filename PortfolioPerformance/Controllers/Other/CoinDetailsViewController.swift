@@ -300,7 +300,7 @@ class CoinDetailsViewController: UIViewController  {
         
         coinRankLabel.text = "#\(Int(coinModel.marketCapRank ?? 0))"
         coinMarketCapLabel.text = "$\(coinModel.marketCap ?? 0)"
-        coinVolumeLabel.text = "\(coinModel.totalVolume)"
+        //coinVolumeLabel.text = "\(coinModel.totalVolume)"
         
         rangeLowLabel.text = priceLow.string2f()
         rangeHigh.text = priceHigh.string2f()

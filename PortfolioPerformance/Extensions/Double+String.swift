@@ -42,6 +42,7 @@ extension String {
     
     static func priceString(from number: Double) -> String {
         let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "en_US")
         formatter.numberStyle = .currency
         formatter.maximumFractionDigits = 2
         
@@ -60,6 +61,7 @@ extension String {
     static func marketCapString(from number: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "en_US")
         formatter.maximumFractionDigits = 0
         var formattedNumber: Double = 0
         

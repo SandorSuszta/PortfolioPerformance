@@ -17,7 +17,8 @@ class DetailsViewController: UIViewController {
 //    @IBOutlet weak var chartShadowView: UIView!
 //    @IBOutlet weak var chartView: UIView!
 //    @IBOutlet weak var coinDetailsView: UIView!
-    var coinModel: CoinModel?
+    
+    var headerViewModel: CryptoCurrencyViewModel?
     
     private var symbolLabel: UILabel = {
         let label = UILabel()
@@ -39,8 +40,8 @@ class DetailsViewController: UIViewController {
         return label
     }()
     
-    private var coinLogoView: UIView = {
-        let view = UIView()
+    private var coinLogoView: UIImageView = {
+        let view = UIImageView()
         return view
     }()
     
@@ -51,5 +52,29 @@ class DetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupHeaderView()
+    }
+    
+    private func setupHeaderView() {
+        
+        guard let headerViewModel = headerViewModel else { return }
+        
+        symbolLabel.text = headerViewModel.symbol
+        priceLabel.text = headerViewModel.currentPrice
+        priceChangeLabel.text = headerViewModel.priceChange24H
+        priceChangePercentageLabel.text = headerViewModel.priceChange24H
+        
+        coinLogoView.setImage(
+            imageData: headerViewModel.imageData,
+            imageUrl: headerViewModel.imageUrl
+        )
+        
+        if headerViewModel.isPriceChangeNegative  {
+            priceChangeLabel.textColor = .pomergranate
+            priceChangePercentageLabel.textColor = .pomergranate
+        } else {
+            priceChangeLabel.textColor = .nephritis
+            priceChangePercentageLabel.textColor = .nephritis
+        }
     }
 }

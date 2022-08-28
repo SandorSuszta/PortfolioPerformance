@@ -11,7 +11,7 @@ class WatchlistTableViewModel {
     
     static var watclistCoinIDs: [String] = ["bitcoin", "ethereum", "ripple"]
     
-    var cellViewModels: ObservableObject<[CryptoCurrencyTableCellViewModel]> = ObservableObject(value:[])
+    var cellViewModels: ObservableObject<[CryptoCurrencyViewModel]> = ObservableObject(value:[])
     
     public func loadWatchlistCryptoCurrenciesData() {
         NetworkingManager.shared.requestDataForWatchlist(list: WatchlistTableViewModel.watclistCoinIDs) { result in
