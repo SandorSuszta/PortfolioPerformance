@@ -15,7 +15,6 @@
 		792B0FC5287C85EF0040B461 /* WatchlistTableViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC4287C85EF0040B461 /* WatchlistTableViewViewModel.swift */; };
 		792B0FC7287F03080040B461 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC6287F03080040B461 /* MainTabBarController.swift */; };
 		792C040028B7C2E7008EE48C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C03FF28B7C2E7008EE48C /* DetailsViewController.swift */; };
-		7932629327FCAFBC005E4D2E /* [OLD]MarketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932629127FCAFBC005E4D2E /* [OLD]MarketTableViewCell.swift */; };
 		7932629427FCAFBC005E4D2E /* MarketTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7932629227FCAFBC005E4D2E /* MarketTableCell.xib */; };
 		79326299280423E1005E4D2E /* HoldingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */; };
 		7932629A280423E1005E4D2E /* HoldingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79326298280423E1005E4D2E /* HoldingsTableViewCell.xib */; };
@@ -60,7 +59,7 @@
 		796EFA2B285A21F1005E24AF /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA2A285A21F1005E24AF /* Test.swift */; };
 		796EFA2D285B8A98005E24AF /* MarketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA2C285B8A98005E24AF /* MarketViewController.swift */; };
 		796EFA2F285B8B64005E24AF /* MarketCardsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA2E285B8B64005E24AF /* MarketCardsCollectionViewCell.swift */; };
-		796EFA3128690062005E24AF /* MarketCerdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA3028690062005E24AF /* MarketCerdModel.swift */; };
+		796EFA3128690062005E24AF /* MarketCardCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA3028690062005E24AF /* MarketCardCellModel.swift */; };
 		796EFA3328697A91005E24AF /* MarketCardsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA3228697A90005E24AF /* MarketCardsCellViewModel.swift */; };
 		796EFA3A286DDD60005E24AF /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA39286DDD60005E24AF /* ObservableObject.swift */; };
 		796EFA3C286DF594005E24AF /* MarketCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA3B286DF594005E24AF /* MarketCardsViewModel.swift */; };
@@ -98,7 +97,6 @@
 		792B0FC4287C85EF0040B461 /* WatchlistTableViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistTableViewViewModel.swift; sourceTree = "<group>"; };
 		792B0FC6287F03080040B461 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		792C03FF28B7C2E7008EE48C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
-		7932629127FCAFBC005E4D2E /* [OLD]MarketTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "[OLD]MarketTableViewCell.swift"; sourceTree = "<group>"; };
 		7932629227FCAFBC005E4D2E /* MarketTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarketTableCell.xib; sourceTree = "<group>"; };
 		79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsTableViewCell.swift; sourceTree = "<group>"; };
 		79326298280423E1005E4D2E /* HoldingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HoldingsTableViewCell.xib; sourceTree = "<group>"; };
@@ -143,7 +141,7 @@
 		796EFA2A285A21F1005E24AF /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		796EFA2C285B8A98005E24AF /* MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarketViewController.swift; path = "PortfolioPerformance/Controllers/Main Tabs/MarketViewController.swift"; sourceTree = SOURCE_ROOT; };
 		796EFA2E285B8B64005E24AF /* MarketCardsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardsCollectionViewCell.swift; sourceTree = "<group>"; };
-		796EFA3028690062005E24AF /* MarketCerdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCerdModel.swift; sourceTree = "<group>"; };
+		796EFA3028690062005E24AF /* MarketCardCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardCellModel.swift; sourceTree = "<group>"; };
 		796EFA3228697A90005E24AF /* MarketCardsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardsCellViewModel.swift; sourceTree = "<group>"; };
 		796EFA39286DDD60005E24AF /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
 		796EFA3B286DF594005E24AF /* MarketCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardsViewModel.swift; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 			isa = PBXGroup;
 			children = (
 				79397C8127E36FC800B04EDA /* TransactionHistoryTableView Cells */,
-				7932629127FCAFBC005E4D2E /* [OLD]MarketTableViewCell.swift */,
 				796EFA2E285B8B64005E24AF /* MarketCardsCollectionViewCell.swift */,
 				79628DCA281939E600497D97 /* MarketSortlCollectionViewCell.swift */,
 				7955694828773472003E8A13 /* SortOptionsCollectionViewCell.swift */,
@@ -365,7 +362,7 @@
 				7934EFA5282D141B00CE7FD0 /* SearchResponse.swift */,
 				7934EFB5283E45A700CE7FD0 /* HoldingPerfomanceModel.swift */,
 				7934EFB7283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift */,
-				796EFA3028690062005E24AF /* MarketCerdModel.swift */,
+				796EFA3028690062005E24AF /* MarketCardCellModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -565,7 +562,7 @@
 				79619A1427BD374C0080CB01 /* [Old]AddTransactionViewController.swift in Sources */,
 				796EFA2B285A21F1005E24AF /* Test.swift in Sources */,
 				796EFA22284E65D9005E24AF /* [Delete]AddTransactionChildViewController.swift in Sources */,
-				796EFA3128690062005E24AF /* MarketCerdModel.swift in Sources */,
+				796EFA3128690062005E24AF /* MarketCardCellModel.swift in Sources */,
 				798957C827F479DD0074CA38 /* UIView+Shadow.swift in Sources */,
 				79397C7F27E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.swift in Sources */,
 				79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */,
@@ -599,7 +596,6 @@
 				79C2109627EB5523001B2D80 /* CoinPriceOnGivenDate.swift in Sources */,
 				79397C8427E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.swift in Sources */,
 				79EAFD3527B3FDC8008A6062 /* CoinModel.swift in Sources */,
-				7932629327FCAFBC005E4D2E /* [OLD]MarketTableViewCell.swift in Sources */,
 				7934EFBA2841600A00CE7FD0 /* UIProgressView+Height.swift in Sources */,
 				79619A1827C4EAC00080CB01 /* TransferTransactionViewController.swift in Sources */,
 				7934EFA6282D141B00CE7FD0 /* SearchResponse.swift in Sources */,

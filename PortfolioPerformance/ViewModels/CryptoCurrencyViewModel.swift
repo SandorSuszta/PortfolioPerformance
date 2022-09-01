@@ -26,16 +26,16 @@ class CryptoCurrencyViewModel {
         .priceString(from: coinModel.currentPrice)
     }
     public var priceChange24H: String {
-        .priceString(from: coinModel.priceChange24H)
+        .priceString(from: coinModel.priceChange24H ?? 0)
     }
     public var priceChangePercentage24H: String {
-        .percentageString(from: coinModel.priceChangePercentage24H)
+        .percentageString(from: coinModel.priceChangePercentage24H ?? 0)
     }
     
     public var isFavourite: Bool = false
     
     public var isPriceChangeNegative: Bool {
-        coinModel.priceChange24H > 0 ? false : true
+        coinModel.priceChange24H ?? 0 > 0 ? false : true
     }
     
     init (coinModel: CoinModel) {

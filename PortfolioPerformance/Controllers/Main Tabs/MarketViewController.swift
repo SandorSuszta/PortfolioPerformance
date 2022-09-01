@@ -29,14 +29,15 @@ class MarketViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
+        marketCardsViewModel.loadGreedAndFearIndex()
+        marketCardsViewModel.loadGlobalData()
         setupTitle()
         setupMarketCardsCollectionView()
         setupSortOptionsCollectionView()
         setupTableView()
         bindViewModels()
         cryptoCurrencyTableViewModel.loadAllCryptoCurrenciesData()
-        marketCardsViewModel.loadGreedAndFearIndex()
-        marketCardsViewModel.loadGlobalData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -223,7 +224,7 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
             })
         case 2: //Top Losers
             cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
-                $0.coinModel.priceChangePercentage24H ?? 0 < $1.coinModel.priceChangePercentage24H ?? 0
+                $0.coinModel.priceChangePercentage24H ?? 0  < $1.coinModel.priceChangePercentage24H ?? 0
             })
         case 3: //Top Volume
             cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
@@ -251,8 +252,16 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cellViewModel = cryptoCurrencyTableViewModel.cellViewModels.value?[indexPath.row] else { fatalError() }
         cell.configureCell(with: cellViewModel)
         
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let headerViewModel = cryptoCurrencyTableViewModel.cellViewModels.value?[indexPath.row] else { fatalError() }
+        
+        let detailsVC = DetailsViewController(headerViewModel: headerViewModel)
+        
+        self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
