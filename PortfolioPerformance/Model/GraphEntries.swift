@@ -10,4 +10,3 @@ import Foundation
 struct GraphEntries: Codable {
     let prices: [[Double]]
 }
-

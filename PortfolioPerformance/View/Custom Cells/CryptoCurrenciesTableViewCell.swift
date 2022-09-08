@@ -119,7 +119,7 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
             width: priceLabel.width,
             height: 20)
         
-        contentView.backgroundColor = .clouds
+        contentView.backgroundColor = .white
         backgroundColor = .clear
     }
     
@@ -127,7 +127,7 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
         super.prepareForReuse()
     }
     
-    public func configureCell(with viewModel: CryptoCurrencyViewModel) {
+    public func configureCell(with viewModel: MarketTableCellViewModel) {
         nameLabel.text = viewModel.name
         symbolLabel.text = viewModel.symbol
         priceLabel.text = viewModel.currentPrice

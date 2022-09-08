@@ -18,7 +18,7 @@ class WatchlistViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
         self.title = "Watchlist"
-        
+
         setupTableView()
         tableViewModel.loadWatchlistCryptoCurrenciesData()
         

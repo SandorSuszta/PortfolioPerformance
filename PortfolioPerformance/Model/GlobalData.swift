@@ -190,4 +190,3 @@ struct GlobalData: Codable {
         return todayDominance - yesterdayDominance
     }
 }
-

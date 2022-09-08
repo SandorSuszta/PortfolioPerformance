@@ -85,5 +85,35 @@ extension String {
         }
         return formatter.string(from: NSNumber(value: formattedNumber)) ?? ""
     }
+    
+    static func stringForGraphAxis(from date: Date, daysInterval: Int) -> String {
+        let formatter = DateFormatter()
+        
+        switch daysInterval {
+        case 1:
+            formatter.dateFormat = "HH:mm"
+        case 7, 30:
+            formatter.dateFormat = "d MMM"
+        case 180, 360:
+            formatter.dateFormat = "MMM yy"
+        case 2000:
+            formatter.dateFormat = "yyyy"
+        default: fatalError()
+        }
+        return formatter.string(from: date)
+    }
+    
+    
+    
+    static func formatedDateString(from isoDate: String) -> String {
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions.insert(.withFractionalSeconds)
+        
+        guard let convertedDate = isoFormatter.date(from: isoDate) else { return "" }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMM yyyy"
+        return formatter.string(from: convertedDate)
+    }
 }
 

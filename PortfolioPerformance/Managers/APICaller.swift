@@ -113,7 +113,6 @@ class APICaller {
     }
     
     //MARK: - Get Graph Entries
-    
     public func getHistoricalPrices(
         for coinID: String,
         intervalInDays: Int,

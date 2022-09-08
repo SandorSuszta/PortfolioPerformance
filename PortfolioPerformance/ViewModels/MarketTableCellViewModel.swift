@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CryptoCurrencyViewModel {
+class MarketTableCellViewModel {
 
     public let coinModel: CoinModel
     
@@ -20,7 +20,7 @@ class CryptoCurrencyViewModel {
     public var imageUrl: String {
         coinModel.image
     }
-    public var imageData: Data? = nil
+    public var imageData: Data?
     
     public var currentPrice: String {
         .priceString(from: coinModel.currentPrice)
@@ -38,6 +38,7 @@ class CryptoCurrencyViewModel {
         coinModel.priceChange24H ?? 0 > 0 ? false : true
     }
     
+    //MARK: - Init
     init (coinModel: CoinModel) {
         self.coinModel = coinModel
     }

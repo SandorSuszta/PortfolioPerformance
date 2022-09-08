@@ -29,13 +29,13 @@ class MarketViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
+        bindViewModels()
         marketCardsViewModel.loadGreedAndFearIndex()
         marketCardsViewModel.loadGlobalData()
         setupTitle()
         setupMarketCardsCollectionView()
         setupSortOptionsCollectionView()
         setupTableView()
-        bindViewModels()
         cryptoCurrencyTableViewModel.loadAllCryptoCurrenciesData()
         
     }
@@ -257,9 +257,9 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let headerViewModel = cryptoCurrencyTableViewModel.cellViewModels.value?[indexPath.row] else { fatalError() }
+        guard let currentCoinModel = cryptoCurrencyTableViewModel.cellViewModels.value?[indexPath.row].coinModel else { fatalError() }
         
-        let detailsVC = DetailsViewController(headerViewModel: headerViewModel)
+        let detailsVC = DetailsViewController(coinModel: currentCoinModel)
         
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }

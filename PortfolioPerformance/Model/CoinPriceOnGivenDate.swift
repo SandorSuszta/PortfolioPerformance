@@ -224,4 +224,3 @@ struct CoinPriceOnGivenDate: Codable {
 struct MarketDataOnDate: Codable {
     let current_price: [String: Double]
 }
-

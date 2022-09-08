@@ -14,6 +14,4 @@ struct Formatter {
         df.dateStyle = .medium
         return df.string(from: date)
     }
-    
-    
 }

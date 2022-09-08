@@ -288,8 +288,6 @@ class CoinDetailsViewController: UIViewController  {
             $0[1] < $1[1]
         }
         
-        
-        
         guard let coinModel = coinModel,
               let priceLow = sortedPriceArray.first?[1],
               let priceHigh = sortedPriceArray.last?[1],

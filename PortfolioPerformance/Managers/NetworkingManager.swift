@@ -79,27 +79,53 @@ class NetworkingManager {
     }
     
     //MARK: - Crypto Data For Watchlist
-    public func requestDataForWatchlist(list: [String], completion: @escaping (Result<[CoinModel], Error>) -> Void) {
-        
-        let endpoint = constructURLfor(list: list)
-        
-        guard let url = URL(string: endpoint) else { fatalError() }
-        
+    public func requestDataForWatchlist(
+        list: [String],
+        completion: @escaping (Result<[CoinModel], Error>) -> Void
+    ){
         request(
-            url: url,
+            url: constructURL(list: list),
             expectingType: [CoinModel].self,
             completion: completion
         )
     }
+    //MARK: - Chart Data
     
-    private func constructURLfor(list: [String]) -> String {
+    public func requestDataForChart(
+        coinID: String,
+        intervalInDays: Int,
+        completion: @escaping (Result<GraphEntries, Error>) -> Void
+    ){
+        request(
+            url: constructURL(coinID: coinID, intervalInDays: intervalInDays),
+            expectingType: GraphEntries.self,
+            completion: completion
+        )
+    }
+    
+    //MARK: - URL constructors
+    private func constructURL(coinID: String, intervalInDays: Int) -> URL {
+      
+        let unixTimeNow = Int(Date().timeIntervalSince1970)
+        let unixTimeThen = unixTimeNow - (86400 * intervalInDays)
+        let endpointString = "https://api.coingecko.com/api/v3/coins/\(coinID)/market_chart/range?vs_currency=usd&from=\(unixTimeThen)&to=\(unixTimeNow)"
+        
+        guard let url = URL(string: endpointString) else { fatalError() }
+        
+        return url
+    }
+    
+    private func constructURL(list: [String]) -> URL {
         var updatedBaseURL = NetworkingManager.Constants.requestDataForListBaseUrl
 
         for coinID in list {
             updatedBaseURL += coinID + "%2C%20"
         }
         
-        let endpoint = updatedBaseURL + NetworkingManager.Constants.requestDataForListTrailingUrl
-        return endpoint
+        let endpointString = updatedBaseURL + NetworkingManager.Constants.requestDataForListTrailingUrl
+        
+        guard let url = URL(string: endpointString) else { fatalError() }
+        
+        return url
     }
 }

@@ -42,5 +42,4 @@ struct HoldingPerfomanceModel {
     var holdingValueChangePercentage: Double {
         holdingValueChange / holdingModel.totalCostBasis * 100
     }
-    
 }

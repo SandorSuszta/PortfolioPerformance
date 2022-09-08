@@ -28,4 +28,3 @@ struct SearchResult: Codable {
     let symbol: String
     let large: String
 }
-

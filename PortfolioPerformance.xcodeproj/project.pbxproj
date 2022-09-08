@@ -15,6 +15,8 @@
 		792B0FC5287C85EF0040B461 /* WatchlistTableViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC4287C85EF0040B461 /* WatchlistTableViewViewModel.swift */; };
 		792B0FC7287F03080040B461 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC6287F03080040B461 /* MainTabBarController.swift */; };
 		792C040028B7C2E7008EE48C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C03FF28B7C2E7008EE48C /* DetailsViewController.swift */; };
+		792C040628C14386008EE48C /* CoinDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040528C14386008EE48C /* CoinDetailsViewModel.swift */; };
+		792C040928C9E62B008EE48C /* RangeProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040828C9E62B008EE48C /* RangeProgressBar.swift */; };
 		7932629427FCAFBC005E4D2E /* MarketTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7932629227FCAFBC005E4D2E /* MarketTableCell.xib */; };
 		79326299280423E1005E4D2E /* HoldingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */; };
 		7932629A280423E1005E4D2E /* HoldingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79326298280423E1005E4D2E /* HoldingsTableViewCell.xib */; };
@@ -56,7 +58,6 @@
 		796EFA22284E65D9005E24AF /* [Delete]AddTransactionChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA21284E65D9005E24AF /* [Delete]AddTransactionChildViewController.swift */; };
 		796EFA252853A1CD005E24AF /* UIButton+AddTransactionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA242853A1CD005E24AF /* UIButton+AddTransactionButton.swift */; };
 		796EFA27285A1FF9005E24AF /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA26285A1FF9005E24AF /* CircularProgressBar.swift */; };
-		796EFA2B285A21F1005E24AF /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA2A285A21F1005E24AF /* Test.swift */; };
 		796EFA2D285B8A98005E24AF /* MarketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA2C285B8A98005E24AF /* MarketViewController.swift */; };
 		796EFA2F285B8B64005E24AF /* MarketCardsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA2E285B8B64005E24AF /* MarketCardsCollectionViewCell.swift */; };
 		796EFA3128690062005E24AF /* MarketCardCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA3028690062005E24AF /* MarketCardCellModel.swift */; };
@@ -65,7 +66,7 @@
 		796EFA3C286DF594005E24AF /* MarketCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA3B286DF594005E24AF /* MarketCardsViewModel.swift */; };
 		796EFA4128733AF2005E24AF /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA4028733AF2005E24AF /* NetworkingManager.swift */; };
 		796EFA432876EFBB005E24AF /* CryptoCurrencyTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA422876EFBB005E24AF /* CryptoCurrencyTableViewModel.swift */; };
-		796EFA452876F076005E24AF /* CryptoCurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA442876F076005E24AF /* CryptoCurrencyViewModel.swift */; };
+		796EFA452876F076005E24AF /* MarketTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA442876F076005E24AF /* MarketTableCellViewModel.swift */; };
 		796EFA4928770D26005E24AF /* CryptoCurrenciesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA4828770D26005E24AF /* CryptoCurrenciesTableViewCell.swift */; };
 		7982923227E673E6007ECCCD /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982923127E673E6007ECCCD /* UIColor+CustomColors.swift */; };
 		7982923427E678A5007ECCCD /* Double+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982923327E678A5007ECCCD /* Double+String.swift */; };
@@ -97,6 +98,8 @@
 		792B0FC4287C85EF0040B461 /* WatchlistTableViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistTableViewViewModel.swift; sourceTree = "<group>"; };
 		792B0FC6287F03080040B461 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		792C03FF28B7C2E7008EE48C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		792C040528C14386008EE48C /* CoinDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsViewModel.swift; sourceTree = "<group>"; };
+		792C040828C9E62B008EE48C /* RangeProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeProgressBar.swift; sourceTree = "<group>"; };
 		7932629227FCAFBC005E4D2E /* MarketTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarketTableCell.xib; sourceTree = "<group>"; };
 		79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsTableViewCell.swift; sourceTree = "<group>"; };
 		79326298280423E1005E4D2E /* HoldingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HoldingsTableViewCell.xib; sourceTree = "<group>"; };
@@ -138,7 +141,6 @@
 		796EFA21284E65D9005E24AF /* [Delete]AddTransactionChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "[Delete]AddTransactionChildViewController.swift"; sourceTree = "<group>"; };
 		796EFA242853A1CD005E24AF /* UIButton+AddTransactionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+AddTransactionButton.swift"; sourceTree = "<group>"; };
 		796EFA26285A1FF9005E24AF /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
-		796EFA2A285A21F1005E24AF /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		796EFA2C285B8A98005E24AF /* MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarketViewController.swift; path = "PortfolioPerformance/Controllers/Main Tabs/MarketViewController.swift"; sourceTree = SOURCE_ROOT; };
 		796EFA2E285B8B64005E24AF /* MarketCardsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardsCollectionViewCell.swift; sourceTree = "<group>"; };
 		796EFA3028690062005E24AF /* MarketCardCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardCellModel.swift; sourceTree = "<group>"; };
@@ -147,7 +149,7 @@
 		796EFA3B286DF594005E24AF /* MarketCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardsViewModel.swift; sourceTree = "<group>"; };
 		796EFA4028733AF2005E24AF /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		796EFA422876EFBB005E24AF /* CryptoCurrencyTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCurrencyTableViewModel.swift; sourceTree = "<group>"; };
-		796EFA442876F076005E24AF /* CryptoCurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCurrencyViewModel.swift; sourceTree = "<group>"; };
+		796EFA442876F076005E24AF /* MarketTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTableCellViewModel.swift; sourceTree = "<group>"; };
 		796EFA4828770D26005E24AF /* CryptoCurrenciesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCurrenciesTableViewCell.swift; sourceTree = "<group>"; };
 		7982923127E673E6007ECCCD /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		7982923327E678A5007ECCCD /* Double+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+String.swift"; sourceTree = "<group>"; };
@@ -193,11 +195,19 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7934EFA2282A72DD00CE7FD0 /* Extensions */ = {
+		792C040728C9E5D4008EE48C /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
 				796EFA1D284771C3005E24AF /* Floating label.swift */,
 				796EFA26285A1FF9005E24AF /* CircularProgressBar.swift */,
+				792C040828C9E62B008EE48C /* RangeProgressBar.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		7934EFA2282A72DD00CE7FD0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
 				79410D8C2823D3E700BD9EA4 /* UIView+Framing.swift */,
 				7934EFA72835172200CE7FD0 /* UIView+Addsubviews.swift */,
 				798957C727F479DD0074CA38 /* UIView+Shadow.swift */,
@@ -219,7 +229,8 @@
 				7934EFB1283E295200CE7FD0 /* HoldingsCellViewModel.swift */,
 				796EFA422876EFBB005E24AF /* CryptoCurrencyTableViewModel.swift */,
 				792B0FC4287C85EF0040B461 /* WatchlistTableViewViewModel.swift */,
-				796EFA442876F076005E24AF /* CryptoCurrencyViewModel.swift */,
+				796EFA442876F076005E24AF /* MarketTableCellViewModel.swift */,
+				792C040528C14386008EE48C /* CoinDetailsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -254,7 +265,6 @@
 			children = (
 				790C30C427CEA7620021658F /* PersistanceManager.swift */,
 				79EAFD3627B3FE02008A6062 /* APICaller.swift */,
-				796EFA2A285A21F1005E24AF /* Test.swift */,
 				796EFA4028733AF2005E24AF /* NetworkingManager.swift */,
 			);
 			path = Managers;
@@ -270,7 +280,6 @@
 				79E2763627CF955A005FB139 /* TransactionHistoryViewController.swift */,
 				7932629B28048291005E4D2E /* PortfolioViewController2.swift */,
 				7934EFAB28365AB600CE7FD0 /* CurrentPortfolioViewController.swift */,
-				7934EFAF283BE06E00CE7FD0 /* MyPortfolioViewController.swift */,
 			);
 			path = "Main Tabs";
 			sourceTree = "<group>";
@@ -329,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */,
+				7934EFAF283BE06E00CE7FD0 /* MyPortfolioViewController.swift */,
 				79410D8E282416C000BD9EA4 /* SearchScreenViewController.swift */,
 				792C03FF28B7C2E7008EE48C /* DetailsViewController.swift */,
 			);
@@ -338,6 +348,7 @@
 		7982922F27E3D829007ECCCD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				792C040728C9E5D4008EE48C /* CustomViews */,
 				79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */,
 				7932629227FCAFBC005E4D2E /* MarketTableCell.xib */,
 				79326298280423E1005E4D2E /* HoldingsTableViewCell.xib */,
@@ -548,6 +559,7 @@
 				7934EFA4282A824E00CE7FD0 /* ResultsTableViewCell.swift in Sources */,
 				7934EFAA28352A1A00CE7FD0 /* UIImageView+SetImage.swift in Sources */,
 				79C8DE7127BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift in Sources */,
+				792C040928C9E62B008EE48C /* RangeProgressBar.swift in Sources */,
 				796EFA3A286DDD60005E24AF /* ObservableObject.swift in Sources */,
 				790C30C827CEAA200021658F /* DataModel.xcdatamodeld in Sources */,
 				79410D8F282416C000BD9EA4 /* SearchScreenViewController.swift in Sources */,
@@ -556,11 +568,11 @@
 				7934EFBE28453D3800CE7FD0 /* AddTransactionParentViewControllerViewModel.swift in Sources */,
 				7941061227E0D84F009B4B8C /* DateFormatter.swift in Sources */,
 				7934EFB0283BE06E00CE7FD0 /* MyPortfolioViewController.swift in Sources */,
+				792C040628C14386008EE48C /* CoinDetailsViewModel.swift in Sources */,
 				7934EFA82835172200CE7FD0 /* UIView+Addsubviews.swift in Sources */,
 				7982923627E67ABB007ECCCD /* Date+FormatedString.swift in Sources */,
 				798957C227F31AE00074CA38 /* GlobalData.swift in Sources */,
 				79619A1427BD374C0080CB01 /* [Old]AddTransactionViewController.swift in Sources */,
-				796EFA2B285A21F1005E24AF /* Test.swift in Sources */,
 				796EFA22284E65D9005E24AF /* [Delete]AddTransactionChildViewController.swift in Sources */,
 				796EFA3128690062005E24AF /* MarketCardCellModel.swift in Sources */,
 				798957C827F479DD0074CA38 /* UIView+Shadow.swift in Sources */,
@@ -603,7 +615,7 @@
 				7934EFAC28365AB700CE7FD0 /* CurrentPortfolioViewController.swift in Sources */,
 				790C30C527CEA7620021658F /* PersistanceManager.swift in Sources */,
 				796EFA2F285B8B64005E24AF /* MarketCardsCollectionViewCell.swift in Sources */,
-				796EFA452876F076005E24AF /* CryptoCurrencyViewModel.swift in Sources */,
+				796EFA452876F076005E24AF /* MarketTableCellViewModel.swift in Sources */,
 				796EFA3328697A91005E24AF /* MarketCardsCellViewModel.swift in Sources */,
 				796EFA4128733AF2005E24AF /* NetworkingManager.swift in Sources */,
 				7934EFBC2845113300CE7FD0 /* AddTransactionDetailsViewController.swift in Sources */,
