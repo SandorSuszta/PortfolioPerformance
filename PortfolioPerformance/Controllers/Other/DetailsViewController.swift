@@ -1,12 +1,5 @@
-//
-//  DetailsViewController.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 25/08/2022.
-//
-
-import UIKit
 import Charts
+import UIKit
 
 class DetailsViewController: UIViewController {
     
@@ -21,12 +14,13 @@ class DetailsViewController: UIViewController {
         return button
     }()
     
-    // Header View and Its Elements
-    private var headerView: UIView = {
-        let view = UIView()
-        return view
+    private var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.showsVerticalScrollIndicator = false
+        return scroll
     }()
     
+    // Header View and Its Elements
     private var symbolLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -48,6 +42,7 @@ class DetailsViewController: UIViewController {
     
     private var priceChangePercentageLabel: UILabel = {
         let label = UILabel()
+        label.text = ""
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
@@ -83,6 +78,7 @@ class DetailsViewController: UIViewController {
     
     private var lineChartView = LineChartView()
     
+    // Interval Selection
     private var timeIntervalSelection: UISegmentedControl = {
         let items = ["1D", "1W", "1M", "6M", "1Y", "MAX"]
         let segmentControl = UISegmentedControl(items: items)
@@ -93,6 +89,7 @@ class DetailsViewController: UIViewController {
         return segmentControl
     }()
 
+    // Range ProgressBar
     private var rangeProgressBar: RangeProgressBar = {
         let bar = RangeProgressBar()
         bar.configureWithShadow()
@@ -102,33 +99,67 @@ class DetailsViewController: UIViewController {
         return bar
     }()
     
+    // Details TableView
+    private var detailsTableView = UITableView()
+    private var headerView = UIView()
+    
+    private var headerNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Details"
+        label.font = .systemFont(ofSize: 18, weight: .regular)
+        return label
+    }()
+    
+    private var marketCapRankLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 18, weight: .regular)
+        return label
+    }()
+    
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
         title = viewModel.name
+        bindViewModel()
         setup()
         viewModel.getChartDataEntries(coinID: viewModel.coinModel.id, intervalInDays: currentChartTimeInterval)
-        bindViewModel()
+        setupTableView()
+        viewModel.createDetailsCellsViewModels()
+        priceChangePercentageLabel.frame = CGRect(
+            x: priceChangeLabel.right + 5,
+            y: priceLabel.bottom + 5,
+            width: priceChangePercentageLabel.width,
+            height: priceChangePercentageLabel.height
+        )
+        
     }
     
+    
+    
     override func viewDidLayoutSubviews() {
-        view.addSubviews(symbolLabel, priceLabel, priceChangeLabel, priceChangePercentageLabel, coinLogoShadowView, chartView, timeIntervalSelection, rangeProgressBar)
-        //intervalDescriptionLabel
+        super.viewDidLayoutSubviews()
+        
+        view.addSubview(scrollView)
+        scrollView.addSubviews(symbolLabel, priceLabel, priceChangeLabel, priceChangePercentageLabel, coinLogoShadowView, chartView, timeIntervalSelection, rangeProgressBar, detailsTableView)
         
         coinLogoShadowView.addSubview(coinLogoView)
-        chartView.addSubviews(lineChartView)
-        
+        chartView.addSubview(lineChartView)
+        headerView.addSubviews(headerNameLabel, marketCapRankLabel)
+
         symbolLabel.sizeToFit()
         priceLabel.sizeToFit()
         priceChangeLabel.sizeToFit()
         priceChangePercentageLabel.sizeToFit()
-//        intervalDescriptionLabel.sizeToFit()
+        
+        scrollView.frame = view.bounds
+        scrollView.contentSize = CGSize(width: view.width, height: 1000)
         
         symbolLabel.frame = CGRect(
             x: 0,
-            y: 90,
+            y: 0,
             width: view.width,
             height: symbolLabel.height
         )
@@ -149,7 +180,7 @@ class DetailsViewController: UIViewController {
         
         priceLabel.frame = CGRect(
             x: 35,
-            y: coinLogoShadowView.top + (coinLogoShadowView.height - priceLabel.height - priceChangePercentageLabel.height)/2,
+            y: coinLogoShadowView.top + (coinLogoShadowView.height - priceLabel.height - priceChangeLabel.height)/2,
             width: priceLabel.width,
             height: priceLabel.height
         )
@@ -163,7 +194,7 @@ class DetailsViewController: UIViewController {
         
         priceChangePercentageLabel.frame = CGRect(
             x: priceChangeLabel.right + 5,
-            y: priceChangeLabel.top,
+            y: priceLabel.bottom + 5,
             width: priceChangePercentageLabel.width,
             height: priceChangePercentageLabel.height
         )
@@ -202,7 +233,38 @@ class DetailsViewController: UIViewController {
             x: 20,
             y: timeIntervalSelection.bottom + 15,
             width: chartView.width,
-            height: 60
+            height: 65
+        )
+        
+        //TableView
+        detailsTableView.frame = CGRect(
+            x: 20,
+            y: rangeProgressBar.bottom + 15,
+            width: chartView.width,
+            height: 200
+        )
+        
+        headerView.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: detailsTableView.width,
+            height: 40
+        )
+        
+        headerNameLabel.sizeToFit()
+        headerNameLabel.frame = CGRect(
+            x: 20,
+            y: headerView.height/2 - headerNameLabel.height/2,
+            width: headerNameLabel.width,
+            height: headerNameLabel.height
+        )
+        
+        marketCapRankLabel.sizeToFit()
+        marketCapRankLabel.frame = CGRect(
+            x: headerView.right - marketCapRankLabel.width - 20,
+            y: headerNameLabel.top,
+            width: marketCapRankLabel.width,
+            height: marketCapRankLabel.height
         )
     }
     
@@ -226,8 +288,10 @@ class DetailsViewController: UIViewController {
                 
                 self?.priceChangeLabel.text = data.rangePriceChange
                 self?.priceChangeLabel.sizeToFit()
-                self?.priceChangePercentageLabel.text = "(" + data.rangePriceChangePercentage + ")"
-                self?.priceChangeLabel.sizeToFit()
+                self?.priceChangePercentageLabel.text = data.rangePriceChangePercentage
+                self?.priceChangePercentageLabel.sizeToFit()
+                self?.view.setNeedsLayout()
+                self?.view.layoutIfNeeded()
                 
                 if data.isChangeNegative  {
                     self?.priceChangeLabel.textColor = .pomergranate
@@ -249,6 +313,12 @@ class DetailsViewController: UIViewController {
                 )
             }
         }
+        
+        viewModel.detailsTableViewCelsViewModels.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.detailsTableView.reloadData()
+            }
+        }
     }
     
     //MARK: - Init
@@ -268,8 +338,8 @@ class DetailsViewController: UIViewController {
         
         symbolLabel.text = viewModel.symbol
         priceLabel.text = viewModel.currentPrice
-        priceChangeLabel.text = viewModel.priceChange24H
-        priceChangePercentageLabel.text = "(" + viewModel.priceChangePercentage24H + ")"
+//        priceChangeLabel.text = viewModel.priceChange24H
+//        priceChangePercentageLabel.text = "(" + viewModel.priceChangePercentage24H + ")"
         
         coinLogoView.setImage(
             imageData: viewModel.imageData,
@@ -300,7 +370,6 @@ class DetailsViewController: UIViewController {
         rangeProgressBar.leftBottomLabel.sizeToFit()
         
         rangeProgressBar.progressBar.setProgress(rangeProgress, animated: true)
-        
     }
     
     private func createGraph(entries: [ChartDataEntry], color: UIColor = .emerald) {
@@ -331,9 +400,10 @@ class DetailsViewController: UIViewController {
         lineChartView.xAxis.drawGridLinesEnabled = false // Disable vertical grids
         lineChartView.rightAxis.drawAxisLineEnabled = false
         lineChartView.xAxis.drawAxisLineEnabled = false
-        lineChartView.rightAxis.gridColor = .darkClouds
+        lineChartView.rightAxis.gridColor = .systemGray6
         lineChartView.legend.enabled = false // Disable legend
         lineChartView.xAxis.setLabelCount(4, force: true) // How many labels on axis
+        lineChartView.rightAxis.setLabelCount(4, force: false)
         lineChartView.xAxis.avoidFirstLastClippingEnabled = true
        
         //lineChartView.animate(xAxisDuration: 1)
@@ -349,44 +419,79 @@ class DetailsViewController: UIViewController {
     }
     
     @objc private func didChangeValue(_ sender: UISegmentedControl) -> Void {
-        
-//        var intervalName = ""
+    
         var rangeName = ""
         switch sender.selectedSegmentIndex {
         case 0:
             currentChartTimeInterval = 1
-//            intervalName = "Last day"
             rangeName = "Day range"
         case 1:
             currentChartTimeInterval = 7
-//            intervalName = "Last week"
             rangeName = "Week Range"
         case 2:
             currentChartTimeInterval = 30
-//            intervalName = "Last month"
             rangeName = "Month range"
         case 3:
             currentChartTimeInterval = 180
-//            intervalName = "Last 6 months"
             rangeName = "Six month range"
         case 4:
             currentChartTimeInterval = 360
-//            intervalName = "Year Range"
             rangeName = "Year range"
         case 5:
             currentChartTimeInterval = 2000
-//            intervalName = "All time"
             rangeName = "All time range"
         default:
             fatalError("Invalid segment selection")
         }
         
-//        intervalDescriptionLabel.text = intervalName
-//        intervalDescriptionLabel.sizeToFit()
         rangeProgressBar.titleLabel.text = rangeName
         rangeProgressBar.titleLabel.sizeToFit()
         
         viewModel.getChartDataEntries(coinID: viewModel.coinModel.id, intervalInDays: currentChartTimeInterval)
+    }
+    
+    private func setupTableView() {
+        detailsTableView.tableHeaderView = headerView
+        detailsTableView.configureWithShadow()
+        detailsTableView.clipsToBounds = false
+        detailsTableView.layer.masksToBounds = false
+        detailsTableView.separatorStyle = .singleLine
+        detailsTableView.separatorColor = .systemGray5
+        detailsTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        detailsTableView.isScrollEnabled = false
+        detailsTableView.dataSource = self
+        detailsTableView.delegate = self
+        detailsTableView.register(
+            DetailsTableViewCell.self,
+            forCellReuseIdentifier: DetailsTableViewCell.identifier
+        )
+
+        marketCapRankLabel.text = viewModel.marketCap
+    }
+}
+
+extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.detailsTableViewCelsViewModels.value?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: DetailsTableViewCell.identifier,
+            for: indexPath
+        ) as? DetailsTableViewCell else { return UITableViewCell() }
+        
+        guard let viewModel = viewModel.detailsTableViewCelsViewModels.value?[indexPath.row] else { fatalError() }
+                
+        cell.configure(with: viewModel)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        DetailsTableViewCell.prefferedHeight
     }
 }
 

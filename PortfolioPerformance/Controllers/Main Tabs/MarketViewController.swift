@@ -38,9 +38,12 @@ class MarketViewController: UIViewController {
         setupTableView()
         cryptoCurrencyTableViewModel.loadAllCryptoCurrenciesData()
         
+        //Delete BackButton title on pushed screen
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -120,7 +123,6 @@ class MarketViewController: UIViewController {
         )
         view.addSubview(cryptoCurrencyTableView)
     }
-                                                       
                                                        
     private func bindViewModels() {
         cryptoCurrencyTableViewModel.cellViewModels.bind { [weak self] _ in
@@ -250,6 +252,7 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
         ) as? CryptoCurrenciesTableViewCell else { return UITableViewCell() }
         
         guard let cellViewModel = cryptoCurrencyTableViewModel.cellViewModels.value?[indexPath.row] else { fatalError() }
+        
         cell.configureCell(with: cellViewModel)
         
         return cell

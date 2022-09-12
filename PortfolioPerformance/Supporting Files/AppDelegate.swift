@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .font: UIFont.systemFont(ofSize: 26)
         ]
         
+        // Change Back Button color
+        UINavigationBar.appearance().tintColor = .black
+        
 //        //Fix bar transparency in IOS15
 //        let navigationBarAppearance = UINavigationBarAppearance()
 //        navigationBarAppearance.configureWithDefaultBackground()

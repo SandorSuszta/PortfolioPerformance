@@ -13,7 +13,7 @@ class SortOptionsCollectionViewCell: UICollectionViewCell {
     
     public var sortingNameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .systemGray
         label.font = .systemFont(ofSize: 12)
         label.textAlignment = .center
         return label

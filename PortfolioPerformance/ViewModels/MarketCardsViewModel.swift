@@ -45,7 +45,7 @@ final class MarketCardsCollectionViewViewModel {
                 //Create model for Total Market Cap Card
                 let marketCapCardModel = MarketCardCellModel(
                     headerTitle: "Total Market Cap",
-                    mainTitle: .marketCapString(from: totalMarketCap),
+                    mainTitle: .bigNumberString(from: totalMarketCap),
                     secondaryTitle: .percentageString(from: marketCapChangeFor24H),
                     circularProgressBarType: .round,
                     progress: Float(totalMarketCap / allTimeHighMarketCap),

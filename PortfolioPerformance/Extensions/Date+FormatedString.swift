@@ -37,7 +37,6 @@ extension Date {
             df.dateFormat = "yyyy"
         default: fatalError()
         }
-        
         return df.string(from: self)
     }
 }

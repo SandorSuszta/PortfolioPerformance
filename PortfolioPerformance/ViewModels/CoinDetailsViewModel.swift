@@ -38,6 +38,14 @@ class CoinDetailsViewModel {
         .formatedDateString(from: coinModel.athDate ?? "")
     }
     
+    public var marketCap: String {
+        if let cap = coinModel.marketCapRank {
+            return "#\(Int(cap))"
+        } else {
+            return "N/A"
+        }
+    }
+    
     public var isFavourite: Bool = false
     
     public var isPriceChangeNegative: Bool {
@@ -50,7 +58,8 @@ class CoinDetailsViewModel {
     
     public var rangeData: ObservableObject<RangeDetails> = ObservableObject(value: nil)
     
-    public var metricsTableViewCelsViewModels = [MetricsTableviewCellsViewModel]()
+    public var detailsTableViewCelsViewModels: ObservableObject<[DetailsTableviewCellsViewModel]> = ObservableObject(value: [])
+    
     
     //MARK: - Public methods
     
@@ -78,6 +87,37 @@ class CoinDetailsViewModel {
                 print(error)
             }
         }
+    }
+    
+    public func createDetailsCellsViewModels() {
+        var viewModels: [DetailsTableviewCellsViewModel] = []
+        viewModels.append(.init(
+            name: "Market Cap Value",
+            value: .bigNumberString(from: coinModel.marketCap ?? 0)
+        ))
+        viewModels.append(.init(
+            name: "Volume",
+            value: .bigNumberString(from: coinModel.totalVolume ?? 0)
+        ))
+        viewModels.append(.init(
+            name: "Circulating supply",
+            value: .bigNumberString(from: coinModel.circulatingSupply ?? 0, style: .decimal)
+        ))
+        viewModels.append(.init(
+            name: "Total supply",
+            value: .bigNumberString(from: coinModel.totalSupply ?? 0, style: .decimal)
+        ))
+        viewModels.append(.init(
+            name: "Max supply",
+            value: .bigNumberString(from: coinModel.maxSupply ?? 0, style: .decimal)
+        ))
+        viewModels.append(.init(
+            name: "All time high",
+            value: .priceString(from: coinModel.ath ?? 0)
+            
+        ))
+       
+        detailsTableViewCelsViewModels.value = viewModels
     }
     
     //MARK: - Private methods
@@ -123,12 +163,6 @@ class CoinDetailsViewModel {
         return rangeDetails
     }
     
-    private func createMetricsCellsViewModels() -> [MetricsTableviewCellsViewModel] {
-        var viewModels: [MetricsTableviewCellsViewModel] = []
-        viewModels.append(.init(name: "", value: "4"))
-        return viewModels
-    }
-    
     //MARK: - Init
     
     init(coinModel: CoinModel) {
@@ -147,7 +181,7 @@ class CoinDetailsViewModel {
         public var isChangeNegative: Bool
     }
     
-    struct MetricsTableviewCellsViewModel {
+    struct DetailsTableviewCellsViewModel {
         public var name: String
         public var value: String
     }

@@ -41,6 +41,9 @@ extension NumberFormatter {
 extension String {
     
     static func priceString(from number: Double) -> String {
+        
+        guard number != 0 else { return "N/A"}
+        
         let formatter = NumberFormatter()
         formatter.locale = Locale(identifier: "en_US")
         formatter.numberStyle = .currency
@@ -50,6 +53,9 @@ extension String {
     }
     
     static func percentageString(from number: Double, positivePrefix: String = "+") -> String {
+        
+        guard number != 0 else { return "N/A"}
+        
         let formatter = NumberFormatter()
         formatter.numberStyle = .percent
         formatter.positivePrefix = positivePrefix
@@ -58,11 +64,14 @@ extension String {
         return formatter.string(from: NSNumber(value: number / 100)) ?? ""
     }
     
-    static func marketCapString(from number: Double) -> String {
+    static func bigNumberString(from number: Double, style: NumberFormatter.Style = .currency ) -> String {
+        
+        guard number != 0 else { return "N/A"}
+        
         let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
+        formatter.numberStyle = style
         formatter.locale = Locale(identifier: "en_US")
-        formatter.maximumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
         var formattedNumber: Double = 0
         
         switch number {
@@ -102,7 +111,6 @@ extension String {
         }
         return formatter.string(from: date)
     }
-    
     
     
     static func formatedDateString(from isoDate: String) -> String {

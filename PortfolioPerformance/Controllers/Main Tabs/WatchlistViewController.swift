@@ -22,7 +22,7 @@ class WatchlistViewController: UIViewController {
         setupTableView()
         tableViewModel.loadWatchlistCryptoCurrenciesData()
         
-        tableViewModel.cellViewModels.bind { [weak self] _ in
+        tableViewModel.cellViewModels.bind { [weak self] models in
             DispatchQueue.main.async {
                 self?.watchlistTableView.reloadData()
             }
@@ -68,7 +68,6 @@ class WatchlistViewController: UIViewController {
             cell.configureCell(with: cellViewModel)
             
             return cell
-        
         }
 
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
