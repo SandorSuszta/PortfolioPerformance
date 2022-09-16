@@ -1,11 +1,3 @@
-//
-//  SearchViewController.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 05/05/2022.
-//
-
-import Foundation
 import UIKit
 
 protocol SearchViewControllerDelegate {
@@ -110,15 +102,18 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch rootViewController {
-        case .transactionDetails:
-            delegate?.didSelectCoin(coinName: searchResultsArray[indexPath.row].symbol)
-            navigationController?.popViewController(animated: true)
-        case .marketTableView:
-            fatalError()
-        default:
-            fatalError()
-        }
+        
+        self.navigationController?.pushViewController(DetailsViewController(coinID: searchResultsArray[indexPath.row].id), animated: true)
+//        switch rootViewController {
+//        case .transactionDetails:
+//            delegate?.didSelectCoin(coinName: searchResultsArray[indexPath.row].symbol)
+//            navigationController?.popViewController(animated: true)
+//        case .marketTableView:
+//            delegate?.didSelectCoin(coinName: searchResultsArray[indexPath.row].symbol)
+//            navigationController?.popViewController(animated: true)
+//        default:
+//            fatalError()
+//        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

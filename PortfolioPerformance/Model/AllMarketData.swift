@@ -7,9 +7,9 @@
 
 import Foundation
 
-class MarketData {
+class AllMarketData {
     
-    static let shared = MarketData()
+    static let shared = AllMarketData()
     
     public var allCoinsArray: [CoinModel] = []
     

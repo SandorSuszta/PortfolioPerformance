@@ -46,14 +46,12 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
         let view = UIView()
         view.backgroundColor = .systemGray6
         view.configureWithShadow()
-        view.layer.cornerRadius = 20
         return view
     }()
     
     private let logoImageView: UIImageView = {
         let image = UIImageView()
         image.clipsToBounds = true
-        image.layer.cornerRadius = 20
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -83,16 +81,19 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
         logoContainerView.frame = CGRect(
             x: contentView.left + 10,
             y: 7,
-            width: imageSize,
-            height: imageSize
+            width: contentView.height - 14,
+            height: contentView.height - 14
         )
+        logoContainerView.layer.cornerRadius = logoContainerView.width / 2
         
         logoImageView.frame = CGRect(
             x: 2,
             y: 2,
-            width: imageSize - 4 ,
-            height: imageSize - 4
+            width: logoContainerView.width - 4,
+            height: logoContainerView.width - 4
         )
+        logoImageView.layer.cornerRadius = logoImageView.width / 2
+        
         
         nameLabel.frame = CGRect(
             x: logoContainerView.right + 20,

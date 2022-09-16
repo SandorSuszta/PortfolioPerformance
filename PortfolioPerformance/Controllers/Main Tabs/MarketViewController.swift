@@ -32,11 +32,13 @@ class MarketViewController: UIViewController {
         bindViewModels()
         marketCardsViewModel.loadGreedAndFearIndex()
         marketCardsViewModel.loadGlobalData()
+        cryptoCurrencyTableViewModel.loadAllCryptoCurrenciesData()
         setupTitle()
+        addSearchButton()
         setupMarketCardsCollectionView()
         setupSortOptionsCollectionView()
         setupTableView()
-        cryptoCurrencyTableViewModel.loadAllCryptoCurrenciesData()
+        
         
         //Delete BackButton title on pushed screen
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -144,6 +146,16 @@ class MarketViewController: UIViewController {
             at: .top,
             animated: false
         )
+    }
+    
+    private func addSearchButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
+    }
+    
+    @objc private func searchTapped() {
+        let searchVC = SearchScreenViewController()
+        searchVC.rootViewController = .marketTableView
+        navigationController?.pushViewController(searchVC, animated: true)
     }
 }
 
@@ -262,7 +274,7 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let currentCoinModel = cryptoCurrencyTableViewModel.cellViewModels.value?[indexPath.row].coinModel else { fatalError() }
         
-        let detailsVC = DetailsViewController(coinModel: currentCoinModel)
+        let detailsVC = DetailsViewController(coinID: currentCoinModel.id)
         
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }

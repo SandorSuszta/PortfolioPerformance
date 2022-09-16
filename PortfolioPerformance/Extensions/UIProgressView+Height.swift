@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 // Change height of progress bar, setting custom height
-
 class CustomProgressView: UIProgressView {
     
     var customHeight: CGFloat = 1.0

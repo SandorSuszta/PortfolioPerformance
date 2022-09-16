@@ -10,7 +10,6 @@
 		790C30C227C78E930021658F /* GreedAndFearModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C127C78E930021658F /* GreedAndFearModel.swift */; };
 		790C30C527CEA7620021658F /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C427CEA7620021658F /* PersistanceManager.swift */; };
 		790C30C827CEAA200021658F /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C627CEAA200021658F /* DataModel.xcdatamodeld */; };
-		791F3E1827B543BD008A7693 /* CoinDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */; };
 		792B0FC3287B3C6C0040B461 /* WatchlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC2287B3C6C0040B461 /* WatchlistViewController.swift */; };
 		792B0FC5287C85EF0040B461 /* WatchlistTableViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC4287C85EF0040B461 /* WatchlistTableViewViewModel.swift */; };
 		792B0FC7287F03080040B461 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC6287F03080040B461 /* MainTabBarController.swift */; };
@@ -18,6 +17,7 @@
 		792C040628C14386008EE48C /* CoinDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040528C14386008EE48C /* CoinDetailsViewModel.swift */; };
 		792C040928C9E62B008EE48C /* RangeProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040828C9E62B008EE48C /* RangeProgressBar.swift */; };
 		792C040B28CE2941008EE48C /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040A28CE2941008EE48C /* DetailsTableViewCell.swift */; };
+		792C040D28D32D5D008EE48C /* SingleCoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040C28D32D5D008EE48C /* SingleCoinModel.swift */; };
 		7932629427FCAFBC005E4D2E /* MarketTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7932629227FCAFBC005E4D2E /* MarketTableCell.xib */; };
 		79326299280423E1005E4D2E /* HoldingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */; };
 		7932629A280423E1005E4D2E /* HoldingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79326298280423E1005E4D2E /* HoldingsTableViewCell.xib */; };
@@ -39,7 +39,7 @@
 		79397C7627E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */; };
 		79397C7927E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79397C7727E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift */; };
 		79397C7A27E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79397C7827E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.xib */; };
-		79397C7C27E3541700B04EDA /* MarketData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79397C7B27E3541700B04EDA /* MarketData.swift */; };
+		79397C7C27E3541700B04EDA /* AllMarketData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79397C7B27E3541700B04EDA /* AllMarketData.swift */; };
 		79397C7F27E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79397C7D27E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.swift */; };
 		79397C8027E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79397C7E27E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.xib */; };
 		79397C8427E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79397C8227E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.swift */; };
@@ -93,7 +93,6 @@
 		790C30C127C78E930021658F /* GreedAndFearModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedAndFearModel.swift; sourceTree = "<group>"; };
 		790C30C427CEA7620021658F /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		790C30C727CEAA200021658F /* Transaction.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Transaction.xcdatamodel; sourceTree = "<group>"; };
-		791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsViewController.swift; sourceTree = "<group>"; };
 		792B0FC2287B3C6C0040B461 /* WatchlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistViewController.swift; sourceTree = "<group>"; };
 		792B0FC4287C85EF0040B461 /* WatchlistTableViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistTableViewViewModel.swift; sourceTree = "<group>"; };
 		792B0FC6287F03080040B461 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -101,6 +100,7 @@
 		792C040528C14386008EE48C /* CoinDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsViewModel.swift; sourceTree = "<group>"; };
 		792C040828C9E62B008EE48C /* RangeProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeProgressBar.swift; sourceTree = "<group>"; };
 		792C040A28CE2941008EE48C /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
+		792C040C28D32D5D008EE48C /* SingleCoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCoinModel.swift; sourceTree = "<group>"; };
 		7932629227FCAFBC005E4D2E /* MarketTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarketTableCell.xib; sourceTree = "<group>"; };
 		79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsTableViewCell.swift; sourceTree = "<group>"; };
 		79326298280423E1005E4D2E /* HoldingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HoldingsTableViewCell.xib; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 		79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistorySellTableViewCell.xib; sourceTree = "<group>"; };
 		79397C7727E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryBuyTableViewCell.swift; sourceTree = "<group>"; };
 		79397C7827E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistoryBuyTableViewCell.xib; sourceTree = "<group>"; };
-		79397C7B27E3541700B04EDA /* MarketData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketData.swift; sourceTree = "<group>"; };
+		79397C7B27E3541700B04EDA /* AllMarketData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMarketData.swift; sourceTree = "<group>"; };
 		79397C7D27E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryTransferTableViewCell.swift; sourceTree = "<group>"; };
 		79397C7E27E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistoryTransferTableViewCell.xib; sourceTree = "<group>"; };
 		79397C8227E3A03400B04EDA /* TransactionHistoryConvertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryConvertTableViewCell.swift; sourceTree = "<group>"; };
@@ -279,7 +279,6 @@
 				796EFA362869F5C3005E24AF /* AddTransactionTab */,
 				79E2763627CF955A005FB139 /* TransactionHistoryViewController.swift */,
 				7932629B28048291005E4D2E /* PortfolioViewController2.swift */,
-				791F3E1727B543BC008A7693 /* CoinDetailsViewController.swift */,
 				7934EFAB28365AB600CE7FD0 /* CurrentPortfolioViewController.swift */,
 			);
 			path = "Main Tabs";
@@ -365,12 +364,13 @@
 			isa = PBXGroup;
 			children = (
 				790C30C127C78E930021658F /* GreedAndFearModel.swift */,
-				79397C7B27E3541700B04EDA /* MarketData.swift */,
+				79397C7B27E3541700B04EDA /* AllMarketData.swift */,
 				798957C127F31AE00074CA38 /* GlobalData.swift */,
 				79EAFD3427B3FDC7008A6062 /* CoinModel.swift */,
 				79C2109527EB5523001B2D80 /* CoinPriceOnGivenDate.swift */,
 				793262C028061135005E4D2E /* GraphEntries.swift */,
 				7934EFA5282D141B00CE7FD0 /* SearchResponse.swift */,
+				792C040C28D32D5D008EE48C /* SingleCoinModel.swift */,
 				7934EFB5283E45A700CE7FD0 /* HoldingPerfomanceModel.swift */,
 				7934EFB7283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift */,
 				7982922F27E3D829007ECCCD /* View */,
@@ -554,7 +554,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				791F3E1827B543BD008A7693 /* CoinDetailsViewController.swift in Sources */,
 				7934EFA4282A824E00CE7FD0 /* ResultsTableViewCell.swift in Sources */,
 				7934EFAA28352A1A00CE7FD0 /* UIImageView+SetImage.swift in Sources */,
 				79C8DE7127BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift in Sources */,
@@ -575,6 +574,7 @@
 				796EFA22284E65D9005E24AF /* [Delete]AddTransactionChildViewController.swift in Sources */,
 				796EFA3128690062005E24AF /* MarketCardCellModel.swift in Sources */,
 				798957C827F479DD0074CA38 /* UIView+Shadow.swift in Sources */,
+				792C040D28D32D5D008EE48C /* SingleCoinModel.swift in Sources */,
 				79397C7F27E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.swift in Sources */,
 				79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */,
 				79410D8D2823D3E700BD9EA4 /* UIView+Framing.swift in Sources */,
@@ -600,7 +600,7 @@
 				7934EFB6283E45A700CE7FD0 /* HoldingPerfomanceModel.swift in Sources */,
 				796EFA2D285B8A98005E24AF /* MarketViewController.swift in Sources */,
 				792B0FC5287C85EF0040B461 /* WatchlistTableViewViewModel.swift in Sources */,
-				79397C7C27E3541700B04EDA /* MarketData.swift in Sources */,
+				79397C7C27E3541700B04EDA /* AllMarketData.swift in Sources */,
 				796EFA3C286DF594005E24AF /* MarketCardsViewModel.swift in Sources */,
 				796EFA1E284771C3005E24AF /* Floating label.swift in Sources */,
 				792B0FC7287F03080040B461 /* MainTabBarController.swift in Sources */,

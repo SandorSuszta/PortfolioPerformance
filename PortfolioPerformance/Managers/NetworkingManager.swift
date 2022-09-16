@@ -8,6 +8,7 @@
 import Foundation
 
 class NetworkingManager {
+    
     static let shared = NetworkingManager()
     
     private init() {}
@@ -84,27 +85,43 @@ class NetworkingManager {
         completion: @escaping (Result<[CoinModel], Error>) -> Void
     ){
         request(
-            url: constructURL(list: list),
+            url: constructURL(for: list),
             expectingType: [CoinModel].self,
             completion: completion
         )
     }
-    //MARK: - Chart Data
     
+    //MARK: - Chart Data
     public func requestDataForChart(
         coinID: String,
         intervalInDays: Int,
         completion: @escaping (Result<GraphEntries, Error>) -> Void
     ){
         request(
-            url: constructURL(coinID: coinID, intervalInDays: intervalInDays),
+            url: constructURL(for: coinID, for: intervalInDays),
             expectingType: GraphEntries.self,
             completion: completion
         )
     }
     
+    //MARK: - Data by ID
+    public func requestData(
+        for ID: String,
+        completion: @escaping (Result<SingleCoinModel, Error>) -> Void
+    ){
+        let urlString = "https://api.coingecko.com/api/v3/coins/\(ID)?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"
+        guard let url = URL(string: urlString) else { fatalError() }
+        
+        request(
+            url: url,
+            expectingType: SingleCoinModel.self,
+            completion: completion
+        )
+    }
+    
     //MARK: - URL constructors
-    private func constructURL(coinID: String, intervalInDays: Int) -> URL {
+
+    private func constructURL(for coinID: String,for intervalInDays: Int) -> URL {
       
         let unixTimeNow = Int(Date().timeIntervalSince1970)
         let unixTimeThen = unixTimeNow - (86400 * intervalInDays)
@@ -115,7 +132,7 @@ class NetworkingManager {
         return url
     }
     
-    private func constructURL(list: [String]) -> URL {
+    private func constructURL(for list: [String]) -> URL {
         var updatedBaseURL = NetworkingManager.Constants.requestDataForListBaseUrl
 
         for coinID in list {

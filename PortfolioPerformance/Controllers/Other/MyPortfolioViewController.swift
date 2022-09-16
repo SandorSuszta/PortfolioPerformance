@@ -90,7 +90,7 @@ extension MyPortfolioViewController: UITableViewDelegate, UITableViewDataSource 
         
         holdingModels.forEach { holdingModel in
          
-            guard let coinModel = MarketData.shared.allCoinsArray.first(where: {
+            guard let coinModel = AllMarketData.shared.allCoinsArray.first(where: {
                 $0.symbol == holdingModel.symbol
             }) else { fatalError() }
             

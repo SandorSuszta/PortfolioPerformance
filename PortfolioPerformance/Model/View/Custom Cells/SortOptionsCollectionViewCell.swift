@@ -23,8 +23,10 @@ class SortOptionsCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             sortingNameLabel.textColor = isSelected ? .black : .darkGray
-            contentView.backgroundColor = isSelected ? .clouds : .clear
-            sortingNameLabel.layer.shadowRadius = isSelected ? 5.0 : 0.0
+            sortingNameLabel.font = isSelected ? .systemFont(ofSize: 13, weight: .medium) : .systemFont(ofSize: 12, weight: .regular)
+             
+//            contentView.backgroundColor = isSelected ? .clouds : .clear
+//            sortingNameLabel.layer.shadowRadius = isSelected ? 5.0 : 0.0
         }
     }
     override init(frame: CGRect) {

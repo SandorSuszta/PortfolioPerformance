@@ -47,7 +47,19 @@ extension String {
         let formatter = NumberFormatter()
         formatter.locale = Locale(identifier: "en_US")
         formatter.numberStyle = .currency
-        formatter.maximumFractionDigits = 2
+        
+        if number >= 1 || number <= -1 {
+            formatter.maximumFractionDigits = 2
+        } else {
+            // Number of zeros between the decimal point and first non zero digit
+            let numberOfDigits = ceil(abs(log10(abs(number)))) + 2
+            
+            //Guard the error converting to Int
+            guard !(numberOfDigits.isNaN || numberOfDigits.isInfinite) else {
+                return  "N/A"
+             }
+            formatter.maximumFractionDigits = Int(numberOfDigits)
+        }
         
         return formatter.string(from: NSNumber(value: number)) ?? ""
     }

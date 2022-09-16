@@ -1,10 +1,3 @@
-//
-//  PersistanceManager.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 01/03/2022.
-//
-
 import UIKit
 import CoreData
 

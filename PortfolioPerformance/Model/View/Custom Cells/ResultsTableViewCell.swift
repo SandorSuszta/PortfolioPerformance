@@ -37,6 +37,7 @@ class ResultsTableViewCell: UITableViewCell {
         return logoView
     }()
     
+    
     public func configure (with searchResult: SearchResult) {
         
         symbolLabel.text = searchResult.symbol
@@ -85,6 +86,10 @@ class ResultsTableViewCell: UITableViewCell {
             width: contentView.width - logoView.width - symbolLabel.width,
             height: contentView.height
         )
+    }
+    
+    override func prepareForReuse() {
+        logoView.image = nil
     }
     
     required init?(coder: NSCoder) {

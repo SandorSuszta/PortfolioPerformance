@@ -11,14 +11,14 @@ import UIKit
 extension UIView {
     
     public func configureWithShadow(
-        shadowColor: UIColor = .systemGray2,
+        shadowColor: UIColor = .systemGray5,
         shadowRadius: CGFloat = 5.0
     ){
         self.backgroundColor = .white
         self.layer.cornerRadius = 10
         self.layer.shadowColor = shadowColor.cgColor
         self.layer.shadowOffset = .zero
-        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOpacity = 0.9
         self.layer.shadowRadius = shadowRadius
     }
 }
