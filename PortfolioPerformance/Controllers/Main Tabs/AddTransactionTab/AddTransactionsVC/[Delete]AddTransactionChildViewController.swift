@@ -37,7 +37,7 @@ class AddTransactionChildViewController: UIViewController {
     
     let addButton: AddTransactionButton = {
         let button = AddTransactionButton(color: .nephritis)
-        button.addTarget(self, action: #selector(didPressAddTransaction), for: .touchUpInside)
+        button.addTarget(AddTransactionChildViewController.self, action: #selector(didPressAddTransaction), for: .touchUpInside)
         return button
     }()
     

@@ -103,7 +103,7 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.navigationController?.pushViewController(DetailsViewController(coinID: searchResultsArray[indexPath.row].id), animated: true)
+        self.navigationController?.pushViewController(DetailsViewController(coinID: searchResultsArray[indexPath.row].id, coinName: searchResultsArray[indexPath.row].name), animated: true)
 //        switch rootViewController {
 //        case .transactionDetails:
 //            delegate?.didSelectCoin(coinName: searchResultsArray[indexPath.row].symbol)

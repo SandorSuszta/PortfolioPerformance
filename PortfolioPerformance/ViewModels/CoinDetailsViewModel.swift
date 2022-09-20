@@ -9,10 +9,14 @@ class CoinDetailsViewModel {
     
     public var coinModel: SingleCoinModel?
     
+    public var isChangePositive: Bool?
+    
+    public var marketCapRank: String?
+    
     //MARK: - Observables
     public var metricsData: ObservableObject<MetricsData> = ObservableObject(value: nil)
     
-    public var chartDataEntries: ObservableObject<[ChartDataEntry]> = ObservableObject(value: [])
+    public var chartDataEntries: [ChartDataEntry] = []
     
     public var rangeData: ObservableObject<RangeDetails> = ObservableObject(value: nil)
     
@@ -27,21 +31,8 @@ class CoinDetailsViewModel {
             switch result {
             case .success(let model):
                 self.coinModel = model
-                let metrics = MetricsData(
-                    name: model.name,
-                    symbol: model.symbol,
-                    imageUrl: model.image.large,
-                    currentPrice: .priceString(from: model.marketData.currentPrice["usd"] ?? 0),
-                    athPrice: .priceString(from: model.marketData.ath["usd"] ?? 0),
-                    athChangePercentage: .percentageString(from: model.marketData.athChangePercentage["usd"] ?? 0),
-                    athDate: model.marketData.athDate["usd"] ?? "N/A",
-                    marketCap: .bigNumberString(from: model.marketData.marketCap["usd"] ?? 0),
-                    volume: .bigNumberString(from: model.marketData.totalVolume["usd"] ?? 0, style: .decimal),
-                    circulatingSupply: "",
-                    totalSupply: "",
-                    maxSupply: ""
-                )
-                self.metricsData.value = metrics
+
+                self.metricsData.value = MetricsData(model: model)
                 
             case .failure(let error):
                 print(error)
@@ -61,11 +52,9 @@ class CoinDetailsViewModel {
                 let entries = self.convertPricesToChartEntries(
                     prices: graphData.prices
                 )
-                self.chartDataEntries.value = entries
+                self.chartDataEntries = entries
                 
-                let data = self.calculateRangeData(
-                    prices: graphData.prices
-                )
+                let data = self.calculateRangeData(prices: graphData.prices)
                 self.rangeData.value = data
                 
             case .failure(let error):
@@ -169,6 +158,21 @@ struct MetricsData {
     public var totalSupply: String
     public var maxSupply:String
     public var isFavourite: Bool = false
+    
+    init (model: SingleCoinModel) {
+        self.name = model.name
+        self.symbol = model.symbol
+        self.imageUrl = model.image.large
+        self.currentPrice = .priceString(from: model.marketData.currentPrice["usd"] ?? 0)
+        self.athPrice = .priceString(from: model.marketData.ath["usd"] ?? 0)
+        self.athChangePercentage = .percentageString(from: model.marketData.athChangePercentage["usd"] ?? 0)
+        self.athDate = model.marketData.athDate["usd"] ?? "N/A"
+        self.marketCap = .bigNumberString(from: model.marketData.marketCap["usd"] ?? 0)
+        self.volume = .bigNumberString(from: model.marketData.totalVolume["usd"] ?? 0, style: .decimal)
+        self.circulatingSupply = ""
+        self.totalSupply = ""
+        self.maxSupply = ""
+    }
 }
 
 struct RangeDetails {

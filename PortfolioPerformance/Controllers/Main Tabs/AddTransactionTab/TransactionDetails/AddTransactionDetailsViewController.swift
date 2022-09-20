@@ -47,7 +47,7 @@ class AddTransactionDetailsViewController: UIViewController {
     let tradingPairButton: UIButton = {
         let button = UIButton()
         button.contentHorizontalAlignment = .left
-        button.addTarget(self, action: #selector(didClickTradingPairButton), for: .touchUpInside)
+        button.addTarget(AddTransactionDetailsViewController.self, action: #selector(didClickTradingPairButton), for: .touchUpInside)
         return button
     }()
     
@@ -86,7 +86,7 @@ class AddTransactionDetailsViewController: UIViewController {
     let addButton: AddTransactionButton = {
         let button = AddTransactionButton(color: .nephritis)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
-        button.addTarget(self, action: #selector(didPressAddTransactionButton), for: .touchUpInside)
+        button.addTarget(AddTransactionDetailsViewController.self, action: #selector(didPressAddTransactionButton), for: .touchUpInside)
         return button
     }()
     

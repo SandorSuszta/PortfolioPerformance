@@ -70,15 +70,7 @@ class DetailsViewController: UIViewController {
     private var lineChartView = LineChartView()
     
     // Interval Selection
-    private var timeIntervalSelection: UISegmentedControl = {
-        let items = ["1D", "1W", "1M", "6M", "1Y", "MAX"]
-        let segmentControl = UISegmentedControl(items: items)
-        segmentControl.selectedSegmentIndex = 0
-        segmentControl.layer.cornerRadius = 5
-        segmentControl.addTarget(self, action: #selector(didChangeValue(_:)), for: .valueChanged)
-        
-        return segmentControl
-    }()
+    private var timeIntervalSelection = UISegmentedControl()
 
     // Range ProgressBar
     private var rangeProgressBar: RangeProgressBar = {
@@ -115,9 +107,8 @@ class DetailsViewController: UIViewController {
         view.backgroundColor = .systemGray6
         bindViewModel()
         viewModel.getMetricsData(coinID: viewModel.coinID)
+        setupSegmentedControl()
     }
-    
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -178,13 +169,6 @@ class DetailsViewController: UIViewController {
             width: priceChangePercentageLabel.width,
             height: priceChangePercentageLabel.height
         )
-        
-//        intervalDescriptionLabel.frame = CGRect(
-//            x: priceChangePercentageLabel.right + 5,
-//            y: priceChangeLabel.top,
-//            width: intervalDescriptionLabel.width,
-//            height: intervalDescriptionLabel.height
-//        )
         
         //Graph
         chartView.frame = CGRect(
@@ -254,33 +238,25 @@ class DetailsViewController: UIViewController {
         
         viewModel.metricsData.bind { [weak self] _ in
             
-            guard let self = self else { return }
-            
-            self.setupNameAndLogo()
-            self.viewModel.getChartDataEntries(
-                coinID: self.viewModel.coinID,
-                intervalInDays: self.currentChartTimeInterval
+            self?.setupNameAndLogo()
+            self?.viewModel.getChartDataEntries(
+                coinID: self?.viewModel.coinID ?? "",
+                intervalInDays: self?.currentChartTimeInterval ?? 1
             )
-            self.setupTableView()
-            self.viewModel.createDetailsCellsViewModels()
-        }
-        
-        viewModel.chartDataEntries.bind { [weak self] _ in
-            guard let entries = self?.viewModel.chartDataEntries.value else { return }
-            guard let isChangeNegative = self?.viewModel.rangeData.value?.isPriceChangeNegative else {return}
-            let color: UIColor = isChangeNegative ? .pinkGlamour : .nephritis
-        
-            DispatchQueue.main.async {
-                self?.createGraph(entries: entries, color: color)
-            }
+            self?.setupTableView()
+            self?.viewModel.createDetailsCellsViewModels()
         }
         
         viewModel.rangeData.bind { [weak self] _ in
             
             guard let rangeData = self?.viewModel.rangeData.value else { return }
-    
+            guard let entries = self?.viewModel.chartDataEntries else { return }
+            guard let isChangeNegative = self?.viewModel.rangeData.value?.isPriceChangeNegative else { return }
+            
+            let color: UIColor = isChangeNegative ? .pinkGlamour : .nephritis
+            
             DispatchQueue.main.async {
-                
+                self?.createGraph(entries: entries, color: color)
                 self?.priceChangeLabel.text = rangeData.rangePriceChange
                 self?.priceChangeLabel.sizeToFit()
                 self?.priceChangePercentageLabel.text = rangeData.rangePriceChangePercentage
@@ -318,9 +294,10 @@ class DetailsViewController: UIViewController {
     
     //MARK: - Init
     
-    init(coinID: String) {
-        self.viewModel = CoinDetailsViewModel(coinID: coinID)
+    init(coinID: String, coinName: String) {
+        viewModel = CoinDetailsViewModel(coinID: coinID)
         super.init(nibName: nil, bundle: nil)
+        title = coinName
     }
 
     required init?(coder: NSCoder) {
@@ -386,7 +363,6 @@ class DetailsViewController: UIViewController {
 
         lineChartView.data = LineChartData(dataSet: dataSet)
         lineChartView.data?.setDrawValues(false)
-
         lineChartView.backgroundColor = .white
         lineChartView.leftAxis.enabled = false // Disable right axis
         lineChartView.xAxis.labelPosition = .bottom // Labels on the bottom
@@ -411,7 +387,15 @@ class DetailsViewController: UIViewController {
         lineChartView.xAxis.valueFormatter = self
     }
     
-    @objc private func didChangeValue(_ sender: UISegmentedControl) -> Void {
+    private func setupSegmentedControl() {
+        let items = ["1D", "1W", "1M", "6M", "1Y", "MAX"]
+        timeIntervalSelection = UISegmentedControl(items: items)
+        timeIntervalSelection.selectedSegmentIndex = 0
+        timeIntervalSelection.layer.cornerRadius = 5
+        timeIntervalSelection.addTarget(self, action: #selector(didChangeSegment(_:)) , for: .valueChanged)
+    }
+    
+    @objc func didChangeSegment(_ sender: UISegmentedControl) -> Void {
     
         var rangeName = ""
         switch sender.selectedSegmentIndex {
@@ -444,23 +428,24 @@ class DetailsViewController: UIViewController {
     }
     
     private func setupTableView() {
-        detailsTableView.dataSource = self
-        detailsTableView.delegate = self
-        detailsTableView.tableHeaderView = headerView
-        detailsTableView.configureWithShadow()
-        detailsTableView.clipsToBounds = false
-        detailsTableView.layer.masksToBounds = false
-        detailsTableView.separatorStyle = .singleLine
-        detailsTableView.separatorColor = .systemGray5
-        detailsTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        detailsTableView.isScrollEnabled = false
-        
-        detailsTableView.register(
-            DetailsTableViewCell.self,
-            forCellReuseIdentifier: DetailsTableViewCell.identifier
-        )
+        DispatchQueue.main.async {
+            self.detailsTableView.dataSource = self
+            self.detailsTableView.delegate = self
+            self.detailsTableView.tableHeaderView = self.headerView
+            self.detailsTableView.configureWithShadow()
+            self.detailsTableView.clipsToBounds = false
+            self.detailsTableView.layer.masksToBounds = false
+            self.detailsTableView.separatorStyle = .singleLine
+            self.detailsTableView.separatorColor = .systemGray5
+            self.detailsTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            self.detailsTableView.isScrollEnabled = false
+            self.detailsTableView.register(
+                DetailsTableViewCell.self,
+                forCellReuseIdentifier: DetailsTableViewCell.identifier
+            )
 
-        marketCapRankLabel.text = "Fix"
+            self.marketCapRankLabel.text = "Fix"
+        }
     }
 }
 

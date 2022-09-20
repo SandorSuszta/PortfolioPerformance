@@ -109,8 +109,8 @@ class NetworkingManager {
         for ID: String,
         completion: @escaping (Result<SingleCoinModel, Error>) -> Void
     ){
-        let urlString = "https://api.coingecko.com/api/v3/coins/\(ID)?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"
-        guard let url = URL(string: urlString) else { fatalError() }
+        let endpointString = "https://api.coingecko.com/api/v3/coins/\(ID)?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"
+        guard let url = URL(string: endpointString) else { fatalError() }
         
         request(
             url: url,
@@ -119,7 +119,7 @@ class NetworkingManager {
         )
     }
     
-    //MARK: - URL constructors
+    //MARK: - URL constructor
 
     private func constructURL(for coinID: String,for intervalInDays: Int) -> URL {
       
@@ -133,13 +133,13 @@ class NetworkingManager {
     }
     
     private func constructURL(for list: [String]) -> URL {
-        var updatedBaseURL = NetworkingManager.Constants.requestDataForListBaseUrl
+        var leadingUrl = NetworkingManager.Constants.requestDataForListBaseUrl
 
         for coinID in list {
-            updatedBaseURL += coinID + "%2C%20"
+            leadingUrl += coinID + "%2C%20"
         }
         
-        let endpointString = updatedBaseURL + NetworkingManager.Constants.requestDataForListTrailingUrl
+        let endpointString = leadingUrl + NetworkingManager.Constants.requestDataForListTrailingUrl
         
         guard let url = URL(string: endpointString) else { fatalError() }
         

@@ -274,7 +274,7 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let currentCoinModel = cryptoCurrencyTableViewModel.cellViewModels.value?[indexPath.row].coinModel else { fatalError() }
         
-        let detailsVC = DetailsViewController(coinID: currentCoinModel.id)
+        let detailsVC = DetailsViewController(coinID: currentCoinModel.id, coinName: currentCoinModel.name)
         
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
