@@ -42,7 +42,7 @@ class ResultsTableViewCell: UITableViewCell {
         
         symbolLabel.text = searchResult.symbol
         nameLabel.text = searchResult.name
-        logoView.setImage(imageData: nil, imageUrl: searchResult.large)
+        logoView.setImage(imageData: searchResult.imageData, imageUrl: searchResult.large)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

@@ -1,7 +1,7 @@
 import Charts
 import UIKit
 
-class DetailsViewController: UIViewController {
+class DetailVC: UIViewController {
     
     //MARK: - Properties
     
@@ -36,12 +36,14 @@ class DetailsViewController: UIViewController {
     
     private var priceChangeLabel: UILabel = {
         let label = UILabel()
+        label.text = "0.00"
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
     
     private var priceChangePercentageLabel: UILabel = {
         let label = UILabel()
+        label.text = "0.00"
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
@@ -105,9 +107,10 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
-        bindViewModel()
+        bindViewModels()
         viewModel.getMetricsData(coinID: viewModel.coinID)
         setupSegmentedControl()
+        setupTableView()
     }
     
     override func viewDidLayoutSubviews() {
@@ -119,11 +122,6 @@ class DetailsViewController: UIViewController {
         coinLogoShadowView.addSubview(coinLogoView)
         chartView.addSubview(lineChartView)
         headerView.addSubviews(headerNameLabel, marketCapRankLabel)
-
-        symbolLabel.sizeToFit()
-        priceLabel.sizeToFit()
-        priceChangeLabel.sizeToFit()
-        priceChangePercentageLabel.sizeToFit()
         
         scrollView.frame = view.bounds
         scrollView.contentSize = CGSize(width: view.width, height: 1000)
@@ -234,58 +232,35 @@ class DetailsViewController: UIViewController {
     
     //MARK: - Bind View Model
 
-    private func bindViewModel() {
+    private func bindViewModels() {
         
-        viewModel.metricsData.bind { [weak self] _ in
+        viewModel.metricsVM.bind { [weak self] _ in
+            guard let metrics = self?.viewModel.metricsVM.value else { return }
             
-            self?.setupNameAndLogo()
-            self?.viewModel.getChartDataEntries(
+            DispatchQueue.main.async {
+                self?.updateCurrentPrice(with: metrics.currentPrice )
+            }
+            self?.viewModel.createDetailsCellsViewModels()
+            self?.viewModel.getTimeRangeDetails(
                 coinID: self?.viewModel.coinID ?? "",
                 intervalInDays: self?.currentChartTimeInterval ?? 1
             )
-            self?.setupTableView()
-            self?.viewModel.createDetailsCellsViewModels()
         }
         
-        viewModel.rangeData.bind { [weak self] _ in
+        viewModel.rangeDetailsVM.bind { [weak self] _ in
             
-            guard let rangeData = self?.viewModel.rangeData.value else { return }
-            guard let entries = self?.viewModel.chartDataEntries else { return }
-            guard let isChangeNegative = self?.viewModel.rangeData.value?.isPriceChangeNegative else { return }
+            guard let rangeDetails = self?.viewModel.rangeDetailsVM.value else { return }
             
-            let color: UIColor = isChangeNegative ? .pinkGlamour : .nephritis
+            let color: UIColor = rangeDetails.isChangePositive ? .nephritis : .pinkGlamour
             
             DispatchQueue.main.async {
-                self?.createGraph(entries: entries, color: color)
-                self?.priceChangeLabel.text = rangeData.rangePriceChange
-                self?.priceChangeLabel.sizeToFit()
-                self?.priceChangePercentageLabel.text = rangeData.rangePriceChangePercentage
-                self?.priceChangePercentageLabel.sizeToFit()
-                self?.view.setNeedsLayout()
-                self?.view.layoutIfNeeded()
-                
-                if rangeData.isPriceChangeNegative  {
-                    self?.priceChangeLabel.textColor = .pomergranate
-                    self?.priceChangePercentageLabel.textColor = .pomergranate
-                } else {
-                    self?.priceChangeLabel.textColor = .nephritis
-                    self?.priceChangePercentageLabel.textColor = .nephritis
-                }
-
-                self?.setupProgressBars(
-                    rangeLow: rangeData.rangeLow,
-                    rangeHigh: rangeData.rangeHigh,
-                    percentageFromLow: rangeData.percentFromLow,
-                    percentageFromHigh: rangeData.percentFromHigh,
-                    athPrice: self?.viewModel.metricsData.value?.athPrice ?? "",
-                    athDate: self?.viewModel.metricsData.value?.athPrice ?? "",
-                    rangeProgress: rangeData.rangeProgress,
-                    athProgress: 0.0
-                )
+                self?.updateRangeLabels(with: rangeDetails)
+                self?.createGraph(entries: rangeDetails.chartEntries, color: color)
+                self?.updatePriceRangeBar(with: rangeDetails)
             }
         }
         
-        viewModel.detailsTableViewCelsViewModels.bind { [weak self] _ in
+        viewModel.detailsTableViewCelsVM.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.detailsTableView.reloadData()
             }
@@ -294,10 +269,10 @@ class DetailsViewController: UIViewController {
     
     //MARK: - Init
     
-    init(coinID: String, coinName: String) {
+    init(coinID: String, coinName: String, coinSymbol: String, logoURL: String) {
         viewModel = CoinDetailsViewModel(coinID: coinID)
         super.init(nibName: nil, bundle: nil)
-        title = coinName
+        setupLabelsAndLogo(coinName: coinName, coinSymbol: coinSymbol, logoUrl: logoURL)
     }
 
     required init?(coder: NSCoder) {
@@ -305,47 +280,54 @@ class DetailsViewController: UIViewController {
     }
     
     //MARK: - Private methods
+    private func setupLabelsAndLogo(coinName:String, coinSymbol: String, logoUrl: String) {
+        title = coinName
+        symbolLabel.text = coinSymbol.uppercased()
+        symbolLabel.sizeToFit()
+        coinLogoView.setImage(imageData: nil, imageUrl: logoUrl)
+    }
     
-    private func setupNameAndLogo() {
+    private func updateCurrentPrice(with price: String) {
+        priceLabel.text = price
+        priceLabel.sizeToFit()
+    }
+    
+    private func updatePriceRangeBar(with rangeData: RangeDetailsViewModel) {
         
-        guard let metrics = viewModel.metricsData.value else { return }
+        rangeProgressBar.rightTopLabel.text = rangeData.rangeHigh
+        rangeProgressBar.rightTopLabel.sizeToFit()
         
-        DispatchQueue.main.async {
-            self.title = metrics.name
-            self.symbolLabel.text = metrics.symbol.uppercased()
-            self.priceLabel.text = metrics.currentPrice
-            self.symbolLabel.sizeToFit()
-            self.view.setNeedsLayout()
-            self.view.layoutIfNeeded()
-            
-            self.coinLogoView.setImage(
-                imageData: nil,
-                imageUrl: metrics.imageUrl
-            )
+        rangeProgressBar.rightBottomLabel.text = rangeData.percentageFromHigh
+        rangeProgressBar.rightBottomLabel.sizeToFit()
+        
+        rangeProgressBar.leftTopLabel.text = rangeData.rangeLow
+        rangeProgressBar.leftTopLabel.sizeToFit()
+        
+        rangeProgressBar.leftBottomLabel.text = rangeData.percentageFromLow
+        rangeProgressBar.leftBottomLabel.sizeToFit()
+        
+        rangeProgressBar.progressBar.setProgress(rangeData.progress, animated: true)
+    }
+    
+    private func updateRangeLabels(with rangeDetails: RangeDetailsViewModel) {
+        priceChangeLabel.text = rangeDetails.priceChange
+        priceChangeLabel.sizeToFit()
+        priceChangePercentageLabel.text = "(" + rangeDetails.priceChangePercentage + ")"
+        priceChangePercentageLabel.sizeToFit()
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+        
+        if rangeDetails.isChangePositive  {
+            priceChangeLabel.textColor = .nephritis
+            priceChangePercentageLabel.textColor = .nephritis
+        } else {
+            priceChangeLabel.textColor = .pomergranate
+            priceChangePercentageLabel.textColor = .pomergranate
         }
     }
     
-    private func setupProgressBars(rangeLow: String, rangeHigh: String, percentageFromLow: String, percentageFromHigh: String, athPrice: String, athDate: String, rangeProgress: Float, athProgress: Double) {
-        
-        rangeProgressBar.rightTopLabel.text = rangeHigh
-        rangeProgressBar.rightTopLabel.sizeToFit()
-        
-        rangeProgressBar.rightBottomLabel.text = percentageFromHigh
-        rangeProgressBar.rightBottomLabel.sizeToFit()
-        
-        rangeProgressBar.leftTopLabel.text = rangeLow
-        rangeProgressBar.leftTopLabel.sizeToFit()
-        
-        rangeProgressBar.leftBottomLabel.text = percentageFromLow
-        rangeProgressBar.leftBottomLabel.sizeToFit()
-        
-        rangeProgressBar.progressBar.setProgress(rangeProgress, animated: true)
-    }
-    
     private func createGraph(entries: [ChartDataEntry], color: UIColor) {
-        
         let dataSet = LineChartDataSet(entries: entries)
-        
         dataSet.drawCirclesEnabled = false // Disable data points
         dataSet.mode = .horizontalBezier
         dataSet.lineWidth = 2
@@ -354,12 +336,6 @@ class DetailsViewController: UIViewController {
         dataSet.highlightEnabled = false
         dataSet.highlightLineWidth = 1
         dataSet.setColor(color)
-    
-        let gradientColors = [color.cgColor, UIColor.white.cgColor] as CFArray // Colors of the gradient
-        let colorLocations:[CGFloat] = [1.0, 0.0] // Positioning of the gradient
-        let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: gradientColors, locations: colorLocations) // Gradient Object
-        dataSet.fill = LinearGradientFill(gradient: gradient!, angle: 90.0) // Set gradient
-        dataSet.drawFilledEnabled = true // Draw the Gradient
 
         lineChartView.data = LineChartData(dataSet: dataSet)
         lineChartView.data?.setDrawValues(false)
@@ -376,6 +352,13 @@ class DetailsViewController: UIViewController {
         lineChartView.xAxis.avoidFirstLastClippingEnabled = true
        
         //lineChartView.animate(xAxisDuration: 1)
+        
+        //Gradient
+        let gradientColors = [color.cgColor, UIColor.white.cgColor] as CFArray // Colors of the gradient
+        let colorLocations:[CGFloat] = [1.0, 0.0] // Positioning of the gradient
+        let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: gradientColors, locations: colorLocations) // Gradient Object
+        dataSet.fill = LinearGradientFill(gradient: gradient!, angle: 90.0) // Set gradient
+        dataSet.drawFilledEnabled = true // Draw the Gradient
         
         // Disable zooming
         lineChartView.doubleTapToZoomEnabled = false
@@ -396,7 +379,6 @@ class DetailsViewController: UIViewController {
     }
     
     @objc func didChangeSegment(_ sender: UISegmentedControl) -> Void {
-    
         var rangeName = ""
         switch sender.selectedSegmentIndex {
         case 0:
@@ -424,7 +406,7 @@ class DetailsViewController: UIViewController {
         rangeProgressBar.titleLabel.text = rangeName
         rangeProgressBar.titleLabel.sizeToFit()
         
-        viewModel.getChartDataEntries(coinID: viewModel.coinID, intervalInDays: currentChartTimeInterval)
+        viewModel.getTimeRangeDetails(coinID: viewModel.coinID, intervalInDays: currentChartTimeInterval)
     }
     
     private func setupTableView() {
@@ -443,16 +425,17 @@ class DetailsViewController: UIViewController {
                 DetailsTableViewCell.self,
                 forCellReuseIdentifier: DetailsTableViewCell.identifier
             )
-
             self.marketCapRankLabel.text = "Fix"
         }
     }
 }
 
-extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
+    //MARK: - TableView delegate and data source
+
+extension DetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.detailsTableViewCelsViewModels.value?.count ?? 0
+        viewModel.detailsTableViewCelsVM.value?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -462,10 +445,9 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
             for: indexPath
         ) as? DetailsTableViewCell else { return UITableViewCell() }
         
-        guard let viewModel = viewModel.detailsTableViewCelsViewModels.value?[indexPath.row] else { fatalError() }
+        guard let viewModel = viewModel.detailsTableViewCelsVM.value?[indexPath.row] else { fatalError() }
                 
         cell.configure(with: viewModel)
-        
         return cell
     }
     
@@ -474,12 +456,11 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension DetailsViewController: AxisValueFormatter, ChartViewDelegate {
+    //MARK: - Charts delegate
 
+extension DetailVC: AxisValueFormatter, ChartViewDelegate {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-
         let date = Date(timeIntervalSince1970: value/1000)
-        
         return .stringForGraphAxis(from: date, daysInterval: currentChartTimeInterval)
     }
 }

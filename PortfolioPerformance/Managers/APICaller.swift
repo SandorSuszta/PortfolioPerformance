@@ -116,7 +116,7 @@ class APICaller {
     public func getHistoricalPrices(
         for coinID: String,
         intervalInDays: Int,
-        completion: @escaping (Result<GraphEntries, Error>) -> Void
+        completion: @escaping (Result<PriceModels, Error>) -> Void
     ){
         
         let unixTimeNow = Int(Date().timeIntervalSince1970)
@@ -131,7 +131,7 @@ class APICaller {
             guard let data = data, error == nil else { fatalError() }
             
             do {
-                let entries = try JSONDecoder().decode(GraphEntries.self, from: data)
+                let entries = try JSONDecoder().decode(PriceModels.self, from: data)
                 completion(.success(entries))
             } catch {
                 completion(.failure(error))

@@ -95,11 +95,11 @@ class NetworkingManager {
     public func requestDataForChart(
         coinID: String,
         intervalInDays: Int,
-        completion: @escaping (Result<GraphEntries, Error>) -> Void
+        completion: @escaping (Result<PriceModels, Error>) -> Void
     ){
         request(
             url: constructURL(for: coinID, for: intervalInDays),
-            expectingType: GraphEntries.self,
+            expectingType: PriceModels.self,
             completion: completion
         )
     }

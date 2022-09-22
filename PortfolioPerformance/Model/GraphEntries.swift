@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct GraphEntries: Codable {
+struct PriceModels: Codable {
     let prices: [[Double]]
 }

@@ -12,11 +12,11 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBar.tintColor = .black
         setupTabBar()
     }
     
     private func setupTabBar() {
+        tabBar.tintColor = .black
         
         let market = MarketViewController()
         let watchlist = WatchlistViewController()

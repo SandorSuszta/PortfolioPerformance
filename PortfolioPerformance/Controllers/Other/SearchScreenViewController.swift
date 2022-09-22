@@ -15,7 +15,7 @@ class SearchScreenViewController: UIViewController {
     
     public var rootViewController: RootViewControllersForSearch?
     
-    private var searchResultsArray: [SearchResult] = [SearchResult(id: "", name: "Bitcoin", symbol: "BTC", large: "")]
+    private var searchResultsArray: [SearchResult] = []
     
     let resultsTableView: UITableView = {
         let table = UITableView()
@@ -103,7 +103,9 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.navigationController?.pushViewController(DetailsViewController(coinID: searchResultsArray[indexPath.row].id, coinName: searchResultsArray[indexPath.row].name), animated: true)
+        let model = searchResultsArray[indexPath.row]
+        
+        self.navigationController?.pushViewController(DetailVC(coinID: model.id, coinName: model.name, coinSymbol: model.symbol, logoURL: model.large), animated: true)
 //        switch rootViewController {
 //        case .transactionDetails:
 //            delegate?.didSelectCoin(coinName: searchResultsArray[indexPath.row].symbol)
