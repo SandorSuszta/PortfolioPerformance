@@ -18,7 +18,6 @@
 		792C040928C9E62B008EE48C /* RangeProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040828C9E62B008EE48C /* RangeProgressBar.swift */; };
 		792C040B28CE2941008EE48C /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040A28CE2941008EE48C /* DetailsTableViewCell.swift */; };
 		792C040D28D32D5D008EE48C /* SingleCoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040C28D32D5D008EE48C /* SingleCoinModel.swift */; };
-		7932629427FCAFBC005E4D2E /* MarketTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7932629227FCAFBC005E4D2E /* MarketTableCell.xib */; };
 		79326299280423E1005E4D2E /* HoldingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */; };
 		7932629A280423E1005E4D2E /* HoldingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79326298280423E1005E4D2E /* HoldingsTableViewCell.xib */; };
 		7932629C28048291005E4D2E /* PortfolioViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932629B28048291005E4D2E /* PortfolioViewController2.swift */; };
@@ -104,7 +103,6 @@
 		792C040828C9E62B008EE48C /* RangeProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeProgressBar.swift; sourceTree = "<group>"; };
 		792C040A28CE2941008EE48C /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
 		792C040C28D32D5D008EE48C /* SingleCoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCoinModel.swift; sourceTree = "<group>"; };
-		7932629227FCAFBC005E4D2E /* MarketTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarketTableCell.xib; sourceTree = "<group>"; };
 		79326297280423E1005E4D2E /* HoldingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsTableViewCell.swift; sourceTree = "<group>"; };
 		79326298280423E1005E4D2E /* HoldingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HoldingsTableViewCell.xib; sourceTree = "<group>"; };
 		7932629B28048291005E4D2E /* PortfolioViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioViewController2.swift; sourceTree = "<group>"; };
@@ -352,7 +350,6 @@
 			children = (
 				792C040728C9E5D4008EE48C /* CustomViews */,
 				79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */,
-				7932629227FCAFBC005E4D2E /* MarketTableCell.xib */,
 				79326298280423E1005E4D2E /* HoldingsTableViewCell.xib */,
 				79397C7827E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.xib */,
 				79397C7427E203FD00B04EDA /* TransactionHistorySellTableViewCell.xib */,
@@ -376,7 +373,6 @@
 				792C040C28D32D5D008EE48C /* SingleCoinModel.swift */,
 				7934EFB5283E45A700CE7FD0 /* HoldingPerfomanceModel.swift */,
 				7934EFB7283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift */,
-				7982922F27E3D829007ECCCD /* View */,
 				796EFA3028690062005E24AF /* MarketCardCellModel.swift */,
 			);
 			path = Model;
@@ -426,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				79410D8A2822938100BD9EA4 /* Managers */,
+				7982922F27E3D829007ECCCD /* View */,
 				7982923027E3D87C007ECCCD /* Model */,
 				79619A1927C4EAD80080CB01 /* Controllers */,
 				7934EFBF28453D7200CE7FD0 /* ViewModels */,
@@ -522,7 +519,6 @@
 				79EAFD2927B3DCDE008A6062 /* LaunchScreen.storyboard in Resources */,
 				79EAFD2627B3DCDE008A6062 /* Assets.xcassets in Resources */,
 				79397C8027E36FB900B04EDA /* TransactionHistoryTransferTableViewCell.xib in Resources */,
-				7932629427FCAFBC005E4D2E /* MarketTableCell.xib in Resources */,
 				7932629A280423E1005E4D2E /* HoldingsTableViewCell.xib in Resources */,
 				7941060A27DA0A11009B4B8C /* SF-Pro-Italic.ttf in Resources */,
 				7941060B27DA0A11009B4B8C /* SF-Pro.ttf in Resources */,

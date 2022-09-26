@@ -18,15 +18,14 @@ class WatchlistViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
         self.title = "Watchlist"
-
         setupTableView()
+        bindViewModel()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateTableWithWatchlist()
         tableViewModel.loadWatchlistCryptoCurrenciesData()
-        
-        tableViewModel.cellViewModels.bind { [weak self] models in
-            DispatchQueue.main.async {
-                self?.watchlistTableView.reloadData()
-            }
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -48,6 +47,18 @@ class WatchlistViewController: UIViewController {
             forCellReuseIdentifier: CryptoCurrenciesTableViewCell.identifier
         )
         view.addSubview(watchlistTableView)
+    }
+    
+    private func updateTableWithWatchlist() {
+        tableViewModel.loadWatchlistCryptoCurrenciesData()
+    }
+    
+    private func bindViewModel() {
+        tableViewModel.cellViewModels.bind { [weak self] models in
+            DispatchQueue.main.async {
+                self?.watchlistTableView.reloadData()
+            }
+        }
     }
 }
 

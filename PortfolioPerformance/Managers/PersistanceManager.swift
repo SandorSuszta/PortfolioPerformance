@@ -3,6 +3,32 @@ import CoreData
 
 struct PersistanceManager {
     
+    static let shared = PersistanceManager()
+    
+    public var watchlistIDs: [String] {
+        defaults.stringArray(forKey: watchlistKey) ?? []
+    }
+    
+    private let defaults = UserDefaults.standard
+    
+    private let watchlistKey = "watchlist"
+    
+    private init() {}
+    
+    public func saveToWatchlist(ID: String) {
+        var currentWatchlist = watchlistIDs
+        currentWatchlist.append(ID)
+        defaults.set(currentWatchlist, forKey: watchlistKey)
+    }
+    
+    public func deleteFromWatchlist(ID: String) {
+         
+    }
+    
+    public func isInWatchlist(id: String) -> Bool {
+        watchlistIDs.contains(id)
+    }
+    
     static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     static func saveUpdates () {

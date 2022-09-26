@@ -83,7 +83,7 @@ extension String {
         let formatter = NumberFormatter()
         formatter.numberStyle = style
         formatter.locale = Locale(identifier: "en_US")
-        formatter.maximumFractionDigits = 2
+        formatter.maximumFractionDigits = 1
         var formattedNumber: Double = 0
         
         switch number {
@@ -100,6 +100,7 @@ extension String {
             formatter.positiveSuffix = " T"
             formatter.maximumFractionDigits = 2
             formattedNumber = number / 1000000000000
+            formatter.maximumFractionDigits = 2
             
         default:
             formattedNumber = number

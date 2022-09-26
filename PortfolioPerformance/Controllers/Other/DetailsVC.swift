@@ -9,7 +9,9 @@ class DetailVC: UIViewController {
     
     private var currentChartTimeInterval = 1
     
-    private var isInWatchlist: UIButton = {
+    private var isCoinInWatchlist: Bool = false
+    
+    private var favouriteButton: UIButton = {
         let button = UIButton()
         return button
     }()
@@ -107,10 +109,17 @@ class DetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
+        setUpFavouriteButton()
         bindViewModels()
         viewModel.getMetricsData(coinID: viewModel.coinID)
         setupSegmentedControl()
         setupTableView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        isCoinInWatchlist = PersistanceManager.shared.isInWatchlist(id: viewModel.coinID)
+        updateFavouriteButtonImage()
     }
     
     override func viewDidLayoutSubviews() {
@@ -280,11 +289,23 @@ class DetailVC: UIViewController {
     }
     
     //MARK: - Private methods
+    
     private func setupLabelsAndLogo(coinName:String, coinSymbol: String, logoUrl: String) {
         title = coinName
         symbolLabel.text = coinSymbol.uppercased()
         symbolLabel.sizeToFit()
         coinLogoView.setImage(imageData: nil, imageUrl: logoUrl)
+    }
+    
+    private func setUpFavouriteButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(), style: .plain, target: self, action: #selector(favouriteButtonTapped))
+        navigationItem.rightBarButtonItem?.tintColor = .systemYellow
+        updateFavouriteButtonImage()
+    }
+    
+    private func updateFavouriteButtonImage() {
+        let imageName = isCoinInWatchlist ? "star.fill" : "star"
+        navigationItem.rightBarButtonItem?.image = UIImage(systemName: imageName)
     }
     
     private func updateCurrentPrice(with price: String) {
@@ -407,6 +428,17 @@ class DetailVC: UIViewController {
         rangeProgressBar.titleLabel.sizeToFit()
         
         viewModel.getTimeRangeDetails(coinID: viewModel.coinID, intervalInDays: currentChartTimeInterval)
+    }
+    
+    @objc func favouriteButtonTapped() {
+        if isCoinInWatchlist {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
+        } else {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
+            PersistanceManager.shared.saveToWatchlist(ID: viewModel.coinID)
+        }
+        
+        isCoinInWatchlist = !isCoinInWatchlist
     }
     
     private func setupTableView() {

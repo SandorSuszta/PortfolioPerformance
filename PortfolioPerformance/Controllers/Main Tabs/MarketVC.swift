@@ -202,9 +202,9 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == marketCardsCollectionView {
             //Sort options collection case
-            return CGSize(width: view.width/3 - 10 , height: (view.width/3 + 20) )
+            return CGSize(width: 120 , height: 150)
         }
-        //Market card collection case
+        //Sort options collection case
         return CGSize(width: 90, height: 20)
     }
     

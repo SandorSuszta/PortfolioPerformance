@@ -9,12 +9,10 @@ import Foundation
 
 class WatchlistTableViewModel {
     
-    static var watclistCoinIDs: [String] = ["bitcoin", "ethereum", "ripple"]
-    
     var cellViewModels: ObservableObject<[MarketTableCellViewModel]> = ObservableObject(value:[])
     
     public func loadWatchlistCryptoCurrenciesData() {
-        NetworkingManager.shared.requestDataForWatchlist(list: WatchlistTableViewModel.watclistCoinIDs) { result in
+        NetworkingManager.shared.requestDataForWatchlist(list: PersistanceManager.shared.watchlistIDs) { result in
             
             switch result {
             case .success(let coinModels):
