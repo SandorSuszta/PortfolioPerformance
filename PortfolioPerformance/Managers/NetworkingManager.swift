@@ -19,6 +19,7 @@ class NetworkingManager {
         static let requestAllCryptoCurrenciesDataBaseUrl = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=500&page=1&sparkline=false"
         static let requestDataForListBaseUrl = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids="
         static let requestDataForListTrailingUrl = "&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+        static let searchBaseUrl = "https://api.coingecko.com/api/v3/search?query="
     }
     
     //MARK: - Generic Request
@@ -124,6 +125,20 @@ class NetworkingManager {
         request(
             url: url,
             expectingType: SingleCoinModel.self,
+            completion: completion
+        )
+    }
+    
+    public func searchWith(
+        query: String,
+        completion: @escaping (Result<SearchResponse, Error>) -> Void
+    ){
+        
+        guard let url = URL(string: Constants.searchBaseUrl + query) else { fatalError() }
+        
+        request(
+            url: url,
+            expectingType: SearchResponse.self,
             completion: completion
         )
     }
