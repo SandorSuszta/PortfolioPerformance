@@ -91,9 +91,9 @@ class PortfolioViewController: UIViewController {
         let dataSet = LineChartDataSet(entries: graphEntries)
         
         dataSet.drawCirclesEnabled = false // Disable data points
-        dataSet.mode = .horizontalBezier
+        dataSet.mode = .cubicBezier
         dataSet.lineWidth = 2
-        dataSet.cubicIntensity = 0.01
+        dataSet.cubicIntensity = 0.5
         dataSet.drawHorizontalHighlightIndicatorEnabled = false
         dataSet.highlightEnabled = false
         dataSet.highlightLineWidth = 3

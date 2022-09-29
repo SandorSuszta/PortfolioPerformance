@@ -22,6 +22,9 @@ class SearchScreenViewController: UIViewController {
         setUpResultsTableVIew()
         setUpTitleView()
         setUpSearchController()
+        
+        //Delete BackButton title on pushed screen
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -92,7 +95,16 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
         
         let model = searchResultsArray[indexPath.row]
         
-        self.navigationController?.pushViewController(DetailVC(coinID: model.id, coinName: model.name, coinSymbol: model.symbol, logoURL: model.large), animated: true)
+        let detailVC = DetailVC(
+            coinID: model.id,
+            coinName: model.name,
+            coinSymbol: model.symbol,
+            logoURL: model.large,
+            isFavourite: WatchlistManager.shared.isInWatchlist(id: model.id)
+        )
+        
+        self.navigationController?.pushViewController(detailVC, animated: true)
+        
 //        switch rootViewController {
 //        case .transactionDetails:
 //            delegate?.didSelectCoin(coinName: searchResultsArray[indexPath.row].symbol)

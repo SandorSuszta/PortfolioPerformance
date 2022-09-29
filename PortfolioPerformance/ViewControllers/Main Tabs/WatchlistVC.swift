@@ -13,6 +13,14 @@ class WatchlistViewController: UIViewController {
     private let tableViewModel = WatchlistTableViewModel()
 
     private let watchlistTableView = UITableView()
+    
+    private let emptyWatchlistLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Watchlist is empty..."
+        label.font = .systemFont(ofSize: 26, weight: .bold)
+        label.textColor = .secondaryLabel
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,20 +28,32 @@ class WatchlistViewController: UIViewController {
         self.title = "Watchlist"
         setupTableView()
         bindViewModel()
+        
+        //Delete BackButton title on pushed screen
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateTableWithWatchlist()
-        tableViewModel.loadWatchlistCryptoCurrenciesData()
     }
     
     override func viewDidLayoutSubviews() {
+        
         watchlistTableView.frame = CGRect(
             x: 15,
             y: 100,
             width: view.width - 30,
             height: view.height - 80
+        )
+        
+        view.addSubview(emptyWatchlistLabel)
+        emptyWatchlistLabel.sizeToFit()
+        emptyWatchlistLabel.frame = CGRect(
+            x: view.width / 2 - emptyWatchlistLabel.width / 2,
+            y: view.height / 2 - emptyWatchlistLabel.height / 2,
+            width: emptyWatchlistLabel.width,
+            height: emptyWatchlistLabel.height
         )
     }
     
@@ -50,7 +70,14 @@ class WatchlistViewController: UIViewController {
     }
     
     private func updateTableWithWatchlist() {
-        tableViewModel.loadWatchlistCryptoCurrenciesData()
+        if WatchlistManager.shared.watchlistIDs.isEmpty {
+            emptyWatchlistLabel.isHidden = false
+        } else {
+            emptyWatchlistLabel.isHidden = true
+            tableViewModel.loadWatchlistCryptoCurrenciesData(
+                list: WatchlistManager.shared.watchlistIDs
+            )
+        }
     }
     
     private func bindViewModel() {
@@ -95,6 +122,10 @@ class WatchlistViewController: UIViewController {
                 tableViewModel.cellViewModels.value?.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .left)
                 tableView.endUpdates()
+                
+                if WatchlistManager.shared.watchlistIDs.isEmpty {
+                    emptyWatchlistLabel.isHidden = false
+                }
             }
         }
         
@@ -102,8 +133,13 @@ class WatchlistViewController: UIViewController {
             
             guard let currentCoinModel = tableViewModel.cellViewModels.value?[indexPath.row].coinModel else { fatalError("Cant get coinModel in WatclistVC")}
             
-            
-            let detailsVC = DetailVC(coinID: currentCoinModel.id, coinName: currentCoinModel.name, coinSymbol: currentCoinModel.symbol, logoURL: currentCoinModel.image)
+            let detailsVC = DetailVC(
+                coinID: currentCoinModel.id,
+                coinName: currentCoinModel.name,
+                coinSymbol: currentCoinModel.symbol,
+                logoURL: currentCoinModel.image,
+                isFavourite: WatchlistManager.shared.isInWatchlist(id: currentCoinModel.id)
+            )
             
             self.navigationController?.pushViewController(detailsVC, animated: true)
         }

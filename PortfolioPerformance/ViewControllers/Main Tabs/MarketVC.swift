@@ -44,10 +44,6 @@ class MarketViewController: UIViewController {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -273,7 +269,13 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let currentCoinModel = cryptoCurrencyTableViewModel.cellViewModels.value?[indexPath.row].coinModel else { fatalError() }
         
-        let detailsVC = DetailVC(coinID: currentCoinModel.id, coinName: currentCoinModel.name, coinSymbol: currentCoinModel.symbol, logoURL: currentCoinModel.image)
+        let detailsVC = DetailVC(
+            coinID: currentCoinModel.id,
+            coinName: currentCoinModel.name,
+            coinSymbol: currentCoinModel.symbol,
+            logoURL: currentCoinModel.image,
+            isFavourite: WatchlistManager.shared.isInWatchlist(id: currentCoinModel.id)
+        )
         
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }

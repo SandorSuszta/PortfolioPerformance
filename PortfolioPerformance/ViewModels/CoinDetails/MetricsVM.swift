@@ -10,6 +10,7 @@ struct MetricsViewModel {
     public var athChangePercentage: String
     public var athDate: String
     public var marketCap: String
+    public var marketCapRank: String
     public var volume: String
     public var circulatingSupply: String
     public var totalSupply: String
@@ -25,6 +26,7 @@ struct MetricsViewModel {
         self.athChangePercentage = .percentageString(from: model.marketData.athChangePercentage["usd"] ?? 0)
         self.athDate = model.marketData.athDate["usd"] ?? "N/A"
         self.marketCap = .bigNumberString(from: model.marketData.marketCap["usd"] ?? 0)
+        self.marketCapRank = "#\(model.marketData.marketCapRank)"
         self.volume = .bigNumberString(from: model.marketData.totalVolume["usd"] ?? 0, style: .decimal)
         self.circulatingSupply = ""
         self.totalSupply = ""

@@ -4,7 +4,10 @@ import Charts
 class CoinDetailsViewModel {
     
     public var coinID: String
-    private var coinModel: SingleCoinModel?
+    public var coinModel: SingleCoinModel?
+    public var marketCapRank: String {
+        String(coinModel?.marketData.marketCapRank ?? 0)
+    }
     
     //MARK: - Observable properties
     public var metricsVM: ObservableObject<MetricsViewModel> = ObservableObject(value: nil)
@@ -64,7 +67,7 @@ class CoinDetailsViewModel {
         ))
         viewModels.append(.init(
             name: "Total supply",
-            value: .bigNumberString(from: Double(coinModel?.marketData.totalSupply ?? 0))
+            value: .bigNumberString(from: Double(coinModel?.marketData.totalSupply ?? 0), style: .decimal)
         ))
         viewModels.append(.init(
             name: "Max supply",

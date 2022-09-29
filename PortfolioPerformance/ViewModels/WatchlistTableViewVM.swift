@@ -11,9 +11,9 @@ class WatchlistTableViewModel {
     
     var cellViewModels: ObservableObject<[MarketTableCellViewModel]> = ObservableObject(value:[])
     
-    public func loadWatchlistCryptoCurrenciesData() {
-        NetworkingManager.shared.requestDataForWatchlist(list: WatchlistManager.shared.watchlistIDs) { result in
-            
+    public func loadWatchlistCryptoCurrenciesData(list: [String]) {
+        
+        NetworkingManager.shared.requestDataForWatchlist(list: list) { result in
             switch result {
             case .success(let coinModels):
                 //Transform array of coin models into array of cell view models

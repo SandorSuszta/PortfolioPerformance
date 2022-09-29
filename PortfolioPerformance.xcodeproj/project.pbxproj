@@ -13,7 +13,6 @@
 		792B0FC3287B3C6C0040B461 /* WatchlistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC2287B3C6C0040B461 /* WatchlistVC.swift */; };
 		792B0FC5287C85EF0040B461 /* WatchlistTableViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC4287C85EF0040B461 /* WatchlistTableViewVM.swift */; };
 		792B0FC7287F03080040B461 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC6287F03080040B461 /* MainTabBarController.swift */; };
-		792C040028B7C2E7008EE48C /* DetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C03FF28B7C2E7008EE48C /* DetailsVC.swift */; };
 		792C040628C14386008EE48C /* CoinDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040528C14386008EE48C /* CoinDetailsVM.swift */; };
 		792C040928C9E62B008EE48C /* RangeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040828C9E62B008EE48C /* RangeProgressView.swift */; };
 		792C040B28CE2941008EE48C /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040A28CE2941008EE48C /* DetailsTableViewCell.swift */; };
@@ -81,6 +80,7 @@
 		79C8DE7127BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C8DE7027BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift */; };
 		79D5C6D328DC75060018B133 /* DetailsTableVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5C6D228DC75060018B133 /* DetailsTableVM.swift */; };
 		79E2763727CF955A005FB139 /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E2763627CF955A005FB139 /* TransactionHistoryViewController.swift */; };
+		79E7A21428E5B73A00BD5CB0 /* DetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7A21328E5B73A00BD5CB0 /* DetailsVC.swift */; };
 		79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */; };
 		79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */; };
 		79EAFD2627B3DCDE008A6062 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79EAFD2527B3DCDE008A6062 /* Assets.xcassets */; };
@@ -99,7 +99,6 @@
 		792B0FC2287B3C6C0040B461 /* WatchlistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistVC.swift; sourceTree = "<group>"; };
 		792B0FC4287C85EF0040B461 /* WatchlistTableViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistTableViewVM.swift; sourceTree = "<group>"; };
 		792B0FC6287F03080040B461 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		792C03FF28B7C2E7008EE48C /* DetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsVC.swift; sourceTree = "<group>"; };
 		792C040528C14386008EE48C /* CoinDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsVM.swift; sourceTree = "<group>"; };
 		792C040828C9E62B008EE48C /* RangeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeProgressView.swift; sourceTree = "<group>"; };
 		792C040A28CE2941008EE48C /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
@@ -167,6 +166,7 @@
 		79C8DE7027BAA9D700C4F3CC /* AddCoinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoinCollectionViewCell.swift; sourceTree = "<group>"; };
 		79D5C6D228DC75060018B133 /* DetailsTableVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableVM.swift; sourceTree = "<group>"; };
 		79E2763627CF955A005FB139 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
+		79E7A21328E5B73A00BD5CB0 /* DetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsVC.swift; path = ../../../../DetailsVC.swift; sourceTree = "<group>"; };
 		79EAFD1627B3DCD9008A6062 /* PortfolioPerformance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PortfolioPerformance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -340,8 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				7934EFAF283BE06E00CE7FD0 /* MyPortfolioVC.swift */,
+				79E7A21328E5B73A00BD5CB0 /* DetailsVC.swift */,
 				79410D8E282416C000BD9EA4 /* SearchVC.swift */,
-				792C03FF28B7C2E7008EE48C /* DetailsVC.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -621,7 +621,6 @@
 				792B0FC3287B3C6C0040B461 /* WatchlistVC.swift in Sources */,
 				79397C7927E3386B00B04EDA /* TransactionHistoryBuyTableViewCell.swift in Sources */,
 				796EFA27285A1FF9005E24AF /* CircularProgressBar.swift in Sources */,
-				792C040028B7C2E7008EE48C /* DetailsVC.swift in Sources */,
 				796EFA252853A1CD005E24AF /* AddTransactionButton.swift in Sources */,
 				79397C7527E203FD00B04EDA /* TransactionHistorySellTableViewCell.swift in Sources */,
 				79EAFD3727B3FE02008A6062 /* APICaller.swift in Sources */,
@@ -631,6 +630,7 @@
 				796EFA4928770D26005E24AF /* CryptoCurrenciesTableViewCell.swift in Sources */,
 				7934EFB8283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift in Sources */,
 				7934EFB6283E45A700CE7FD0 /* HoldingPerfomanceModel.swift in Sources */,
+				79E7A21428E5B73A00BD5CB0 /* DetailsVC.swift in Sources */,
 				796EFA2D285B8A98005E24AF /* MarketVC.swift in Sources */,
 				792B0FC5287C85EF0040B461 /* WatchlistTableViewVM.swift in Sources */,
 				79397C7C27E3541700B04EDA /* AllMarketData.swift in Sources */,

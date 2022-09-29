@@ -89,6 +89,7 @@ class NetworkingManager {
         list: [String],
         completion: @escaping (Result<[CoinModel], Error>) -> Void
     ){
+        
         request(
             url: constructURL(for: list),
             expectingType: [CoinModel].self,
