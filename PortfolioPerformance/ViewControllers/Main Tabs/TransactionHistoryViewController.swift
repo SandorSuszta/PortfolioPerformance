@@ -20,7 +20,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        transactionHistory = PersistanceManager.loadTransactions()
+        transactionHistory = WatchlistManager.loadTransactions()
         
         transactionHistoryTableView.dataSource = self
         transactionHistoryTableView.delegate = self
@@ -29,7 +29,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        transactionHistory = PersistanceManager.loadTransactions()
+        transactionHistory = WatchlistManager.loadTransactions()
         transactionHistoryTableView.reloadData()
     }
     
@@ -91,24 +91,24 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         if editingStyle == .delete {
             let symbol = transactionHistory[indexPath.row].boughtCurrency
             
-            PersistanceManager.updateHoldingsWithDeletedTransaction(
+            WatchlistManager.updateHoldingsWithDeletedTransaction(
                 transaction: transactionHistory[indexPath.row]
             )
             
-            PersistanceManager.context.delete(
+            WatchlistManager.context.delete(
                 transactionHistory[indexPath.row]
             )
             
             transactionHistory.remove(at: indexPath.row)
             
-            PersistanceManager.saveUpdates()
+            WatchlistManager.saveUpdates()
             
             tableView.deleteRows(at: [indexPath], with: .fade)
             
             //Delete holding if user deletes all transactions
             if !transactionHistory.contains(where: { $0.boughtCurrency == symbol
             }) {
-                PersistanceManager.deleteHolding(symbol: symbol ?? "")
+                WatchlistManager.deleteHolding(symbol: symbol ?? "")
             }
         }
     }

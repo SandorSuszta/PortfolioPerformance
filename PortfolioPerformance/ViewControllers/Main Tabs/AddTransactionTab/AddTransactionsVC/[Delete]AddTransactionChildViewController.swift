@@ -137,11 +137,11 @@ class AddTransactionChildViewController: UIViewController {
         //        }
         
         let newTransaction = createTransactionModel()
-        PersistanceManager.updateHoldingsWithNewTransaction(transaction: newTransaction)
+        WatchlistManager.updateHoldingsWithNewTransaction(transaction: newTransaction)
     }
     
     private func createTransactionModel() -> Transaction {
-        let transaction = Transaction(context: PersistanceManager.context)
+        let transaction = Transaction(context: WatchlistManager.context)
         transaction.type = transactionType
         return transaction
     }

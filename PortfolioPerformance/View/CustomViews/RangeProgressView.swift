@@ -1,14 +1,6 @@
-//
-//  RangeProgressBar.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 08/09/2022.
-//
-
-import Foundation
 import UIKit
 
-class RangeProgressBar: UIView {
+class RangeProgressView: UIView {
     public var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)

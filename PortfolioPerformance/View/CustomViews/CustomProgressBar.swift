@@ -1,11 +1,3 @@
-//
-//  UIProgressView+Height.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 27/05/2022.
-//
-
-import Foundation
 import UIKit
 
 // Change height of progress bar, setting custom height

@@ -1,11 +1,3 @@
-//
-//  UIButton+AddTransactionButton.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 10/06/2022.
-//
-
-import Foundation
 import UIKit
 
 class AddTransactionButton: UIButton {

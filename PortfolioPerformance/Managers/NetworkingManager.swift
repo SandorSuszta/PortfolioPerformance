@@ -22,6 +22,7 @@ class NetworkingManager {
     }
     
     //MARK: - Generic Request
+    
     private func request<T:Codable>(
         url: URL?,
         expectingType: T.Type,
@@ -44,6 +45,7 @@ class NetworkingManager {
     }
     
     //MARK: - Greed And Fear Index
+    
     public func requestGreedAndFearIndex (
         completion: @escaping (Result<GreedAndFearModel, Error>) -> Void
     ){
@@ -56,6 +58,7 @@ class NetworkingManager {
     }
     
     //MARK: - Total Market Cap
+    
     public func requestGlobalData(
         completion: @escaping (Result<GlobalDataResponse, Error>) -> Void
     ){
@@ -68,6 +71,7 @@ class NetworkingManager {
     }
     
     //MARK: - All Crypto Data
+    
     public func requestCryptoCurrenciesData(
         completion: @escaping (Result<[CoinModel], Error>) -> Void
     ){
@@ -80,6 +84,7 @@ class NetworkingManager {
     }
     
     //MARK: - Crypto Data For Watchlist
+    
     public func requestDataForWatchlist(
         list: [String],
         completion: @escaping (Result<[CoinModel], Error>) -> Void
@@ -92,6 +97,7 @@ class NetworkingManager {
     }
     
     //MARK: - Chart Data
+    
     public func requestDataForChart(
         coinID: String,
         intervalInDays: Int,
@@ -105,11 +111,13 @@ class NetworkingManager {
     }
     
     //MARK: - Data by ID
+    
     public func requestData(
         for ID: String,
         completion: @escaping (Result<SingleCoinModel, Error>) -> Void
     ){
         let endpointString = "https://api.coingecko.com/api/v3/coins/\(ID)?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"
+        
         guard let url = URL(string: endpointString) else { fatalError() }
         
         request(

@@ -45,7 +45,7 @@ class TransferTransactionViewController: UIViewController {
     }
     
     func saveTransferTransaction() {
-        let newTransaction = Transaction(context: PersistanceManager.context)
+        let newTransaction = Transaction(context: WatchlistManager.context)
         let selectedCoin = AddTransactionViewController.selectedCoin
         
         newTransaction.type = "transfer"
@@ -55,6 +55,6 @@ class TransferTransactionViewController: UIViewController {
         newTransaction.logo = selectedCoin?.imageData
         newTransaction.transferType = transferType
         
-        PersistanceManager.saveUpdates()
+        WatchlistManager.saveUpdates()
     }
 }

@@ -256,19 +256,18 @@ class AddTransactionDetailsViewController: UIViewController {
     
     @objc private func didPressAddTransactionButton(_ sender: UIButton) {
         let newTransaction = createTransactionModel()
-        PersistanceManager.updateHoldingsWithNewTransaction(transaction: newTransaction)
+        WatchlistManager.updateHoldingsWithNewTransaction(transaction: newTransaction)
         navigationController?.popViewController(animated: true)
     }
     
     @objc private func didClickTradingPairButton(_ sender: UIButton) {
         let vc = SearchScreenViewController()
-        vc.delegate = self
-        vc.rootViewController = .transactionDetails
+        //vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func createTransactionModel() -> Transaction {
-        let transaction = Transaction(context: PersistanceManager.context)
+        let transaction = Transaction(context: WatchlistManager.context)
         transaction.type = transactionType
         transaction.price = Double(priceInputView.textField.text!) ?? 0
         transaction.ammount = Double(ammountInputView.textField.text!) ?? 0
@@ -282,13 +281,13 @@ class AddTransactionDetailsViewController: UIViewController {
 
 //MARK: - Search Controller Delegate Method
 
-extension AddTransactionDetailsViewController: SearchViewControllerDelegate {
-    func didSelectCoin(coinName: String) {
-        DispatchQueue.main.async {
-            self.tradingPairButton.setTitle(
-                (self.viewModel?.coinSymbol ?? "") + " / " + coinName,
-                for: .normal
-            )
-        }
-    }
-}
+//extension AddTransactionDetailsViewController: SearchViewControllerDelegate {
+//    func didSelectCoin(coinName: String) {
+//        DispatchQueue.main.async {
+//            self.tradingPairButton.setTitle(
+//                (self.viewModel?.coinSymbol ?? "") + " / " + coinName,
+//                for: .normal
+//            )
+//        }
+//    }
+//}

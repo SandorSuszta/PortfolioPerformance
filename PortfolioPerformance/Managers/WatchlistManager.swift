@@ -1,9 +1,11 @@
 import UIKit
 import CoreData
 
-struct PersistanceManager {
+struct WatchlistManager {
     
-    static let shared = PersistanceManager()
+    static let shared = WatchlistManager()
+    
+    private init() {}
     
     public var watchlistIDs: [String] {
         defaults.stringArray(forKey: watchlistKey) ?? []
@@ -13,8 +15,6 @@ struct PersistanceManager {
     
     private let watchlistKey = "watchlist"
     
-    private init() {}
-    
     public func saveToWatchlist(ID: String) {
         var currentWatchlist = watchlistIDs
         currentWatchlist.append(ID)
@@ -22,12 +22,15 @@ struct PersistanceManager {
     }
     
     public func deleteFromWatchlist(ID: String) {
-         
+        var currentWatchlist = watchlistIDs
+        currentWatchlist.removeAll { $0 == ID }
+        defaults.set(currentWatchlist, forKey: watchlistKey)
     }
     
     public func isInWatchlist(id: String) -> Bool {
         watchlistIDs.contains(id)
     }
+    
     
     static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -40,7 +43,7 @@ struct PersistanceManager {
     }
     
     static func updateHoldingsWithNewTransaction (transaction: Transaction) {
-        let holdings = PersistanceManager.loadHoldings()
+        let holdings = WatchlistManager.loadHoldings()
         switch transaction.type {
         case "buy":
             
@@ -50,7 +53,7 @@ struct PersistanceManager {
                 holdingToUpdate.ammount += transaction.ammount
                 holdingToUpdate.totalCostBasis += transaction.price * transaction.ammount
             } else {
-                let newHolding = HoldingModel(context: PersistanceManager.context)
+                let newHolding = HoldingModel(context: WatchlistManager.context)
                 newHolding.symbol = transaction.boughtCurrency
                 newHolding.ammount = transaction.ammount
                 newHolding.totalCostBasis = transaction.price * transaction.ammount
@@ -59,11 +62,11 @@ struct PersistanceManager {
         default:
             fatalError()
         }
-        PersistanceManager.saveUpdates()
+        WatchlistManager.saveUpdates()
     }
     
     static func updateHoldingsWithDeletedTransaction (transaction: Transaction) {
-        let holdings = PersistanceManager.loadHoldings()
+        let holdings = WatchlistManager.loadHoldings()
         switch transaction.type {
         case "buy":
             if let holdingToUpdate = holdings.first(where: {
@@ -78,7 +81,7 @@ struct PersistanceManager {
         default:
             fatalError()
         }
-        PersistanceManager.saveUpdates()
+        WatchlistManager.saveUpdates()
     }
     static func loadTransactions() -> [Transaction]{
         
@@ -113,7 +116,7 @@ struct PersistanceManager {
     static func deleteHolding (symbol: String) {
         guard let holdingToDelete = loadHoldings(with: NSPredicate(format: "symbol == %@", symbol)).first else { fatalError() }
         
-        PersistanceManager.context.delete(holdingToDelete)
-        PersistanceManager.saveUpdates()
+        WatchlistManager.context.delete(holdingToDelete)
+        WatchlistManager.saveUpdates()
     }
 }

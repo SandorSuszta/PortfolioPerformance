@@ -64,6 +64,7 @@ class WatchlistViewController: UIViewController {
 
     //MARK: - Table view delegate and data source
     extension WatchlistViewController: UITableViewDelegate, UITableViewDataSource {
+        
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             tableViewModel.cellViewModels.value?.count ?? 0
         }
@@ -84,5 +85,28 @@ class WatchlistViewController: UIViewController {
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             CryptoCurrenciesTableViewCell.prefferedHeight
         }
+        
+        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                guard let ID = tableViewModel.cellViewModels.value?[indexPath.row].coinModel.id else { fatalError() }
+                
+                tableView.beginUpdates()
+                WatchlistManager.shared.deleteFromWatchlist(ID: ID)
+                tableViewModel.cellViewModels.value?.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .left)
+                tableView.endUpdates()
+            }
+        }
+        
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            
+            guard let currentCoinModel = tableViewModel.cellViewModels.value?[indexPath.row].coinModel else { fatalError("Cant get coinModel in WatclistVC")}
+            
+            
+            let detailsVC = DetailVC(coinID: currentCoinModel.id, coinName: currentCoinModel.name, coinSymbol: currentCoinModel.symbol, logoURL: currentCoinModel.image)
+            
+            self.navigationController?.pushViewController(detailsVC, animated: true)
+        }
+       
     }
 

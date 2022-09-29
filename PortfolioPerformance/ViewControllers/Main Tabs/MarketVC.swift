@@ -154,7 +154,6 @@ class MarketViewController: UIViewController {
     
     @objc private func searchTapped() {
         let searchVC = SearchScreenViewController()
-        searchVC.rootViewController = .marketTableView
         navigationController?.pushViewController(searchVC, animated: true)
     }
 }

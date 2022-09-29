@@ -1,10 +1,3 @@
-//
-//  Date+FormatedString.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 19/03/2022.
-//
-
 import Foundation
 
 // TODO: New Date Formatter IOS15 - https://sarunw.com/posts/new-formatters-in-ios15/

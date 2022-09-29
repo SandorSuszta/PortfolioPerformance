@@ -45,7 +45,7 @@ class BuyTransactionViewController: UIViewController {
     }
     
     func saveBuyTransaction() {
-        let newTransaction = Transaction(context: PersistanceManager.context)
+        let newTransaction = Transaction(context: WatchlistManager.context)
         let selectedCoin = AddTransactionViewController.selectedCoin
         
         newTransaction.type = "buy"
@@ -56,7 +56,7 @@ class BuyTransactionViewController: UIViewController {
         newTransaction.convertedCurrency = AddTransactionViewController.tradingPairCoinSymbol
         newTransaction.logo = selectedCoin?.imageData
         
-        PersistanceManager.updateHoldingsWithNewTransaction(transaction: newTransaction)
+        WatchlistManager.updateHoldingsWithNewTransaction(transaction: newTransaction)
     }
     
 //    func updateHoldings() {

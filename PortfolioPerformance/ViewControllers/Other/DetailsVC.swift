@@ -39,6 +39,7 @@ class DetailVC: UIViewController {
     private var priceChangeLabel: UILabel = {
         let label = UILabel()
         label.text = "0.00"
+        label.alpha = 0.0
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
@@ -46,6 +47,7 @@ class DetailVC: UIViewController {
     private var priceChangePercentageLabel: UILabel = {
         let label = UILabel()
         label.text = "0.00"
+        label.alpha = 0.0
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
@@ -77,8 +79,8 @@ class DetailVC: UIViewController {
     private var timeIntervalSelection = UISegmentedControl()
 
     // Range ProgressBar
-    private var rangeProgressBar: RangeProgressBar = {
-        let bar = RangeProgressBar()
+    private var rangeProgressBar: RangeProgressView = {
+        let bar = RangeProgressView()
         bar.configureWithShadow()
         bar.titleLabel.text = "Day range"
         bar.progressBar.progress = 0.5
@@ -118,7 +120,7 @@ class DetailVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        isCoinInWatchlist = PersistanceManager.shared.isInWatchlist(id: viewModel.coinID)
+        isCoinInWatchlist = WatchlistManager.shared.isInWatchlist(id: viewModel.coinID)
         updateFavouriteButtonImage()
     }
     
@@ -158,7 +160,7 @@ class DetailVC: UIViewController {
         
         priceLabel.frame = CGRect(
             x: 35,
-            y: coinLogoShadowView.top + (coinLogoShadowView.height - priceLabel.height - priceChangeLabel.height)/2,
+            y: coinLogoShadowView.top + 15,
             width: priceLabel.width,
             height: priceLabel.height
         )
@@ -239,7 +241,7 @@ class DetailVC: UIViewController {
         )
     }
     
-    //MARK: - Bind View Model
+    //MARK: - Bind View Models
 
     private func bindViewModels() {
         
@@ -299,13 +301,17 @@ class DetailVC: UIViewController {
     
     private func setUpFavouriteButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(), style: .plain, target: self, action: #selector(favouriteButtonTapped))
-        navigationItem.rightBarButtonItem?.tintColor = .systemYellow
         updateFavouriteButtonImage()
     }
     
     private func updateFavouriteButtonImage() {
-        let imageName = isCoinInWatchlist ? "star.fill" : "star"
-        navigationItem.rightBarButtonItem?.image = UIImage(systemName: imageName)
+        if isCoinInWatchlist {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
+            navigationItem.rightBarButtonItem?.tintColor = .systemYellow
+        } else {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
+            navigationItem.rightBarButtonItem?.tintColor = .black
+        }
     }
     
     private func updateCurrentPrice(with price: String) {
@@ -333,8 +339,10 @@ class DetailVC: UIViewController {
     private func updateRangeLabels(with rangeDetails: RangeDetailsViewModel) {
         priceChangeLabel.text = rangeDetails.priceChange
         priceChangeLabel.sizeToFit()
+        priceChangeLabel.alpha = 1.0
         priceChangePercentageLabel.text = "(" + rangeDetails.priceChangePercentage + ")"
         priceChangePercentageLabel.sizeToFit()
+        priceChangePercentageLabel.alpha = 1.0
         view.setNeedsLayout()
         view.layoutIfNeeded()
         
@@ -348,11 +356,13 @@ class DetailVC: UIViewController {
     }
     
     private func createGraph(entries: [ChartDataEntry], color: UIColor) {
+        lineChartView.alpha = 1.0
+        
         let dataSet = LineChartDataSet(entries: entries)
         dataSet.drawCirclesEnabled = false // Disable data points
         dataSet.mode = .horizontalBezier
-        dataSet.lineWidth = 2
-        dataSet.cubicIntensity = 2
+        dataSet.lineWidth = 1
+        dataSet.cubicIntensity = 0.5
         dataSet.drawHorizontalHighlightIndicatorEnabled = false
         dataSet.highlightEnabled = false
         dataSet.highlightLineWidth = 1
@@ -401,6 +411,9 @@ class DetailVC: UIViewController {
     
     @objc func didChangeSegment(_ sender: UISegmentedControl) -> Void {
         var rangeName = ""
+        lineChartView.fadeOut()
+        priceChangeLabel.fadeOut()
+        priceChangePercentageLabel.fadeOut()
         switch sender.selectedSegmentIndex {
         case 0:
             currentChartTimeInterval = 1
@@ -431,14 +444,14 @@ class DetailVC: UIViewController {
     }
     
     @objc func favouriteButtonTapped() {
-        if isCoinInWatchlist {
-            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
-        } else {
-            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
-            PersistanceManager.shared.saveToWatchlist(ID: viewModel.coinID)
-        }
         
+        if isCoinInWatchlist {
+            WatchlistManager.shared.deleteFromWatchlist(ID: viewModel.coinID)
+        } else {
+            WatchlistManager.shared.saveToWatchlist(ID: viewModel.coinID)
+        }
         isCoinInWatchlist = !isCoinInWatchlist
+        updateFavouriteButtonImage()
     }
     
     private func setupTableView() {

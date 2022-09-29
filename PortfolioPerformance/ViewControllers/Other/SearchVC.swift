@@ -1,20 +1,7 @@
 import UIKit
 
-protocol SearchViewControllerDelegate {
-    func didSelectCoin(coinName: String)
-}
-
-enum RootViewControllersForSearch {
-    case marketTableView
-    case transactionDetails
-}
-
 class SearchScreenViewController: UIViewController {
-    
-    public var delegate: SearchViewControllerDelegate?
-    
-    public var rootViewController: RootViewControllersForSearch?
-    
+
     private var searchResultsArray: [SearchResult] = []
     
     let resultsTableView: UITableView = {

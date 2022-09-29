@@ -9,7 +9,7 @@ import UIKit
 
 class MyPortfolioViewController: UIViewController {
     
-    var holdingModels = PersistanceManager.loadHoldings().sorted {
+    var holdingModels = WatchlistManager.loadHoldings().sorted {
         $0.ammount < $1.ammount
     }
 
@@ -47,7 +47,7 @@ class MyPortfolioViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        holdingModels = PersistanceManager.loadHoldings()
+        holdingModels = WatchlistManager.loadHoldings()
         updateHoldingPerfomanceModels(from: holdingModels)
         holdingPerfomanceModels.sort {
             $0.holdingValue > $1.holdingValue

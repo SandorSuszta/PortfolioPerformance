@@ -48,7 +48,7 @@ class ConvertTransactionViewController: UIViewController {
     
     func saveConvertTransaction() {
         
-        let transaction = Transaction(context: PersistanceManager.context)
+        let transaction = Transaction(context: WatchlistManager.context)
         
         transaction.type = "convert"
         transaction.boughtCurrency = AddTransactionViewController.selectedCoin?.symbol.uppercased()
@@ -60,7 +60,7 @@ class ConvertTransactionViewController: UIViewController {
         transaction.convertedCoinWorthThen = transaction.ammount * transaction.priceThen
         transaction.logo = selectedCoin?.imageData
         
-        PersistanceManager.saveUpdates()
+        WatchlistManager.saveUpdates()
     }
     
     func getPriceOnTransactionDate() {
