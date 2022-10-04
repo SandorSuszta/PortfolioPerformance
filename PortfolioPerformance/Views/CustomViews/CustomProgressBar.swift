@@ -9,7 +9,4 @@ class CustomProgressView: UIProgressView {
         let size: CGSize = .init(width: size.width, height: customHeight)
         return size
     }
-    
-    
-    
 }

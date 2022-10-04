@@ -5,11 +5,13 @@
 //  Created by Nataliia Shusta on 04/07/2022.
 //
 
-import Foundation
+import UIKit
 
 class NetworkingManager {
     
     static let shared = NetworkingManager()
+    
+    public var cache = NSCache<NSString, UIImage>()
     
     private init() {}
     
@@ -33,7 +35,7 @@ class NetworkingManager {
         
         let task = URLSession.shared.dataTask(
             with: url) { data, _, error in
-                guard let data = data, error == nil  else { fatalError() }
+                 guard let data = data, error == nil  else { fatalError() }
                 
                 do {
                     let result = try JSONDecoder().decode(expectingType, from: data)

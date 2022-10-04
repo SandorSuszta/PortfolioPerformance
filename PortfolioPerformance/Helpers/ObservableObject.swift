@@ -13,6 +13,7 @@ final class ObservableObject<T> {
             listener?(value)
         }
     }
+    
     var listener: ((T?) -> Void)?
     
     init(value: T?) {

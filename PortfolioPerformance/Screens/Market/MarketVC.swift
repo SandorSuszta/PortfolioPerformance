@@ -28,20 +28,15 @@ class MarketViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray6
+        setupViewController()
         bindViewModels()
         marketCardsViewModel.loadGreedAndFearIndex()
         marketCardsViewModel.loadGlobalData()
         cryptoCurrencyTableViewModel.loadAllCryptoCurrenciesData()
-        setupTitle()
         addSearchButton()
         setupMarketCardsCollectionView()
         setupSortOptionsCollectionView()
         setupTableView()
-        
-        
-        //Delete BackButton title on pushed screen
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -72,9 +67,13 @@ class MarketViewController: UIViewController {
     
     //MARK: - Methods
     
-    //Title
-    private func setupTitle() {
+    //Setup VC
+    private func setupViewController() {
         self.title = "Market"
+        view.backgroundColor = .systemGray6
+        
+        //Delete BackButton title on pushed screen
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     //Market Cards Setup
@@ -148,6 +147,29 @@ class MarketViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
     }
     
+    private func sortTableview(byOption number: Int) {
+        switch number {
+        case 0: //Top Market Cap
+            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
+                $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0
+            })
+        case 1: //Top Winners
+            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
+                $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0
+            })
+        case 2: //Top Losers
+            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
+                $0.coinModel.priceChangePercentage24H ?? 0  < $1.coinModel.priceChangePercentage24H ?? 0
+            })
+        case 3: //Top Volume
+            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
+                $0.coinModel.totalVolume ?? 0 > $1.coinModel.totalVolume ?? 0
+            })
+        default:
+            fatalError()
+        }
+    }
+    
     @objc private func searchTapped() {
         let searchVC = SearchScreenViewController()
         navigationController?.pushViewController(searchVC, animated: true)
@@ -206,7 +228,7 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == sortOptionsCollectionView {
             //Sort options collection case
-            sortTableview(option: indexPath.row)
+            sortTableview(byOption: indexPath.row)
             scrollToTop()
         }
     }
@@ -219,29 +241,6 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
     //Left inset
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-    }
-    
-    func sortTableview(option: Int) {
-        switch option {
-        case 0: //Top Market Cap
-            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
-                $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0
-            })
-        case 1: //Top Winners
-            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
-                $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0
-            })
-        case 2: //Top Losers
-            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
-                $0.coinModel.priceChangePercentage24H ?? 0  < $1.coinModel.priceChangePercentage24H ?? 0
-            })
-        case 3: //Top Volume
-            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
-                $0.coinModel.totalVolume ?? 0 > $1.coinModel.totalVolume ?? 0
-            })
-        default:
-            fatalError()
-        }
     }
 }
     //MARK: - Table View Delegate and Data Source Methods
@@ -284,7 +283,3 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
         CryptoCurrenciesTableViewCell.prefferedHeight
     }
 }
-    
-    
-
-

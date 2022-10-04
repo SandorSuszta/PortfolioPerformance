@@ -9,10 +9,9 @@ import Foundation
 import UIKit
 
 extension UIImageView {
-    func setImage(imageData: Data?, imageUrl: String) {
-        
-        if let imageData = imageData {
-            image = UIImage(data: imageData)
+    func setImage(imageUrl: String) {
+        if let cachedImage = NetworkingManager.shared.cache.object(forKey: NSString(string: imageUrl)) {
+            image = cachedImage
         } else {
             guard let url = URL(string: imageUrl) else { return }
             
@@ -20,6 +19,12 @@ extension UIImageView {
                 
                 guard let data = data, error == nil else { return }
                 
+                if let downloadedImage = UIImage(data: data) {
+                    NetworkingManager.shared.cache.setObject(
+                        downloadedImage,
+                        forKey: NSString(string: imageUrl)
+                    )
+                }
                 DispatchQueue.main.async {
                     self?.image = UIImage(data: data)
                 }
