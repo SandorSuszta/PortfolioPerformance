@@ -12,7 +12,7 @@ extension UIView {
     
     public func configureWithShadow(
         shadowColor: UIColor = .systemGray4,
-        shadowRadius: CGFloat = 5.0
+        shadowRadius: CGFloat = 2.0
     ){
         self.backgroundColor = .white
         self.layer.cornerRadius = 16

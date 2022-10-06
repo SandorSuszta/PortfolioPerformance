@@ -10,7 +10,9 @@ import UIKit
 class MarketCardsCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "MarketCardsCollectionViewCell"
-
+    static let preferredHeight: CGFloat = 150
+    static let preferredWidth: CGFloat = 120
+    
     var progressBar = CircularProgressBar(frame: .zero, type: .round, progress: 0, color: UIColor.pomergranate.cgColor)
     
     let headerTitle: UILabel = {

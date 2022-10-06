@@ -9,7 +9,10 @@ import Foundation
 import UIKit
 
 class SortOptionsCollectionViewCell: UICollectionViewCell {
+    
     static let identifier = "SortOptionsCollectionViewCell"
+    static let preferredHeight: CGFloat = 20
+    static let preferredWidth: CGFloat = 90
     
     public var sortingNameLabel: UILabel = {
         let label = UILabel()

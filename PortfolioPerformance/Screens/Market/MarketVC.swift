@@ -39,36 +39,22 @@ class MarketViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        marketCardsCollectionView.frame = CGRect(
-            x: 0,
-            y: 80,
-            width: view.width,
-            height: 170
-        )
-        
-        sortOptionsCollectionView.frame = CGRect(
-            x: 0,
-            y: marketCardsCollectionView.bottom,
-            width: view.width,
-            height: 30
-        )
-        
-        cryptoCurrencyTableView.frame = CGRect(
-            x: 10,
-            y: sortOptionsCollectionView.bottom + 5,
-            width: view.width - 20,
-            height: view.height - marketCardsCollectionView.height - sortOptionsCollectionView.height -
-            (self.tabBarController?.tabBar.frame.height ?? 0) - 90
-        )
+
     }
     
     //MARK: - Methods
     
     //Setup VC
     private func setupViewController() {
-        self.title = "Market"
         view.backgroundColor = .systemGray6
+        
+        //Set Title Logo
+        let imageView = UIImageView(image: UIImage(named: "titleLogo"))
+        imageView.contentMode = .scaleAspectFill
+        let titleView = UIView(frame: CGRect(x: 0, y: 0, width: 48, height: 48))
+        imageView.frame = titleView.bounds
+        titleView.addSubview(imageView)
+        self.navigationItem.titleView = titleView
         
         //Delete BackButton title on pushed screen
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -76,6 +62,8 @@ class MarketViewController: UIViewController {
     
     //Market Cards Setup
     private func setupMarketCardsCollectionView() {
+        view.addSubview(marketCardsCollectionView)
+        
         marketCardsCollectionView.delegate = self
         marketCardsCollectionView.dataSource = self
         marketCardsCollectionView.backgroundColor = .clear
@@ -84,11 +72,20 @@ class MarketViewController: UIViewController {
             MarketCardsCollectionViewCell.self,
             forCellWithReuseIdentifier: MarketCardsCollectionViewCell.identifier
         )
-        view.addSubview(marketCardsCollectionView)
+        marketCardsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            marketCardsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            marketCardsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            marketCardsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
+            marketCardsCollectionView.heightAnchor.constraint(equalToConstant: 156)
+        ])
     }
     
     //Sort Options Setup
     private func setupSortOptionsCollectionView() {
+        view.addSubview(sortOptionsCollectionView)
+        
         sortOptionsCollectionView.delegate = self
         sortOptionsCollectionView.dataSource = self
         sortOptionsCollectionView.backgroundColor = .clear
@@ -103,20 +100,37 @@ class MarketViewController: UIViewController {
             SortOptionsCollectionViewCell.self,
             forCellWithReuseIdentifier: SortOptionsCollectionViewCell.identifier
         )
-        view.addSubview(sortOptionsCollectionView)
+        sortOptionsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            sortOptionsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            sortOptionsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            sortOptionsCollectionView.topAnchor.constraint(equalTo: marketCardsCollectionView.bottomAnchor),
+            sortOptionsCollectionView.heightAnchor.constraint(equalToConstant: 30)
+        ])
     }
     
     //Table View Setup
     private func setupTableView() {
+        view.addSubview(cryptoCurrencyTableView)
+        
         cryptoCurrencyTableView.delegate = self
         cryptoCurrencyTableView.dataSource = self
         cryptoCurrencyTableView.backgroundColor = .systemGray6
         cryptoCurrencyTableView.separatorStyle = .none
+        cryptoCurrencyTableView.translatesAutoresizingMaskIntoConstraints = false
+        
         cryptoCurrencyTableView.register(
             CryptoCurrenciesTableViewCell.self,
             forCellReuseIdentifier: CryptoCurrenciesTableViewCell.identifier
         )
-        view.addSubview(cryptoCurrencyTableView)
+        
+        NSLayoutConstraint.activate([
+            cryptoCurrencyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 10),
+            cryptoCurrencyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            cryptoCurrencyTableView.topAnchor.constraint(equalTo: sortOptionsCollectionView.bottomAnchor, constant: 3),
+            cryptoCurrencyTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
                                                        
     private func bindViewModels() {
@@ -220,10 +234,16 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == marketCardsCollectionView {
             //Sort options collection case
-            return CGSize(width: 120 , height: 150)
+            return CGSize(
+                width: MarketCardsCollectionViewCell.preferredWidth,
+                height: MarketCardsCollectionViewCell.preferredHeight
+            )
         }
         //Sort options collection case
-        return CGSize(width: 90, height: 20)
+        return CGSize(
+            width: SortOptionsCollectionViewCell.preferredWidth,
+            height: SortOptionsCollectionViewCell.preferredHeight
+        )
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -5,7 +5,7 @@ class DetailsTableViewCell: UITableViewCell {
     //MARK: - Properties
     
     static let identifier = "DetailsTableViewCell"
-    static let prefferedHeight: CGFloat = 40
+    static let preferredHeight: CGFloat = 40
     
     public var metricName: UILabel = {
         let label = UILabel()

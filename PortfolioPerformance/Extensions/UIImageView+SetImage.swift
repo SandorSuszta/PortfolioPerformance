@@ -9,10 +9,15 @@ import Foundation
 import UIKit
 
 extension UIImageView {
+    
     func setImage(imageUrl: String) {
+        
         if let cachedImage = NetworkingManager.shared.cache.object(forKey: NSString(string: imageUrl)) {
+            
             image = cachedImage
+            
         } else {
+            
             guard let url = URL(string: imageUrl) else { return }
             
             let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
@@ -25,6 +30,7 @@ extension UIImageView {
                         forKey: NSString(string: imageUrl)
                     )
                 }
+                
                 DispatchQueue.main.async {
                     self?.image = UIImage(data: data)
                 }
