@@ -10,16 +10,20 @@ class CoinDetailsViewModel {
     }
     
     //MARK: - Observable properties
+    
     public var metricsVM: ObservableObject<MetricsViewModel> = ObservableObject(value: nil)
     public var rangeDetailsVM: ObservableObject<RangeDetailsViewModel> = ObservableObject(value: nil)
     public var detailsTableViewCelsVM: ObservableObject<[DetailsTableviewCellsViewModel]> = ObservableObject(value: [])
+    public var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
     
     //MARK: - Init
+    
     init(coinID: String) {
         self.coinID = coinID
     }
     
     //MARK: - Public methods
+    
     public func getMetricsData(coinID: String) {
         NetworkingManager.shared.requestData(for: coinID) { result in
             switch result {
@@ -27,7 +31,7 @@ class CoinDetailsViewModel {
                 self.coinModel = model
                 self.metricsVM.value = MetricsViewModel(model: model)
             case .failure(let error):
-                print(error)
+                self.errorMessage.value = error.rawValue
             }
         }
     }
@@ -46,7 +50,7 @@ class CoinDetailsViewModel {
                 )
                 self.rangeDetailsVM.value = rangeDetails
             case .failure(let error):
-                print(error)
+                self.errorMessage.value = error.rawValue
             }
         }
     }

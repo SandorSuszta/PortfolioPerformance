@@ -1,15 +1,23 @@
 //
-//  MarketCardsCollectionViewViewModel.swift
+//  MarketViewModel.swift
 //  PortfolioPerformance
 //
-//  Created by Nataliia Shusta on 30/06/2022.
+//  Created by Nataliia Shusta on 06/10/2022.
 //
 
 import Foundation
 
-final class MarketCardsCollectionViewViewModel {
-   
-    var cardViewModels: ObservableObject<[MarketCardsCollectionViewCellViewModel]> = ObservableObject(value: [])
+class MarketViewModel {
+    
+    public var cardViewModels: ObservableObject<[MarketCardsCollectionViewCellViewModel]> = ObservableObject(value: [])
+    
+    public var cellViewModels: ObservableObject<[MarketTableCellViewModel]> = ObservableObject(value:[])
+    
+    public var errorMessage: ObservableObject<String>?
+    
+    public let sortOptionsArray = ["Highest Cap", "Top Winners", "Top Losers", "Top Volume"]
+    
+    //MARK: - Public methods
     
     public func loadGreedAndFearIndex() {
         NetworkingManager.shared.requestGreedAndFearIndex { result in
@@ -28,7 +36,7 @@ final class MarketCardsCollectionViewViewModel {
                 self.cardViewModels.value?.append(.init(model: greedAndFearCardModel))
                 
             case .failure(let error):
-                print(error)
+                self.errorMessage?.value = error.rawValue
             }
         }
     }
@@ -49,7 +57,7 @@ final class MarketCardsCollectionViewViewModel {
                     secondaryTitle: .percentageString(from: marketCapChangeFor24H),
                     circularProgressBarType: .round,
                     progress: Float(totalMarketCap / allTimeHighMarketCap),
-                    isGrowing: globalDataResponse.data.marketCapChangePercentage24HUsd >= 0 
+                    isGrowing: globalDataResponse.data.marketCapChangePercentage24HUsd >= 0
                 )
                 
                 //Create model for BTC Dominance Card
@@ -68,7 +76,20 @@ final class MarketCardsCollectionViewViewModel {
                 
                 
             case .failure(let error):
-                print(error)
+                self.errorMessage?.value = error.rawValue
+            }
+        }
+    }
+    
+    public func loadAllCryptoCurrenciesData() {
+        NetworkingManager.shared.requestCryptoCurrenciesData { result in
+            
+            switch result {
+            case .success(let cryptosArray):
+                //Transform array of coin models into array of cell view models
+                self.cellViewModels.value = cryptosArray.compactMap({ .init(coinModel: $0) })
+            case .failure(let error):
+                self.errorMessage?.value = error.rawValue
             }
         }
     }

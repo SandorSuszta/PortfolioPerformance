@@ -16,8 +16,8 @@ class MainTabBarController: UITabBarController {
     }
     
     private func setupTabBar() {
-        tabBar.tintColor = .black
-        
+        tabBar.tintColor = .PPblue
+
         let market = MarketViewController()
         let watchlist = WatchlistViewController()
         
@@ -35,10 +35,10 @@ class MainTabBarController: UITabBarController {
 //            navController5
         ], animated: false)
         
-        tabBar.items?[0].image = UIImage(named: "market")
+        tabBar.items?[0].image = UIImage(systemName: "house")
         tabBar.items?[0].title = "Market"
     
-        tabBar.items?[1].image = UIImage(named: "star")
+        tabBar.items?[1].image = UIImage(systemName: "star")
         tabBar.items?[1].title = "Watchlist"
         
 //        tabBar.items?[2].image = UIImage(named: "add")

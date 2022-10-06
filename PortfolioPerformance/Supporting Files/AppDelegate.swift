@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
         
         // Change Back Button color
-        UINavigationBar.appearance().tintColor = .black
+        UINavigationBar.appearance().tintColor = .PPblue
         
 //        //Fix bar transparency in IOS15
 //        let navigationBarAppearance = UINavigationBarAppearance()

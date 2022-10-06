@@ -29,19 +29,25 @@ class NetworkingManager {
     private func request<T:Codable>(
         url: URL?,
         expectingType: T.Type,
-        completion: @escaping (Result<T,Error>) -> Void
+        completion: @escaping (Result<T, PPError>) -> Void
     ){
-        guard let url = url else { return }
+        guard let url = url else {
+            completion(.failure(.invalidUrl))
+            return
+        }
         
         let task = URLSession.shared.dataTask(
             with: url) { data, _, error in
-                 guard let data = data, error == nil  else { fatalError() }
+                 guard let data = data, error == nil  else {
+                     completion(.failure(.netwokingError))
+                     return
+                 }
                 
                 do {
                     let result = try JSONDecoder().decode(expectingType, from: data)
                     completion(.success(result))
                 } catch {
-                    completion(.failure(error))
+                    completion(.failure(.decodingError))
                 }
             }
         task.resume()
@@ -50,9 +56,13 @@ class NetworkingManager {
     //MARK: - Greed And Fear Index
     
     public func requestGreedAndFearIndex (
-        completion: @escaping (Result<GreedAndFearModel, Error>) -> Void
+        completion: @escaping (Result<GreedAndFearModel, PPError>) -> Void
     ){
-        guard let url = URL(string: Constants.requestGreedAndFearIndexBaseUrl) else { fatalError() }
+        guard let url = URL(string: Constants.requestGreedAndFearIndexBaseUrl) else {
+            completion(.failure(.invalidUrl))
+            return
+        }
+        
         request(
             url: url,
             expectingType: GreedAndFearModel.self,
@@ -63,9 +73,13 @@ class NetworkingManager {
     //MARK: - Total Market Cap
     
     public func requestGlobalData(
-        completion: @escaping (Result<GlobalDataResponse, Error>) -> Void
+        completion: @escaping (Result<GlobalDataResponse, PPError>) -> Void
     ){
-        guard let url = URL(string: Constants.requestGlobalDataBaseUrl) else { fatalError() }
+        guard let url = URL(string: Constants.requestGlobalDataBaseUrl) else {
+            completion(.failure(.invalidUrl))
+            return
+        }
+        
         request(
             url: url,
             expectingType: GlobalDataResponse.self,
@@ -76,9 +90,13 @@ class NetworkingManager {
     //MARK: - All Crypto Data
     
     public func requestCryptoCurrenciesData(
-        completion: @escaping (Result<[CoinModel], Error>) -> Void
+        completion: @escaping (Result<[CoinModel], PPError>) -> Void
     ){
-        guard let url = URL(string: Constants.requestAllCryptoCurrenciesDataBaseUrl) else { fatalError() }
+        guard let url = URL(string: Constants.requestAllCryptoCurrenciesDataBaseUrl) else {
+            completion(.failure(.invalidUrl))
+            return()
+        }
+        
         request(
             url: url,
             expectingType: [CoinModel].self,
@@ -90,7 +108,7 @@ class NetworkingManager {
     
     public func requestDataForWatchlist(
         list: [String],
-        completion: @escaping (Result<[CoinModel], Error>) -> Void
+        completion: @escaping (Result<[CoinModel], PPError>) -> Void
     ){
         
         request(
@@ -105,7 +123,7 @@ class NetworkingManager {
     public func requestDataForChart(
         coinID: String,
         intervalInDays: Int,
-        completion: @escaping (Result<PriceModels, Error>) -> Void
+        completion: @escaping (Result<PriceModels, PPError>) -> Void
     ){
         request(
             url: constructURL(for: coinID, for: intervalInDays),
@@ -118,11 +136,14 @@ class NetworkingManager {
     
     public func requestData(
         for ID: String,
-        completion: @escaping (Result<SingleCoinModel, Error>) -> Void
+        completion: @escaping (Result<SingleCoinModel, PPError>) -> Void
     ){
         let endpointString = "https://api.coingecko.com/api/v3/coins/\(ID)?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"
         
-        guard let url = URL(string: endpointString) else { fatalError() }
+        guard let url = URL(string: endpointString) else {
+            completion(.failure(.invalidUrl))
+            return
+        }
         
         request(
             url: url,
@@ -133,10 +154,13 @@ class NetworkingManager {
     
     public func searchWith(
         query: String,
-        completion: @escaping (Result<SearchResponse, Error>) -> Void
+        completion: @escaping (Result<SearchResponse, PPError>) -> Void
     ){
         
-        guard let url = URL(string: Constants.searchBaseUrl + query) else { fatalError() }
+        guard let url = URL(string: Constants.searchBaseUrl + query) else {
+            completion(.failure(.invalidUrl))
+            return
+        }
         
         request(
             url: url,

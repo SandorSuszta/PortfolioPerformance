@@ -4,9 +4,7 @@ class MarketViewController: UIViewController {
     
     //MARK: - Properties
     
-    private let marketCardsViewModel = MarketCardsCollectionViewViewModel()
-    private let cryptoCurrencyTableViewModel = CryptoCurrencyTableViewModel()
-    private let sortOptionsArray = ["Highest Cap", "Top Winners", "Top Losers", "Top Volume"]
+    private let marketVM = MarketViewModel()
     
     private var marketCardsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -30,9 +28,9 @@ class MarketViewController: UIViewController {
         super.viewDidLoad()
         setupViewController()
         bindViewModels()
-        marketCardsViewModel.loadGreedAndFearIndex()
-        marketCardsViewModel.loadGlobalData()
-        cryptoCurrencyTableViewModel.loadAllCryptoCurrenciesData()
+        marketVM.loadGreedAndFearIndex()
+        marketVM.loadGlobalData()
+        marketVM.loadAllCryptoCurrenciesData()
         addSearchButton()
         setupMarketCardsCollectionView()
         setupSortOptionsCollectionView()
@@ -122,15 +120,18 @@ class MarketViewController: UIViewController {
     }
                                                        
     private func bindViewModels() {
-        cryptoCurrencyTableViewModel.cellViewModels.bind { [weak self] _ in
+        marketVM.cellViewModels.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.cryptoCurrencyTableView.reloadData()
             }
         }
-        marketCardsViewModel.cardViewModels.bind {[weak self] _ in
+        marketVM.cardViewModels.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.marketCardsCollectionView.reloadData()
             }
+        }
+        marketVM.errorMessage?.bind { [weak self] message in
+            self?.showAlert(message: message ?? "An error has occured")
         }
     }
     
@@ -150,19 +151,19 @@ class MarketViewController: UIViewController {
     private func sortTableview(byOption number: Int) {
         switch number {
         case 0: //Top Market Cap
-            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
+            marketVM.cellViewModels.value?.sort(by: {
                 $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0
             })
         case 1: //Top Winners
-            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
+            marketVM.cellViewModels.value?.sort(by: {
                 $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0
             })
         case 2: //Top Losers
-            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
+            marketVM.cellViewModels.value?.sort(by: {
                 $0.coinModel.priceChangePercentage24H ?? 0  < $1.coinModel.priceChangePercentage24H ?? 0
             })
         case 3: //Top Volume
-            cryptoCurrencyTableViewModel.cellViewModels.value?.sort(by: {
+            marketVM.cellViewModels.value?.sort(by: {
                 $0.coinModel.totalVolume ?? 0 > $1.coinModel.totalVolume ?? 0
             })
         default:
@@ -184,11 +185,11 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         if collectionView == sortOptionsCollectionView {
             //Sort options collection case
-            return sortOptionsArray.count
+            return marketVM.sortOptionsArray.count
         }
         
         //Market card collection case
-        return marketCardsViewModel.cardViewModels.value?.count ?? 0
+        return marketVM.cardViewModels.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -200,7 +201,7 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 for: indexPath
             ) as? SortOptionsCollectionViewCell else { return UICollectionViewCell() }
             
-            cell.sortingNameLabel.text = sortOptionsArray[indexPath.row]
+            cell.sortingNameLabel.text = marketVM.sortOptionsArray[indexPath.row]
             return cell
         }
         
@@ -210,7 +211,7 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
             for: indexPath
         ) as? MarketCardsCollectionViewCell else { return UICollectionViewCell() }
         
-        guard let cellViewModel = marketCardsViewModel.cardViewModels.value?[indexPath.row] else { fatalError()}
+        guard let cellViewModel = marketVM.cardViewModels.value?[indexPath.row] else { fatalError()}
         cell.configureCard(with: cellViewModel)
         cell.configureWithShadow()
         return cell
@@ -248,7 +249,7 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
 extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        cryptoCurrencyTableViewModel.cellViewModels.value?.count ?? 0
+        marketVM.cellViewModels.value?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -257,7 +258,7 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
             for: indexPath
         ) as? CryptoCurrenciesTableViewCell else { return UITableViewCell() }
         
-        guard let cellViewModel = cryptoCurrencyTableViewModel.cellViewModels.value?[indexPath.row] else { fatalError() }
+        guard let cellViewModel = marketVM.cellViewModels.value?[indexPath.row] else { fatalError() }
         
         cell.configureCell(with: cellViewModel)
         
@@ -266,9 +267,9 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let currentCoinModel = cryptoCurrencyTableViewModel.cellViewModels.value?[indexPath.row].coinModel else { fatalError() }
+        guard let currentCoinModel = marketVM.cellViewModels.value?[indexPath.row].coinModel else { fatalError() }
         
-        let detailsVC = DetailVC(
+        let detailsVC = CoinDetailsVC(
             coinID: currentCoinModel.id,
             coinName: currentCoinModel.name,
             coinSymbol: currentCoinModel.symbol,

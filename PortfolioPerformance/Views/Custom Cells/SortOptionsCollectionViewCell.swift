@@ -22,7 +22,7 @@ class SortOptionsCollectionViewCell: UICollectionViewCell {
     //Configure selected cell
     override var isSelected: Bool {
         didSet {
-            sortingNameLabel.textColor = isSelected ? .black : .darkGray
+            sortingNameLabel.textColor = isSelected ? .PPblue : .systemGray
             sortingNameLabel.font = isSelected ? .systemFont(ofSize: 13, weight: .medium) : .systemFont(ofSize: 12, weight: .regular)
              
 //            contentView.backgroundColor = isSelected ? .clouds : .clear

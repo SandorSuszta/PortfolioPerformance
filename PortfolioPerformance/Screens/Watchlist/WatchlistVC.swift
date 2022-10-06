@@ -1,16 +1,15 @@
 //
-//  WatchlistViewController2.swift
+//  WatchlistViewController.swift
 //  PortfolioPerformance
 //
-//  Created by Nataliia Shusta on 10/07/2022.
+//  Created by Sandor Suszta on 10/07/2022.
 //
 
-import Foundation
 import UIKit
 
 class WatchlistViewController: UIViewController {
 
-    private let tableViewModel = WatchlistTableViewModel()
+    private let watchlistVM = WatchlistViewModel()
 
     private let watchlistTableView = UITableView()
     
@@ -22,15 +21,13 @@ class WatchlistViewController: UIViewController {
         return label
     }()
 
+    //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray6
-        self.title = "Watchlist"
+        setupVC()
         setupTableView()
         bindViewModel()
-        
-        //Delete BackButton title on pushed screen
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,7 +36,56 @@ class WatchlistViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        layoutComponents()
+    }
+    
+    //MARK: - Private methods
+    
+    private func setupVC() {
+        view.backgroundColor = .systemGray6
+        self.title = "Watchlist"
         
+        //Delete BackButton title on pushed screen
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    private func setupTableView() {
+        view.addSubview(watchlistTableView)
+        
+        watchlistTableView.delegate = self
+        watchlistTableView.dataSource = self
+        watchlistTableView.backgroundColor = .clear
+        watchlistTableView.separatorStyle = .none
+        watchlistTableView.register(
+            CryptoCurrenciesTableViewCell.self,
+            forCellReuseIdentifier: CryptoCurrenciesTableViewCell.identifier
+        )
+    }
+    
+    private func updateTableWithWatchlist() {
+        if WatchlistManager.shared.watchlistIDs.isEmpty {
+            emptyWatchlistLabel.isHidden = false
+        } else {
+            emptyWatchlistLabel.isHidden = true
+            watchlistVM.loadWatchlistCryptoCurrenciesData(
+                list: WatchlistManager.shared.watchlistIDs
+            )
+        }
+    }
+    
+    private func bindViewModel() {
+        watchlistVM.cellViewModels.bind { [weak self] models in
+            DispatchQueue.main.async {
+                self?.watchlistTableView.reloadData()
+            }
+        }
+        
+        watchlistVM.errorMessage?.bind { [weak self] message in
+            self?.showAlert(message: message ?? "An error has occured")
+        }
+    }
+    
+    private func layoutComponents() {
         watchlistTableView.frame = CGRect(
             x: 15,
             y: 100,
@@ -56,44 +102,14 @@ class WatchlistViewController: UIViewController {
             height: emptyWatchlistLabel.height
         )
     }
-    
-    private func setupTableView() {
-        watchlistTableView.delegate = self
-        watchlistTableView.dataSource = self
-        watchlistTableView.backgroundColor = .clear
-        watchlistTableView.separatorStyle = .none
-        watchlistTableView.register(
-            CryptoCurrenciesTableViewCell.self,
-            forCellReuseIdentifier: CryptoCurrenciesTableViewCell.identifier
-        )
-        view.addSubview(watchlistTableView)
-    }
-    
-    private func updateTableWithWatchlist() {
-        if WatchlistManager.shared.watchlistIDs.isEmpty {
-            emptyWatchlistLabel.isHidden = false
-        } else {
-            emptyWatchlistLabel.isHidden = true
-            tableViewModel.loadWatchlistCryptoCurrenciesData(
-                list: WatchlistManager.shared.watchlistIDs
-            )
-        }
-    }
-    
-    private func bindViewModel() {
-        tableViewModel.cellViewModels.bind { [weak self] models in
-            DispatchQueue.main.async {
-                self?.watchlistTableView.reloadData()
-            }
-        }
-    }
 }
 
     //MARK: - Table view delegate and data source
+
     extension WatchlistViewController: UITableViewDelegate, UITableViewDataSource {
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            tableViewModel.cellViewModels.value?.count ?? 0
+            watchlistVM.cellViewModels.value?.count ?? 0
         }
 
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,7 +118,7 @@ class WatchlistViewController: UIViewController {
                 for: indexPath
             ) as? CryptoCurrenciesTableViewCell else { return UITableViewCell() }
             
-            guard let cellViewModel = tableViewModel.cellViewModels.value?[indexPath.row] else { fatalError() }
+            guard let cellViewModel = watchlistVM.cellViewModels.value?[indexPath.row] else { fatalError() }
             
             cell.configureCell(with: cellViewModel)
             
@@ -115,11 +131,11 @@ class WatchlistViewController: UIViewController {
         
         func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             if editingStyle == .delete {
-                guard let ID = tableViewModel.cellViewModels.value?[indexPath.row].coinModel.id else { fatalError() }
+                guard let ID = watchlistVM.cellViewModels.value?[indexPath.row].coinModel.id else { fatalError() }
                 
                 tableView.beginUpdates()
                 WatchlistManager.shared.deleteFromWatchlist(ID: ID)
-                tableViewModel.cellViewModels.value?.remove(at: indexPath.row)
+                watchlistVM.cellViewModels.value?.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .left)
                 tableView.endUpdates()
                 
@@ -131,9 +147,9 @@ class WatchlistViewController: UIViewController {
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             
-            guard let currentCoinModel = tableViewModel.cellViewModels.value?[indexPath.row].coinModel else { fatalError("Cant get coinModel in WatclistVC")}
+            guard let currentCoinModel = watchlistVM.cellViewModels.value?[indexPath.row].coinModel else { fatalError("Cant get coinModel in WatclistVC")}
             
-            let detailsVC = DetailVC(
+            let detailsVC = CoinDetailsVC(
                 coinID: currentCoinModel.id,
                 coinName: currentCoinModel.name,
                 coinSymbol: currentCoinModel.symbol,
@@ -145,4 +161,3 @@ class WatchlistViewController: UIViewController {
         }
        
     }
-

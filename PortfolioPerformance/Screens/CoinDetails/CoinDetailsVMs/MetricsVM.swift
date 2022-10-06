@@ -1,6 +1,7 @@
 import Foundation
 
 struct MetricsViewModel {
+    
     public var name: String
     public var symbol: String
     public var imageUrl: String

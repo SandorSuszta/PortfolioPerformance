@@ -97,7 +97,7 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
         
         let model = searchResultsArray[indexPath.row]
         
-        let detailVC = DetailVC(
+        let detailVC = CoinDetailsVC(
             coinID: model.id,
             coinName: model.name,
             coinSymbol: model.symbol,
@@ -106,17 +106,6 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
         )
         
         self.navigationController?.pushViewController(detailVC, animated: true)
-        
-//        switch rootViewController {
-//        case .transactionDetails:
-//            delegate?.didSelectCoin(coinName: searchResultsArray[indexPath.row].symbol)
-//            navigationController?.popViewController(animated: true)
-//        case .marketTableView:
-//            delegate?.didSelectCoin(coinName: searchResultsArray[indexPath.row].symbol)
-//            navigationController?.popViewController(animated: true)
-//        default:
-//            fatalError()
-//        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -158,7 +147,7 @@ extension SearchScreenViewController: UISearchResultsUpdating {
                         self.resultsTableView.reloadData()
                     }
                 case .failure(let error):
-                    fatalError(error.localizedDescription)
+                    self.showAlert(message: error.rawValue)
                 }
             }
     }
