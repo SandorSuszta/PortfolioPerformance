@@ -17,6 +17,14 @@ class MarketViewModel {
     
     public let sortOptionsArray = ["Highest Cap", "Top Winners", "Top Losers", "Top Volume"]
     
+    //MARK: - Init
+    
+    init() {
+        loadGreedAndFearIndex()
+        loadGlobalData()
+        loadAllCryptoCurrenciesData()
+    }
+    
     //MARK: - Public methods
     
     public func loadGreedAndFearIndex() {

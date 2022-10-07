@@ -8,6 +8,7 @@ class CoinDetailsViewModel {
     public var marketCapRank: String {
         String(coinModel?.marketData.marketCapRank ?? 0)
     }
+    public let chartIntervals = ["1D", "1W", "1M", "6M", "1Y", "MAX"]
     
     //MARK: - Observable properties
     
@@ -20,6 +21,7 @@ class CoinDetailsViewModel {
     
     init(coinID: String) {
         self.coinID = coinID
+        getMetricsData(coinID: coinID)
     }
     
     //MARK: - Public methods

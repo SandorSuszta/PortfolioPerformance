@@ -53,7 +53,7 @@
 		79895E9428DB773700087A23 /* RangeDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79895E9328DB773700087A23 /* RangeDetailsVM.swift */; };
 		79C2109627EB5523001B2D80 /* CoinPriceOnGivenDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2109527EB5523001B2D80 /* CoinPriceOnGivenDate.swift */; };
 		79CF41BF28EEFF7E00CA9F51 /* MarketVMl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CF41BE28EEFF7E00CA9F51 /* MarketVMl.swift */; };
-		79D5B8E428EDB85100178402 /* PPCustomAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E328EDB85100178402 /* PPCustomAlertVC.swift */; };
+		79D5B8E428EDB85100178402 /* PPAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E328EDB85100178402 /* PPAlertVC.swift */; };
 		79D5B8E628EEDABC00178402 /* UIViewController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E528EEDABC00178402 /* UIViewController+ShowAlert.swift */; };
 		79D5B8E828EEE3FF00178402 /* PPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E728EEE3FF00178402 /* PPButton.swift */; };
 		79D5C6D328DC75060018B133 /* DetailsTableCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5C6D228DC75060018B133 /* DetailsTableCellVM.swift */; };
@@ -64,6 +64,7 @@
 		79EAFD2627B3DCDE008A6062 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79EAFD2527B3DCDE008A6062 /* Assets.xcassets */; };
 		79EAFD2927B3DCDE008A6062 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */; };
 		79EAFD3527B3FDC8008A6062 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD3427B3FDC7008A6062 /* CoinModel.swift */; };
+		79EC45B528F0B9DC006A849A /* PPSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EC45B428F0B9DC006A849A /* PPSegmentedControl.swift */; };
 		7D0B06BAD8E02CC99B5C7BB5 /* Pods_PortfolioPerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BDECDAA83ECC22DF03AB629 /* Pods_PortfolioPerformance.framework */; };
 /* End PBXBuildFile section */
 
@@ -116,7 +117,7 @@
 		79895E9328DB773700087A23 /* RangeDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeDetailsVM.swift; sourceTree = "<group>"; };
 		79C2109527EB5523001B2D80 /* CoinPriceOnGivenDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPriceOnGivenDate.swift; sourceTree = "<group>"; };
 		79CF41BE28EEFF7E00CA9F51 /* MarketVMl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVMl.swift; sourceTree = "<group>"; };
-		79D5B8E328EDB85100178402 /* PPCustomAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPCustomAlertVC.swift; sourceTree = "<group>"; };
+		79D5B8E328EDB85100178402 /* PPAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPAlertVC.swift; sourceTree = "<group>"; };
 		79D5B8E528EEDABC00178402 /* UIViewController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowAlert.swift"; sourceTree = "<group>"; };
 		79D5B8E728EEE3FF00178402 /* PPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPButton.swift; sourceTree = "<group>"; };
 		79D5C6D228DC75060018B133 /* DetailsTableCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableCellVM.swift; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 		79EAFD2827B3DCDE008A6062 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79EAFD2A27B3DCDE008A6062 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79EAFD3427B3FDC7008A6062 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
+		79EC45B428F0B9DC006A849A /* PPSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPSegmentedControl.swift; sourceTree = "<group>"; };
 		7C51FFC2FB780C01DED1D527 /* Pods-PortfolioPerformance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioPerformance.debug.xcconfig"; path = "Target Support Files/Pods-PortfolioPerformance/Pods-PortfolioPerformance.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,7 +165,8 @@
 				792C040828C9E62B008EE48C /* RangeProgressView.swift */,
 				7934EFB92841600A00CE7FD0 /* CustomProgressBar.swift */,
 				79D5B8E728EEE3FF00178402 /* PPButton.swift */,
-				79D5B8E328EDB85100178402 /* PPCustomAlertVC.swift */,
+				79D5B8E328EDB85100178402 /* PPAlertVC.swift */,
+				79EC45B428F0B9DC006A849A /* PPSegmentedControl.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				79D5B8E628EEDABC00178402 /* UIViewController+ShowAlert.swift in Sources */,
 				79410D8F282416C000BD9EA4 /* SearchVC.swift in Sources */,
 				7955694928773472003E8A13 /* SortOptionsCollectionViewCell.swift in Sources */,
+				79EC45B528F0B9DC006A849A /* PPSegmentedControl.swift in Sources */,
 				7941061227E0D84F009B4B8C /* DateFormatter.swift in Sources */,
 				792C040628C14386008EE48C /* CoinDetailsVM.swift in Sources */,
 				7934EFA82835172200CE7FD0 /* UIView+AddSubviews.swift in Sources */,
@@ -529,7 +533,7 @@
 				79CF41BF28EEFF7E00CA9F51 /* MarketVMl.swift in Sources */,
 				7934EFB8283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift in Sources */,
 				79E7A22828E605BB00BD5CB0 /* CoinDetailsVC.swift in Sources */,
-				79D5B8E428EDB85100178402 /* PPCustomAlertVC.swift in Sources */,
+				79D5B8E428EDB85100178402 /* PPAlertVC.swift in Sources */,
 				7934EFB6283E45A700CE7FD0 /* HoldingPerfomanceModel.swift in Sources */,
 				792B0FC5287C85EF0040B461 /* WatchlistVM.swift in Sources */,
 				796EFA1E284771C3005E24AF /* Floating label.swift in Sources */,
