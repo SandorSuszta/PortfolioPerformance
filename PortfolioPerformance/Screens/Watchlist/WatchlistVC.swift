@@ -135,9 +135,16 @@ class WatchlistViewController: UIViewController {
                 guard let ID = watchlistVM.cellViewModels.value?[indexPath.row].coinModel.id else { fatalError() }
                 
                 tableView.beginUpdates()
-                UserDefaultsManager.shared.deleteFromWatchlist(ID: ID)
+                
+                UserDefaultsManager.shared.deleteFromDefaults(
+                    ID: ID,
+                    for: UserDefaultsManager.shared.watchlistKey
+                )
+                
                 watchlistVM.cellViewModels.value?.remove(at: indexPath.row)
+                
                 tableView.deleteRows(at: [indexPath], with: .left)
+                
                 tableView.endUpdates()
                 
                 if UserDefaultsManager.shared.watchlistIDs.isEmpty {

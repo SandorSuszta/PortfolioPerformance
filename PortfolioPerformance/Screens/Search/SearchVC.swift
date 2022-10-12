@@ -2,9 +2,9 @@ import UIKit
 
 class SearchScreenViewController: UIViewController {
 
-    private var searchResultsArray: [SearchResult] = []
+    var viewModel = SearchScreenViewModel()
     
-    private var searchTimer: Timer?
+    var searchResultsArray: [SearchResult] = []
     
     let resultsTableView: UITableView = {
         let table = UITableView()
@@ -20,6 +20,12 @@ class SearchScreenViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.searchTableCellModels.bind { _ in
+            DispatchQueue.main.async {
+                self.resultsTableView.reloadData()
+            }
+        }
 
         setUpResultsTableVIew()
         setUpTitleView()
@@ -27,6 +33,10 @@ class SearchScreenViewController: UIViewController {
         
         //Delete BackButton title on pushed screen
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel.updateRecentSearches()
     }
     
     override func viewDidLayoutSubviews() {
@@ -78,8 +88,20 @@ class SearchScreenViewController: UIViewController {
     //MARK: - TableView delegate methods
 extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if searchResultsArray.isEmpty {
+           return viewModel.searchTableCellModels.value?.count ?? 0
+        } else {
+            return 1
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResultsArray.count
+        if searchResultsArray.isEmpty {
+            return viewModel.searchTableCellModels.value?[section].count ?? 0
+        } else {
+            return searchResultsArray.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,13 +111,27 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
             for: indexPath
         ) as? ResultsTableViewCell else { return UITableViewCell() }
         
-        cell.configure(with: searchResultsArray[indexPath.row])
+        if searchResultsArray.isEmpty {
+            guard let model = viewModel.searchTableCellModels.value?[indexPath.section][indexPath.row] else { return cell }
+            
+            cell.configure(with: model)
+        } else {
+            cell.configure(with: searchResultsArray[indexPath.row])
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let model = searchResultsArray[indexPath.row]
+        var model: SearchResult?
+        
+        if searchResultsArray.isEmpty {
+            model = viewModel.searchTableCellModels.value?[indexPath.section][indexPath.row]
+        } else {
+            model = searchResultsArray[indexPath.row]
+        }
+        
+        guard let model = model else { return }
         
         let detailVC = CoinDetailsVC(
             coinID: model.id,

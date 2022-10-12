@@ -22,6 +22,7 @@ class NetworkingManager {
         static let requestDataForListBaseUrl = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids="
         static let requestDataForListTrailingUrl = "&order=market_cap_desc&per_page=100&page=1&sparkline=false"
         static let searchBaseUrl = "https://api.coingecko.com/api/v3/search?query="
+        static let trendingBaseUrl = "https://api.coingecko.com/api/v3/search/trending"
     }
     
     //MARK: - Generic Request
@@ -106,7 +107,7 @@ class NetworkingManager {
     
     //MARK: - Crypto Data For Watchlist
     
-    public func requestDataForWatchlist(
+    public func requestDataForList(
         list: [String],
         completion: @escaping (Result<[CoinModel], PPError>) -> Void
     ){
@@ -152,6 +153,8 @@ class NetworkingManager {
         )
     }
     
+    //MARK: - Search
+    
     public func searchWith(
         query: String,
         completion: @escaping (Result<SearchResponse, PPError>) -> Void
@@ -165,6 +168,24 @@ class NetworkingManager {
         request(
             url: url,
             expectingType: SearchResponse.self,
+            completion: completion
+        )
+    }
+    
+    //MARK: - Trending
+    
+    public func requestTrendingCoins(
+        completion: @escaping (Result<TrendingResponse, PPError>) -> Void
+    ){
+        
+        guard let url = URL(string: Constants.trendingBaseUrl) else {
+            completion(.failure(.invalidUrl))
+            return
+        }
+     
+        request(
+            url: url,
+            expectingType: TrendingResponse.self,
             completion: completion
         )
     }

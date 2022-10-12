@@ -10,26 +10,27 @@ struct UserDefaultsManager {
     private let defaults = UserDefaults.standard
     
     public var watchlistIDs: [String] {
-        defaults.stringArray(forKey: UserDefaultsKeys.watchlist) ?? []
+        defaults.stringArray(forKey: watchlistKey) ?? []
     }
     
     public var recentSearchesIDs: [String] {
         defaults.stringArray(forKey: recentSearchesKey) ?? []
     }
     
-    private let watchlistKey = "watchlist"
-    private let recentSearchesKey = "recentSearch"
+    public let watchlistKey = "watchlist"
     
-    public func saveToWatchlist(ID: String) {
-        var currentWatchlist = watchlistIDs
-        currentWatchlist.append(ID)
-        defaults.set(currentWatchlist, forKey: watchlistKey)
+    public let recentSearchesKey = "recentSearch"
+    
+    public func saveToDefaults(ID: String, for key: String) {
+        var currentIDs = defaults.stringArray(forKey: key) ?? []
+        currentIDs.append(ID)
+        defaults.set(currentIDs, forKey: key)
     }
     
-    public func deleteFromWatchlist(ID: String) {
-        var currentWatchlist = watchlistIDs
-        currentWatchlist.removeAll { $0 == ID }
-        defaults.set(currentWatchlist, forKey: watchlistKey)
+    public func deleteFromDefaults(ID: String, for key: String) {
+        var currentIDs = watchlistIDs
+        currentIDs.removeAll { $0 == ID }
+        defaults.set(currentIDs, forKey: key)
     }
     
     public func isInWatchlist(id: String) -> Bool {
