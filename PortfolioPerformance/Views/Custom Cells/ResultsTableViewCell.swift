@@ -34,6 +34,7 @@ class ResultsTableViewCell: UITableViewCell {
     
     let logoView: UIImageView = {
         let logoView = UIImageView()
+        logoView.layer.cornerRadius = 10
         return logoView
     }()
     

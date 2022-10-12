@@ -102,7 +102,7 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
             coinName: model.name,
             coinSymbol: model.symbol,
             logoURL: model.large,
-            isFavourite: WatchlistManager.shared.isInWatchlist(id: model.id)
+            isFavourite: UserDefaultsManager.shared.isInWatchlist(id: model.id)
         )
         
         self.navigationController?.pushViewController(detailVC, animated: true)
@@ -121,10 +121,11 @@ extension SearchScreenViewController: UISearchResultsUpdating {
         if let query = searchController.searchBar.text,
               !query.trimmingCharacters(in: .whitespaces).isEmpty
         {
-            searchTimer?.invalidate()
-            searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-                self.performSearch(query: query)
-            }
+//            searchTimer?.invalidate()
+//            searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+//                self.performSearch(query: query)
+            performSearch(query: query)
+
         } else {
             clearTableView()
         }

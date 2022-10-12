@@ -7,18 +7,21 @@ enum CircularProgressBarType {
 
 class CircularProgressBar: UIView {
     
-    var type: CircularProgressBarType
-    var progress: Float
-    var color: CGColor?
+    public var type: CircularProgressBarType
+    public var progress: Float
+    public var color: CGColor
     
-    let shapeLayer = CAShapeLayer()
-    let trackLayer = CAShapeLayer()
+    private let shapeLayer = CAShapeLayer()
+    private let trackLayer = CAShapeLayer()
+    private let gradient = CAGradientLayer()
     
-    init(frame: CGRect, type: CircularProgressBarType, progress: Float, color: CGColor?) {
+    //MARK: - Init
+    
+    init(frame: CGRect, type: CircularProgressBarType, progress: Float, color: CGColor) {
         
         self.type = type
         self.progress = progress
-        self.shapeLayer.strokeColor = color
+        self.color = color
         super.init(frame: frame)
     }
     
@@ -26,11 +29,15 @@ class CircularProgressBar: UIView {
         fatalError()
     }
     
+    //MARK: - Lifecycle
+    
     override func layoutSubviews() {
         addProgressBar()
     }
     
-    func addProgressBar() {
+    //MARK: - Private methods
+    
+    private func addProgressBar() {
         
         var circularPath = UIBezierPath()
         
@@ -41,7 +48,7 @@ class CircularProgressBar: UIView {
         case .round:
             circularPath = UIBezierPath(
                 arcCenter: CGPoint(x: width/2, y: height/2),
-                radius: width/2 - 5,
+                radius: width/2 - 4,
                 startAngle: -CGFloat.pi / 2,
                 endAngle: CGFloat.pi + CGFloat.pi / 2,
                 clockwise: true
@@ -51,7 +58,7 @@ class CircularProgressBar: UIView {
         case .gradient:
             circularPath = UIBezierPath(
                 arcCenter: CGPoint(x: width/2, y: height/2),
-                radius: width/2 - 5,
+                radius: width/2 - 4,
                 startAngle: CGFloat.pi - CGFloat.pi / 8,
                 endAngle:  2 * CGFloat.pi + CGFloat.pi / 8,
                 clockwise: true
@@ -63,20 +70,19 @@ class CircularProgressBar: UIView {
         trackLayer.path = circularPath.cgPath
         trackLayer.fillColor = UIColor.clear.cgColor
         trackLayer.strokeColor = UIColor.systemGray5.cgColor
-        trackLayer.lineWidth = 10
+        trackLayer.lineWidth = width / 11
         trackLayer.lineCap = CAShapeLayerLineCap.round
         
         //BarLayer
         shapeLayer.path = circularPath.cgPath
         shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.strokeColor = color ?? UIColor.clouds.cgColor
-        shapeLayer.lineWidth = 10
+        shapeLayer.strokeColor = color
+        shapeLayer.lineWidth = width / 11
         shapeLayer.strokeEnd = CGFloat(progress)
         shapeLayer.lineCap = CAShapeLayerLineCap.round
     }
     
     private func addGradient() {
-        let gradient = CAGradientLayer()
         gradient.frame = bounds
         gradient.startPoint = CGPoint(x: 0, y: 0.5)
         gradient.endPoint = CGPoint(x: 1, y: 0.5)

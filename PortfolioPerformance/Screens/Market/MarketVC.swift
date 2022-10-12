@@ -6,6 +6,14 @@ class MarketViewController: UIViewController {
     
     private let marketVM = MarketViewModel()
     
+    private var cardsWidth: CGFloat {
+        view.width / 3.35
+    }
+    
+    private var cardsPadding: CGFloat {
+        (view.width - cardsWidth * 3) / 4
+    }
+    
     private var marketCardsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -75,7 +83,7 @@ class MarketViewController: UIViewController {
             marketCardsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             marketCardsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             marketCardsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
-            marketCardsCollectionView.heightAnchor.constraint(equalToConstant: 156)
+            marketCardsCollectionView.heightAnchor.constraint(equalToConstant:  cardsWidth * 1.2 + 10)
         ])
     }
     
@@ -125,8 +133,8 @@ class MarketViewController: UIViewController {
         NSLayoutConstraint.activate([
             cryptoCurrencyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 10),
             cryptoCurrencyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            cryptoCurrencyTableView.topAnchor.constraint(equalTo: sortOptionsCollectionView.bottomAnchor, constant: 3),
-            cryptoCurrencyTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            cryptoCurrencyTableView.topAnchor.constraint(equalTo: sortOptionsCollectionView.bottomAnchor, constant: 5),
+            cryptoCurrencyTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5)
         ])
     }
                                                        
@@ -147,6 +155,7 @@ class MarketViewController: UIViewController {
     }
     
     private func scrollToTop() {
+        guard !(marketVM.cardViewModels.value?.isEmpty ?? false) else { return }
         let topRow = IndexPath(row: 0, section: 0)
         self.cryptoCurrencyTableView.scrollToRow(
             at: topRow,
@@ -197,10 +206,10 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if collectionView == sortOptionsCollectionView {
             //Sort options collection case
             return marketVM.sortOptionsArray.count
+        } else {
+            //Market card collection case
+            return marketVM.cardViewModels.value?.count ?? 0
         }
-        
-        //Market card collection case
-        return marketVM.cardViewModels.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -232,8 +241,8 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if collectionView == marketCardsCollectionView {
             //Sort options collection case
             return CGSize(
-                width: MarketCardsCollectionViewCell.preferredWidth,
-                height: MarketCardsCollectionViewCell.preferredHeight
+                width: cardsWidth,
+                height: cardsWidth * 1.2
             )
         }
         //Sort options collection case
@@ -251,14 +260,14 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
-    //Distance between the cells
+    //Distance between the cards
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        10
+        cardsPadding
     }
     
     //Left inset
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        UIEdgeInsets(top: 0, left: cardsPadding, bottom: 0, right: cardsPadding)
     }
 }
     //MARK: - Table View Delegate and Data Source Methods
@@ -291,7 +300,7 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
             coinName: currentCoinModel.name,
             coinSymbol: currentCoinModel.symbol,
             logoURL: currentCoinModel.image,
-            isFavourite: WatchlistManager.shared.isInWatchlist(id: currentCoinModel.id)
+            isFavourite: UserDefaultsManager.shared.isInWatchlist(id: currentCoinModel.id)
         )
         
         self.navigationController?.pushViewController(detailsVC, animated: true)

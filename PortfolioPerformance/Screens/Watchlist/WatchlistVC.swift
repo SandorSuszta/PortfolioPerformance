@@ -63,12 +63,13 @@ class WatchlistViewController: UIViewController {
     }
     
     private func updateTableWithWatchlist() {
-        if WatchlistManager.shared.watchlistIDs.isEmpty {
+        if UserDefaultsManager.shared.watchlistIDs.isEmpty {
+            watchlistVM.cellViewModels.value = []
             emptyWatchlistLabel.isHidden = false
         } else {
             emptyWatchlistLabel.isHidden = true
             watchlistVM.loadWatchlistCryptoCurrenciesData(
-                list: WatchlistManager.shared.watchlistIDs
+                list: UserDefaultsManager.shared.watchlistIDs
             )
         }
     }
@@ -134,12 +135,12 @@ class WatchlistViewController: UIViewController {
                 guard let ID = watchlistVM.cellViewModels.value?[indexPath.row].coinModel.id else { fatalError() }
                 
                 tableView.beginUpdates()
-                WatchlistManager.shared.deleteFromWatchlist(ID: ID)
+                UserDefaultsManager.shared.deleteFromWatchlist(ID: ID)
                 watchlistVM.cellViewModels.value?.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .left)
                 tableView.endUpdates()
                 
-                if WatchlistManager.shared.watchlistIDs.isEmpty {
+                if UserDefaultsManager.shared.watchlistIDs.isEmpty {
                     emptyWatchlistLabel.isHidden = false
                 }
             }
@@ -154,7 +155,7 @@ class WatchlistViewController: UIViewController {
                 coinName: currentCoinModel.name,
                 coinSymbol: currentCoinModel.symbol,
                 logoURL: currentCoinModel.image,
-                isFavourite: WatchlistManager.shared.isInWatchlist(id: currentCoinModel.id)
+                isFavourite: UserDefaultsManager.shared.isInWatchlist(id: currentCoinModel.id)
             )
             
             self.navigationController?.pushViewController(detailsVC, animated: true)

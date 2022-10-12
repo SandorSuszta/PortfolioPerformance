@@ -24,7 +24,7 @@ extension LineChartView {
 
         data = LineChartData(dataSet: dataSet)
         data?.setDrawValues(false)
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         leftAxis.enabled = false // Disable right axis
         xAxis.labelPosition = .bottom // Labels on the bottom
         xAxis.drawGridLinesEnabled = false // Disable vertical grids

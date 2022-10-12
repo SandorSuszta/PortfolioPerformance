@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		790C30C227C78E930021658F /* GreedAndFearModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C127C78E930021658F /* GreedAndFearModel.swift */; };
-		790C30C527CEA7620021658F /* WatchlistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C427CEA7620021658F /* WatchlistManager.swift */; };
+		790C30C527CEA7620021658F /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C427CEA7620021658F /* UserDefaultsManager.swift */; };
 		790C30C827CEAA200021658F /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C627CEAA200021658F /* DataModel.xcdatamodeld */; };
 		792B0FC3287B3C6C0040B461 /* WatchlistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC2287B3C6C0040B461 /* WatchlistVC.swift */; };
 		792B0FC5287C85EF0040B461 /* WatchlistVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC4287C85EF0040B461 /* WatchlistVM.swift */; };
@@ -26,6 +26,7 @@
 		7934EFB6283E45A700CE7FD0 /* HoldingPerfomanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFB5283E45A700CE7FD0 /* HoldingPerfomanceModel.swift */; };
 		7934EFB8283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFB7283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift */; };
 		7934EFBA2841600A00CE7FD0 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFB92841600A00CE7FD0 /* CustomProgressBar.swift */; };
+		7937CE1B28F5E40100B80C71 /* PPGreedAndFearBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7937CE1A28F5E40100B80C71 /* PPGreedAndFearBar.swift */; };
 		7941060A27DA0A11009B4B8C /* SF-Pro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7941060827DA0A10009B4B8C /* SF-Pro-Italic.ttf */; };
 		7941060B27DA0A11009B4B8C /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7941060927DA0A11009B4B8C /* SF-Pro.ttf */; };
 		7941061227E0D84F009B4B8C /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7941061127E0D84F009B4B8C /* DateFormatter.swift */; };
@@ -72,7 +73,7 @@
 		16F6ACFC027E269968DA0AFF /* Pods-PortfolioPerformance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioPerformance.release.xcconfig"; path = "Target Support Files/Pods-PortfolioPerformance/Pods-PortfolioPerformance.release.xcconfig"; sourceTree = "<group>"; };
 		5BDECDAA83ECC22DF03AB629 /* Pods_PortfolioPerformance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PortfolioPerformance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		790C30C127C78E930021658F /* GreedAndFearModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedAndFearModel.swift; sourceTree = "<group>"; };
-		790C30C427CEA7620021658F /* WatchlistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistManager.swift; sourceTree = "<group>"; };
+		790C30C427CEA7620021658F /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		790C30C727CEAA200021658F /* Transaction.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Transaction.xcdatamodel; sourceTree = "<group>"; };
 		792B0FC2287B3C6C0040B461 /* WatchlistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistVC.swift; sourceTree = "<group>"; };
 		792B0FC4287C85EF0040B461 /* WatchlistVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistVM.swift; sourceTree = "<group>"; };
@@ -90,6 +91,7 @@
 		7934EFB5283E45A700CE7FD0 /* HoldingPerfomanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingPerfomanceModel.swift; sourceTree = "<group>"; };
 		7934EFB7283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioPerfomanceModel.swift; sourceTree = "<group>"; };
 		7934EFB92841600A00CE7FD0 /* CustomProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressBar.swift; sourceTree = "<group>"; };
+		7937CE1A28F5E40100B80C71 /* PPGreedAndFearBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPGreedAndFearBar.swift; sourceTree = "<group>"; };
 		7941060827DA0A10009B4B8C /* SF-Pro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Italic.ttf"; sourceTree = "<group>"; };
 		7941060927DA0A11009B4B8C /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 		7941061127E0D84F009B4B8C /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				79D5B8E728EEE3FF00178402 /* PPButton.swift */,
 				79D5B8E328EDB85100178402 /* PPAlertVC.swift */,
 				79EC45B428F0B9DC006A849A /* PPSegmentedControl.swift */,
+				7937CE1A28F5E40100B80C71 /* PPGreedAndFearBar.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -201,7 +204,7 @@
 		79410D8A2822938100BD9EA4 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				790C30C427CEA7620021658F /* WatchlistManager.swift */,
+				790C30C427CEA7620021658F /* UserDefaultsManager.swift */,
 				796EFA4028733AF2005E24AF /* NetworkingManager.swift */,
 			);
 			path = Managers;
@@ -502,6 +505,7 @@
 				7934EFA4282A824E00CE7FD0 /* ResultsTableViewCell.swift in Sources */,
 				7934EFAA28352A1A00CE7FD0 /* UIImageView+SetImage.swift in Sources */,
 				792C040928C9E62B008EE48C /* RangeProgressView.swift in Sources */,
+				7937CE1B28F5E40100B80C71 /* PPGreedAndFearBar.swift in Sources */,
 				796EFA3A286DDD60005E24AF /* ObservableObject.swift in Sources */,
 				790C30C827CEAA200021658F /* DataModel.xcdatamodeld in Sources */,
 				79D5B8E628EEDABC00178402 /* UIViewController+ShowAlert.swift in Sources */,
@@ -544,7 +548,7 @@
 				79EAFD3527B3FDC8008A6062 /* CoinModel.swift in Sources */,
 				7934EFBA2841600A00CE7FD0 /* CustomProgressBar.swift in Sources */,
 				7934EFA6282D141B00CE7FD0 /* SearchResponse.swift in Sources */,
-				790C30C527CEA7620021658F /* WatchlistManager.swift in Sources */,
+				790C30C527CEA7620021658F /* UserDefaultsManager.swift in Sources */,
 				796EFA2F285B8B64005E24AF /* MarketCardsCollectionViewCell.swift in Sources */,
 				796EFA452876F076005E24AF /* MarketTableCellVM.swift in Sources */,
 				796EFA3328697A91005E24AF /* MarketCardsCellVM.swift in Sources */,
@@ -692,15 +696,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SMCJ9P776W;
+				DEVELOPMENT_TEAM = B9D9FYA643;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PortfolioPerformance/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -708,6 +713,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sandorsuszta.PortfolioPerformance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -720,15 +726,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SMCJ9P776W;
+				DEVELOPMENT_TEAM = B9D9FYA643;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PortfolioPerformance/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -736,6 +743,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sandorsuszta.PortfolioPerformance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

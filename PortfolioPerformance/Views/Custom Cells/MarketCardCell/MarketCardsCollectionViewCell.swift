@@ -17,21 +17,29 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
     
     let headerTitle: UILabel = {
         let title = UILabel()
-        title.font = .systemFont(ofSize: 12, weight: .semibold)
-        title.textAlignment = .center
+        title.font = .systemFont(ofSize: 14, weight: .semibold)
+        title.adjustsFontSizeToFitWidth = true
+        title.minimumScaleFactor = 0.5
         title.numberOfLines = 2
+        title.textAlignment = .center
         return title
     }()
     
     let mainTitle: UILabel = {
         let title = UILabel()
-        title.font = .systemFont(ofSize: 14, weight: .semibold)
+        title.font = .systemFont(ofSize: 20, weight: .semibold)
+        title.adjustsFontSizeToFitWidth = true
+        title.minimumScaleFactor = 0.5
+        title.textAlignment = .center
         return title
     }()
     
     let secondaryTitle: UILabel = {
         let title = UILabel()
-        title.font = .systemFont(ofSize: 10, weight: .semibold)
+        title.font = .systemFont(ofSize: 16, weight: .semibold)
+        title.adjustsFontSizeToFitWidth = true
+        title.minimumScaleFactor = 0.5
+        title.textAlignment = .center
         title.textColor = .pomergranate
         return title
     }()
@@ -49,8 +57,8 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        mainTitle.sizeToFit()
-        secondaryTitle.sizeToFit()
+        
+        let circleRadius = contentView.width / 1.35
         
         headerTitle.frame = CGRect(
             x: 10,
@@ -60,33 +68,19 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
         )
         
         progressBar.frame = CGRect(
-            x: 15,
-            y: 48,
-            width: contentView.width - 30,
-            height: contentView.width - 30
+            x: (contentView.width - circleRadius) / 2,
+            y: headerTitle.height + (contentView.height - headerTitle.height - circleRadius) / 2,
+            width: circleRadius,
+            height: circleRadius
         )
-        
-        mainTitle.frame = CGRect(
-            x: contentView.width/2 - mainTitle.width/2,
-            y: progressBar.top + progressBar.height/2 - mainTitle.height/2,
-            width: mainTitle.width,
-            height: mainTitle.height
-        )
-        
-        secondaryTitle.frame = CGRect(
-            x: contentView.width/2 - secondaryTitle.width/2,
-            y: mainTitle.bottom,
-            width: secondaryTitle.width,
-            height: secondaryTitle.height
-        )
-        
+
         //Gradient Type semicircle for GreedAndFear Index presentation
         if progressBar.type == .gradient {
-            mainTitle.font = .systemFont(ofSize: 18, weight: .semibold)
-            secondaryTitle.font = .systemFont(ofSize: 14, weight: .semibold)
-            
-            mainTitle.sizeToFit()
             secondaryTitle.sizeToFit()
+            mainTitle.sizeToFit()
+            
+            mainTitle.font = .systemFont(ofSize: 18, weight: .semibold)
+            secondaryTitle.font = .systemFont(ofSize: 16, weight: .semibold)
             
             mainTitle.frame = CGRect(
                 x: contentView.width/2 - mainTitle.width/2,
@@ -96,10 +90,26 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
             )
             
             secondaryTitle.frame = CGRect(
-                x: contentView.width/2 - secondaryTitle.width/2,
-                y: contentView.bottom - 26,
-                width: secondaryTitle.width,
-                height: secondaryTitle.height
+                x: contentView.width/2 - contentView.width / 2.4,
+                y: contentView.bottom - contentView.width / 5,
+                width: contentView.width / 1.2,
+                height: secondaryTitle.font.pointSize
+            )
+            
+        } else {
+    
+            mainTitle.frame = CGRect(
+                x: (contentView.width - circleRadius) / 2 + 13,
+                y: progressBar.top + progressBar.height / 2 - mainTitle.font.pointSize / 2,
+                width: circleRadius - 26,
+                height: mainTitle.font.pointSize
+            )
+  
+            secondaryTitle.frame = CGRect(
+                x: contentView.width/2 - mainTitle.width / 3.2,
+                y: mainTitle.bottom,
+                width: mainTitle.width / 1.6,
+                height: secondaryTitle.font.pointSize
             )
         }
     }

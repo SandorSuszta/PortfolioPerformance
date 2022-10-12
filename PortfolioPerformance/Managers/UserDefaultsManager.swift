@@ -1,19 +1,24 @@
 import UIKit
 import CoreData
 
-struct WatchlistManager {
+struct UserDefaultsManager {
     
-    static let shared = WatchlistManager()
+    static let shared = UserDefaultsManager()
     
     private init() {}
     
-    public var watchlistIDs: [String] {
-        defaults.stringArray(forKey: watchlistKey) ?? []
-    }
-    
     private let defaults = UserDefaults.standard
     
+    public var watchlistIDs: [String] {
+        defaults.stringArray(forKey: UserDefaultsKeys.watchlist) ?? []
+    }
+    
+    public var recentSearchesIDs: [String] {
+        defaults.stringArray(forKey: recentSearchesKey) ?? []
+    }
+    
     private let watchlistKey = "watchlist"
+    private let recentSearchesKey = "recentSearch"
     
     public func saveToWatchlist(ID: String) {
         var currentWatchlist = watchlistIDs

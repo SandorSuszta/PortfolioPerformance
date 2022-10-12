@@ -35,10 +35,10 @@ class MainTabBarController: UITabBarController {
 //            navController5
         ], animated: false)
         
-        tabBar.items?[0].image = UIImage(systemName: "house")
+        tabBar.items?[0].image = UIImage(systemName: "house.fill")
         tabBar.items?[0].title = "Market"
     
-        tabBar.items?[1].image = UIImage(systemName: "star")
+        tabBar.items?[1].image = UIImage(systemName: "star.fill")
         tabBar.items?[1].title = "Watchlist"
         
 //        tabBar.items?[2].image = UIImage(named: "add")
