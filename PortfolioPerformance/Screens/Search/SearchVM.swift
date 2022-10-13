@@ -11,7 +11,9 @@ class SearchScreenViewModel {
     
     //MARK: - Observable properties
     
-    public var searchTableCellModels: ObservableObject<[[SearchResult]]> = ObservableObject(value: [])
+    public var emptySearchCellModels: ObservableObject<[[SearchResult]]> = ObservableObject(value: [])
+    
+    public var searchResultCellModels: ObservableObject<[SearchResult]> = ObservableObject(value: nil)
     
     public var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
     
@@ -21,7 +23,7 @@ class SearchScreenViewModel {
         updateRecentSearches()
         getTrendingCoinsModels()
     }
-
+    
     //MARK: - Public methods
     
     public func updateRecentSearches() {
@@ -29,6 +31,24 @@ class SearchScreenViewModel {
         if !UserDefaultsManager.shared.recentSearchesIDs.isEmpty {
             getRecentSearchesModels()
         }
+    }
+    
+    public func updateSearchResults(query: String) {
+        
+        NetworkingManager.shared.searchWith(query: query) { result in
+            
+            switch result {
+            case.success(let response):
+                self.searchResultCellModels.value = Array(response.coins.prefix(5))
+                
+            case .failure(let error):
+                self.errorMessage.value = error.rawValue
+            }
+        }
+    }
+    
+    public func clearSearchModels() {
+        self.searchResultCellModels.value = nil
     }
     
     //MARK: - Private methods
@@ -53,10 +73,10 @@ class SearchScreenViewModel {
                     )
                 }
                 
-                if self.searchTableCellModels.value?.count == 2 {
-                    self.searchTableCellModels.value?[0] = recentSearchesModels
+                if self.emptySearchCellModels.value?.count == 2 {
+                    self.emptySearchCellModels.value?[0] = recentSearchesModels
                 } else {
-                    self.searchTableCellModels.value?.insert(recentSearchesModels, at: 0)
+                    self.emptySearchCellModels.value?.insert(recentSearchesModels, at: 0)
                 }
                 
             case .failure(let error):
@@ -74,7 +94,7 @@ class SearchScreenViewModel {
                 let trendingCoins: [SearchResult] = response.coins.compactMap {
                     $0.item
                 }
-                self.searchTableCellModels.value?.append(trendingCoins)
+                self.emptySearchCellModels.value?.append(trendingCoins)
             case .failure(let error):
                 self.errorMessage.value = error.rawValue
             }

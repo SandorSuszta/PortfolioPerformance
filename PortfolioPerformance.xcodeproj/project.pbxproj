@@ -193,8 +193,8 @@
 		7937CE1C28F6E2DB00B80C71 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				79410D8E282416C000BD9EA4 /* SearchVC.swift */,
 				7937CE1D28F6E30600B80C71 /* SearchVM.swift */,
+				79410D8E282416C000BD9EA4 /* SearchVC.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";

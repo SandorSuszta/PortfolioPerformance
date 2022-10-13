@@ -2,11 +2,17 @@ import UIKit
 
 class SearchScreenViewController: UIViewController {
 
-    var viewModel = SearchScreenViewModel()
+    private var viewModel = SearchScreenViewModel()
     
-    var searchResultsArray: [SearchResult] = []
+    private var searchTimer: Timer?
     
-    let resultsTableView: UITableView = {
+    private let sectionHeaderHeight: CGFloat = 40
+    
+    private var isSearching: Bool = false
+    
+    lazy var searchBar = UISearchBar()
+    
+    private let resultsTableView: UITableView = {
         let table = UITableView()
         table.isScrollEnabled = false
         table.backgroundColor = .systemGray6
@@ -20,16 +26,10 @@ class SearchScreenViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        viewModel.searchTableCellModels.bind { _ in
-            DispatchQueue.main.async {
-                self.resultsTableView.reloadData()
-            }
-        }
 
         setUpResultsTableVIew()
-        setUpTitleView()
-        setUpSearchController()
+        setUpSearchBar()
+        bindViewModels()
         
         //Delete BackButton title on pushed screen
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -45,37 +45,14 @@ class SearchScreenViewController: UIViewController {
     }
     
     //MARK: - Private
-    private func setUpSearchController() {
-        let searchVC = UISearchController(searchResultsController: nil)
-        searchVC.searchResultsUpdater = self
-        navigationItem.searchController = searchVC
-        navigationItem.hidesSearchBarWhenScrolling = false
-    }
-    
-    private func setUpTitleView() {
-        
-        let titleView = UIView(
-            frame: CGRect(
-                x: 0,
-                y: 0,
-                width: view.width,
-                height: navigationController?.navigationBar.height ?? 100
-            )
-        )
-    
-        let label = UILabel(
-            frame: CGRect(
-                x: 0,
-                y: 0,
-                width: titleView.width,
-                height: titleView.height
-            )
-        )
-        label.text = "Select Coin"
-        label.font = .systemFont(ofSize: 28, weight: .medium)
-        
-        titleView.addSubview(label)
-        navigationItem.titleView = titleView
+    private func setUpSearchBar() {
+        searchBar.searchBarStyle = UISearchBar.Style.default
+        searchBar.placeholder = "Search..."
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        searchBar.backgroundImage = UIImage()
+        searchBar.delegate = self
+        navigationItem.titleView = searchBar
     }
     
     private func setUpResultsTableVIew() {
@@ -83,25 +60,80 @@ class SearchScreenViewController: UIViewController {
         resultsTableView.delegate = self
         resultsTableView.dataSource = self
     }
-}
-
-    //MARK: - TableView delegate methods
-extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        if searchResultsArray.isEmpty {
-           return viewModel.searchTableCellModels.value?.count ?? 0
-        } else {
-            return 1
+    private func bindViewModels() {
+        
+        viewModel.searchResultCellModels.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.resultsTableView.reloadData()
+            }
+        }
+        
+        viewModel.emptySearchCellModels.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.resultsTableView.reloadData()
+            }
+        }
+        
+        viewModel.errorMessage.bind { [weak self] message in
+            guard let message = message else { return }
+            
+            self?.showAlert(message: message)
         }
     }
     
+    private func createSectionHeader(withName name: String, addClearButton: Bool = false) -> UIView {
+        
+        let header = UIView(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: view.width,
+            height: sectionHeaderHeight
+        ))
+        header.backgroundColor = .systemGray5
+        
+        let label = UILabel(frame: CGRect(
+            x: 20,
+            y: 0,
+            width: header.width - 20,
+            height: header.height
+        ))
+        label.text = name
+        label.textColor = .secondaryLabel
+        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.textAlignment = .left
+        
+        
+        header.addSubview(label)
+        
+        return header
+    }
+}
+
+    //MARK: - TableView delegate methods
+
+extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        isSearching ? 1 : viewModel.emptySearchCellModels.value?.count ?? 0
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchResultsArray.isEmpty {
-            return viewModel.searchTableCellModels.value?[section].count ?? 0
+        
+        isSearching ? viewModel.searchResultCellModels.value?.count ?? 0 : viewModel.emptySearchCellModels.value?[section].count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if isSearching {
+            return nil
         } else {
-            return searchResultsArray.count
+            return createSectionHeader(withName: "Trending coins")
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        isSearching ? 0 : sectionHeaderHeight
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,13 +143,17 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
             for: indexPath
         ) as? ResultsTableViewCell else { return UITableViewCell() }
         
-        if searchResultsArray.isEmpty {
-            guard let model = viewModel.searchTableCellModels.value?[indexPath.section][indexPath.row] else { return cell }
+        if let searchResults = viewModel.searchResultCellModels.value {
+            
+            cell.configure(with: searchResults[indexPath.row])
+            
+        } else {
+            
+            guard let model = viewModel.emptySearchCellModels.value?[indexPath.section][indexPath.row] else { return UITableViewCell() }
             
             cell.configure(with: model)
-        } else {
-            cell.configure(with: searchResultsArray[indexPath.row])
         }
+        
         return cell
     }
     
@@ -125,10 +161,10 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
         
         var model: SearchResult?
         
-        if searchResultsArray.isEmpty {
-            model = viewModel.searchTableCellModels.value?[indexPath.section][indexPath.row]
+        if let searchResults = viewModel.searchResultCellModels.value {
+            model = searchResults[indexPath.row]
         } else {
-            model = searchResultsArray[indexPath.row]
+            model = viewModel.emptySearchCellModels.value?[indexPath.section][indexPath.row]
         }
         
         guard let model = model else { return }
@@ -150,43 +186,21 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
 }
 
     //MARK: - Results Updating methods
-extension SearchScreenViewController: UISearchResultsUpdating {
+extension SearchScreenViewController: UISearchBarDelegate  {
     
-    func updateSearchResults(for searchController: UISearchController) {
-        //Check if not empty
-        if let query = searchController.searchBar.text,
-              !query.trimmingCharacters(in: .whitespaces).isEmpty
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if let query = searchBar.text,
+           !query.trimmingCharacters(in: .whitespaces).isEmpty
         {
-//            searchTimer?.invalidate()
-//            searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-//                self.performSearch(query: query)
-            performSearch(query: query)
-
-        } else {
-            clearTableView()
-        }
-    }
-    
-    func clearTableView() {
-        searchResultsArray = []
-        DispatchQueue.main.async {
-            self.resultsTableView.reloadData()
-        }
-    }
-    
-    func performSearch(query: String) {
-        NetworkingManager.shared.searchWith(
-            query: query) { result in
-                switch result {
-                case.success(let response):
-                    self.searchResultsArray = response.coins
-                    DispatchQueue.main.async {
-                        self.resultsTableView.reloadData()
-                    }
-                case .failure(let error):
-                    self.showAlert(message: error.rawValue)
-                }
+            isSearching = true
+            searchTimer?.invalidate()
+            searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+                self.viewModel.updateSearchResults(query: query)
             }
-    }
+        } else {
+            isSearching = false
+            viewModel.clearSearchModels()
+        }
+    }    
 }
     
