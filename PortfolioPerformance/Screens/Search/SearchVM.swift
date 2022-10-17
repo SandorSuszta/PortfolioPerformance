@@ -11,11 +11,11 @@ class SearchScreenViewModel {
     
     //MARK: - Observable properties
     
-    public var emptySearchCellModels: ObservableObject<[[SearchResult]]> = ObservableObject(value: [])
+    var defaultCellModels: ObservableObject<[[SearchResult]]> = ObservableObject(value: [])
     
-    public var searchResultCellModels: ObservableObject<[SearchResult]> = ObservableObject(value: nil)
+    var searchResultCellModels: ObservableObject<[SearchResult]> = ObservableObject(value: nil)
     
-    public var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
+    var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
     
     //MARK: - Init
     
@@ -26,14 +26,14 @@ class SearchScreenViewModel {
     
     //MARK: - Public methods
     
-    public func updateRecentSearches() {
+    func updateRecentSearches() {
         
         if !UserDefaultsManager.shared.recentSearchesIDs.isEmpty {
             getRecentSearchesModels()
         }
     }
     
-    public func updateSearchResults(query: String) {
+    func updateSearchResults(query: String) {
         
         NetworkingManager.shared.searchWith(query: query) { result in
             
@@ -47,8 +47,12 @@ class SearchScreenViewModel {
         }
     }
     
-    public func clearSearchModels() {
+    func clearSearchModels() {
         self.searchResultCellModels.value = nil
+    }
+    
+    func clearRecentSearches() {
+        defaultCellModels.value?.remove(at: 0)
     }
     
     //MARK: - Private methods
@@ -64,7 +68,8 @@ class SearchScreenViewModel {
             
             switch result {
             case .success(let coinModels):
-                let recentSearchesModels: [SearchResult] = coinModels.compactMap {
+               
+                var recentSearchesModels: [SearchResult] = coinModels.compactMap {
                     SearchResult(
                         id: $0.id,
                         name: $0.name,
@@ -73,10 +78,19 @@ class SearchScreenViewModel {
                     )
                 }
                 
-                if self.emptySearchCellModels.value?.count == 2 {
-                    self.emptySearchCellModels.value?[0] = recentSearchesModels
+                let list = UserDefaultsManager.shared.recentSearchesIDs
+                
+                //Use the same order as in saved list
+                recentSearchesModels.sort {
+                    list.firstIndex(of: $0.id) ?? 0 > list.firstIndex(of: $1.id) ?? 0
+                }
+                
+                if self.defaultCellModels.value?.count == 2 {
+                    //Update recent search models
+                    self.defaultCellModels.value?[0] = recentSearchesModels
                 } else {
-                    self.emptySearchCellModels.value?.insert(recentSearchesModels, at: 0)
+                    //Insert recent search models before trending coin models
+                    self.defaultCellModels.value?.insert(recentSearchesModels, at: 0)
                 }
                 
             case .failure(let error):
@@ -94,7 +108,7 @@ class SearchScreenViewModel {
                 let trendingCoins: [SearchResult] = response.coins.compactMap {
                     $0.item
                 }
-                self.emptySearchCellModels.value?.append(trendingCoins)
+                self.defaultCellModels.value?.append(trendingCoins)
             case .failure(let error):
                 self.errorMessage.value = error.rawValue
             }

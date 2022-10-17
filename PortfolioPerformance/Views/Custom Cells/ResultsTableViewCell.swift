@@ -10,7 +10,7 @@ import UIKit
 class ResultsTableViewCell: UITableViewCell {
     
     static let identifier = "ResultsTableViewCell"
-    static let preferedHeight: CGFloat = 60
+    static let preferredHeight: CGFloat = 60
     
     let symbolLabel: UILabel = {
         let label = UILabel()
@@ -42,7 +42,7 @@ class ResultsTableViewCell: UITableViewCell {
     
     public func configure (with searchResult: SearchResult) {
         
-        symbolLabel.text = searchResult.symbol
+        symbolLabel.text = searchResult.symbol.uppercased()
         nameLabel.text = searchResult.name
         logoView.setImage(imageUrl: searchResult.large)
     }

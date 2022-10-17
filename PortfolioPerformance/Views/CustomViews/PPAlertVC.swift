@@ -11,7 +11,7 @@ class PPCustomAlertVC: UIViewController {
     
     public var alertText: String
 
-    private let containerView = UIView()
+    private let containerView = UIView(frame: .zero)
     private let titleLabel = UILabel()
     private let textLabel = UILabel()
     private let actionButton = PPButton(color: .PPblue, name: "Close")

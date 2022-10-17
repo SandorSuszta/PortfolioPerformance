@@ -21,20 +21,29 @@ struct UserDefaultsManager {
     
     public let recentSearchesKey = "recentSearch"
     
-    public func saveToDefaults(ID: String, for key: String) {
+    public func saveToDefaults(ID: String, forKey key: String) {
         var currentIDs = defaults.stringArray(forKey: key) ?? []
+        
+        //Make sure recent ID is the last in the list
+        if let idIndex = currentIDs.firstIndex(of: ID) {
+            currentIDs.remove(at: idIndex)
+        }
         currentIDs.append(ID)
         defaults.set(currentIDs, forKey: key)
     }
     
-    public func deleteFromDefaults(ID: String, for key: String) {
+    func deleteFromDefaults(ID: String, for key: String) {
         var currentIDs = watchlistIDs
         currentIDs.removeAll { $0 == ID }
         defaults.set(currentIDs, forKey: key)
     }
     
-    public func isInWatchlist(id: String) -> Bool {
+    func isInWatchlist(id: String) -> Bool {
         watchlistIDs.contains(id)
+    }
+    
+    func clearRecentSearchesIDs() {
+        defaults.set([], forKey: recentSearchesKey)
     }
     
 //    static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext

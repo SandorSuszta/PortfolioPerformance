@@ -6,15 +6,12 @@ class SearchScreenViewController: UIViewController {
     
     private var searchTimer: Timer?
     
-    private let sectionHeaderHeight: CGFloat = 40
-    
     private var isSearching: Bool = false
     
     lazy var searchBar = UISearchBar()
     
     private let resultsTableView: UITableView = {
         let table = UITableView()
-        table.isScrollEnabled = false
         table.backgroundColor = .systemGray6
         table.register(
             ResultsTableViewCell.self,
@@ -24,6 +21,7 @@ class SearchScreenViewController: UIViewController {
     }()
    
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +43,7 @@ class SearchScreenViewController: UIViewController {
     }
     
     //MARK: - Private
+    
     private func setUpSearchBar() {
         searchBar.searchBarStyle = UISearchBar.Style.default
         searchBar.placeholder = "Search..."
@@ -59,6 +58,7 @@ class SearchScreenViewController: UIViewController {
         view.addSubview(resultsTableView)
         resultsTableView.delegate = self
         resultsTableView.dataSource = self
+        resultsTableView.sectionHeaderTopPadding = 0
     }
     
     private func bindViewModels() {
@@ -69,7 +69,7 @@ class SearchScreenViewController: UIViewController {
             }
         }
         
-        viewModel.emptySearchCellModels.bind { [weak self] _ in
+        viewModel.defaultCellModels.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.resultsTableView.reloadData()
             }
@@ -81,60 +81,22 @@ class SearchScreenViewController: UIViewController {
             self?.showAlert(message: message)
         }
     }
-    
-    private func createSectionHeader(withName name: String, addClearButton: Bool = false) -> UIView {
-        
-        let header = UIView(frame: CGRect(
-            x: 0,
-            y: 0,
-            width: view.width,
-            height: sectionHeaderHeight
-        ))
-        header.backgroundColor = .systemGray5
-        
-        let label = UILabel(frame: CGRect(
-            x: 20,
-            y: 0,
-            width: header.width - 20,
-            height: header.height
-        ))
-        label.text = name
-        label.textColor = .secondaryLabel
-        label.font = .systemFont(ofSize: 18, weight: .semibold)
-        label.textAlignment = .left
-        
-        
-        header.addSubview(label)
-        
-        return header
-    }
 }
 
-    //MARK: - TableView delegate methods
+    //MARK: - TableView data source methods
 
-extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource {
+extension SearchScreenViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        isSearching ? 1 : viewModel.emptySearchCellModels.value?.count ?? 0
+        isSearching ? 1 : viewModel.defaultCellModels.value?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        isSearching ? viewModel.searchResultCellModels.value?.count ?? 0 : viewModel.emptySearchCellModels.value?[section].count ?? 0
+        isSearching ? viewModel.searchResultCellModels.value?.count ?? 0 : viewModel.defaultCellModels.value?[section].count ?? 0
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if isSearching {
-            return nil
-        } else {
-            return createSectionHeader(withName: "Trending coins")
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        isSearching ? 0 : sectionHeaderHeight
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -149,12 +111,39 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
             
         } else {
             
-            guard let model = viewModel.emptySearchCellModels.value?[indexPath.section][indexPath.row] else { return UITableViewCell() }
+            guard let model = viewModel.defaultCellModels.value?[indexPath.section][indexPath.row] else { return UITableViewCell() }
             
             cell.configure(with: model)
         }
         
         return cell
+    }
+}
+    
+    //MARK: - TableView delegate methods
+    
+extension SearchScreenViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if isSearching {
+            return nil
+        } else {
+            
+            let recentSearchesHeader = PPSectionHeaderView(type: .recentSearches, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
+            
+            recentSearchesHeader.buttonAction = { [weak self] in
+                self?.viewModel.clearRecentSearches()
+                UserDefaultsManager.shared.clearRecentSearchesIDs()
+            }
+            
+            let trendingCoinsHeader = PPSectionHeaderView(type: .trendingCoins, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
+            
+            return UserDefaultsManager.shared.recentSearchesIDs.isEmpty ? trendingCoinsHeader : [recentSearchesHeader, trendingCoinsHeader][section]
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        isSearching ? 0 : PPSectionHeaderView.preferredHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -164,10 +153,19 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
         if let searchResults = viewModel.searchResultCellModels.value {
             model = searchResults[indexPath.row]
         } else {
-            model = viewModel.emptySearchCellModels.value?[indexPath.section][indexPath.row]
+            model = viewModel.defaultCellModels.value?[indexPath.section][indexPath.row]
         }
         
         guard let model = model else { return }
+       
+        searchBar.text = ""
+        isSearching = false
+        viewModel.clearSearchModels()
+        
+        UserDefaultsManager.shared.saveToDefaults(
+            ID: model.id,
+            forKey: UserDefaultsManager.shared.recentSearchesKey
+        )
         
         let detailVC = CoinDetailsVC(
             coinID: model.id,
@@ -181,7 +179,7 @@ extension SearchScreenViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        ResultsTableViewCell.preferedHeight
+        ResultsTableViewCell.preferredHeight
     }
 }
 
