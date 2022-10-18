@@ -47,6 +47,7 @@ class SearchScreenViewController: UIViewController {
     private func setUpSearchBar() {
         searchBar.searchBarStyle = UISearchBar.Style.default
         searchBar.placeholder = "Search..."
+        searchBar.keyboardType = .asciiCapable
         searchBar.sizeToFit()
         searchBar.isTranslucent = false
         searchBar.backgroundImage = UIImage()

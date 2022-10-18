@@ -59,7 +59,7 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        contentView.backgroundColor = .clouds
+        contentView.backgroundColor = .systemBackground
 
         logoContainerView.addSubview(logoImageView)
         addSubviews(nameLabel, symbolLabel, priceLabel, changeLabel, logoContainerView)
@@ -74,7 +74,7 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
         //Add distance between the cells
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 7, right: 0))
         contentView.layer.cornerRadius = 25
-        contentView.backgroundColor = .clouds
+        contentView.backgroundColor = .systemBackground
         backgroundColor = .clear
         
         let imageSize: CGFloat = contentView.height - 14
@@ -119,9 +119,6 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
             y: priceLabel.bottom,
             width: priceLabel.width,
             height: 20)
-        
-        contentView.backgroundColor = .white
-        backgroundColor = .clear
     }
     
     override func prepareForReuse() {

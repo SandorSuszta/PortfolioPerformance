@@ -41,7 +41,7 @@ class PPSectionHeaderView: UIView {
         nameLabel.text = type.rawValue
         nameLabel.textAlignment = .left
         nameLabel.textColor = .secondaryLabel
-        nameLabel.font = .systemFont(ofSize: 18, weight: .semibold)
+        nameLabel.font = .systemFont(ofSize: 15, weight: .semibold)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(nameLabel)
@@ -62,7 +62,7 @@ class PPSectionHeaderView: UIView {
         let button = UIButton(frame: .zero)
         button.setTitle("Clear", for: .normal)
         button.setTitleColor(.secondaryLabel, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
         button.titleLabel?.textAlignment = .right
         button.backgroundColor = .clear
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -75,7 +75,7 @@ class PPSectionHeaderView: UIView {
             button.topAnchor.constraint(equalTo: topAnchor),
             button.bottomAnchor.constraint(equalTo: bottomAnchor),
             button.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -70),
-            button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
     
