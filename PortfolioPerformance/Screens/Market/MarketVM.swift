@@ -32,16 +32,14 @@ class MarketViewModel {
             switch result {
             case .success(let index):
                 
-                let greedAndFearCardModel = MarketCardCellModel(
-                    headerTitle: "GreedAndFear Index",
-                    mainTitle: index.data[0].value,
-                    secondaryTitle: index.data[0].valueClassification,
-                    circularProgressBarType: .gradient,
-                    progress: (Float(index.data[0].value) ?? 0)/100,
-                    isGrowing: nil
-                    )
+                let greedAndFearCellViewModel = MarketCardsCollectionViewCellViewModel(
+                    metricName: "GreedAndFear Index",
+                    mainMetricValue: index.data[0].value,
+                    secondaryMetricValue: index.data[0].valueClassification,
+                    progressValue: (Float(index.data[0].value) ?? 0)/100,
+                    progressCircleType: .gradient)
                 
-                self.cardViewModels.value?.append(.init(model: greedAndFearCardModel))
+                self.cardViewModels.value?.append(greedAndFearCellViewModel)
                 
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue
@@ -59,28 +57,23 @@ class MarketViewModel {
                 let btcDominance = globalDataResponse.data.marketCapPercentage["btc"] ?? 0
                 
                 //Create model for Total Market Cap Card
-                let marketCapCardModel = MarketCardCellModel(
-                    headerTitle: "Total Market Cap",
-                    mainTitle: .bigNumberString(from: totalMarketCap),
-                    secondaryTitle: .percentageString(from: marketCapChangeFor24H),
-                    circularProgressBarType: .round,
-                    progress: Float(totalMarketCap / allTimeHighMarketCap),
-                    isGrowing: globalDataResponse.data.marketCapChangePercentage24HUsd >= 0
-                )
+                let marketCapCellViewModel = MarketCardsCollectionViewCellViewModel(
+                    metricName: "Total Market Cap",
+                    mainMetricValue: .bigNumberString(from: totalMarketCap),
+                    secondaryMetricValue: .percentageString(from: marketCapChangeFor24H),
+                    progressValue: Float(totalMarketCap / allTimeHighMarketCap),
+                    progressCircleType: .round)
                 
                 //Create model for BTC Dominance Card
-                let dominanceCardModel = MarketCardCellModel(
-                    headerTitle: "Bitcoin Dominance",
-                    mainTitle: .percentageString(from: btcDominance, positivePrefix: ""),
-                    secondaryTitle: "",
-                    circularProgressBarType: .round,
-                    progress: Float(btcDominance / 100),
-                    isGrowing: true
-                )
+                let dominanceCardModel = MarketCardsCollectionViewCellViewModel(
+                    metricName: "Bitcoin Dominance",
+                    mainMetricValue: .percentageString(from: btcDominance, positivePrefix: ""),
+                    secondaryMetricValue: "",
+                    progressValue: Float(btcDominance / 100),
+                    progressCircleType: .round)
                 
                 //Add card view models to the observable array
-                self.cardViewModels.value?.append(.init(model: marketCapCardModel))
-                self.cardViewModels.value?.append(.init(model: dominanceCardModel))
+                self.cardViewModels.value?.append(contentsOf: [marketCapCellViewModel,dominanceCardModel])
                 
                 
             case .failure(let error):

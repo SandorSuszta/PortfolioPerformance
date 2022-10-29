@@ -8,40 +8,42 @@
 import Foundation
 import UIKit
 
-class MarketCardsCollectionViewCellViewModel {
+struct MarketCardsCollectionViewCellViewModel {
     
-    let model: MarketCardCellModel
+    var metricName: String
     
-    var headerTitle: String {
-        model.headerTitle
-    }
+    var mainMetricValue: String
     
-    var mainTitle: String {
-        model.mainTitle
-    }
+    var secondaryMetricValue: String
     
-    var secondaryTitle: String {
-        model.secondaryTitle
-    }
+    var progressValue: Float
     
-    var progressValue: Float {
-        model.progress
-    }
+    var progressCircleType: CircularProgressBarType
     
-    var progressCircleType: CircularProgressBarType {
-        model.circularProgressBarType
-    }
-    
-    var changeColour: UIColor {
-        if let isGrowing = model.isGrowing {
-            return isGrowing ? .nephritis : .pomergranate
-        } else {
-            return .clouds
+    var secondaryMetricTextColor: UIColor {
+        switch progressCircleType {
+        case .round:
+            return Int(secondaryMetricValue) ?? 0 >= 0 ? .nephritis : .pomergranate
+        case .gradient:
+            return determineColorBasedOn(indexValue: Int(mainMetricValue) ?? 0)
         }
     }
     
-    init (model: MarketCardCellModel) {
-        self.model = model
+    private func determineColorBasedOn(indexValue: Int) -> UIColor {
+        
+        switch indexValue {
+        case 0...20:
+            return .pomergranate
+        case 21...40:
+            return .alizarin
+        case 41...54:
+            return .carrot
+        case 55...74:
+            return .emerald
+        case 75...100:
+            return .nephritis
+        default:
+            fatalError()
+        }
     }
-    
 }

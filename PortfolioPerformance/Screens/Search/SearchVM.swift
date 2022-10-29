@@ -11,9 +11,9 @@ class SearchScreenViewModel {
     
     //MARK: - Observable properties
     
-    var defaultCellModels: ObservableObject<[[SearchResult]]> = ObservableObject(value: [])
+    var defaultCellModels: ObservableObject<[[SearchResult]]> = ObservableObject(value: [[],[]])
     
-    var searchResultCellModels: ObservableObject<[SearchResult]> = ObservableObject(value: nil)
+    var searchResultCellModels: ObservableObject<[SearchResult]> = ObservableObject(value: [])
     
     var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
     
@@ -52,7 +52,7 @@ class SearchScreenViewModel {
     }
     
     func clearRecentSearches() {
-        defaultCellModels.value?.remove(at: 0)
+        defaultCellModels.value?[0] = []
     }
     
     //MARK: - Private methods
@@ -68,7 +68,7 @@ class SearchScreenViewModel {
             
             switch result {
             case .success(let coinModels):
-               
+                
                 var recentSearchesModels: [SearchResult] = coinModels.compactMap {
                     SearchResult(
                         id: $0.id,
@@ -85,13 +85,7 @@ class SearchScreenViewModel {
                     list.firstIndex(of: $0.id) ?? 0 > list.firstIndex(of: $1.id) ?? 0
                 }
                 
-                if self.defaultCellModels.value?.count == 2 {
-                    //Update recent search models
-                    self.defaultCellModels.value?[0] = recentSearchesModels
-                } else {
-                    //Insert recent search models before trending coin models
-                    self.defaultCellModels.value?.insert(recentSearchesModels, at: 0)
-                }
+                self.defaultCellModels.value?[0] = recentSearchesModels
                 
             case .failure(let error):
                 self.errorMessage.value = error.rawValue
@@ -108,7 +102,7 @@ class SearchScreenViewModel {
                 let trendingCoins: [SearchResult] = response.coins.compactMap {
                     $0.item
                 }
-                self.defaultCellModels.value?.append(trendingCoins)
+                self.defaultCellModels.value?[1] = trendingCoins
             case .failure(let error):
                 self.errorMessage.value = error.rawValue
             }

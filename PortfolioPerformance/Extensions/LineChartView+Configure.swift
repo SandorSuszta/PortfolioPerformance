@@ -45,7 +45,7 @@ extension LineChartView {
         //animate(xAxisDuration: 1)
         
         //Gradient
-        let gradientColors = [color.cgColor, UIColor.white.cgColor] as CFArray // Colors of the gradient
+        let gradientColors = [color.cgColor, UIColor.PPSystemBackground.cgColor] as CFArray // Colors of the gradient
         let colorLocations:[CGFloat] = [1.0, 0.0] // Positioning of the gradient
         let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: gradientColors, locations: colorLocations) // Gradient Object
         dataSet.fill = LinearGradientFill(gradient: gradient!, angle: 90.0) // Set gradient

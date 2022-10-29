@@ -1,5 +1,11 @@
 import UIKit
 
+enum SearchBarStatus {
+    case searching
+    case emptyWithRecents
+    case emptyWithoutRecents
+}
+
 class SearchScreenViewController: UIViewController {
 
     private var viewModel = SearchScreenViewModel()
@@ -8,11 +14,18 @@ class SearchScreenViewController: UIViewController {
     
     private var isSearching: Bool = false
     
+    private var searchBarStatus: SearchBarStatus {
+        determineSearchBarStatus(
+            isSearching: isSearching,
+            isRecentSearchesEmpty: viewModel.defaultCellModels.value?[0].isEmpty ?? true
+        )
+    }
+    
     lazy var searchBar = UISearchBar()
     
     private let resultsTableView: UITableView = {
         let table = UITableView()
-        table.backgroundColor = .systemGray6
+        table.backgroundColor = .PPSecondarySystemBackground
         table.register(
             ResultsTableViewCell.self,
             forCellReuseIdentifier: ResultsTableViewCell.identifier
@@ -24,7 +37,8 @@ class SearchScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        UserDefaultsManager.shared.clearRecentSearchesIDs()
         setUpResultsTableVIew()
         setUpSearchBar()
         bindViewModels()
@@ -82,6 +96,18 @@ class SearchScreenViewController: UIViewController {
             self?.showAlert(message: message)
         }
     }
+    
+    private func determineSearchBarStatus(isSearching: Bool, isRecentSearchesEmpty: Bool) -> SearchBarStatus {
+        
+        switch (isSearching, isRecentSearchesEmpty) {
+        case (true, _):
+            return .searching
+        case (false, false):
+            return .emptyWithRecents
+        case (false, true):
+            return .emptyWithoutRecents
+        }
+    }
 }
 
     //MARK: - TableView data source methods
@@ -106,30 +132,38 @@ extension SearchScreenViewController: UITableViewDataSource {
             for: indexPath
         ) as? ResultsTableViewCell else { return UITableViewCell() }
         
-        if let searchResults = viewModel.searchResultCellModels.value {
-            
-            cell.configure(with: searchResults[indexPath.row])
-            
+        var model: SearchResult?
+        
+        if isSearching {
+            model = viewModel.searchResultCellModels.value?[indexPath.row]
         } else {
-            
-            guard let model = viewModel.defaultCellModels.value?[indexPath.section][indexPath.row] else { return UITableViewCell() }
-            
-            cell.configure(with: model)
+            model = viewModel.defaultCellModels.value?[indexPath.section][indexPath.row]
         }
+        
+        guard let model else { return UITableViewCell() }
+        
+        cell.configure(with: model)
         
         return cell
     }
 }
-    
     //MARK: - TableView delegate methods
     
 extension SearchScreenViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if isSearching {
-            return nil
-        } else {
+        
+        let trendingCoinsHeader = PPSectionHeaderView(type: .trendingCoins, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
+        
+        switch searchBarStatus {
             
+        case .searching:
+            return nil
+            
+        case .emptyWithoutRecents:
+            return [nil, trendingCoinsHeader][section]
+            
+        case .emptyWithRecents:
             let recentSearchesHeader = PPSectionHeaderView(type: .recentSearches, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
             
             recentSearchesHeader.buttonAction = { [weak self] in
@@ -137,22 +171,28 @@ extension SearchScreenViewController: UITableViewDelegate {
                 UserDefaultsManager.shared.clearRecentSearchesIDs()
             }
             
-            let trendingCoinsHeader = PPSectionHeaderView(type: .trendingCoins, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
-            
-            return UserDefaultsManager.shared.recentSearchesIDs.isEmpty ? trendingCoinsHeader : [recentSearchesHeader, trendingCoinsHeader][section]
+            return [recentSearchesHeader,trendingCoinsHeader][section]
         }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        isSearching ? 0 : PPSectionHeaderView.preferredHeight
+        
+        switch searchBarStatus {
+        case .searching:
+            return 0
+        case .emptyWithoutRecents:
+            return [0, PPSectionHeaderView.preferredHeight][section]
+        case .emptyWithRecents:
+            return PPSectionHeaderView.preferredHeight
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         var model: SearchResult?
         
-        if let searchResults = viewModel.searchResultCellModels.value {
-            model = searchResults[indexPath.row]
+        if isSearching {
+            model = viewModel.searchResultCellModels.value?[indexPath.row]
         } else {
             model = viewModel.defaultCellModels.value?[indexPath.section][indexPath.row]
         }
@@ -184,13 +224,12 @@ extension SearchScreenViewController: UITableViewDelegate {
     }
 }
 
-    //MARK: - Results Updating methods
+    //MARK: - Search bar delegate methods
+
 extension SearchScreenViewController: UISearchBarDelegate  {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if let query = searchBar.text,
-           !query.trimmingCharacters(in: .whitespaces).isEmpty
-        {
+        if let query = searchBar.text, !query.isEmpty {
             isSearching = true
             searchTimer?.invalidate()
             searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
@@ -200,6 +239,14 @@ extension SearchScreenViewController: UISearchBarDelegate  {
             isSearching = false
             viewModel.clearSearchModels()
         }
-    }    
-}
+    }
     
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        let allowedChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        let allowedCharSet = CharacterSet(charactersIn: allowedChars)
+        let typedCharSet = CharacterSet(charactersIn: text)
+        
+        return allowedCharSet.isSuperset(of: typedCharSet)
+    }
+}

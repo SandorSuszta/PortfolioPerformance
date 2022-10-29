@@ -117,36 +117,20 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
     public func configureCard(with viewModel: MarketCardsCollectionViewCellViewModel) {
         progressBar.type = viewModel.progressCircleType
         progressBar.progress = viewModel.progressValue
-        progressBar.color = viewModel.changeColour.cgColor
+        progressBar.color = viewModel.secondaryMetricTextColor.cgColor
         
-        headerTitle.text = viewModel.headerTitle
-        mainTitle.text = viewModel.mainTitle
-        secondaryTitle.text = viewModel.secondaryTitle
+        headerTitle.text = viewModel.metricName
+        mainTitle.text = viewModel.mainMetricValue
+        secondaryTitle.text = viewModel.secondaryMetricValue
         
         switch progressBar.type {
             
         case .round:
-            secondaryTitle.textColor = viewModel.changeColour
-            secondaryTitle.text = viewModel.secondaryTitle
+            secondaryTitle.textColor = viewModel.secondaryMetricTextColor
+            secondaryTitle.text = viewModel.secondaryMetricValue
             
         case .gradient:
-            secondaryTitle.text = viewModel.secondaryTitle
-            
-            //Change label color based on the GreedAbdFear index value
-            switch Int(viewModel.mainTitle) ?? 0 {
-            case 0...20:
-                secondaryTitle.textColor = .pomergranate
-            case 21...40:
-                secondaryTitle.textColor = .alizarin
-            case 41...54:
-                secondaryTitle.textColor = .carrot
-            case 55...74:
-                secondaryTitle.textColor = .emerald
-            case 75...100:
-                secondaryTitle.textColor = .nephritis
-            default:
-                fatalError()
-            }
+            secondaryTitle.text = viewModel.secondaryMetricValue
         }
     }
     

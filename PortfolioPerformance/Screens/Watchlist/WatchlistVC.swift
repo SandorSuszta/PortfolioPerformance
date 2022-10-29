@@ -167,5 +167,4 @@ class WatchlistViewController: UIViewController {
             
             self.navigationController?.pushViewController(detailsVC, animated: true)
         }
-       
     }

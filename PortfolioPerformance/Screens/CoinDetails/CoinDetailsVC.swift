@@ -55,7 +55,7 @@ class CoinDetailsVC: UIViewController {
     private var coinLogoShadowView: UIImageView = {
         let view = UIImageView()
         view.configureWithShadow()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .PPSystemBackground
         return view
     }()
     

@@ -46,6 +46,9 @@ struct UserDefaultsManager {
         defaults.set([], forKey: recentSearchesKey)
     }
     
+    func clearWatchlist() {
+        defaults.set([], forKey: watchlistKey)
+    }
 //    static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 //
 //    static func saveUpdates () {
