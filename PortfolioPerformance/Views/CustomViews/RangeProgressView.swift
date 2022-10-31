@@ -1,35 +1,41 @@
 import UIKit
 
 class RangeProgressView: UIView {
+    
     public var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         return label
     }()
+    
     public var leftTopLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .regular)
         label.textColor = .darkGray
         return label
     }()
+    
     public var leftBottomLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 10, weight: .regular)
         label.textColor = .nephritis
         return label
     }()
+    
     public var rightTopLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .regular)
         label.textColor = .darkGray
         return label
     }()
+    
     public var rightBottomLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 10, weight: .regular)
         label.textColor = .pomergranate
         return label
     }()
+    
     public var progressBar: CustomProgressView = {
         let progress = CustomProgressView()
         progress.customHeight = 10

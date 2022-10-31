@@ -7,9 +7,9 @@ enum CircularProgressBarType {
 
 class CircularProgressBar: UIView {
     
-    public var type: CircularProgressBarType
-    public var progress: Float
-    public var color: CGColor
+    var type: CircularProgressBarType
+    var progress: Float
+    var color: CGColor
     
     private let shapeLayer = CAShapeLayer()
     private let trackLayer = CAShapeLayer()
@@ -23,6 +23,7 @@ class CircularProgressBar: UIView {
         self.progress = progress
         self.color = color
         super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder: NSCoder) {

@@ -27,12 +27,12 @@
 		7934EFB6283E45A700CE7FD0 /* HoldingPerfomanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFB5283E45A700CE7FD0 /* HoldingPerfomanceModel.swift */; };
 		7934EFB8283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFB7283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift */; };
 		7934EFBA2841600A00CE7FD0 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFB92841600A00CE7FD0 /* CustomProgressBar.swift */; };
-		7937CE1B28F5E40100B80C71 /* PPGreedAndFearBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7937CE1A28F5E40100B80C71 /* PPGreedAndFearBar.swift */; };
 		7937CE1E28F6E30600B80C71 /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7937CE1D28F6E30600B80C71 /* SearchVM.swift */; };
 		7941061227E0D84F009B4B8C /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7941061127E0D84F009B4B8C /* DateFormatter.swift */; };
 		79410D8D2823D3E700BD9EA4 /* UIView+Framing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79410D8C2823D3E700BD9EA4 /* UIView+Framing.swift */; };
 		79410D8F282416C000BD9EA4 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79410D8E282416C000BD9EA4 /* SearchVC.swift */; };
 		7955694928773472003E8A13 /* SortOptionsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955694828773472003E8A13 /* SortOptionsCollectionViewCell.swift */; };
+		795E43F62910017D0016F3C3 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795E43F52910017D0016F3C3 /* EmptyStateView.swift */; };
 		7961C37428EB2A010006B9A7 /* PPErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7961C37328EB2A010006B9A7 /* PPErrors.swift */; };
 		796EFA1E284771C3005E24AF /* Floating label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA1D284771C3005E24AF /* Floating label.swift */; };
 		796EFA27285A1FF9005E24AF /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA26285A1FF9005E24AF /* CircularProgressBar.swift */; };
@@ -92,12 +92,12 @@
 		7934EFB5283E45A700CE7FD0 /* HoldingPerfomanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingPerfomanceModel.swift; sourceTree = "<group>"; };
 		7934EFB7283E4AB800CE7FD0 /* PortfolioPerfomanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioPerfomanceModel.swift; sourceTree = "<group>"; };
 		7934EFB92841600A00CE7FD0 /* CustomProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressBar.swift; sourceTree = "<group>"; };
-		7937CE1A28F5E40100B80C71 /* PPGreedAndFearBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPGreedAndFearBar.swift; sourceTree = "<group>"; };
 		7937CE1D28F6E30600B80C71 /* SearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVM.swift; sourceTree = "<group>"; };
 		7941061127E0D84F009B4B8C /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		79410D8C2823D3E700BD9EA4 /* UIView+Framing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Framing.swift"; sourceTree = "<group>"; };
 		79410D8E282416C000BD9EA4 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		7955694828773472003E8A13 /* SortOptionsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionsCollectionViewCell.swift; sourceTree = "<group>"; };
+		795E43F52910017D0016F3C3 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		7961C37328EB2A010006B9A7 /* PPErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPErrors.swift; sourceTree = "<group>"; };
 		796EFA1D284771C3005E24AF /* Floating label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Floating label.swift"; sourceTree = "<group>"; };
 		796EFA26285A1FF9005E24AF /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
@@ -169,8 +169,9 @@
 				79D5B8E728EEE3FF00178402 /* PPButton.swift */,
 				79D5B8E328EDB85100178402 /* PPAlertVC.swift */,
 				79EC45B428F0B9DC006A849A /* PPSegmentedControl.swift */,
-				7937CE1A28F5E40100B80C71 /* PPGreedAndFearBar.swift */,
 				79AAF82928FB358A009F3B85 /* PPSectionHeaderView.swift */,
+				792B0FC6287F03080040B461 /* MainTabBarController.swift */,
+				795E43F52910017D0016F3C3 /* EmptyStateView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -279,7 +280,6 @@
 		79E7A21528E5F9CD00BD5CB0 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				792B0FC6287F03080040B461 /* MainTabBarController.swift */,
 				79E7A21828E5FB4700BD5CB0 /* Market */,
 				79E7A22428E602FC00BD5CB0 /* Watchlist */,
 				79E7A22228E6025300BD5CB0 /* CoinDetails */,
@@ -511,7 +511,6 @@
 				7934EFA4282A824E00CE7FD0 /* ResultsTableViewCell.swift in Sources */,
 				7934EFAA28352A1A00CE7FD0 /* UIImageView+SetImage.swift in Sources */,
 				792C040928C9E62B008EE48C /* RangeProgressView.swift in Sources */,
-				7937CE1B28F5E40100B80C71 /* PPGreedAndFearBar.swift in Sources */,
 				796EFA3A286DDD60005E24AF /* ObservableObject.swift in Sources */,
 				790C30C827CEAA200021658F /* DataModel.xcdatamodeld in Sources */,
 				79D5B8E628EEDABC00178402 /* UIViewController+ShowAlert.swift in Sources */,
@@ -530,6 +529,7 @@
 				79410D8D2823D3E700BD9EA4 /* UIView+Framing.swift in Sources */,
 				79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */,
 				79E7A21728E5FAF000BD5CB0 /* MarketVC.swift in Sources */,
+				795E43F62910017D0016F3C3 /* EmptyStateView.swift in Sources */,
 				79326299280423E1005E4D2E /* HoldingsTableViewCell.swift in Sources */,
 				792223F528FD7F82001B0C8C /* CoinDetailsVC.swift in Sources */,
 				790C30C227C78E930021658F /* GreedAndFearModel.swift in Sources */,

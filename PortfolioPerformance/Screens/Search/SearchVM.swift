@@ -13,7 +13,7 @@ class SearchScreenViewModel {
     
     var defaultCellModels: ObservableObject<[[SearchResult]]> = ObservableObject(value: [[],[]])
     
-    var searchResultCellModels: ObservableObject<[SearchResult]> = ObservableObject(value: [])
+    var searchResultCellModels: ObservableObject<[SearchResult]> = ObservableObject(value: nil)
     
     var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
     

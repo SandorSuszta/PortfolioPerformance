@@ -33,7 +33,7 @@ class MarketViewModel {
             case .success(let index):
                 
                 let greedAndFearCellViewModel = MarketCardsCollectionViewCellViewModel(
-                    metricName: "GreedAndFear Index",
+                    metricName: "Greed And Fear Index",
                     mainMetricValue: index.data[0].value,
                     secondaryMetricValue: index.data[0].valueClassification,
                     progressValue: (Float(index.data[0].value) ?? 0)/100,

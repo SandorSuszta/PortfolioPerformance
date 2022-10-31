@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "titleLogo.png",
+      "filename" : "NoResultLight.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +12,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "titleLogoDark.png",
+      "filename" : "NoResultDark.png",
       "idiom" : "universal",
       "scale" : "1x"
     },

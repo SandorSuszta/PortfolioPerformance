@@ -7,6 +7,6 @@
 
 enum PPError: String, Error {
     case netwokingError = "Server is not responding"
-    case decodingError = "Invalid data from the server"
+    case decodingError = "Server is not responding, please try again later"
     case invalidUrl = "The requested URL is invalid"
 }

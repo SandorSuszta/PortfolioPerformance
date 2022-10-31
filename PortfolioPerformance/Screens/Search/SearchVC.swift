@@ -8,6 +8,8 @@ enum SearchBarStatus {
 
 class SearchScreenViewController: UIViewController {
 
+    //MARK: - Properties
+    
     private var viewModel = SearchScreenViewModel()
     
     private var searchTimer: Timer?
@@ -17,30 +19,35 @@ class SearchScreenViewController: UIViewController {
     private var searchBarStatus: SearchBarStatus {
         determineSearchBarStatus(
             isSearching: isSearching,
-            isRecentSearchesEmpty: viewModel.defaultCellModels.value?[0].isEmpty ?? true
-        )
+            isRecentSearchesEmpty: viewModel.defaultCellModels.value?[0].isEmpty ?? true)
     }
     
-    lazy var searchBar = UISearchBar()
+    lazy private var searchBar = UISearchBar()
     
     private let resultsTableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = .PPSecondarySystemBackground
+        table.sectionHeaderTopPadding = 0
         table.register(
             ResultsTableViewCell.self,
             forCellReuseIdentifier: ResultsTableViewCell.identifier
         )
         return table
     }()
-   
+    
+    private let noResultsView = EmptyStateView(
+        text: "Sorry, nothing found",
+        imageName: "NoResult")
+        
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        UserDefaultsManager.shared.clearRecentSearchesIDs()
+
         setUpResultsTableVIew()
+        view.addSubview(noResultsView)
         setUpSearchBar()
+        setupConstraints()
         bindViewModels()
         
         //Delete BackButton title on pushed screen
@@ -73,28 +80,57 @@ class SearchScreenViewController: UIViewController {
         view.addSubview(resultsTableView)
         resultsTableView.delegate = self
         resultsTableView.dataSource = self
-        resultsTableView.sectionHeaderTopPadding = 0
     }
     
     private func bindViewModels() {
         
         viewModel.searchResultCellModels.bind { [weak self] _ in
+            guard let self else { return }
+      
             DispatchQueue.main.async {
-                self?.resultsTableView.reloadData()
+                self.resultsTableView.reloadData()
+                
+                guard let models = self.viewModel.searchResultCellModels.value else {
+                    self.noResultsView.isHidden = true
+                    return
+                }
+                
+                if models.isEmpty {
+                    self.noResultsView.isHidden = false
+                }
             }
         }
         
         viewModel.defaultCellModels.bind { [weak self] _ in
+            guard let self = self else { return }
+            
             DispatchQueue.main.async {
-                self?.resultsTableView.reloadData()
+                self.resultsTableView.reloadData()
             }
         }
         
         viewModel.errorMessage.bind { [weak self] message in
-            guard let message = message else { return }
+            guard
+                let self = self,
+                let message = message
+            else {
+                return
+            }
             
-            self?.showAlert(message: message)
+            self.showAlert(message: message)
         }
+    }
+    
+    private func setupConstraints() {
+        view.backgroundColor = .red
+        NSLayoutConstraint.activate([
+            noResultsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            noResultsView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            noResultsView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1 / 2),
+            noResultsView.heightAnchor.constraint(equalTo: noResultsView.widthAnchor, constant: 60)
+            
+        ])
+        
     }
     
     private func determineSearchBarStatus(isSearching: Bool, isRecentSearchesEmpty: Bool) -> SearchBarStatus {
@@ -123,7 +159,6 @@ extension SearchScreenViewController: UITableViewDataSource {
         
         isSearching ? viewModel.searchResultCellModels.value?.count ?? 0 : viewModel.defaultCellModels.value?[section].count ?? 0
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -231,6 +266,8 @@ extension SearchScreenViewController: UISearchBarDelegate  {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let query = searchBar.text, !query.isEmpty {
             isSearching = true
+            noResultsView.isHidden = true
+            
             searchTimer?.invalidate()
             searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
                 self.viewModel.updateSearchResults(query: query)
