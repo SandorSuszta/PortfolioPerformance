@@ -1,14 +1,15 @@
 import UIKit
 
-enum SearchBarStatus {
-    case searching
-    case emptyWithRecents
-    case emptyWithoutRecents
-}
 
 class SearchScreenViewController: UIViewController {
 
     //MARK: - Properties
+    
+    enum SearchBarStatus {
+        case searching
+        case emptyWithRecents
+        case emptyWithoutRecents
+    }
     
     private var viewModel = SearchScreenViewModel()
     
@@ -122,7 +123,7 @@ class SearchScreenViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        view.backgroundColor = .red
+
         NSLayoutConstraint.activate([
             noResultsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             noResultsView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -130,7 +131,6 @@ class SearchScreenViewController: UIViewController {
             noResultsView.heightAnchor.constraint(equalTo: noResultsView.widthAnchor, constant: 60)
             
         ])
-        
     }
     
     private func determineSearchBarStatus(isSearching: Bool, isRecentSearchesEmpty: Bool) -> SearchBarStatus {

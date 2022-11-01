@@ -30,7 +30,7 @@ class NetworkingManager {
     private func request<T:Codable>(
         url: URL?,
         expectingType: T.Type,
-        completion: @escaping (Result<T, PPError>) -> Void
+        completion: @escaping (Result<T, CustomErrors>) -> Void
     ){
         guard let url = url else {
             completion(.failure(.invalidUrl))
@@ -57,7 +57,7 @@ class NetworkingManager {
     //MARK: - Greed And Fear Index
     
     public func requestGreedAndFearIndex (
-        completion: @escaping (Result<GreedAndFearModel, PPError>) -> Void
+        completion: @escaping (Result<GreedAndFearModel, CustomErrors>) -> Void
     ){
         guard let url = URL(string: Constants.requestGreedAndFearIndexBaseUrl) else {
             completion(.failure(.invalidUrl))
@@ -74,7 +74,7 @@ class NetworkingManager {
     //MARK: - Total Market Cap
     
     public func requestGlobalData(
-        completion: @escaping (Result<GlobalDataResponse, PPError>) -> Void
+        completion: @escaping (Result<GlobalDataResponse, CustomErrors>) -> Void
     ){
         guard let url = URL(string: Constants.requestGlobalDataBaseUrl) else {
             completion(.failure(.invalidUrl))
@@ -91,7 +91,7 @@ class NetworkingManager {
     //MARK: - All Crypto Data
     
     public func requestCryptoCurrenciesData(
-        completion: @escaping (Result<[CoinModel], PPError>) -> Void
+        completion: @escaping (Result<[CoinModel], CustomErrors>) -> Void
     ){
         guard let url = URL(string: Constants.requestAllCryptoCurrenciesDataBaseUrl) else {
             completion(.failure(.invalidUrl))
@@ -109,7 +109,7 @@ class NetworkingManager {
     
     public func requestDataForList(
         list: [String],
-        completion: @escaping (Result<[CoinModel], PPError>) -> Void
+        completion: @escaping (Result<[CoinModel], CustomErrors>) -> Void
     ){
         
         request(
@@ -124,7 +124,7 @@ class NetworkingManager {
     public func requestDataForChart(
         coinID: String,
         intervalInDays: Int,
-        completion: @escaping (Result<PriceModels, PPError>) -> Void
+        completion: @escaping (Result<PriceModels, CustomErrors>) -> Void
     ){
         request(
             url: constructURL(for: coinID, for: intervalInDays),
@@ -137,7 +137,7 @@ class NetworkingManager {
     
     public func requestData(
         for ID: String,
-        completion: @escaping (Result<SingleCoinModel, PPError>) -> Void
+        completion: @escaping (Result<SingleCoinModel, CustomErrors>) -> Void
     ){
         let endpointString = "https://api.coingecko.com/api/v3/coins/\(ID)?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"
         
@@ -157,7 +157,7 @@ class NetworkingManager {
     
     public func searchWith(
         query: String,
-        completion: @escaping (Result<SearchResponse, PPError>) -> Void
+        completion: @escaping (Result<SearchResponse, CustomErrors>) -> Void
     ){
         
         guard let url = URL(string: Constants.searchBaseUrl + query) else {
@@ -175,7 +175,7 @@ class NetworkingManager {
     //MARK: - Trending
     
     public func requestTrendingCoins(
-        completion: @escaping (Result<TrendingResponse, PPError>) -> Void
+        completion: @escaping (Result<TrendingResponse, CustomErrors>) -> Void
     ){
         
         guard let url = URL(string: Constants.trendingBaseUrl) else {

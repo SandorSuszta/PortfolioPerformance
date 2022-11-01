@@ -44,8 +44,8 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
     
     private let logoContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray6
         view.configureWithShadow()
+        view.backgroundColor = .logoBackground
         return view
     }()
     
@@ -53,6 +53,7 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFit
+        image.backgroundColor = .clear
         return image
     }()
     

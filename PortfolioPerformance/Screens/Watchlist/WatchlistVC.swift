@@ -12,21 +12,16 @@ class WatchlistViewController: UIViewController {
     private let watchlistVM = WatchlistViewModel()
 
     private let watchlistTableView = UITableView()
-    
-    private let emptyWatchlistLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Watchlist is empty..."
-        label.font = .systemFont(ofSize: 26, weight: .bold)
-        label.textColor = .secondaryLabel
-        return label
-    }()
 
+    private let emptyWatchlistView = EmptyStateView(text: "Favourite list  is empty", imageName: "NoFavourites")
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
         setupTableView()
+        setupConstraints()
         bindViewModel()
     }
     
@@ -44,6 +39,7 @@ class WatchlistViewController: UIViewController {
     private func setupVC() {
         view.backgroundColor = .systemGray6
         self.title = "Watchlist"
+        view.addSubview(emptyWatchlistView)
         
         //Delete BackButton title on pushed screen
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -62,12 +58,21 @@ class WatchlistViewController: UIViewController {
         )
     }
     
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            emptyWatchlistView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyWatchlistView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            emptyWatchlistView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1 / 2),
+            emptyWatchlistView.heightAnchor.constraint(equalTo: emptyWatchlistView.widthAnchor, constant: 60)
+        ])
+    }
+    
     private func updateTableWithWatchlist() {
         if UserDefaultsManager.shared.watchlistIDs.isEmpty {
             watchlistVM.cellViewModels.value = []
-            emptyWatchlistLabel.isHidden = false
+            emptyWatchlistView.isHidden = false
         } else {
-            emptyWatchlistLabel.isHidden = true
+            emptyWatchlistView.isHidden = true
             watchlistVM.loadWatchlistCryptoCurrenciesData(
                 list: UserDefaultsManager.shared.watchlistIDs
             )
@@ -92,15 +97,6 @@ class WatchlistViewController: UIViewController {
             y: 100,
             width: view.width - 30,
             height: view.height - 80
-        )
-        
-        view.addSubview(emptyWatchlistLabel)
-        emptyWatchlistLabel.sizeToFit()
-        emptyWatchlistLabel.frame = CGRect(
-            x: view.width / 2 - emptyWatchlistLabel.width / 2,
-            y: view.height / 2 - emptyWatchlistLabel.height / 2,
-            width: emptyWatchlistLabel.width,
-            height: emptyWatchlistLabel.height
         )
     }
 }
@@ -148,7 +144,7 @@ class WatchlistViewController: UIViewController {
                 tableView.endUpdates()
                 
                 if UserDefaultsManager.shared.watchlistIDs.isEmpty {
-                    emptyWatchlistLabel.isHidden = false
+                    emptyWatchlistView.isHidden = false
                 }
             }
         }

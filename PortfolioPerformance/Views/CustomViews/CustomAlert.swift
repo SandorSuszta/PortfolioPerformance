@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PPCustomAlertVC: UIViewController {
+class CustomAlertVC: UIViewController {
     
     public var alertText: String
 

@@ -10,28 +10,28 @@ class RangeProgressView: UIView {
     
     public var leftTopLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .regular)
-        label.textColor = .darkGray
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textColor = .label
         return label
     }()
     
     public var leftBottomLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 10, weight: .regular)
+        label.font = .systemFont(ofSize: 12, weight: .regular)
         label.textColor = .nephritis
         return label
     }()
     
     public var rightTopLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .regular)
-        label.textColor = .darkGray
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textColor = .label
         return label
     }()
     
     public var rightBottomLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 10, weight: .regular)
+        label.font = .systemFont(ofSize: 12, weight: .regular)
         label.textColor = .pomergranate
         return label
     }()
@@ -40,8 +40,8 @@ class RangeProgressView: UIView {
         let progress = CustomProgressView()
         progress.customHeight = 10
         progress.trackTintColor
-        = .pinkGlamour
-        progress.progressTintColor = .emerald
+        = .priceRangeRed
+        progress.progressTintColor = .priceRangeGreen
         progress.layer.cornerRadius = 6
         progress.clipsToBounds = true
         return progress

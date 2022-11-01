@@ -29,5 +29,29 @@ extension UIColor {
             return traits.userInterfaceStyle == .light ? .secondarySystemBackground : .systemBackground
         }
     }()
+    
+    static var favouriteButtonColor: UIColor = {
+        return UIColor { (traits) -> UIColor in
+            return traits.userInterfaceStyle == .light ? .black : .systemYellow
+        }
+    }()
+    
+    static var priceRangeRed: UIColor = {
+        return UIColor { (traits) -> UIColor in
+            return traits.userInterfaceStyle == .light ? .pomergranate.withAlphaComponent(0.7) : .pomergranate
+        }
+    }()
+    
+    static var priceRangeGreen: UIColor = {
+        return UIColor { (traits) -> UIColor in
+            return traits.userInterfaceStyle == .light ? .nephritis.withAlphaComponent(0.7) : .nephritis
+        }
+    }()
+    
+    static var logoBackground: UIColor = {
+        return UIColor { (traits) -> UIColor in
+            return traits.userInterfaceStyle == .light ? .systemBackground : .systemFill
+        }
+    }()
 }
 

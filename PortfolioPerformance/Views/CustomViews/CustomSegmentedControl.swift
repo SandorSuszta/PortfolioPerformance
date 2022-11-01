@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PPSegmentedControl: UISegmentedControl {
+class CustomSegmentedControl: UISegmentedControl {
     
     //MARK: - Init
     

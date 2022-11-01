@@ -9,7 +9,7 @@ import UIKit
 
 extension UIViewController {
     public func showAlert(message: String) {
-        let alert = PPCustomAlertVC (text: message)
+        let alert = CustomAlertVC (text: message)
         alert.modalTransitionStyle = .crossDissolve
         alert.modalPresentationStyle = .overFullScreen
         DispatchQueue.main.async {

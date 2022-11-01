@@ -60,6 +60,5 @@ class EmptyStateView: UIView {
             textLabel.widthAnchor.constraint(equalTo: self.widthAnchor),
             textLabel.heightAnchor.constraint(equalToConstant: 40)
         ])
-        
     }
 }

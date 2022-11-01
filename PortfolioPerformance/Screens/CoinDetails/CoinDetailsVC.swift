@@ -55,7 +55,7 @@ class CoinDetailsVC: UIViewController {
     private var coinLogoShadowView: UIImageView = {
         let view = UIImageView()
         view.configureWithShadow()
-        view.backgroundColor = .PPSystemBackground
+        view.backgroundColor = .logoBackground
         return view
     }()
     
@@ -63,6 +63,7 @@ class CoinDetailsVC: UIViewController {
         let view = UIImageView()
         view.layer.cornerRadius = 15
         view.layer.masksToBounds = true
+        view.backgroundColor = .clear
         return view
     }()
     
@@ -323,7 +324,7 @@ class CoinDetailsVC: UIViewController {
             navigationItem.rightBarButtonItem?.tintColor = .systemYellow
         } else {
             navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
-            navigationItem.rightBarButtonItem?.tintColor = .black
+            navigationItem.rightBarButtonItem?.tintColor = .favouriteButtonColor
         }
     }
     
@@ -369,7 +370,7 @@ class CoinDetailsVC: UIViewController {
     }
     
     private func setupSegmentedControl() {
-        timeIntervalSelection = PPSegmentedControl(items: coinDetailsVM.chartIntervals)
+        timeIntervalSelection = CustomSegmentedControl(items: coinDetailsVM.chartIntervals)
         timeIntervalSelection.addTarget(self, action: #selector(didChangeSegment(_:)) , for: .valueChanged)
     }
     

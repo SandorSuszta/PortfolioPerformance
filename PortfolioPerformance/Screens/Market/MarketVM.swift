@@ -36,7 +36,7 @@ class MarketViewModel {
                     metricName: "Greed And Fear Index",
                     mainMetricValue: index.data[0].value,
                     secondaryMetricValue: index.data[0].valueClassification,
-                    progressValue: (Float(index.data[0].value) ?? 0)/100,
+                    progressValue: (Float(index.data[0].value) ?? 0) / 100,
                     progressCircleType: .gradient)
                 
                 self.cardViewModels.value?.append(greedAndFearCellViewModel)

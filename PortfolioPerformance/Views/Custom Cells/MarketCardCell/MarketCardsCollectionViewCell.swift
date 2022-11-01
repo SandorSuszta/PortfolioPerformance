@@ -143,7 +143,7 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
             
             secondaryTitle.topAnchor.constraint(equalTo: mainTitle.bottomAnchor),
             secondaryTitle.centerXAnchor.constraint(equalTo: mainTitle.centerXAnchor),
-            secondaryTitle.widthAnchor.constraint(equalTo: mainTitle.widthAnchor, multiplier: 1 / 1.6)
+            secondaryTitle.widthAnchor.constraint(equalTo: mainTitle.widthAnchor, multiplier: 1 / 1.8)
         ])
         
     }
