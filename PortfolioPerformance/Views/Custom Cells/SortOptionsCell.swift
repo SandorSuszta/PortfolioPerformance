@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class SortOptionsCollectionViewCell: UICollectionViewCell {
+class SortOptionsCell: UICollectionViewCell {
     
-    static let identifier = "SortOptionsCollectionViewCell"
+    static let identifier = "SortOptionCell"
     static let preferredHeight: CGFloat = 20
     static let preferredWidth: CGFloat = 90
     
@@ -22,29 +22,29 @@ class SortOptionsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    //Configure selected cell
     override var isSelected: Bool {
         didSet {
             sortingNameLabel.textColor = isSelected ? .PPblue : .systemGray
             sortingNameLabel.font = isSelected ? .systemFont(ofSize: 13, weight: .medium) : .systemFont(ofSize: 12, weight: .regular)
-             
-//            contentView.backgroundColor = isSelected ? .clouds : .clear
-//            sortingNameLabel.layer.shadowRadius = isSelected ? 5.0 : 0.0
         }
     }
+    
     override init(frame: CGRect) {
         super .init(frame: frame)
         sortingNameLabel.frame = contentView.bounds
         contentView.addSubview(sortingNameLabel)
-        
+        configureContentView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureContentView() {
         contentView.layer.cornerRadius = 10
         contentView.layer.shadowColor = UIColor.lightGray.cgColor
         contentView.layer.shadowOffset = .zero
         contentView.layer.shadowOpacity = 0.1
         contentView.layer.shadowRadius = 5.0
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

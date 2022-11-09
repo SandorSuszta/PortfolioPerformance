@@ -1,32 +1,29 @@
 import Foundation
 import Charts
 
-class CoinDetailsViewModel {
+final class CoinDetailsViewModel {
     
-    public var coinID: String
-    public var coinModel: SingleCoinModel?
-    public var marketCapRank: String {
+    var coinID: String
+    var coinModel: SingleCoinModel?
+    var marketCapRank: String {
         String(coinModel?.marketData.marketCapRank ?? 0)
     }
-    public let chartIntervals = ["1D", "1W", "1M", "6M", "1Y", "MAX"]
+    let chartIntervals = ["1D", "1W", "1M", "6M", "1Y", "MAX"]
     
     //MARK: - Observable properties
-    
-    public var metricsVM: ObservableObject<MetricsViewModel> = ObservableObject(value: nil)
-    public var rangeDetailsVM: ObservableObject<RangeDetailsViewModel> = ObservableObject(value: nil)
-    public var detailsTableViewCelsVM: ObservableObject<[DetailsTableviewCellsViewModel]> = ObservableObject(value: [])
-    public var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
+    var metricsVM: ObservableObject<MetricsViewModel> = ObservableObject(value: nil)
+    var rangeDetailsVM: ObservableObject<RangeDetailsViewModel> = ObservableObject(value: nil)
+    var detailsTableViewCelsVM: ObservableObject<[DetailsCellsViewModel]> = ObservableObject(value: [])
+    var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
     
     //MARK: - Init
-    
     init(coinID: String) {
         self.coinID = coinID
         getMetricsData(coinID: coinID)
     }
     
     //MARK: - Public methods
-    
-    public func getMetricsData(coinID: String) {
+    func getMetricsData(coinID: String) {
         NetworkingManager.shared.requestData(for: coinID) { result in
             switch result {
             case .success(let model):
@@ -38,12 +35,11 @@ class CoinDetailsViewModel {
         }
     }
     
-    public func getTimeRangeDetails(coinID: String, intervalInDays: Int) {
+   func getTimeRangeDetails(coinID: String, intervalInDays: Int) {
         NetworkingManager.shared.requestDataForChart(
             coinID: coinID,
             intervalInDays: intervalInDays
-        ){
-            result in
+        ){ result in
             switch result {
             case .success(let priceData):
                 let rangeDetails = RangeDetailsViewModel(
@@ -57,8 +53,8 @@ class CoinDetailsViewModel {
         }
     }
 
-    public func createDetailsCellsViewModels() {
-        var viewModels: [DetailsTableviewCellsViewModel] = []
+    func createDetailsCellsViewModels() {
+        var viewModels: [DetailsCellsViewModel] = []
         viewModels.append(.init(
             name: "Market Cap Value",
             value: metricsVM.value?.marketCap ?? ""
@@ -82,6 +78,14 @@ class CoinDetailsViewModel {
         viewModels.append(.init(
             name: "All time high",
             value: .priceString(from: coinModel?.marketData.ath["usd"] ?? 0)
+        ))
+        viewModels.append(.init(
+            name: "Change percentage from ATH",
+            value: .percentageString(from: coinModel?.marketData.athChangePercentage["usd"] ?? 0)
+        ))
+        viewModels.append(.init(
+            name: "All time high date",
+            value: .formatedStringForATHDate(fromUTC: coinModel?.marketData.athDate["usd"] ?? "N/A")
         ))
         detailsTableViewCelsVM.value = viewModels
     }

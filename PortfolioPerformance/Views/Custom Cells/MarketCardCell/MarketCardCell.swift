@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MarketCardsCollectionViewCell: UICollectionViewCell {
+class MarketCardCell: UICollectionViewCell {
     
     static let identifier = "MarketCardsCollectionViewCell"
     static let preferredHeight: CGFloat = 150
@@ -32,7 +32,7 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
     
     let mainTitle: UILabel = {
         let title = UILabel()
-        title.font = .systemFont(ofSize: 20, weight: .semibold)
+        title.font = .systemFont(ofSize: 18, weight: .semibold)
         title.adjustsFontSizeToFitWidth = true
         title.minimumScaleFactor = 0.5
         title.textAlignment = .center
@@ -42,11 +42,10 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
     
     let secondaryTitle: UILabel = {
         let title = UILabel()
-        title.font = .systemFont(ofSize: 16, weight: .semibold)
+        title.font = .systemFont(ofSize: 12, weight: .semibold)
         title.adjustsFontSizeToFitWidth = true
         title.minimumScaleFactor = 0.5
         title.textAlignment = .center
-        title.textColor = .pomergranate
         title.translatesAutoresizingMaskIntoConstraints = false
         return title
     }()
@@ -59,7 +58,6 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
             secondaryTitle,
             progressBar
         )
-        backgroundColor = .clouds
         setupConstraints()
     }
     
@@ -133,17 +131,15 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
             
             progressBar.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             progressBar.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 20),
-            progressBar.widthAnchor.constraint(equalToConstant: circleRadius),
-            progressBar.heightAnchor.constraint(equalToConstant: circleRadius),
+            progressBar.widthAnchor.constraint(equalToConstant: contentView.width - 30),
+            progressBar.heightAnchor.constraint(equalToConstant: contentView.width - 30),
             
-            mainTitle.centerXAnchor.constraint(equalTo: progressBar.centerXAnchor),
-            mainTitle.centerYAnchor.constraint(equalTo: progressBar.centerYAnchor),
-            mainTitle.widthAnchor.constraint(equalToConstant: circleRadius - 12),
-            mainTitle.heightAnchor.constraint(equalToConstant: mainTitle.font.pointSize),
+            mainTitle.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            mainTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 20),
+            mainTitle.widthAnchor.constraint(equalToConstant: contentView.width - 55),
             
             secondaryTitle.topAnchor.constraint(equalTo: mainTitle.bottomAnchor),
             secondaryTitle.centerXAnchor.constraint(equalTo: mainTitle.centerXAnchor),
-            secondaryTitle.widthAnchor.constraint(equalTo: mainTitle.widthAnchor, multiplier: 1 / 1.8)
         ])
         
     }
@@ -160,8 +156,8 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    public func configureCard(with viewModel: MarketCardsCollectionViewCellViewModel) {
-        progressBar.type = viewModel.progressCircleType
+    public func configureCard(with viewModel: MarketCardCellViewModel) {
+        progressBar.type = viewModel.progressBarType
         progressBar.progress = viewModel.progressValue
         progressBar.color = viewModel.secondaryMetricTextColor.cgColor
         
@@ -177,6 +173,7 @@ class MarketCardsCollectionViewCell: UICollectionViewCell {
             
         case .gradient:
             secondaryTitle.text = viewModel.secondaryMetricValue
+            secondaryTitle.textColor = viewModel.secondaryMetricTextColor
             updateLayoutForGreedAndFearType()
         }
     }

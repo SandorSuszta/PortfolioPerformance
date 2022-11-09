@@ -1,6 +1,6 @@
 import UIKit
 
-class DetailsTableViewCell: UITableViewCell {
+class DetailsCell: UITableViewCell {
     
     //MARK: - Properties
     
@@ -56,10 +56,9 @@ class DetailsTableViewCell: UITableViewCell {
     
     //MARK: - Public methods
     
-    public func configure(with viewModel: DetailsTableviewCellsViewModel) {
+    public func configure(with viewModel: DetailsCellsViewModel) {
         metricName.text = viewModel.name
         metricValue.text = viewModel.value
-        
         selectionStyle = .none
     }
 }

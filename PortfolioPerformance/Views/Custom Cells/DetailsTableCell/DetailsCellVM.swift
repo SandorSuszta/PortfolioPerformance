@@ -1,6 +1,6 @@
 import Foundation
 
-struct DetailsTableviewCellsViewModel {
+struct DetailsCellsViewModel {
     public var name: String
     public var value: String
 }

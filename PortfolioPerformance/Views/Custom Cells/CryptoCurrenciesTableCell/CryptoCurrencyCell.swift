@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class CryptoCurrenciesTableViewCell: UITableViewCell {
+class CryptoCurrencyCell: UITableViewCell {
     
-    static let identifier = "MarketTableCell"
+    static let identifier = "CryptoCurrencyCell"
     static let prefferedHeight: CGFloat = 60
     
     private let nameLabel: UILabel = {
@@ -61,7 +61,6 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         contentView.backgroundColor = .systemBackground
-
         logoContainerView.addSubview(logoImageView)
         addSubviews(nameLabel, symbolLabel, priceLabel, changeLabel, logoContainerView)
     }
@@ -122,11 +121,7 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
             height: 20)
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
-    public func configureCell(with viewModel: MarketTableCellViewModel) {
+    func configureCell(with viewModel: CryptoCurrencyCellViewModel) {
         nameLabel.text = viewModel.name
         symbolLabel.text = viewModel.symbol
         priceLabel.text = viewModel.currentPrice
@@ -134,8 +129,7 @@ class CryptoCurrenciesTableViewCell: UITableViewCell {
         changeLabel.textColor = viewModel.coinModel.priceChange24H ?? 0 >= 0 ? .nephritis : .pomergranate
         
         logoImageView.setImage(imageUrl: viewModel.imageUrl)
-        
-        selectionStyle = .none //dont highlight selected cell
+        selectionStyle = .none
     }
 }
 

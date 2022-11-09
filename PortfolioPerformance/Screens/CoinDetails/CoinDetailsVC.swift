@@ -38,8 +38,8 @@ class CoinDetailsVC: UIViewController {
     
     private var priceChangeLabel: UILabel = {
         let label = UILabel()
-        label.text = "0.00"
-        label.alpha = 0.0
+//        label.text = "0.00"
+//        label.alpha = 0.0
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
@@ -135,7 +135,7 @@ class CoinDetailsVC: UIViewController {
         headerView.addSubviews(headerNameLabel, marketCapRankLabel)
         
         scrollView.frame = view.bounds
-        scrollView.contentSize = CGSize(width: view.width, height: 1000)
+        scrollView.contentSize = CGSize(width: view.width, height: 1400)
         
         symbolLabel.frame = CGRect(
             x: 0,
@@ -214,7 +214,7 @@ class CoinDetailsVC: UIViewController {
             x: 10,
             y: rangeProgressBar.bottom + 10,
             width: chartView.width,
-            height: 400
+            height: 370
         )
         
         headerView.frame = CGRect(
@@ -437,8 +437,8 @@ class CoinDetailsVC: UIViewController {
             self.detailsTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             self.detailsTableView.isScrollEnabled = false
             self.detailsTableView.register(
-                DetailsTableViewCell.self,
-                forCellReuseIdentifier: DetailsTableViewCell.identifier
+                DetailsCell.self,
+                forCellReuseIdentifier: DetailsCell.identifier
             )
         }
     }
@@ -455,9 +455,9 @@ extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: DetailsTableViewCell.identifier,
+            withIdentifier: DetailsCell.identifier,
             for: indexPath
-        ) as? DetailsTableViewCell else { return UITableViewCell() }
+        ) as? DetailsCell else { return UITableViewCell() }
         
         guard let viewModel = coinDetailsVM.detailsTableViewCelsVM.value?[indexPath.row] else { fatalError() }
                 
@@ -466,7 +466,7 @@ extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        DetailsTableViewCell.preferredHeight
+        DetailsCell.preferredHeight
     }
 }
 

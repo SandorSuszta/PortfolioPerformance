@@ -9,24 +9,24 @@ struct UserDefaultsManager {
     
     private let defaults = UserDefaults.standard
     
-    public var watchlistIDs: [String] {
+    var watchlistIDs: [String] {
         defaults.stringArray(forKey: watchlistKey) ?? []
     }
     
-    public var recentSearchesIDs: [String] {
+    var recentSearchesIDs: [String] {
         defaults.stringArray(forKey: recentSearchesKey) ?? []
     }
     
-    public let watchlistKey = "watchlist"
+    let watchlistKey = "watchlist"
     
-    public let recentSearchesKey = "recentSearch"
+    let recentSearchesKey = "recentSearch"
     
-    public func saveToDefaults(ID: String, forKey key: String) {
+    func saveToDefaults(ID: String, forKey key: String) {
         var currentIDs = defaults.stringArray(forKey: key) ?? []
         
         //Make sure recent ID is the last in the list
-        if let idIndex = currentIDs.firstIndex(of: ID) {
-            currentIDs.remove(at: idIndex)
+        if let indexOfID = currentIDs.firstIndex(of: ID) {
+            currentIDs.remove(at: indexOfID)
         }
         currentIDs.append(ID)
         defaults.set(currentIDs, forKey: key)

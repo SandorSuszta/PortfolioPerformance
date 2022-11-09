@@ -53,8 +53,8 @@ class WatchlistViewController: UIViewController {
         watchlistTableView.backgroundColor = .clear
         watchlistTableView.separatorStyle = .none
         watchlistTableView.register(
-            CryptoCurrenciesTableViewCell.self,
-            forCellReuseIdentifier: CryptoCurrenciesTableViewCell.identifier
+            CryptoCurrencyCell.self,
+            forCellReuseIdentifier: CryptoCurrencyCell.identifier
         )
     }
     
@@ -111,9 +111,9 @@ class WatchlistViewController: UIViewController {
 
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: CryptoCurrenciesTableViewCell.identifier,
+                withIdentifier: CryptoCurrencyCell.identifier,
                 for: indexPath
-            ) as? CryptoCurrenciesTableViewCell else { return UITableViewCell() }
+            ) as? CryptoCurrencyCell else { return UITableViewCell() }
             
             guard let cellViewModel = watchlistVM.cellViewModels.value?[indexPath.row] else { fatalError() }
             
@@ -123,7 +123,7 @@ class WatchlistViewController: UIViewController {
         }
 
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            CryptoCurrenciesTableViewCell.prefferedHeight
+            CryptoCurrencyCell.prefferedHeight
         }
         
         func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

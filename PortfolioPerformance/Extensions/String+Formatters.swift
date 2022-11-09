@@ -7,37 +7,6 @@
 
 import Foundation
 
-extension Double {
-    public func string2f() -> String {
-        String(format: "%.2f", self)
-    }
-}
-
-extension NumberFormatter {
-    static let priceFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.maximumFractionDigits = 2
-        return formatter
-    }()
-    
-    static let percentageFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
-        formatter.positivePrefix = "+"
-        formatter.maximumFractionDigits = 2
-        return formatter
-    }()
-    
-    static let marketCapFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
-        formatter.positivePrefix = "+"
-        formatter.maximumFractionDigits = 2
-        return formatter
-    }()
-}
-
 extension String {
     
     static func priceString(from number: Double) -> String {
@@ -125,16 +94,30 @@ extension String {
         return formatter.string(from: date)
     }
     
-    
-    static func formatedDateString(from isoDate: String) -> String {
+    static func formatedDateString(fromISO date: String) -> String {
         let isoFormatter = ISO8601DateFormatter()
         isoFormatter.formatOptions.insert(.withFractionalSeconds)
         
-        guard let convertedDate = isoFormatter.date(from: isoDate) else { return "" }
+        guard let convertedDate = isoFormatter.date(from: date) else { return "" }
         
         let formatter = DateFormatter()
         formatter.dateFormat = "d MMM yyyy"
         return formatter.string(from: convertedDate)
+    }
+    
+    static func formatedStringForATHDate(fromUTC date: String) -> String {
+        let utcToDateFormater = DateFormatter()
+        utcToDateFormater.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        
+        guard let convertedDate  = utcToDateFormater.date(from: date) else { return "" }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        
+        let formatedDate = formatter.string(from: convertedDate)
+        let daysSince = Int(Date().timeIntervalSince(convertedDate) / (60 * 60 * 24))
+        
+        return formatedDate + " (\(daysSince) days ago)"
     }
 }
 

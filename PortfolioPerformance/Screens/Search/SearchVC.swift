@@ -30,8 +30,8 @@ class SearchScreenViewController: UIViewController {
         table.backgroundColor = .PPSecondarySystemBackground
         table.sectionHeaderTopPadding = 0
         table.register(
-            ResultsTableViewCell.self,
-            forCellReuseIdentifier: ResultsTableViewCell.identifier
+            ResultsCell.self,
+            forCellReuseIdentifier: ResultsCell.identifier
         )
         return table
     }()
@@ -163,9 +163,9 @@ extension SearchScreenViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = resultsTableView.dequeueReusableCell(
-            withIdentifier: ResultsTableViewCell.identifier,
+            withIdentifier: ResultsCell.identifier,
             for: indexPath
-        ) as? ResultsTableViewCell else { return UITableViewCell() }
+        ) as? ResultsCell else { return UITableViewCell() }
         
         var model: SearchResult?
         
@@ -255,7 +255,7 @@ extension SearchScreenViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        ResultsTableViewCell.preferredHeight
+        ResultsCell.preferredHeight
     }
 }
 

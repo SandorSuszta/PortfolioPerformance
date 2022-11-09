@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ResultsTableViewCell: UITableViewCell {
+class ResultsCell: UITableViewCell {
     
-    static let identifier = "ResultsTableViewCell"
+    static let identifier = "ResultsCell"
     static let preferredHeight: CGFloat = 60
     
     let symbolLabel: UILabel = {
@@ -50,7 +50,6 @@ class ResultsTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .systemBackground
-
         logoContainerView.addSubview(logoView)
         contentView.addSubviews(symbolLabel, nameLabel, logoContainerView)
     }
@@ -91,6 +90,7 @@ class ResultsTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         logoView.image = nil
     }
     

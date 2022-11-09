@@ -49,11 +49,9 @@ class MarketViewController: UIViewController {
     
     //MARK: - Methods
     
-    //Setup VC
     private func setupViewController() {
         view.backgroundColor = .systemGray6
         
-        //Set Title Logo
         let imageView = UIImageView(image: UIImage(named: "titleLogo"))
         imageView.contentMode = .scaleAspectFill
         let titleView = UIView(frame: CGRect(x: 0, y: 0, width: 48, height: 48))
@@ -65,7 +63,6 @@ class MarketViewController: UIViewController {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    //Market Cards Setup
     private func setupMarketCardsCollectionView() {
         view.addSubview(marketCardsCollectionView)
         
@@ -74,8 +71,8 @@ class MarketViewController: UIViewController {
         marketCardsCollectionView.backgroundColor = .clear
         marketCardsCollectionView.showsHorizontalScrollIndicator = false
         marketCardsCollectionView.register(
-            MarketCardsCollectionViewCell.self,
-            forCellWithReuseIdentifier: MarketCardsCollectionViewCell.identifier
+            MarketCardCell.self,
+            forCellWithReuseIdentifier: MarketCardCell.identifier
         )
         marketCardsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -87,7 +84,6 @@ class MarketViewController: UIViewController {
         ])
     }
     
-    //Sort Options Setup
     private func setupSortOptionsCollectionView() {
         view.addSubview(sortOptionsCollectionView)
         
@@ -102,8 +98,8 @@ class MarketViewController: UIViewController {
             scrollPosition: .left
         )
         sortOptionsCollectionView.register(
-            SortOptionsCollectionViewCell.self,
-            forCellWithReuseIdentifier: SortOptionsCollectionViewCell.identifier
+            SortOptionsCell.self,
+            forCellWithReuseIdentifier: SortOptionsCell.identifier
         )
         sortOptionsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -115,7 +111,6 @@ class MarketViewController: UIViewController {
         ])
     }
     
-    //Table View Setup
     private func setupTableView() {
         view.addSubview(cryptoCurrencyTableView)
         
@@ -126,8 +121,8 @@ class MarketViewController: UIViewController {
         cryptoCurrencyTableView.translatesAutoresizingMaskIntoConstraints = false
         
         cryptoCurrencyTableView.register(
-            CryptoCurrenciesTableViewCell.self,
-            forCellReuseIdentifier: CryptoCurrenciesTableViewCell.identifier
+            CryptoCurrencyCell.self,
+            forCellReuseIdentifier: CryptoCurrencyCell.identifier
         )
         
         NSLayoutConstraint.activate([
@@ -155,7 +150,12 @@ class MarketViewController: UIViewController {
     }
     
     private func scrollToTop() {
-        guard !(marketVM.cardViewModels.value?.isEmpty ?? false) else { return }
+        guard
+            let models = marketVM.cellViewModels.value,
+            !models.isEmpty
+        else {
+            return
+        }
         let topRow = IndexPath(row: 0, section: 0)
         self.cryptoCurrencyTableView.scrollToRow(
             at: topRow,
@@ -217,9 +217,9 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if collectionView == sortOptionsCollectionView {
             //Sort options collection case
             guard let cell = sortOptionsCollectionView.dequeueReusableCell(
-                withReuseIdentifier: SortOptionsCollectionViewCell.identifier,
+                withReuseIdentifier: SortOptionsCell.identifier,
                 for: indexPath
-            ) as? SortOptionsCollectionViewCell else { return UICollectionViewCell() }
+            ) as? SortOptionsCell else { return UICollectionViewCell() }
             
             cell.sortingNameLabel.text = marketVM.sortOptionsArray[indexPath.row]
             return cell
@@ -227,9 +227,9 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         //Market card collection case
         guard let cell = marketCardsCollectionView.dequeueReusableCell(
-            withReuseIdentifier: MarketCardsCollectionViewCell.identifier,
+            withReuseIdentifier: MarketCardCell.identifier,
             for: indexPath
-        ) as? MarketCardsCollectionViewCell else { return UICollectionViewCell() }
+        ) as? MarketCardCell else { return UICollectionViewCell() }
         
         guard let cellViewModel = marketVM.cardViewModels.value?[indexPath.row] else { fatalError()}
         cell.configureCard(with: cellViewModel)
@@ -247,8 +247,8 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         //Sort options collection case
         return CGSize(
-            width: SortOptionsCollectionViewCell.preferredWidth,
-            height: SortOptionsCollectionViewCell.preferredHeight
+            width: SortOptionsCell.preferredWidth,
+            height: SortOptionsCell.preferredHeight
         )
     }
     
@@ -280,9 +280,9 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: CryptoCurrenciesTableViewCell.identifier,
+            withIdentifier: CryptoCurrencyCell.identifier,
             for: indexPath
-        ) as? CryptoCurrenciesTableViewCell else { return UITableViewCell() }
+        ) as? CryptoCurrencyCell else { return UITableViewCell() }
         
         guard let cellViewModel = marketVM.cellViewModels.value?[indexPath.row] else { fatalError() }
         
@@ -307,6 +307,6 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        CryptoCurrenciesTableViewCell.prefferedHeight
+        CryptoCurrencyCell.prefferedHeight
     }
 }

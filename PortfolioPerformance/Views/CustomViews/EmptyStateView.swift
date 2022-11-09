@@ -26,11 +26,9 @@ class EmptyStateView: UIView {
     //MARK: - Init
     
     init(text: String, imageName: String) {
-        
         imageView = UIImageView(image: UIImage(named: imageName))
         textLabel.text = text
         super .init(frame: .zero)
-        
         setup()
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct MarketCardsCollectionViewCellViewModel {
+struct MarketCardCellViewModel {
     
     var metricName: String
     
@@ -18,12 +18,14 @@ struct MarketCardsCollectionViewCellViewModel {
     
     var progressValue: Float
     
-    var progressCircleType: CircularProgressBarType
+    var progressBarType: CircularProgressBarType
+    
+    var isChangePositive: Bool? = nil
     
     var secondaryMetricTextColor: UIColor {
-        switch progressCircleType {
+        switch progressBarType {
         case .round:
-            return Int(secondaryMetricValue) ?? 0 >= 0 ? .nephritis : .pomergranate
+            return isChangePositive ?? true ? .nephritis : .pomergranate
         case .gradient:
             return determineColorBasedOn(indexValue: Int(mainMetricValue) ?? 0)
         }
@@ -43,7 +45,7 @@ struct MarketCardsCollectionViewCellViewModel {
         case 75...100:
             return .nephritis
         default:
-            fatalError()
+            return .clear
         }
     }
 }

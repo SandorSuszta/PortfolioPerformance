@@ -30,7 +30,7 @@ struct GreedAndFearModel: Codable {
 // MARK: - Index
 struct Index: Codable {
     let value, valueClassification: String
-
+    
     enum CodingKeys: String, CodingKey {
         case value
         case valueClassification = "value_classification"

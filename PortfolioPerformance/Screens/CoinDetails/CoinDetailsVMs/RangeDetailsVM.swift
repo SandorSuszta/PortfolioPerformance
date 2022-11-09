@@ -25,42 +25,42 @@ struct RangeDetailsViewModel {
     
     //MARK: - Public properties
     
-    public var priceChange: String {
+    var priceChange: String {
         .priceString(from: priceChangeValue)
     }
     
-    public var priceChangePercentage: String {
+    var priceChangePercentage: String {
         let percentage = ((priceModels.last?[1] ?? 0) / (priceModels.first?[1] ?? 0) - 1) * 100
         return .percentageString(from: percentage)
     }
     
-    public var rangeLow: String {
+    var rangeLow: String {
         .priceString(from: lowestPriceValue)
     }
     
-    public var rangeHigh: String {
+    var rangeHigh: String {
         .priceString(from: highestPriceValue)
     }
     
-    public var percentageFromLow: String {
+    var percentageFromLow: String {
         let percentage = (currentPriceValue/lowestPriceValue - 1) * 100
         return .percentageString(from: percentage)
     }
     
-    public var percentageFromHigh: String {
+    var percentageFromHigh: String {
         let percentage = (currentPriceValue/highestPriceValue - 1) * 100
         return .percentageString(from: percentage)
     }
     
-    public var progress: Float {
+    var progress: Float {
         Float((currentPriceValue - lowestPriceValue) / (highestPriceValue - lowestPriceValue))
     }
     
-    public var isChangePositive: Bool {
+    var isChangePositive: Bool {
         priceChangeValue >= 0 ? true : false
     }
     
-    public var chartEntries: [ChartDataEntry] {
+    var chartEntries: [ChartDataEntry] {
         convertPricesToChartEntries(priceModels: priceModels)
     }
     

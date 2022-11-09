@@ -7,13 +7,13 @@
 
 import UIKit
 
-class NetworkingManager {
+struct NetworkingManager {
     
     static let shared = NetworkingManager()
     
-    public var cache = NSCache<NSString, UIImage>()
-    
     private init() {}
+    
+    var cache = NSCache<NSString, UIImage>()
     
     private struct Constants {
         static let requestGreedAndFearIndexBaseUrl = "https://api.alternative.me/fng/"
@@ -26,11 +26,10 @@ class NetworkingManager {
     }
     
     //MARK: - Generic Request
-    
     private func request<T:Codable>(
         url: URL?,
         expectingType: T.Type,
-        completion: @escaping (Result<T, CustomErrors>) -> Void
+        completion: @escaping (Result<T, PPError>) -> Void
     ){
         guard let url = url else {
             completion(.failure(.invalidUrl))
@@ -43,7 +42,6 @@ class NetworkingManager {
                      completion(.failure(.netwokingError))
                      return
                  }
-                
                 do {
                     let result = try JSONDecoder().decode(expectingType, from: data)
                     completion(.success(result))
@@ -55,15 +53,13 @@ class NetworkingManager {
     }
     
     //MARK: - Greed And Fear Index
-    
-    public func requestGreedAndFearIndex (
-        completion: @escaping (Result<GreedAndFearModel, CustomErrors>) -> Void
+    func requestGreedAndFearIndex (
+        completion: @escaping (Result<GreedAndFearModel, PPError>) -> Void
     ){
         guard let url = URL(string: Constants.requestGreedAndFearIndexBaseUrl) else {
             completion(.failure(.invalidUrl))
             return
         }
-        
         request(
             url: url,
             expectingType: GreedAndFearModel.self,
@@ -72,15 +68,13 @@ class NetworkingManager {
     }
     
     //MARK: - Total Market Cap
-    
-    public func requestGlobalData(
-        completion: @escaping (Result<GlobalDataResponse, CustomErrors>) -> Void
+    func requestGlobalData(
+        completion: @escaping (Result<GlobalDataResponse, PPError>) -> Void
     ){
         guard let url = URL(string: Constants.requestGlobalDataBaseUrl) else {
             completion(.failure(.invalidUrl))
             return
         }
-        
         request(
             url: url,
             expectingType: GlobalDataResponse.self,
@@ -89,15 +83,13 @@ class NetworkingManager {
     }
     
     //MARK: - All Crypto Data
-    
-    public func requestCryptoCurrenciesData(
-        completion: @escaping (Result<[CoinModel], CustomErrors>) -> Void
+    func requestCryptoCurrenciesData(
+        completion: @escaping (Result<[CoinModel], PPError>) -> Void
     ){
         guard let url = URL(string: Constants.requestAllCryptoCurrenciesDataBaseUrl) else {
             completion(.failure(.invalidUrl))
             return()
         }
-        
         request(
             url: url,
             expectingType: [CoinModel].self,
@@ -106,12 +98,10 @@ class NetworkingManager {
     }
     
     //MARK: - Crypto Data For Watchlist
-    
-    public func requestDataForList(
+    func requestDataForList(
         list: [String],
-        completion: @escaping (Result<[CoinModel], CustomErrors>) -> Void
+        completion: @escaping (Result<[CoinModel], PPError>) -> Void
     ){
-        
         request(
             url: constructURL(for: list),
             expectingType: [CoinModel].self,
@@ -120,24 +110,22 @@ class NetworkingManager {
     }
     
     //MARK: - Chart Data
-    
-    public func requestDataForChart(
+    func requestDataForChart(
         coinID: String,
         intervalInDays: Int,
-        completion: @escaping (Result<PriceModels, CustomErrors>) -> Void
+        completion: @escaping (Result<PriceModels, PPError>) -> Void
     ){
         request(
-            url: constructURL(for: coinID, for: intervalInDays),
+            url: constructURL(for: coinID, forInterval: intervalInDays),
             expectingType: PriceModels.self,
             completion: completion
         )
     }
     
     //MARK: - Data by ID
-    
-    public func requestData(
+    func requestData(
         for ID: String,
-        completion: @escaping (Result<SingleCoinModel, CustomErrors>) -> Void
+        completion: @escaping (Result<SingleCoinModel, PPError>) -> Void
     ){
         let endpointString = "https://api.coingecko.com/api/v3/coins/\(ID)?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"
         
@@ -145,7 +133,6 @@ class NetworkingManager {
             completion(.failure(.invalidUrl))
             return
         }
-        
         request(
             url: url,
             expectingType: SingleCoinModel.self,
@@ -154,17 +141,14 @@ class NetworkingManager {
     }
     
     //MARK: - Search
-    
-    public func searchWith(
+    func searchWith(
         query: String,
-        completion: @escaping (Result<SearchResponse, CustomErrors>) -> Void
+        completion: @escaping (Result<SearchResponse, PPError>) -> Void
     ){
-        
         guard let url = URL(string: Constants.searchBaseUrl + query) else {
             completion(.failure(.invalidUrl))
             return
         }
-        
         request(
             url: url,
             expectingType: SearchResponse.self,
@@ -173,16 +157,13 @@ class NetworkingManager {
     }
     
     //MARK: - Trending
-    
-    public func requestTrendingCoins(
-        completion: @escaping (Result<TrendingResponse, CustomErrors>) -> Void
+    func requestTrendingCoins(
+        completion: @escaping (Result<TrendingResponse, PPError>) -> Void
     ){
-        
         guard let url = URL(string: Constants.trendingBaseUrl) else {
             completion(.failure(.invalidUrl))
             return
         }
-     
         request(
             url: url,
             expectingType: TrendingResponse.self,
@@ -191,29 +172,21 @@ class NetworkingManager {
     }
     
     //MARK: - URL constructor
-
-    private func constructURL(for coinID: String,for intervalInDays: Int) -> URL {
-      
+    private func constructURL(for coinID: String, forInterval intervalInDays: Int) -> URL {
         let unixTimeNow = Int(Date().timeIntervalSince1970)
         let unixTimeThen = unixTimeNow - (86400 * intervalInDays)
         let endpointString = "https://api.coingecko.com/api/v3/coins/\(coinID)/market_chart/range?vs_currency=usd&from=\(unixTimeThen)&to=\(unixTimeNow)"
-        
         guard let url = URL(string: endpointString) else { fatalError() }
-        
         return url
     }
     
     private func constructURL(for list: [String]) -> URL {
         var leadingUrl = NetworkingManager.Constants.requestDataForListBaseUrl
-
         for coinID in list {
             leadingUrl += coinID + "%2C%20"
         }
-        
         let endpointString = leadingUrl + NetworkingManager.Constants.requestDataForListTrailingUrl
-        
         guard let url = URL(string: endpointString) else { fatalError() }
-        
         return url
     }
 }

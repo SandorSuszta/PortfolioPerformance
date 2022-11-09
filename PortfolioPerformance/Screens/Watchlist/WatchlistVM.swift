@@ -9,7 +9,7 @@ import Foundation
 
 class WatchlistViewModel {
     
-    public var cellViewModels: ObservableObject<[MarketTableCellViewModel]> = ObservableObject(value:[])
+    public var cellViewModels: ObservableObject<[CryptoCurrencyCellViewModel]> = ObservableObject(value:[])
     
     public var errorMessage: ObservableObject<String>?
     
@@ -19,7 +19,7 @@ class WatchlistViewModel {
             switch result {
             case .success(let coinModels):
                 //Transform array of coin models into array of cell view models
-                let viewModels: [MarketTableCellViewModel] = coinModels.compactMap({ .init(coinModel: $0)
+                let viewModels: [CryptoCurrencyCellViewModel] = coinModels.compactMap({ .init(coinModel: $0)
                 })
                 self.cellViewModels.value = viewModels
                
