@@ -22,7 +22,6 @@ class CoinDetailsVC: UIViewController {
         return scroll
     }()
     
-    // Header View and Its Elements
     private var symbolLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -38,16 +37,12 @@ class CoinDetailsVC: UIViewController {
     
     private var priceChangeLabel: UILabel = {
         let label = UILabel()
-//        label.text = "0.00"
-//        label.alpha = 0.0
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
     
     private var priceChangePercentageLabel: UILabel = {
         let label = UILabel()
-        label.text = "0.00"
-        label.alpha = 0.0
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
@@ -67,7 +62,6 @@ class CoinDetailsVC: UIViewController {
         return view
     }()
     
-    //Chart View
     private var chartView: UIView = {
         let view = UIView()
         view.configureWithShadow()
@@ -75,11 +69,9 @@ class CoinDetailsVC: UIViewController {
     }()
     
     private var lineChartView = LineChartView()
-    
-    // Interval Selection
+
     private var timeIntervalSelection = UISegmentedControl()
 
-    // Range ProgressBar
     private var rangeProgressBar: RangeProgressView = {
         let bar = RangeProgressView()
         bar.configureWithShadow()
@@ -89,8 +81,8 @@ class CoinDetailsVC: UIViewController {
         return bar
     }()
     
-    // Details TableView
     private var detailsTableView = UITableView()
+    
     private var headerView = UIView()
     
     private var headerNameLabel: UILabel = {
@@ -135,7 +127,7 @@ class CoinDetailsVC: UIViewController {
         headerView.addSubviews(headerNameLabel, marketCapRankLabel)
         
         scrollView.frame = view.bounds
-        scrollView.contentSize = CGSize(width: view.width, height: 1400)
+        scrollView.contentSize = CGSize(width: view.width, height: 1000)
         
         symbolLabel.frame = CGRect(
             x: 0,
@@ -179,7 +171,6 @@ class CoinDetailsVC: UIViewController {
             height: priceChangePercentageLabel.height
         )
         
-        //Graph
         chartView.frame = CGRect(
             x: 10,
             y: coinLogoShadowView.bottom + 20,
@@ -201,7 +192,6 @@ class CoinDetailsVC: UIViewController {
             height: 25
         )
         
-        //Progress bars
         rangeProgressBar.frame = CGRect(
             x: 10,
             y: timeIntervalSelection.bottom + 10,
@@ -209,7 +199,6 @@ class CoinDetailsVC: UIViewController {
             height: 65
         )
         
-        //TableView
         detailsTableView.frame = CGRect(
             x: 10,
             y: rangeProgressBar.bottom + 10,
@@ -413,7 +402,7 @@ class CoinDetailsVC: UIViewController {
         if isFavourite {
             UserDefaultsManager.shared.deleteFromDefaults(
                 ID: coinDetailsVM.coinID,
-                for: UserDefaultsManager.shared.watchlistKey
+                forKey: UserDefaultsManager.shared.watchlistKey
             )
         } else {
             UserDefaultsManager.shared.saveToDefaults(ID: coinDetailsVM.coinID, forKey: UserDefaultsManager.shared.watchlistKey)

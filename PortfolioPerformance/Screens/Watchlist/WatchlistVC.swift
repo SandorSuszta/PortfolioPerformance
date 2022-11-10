@@ -134,7 +134,7 @@ class WatchlistViewController: UIViewController {
                 
                 UserDefaultsManager.shared.deleteFromDefaults(
                     ID: ID,
-                    for: UserDefaultsManager.shared.watchlistKey
+                    forKey: UserDefaultsManager.shared.watchlistKey
                 )
                 
                 watchlistVM.cellViewModels.value?.remove(at: indexPath.row)

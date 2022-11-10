@@ -32,7 +32,7 @@ struct UserDefaultsManager {
         defaults.set(currentIDs, forKey: key)
     }
     
-    func deleteFromDefaults(ID: String, for key: String) {
+    func deleteFromDefaults(ID: String, forKey key: String) {
         var currentIDs = watchlistIDs
         currentIDs.removeAll { $0 == ID }
         defaults.set(currentIDs, forKey: key)

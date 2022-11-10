@@ -34,10 +34,11 @@ class MarketViewModel {
                 
                 let greedAndFearCellViewModel = MarketCardCellViewModel(
                     metricName: "Greed And Fear Index",
-                    mainMetricValue: "10", //index.data[0].value,
-                    secondaryMetricValue: "Extreme Fear",//index.data[0].valueClassification,
-                    progressValue: 0.1,//(Float(index.data[0].value) ?? 0) / 100,
-                    progressBarType: .gradient)
+                    mainMetricValue: index.data[0].value,
+                    secondaryMetricValue: index.data[0].valueClassification,
+                    progressValue: (Float(index.data[0].value) ?? 0) / 100,
+                    progressBarType: .gradient
+                )
                 
                 self.cardViewModels.value?.append(greedAndFearCellViewModel)
                 
@@ -72,7 +73,8 @@ class MarketViewModel {
                     mainMetricValue: .percentageString(from: btcDominance, positivePrefix: ""),
                     secondaryMetricValue: "",
                     progressValue: Float(btcDominance / 100),
-                    progressBarType: .round)
+                    progressBarType: .round
+                )
                 
                 //Add card view models to the observable array
                 self.cardViewModels.value?.append(contentsOf: [marketCapCellViewModel,dominanceCardModel])
