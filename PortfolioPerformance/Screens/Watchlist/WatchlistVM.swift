@@ -1,10 +1,3 @@
-//
-//  WatchlistTableViewViewModel.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 11/07/2022.
-//
-
 import Foundation
 
 class WatchlistViewModel {

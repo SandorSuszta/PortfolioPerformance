@@ -1,10 +1,3 @@
-//
-//  UIViewController+ShowAlert.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 06/10/2022.
-//
-
 import UIKit
 
 extension UIViewController {

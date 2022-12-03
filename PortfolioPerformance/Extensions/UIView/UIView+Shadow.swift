@@ -1,15 +1,7 @@
-//
-//  File.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 30/03/2022.
-//
 
-import Foundation
 import UIKit
 
 extension UIView {
-    
     public func configureWithShadow(
         shadowColor: UIColor = .systemGray3,
         shadowRadius: CGFloat = 2.0

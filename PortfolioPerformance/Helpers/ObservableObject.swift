@@ -1,10 +1,3 @@
-//
-//  ObservableObject.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 30/06/2022.
-//
-
 import Foundation
 
 final class ObservableObject<T> {

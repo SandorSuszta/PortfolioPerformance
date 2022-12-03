@@ -1,10 +1,3 @@
-//
-//  WatchlistViewController.swift
-//  PortfolioPerformance
-//
-//  Created by Sandor Suszta on 10/07/2022.
-//
-
 import UIKit
 
 class WatchlistViewController: UIViewController {

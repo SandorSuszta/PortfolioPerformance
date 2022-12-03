@@ -1,11 +1,3 @@
-//
-//  MarketCardViewModel.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 27/06/2022.
-//
-
-import Foundation
 import UIKit
 
 struct MarketCardCellViewModel {

@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 09/02/2022.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

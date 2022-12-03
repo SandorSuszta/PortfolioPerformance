@@ -1,7 +1,6 @@
 import UIKit
 
 extension UIView {
-    
     func fadeIn(with duration: TimeInterval = 2.0) {
         UIView.animate(withDuration: duration) {
             self.alpha = 1.0

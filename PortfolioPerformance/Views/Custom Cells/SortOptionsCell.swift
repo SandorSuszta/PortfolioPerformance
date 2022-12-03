@@ -1,11 +1,3 @@
-//
-//  SortOptionsCollectionViewCell.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 07/07/2022.
-//
-
-import Foundation
 import UIKit
 
 class SortOptionsCell: UICollectionViewCell {

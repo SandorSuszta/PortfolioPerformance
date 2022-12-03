@@ -1,6 +1,3 @@
-//
-//  UIColor+CustomColors.swift
-//  PortfolioPerformance
 import UIKit
 
 extension UIColor {

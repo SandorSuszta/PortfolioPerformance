@@ -1,10 +1,3 @@
-//
-//  MainTabBarController.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 13/07/2022.
-//
-
 import Foundation
 import UIKit
 

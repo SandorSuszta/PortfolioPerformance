@@ -1,10 +1,3 @@
-//
-//  PPCustomAlertVC.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 05/10/2022.
-//
-
 import UIKit
 
 class CustomAlertVC: UIViewController {

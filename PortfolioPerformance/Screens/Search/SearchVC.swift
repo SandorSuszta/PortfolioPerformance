@@ -20,7 +20,8 @@ class SearchScreenViewController: UIViewController {
     private var searchBarStatus: SearchBarStatus {
         determineSearchBarStatus(
             isSearching: isSearching,
-            isRecentSearchesEmpty: viewModel.defaultCellModels.value?[0].isEmpty ?? true)
+            isRecentSearchesEmpty: viewModel.defaultCellModels.value?[0].isEmpty ?? true
+        )
     }
     
     lazy private var searchBar = UISearchBar()

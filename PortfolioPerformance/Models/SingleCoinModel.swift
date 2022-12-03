@@ -1,10 +1,3 @@
-//
-//  singleCoinModel.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 15/09/2022.
-//
-
 import Foundation
 
 struct SingleCoinModel: Codable {

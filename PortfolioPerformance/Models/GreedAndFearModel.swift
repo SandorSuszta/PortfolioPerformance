@@ -1,10 +1,3 @@
-//
-//  GreedAndFearModel.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 24/02/2022.
-//
-
 import Foundation
 /* API response example
  {

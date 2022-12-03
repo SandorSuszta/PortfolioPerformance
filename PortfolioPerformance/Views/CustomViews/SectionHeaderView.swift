@@ -1,10 +1,3 @@
-//
-//  PPSectionHeaderView.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 15/10/2022.
-//
-
 import UIKit
 
 enum SectionHeaderType: String {

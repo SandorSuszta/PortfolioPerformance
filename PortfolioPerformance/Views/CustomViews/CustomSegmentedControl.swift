@@ -1,10 +1,3 @@
-//
-//  UISegmentedControl+.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 07/10/2022.
-//
-
 import UIKit
 
 class CustomSegmentedControl: UISegmentedControl {

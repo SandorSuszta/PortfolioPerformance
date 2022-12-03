@@ -1,10 +1,3 @@
-//
-//  ResultsTableViewCell.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 10/05/2022.
-//
-
 import UIKit
 
 class ResultsCell: UITableViewCell {

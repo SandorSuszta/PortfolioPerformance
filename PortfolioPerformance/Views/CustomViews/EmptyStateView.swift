@@ -1,16 +1,8 @@
-//
-//  EmptyStateView.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 31/10/2022.
-//
-
 import UIKit
 
 class EmptyStateView: UIView {
     
     //MARK: - Properties
-    
     private let imageView: UIImageView
     
     private let textLabel: UILabel = {
@@ -24,7 +16,6 @@ class EmptyStateView: UIView {
     }()
     
     //MARK: - Init
-    
     init(text: String, imageName: String) {
         imageView = UIImageView(image: UIImage(named: imageName))
         textLabel.text = text
@@ -37,7 +28,6 @@ class EmptyStateView: UIView {
     }
     
     //MARK: - Methods
-    
     private func setup() {
         translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false

@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 04/10/2022.
-//
-
 import UIKit
 import Charts
 
