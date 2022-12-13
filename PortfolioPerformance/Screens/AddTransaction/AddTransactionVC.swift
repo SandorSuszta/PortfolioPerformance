@@ -28,7 +28,7 @@ class AddTransactionVC: UIViewController {
     private func setUpSearchBar() {
         view.addSubview(searchBar)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.delete(self)
+        searchBar.searchTextField.delegate = self
     }
     
     private func setupCollectionView() {
@@ -83,19 +83,19 @@ extension AddTransactionVC: UITextFieldDelegate  {
             return false
         }
     }
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if let query = searchBar.text, !query.isEmpty {
-//            isSearching = true
-//            noResultsView.isHidden = true
-//
-//            searchTimer?.invalidate()
-//            searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-//                self.viewModel.updateSearchResults(query: query)
-        } else {
-//            isSearching = false
-//            viewModel.clearSearchModels()
-        }
-    }
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        if let query = searchBar.text, !query.isEmpty {
+////            isSearching = true
+////            noResultsView.isHidden = true
+////
+////            searchTimer?.invalidate()
+////            searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+////                self.viewModel.updateSearchResults(query: query)
+//        } else {
+////            isSearching = false
+////            viewModel.clearSearchModels()
+//        }
+//    }
 }
     //MARK: - Collection View Delegate And DataSource
 

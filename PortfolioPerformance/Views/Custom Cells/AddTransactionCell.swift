@@ -55,13 +55,13 @@ class AddTransactionCell: UICollectionViewCell {
     public func configure(with searchResult: SearchResult) {
         symbolLabel.text = searchResult.symbol.uppercased()
         nameLabel.text = searchResult.name
-        logoView.setImage(imageUrl: searchResult.large)
+        logoView.image = UIImage(named: "NoResult")
     }
     
     //MARK: - Private methods
     
     private func setupViews() {
-        contentView.addSubviews(symbolLabel, nameLabel, logoView)
+        contentView.addSubviews(symbolLabel, logoView)
         setupConstraints()
     }
     

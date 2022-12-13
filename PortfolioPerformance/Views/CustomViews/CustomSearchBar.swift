@@ -13,6 +13,7 @@ class CustomSearchBar: UIView {
     let searchTextField: UITextField = {
         let field = UITextField()
         field.translatesAutoresizingMaskIntoConstraints = false
+        field.font = .systemFont(ofSize: 20, weight: .semibold)
         return field
     }()
     
@@ -35,10 +36,15 @@ class CustomSearchBar: UIView {
     private func setUpConstraints() {
         let padding: CGFloat = 8
         NSLayoutConstraint.activate([
-            searchIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-            searchIcon.topAnchor.constraint(equalTo: topAnchor, constant: padding),
-            searchIcon.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
-            searchIcon.widthAnchor.constraint(equalTo: heightAnchor, constant: -padding * 2)
+            searchIcon.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding),
+            searchIcon.topAnchor.constraint(equalTo: self.topAnchor, constant: padding),
+            searchIcon.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding),
+            searchIcon.widthAnchor.constraint(equalTo: self.heightAnchor, constant: -padding * 2),
+            
+            searchTextField.leadingAnchor.constraint(equalTo: searchIcon.trailingAnchor, constant: 10),
+            searchTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            searchTextField.topAnchor.constraint(equalTo: self.topAnchor),
+            searchTextField.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
 }
