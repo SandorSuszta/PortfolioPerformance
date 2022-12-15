@@ -1,5 +1,11 @@
 import Foundation
 
+enum DefaultsKeys: String {
+    case watchlist = "watchlist"
+    case recentSearches = "recentSearch"
+    case recentTransactions = "recentTransactions"
+}
+
 struct UserDefaultsManager {
     
     static let shared = UserDefaultsManager()
@@ -9,16 +15,16 @@ struct UserDefaultsManager {
     private let defaults = UserDefaults.standard
     
     var watchlistIDs: [String] {
-        defaults.stringArray(forKey: watchlistKey) ?? []
+        defaults.stringArray(forKey: DefaultsKeys.watchlist.rawValue) ?? []
     }
     
     var recentSearchesIDs: [String] {
-        defaults.stringArray(forKey: recentSearchesKey) ?? []
+        defaults.stringArray(forKey: DefaultsKeys.recentSearches.rawValue) ?? []
     }
     
-    let watchlistKey = "watchlist"
-    
-    let recentSearchesKey = "recentSearch"
+    var recentTransactionsIDs: [String] {
+        defaults.stringArray(forKey: DefaultsKeys.recentTransactions.rawValue ) ?? []
+    }
     
     func saveToDefaults(ID: String, forKey key: String) {
         var currentIDs = defaults.stringArray(forKey: key) ?? []
@@ -42,10 +48,6 @@ struct UserDefaultsManager {
     }
     
     func clearRecentSearchesIDs() {
-        defaults.set([], forKey: recentSearchesKey)
-    }
-    
-    func clearWatchlist() {
-        defaults.set([], forKey: watchlistKey)
+        defaults.set([], forKey: DefaultsKeys.recentSearches.rawValue)
     }
 }

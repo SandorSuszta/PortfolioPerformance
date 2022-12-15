@@ -402,10 +402,10 @@ class CoinDetailsVC: UIViewController {
         if isFavourite {
             UserDefaultsManager.shared.deleteFromDefaults(
                 ID: coinDetailsVM.coinID,
-                forKey: UserDefaultsManager.shared.watchlistKey
+                forKey: DefaultsKeys.watchlist.rawValue
             )
         } else {
-            UserDefaultsManager.shared.saveToDefaults(ID: coinDetailsVM.coinID, forKey: UserDefaultsManager.shared.watchlistKey)
+            UserDefaultsManager.shared.saveToDefaults(ID: coinDetailsVM.coinID, forKey: DefaultsKeys.watchlist.rawValue)
         }
         
         isFavourite = !isFavourite

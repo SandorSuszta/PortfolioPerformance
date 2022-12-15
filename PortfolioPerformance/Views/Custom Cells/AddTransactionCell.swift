@@ -55,7 +55,7 @@ class AddTransactionCell: UICollectionViewCell {
     public func configure(with searchResult: SearchResult) {
         symbolLabel.text = searchResult.symbol.uppercased()
         nameLabel.text = searchResult.name
-        logoView.image = UIImage(named: "NoResult")
+        logoView.setImage(imageUrl: searchResult.large)
     }
     
     //MARK: - Private methods
@@ -67,9 +67,9 @@ class AddTransactionCell: UICollectionViewCell {
     
     private func setupConstraints(){
         NSLayoutConstraint.activate([
-            logoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            logoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            logoView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            logoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            logoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            logoView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             logoView.heightAnchor.constraint(equalTo: logoView.widthAnchor),
             
             symbolLabel.topAnchor.constraint(equalTo: logoView.bottomAnchor),

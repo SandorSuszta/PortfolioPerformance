@@ -34,7 +34,6 @@ class ResultsCell: UITableViewCell {
     
     
     public func configure (with searchResult: SearchResult) {
-        
         symbolLabel.text = searchResult.symbol.uppercased()
         nameLabel.text = searchResult.name
         logoView.setImage(imageUrl: searchResult.large)

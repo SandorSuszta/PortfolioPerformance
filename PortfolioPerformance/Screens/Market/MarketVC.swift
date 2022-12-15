@@ -42,11 +42,6 @@ class MarketViewController: UIViewController {
         setupTableView()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-    }
-    
     //MARK: - Methods
     
     private func setupViewController() {

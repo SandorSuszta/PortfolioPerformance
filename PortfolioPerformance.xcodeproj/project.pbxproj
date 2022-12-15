@@ -17,6 +17,7 @@
 		792C040928C9E62B008EE48C /* RangeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040828C9E62B008EE48C /* RangeProgressView.swift */; };
 		792C040B28CE2941008EE48C /* DetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040A28CE2941008EE48C /* DetailsCell.swift */; };
 		792C040D28D32D5D008EE48C /* SingleCoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040C28D32D5D008EE48C /* SingleCoinModel.swift */; };
+		792EE344294A28BF001195BD /* AddTransactionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792EE343294A28BF001195BD /* AddTransactionVM.swift */; };
 		793262C128061136005E4D2E /* GraphEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793262C028061135005E4D2E /* GraphEntries.swift */; };
 		793332C5293E9DE4005EE8A3 /* AddTransactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793332C4293E9DE4005EE8A3 /* AddTransactionVC.swift */; };
 		793332C7293F52C2005EE8A3 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793332C6293F52C2005EE8A3 /* CustomSearchBar.swift */; };
@@ -76,6 +77,7 @@
 		792C040828C9E62B008EE48C /* RangeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeProgressView.swift; sourceTree = "<group>"; };
 		792C040A28CE2941008EE48C /* DetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCell.swift; sourceTree = "<group>"; };
 		792C040C28D32D5D008EE48C /* SingleCoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCoinModel.swift; sourceTree = "<group>"; };
+		792EE343294A28BF001195BD /* AddTransactionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionVM.swift; sourceTree = "<group>"; };
 		793262C028061135005E4D2E /* GraphEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphEntries.swift; sourceTree = "<group>"; };
 		793332C4293E9DE4005EE8A3 /* AddTransactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionVC.swift; sourceTree = "<group>"; };
 		793332C6293F52C2005EE8A3 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				793332C4293E9DE4005EE8A3 /* AddTransactionVC.swift */,
+				792EE343294A28BF001195BD /* AddTransactionVM.swift */,
 			);
 			path = AddTransaction;
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 				79D5C6D328DC75060018B133 /* DetailsCellVM.swift in Sources */,
 				796EFA4128733AF2005E24AF /* NetworkingManager.swift in Sources */,
 				79D5B8E828EEE3FF00178402 /* PPButton.swift in Sources */,
+				792EE344294A28BF001195BD /* AddTransactionVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -241,7 +241,7 @@ extension SearchScreenViewController: UITableViewDelegate {
         
         UserDefaultsManager.shared.saveToDefaults(
             ID: model.id,
-            forKey: UserDefaultsManager.shared.recentSearchesKey
+            forKey: DefaultsKeys.recentSearches.rawValue
         )
         
         let detailVC = CoinDetailsVC(

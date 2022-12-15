@@ -6,6 +6,8 @@ class AddTransactionVC: UIViewController {
     
     private let searchBar = CustomSearchBar(frame: .zero)
     
+    private let viewModel = AddTransactionViewModel()
+    
     lazy private var resultsCollectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collection.translatesAutoresizingMaskIntoConstraints = false
@@ -17,18 +19,30 @@ class AddTransactionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .secondarySystemBackground
+        setUpViewController()
         setUpSearchBar()
         setupCollectionView()
+        bindViewModels()
         setupConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        searchBar.searchTextField.becomeFirstResponder()
+    }
+    
     //MARK: - Private methods
+    
+    private func setUpViewController() {
+        view.backgroundColor = .secondarySystemBackground
+        title = "Add new transaction"
+        self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(10, for: .default)
+    }
     
     private func setUpSearchBar() {
         view.addSubview(searchBar)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.searchTextField.delegate = self
+        searchBar.searchTextField.becomeFirstResponder()
     }
     
     private func setupCollectionView() {
@@ -51,9 +65,29 @@ class AddTransactionVC: UIViewController {
         return layout
     }
     
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
+    private func bindViewModels() {
         
+        viewModel.searchResultCellModels.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.resultsCollectionView.reloadData()
+            }
+        }
+        
+        viewModel.errorMessage.bind { [weak self] message in
+            guard
+                let self = self,
+                let message = message
+            else {
+                return
+            }
+            self.showAlert(message: message)
+        }
+    }
+    
+    private func setupConstraints() {
+        let collectionViewHeight: CGFloat = (((view.bounds.width - 110) / 4) + 25) * 2 + 50
+        
+        NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -62,12 +96,17 @@ class AddTransactionVC: UIViewController {
             resultsCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
             resultsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             resultsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            resultsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            resultsCollectionView.heightAnchor.constraint(equalToConstant: collectionViewHeight)
         ])
     }
 }
 
 extension AddTransactionVC: UITextFieldDelegate  {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -101,12 +140,18 @@ extension AddTransactionVC: UITextFieldDelegate  {
 
 extension AddTransactionVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        8
+        viewModel.searchResultCellModels.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddTransactionCell.identifier, for: indexPath) as! AddTransactionCell
-        cell.configure(with: SearchResult(id: "BTC", name: "BTC", symbol: "BTC", large: ""))
+        guard
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddTransactionCell.identifier, for: indexPath) as? AddTransactionCell,
+            let model = viewModel.searchResultCellModels.value?[indexPath.row]
+        else {
+            return UICollectionViewCell()
+        }
+            
+        cell.configure(with: model)
         return cell
     }
 }
