@@ -8,12 +8,18 @@ class AddTransactionVC: UIViewController {
     
     private let viewModel = AddTransactionViewModel()
     
-    lazy private var resultsCollectionView: UICollectionView = {
+    private lazy var resultsCollectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.configureWithShadow()
         return collection
     }()
+    
+    private lazy var dataSource = createDataSource()
+    
+    enum Section {
+        case main
+    }
       
     //MARK: - Lifecycle
     
@@ -47,9 +53,31 @@ class AddTransactionVC: UIViewController {
     
     private func setupCollectionView() {
         view.addSubview(resultsCollectionView)
-        resultsCollectionView.delegate = self
-        resultsCollectionView.dataSource = self
+//        resultsCollectionView.delegate = self
+//        resultsCollectionView.dataSource = self
         resultsCollectionView.register(AddTransactionCell.self, forCellWithReuseIdentifier: AddTransactionCell.identifier)
+    }
+    
+    private func createDataSource() -> UICollectionViewDiffableDataSource<Section, SearchResult> {
+        let dataSource = UICollectionViewDiffableDataSource<Section, SearchResult>(
+            collectionView: resultsCollectionView) { (collectionView, indexPath, itemIdentifier) -> UICollectionViewCell in
+                guard
+                    let cell = self.resultsCollectionView.dequeueReusableCell(withReuseIdentifier: AddTransactionCell.identifier, for: indexPath) as? AddTransactionCell,
+                    let model = self.viewModel.searchResultCellModels.value?[indexPath.row]
+                else {
+                    return UICollectionViewCell()
+                }
+                cell.configure(with: model)
+                return cell
+            }
+        return dataSource
+    }
+    
+    private func applySnapshot(animateDifferences: Bool = true) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, SearchResult>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(viewModel.searchResultCellModels.value ?? [])
+        dataSource.apply(snapshot, animatingDifferences: animateDifferences)
     }
     
     private func createLayout() -> UICollectionViewFlowLayout {
@@ -69,7 +97,7 @@ class AddTransactionVC: UIViewController {
         
         viewModel.searchResultCellModels.bind { [weak self] _ in
             DispatchQueue.main.async {
-                self?.resultsCollectionView.reloadData()
+                self?.applySnapshot()
             }
         }
         
@@ -122,6 +150,7 @@ extension AddTransactionVC: UITextFieldDelegate  {
             return false
         }
     }
+}
 //    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 //        if let query = searchBar.text, !query.isEmpty {
 ////            isSearching = true
@@ -135,23 +164,23 @@ extension AddTransactionVC: UITextFieldDelegate  {
 ////            viewModel.clearSearchModels()
 //        }
 //    }
-}
+
     //MARK: - Collection View Delegate And DataSource
 
-extension AddTransactionVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.searchResultCellModels.value?.count ?? 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddTransactionCell.identifier, for: indexPath) as? AddTransactionCell,
-            let model = viewModel.searchResultCellModels.value?[indexPath.row]
-        else {
-            return UICollectionViewCell()
-        }
-            
-        cell.configure(with: model)
-        return cell
-    }
-}
+//extension AddTransactionVC: UICollectionViewDelegate, UICollectionViewDataSource {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        viewModel.searchResultCellModels.value?.count ?? 0
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddTransactionCell.identifier, for: indexPath) as? AddTransactionCell,
+//            let model = viewModel.searchResultCellModels.value?[indexPath.row]
+//        else {
+//            return UICollectionViewCell()
+//        }
+//
+//        cell.configure(with: model)
+//        return cell
+//    }
+//}
