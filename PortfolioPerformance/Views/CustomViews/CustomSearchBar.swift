@@ -14,6 +14,7 @@ class CustomSearchBar: UIView {
         let field = UITextField()
         field.translatesAutoresizingMaskIntoConstraints = false
         field.font = .systemFont(ofSize: 20, weight: .semibold)
+        field.autocorrectionType = .no
         return field
     }()
     

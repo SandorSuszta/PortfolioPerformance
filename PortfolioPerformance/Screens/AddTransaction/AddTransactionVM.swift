@@ -8,17 +8,19 @@ class AddTransactionViewModel {
     
     public var searchResultCellModels: ObservableObject<[SearchResult]> = ObservableObject(value: nil)
     
+    public var defaultModels: ObservableObject<[SearchResult]> = ObservableObject(value: nil)
+    
     public var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
     
     //MARK: - Init
     
     init() {
-        getModels()
+        getDefaultModels()
     }
     
     //MARK: - Public methods
     
-    public func getModels() {
+    public func getDefaultModels() {
         
         NetworkingManager.shared.requestDataForList(list: createEightIDsList()) { result in
             
@@ -39,7 +41,19 @@ class AddTransactionViewModel {
                     queryList: self.createEightIDsList()
                 )
                 
-                self.searchResultCellModels.value = orderedCellModels
+                self.defaultModels.value = orderedCellModels
+                
+            case .failure(let error):
+                self.errorMessage.value = error.rawValue
+            }
+        }
+    }
+    
+    public func getSearchResults(query: String) {
+        NetworkingManager.shared.searchWith(query: query) { result in
+            switch result {
+            case.success(let response):
+                self.searchResultCellModels.value = Array(response.coins.prefix(8))
                 
             case .failure(let error):
                 self.errorMessage.value = error.rawValue

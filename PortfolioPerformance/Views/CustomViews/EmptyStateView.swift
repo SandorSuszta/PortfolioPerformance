@@ -1,24 +1,38 @@
 import UIKit
 
+enum EmptyStateType {
+    case noSearchResults
+    case noFavourites
+}
+
 class EmptyStateView: UIView {
     
     //MARK: - Properties
     private let imageView: UIImageView
     
-    private let textLabel: UILabel = {
+    private var textLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 26, weight: .bold)
         label.textColor = .secondaryLabel
+        label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false
+
         return label
     }()
     
     //MARK: - Init
-    init(text: String, imageName: String) {
-        imageView = UIImageView(image: UIImage(named: imageName))
-        textLabel.text = text
+    init(type: EmptyStateType) {
+        
+        switch type {
+        case .noFavourites:
+            imageView = UIImageView(image: UIImage(named: "NoFavourites"))
+            textLabel.text = "Favourite list  is empty"
+        case .noSearchResults:
+            imageView = UIImageView(image: UIImage(named: "NoResult"))
+            textLabel.text = "Sorry, nothing found"
+        }
         super .init(frame: .zero)
         setup()
     }
@@ -37,16 +51,17 @@ class EmptyStateView: UIView {
     }
     
     private func setupConstraints() {
+    
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: self.topAnchor),
-            imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            imageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1 / 1.5),
-            imageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1 / 1.5),
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 7 / 10),
+            imageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 7 / 10),
             
-            textLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
-            textLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            textLabel.widthAnchor.constraint(equalTo: self.widthAnchor),
-            textLabel.heightAnchor.constraint(equalToConstant: 40)
+            textLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            textLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            textLabel.widthAnchor.constraint(equalTo: widthAnchor),
+            textLabel.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 2 / 10)
         ])
     }
 }

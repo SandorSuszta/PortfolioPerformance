@@ -5,7 +5,7 @@ class SearchScreenViewController: UIViewController {
 
     //MARK: - Properties
     
-    enum SearchBarStatus {
+    enum SearchBarState {
         case searching
         case emptyWithRecents
         case emptyWithoutRecents
@@ -17,8 +17,8 @@ class SearchScreenViewController: UIViewController {
     
     private var isSearching: Bool = false
     
-    private var searchBarStatus: SearchBarStatus {
-        determineSearchBarStatus(
+    private var searchBarState: SearchBarState {
+        determineSearchBarState(
             isSearching: isSearching,
             isRecentSearchesEmpty: viewModel.defaultCellModels.value?[0].isEmpty ?? true
         )
@@ -37,9 +37,7 @@ class SearchScreenViewController: UIViewController {
         return table
     }()
     
-    private let noResultsView = EmptyStateView(
-        text: "Sorry, nothing found",
-        imageName: "NoResult")
+    private let noResultsView = EmptyStateView(type: .noSearchResults)
         
     //MARK: - Lifecycle
     
@@ -129,12 +127,11 @@ class SearchScreenViewController: UIViewController {
             noResultsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             noResultsView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             noResultsView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1 / 2),
-            noResultsView.heightAnchor.constraint(equalTo: noResultsView.widthAnchor, constant: 60)
-            
+            noResultsView.heightAnchor.constraint(equalTo: noResultsView.widthAnchor)
         ])
     }
     
-    private func determineSearchBarStatus(isSearching: Bool, isRecentSearchesEmpty: Bool) -> SearchBarStatus {
+    private func determineSearchBarState(isSearching: Bool, isRecentSearchesEmpty: Bool) -> SearchBarState {
         
         switch (isSearching, isRecentSearchesEmpty) {
         case (true, _):
@@ -191,7 +188,7 @@ extension SearchScreenViewController: UITableViewDelegate {
         
         let trendingCoinsHeader = PPSectionHeaderView(type: .trendingCoins, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
         
-        switch searchBarStatus {
+        switch searchBarState {
             
         case .searching:
             return nil
@@ -213,7 +210,7 @@ extension SearchScreenViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        switch searchBarStatus {
+        switch searchBarState {
         case .searching:
             return 0
         case .emptyWithoutRecents:

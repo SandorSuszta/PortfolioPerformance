@@ -52,7 +52,9 @@ class AddTransactionCell: UICollectionViewCell {
     
     //MARK: - Public methods
     
-    public func configure(with searchResult: SearchResult) {
+    public func configure(with searchResult: SearchResult?) {
+        guard let searchResult = searchResult else { return }
+        
         symbolLabel.text = searchResult.symbol.uppercased()
         nameLabel.text = searchResult.name
         logoView.setImage(imageUrl: searchResult.large)

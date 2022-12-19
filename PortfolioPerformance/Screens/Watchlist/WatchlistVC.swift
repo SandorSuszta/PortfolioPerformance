@@ -6,7 +6,7 @@ class WatchlistViewController: UIViewController {
 
     private let watchlistTableView = UITableView()
 
-    private let emptyWatchlistView = EmptyStateView(text: "Favourite list  is empty", imageName: "NoFavourites")
+    private let emptyWatchlistView = EmptyStateView(type: .noFavourites)
     
     //MARK: - Lifecycle
     
@@ -56,7 +56,7 @@ class WatchlistViewController: UIViewController {
             emptyWatchlistView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyWatchlistView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             emptyWatchlistView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1 / 2),
-            emptyWatchlistView.heightAnchor.constraint(equalTo: emptyWatchlistView.widthAnchor, constant: 60)
+            emptyWatchlistView.heightAnchor.constraint(equalTo: emptyWatchlistView.widthAnchor)
         ])
     }
     

@@ -78,7 +78,6 @@ class MarketViewModel {
                     self.cardViewModels.value?.append(contentsOf: [marketCapCellViewModel,dominanceCardModel])
                 }
                 
-                
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue
             }
