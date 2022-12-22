@@ -31,7 +31,6 @@ class AddTransactionVC: UIViewController {
                     self.noSearchResultsView.isHidden = false
                 }
             }
-            
             self.applySnapshot()
         }
     }
@@ -56,13 +55,20 @@ class AddTransactionVC: UIViewController {
         setUpSearchBar()
         setupCollectionView()
         bindViewModels()
+        addTapToDismissKeyboard()
         setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        searchBar.searchTextField.becomeFirstResponder()
     }
     
     //MARK: - Private methods
     
     private func setUpViewController() {
         view.backgroundColor = .secondarySystemBackground
+        
         title = "Add new transaction"
         self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(10, for: .default)
     }
@@ -120,7 +126,7 @@ class AddTransactionVC: UIViewController {
         let cellWidth = availableWidth / 4
         
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: cellWidth, height: cellWidth + 25)
+        layout.itemSize = CGSize(width: cellWidth, height: cellWidth + 20)
         layout.minimumInteritemSpacing = minimumInterimSpacing
         layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         return layout
@@ -155,8 +161,17 @@ class AddTransactionVC: UIViewController {
         }
     }
     
+    private func addTapToDismissKeyboard() {
+        let tap = UITapGestureRecognizer(
+            target: self.view,
+            action: #selector(UIView.endEditing(_:))
+        )
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
     private func setupConstraints() {
-        let collectionViewHeight: CGFloat = (((view.bounds.width - 110) / 4) + 25) * 2 + 50
+        let collectionViewHeight: CGFloat = (((view.bounds.width - 110) / 4) + 25) * 2 + 40
         
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -178,11 +193,6 @@ class AddTransactionVC: UIViewController {
 }
 
 extension AddTransactionVC: UITextFieldDelegate  {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -207,6 +217,7 @@ extension AddTransactionVC: UITextFieldDelegate  {
         return true
     }
 }
+
 //    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 //        if let query = searchBar.text, !query.isEmpty {
 ////            isSearching = true
