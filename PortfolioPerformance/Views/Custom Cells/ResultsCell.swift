@@ -33,10 +33,10 @@ class ResultsCell: UITableViewCell {
     }()
     
     
-    public func configure (with searchResult: SearchResult) {
-        symbolLabel.text = searchResult.symbol.uppercased()
-        nameLabel.text = searchResult.name
-        logoView.setImage(imageUrl: searchResult.large)
+    public func configure(withModel model: SearchResult) {
+        symbolLabel.text = model.symbol.uppercased()
+        nameLabel.text = model.name
+        logoView.setImage(imageUrl: model.large)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

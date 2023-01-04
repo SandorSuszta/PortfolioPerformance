@@ -81,6 +81,7 @@ class AddTransactionVC: UIViewController {
     
     private func setupCollectionView() {
         view.addSubviews(resultsCollectionView, noSearchResultsView)
+        resultsCollectionView.delegate = self
         resultsCollectionView.register(AddTransactionCell.self, forCellWithReuseIdentifier: AddTransactionCell.identifier)
     }
     
@@ -99,7 +100,7 @@ class AddTransactionVC: UIViewController {
                     model = self.viewModel.searchResultCellModels.value?[indexPath.row]
                 }
                 
-                cell.configure(with: model)
+                cell.configure(withModel: model)
                 return cell
             }
         return dataSource
@@ -120,13 +121,13 @@ class AddTransactionVC: UIViewController {
     }
     
     private func createLayout() -> UICollectionViewFlowLayout {
-        let padding: CGFloat = 20
-        let minimumInterimSpacing: CGFloat = 10
-        let availableWidth = view.bounds.width - 40 - minimumInterimSpacing * 3 - padding * 2
-        let cellWidth = availableWidth / 4
+        let padding: CGFloat = 6
+        let minimumInterimSpacing: CGFloat = 6
+        let availableWidth = view.bounds.width - minimumInterimSpacing * 4 - padding * 2 - 40
+        let cellWidth = availableWidth / 5
         
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: cellWidth, height: cellWidth + 20)
+        layout.itemSize = CGSize(width: cellWidth, height: cellWidth * 1.2)
         layout.minimumInteritemSpacing = minimumInterimSpacing
         layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         return layout
@@ -177,7 +178,7 @@ class AddTransactionVC: UIViewController {
             searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            searchBar.heightAnchor.constraint(equalToConstant: 50),
+            searchBar.heightAnchor.constraint(equalToConstant: 45),
             
             resultsCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
             resultsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -190,6 +191,20 @@ class AddTransactionVC: UIViewController {
             noSearchResultsView.widthAnchor.constraint(equalTo: noSearchResultsView.heightAnchor)
         ])
     }
+}
+
+extension AddTransactionVC: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Transaction")
+        guard
+            let cell = collectionView.cellForItem(at: indexPath) as? AddTransactionCell,
+            let model = cell.model
+        else { return }
+        
+        self.navigationController?.pushViewController(TransactionDetailsVC(model: model), animated: true)
+    }
+    
 }
 
 extension AddTransactionVC: UITextFieldDelegate  {
@@ -213,41 +228,6 @@ extension AddTransactionVC: UITextFieldDelegate  {
                 self.viewModel.getSearchResults(query: newString)
             }
         }
-        
         return true
     }
 }
-
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        if let query = searchBar.text, !query.isEmpty {
-////            isSearching = true
-////            noResultsView.isHidden = true
-////
-////            searchTimer?.invalidate()
-////            searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-////                self.viewModel.updateSearchResults(query: query)
-//        } else {
-////            isSearching = false
-////            viewModel.clearSearchModels()
-//        }
-//    }
-
-    //MARK: - Collection View Delegate And DataSource
-
-//extension AddTransactionVC: UICollectionViewDelegate, UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        viewModel.searchResultCellModels.value?.count ?? 0
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddTransactionCell.identifier, for: indexPath) as? AddTransactionCell,
-//            let model = viewModel.searchResultCellModels.value?[indexPath.row]
-//        else {
-//            return UICollectionViewCell()
-//        }
-//
-//        cell.configure(with: model)
-//        return cell
-//    }
-//}

@@ -359,7 +359,10 @@ class CoinDetailsVC: UIViewController {
     }
     
     private func setupSegmentedControl() {
-        timeIntervalSelection = CustomSegmentedControl(items: coinDetailsVM.chartIntervals)
+        timeIntervalSelection = CustomSegmentedControl(
+            items: coinDetailsVM.chartIntervals,
+            defaultColor: .PPblue
+        )
         timeIntervalSelection.addTarget(self, action: #selector(didChangeSegment(_:)) , for: .valueChanged)
     }
     

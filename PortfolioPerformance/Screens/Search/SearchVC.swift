@@ -175,7 +175,7 @@ extension SearchScreenViewController: UITableViewDataSource {
         
         guard let model else { return UITableViewCell() }
         
-        cell.configure(with: model)
+        cell.configure(withModel: model)
         
         return cell
     }

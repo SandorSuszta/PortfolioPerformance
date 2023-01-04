@@ -2,11 +2,13 @@ import UIKit
 
 class AddTransactionCell: UICollectionViewCell {
     
-    static let identifier = "ResultsCell"
+    static let identifier = "AddTransactionCell"
+    
+    var model: SearchResult?
     
     let symbolLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.font = .systemFont(ofSize: 12, weight: .semibold)
         label.textColor = .label
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -35,12 +37,12 @@ class AddTransactionCell: UICollectionViewCell {
     
     //MARK: - Public methods
     
-    public func configure(with searchResult: SearchResult?) {
-        guard let searchResult = searchResult else { return }
+    public func configure(withModel model: SearchResult?) {
+        guard let model = model else { return }
         
-        symbolLabel.text = searchResult.symbol.uppercased()
-        
-        logoView.setImage(imageUrl: searchResult.large)
+        self.model = model
+        symbolLabel.text = model.symbol.uppercased()
+        logoView.setImage(imageUrl: model.large)
     }
     
     //MARK: - Private methods
@@ -52,9 +54,9 @@ class AddTransactionCell: UICollectionViewCell {
     
     private func setupConstraints(){
         NSLayoutConstraint.activate([
-            logoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            logoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
-            logoView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            logoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            logoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+            logoView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             logoView.heightAnchor.constraint(equalTo: logoView.widthAnchor),
             
             symbolLabel.topAnchor.constraint(equalTo: logoView.bottomAnchor, constant: 6),

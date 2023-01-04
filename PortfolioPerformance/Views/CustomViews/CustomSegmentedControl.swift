@@ -4,9 +4,9 @@ class CustomSegmentedControl: UISegmentedControl {
     
     //MARK: - Init
     
-    override init(items: [Any]?) {
+    init(items: [Any]?, defaultColor: UIColor) {
         super .init(items: items)
-        configure()
+        configure(withColor: defaultColor)
     }
     
     required init?(coder: NSCoder) {
@@ -26,12 +26,13 @@ class CustomSegmentedControl: UISegmentedControl {
             }
         }
     }
+
     //MARK: - Private methods
     
-    private func configure() {
+    private func configure(withColor color: UIColor) {
         selectedSegmentIndex = 0
         
-        setBackgroundImage(imageWithColor(color: .PPblue), for: .selected, barMetrics: .default)
+        setBackgroundImage(imageWithColor(color: color), for: .selected, barMetrics: .default)
         setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
         setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
         setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .selected)
@@ -48,5 +49,18 @@ class CustomSegmentedControl: UISegmentedControl {
         let image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         return image!
+    }
+    
+    public func updateBackgroundColor() {
+        switch selectedSegmentIndex {
+        case 0:
+            setBackgroundImage(imageWithColor(color: .emerald), for: .selected, barMetrics: .default)
+        case 1:
+            setBackgroundImage(imageWithColor(color: .pomergranate), for: .selected, barMetrics: .default)
+        case 2:
+            setBackgroundImage(imageWithColor(color: .PPblue), for: .selected, barMetrics: .default)
+        default:
+            fatalError()
+        }
     }
 }
