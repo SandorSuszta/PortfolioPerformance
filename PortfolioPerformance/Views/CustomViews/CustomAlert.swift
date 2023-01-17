@@ -9,15 +9,16 @@ class CustomAlertVC: UIViewController {
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 16
         view.layer.borderWidth = 2
-        view.layer.borderColor = UIColor.PPblue.cgColor
+        view.layer.borderColor = UIColor.PPBlue.cgColor
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     private let titleLabel = UILabel()
     private let textLabel = UILabel()
-    private let actionButton = PPButton(color: .PPblue, name: "Close")
+    private let actionButton = PPButton(color: .PPBlue, name: "Close")
     
     //MARK: - Init
+    
     init(text: String) {
         self.alertText = text
         super .init(nibName: nil, bundle: nil)

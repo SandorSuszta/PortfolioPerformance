@@ -58,7 +58,7 @@ class CustomSegmentedControl: UISegmentedControl {
         case 1:
             setBackgroundImage(imageWithColor(color: .pomergranate), for: .selected, barMetrics: .default)
         case 2:
-            setBackgroundImage(imageWithColor(color: .PPblue), for: .selected, barMetrics: .default)
+            setBackgroundImage(imageWithColor(color: .PPBlue), for: .selected, barMetrics: .default)
         default:
             fatalError()
         }

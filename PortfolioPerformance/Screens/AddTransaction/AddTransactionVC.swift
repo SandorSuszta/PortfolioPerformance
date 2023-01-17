@@ -121,10 +121,10 @@ class AddTransactionVC: UIViewController {
     }
     
     private func createLayout() -> UICollectionViewFlowLayout {
-        let padding: CGFloat = 6
-        let minimumInterimSpacing: CGFloat = 6
-        let availableWidth = view.bounds.width - minimumInterimSpacing * 4 - padding * 2 - 40
-        let cellWidth = availableWidth / 5
+        let padding: CGFloat = 10
+        let minimumInterimSpacing: CGFloat = 10
+        let availableWidth = view.bounds.width - minimumInterimSpacing * 3 - padding * 2 - 50
+        let cellWidth = availableWidth / 4
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: cellWidth, height: cellWidth * 1.2)

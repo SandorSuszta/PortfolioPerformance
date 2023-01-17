@@ -1,0 +1,58 @@
+{
+  "_buildCommand2" : {
+    "command" : "prepareForIndexing",
+    "enableIndexBuildArena" : true,
+    "targets" : null
+  },
+  "buildCommand" : "build",
+  "configuredTargets" : [
+    {
+      "guid" : "77407bc6faac2fc7900491337ee755fcbb9a5d881fa178406f20bddf644f5822"
+    }
+  ],
+  "containerPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/PortfolioPerformance.xcworkspace",
+  "continueBuildingAfterErrors" : true,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "indexbuild",
+    "activeArchitecture" : "x86_64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "iphonesimulator",
+      "sdk" : "iphonesimulator16.0",
+      "sdkVariant" : "iphonesimulator",
+      "supportedArchitectures" : [
+        "x86_64"
+      ],
+      "targetArchitecture" : "x86_64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/DerivedData/PortfolioPerformance/Index.noindex/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/DerivedData/PortfolioPerformance/Index.noindex/Build/Products",
+      "derivedDataPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/DerivedData/PortfolioPerformance/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/DerivedData/PortfolioPerformance/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/DerivedData/PortfolioPerformance/Index.noindex/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO",
+          "INDEX_ARENA_INFO_REGULAR_BUILD_PRODUCTS_DIR" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/DerivedData/PortfolioPerformance/Build/Products",
+          "ONLY_ACTIVE_ARCH" : "YES"
+        }
+      }
+    }
+  },
+  "qos" : "default",
+  "schemeCommand" : "launch",
+  "schemeCommand2" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

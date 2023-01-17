@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>10</integer>
+	<key>logs</key>
+	<dict>
+		<key>326549AE-30E2-4E9A-9B38-6B1CD8C3569E</key>
+		<dict>
+			<key>auxiliaryLogUniqueIdentifier</key>
+			<string>66BAFE88-2792-4255-8BDE-4E384281F4C3</string>
+			<key>auxiliaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>className</key>
+			<string>IDESchemeActionsInvocationRecord</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
+			<key>fileName</key>
+			<string>Run-PortfolioPerformance-2023.01.09_15-45-29-+0000.xcresult</string>
+			<key>hasAuxiliaryLog</key>
+			<true/>
+			<key>hasConsoleLog</key>
+			<true/>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PortfolioPerformance project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PortfolioPerformance</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run PortfolioPerformance</string>
+			<key>timeStartedRecording</key>
+			<real>694971929.84328794</real>
+			<key>timeStoppedRecording</key>
+			<real>0.0</real>
+			<key>title</key>
+			<string>Run PortfolioPerformance</string>
+			<key>uniqueIdentifier</key>
+			<string>326549AE-30E2-4E9A-9B38-6B1CD8C3569E</string>
+		</dict>
+		<key>81ACB90B-53AA-4DBD-BF7F-8E9594743C78</key>
+		<dict>
+			<key>auxiliaryLogUniqueIdentifier</key>
+			<string>E8D1EA6D-73E2-48A1-A789-E39EBB980FE3</string>
+			<key>auxiliaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>className</key>
+			<string>IDESchemeActionsInvocationRecord</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
+			<key>fileName</key>
+			<string>Run-PortfolioPerformance-2023.01.09_15-40-50-+0000.xcresult</string>
+			<key>hasAuxiliaryLog</key>
+			<true/>
+			<key>hasConsoleLog</key>
+			<true/>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PortfolioPerformance project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PortfolioPerformance</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run PortfolioPerformance</string>
+			<key>timeStartedRecording</key>
+			<real>694971650.53127098</real>
+			<key>timeStoppedRecording</key>
+			<real>0.0</real>
+			<key>title</key>
+			<string>Run PortfolioPerformance</string>
+			<key>uniqueIdentifier</key>
+			<string>81ACB90B-53AA-4DBD-BF7F-8E9594743C78</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

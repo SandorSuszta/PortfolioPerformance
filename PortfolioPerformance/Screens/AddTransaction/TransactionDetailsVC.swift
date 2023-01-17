@@ -74,10 +74,10 @@ final class TransactionDetailsVC: UIViewController {
         addConstraints()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        view.endEditing(true)
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        view.endEditing(true)
+//    }
     
     //MARK: - Private methods
     
@@ -105,7 +105,7 @@ final class TransactionDetailsVC: UIViewController {
         case 1:
             addTransactionButton.backgroundColor = .pomergranate
         case 2:
-            addTransactionButton.backgroundColor = .PPblue
+            addTransactionButton.backgroundColor = .PPBlue
         default:
             fatalError()
         }

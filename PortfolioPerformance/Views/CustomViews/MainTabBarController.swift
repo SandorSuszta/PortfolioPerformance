@@ -9,7 +9,9 @@ class MainTabBarController: UITabBarController {
     }
     
     private func setupTabBar() {
-        tabBar.tintColor = .PPblue
+        tabBar.tintColor = .PPBlue
+        tabBar.layer.borderColor = UIColor.secondarySystemBackground.cgColor
+        tabBar.layer.borderWidth = 2
 
         let market = MarketViewController()
         let watchlist = WatchlistViewController()

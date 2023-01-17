@@ -1,69 +1,47 @@
-//
-//  Crypto.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 07/07/2022.
-//
-
-import Foundation
 import UIKit
 
 class CryptoCurrencyCell: UITableViewCell {
     
+    //MARK: - Properties
+    
     static let identifier = "CryptoCurrencyCell"
-    static let prefferedHeight: CGFloat = 60
     
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.font = .systemFont(ofSize: 16, weight: .medium)
-        return label
-    }()
-    
-    private let symbolLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .secondaryLabel
-        label.font = .systemFont(ofSize: 12, weight: .regular)
-        return label
-    }()
-    
-    private let priceLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.textAlignment = .right
-        label.font = .systemFont(ofSize: 16, weight: .medium)
-        return label
-    }()
-    
-    private let changeLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .regular)
-        label.textAlignment = .right
-        return label
-    }()
+    private let nameLabel = PPTextLabel(allignment: .left, fontWeight: .medium)
+    private let symbolLabel = PPTextLabel(textColor: .secondaryLabel, allignment: .left)
+    private let priceLabel = PPTextLabel(allignment: .right, fontWeight: .medium)
+    private let changeLabel = PPTextLabel(allignment: .right)
     
     private let logoContainerView: UIView = {
         let view = UIView()
-        view.configureWithShadow()
-        view.backgroundColor = .logoBackground
+        view.layer.cornerRadius = 10
+        view.backgroundColor = .systemBackground
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let labelsContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemBackground
         return view
     }()
     
     private let logoImageView: UIImageView = {
         let image = UIImageView()
         image.clipsToBounds = true
+        image.layer.cornerRadius = 10
         image.contentMode = .scaleAspectFit
-        image.backgroundColor = .clear
+        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
+    //MARK: - Init
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        contentView.backgroundColor = .systemBackground
-        logoContainerView.addSubview(logoImageView)
-        addSubviews(nameLabel, symbolLabel, priceLabel, changeLabel, logoContainerView)
+        configureContentView()
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -71,57 +49,11 @@ class CryptoCurrencyCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        //Add distance between the cells
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 7, right: 0))
-        contentView.layer.cornerRadius = 25
-        contentView.backgroundColor = .systemBackground
-        backgroundColor = .clear
-        
-        let imageSize: CGFloat = contentView.height - 14
-        logoContainerView.frame = CGRect(
-            x: contentView.left + 10,
-            y: 7,
-            width: contentView.height - 14,
-            height: contentView.height - 14
-        )
-        logoContainerView.layer.cornerRadius = logoContainerView.width / 2
-        
-        logoImageView.frame = CGRect(
-            x: 2,
-            y: 2,
-            width: logoContainerView.width - 4,
-            height: logoContainerView.width - 4
-        )
-        logoImageView.layer.cornerRadius = logoImageView.width / 2
-        
-        
-        nameLabel.frame = CGRect(
-            x: logoContainerView.right + 20,
-            y: contentView.height/2 - nameLabel.height,
-            width: (contentView.width - imageSize)/2,
-            height: 20
-        )
-        
-        symbolLabel.frame = CGRect(
-            x: nameLabel.left,
-            y: nameLabel.bottom,
-            width: (contentView.width - imageSize)/2,
-            height: 20)
-        
-        priceLabel.frame = CGRect(
-            x: contentView.right - priceLabel.width - 20,
-            y: nameLabel.top,
-            width: symbolLabel.width - 10,
-            height: 20)
-        
-        changeLabel.frame = CGRect(
-            x: priceLabel.left,
-            y: priceLabel.bottom,
-            width: priceLabel.width,
-            height: 20)
     }
     
-    func configureCell(with viewModel: CryptoCurrencyCellViewModel) {
+    //MARK: - Methods
+    
+    public func configureCell(with viewModel: CryptoCurrencyCellViewModel) {
         nameLabel.text = viewModel.name
         symbolLabel.text = viewModel.symbol
         priceLabel.text = viewModel.currentPrice
@@ -131,5 +63,48 @@ class CryptoCurrencyCell: UITableViewCell {
         logoImageView.setImage(imageUrl: viewModel.imageUrl)
         selectionStyle = .none
     }
+    
+    private func configureContentView() {
+        contentView.backgroundColor = .systemBackground
+        
+        addSubviews(logoContainerView, labelsContainerView)
+        logoContainerView.addSubviews(logoImageView)
+        labelsContainerView.addSubviews(nameLabel, symbolLabel, priceLabel, changeLabel)
+        
+        let padding = height / 5
+        
+        NSLayoutConstraint.activate([
+            logoContainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            logoContainerView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            logoContainerView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7),
+            logoContainerView.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7 ),
+            
+            logoImageView.centerYAnchor.constraint(equalTo: logoContainerView.centerYAnchor),
+            logoImageView.centerXAnchor.constraint(equalTo: logoContainerView.centerXAnchor),
+            logoImageView.heightAnchor.constraint(equalTo: logoContainerView.heightAnchor, multiplier: 0.9),
+            logoImageView.widthAnchor.constraint(equalTo: logoContainerView.widthAnchor, multiplier: 0.9),
+            
+            labelsContainerView.centerYAnchor.constraint(equalTo: logoContainerView.centerYAnchor),
+            labelsContainerView.leadingAnchor.constraint(equalTo: logoContainerView.trailingAnchor, constant: padding),
+            labelsContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            labelsContainerView.heightAnchor.constraint(equalTo: logoContainerView.heightAnchor, multiplier: 0.8),
+            
+            nameLabel.topAnchor.constraint(equalTo: labelsContainerView.topAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: labelsContainerView.leadingAnchor),
+            nameLabel.heightAnchor.constraint(equalTo: labelsContainerView.heightAnchor, multiplier: 0.5),
+            
+            symbolLabel.bottomAnchor.constraint(equalTo: labelsContainerView.bottomAnchor),
+            symbolLabel.leadingAnchor.constraint(equalTo: labelsContainerView.leadingAnchor),
+            symbolLabel.heightAnchor.constraint(equalTo: labelsContainerView.heightAnchor, multiplier: 0.4),
+            
+            priceLabel.topAnchor.constraint(equalTo: nameLabel.topAnchor),
+            priceLabel.trailingAnchor.constraint(equalTo: labelsContainerView.trailingAnchor),
+            priceLabel.heightAnchor.constraint(equalTo: nameLabel.heightAnchor),
+            
+            changeLabel.bottomAnchor.constraint(equalTo: symbolLabel.bottomAnchor),
+            changeLabel.trailingAnchor.constraint(equalTo: labelsContainerView.trailingAnchor),
+            changeLabel.heightAnchor.constraint(equalTo: symbolLabel.heightAnchor),
+            
+        ])
+    }
 }
-

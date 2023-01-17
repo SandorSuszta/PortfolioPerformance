@@ -2,39 +2,36 @@ import UIKit
 
 struct MarketCardCellViewModel {
     
-    var metricName: String
+    public let cellType: MarketCardCellType
     
-    var mainMetricValue: String
+    public let mainMetricValue: String
     
-    var secondaryMetricValue: String
+    public let secondaryMetricValue: String
     
-    var progressValue: Float
+    public let progressValue: Float
     
-    var progressBarType: CircularProgressBarType
+    public let isChangePositive: Bool? = true
     
-    var isChangePositive: Bool? = nil
-    
-    var secondaryMetricTextColor: UIColor {
-        switch progressBarType {
-        case .round:
-            return isChangePositive ?? true ? .nephritis : .pomergranate
-        case .gradient:
+    public var secondaryMetricTextColor: UIColor {
+        switch cellType {
+        case .greedAndFear:
             return determineColorBasedOn(indexValue: Int(mainMetricValue) ?? 0)
+        case .totalMarketCap, .bitcoinDominance:
+            return isChangePositive ?? true ? .nephritis : .pomergranate
         }
     }
     
     private func determineColorBasedOn(indexValue: Int) -> UIColor {
-        
         switch indexValue {
         case 0...20:
             return .pomergranate
         case 21...40:
             return .alizarin
-        case 41...54:
+        case 41...60:
             return .carrot
-        case 55...74:
+        case 60...80:
             return .emerald
-        case 75...100:
+        case 81...100:
             return .nephritis
         default:
             return .clear

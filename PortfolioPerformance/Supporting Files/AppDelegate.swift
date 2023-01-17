@@ -10,7 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [.font: UIFont.systemFont(ofSize: 26)]
         
         // Change Back Button color
-        UINavigationBar.appearance().tintColor = .PPblue
+        UINavigationBar.appearance().tintColor = .PPBlue
             
         return true
     }

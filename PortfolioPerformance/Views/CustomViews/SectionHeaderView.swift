@@ -16,12 +16,10 @@ class PPSectionHeaderView: UIView {
     
     //MARK: - Init
     
-    init(type: SectionHeaderType, frame: CGRect, buttonTapHandler: (() -> ())? = nil)
-    {
+    init(type: SectionHeaderType, frame: CGRect, buttonTapHandler: (() -> ())? = nil) {
         self.type = type
         super.init(frame: frame)
         setup()
-        backgroundColor = .systemGray5
     }
     
     required init?(coder: NSCoder) {
@@ -31,6 +29,11 @@ class PPSectionHeaderView: UIView {
     //MARK: - Private methods
     
     private func setup() {
+        backgroundColor = .systemGray5
+        clipsToBounds = true
+        layer.cornerRadius = 10
+        layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        
         nameLabel.text = type.rawValue
         nameLabel.textAlignment = .left
         nameLabel.textColor = .secondaryLabel

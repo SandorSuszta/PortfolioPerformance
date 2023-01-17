@@ -28,6 +28,9 @@ class AddTransactionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureWithShadow()
+        contentView.layer.borderWidth = 0.2
+        contentView.layer.borderColor = UIColor.systemGray.cgColor
+        contentView.layer.cornerRadius = 15
         setupViews()
     }
     

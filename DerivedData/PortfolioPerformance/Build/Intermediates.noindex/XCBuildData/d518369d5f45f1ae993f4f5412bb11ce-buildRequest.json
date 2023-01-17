@@ -1,0 +1,63 @@
+{
+  "_buildCommand2" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildAndRun"
+  },
+  "buildCommand" : "build",
+  "configuredTargets" : [
+    {
+      "guid" : "77407bc6faac2fc7900491337ee755fcbb9a5d881fa178406f20bddf644f5822"
+    }
+  ],
+  "containerPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/PortfolioPerformance.xcworkspace",
+  "continueBuildingAfterErrors" : false,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "x86_64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "iphonesimulator",
+      "sdk" : "iphonesimulator16.0",
+      "sdkVariant" : "iphonesimulator",
+      "supportedArchitectures" : [
+        "x86_64"
+      ],
+      "targetArchitecture" : "x86_64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/DerivedData/PortfolioPerformance/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/DerivedData/PortfolioPerformance/Build/Products",
+      "derivedDataPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/DerivedData/PortfolioPerformance/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/DerivedData/PortfolioPerformance/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/nataliiashusta/Desktop/PortfolioPerformance/DerivedData/PortfolioPerformance/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ASSETCATALOG_FILTER_FOR_DEVICE_MODEL" : "iPhone14,3",
+          "ASSETCATALOG_FILTER_FOR_DEVICE_OS_VERSION" : "16.0",
+          "ASSETCATALOG_FILTER_FOR_THINNING_DEVICE_CONFIGURATION" : "iPhone14,3",
+          "BUILD_ACTIVE_RESOURCES_ONLY" : "YES",
+          "ENABLE_PREVIEWS" : "NO",
+          "TARGET_DEVICE_IDENTIFIER" : "2E0D3100-F0E6-448B-96FD-3BB6C4C693FB",
+          "TARGET_DEVICE_MODEL" : "iPhone14,3",
+          "TARGET_DEVICE_OS_VERSION" : "16.0",
+          "TARGET_DEVICE_PLATFORM_NAME" : "iphonesimulator"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "launch",
+  "schemeCommand2" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

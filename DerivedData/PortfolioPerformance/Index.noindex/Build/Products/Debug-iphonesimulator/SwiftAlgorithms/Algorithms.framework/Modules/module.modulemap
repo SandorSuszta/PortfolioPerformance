@@ -1,0 +1,11 @@
+framework module Algorithms {
+  umbrella header "SwiftAlgorithms-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module Algorithms.Swift {
+  header "Algorithms-Swift.h"
+  requires objc
+}

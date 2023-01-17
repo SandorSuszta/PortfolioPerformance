@@ -3,28 +3,28 @@ import UIKit
 class SortOptionsCell: UICollectionViewCell {
     
     static let identifier = "SortOptionCell"
-    static let preferredHeight: CGFloat = 20
-    static let preferredWidth: CGFloat = 90
     
     public var sortingNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGray
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 14)
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.2
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     override var isSelected: Bool {
         didSet {
-            sortingNameLabel.textColor = isSelected ? .PPblue : .systemGray
-            sortingNameLabel.font = isSelected ? .systemFont(ofSize: 13, weight: .medium) : .systemFont(ofSize: 12, weight: .regular)
+            contentView.backgroundColor = isSelected ? .PPBlueBackground : .clear
+            sortingNameLabel.textColor = isSelected ? .PPBlue : .systemGray
+            sortingNameLabel.font = isSelected ? .systemFont(ofSize: 14, weight: .medium) : .systemFont(ofSize: 14, weight: .regular)
         }
     }
     
     override init(frame: CGRect) {
         super .init(frame: frame)
-        sortingNameLabel.frame = contentView.bounds
-        contentView.addSubview(sortingNameLabel)
         configureContentView()
     }
     
@@ -33,10 +33,17 @@ class SortOptionsCell: UICollectionViewCell {
     }
     
     private func configureContentView() {
-        contentView.layer.cornerRadius = 10
-        contentView.layer.shadowColor = UIColor.lightGray.cgColor
-        contentView.layer.shadowOffset = .zero
-        contentView.layer.shadowOpacity = 0.1
-        contentView.layer.shadowRadius = 5.0
+        contentView.layer.cornerRadius = contentView.height / 5
+        
+        contentView.addSubview(sortingNameLabel)
+        NSLayoutConstraint.activate([
+            sortingNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            sortingNameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            sortingNameLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5),
+            sortingNameLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor)
+        ])
+        
+        
     }
+    
 }

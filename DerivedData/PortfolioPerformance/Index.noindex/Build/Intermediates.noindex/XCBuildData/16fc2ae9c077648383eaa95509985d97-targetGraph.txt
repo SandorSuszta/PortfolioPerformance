@@ -1,0 +1,21 @@
+Target dependency graph (8 targets)
+SwiftAlgorithms in Pods, no dependencies
+Charts in Pods, depends on:
+SwiftAlgorithms in Pods (explicit)
+Pods-PortfolioPerformance in Pods, depends on:
+Charts in Pods (explicit)
+SwiftAlgorithms in Pods (explicit)
+PortfolioPerformance in PortfolioPerformance, depends on:
+Pods-PortfolioPerformance in Pods (implicit dependency via file 'Pods_PortfolioPerformance.framework' in build phase 'Link Binary')
+SwiftAlgorithms in Pods (implicit dependency via options '-framework Algorithms' in build setting 'OTHER_LDFLAGS')
+Charts in Pods (implicit dependency via options '-framework Charts' in build setting 'OTHER_LDFLAGS')
+SwiftAlgorithms in Pods, no dependencies
+Charts in Pods, depends on:
+SwiftAlgorithms in Pods (explicit)
+Pods-PortfolioPerformance in Pods, depends on:
+Charts in Pods (explicit)
+SwiftAlgorithms in Pods (explicit)
+PortfolioPerformance in PortfolioPerformance, depends on:
+Pods-PortfolioPerformance in Pods (implicit dependency via file 'Pods_PortfolioPerformance.framework' in build phase 'Link Binary')
+SwiftAlgorithms in Pods (implicit dependency via options '-framework Algorithms' in build setting 'OTHER_LDFLAGS')
+Charts in Pods (implicit dependency via options '-framework Charts' in build setting 'OTHER_LDFLAGS')

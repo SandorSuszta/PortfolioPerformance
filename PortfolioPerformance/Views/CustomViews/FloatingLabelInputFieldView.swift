@@ -107,7 +107,7 @@ extension FloatingLabelInputView: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         isLabelFloating = true
-        layer.borderColor = UIColor.PPblue.cgColor
+        layer.borderColor = UIColor.PPBlue.cgColor
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {

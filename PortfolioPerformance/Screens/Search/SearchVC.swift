@@ -28,12 +28,13 @@ class SearchScreenViewController: UIViewController {
     
     private let resultsTableView: UITableView = {
         let table = UITableView()
-        table.backgroundColor = .PPSecondarySystemBackground
+        table.backgroundColor = .clear
         table.sectionHeaderTopPadding = 0
         table.register(
             ResultsCell.self,
             forCellReuseIdentifier: ResultsCell.identifier
         )
+        table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
     
@@ -43,7 +44,7 @@ class SearchScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = .secondarySystemBackground
         setUpResultsTableVIew()
         view.addSubview(noResultsView)
         setUpSearchBar()
@@ -56,11 +57,6 @@ class SearchScreenViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         viewModel.updateRecentSearches()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        resultsTableView.frame = view.bounds
     }
     
     //MARK: - Private
@@ -124,6 +120,11 @@ class SearchScreenViewController: UIViewController {
     private func setupConstraints() {
 
         NSLayoutConstraint.activate([
+            resultsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            resultsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            resultsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            resultsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
             noResultsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             noResultsView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             noResultsView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1 / 2),

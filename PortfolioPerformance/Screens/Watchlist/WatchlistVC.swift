@@ -30,7 +30,7 @@ class WatchlistViewController: UIViewController {
     //MARK: - Private methods
     
     private func setupVC() {
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .systemBackground
         self.title = "Watchlist"
         view.addSubview(emptyWatchlistView)
         
@@ -116,7 +116,7 @@ class WatchlistViewController: UIViewController {
         }
 
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            CryptoCurrencyCell.prefferedHeight
+            view.height / 15
         }
         
         func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

@@ -28,16 +28,13 @@ class MarketViewModel {
             case .success(let index):
                 
                 let greedAndFearCellViewModel = MarketCardCellViewModel(
-                    metricName: "Greed And Fear Index",
+                    cellType: .greedAndFear,
                     mainMetricValue: index.data[0].value,
                     secondaryMetricValue: index.data[0].valueClassification,
-                    progressValue: (Float(index.data[0].value) ?? 0) / 100,
-                    progressBarType: .gradient
+                    progressValue: (Float(index.data[0].value) ?? 0) / 100
                 )
                 
-                self.viewModelQueue.sync {
-                    self.cardViewModels.value?.append(greedAndFearCellViewModel)
-                }
+                self.cardViewModels.value?.append(greedAndFearCellViewModel)
                 
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue
@@ -56,21 +53,18 @@ class MarketViewModel {
                 
                 //Create view model for Total Market Cap Card
                 let marketCapCellViewModel = MarketCardCellViewModel(
-                    metricName: "Total Market Cap",
+                    cellType: .totalMarketCap,
                     mainMetricValue: .bigNumberString(from: totalMarketCap),
                     secondaryMetricValue: .percentageString(from: marketCapChangeFor24H),
-                    progressValue: Float(totalMarketCap / allTimeHighMarketCap),
-                    progressBarType: .round,
-                    isChangePositive: marketCapChangeFor24H >= 0
+                    progressValue: Float(totalMarketCap / allTimeHighMarketCap)
                 )
                 
                 //Create view model for BTC Dominance Card
                 let dominanceCardModel = MarketCardCellViewModel(
-                    metricName: "Bitcoin Dominance",
+                    cellType: .bitcoinDominance,
                     mainMetricValue: .percentageString(from: btcDominance, positivePrefix: ""),
                     secondaryMetricValue: "",
-                    progressValue: Float(btcDominance / 100),
-                    progressBarType: .round
+                    progressValue: Float(btcDominance / 100)
                 )
                 
                 //Add card view models to the observable array
