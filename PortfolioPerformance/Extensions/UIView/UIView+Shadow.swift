@@ -3,7 +3,7 @@ import UIKit
 
 extension UIView {
     public func configureWithShadow(
-        shadowColor: UIColor = .black,
+        shadowColor: UIColor = .clear,
         shadowRadius: CGFloat = 2.0,
         cornerRadius: CGFloat = 10
     ){

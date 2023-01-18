@@ -20,12 +20,12 @@ class PPSegmentedProgressBar: UIView {
     private let progressBarLength: CGFloat
     private let segmentLength: CGFloat
     private let paddingBetweenSegments: CGFloat
-    private let segmentsColor: [CGColor] = [
-        UIColor.red.cgColor,
-        UIColor.pomergranate.cgColor,
-        UIColor.carrot.cgColor,
-        UIColor.emerald.cgColor,
-        UIColor.nephritis.cgColor
+    private let segmentsColor: [UIColor] = [
+        .red,
+        .pomergranate,
+        .carrot,
+        .emerald,
+        .nephritis
     ]
     
     //MARK: - Init
@@ -74,14 +74,14 @@ class PPSegmentedProgressBar: UIView {
             let trackLayer = CAShapeLayer()
             trackLayer.fillColor = UIColor.clear.cgColor
             trackLayer.lineCap = CAShapeLayerLineCap.round
-            trackLayer.strokeColor = UIColor.secondarySystemBackground.cgColor
+            trackLayer.strokeColor = segmentsColor[i].withAlphaComponent(0.2).cgColor
             segmentsTrackLayers.append(trackLayer)
             layer.addSublayer(trackLayer)
             
             let progressLayer = CAShapeLayer()
             progressLayer.fillColor = UIColor.clear.cgColor
             progressLayer.lineCap = CAShapeLayerLineCap.round
-            progressLayer.strokeColor = segmentsColor[i]
+            progressLayer.strokeColor = segmentsColor[i].cgColor
             progressLayer.strokeEnd = 0
             segmentsProgressLayers.append(progressLayer)
             layer.addSublayer(progressLayer)
