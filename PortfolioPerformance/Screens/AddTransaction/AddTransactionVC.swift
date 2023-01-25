@@ -196,7 +196,7 @@ class AddTransactionVC: UIViewController {
 extension AddTransactionVC: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Transaction")
+        
         guard
             let cell = collectionView.cellForItem(at: indexPath) as? AddTransactionCell,
             let model = cell.model

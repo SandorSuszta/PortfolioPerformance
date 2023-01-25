@@ -11,6 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Change Back Button color
         UINavigationBar.appearance().tintColor = .PPBlue
+        
             
         return true
     }

@@ -10,13 +10,19 @@ class MarketViewController: UIViewController {
         view.width / 16
     }
     
+    private var padding: CGFloat {
+        view.width / 20
+    }
+    
     private var cardsWidth: CGFloat {
         (view.width - cardsPadding * 3) / 2
     }
     
-    private var marketCardsCollectionView: UICollectionView = {
+    private lazy var marketCardsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = cardsPadding
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collection
     }()
@@ -31,9 +37,10 @@ class MarketViewController: UIViewController {
         return control
     }()
     
-    private var sortOptionsCollectionView: UICollectionView = {
+    private lazy var sortOptionsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 5
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collection
     }()
@@ -50,6 +57,7 @@ class MarketViewController: UIViewController {
         setupMarketCardsCollectionView()
         setupSortOptionsCollectionView()
         setupTableView()
+        addBackGroundViewForTbaleView()
     }
     
     //MARK: - Methods
@@ -88,13 +96,13 @@ class MarketViewController: UIViewController {
         marketCardsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            marketCardsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            marketCardsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            marketCardsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            marketCardsCollectionView.heightAnchor.constraint(equalToConstant:  cardsWidth / 1.2),
+            marketCardsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: cardsPadding),
+            marketCardsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -cardsPadding),
+            marketCardsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            marketCardsCollectionView.heightAnchor.constraint(equalToConstant:  cardsWidth / 1.2 + 20),
             
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pageControl.topAnchor.constraint(equalTo: marketCardsCollectionView.bottomAnchor),
+            pageControl.topAnchor.constraint(equalTo: marketCardsCollectionView.bottomAnchor, constant: -10),
         ])
     }
     
@@ -118,9 +126,9 @@ class MarketViewController: UIViewController {
         sortOptionsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            sortOptionsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            sortOptionsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            sortOptionsCollectionView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: -3   ),
+            sortOptionsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            sortOptionsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            sortOptionsCollectionView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: -3),
             sortOptionsCollectionView.heightAnchor.constraint(equalToConstant: view.height / 30)
         ])
     }
@@ -141,10 +149,25 @@ class MarketViewController: UIViewController {
         )
         
         NSLayoutConstraint.activate([
-            cryptoCurrencyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 10),
-            cryptoCurrencyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            cryptoCurrencyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: padding),
+            cryptoCurrencyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             cryptoCurrencyTableView.topAnchor.constraint(equalTo: sortOptionsCollectionView.bottomAnchor, constant: view.height / 150),
-            cryptoCurrencyTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5)
+            cryptoCurrencyTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5)
+        ])
+    }
+    
+    private func addBackGroundViewForTbaleView() {
+        let backGroundView = UIView()
+        backGroundView.backgroundColor = .systemBackground
+        backGroundView.translatesAutoresizingMaskIntoConstraints = false
+        backGroundView.layer.cornerRadius = 15
+        view.insertSubview(backGroundView, at: 0)
+        
+        NSLayoutConstraint.activate([
+            backGroundView.topAnchor.constraint(equalTo: cryptoCurrencyTableView.topAnchor),
+            backGroundView.leftAnchor.constraint(equalTo: cryptoCurrencyTableView.leftAnchor),
+            backGroundView.rightAnchor.constraint(equalTo: cryptoCurrencyTableView.rightAnchor),
+            backGroundView.bottomAnchor.constraint(equalTo: cryptoCurrencyTableView.bottomAnchor)
         ])
     }
                                                        
@@ -283,7 +306,7 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == sortOptionsCollectionView {
-            //Sort options collection case
+            
             UIView.animate(withDuration: 0.5, delay: 0) {
                 self.cryptoCurrencyTableView.alpha = 0
             }
@@ -297,35 +320,13 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
-    //Distance between the cards
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if collectionView == sortOptionsCollectionView {
-            return 5
-        } else {
-            return cardsPadding
-        }
-    }
-    
-    //Left inset
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        if collectionView == sortOptionsCollectionView {
-            return UIEdgeInsets(top: 0, left: view.width / 25, bottom: 0, right: view.width / 25)
-        } else {
-            return UIEdgeInsets(top: 0, left: cardsPadding , bottom: 0, right: cardsPadding)
-        }
-    }
-    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-
         let offset = scrollView.contentOffset.x
-        print(offset)
-        
         let currentPage = offset == 0 ? 0 : 1
-        
         pageControl.currentPage = currentPage
     }
 }
+
     //MARK: - Table View Delegate and Data Source Methods
     
 extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
@@ -343,7 +344,6 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cellViewModel = marketVM.cellViewModels.value?[indexPath.row] else { fatalError() }
         
         cell.configureCell(with: cellViewModel)
-        
         return cell
     }
     

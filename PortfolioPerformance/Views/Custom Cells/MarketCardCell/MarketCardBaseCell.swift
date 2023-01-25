@@ -23,6 +23,7 @@ class MarketCardBaseCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         configureLayout()
+        configureWithShadow()
     }
     
     required init?(coder: NSCoder) {

@@ -11,6 +11,10 @@ class CoinDetailsVC: UIViewController {
     
     private var isFavourite: Bool
     
+    private var padding: CGFloat {
+        view.width / 20
+    }
+    
     private var favouriteButton: UIButton = {
         let button = UIButton()
         return button
@@ -172,9 +176,9 @@ class CoinDetailsVC: UIViewController {
         )
         
         chartView.frame = CGRect(
-            x: 10,
+            x: padding,
             y: coinLogoShadowView.bottom + 20,
-            width: view.width - 20,
+            width: view.width - 2 * padding,
             height: 220
         )
         
@@ -186,21 +190,21 @@ class CoinDetailsVC: UIViewController {
         )
      
         timeIntervalSelection.frame = CGRect(
-            x: 10,
+            x: padding,
             y: chartView.bottom + 10,
             width: chartView.width,
             height: 25
         )
         
         rangeProgressBar.frame = CGRect(
-            x: 10,
+            x: padding,
             y: timeIntervalSelection.bottom + 10,
             width: chartView.width,
             height: 65
         )
         
         detailsTableView.frame = CGRect(
-            x: 10,
+            x: padding,
             y: rangeProgressBar.bottom + 10,
             width: chartView.width,
             height: 370

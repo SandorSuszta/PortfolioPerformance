@@ -31,7 +31,6 @@ class WatchlistViewController: UIViewController {
     
     private func setupVC() {
         view.backgroundColor = .systemBackground
-        self.title = "Watchlist"
         view.addSubview(emptyWatchlistView)
         
         //Delete BackButton title on pushed screen

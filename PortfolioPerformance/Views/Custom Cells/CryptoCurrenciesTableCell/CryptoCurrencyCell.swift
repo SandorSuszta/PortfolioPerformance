@@ -71,7 +71,7 @@ class CryptoCurrencyCell: UITableViewCell {
         logoContainerView.addSubviews(logoImageView)
         labelsContainerView.addSubviews(nameLabel, symbolLabel, priceLabel, changeLabel)
         
-        let padding = height / 5
+        let padding = height / 3
         
         NSLayoutConstraint.activate([
             logoContainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
