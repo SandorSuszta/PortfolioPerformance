@@ -10,7 +10,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let mainTabBarVC = MainTabBarController()
+        let mainTabBarVC = PPTabBarController()
         window.rootViewController = mainTabBarVC
         window.makeKeyAndVisible()
         

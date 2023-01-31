@@ -23,7 +23,9 @@ enum TabBarControllerType: CaseIterable {
     }
 }
 
-class MainTabBarController: UITabBarController {
+final class PPTabBarController: UITabBarController {
+    
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,8 @@ class MainTabBarController: UITabBarController {
         super.viewDidLayoutSubviews()
         createTabBarBackgroundLayer()
     }
+    
+    //MARK: - Private methods
     
     private func setupTabBar() {
         var viewControllers: [UIViewController] = []

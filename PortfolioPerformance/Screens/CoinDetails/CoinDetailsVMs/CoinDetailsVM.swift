@@ -84,7 +84,7 @@ final class CoinDetailsViewModel {
             value: .percentageString(from: coinModel?.marketData.athChangePercentage["usd"] ?? 0)
         ))
         viewModels.append(.init(
-            name: "All time high date",
+            name: "ATH date",
             value: .formatedStringForATHDate(fromUTC: coinModel?.marketData.athDate["usd"] ?? "N/A")
         ))
         detailsTableViewCelsVM.value = viewModels

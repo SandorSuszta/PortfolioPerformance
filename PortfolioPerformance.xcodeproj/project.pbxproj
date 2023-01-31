@@ -16,7 +16,7 @@
 		792299B32965921D00FD3007 /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792299B22965921D00FD3007 /* DataTypes.swift */; };
 		792B0FC3287B3C6C0040B461 /* WatchlistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC2287B3C6C0040B461 /* WatchlistVC.swift */; };
 		792B0FC5287C85EF0040B461 /* WatchlistVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC4287C85EF0040B461 /* WatchlistVM.swift */; };
-		792B0FC7287F03080040B461 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC6287F03080040B461 /* MainTabBarController.swift */; };
+		792B0FC7287F03080040B461 /* PPTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B0FC6287F03080040B461 /* PPTabBarController.swift */; };
 		792C040628C14386008EE48C /* CoinDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040528C14386008EE48C /* CoinDetailsVM.swift */; };
 		792C040928C9E62B008EE48C /* RangeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040828C9E62B008EE48C /* RangeProgressView.swift */; };
 		792C040B28CE2941008EE48C /* DetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792C040A28CE2941008EE48C /* DetailsCell.swift */; };
@@ -54,7 +54,7 @@
 		798957C827F479DD0074CA38 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798957C727F479DD0074CA38 /* UIView+Shadow.swift */; };
 		79895E9028DB758600087A23 /* MetricsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79895E8F28DB758600087A23 /* MetricsVM.swift */; };
 		79895E9428DB773700087A23 /* RangeDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79895E9328DB773700087A23 /* RangeDetailsVM.swift */; };
-		79A5B14C29803DBF0067240A /* PortfolioPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5B14B29803DBF0067240A /* PortfolioPerformanceTests.swift */; };
+		79A5B157298276740067240A /* PPTabBarControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5B156298276740067240A /* PPTabBarControllerTests.swift */; };
 		79AAF82A28FB358A009F3B85 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AAF82928FB358A009F3B85 /* SectionHeaderView.swift */; };
 		79CF41BF28EEFF7E00CA9F51 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */; };
 		79D5B8E428EDB85100178402 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E328EDB85100178402 /* CustomAlert.swift */; };
@@ -96,7 +96,7 @@
 		792299B22965921D00FD3007 /* DataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
 		792B0FC2287B3C6C0040B461 /* WatchlistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistVC.swift; sourceTree = "<group>"; };
 		792B0FC4287C85EF0040B461 /* WatchlistVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistVM.swift; sourceTree = "<group>"; };
-		792B0FC6287F03080040B461 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		792B0FC6287F03080040B461 /* PPTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPTabBarController.swift; sourceTree = "<group>"; };
 		792C040528C14386008EE48C /* CoinDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsVM.swift; sourceTree = "<group>"; };
 		792C040828C9E62B008EE48C /* RangeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeProgressView.swift; sourceTree = "<group>"; };
 		792C040A28CE2941008EE48C /* DetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCell.swift; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 		79895E8F28DB758600087A23 /* MetricsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsVM.swift; sourceTree = "<group>"; };
 		79895E9328DB773700087A23 /* RangeDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeDetailsVM.swift; sourceTree = "<group>"; };
 		79A5B14929803DBF0067240A /* PortfolioPerformanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PortfolioPerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		79A5B14B29803DBF0067240A /* PortfolioPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioPerformanceTests.swift; sourceTree = "<group>"; };
+		79A5B156298276740067240A /* PPTabBarControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPTabBarControllerTests.swift; sourceTree = "<group>"; };
 		79AAF82928FB358A009F3B85 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
 		79D5B8E328EDB85100178402 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 				79D5B8E328EDB85100178402 /* CustomAlert.swift */,
 				79EC45B428F0B9DC006A849A /* CustomSegmentedControl.swift */,
 				79AAF82928FB358A009F3B85 /* SectionHeaderView.swift */,
-				792B0FC6287F03080040B461 /* MainTabBarController.swift */,
+				792B0FC6287F03080040B461 /* PPTabBarController.swift */,
 				795E43F52910017D0016F3C3 /* EmptyStateView.swift */,
 				793332C6293F52C2005EE8A3 /* CustomSearchBar.swift */,
 				792299AC296454D000FD3007 /* TransactionDetails.swift */,
@@ -318,7 +318,7 @@
 		79A5B14A29803DBF0067240A /* PortfolioPerformanceTests */ = {
 			isa = PBXGroup;
 			children = (
-				79A5B14B29803DBF0067240A /* PortfolioPerformanceTests.swift */,
+				79A5B156298276740067240A /* PPTabBarControllerTests.swift */,
 			);
 			path = PortfolioPerformanceTests;
 			sourceTree = "<group>";
@@ -588,7 +588,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79A5B14C29803DBF0067240A /* PortfolioPerformanceTests.swift in Sources */,
+				79A5B157298276740067240A /* PPTabBarControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,7 +639,7 @@
 				79D5B8E428EDB85100178402 /* CustomAlert.swift in Sources */,
 				797303B3296B30560006CF76 /* PPCircularProgressBar.swift in Sources */,
 				792B0FC5287C85EF0040B461 /* WatchlistVM.swift in Sources */,
-				792B0FC7287F03080040B461 /* MainTabBarController.swift in Sources */,
+				792B0FC7287F03080040B461 /* PPTabBarController.swift in Sources */,
 				792299B32965921D00FD3007 /* DataTypes.swift in Sources */,
 				792C040B28CE2941008EE48C /* DetailsCell.swift in Sources */,
 				792299AD296454D000FD3007 /* TransactionDetails.swift in Sources */,
