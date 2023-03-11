@@ -44,6 +44,7 @@ class WatchlistViewController: UIViewController {
         watchlistTableView.dataSource = self
         watchlistTableView.backgroundColor = .clear
         watchlistTableView.separatorStyle = .none
+        
         watchlistTableView.register(
             CryptoCurrencyCell.self,
             forCellReuseIdentifier: CryptoCurrencyCell.identifier

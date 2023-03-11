@@ -87,6 +87,7 @@ class MarketViewModel {
                 self.cellViewModels.value = cryptosArray.compactMap({ .init(coinModel: $0) })
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue
+                
             }
         }
     }
