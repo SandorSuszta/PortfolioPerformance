@@ -66,7 +66,7 @@ final class PPTabBarController: UITabBarController {
         layer.opacity = 1.0
         layer.isHidden = false
         layer.masksToBounds = false
-        layer.fillColor = UIColor.systemBackground.cgColor
+        layer.fillColor = UIColor.secondarySystemBackground.cgColor
 
         tabBar.layer.insertSublayer(layer, at: 0)
     }
