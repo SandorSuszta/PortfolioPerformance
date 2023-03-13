@@ -1,6 +1,5 @@
 import UIKit
 
-
 class SearchScreenViewController: UIViewController {
 
     //MARK: - Properties
@@ -44,15 +43,11 @@ class SearchScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .secondarySystemBackground
+        setUpViewController()
         setUpResultsTableVIew()
-        view.addSubview(noResultsView)
         setUpSearchBar()
         setupConstraints()
         bindViewModels()
-        
-        //Delete BackButton title on pushed screen
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,6 +55,14 @@ class SearchScreenViewController: UIViewController {
     }
     
     //MARK: - Private
+    
+    private func setUpViewController() {
+        view.backgroundColor = .secondarySystemBackground
+        view.addSubview(noResultsView)
+        
+        //Delete BackButton title on pushed screen
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
     
     private func setUpSearchBar() {
         searchBar.searchBarStyle = UISearchBar.Style.default
