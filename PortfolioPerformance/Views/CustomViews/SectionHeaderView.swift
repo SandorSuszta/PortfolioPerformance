@@ -2,6 +2,7 @@ import UIKit
 //TODO: - Dependency Injection: Consider using dependency injection to inject the SearchScreenViewModel instead of instantiating it directly in the view controller. This can make the code more testable and easier to maintain.
 
 enum SectionHeaderType: String {
+    case searching = "Search results"
     case recentSearches = "Recent Searches"
     case trendingCoins = "Trending Coins"
 }

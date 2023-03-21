@@ -72,19 +72,19 @@ class ResultsCell: UITableViewCell {
             width: contentView.width - logoView.width - symbolLabel.width,
             height: contentView.height
         )
-        
-        checkIfLastCellInSection()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         logoView.image = nil
+        layer.cornerRadius = 0
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Methods
     
     public func configure(withModel model: SearchResult) {
         symbolLabel.text = model.symbol.uppercased()
@@ -92,18 +92,10 @@ class ResultsCell: UITableViewCell {
         logoView.setImage(imageUrl: model.large)
     }
     
-    private func checkIfLastCellInSection() {
-        guard let tableView = superview as? UITableView,
-              let indexPath = tableView.indexPath(for: self)
-        else { return }
-        
-        let numberOfRows = tableView.numberOfRows(inSection: indexPath.section)
-        let isLastCellInSection = indexPath.row == numberOfRows - 1
-        
-        if isLastCellInSection {
-            contentView.layer.cornerRadius = 10
-            contentView.layer.masksToBounds = true
-        }
+    public func makeBottomCornersWithRadius() {
+        layer.cornerRadius = 10
+        layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
+
 }
 

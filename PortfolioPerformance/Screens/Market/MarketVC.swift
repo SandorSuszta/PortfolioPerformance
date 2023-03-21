@@ -152,7 +152,7 @@ class MarketViewController: UIViewController {
             cryptoCurrencyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: padding),
             cryptoCurrencyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             cryptoCurrencyTableView.topAnchor.constraint(equalTo: sortOptionsCollectionView.bottomAnchor, constant: view.height / 150),
-            cryptoCurrencyTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5)
+            cryptoCurrencyTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
