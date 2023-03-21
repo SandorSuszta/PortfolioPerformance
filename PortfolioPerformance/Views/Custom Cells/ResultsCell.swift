@@ -32,13 +32,6 @@ class ResultsCell: UITableViewCell {
         return logoView
     }()
     
-    
-    public func configure(withModel model: SearchResult) {
-        symbolLabel.text = model.symbol.uppercased()
-        nameLabel.text = model.name
-        logoView.setImage(imageUrl: model.large)
-    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .systemBackground
@@ -79,6 +72,8 @@ class ResultsCell: UITableViewCell {
             width: contentView.width - logoView.width - symbolLabel.width,
             height: contentView.height
         )
+        
+        checkIfLastCellInSection()
     }
     
     override func prepareForReuse() {
@@ -88,6 +83,27 @@ class ResultsCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    public func configure(withModel model: SearchResult) {
+        symbolLabel.text = model.symbol.uppercased()
+        nameLabel.text = model.name
+        logoView.setImage(imageUrl: model.large)
+    }
+    
+    private func checkIfLastCellInSection() {
+        guard let tableView = superview as? UITableView,
+              let indexPath = tableView.indexPath(for: self)
+        else { return }
+        
+        let numberOfRows = tableView.numberOfRows(inSection: indexPath.section)
+        let isLastCellInSection = indexPath.row == numberOfRows - 1
+        
+        if isLastCellInSection {
+            contentView.layer.cornerRadius = 10
+            contentView.layer.masksToBounds = true
+        }
     }
 }
 

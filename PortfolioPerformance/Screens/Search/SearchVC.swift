@@ -26,9 +26,9 @@ class SearchScreenViewController: UIViewController {
     lazy private var searchBar = UISearchBar()
     
     private let resultsTableView: UITableView = {
-        let table = UITableView()
+        let table = UITableView(frame: .zero, style: .grouped)
         table.backgroundColor = .clear
-        table.sectionHeaderTopPadding = 0
+        //table.sectionHeaderTopPadding = 0
         table.register(
             ResultsCell.self,
             forCellReuseIdentifier: ResultsCell.identifier

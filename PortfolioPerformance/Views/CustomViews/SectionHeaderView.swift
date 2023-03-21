@@ -1,4 +1,5 @@
 import UIKit
+//TODO: - Dependency Injection: Consider using dependency injection to inject the SearchScreenViewModel instead of instantiating it directly in the view controller. This can make the code more testable and easier to maintain.
 
 enum SectionHeaderType: String {
     case recentSearches = "Recent Searches"
@@ -7,7 +8,7 @@ enum SectionHeaderType: String {
 
 class PPSectionHeaderView: UIView {
     
-    static let preferredHeight: CGFloat = 60
+    static let preferredHeight: CGFloat = 40
     
     private let type: SectionHeaderType
     
@@ -46,7 +47,7 @@ class PPSectionHeaderView: UIView {
     //MARK: - Private methods
     
     private func setup() {
-        backgroundColor = .clear
+        backgroundColor = .secondarySystemBackground
         clipsToBounds = true
         layer.cornerRadius = 10
         layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
@@ -54,7 +55,7 @@ class PPSectionHeaderView: UIView {
         addSubview(nameLabel)
         
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            nameLabel.topAnchor.constraint(equalTo: topAnchor),
             nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
@@ -79,7 +80,7 @@ class PPSectionHeaderView: UIView {
         addSubview(button)
         
         NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            button.topAnchor.constraint(equalTo: topAnchor),
             button.bottomAnchor.constraint(equalTo: bottomAnchor),
             button.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -70),
             button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
