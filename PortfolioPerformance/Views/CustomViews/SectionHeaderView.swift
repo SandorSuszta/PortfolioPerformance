@@ -7,10 +7,27 @@ enum SectionHeaderType: String {
 
 class PPSectionHeaderView: UIView {
     
-    static let preferredHeight: CGFloat = 40
+    static let preferredHeight: CGFloat = 60
     
     private let type: SectionHeaderType
-    private let nameLabel = UILabel()
+    
+    lazy var nameLabel = {
+        let label = UILabel()
+        label.textColor = .secondaryLabel
+        label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .systemGray5
+        label.layer.cornerRadius = 10
+        label.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        label.layer.masksToBounds = true
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.firstLineHeadIndent = 20
+        let attributes = [NSAttributedString.Key.paragraphStyle: paragraphStyle]
+        let attributedString = NSAttributedString(string: type.rawValue, attributes: attributes)
+        label.attributedText = attributedString
+        return label
+    }()
     
     var buttonAction: (() -> Void)?
     
@@ -29,23 +46,17 @@ class PPSectionHeaderView: UIView {
     //MARK: - Private methods
     
     private func setup() {
-        backgroundColor = .systemGray5
+        backgroundColor = .clear
         clipsToBounds = true
         layer.cornerRadius = 10
         layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
-        nameLabel.text = type.rawValue
-        nameLabel.textAlignment = .left
-        nameLabel.textColor = .secondaryLabel
-        nameLabel.font = .systemFont(ofSize: 15, weight: .semibold)
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         addSubview(nameLabel)
         
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: topAnchor),
+            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         
@@ -68,7 +79,7 @@ class PPSectionHeaderView: UIView {
         addSubview(button)
         
         NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: topAnchor),
+            button.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             button.bottomAnchor.constraint(equalTo: bottomAnchor),
             button.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -70),
             button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
