@@ -1,6 +1,8 @@
 import UIKit
+//TODO: - Dependency Injection: Consider using dependency injection to inject the SearchScreenViewModel instead of instantiating it directly in the view controller. This can make the code more testable and easier to maintain.
 
 enum SectionHeaderType: String {
+    case searching = "Search results"
     case recentSearches = "Recent Searches"
     case trendingCoins = "Trending Coins"
 }
@@ -10,7 +12,24 @@ class PPSectionHeaderView: UIView {
     static let preferredHeight: CGFloat = 40
     
     private let type: SectionHeaderType
-    private let nameLabel = UILabel()
+    
+    lazy var nameLabel = {
+        let label = UILabel()
+        label.textColor = .secondaryLabel
+        label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .systemGray5
+        label.layer.cornerRadius = 10
+        label.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        label.layer.masksToBounds = true
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.firstLineHeadIndent = 20
+        let attributes = [NSAttributedString.Key.paragraphStyle: paragraphStyle]
+        let attributedString = NSAttributedString(string: type.rawValue, attributes: attributes)
+        label.attributedText = attributedString
+        return label
+    }()
     
     var buttonAction: (() -> Void)?
     
@@ -29,23 +48,17 @@ class PPSectionHeaderView: UIView {
     //MARK: - Private methods
     
     private func setup() {
-        backgroundColor = .systemGray5
+        backgroundColor = .secondarySystemBackground
         clipsToBounds = true
         layer.cornerRadius = 10
         layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        
-        nameLabel.text = type.rawValue
-        nameLabel.textAlignment = .left
-        nameLabel.textColor = .secondaryLabel
-        nameLabel.font = .systemFont(ofSize: 15, weight: .semibold)
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(nameLabel)
         
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: topAnchor),
             nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         

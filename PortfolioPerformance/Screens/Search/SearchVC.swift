@@ -1,6 +1,5 @@
 import UIKit
 
-
 class SearchScreenViewController: UIViewController {
 
     //MARK: - Properties
@@ -27,9 +26,11 @@ class SearchScreenViewController: UIViewController {
     lazy private var searchBar = UISearchBar()
     
     private let resultsTableView: UITableView = {
-        let table = UITableView()
+        let table = UITableView(frame: .zero, style: .grouped)
         table.backgroundColor = .clear
         table.sectionHeaderTopPadding = 0
+        table.showsVerticalScrollIndicator = false
+        table.separatorColor = .clear
         table.register(
             ResultsCell.self,
             forCellReuseIdentifier: ResultsCell.identifier
@@ -44,15 +45,11 @@ class SearchScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .secondarySystemBackground
+        setUpViewController()
         setUpResultsTableVIew()
-        view.addSubview(noResultsView)
         setUpSearchBar()
         setupConstraints()
         bindViewModels()
-        
-        //Delete BackButton title on pushed screen
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,6 +57,14 @@ class SearchScreenViewController: UIViewController {
     }
     
     //MARK: - Private
+    
+    private func setUpViewController() {
+        view.backgroundColor = .secondarySystemBackground
+        view.addSubview(noResultsView)
+        
+        //Delete BackButton title on pushed screen
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
     
     private func setUpSearchBar() {
         searchBar.searchBarStyle = UISearchBar.Style.default
@@ -123,7 +128,7 @@ class SearchScreenViewController: UIViewController {
             resultsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             resultsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             resultsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            resultsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            resultsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             noResultsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             noResultsView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -192,7 +197,9 @@ extension SearchScreenViewController: UITableViewDelegate {
         switch searchBarState {
             
         case .searching:
-            return nil
+            let searchingHeader = PPSectionHeaderView(type: .searching, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
+            
+            return searchingHeader
             
         case .emptyWithoutRecents:
             return [nil, trendingCoinsHeader][section]
@@ -212,12 +219,23 @@ extension SearchScreenViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         switch searchBarState {
-        case .searching:
-            return 0
         case .emptyWithoutRecents:
             return [0, PPSectionHeaderView.preferredHeight][section]
-        case .emptyWithRecents:
+        case .emptyWithRecents, .searching:
             return PPSectionHeaderView.preferredHeight
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let section = indexPath.section
+        let row = indexPath.row
+        let numRowsInSection = tableView.numberOfRows(inSection: section)
+        
+        if row == numRowsInSection - 1 {
+            if let resultsCell = cell as? ResultsCell {
+                resultsCell.makeBottomCornersWithRadius()
+            }
         }
     }
     
