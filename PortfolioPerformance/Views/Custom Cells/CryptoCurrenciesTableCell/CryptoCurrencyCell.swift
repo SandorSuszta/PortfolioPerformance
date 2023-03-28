@@ -58,7 +58,7 @@ class CryptoCurrencyCell: UITableViewCell {
     
     //MARK: - Methods
     
-    public func configureCell(with viewModel: CryptoCurrencyCellViewModel) {
+    func configureCell(with viewModel: CryptoCurrencyCellViewModel) {
         nameLabel.text = viewModel.name
         symbolLabel.text = viewModel.symbol
         priceLabel.text = viewModel.currentPrice
@@ -67,6 +67,12 @@ class CryptoCurrencyCell: UITableViewCell {
         
         logoImageView.setImage(imageUrl: viewModel.imageUrl)
         selectionStyle = .none
+    }
+    
+    func makeBottomCornersWithRadius() {
+        layer.cornerRadius = 10
+        layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        clipsToBounds = true
     }
     
     private func configureContentView() {

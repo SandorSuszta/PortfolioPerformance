@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		790C30C227C78E930021658F /* GreedAndFearModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C127C78E930021658F /* GreedAndFearModel.swift */; };
 		790C30C527CEA7620021658F /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C427CEA7620021658F /* UserDefaultsManager.swift */; };
+		790C350329D35FD200141887 /* ImageNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C350229D35FD200141887 /* ImageNames.swift */; };
 		792223F528FD7F82001B0C8C /* CoinDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792223F428FD7F82001B0C8C /* CoinDetailsVC.swift */; };
 		792299AB29644FBF00FD3007 /* TransactionDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792299AA29644FBF00FD3007 /* TransactionDetailsVC.swift */; };
 		792299AD296454D000FD3007 /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792299AC296454D000FD3007 /* TransactionDetails.swift */; };
@@ -49,7 +50,7 @@
 		79807A7028ECBA01000825B0 /* LineChartView+Configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79807A6F28ECBA01000825B0 /* LineChartView+Configure.swift */; };
 		7982923227E673E6007ECCCD /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982923127E673E6007ECCCD /* UIColor+CustomColors.swift */; };
 		7982923427E678A5007ECCCD /* String+Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982923327E678A5007ECCCD /* String+Formatters.swift */; };
-		7986A50928E5A3B900332A48 /* UIView+Fading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986A50828E5A3B900332A48 /* UIView+Fading.swift */; };
+		7986A50928E5A3B900332A48 /* UIView+FadeIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986A50828E5A3B900332A48 /* UIView+FadeIn.swift */; };
 		798957C227F31AE00074CA38 /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798957C127F31AE00074CA38 /* GlobalData.swift */; };
 		798957C827F479DD0074CA38 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798957C727F479DD0074CA38 /* UIView+Shadow.swift */; };
 		79895E9028DB758600087A23 /* MetricsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79895E8F28DB758600087A23 /* MetricsVM.swift */; };
@@ -89,6 +90,7 @@
 		5BDECDAA83ECC22DF03AB629 /* Pods_PortfolioPerformance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PortfolioPerformance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		790C30C127C78E930021658F /* GreedAndFearModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedAndFearModel.swift; sourceTree = "<group>"; };
 		790C30C427CEA7620021658F /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		790C350229D35FD200141887 /* ImageNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNames.swift; sourceTree = "<group>"; };
 		792223F428FD7F82001B0C8C /* CoinDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinDetailsVC.swift; sourceTree = "<group>"; };
 		792299AA29644FBF00FD3007 /* TransactionDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsVC.swift; sourceTree = "<group>"; };
 		792299AC296454D000FD3007 /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
@@ -129,7 +131,7 @@
 		79807A6F28ECBA01000825B0 /* LineChartView+Configure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LineChartView+Configure.swift"; sourceTree = "<group>"; };
 		7982923127E673E6007ECCCD /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		7982923327E678A5007ECCCD /* String+Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Formatters.swift"; sourceTree = "<group>"; };
-		7986A50828E5A3B900332A48 /* UIView+Fading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Fading.swift"; sourceTree = "<group>"; };
+		7986A50828E5A3B900332A48 /* UIView+FadeIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+FadeIn.swift"; sourceTree = "<group>"; };
 		798957C127F31AE00074CA38 /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
 		798957C727F479DD0074CA38 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
 		79895E8F28DB758600087A23 /* MetricsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsVM.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 			children = (
 				7961C37328EB2A010006B9A7 /* PPError.swift */,
 				796EFA39286DDD60005E24AF /* ObservableObject.swift */,
+				790C350229D35FD200141887 /* ImageNames.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -299,7 +302,7 @@
 			children = (
 				79410D8C2823D3E700BD9EA4 /* UIView+Framing.swift */,
 				798957C727F479DD0074CA38 /* UIView+Shadow.swift */,
-				7986A50828E5A3B900332A48 /* UIView+Fading.swift */,
+				7986A50828E5A3B900332A48 /* UIView+FadeIn.swift */,
 				7934EFA72835172200CE7FD0 /* UIView+AddSubviews.swift */,
 			);
 			path = UIView;
@@ -634,6 +637,7 @@
 				7961C37428EB2A010006B9A7 /* PPError.swift in Sources */,
 				796EFA4928770D26005E24AF /* CryptoCurrencyCell.swift in Sources */,
 				79CF41BF28EEFF7E00CA9F51 /* MarketVM.swift in Sources */,
+				790C350329D35FD200141887 /* ImageNames.swift in Sources */,
 				79AAF82A28FB358A009F3B85 /* SectionHeaderView.swift in Sources */,
 				793332C7293F52C2005EE8A3 /* CustomSearchBar.swift in Sources */,
 				79D5B8E428EDB85100178402 /* CustomAlert.swift in Sources */,
@@ -651,7 +655,7 @@
 				79F654F0297340670080DEBB /* MarketCardMetricCell.swift in Sources */,
 				796EFA452876F076005E24AF /* CryptoCurrencyCellVM.swift in Sources */,
 				796EFA3328697A91005E24AF /* MarketCardCellVM.swift in Sources */,
-				7986A50928E5A3B900332A48 /* UIView+Fading.swift in Sources */,
+				7986A50928E5A3B900332A48 /* UIView+FadeIn.swift in Sources */,
 				79807A7028ECBA01000825B0 /* LineChartView+Configure.swift in Sources */,
 				79D5C6D328DC75060018B133 /* DetailsCellVM.swift in Sources */,
 				796EFA4128733AF2005E24AF /* NetworkingManager.swift in Sources */,

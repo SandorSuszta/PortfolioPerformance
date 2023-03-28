@@ -8,7 +8,7 @@ enum EmptyStateType {
 class EmptyStateView: UIView {
     
     //MARK: - Properties
-    private let imageView: PPSegmentedProgressBar
+    private let imageView: UIImageView
     
     private var textLabel: UILabel = {
         let label = UILabel()
@@ -27,11 +27,11 @@ class EmptyStateView: UIView {
         
         switch type {
         case .noFavourites:
-            imageView = PPSegmentedProgressBar(frame: CGRect(x: 0, y: 0, width: 200, height: 200))//UIImageView(image: UIImage(named: "NoFavourites"))
-            textLabel.text = "Favourite list  is empty"
+            imageView = UIImageView(image: UIImage(named: ImageNames.noFavouirites))
+            textLabel.text = "Favourite list is empty"
         
         case .noSearchResults:
-            imageView = PPSegmentedProgressBar(frame: .zero)//UIImageView(image: UIImage(named: "NoResult"))
+            imageView = UIImageView(image: UIImage(named: ImageNames.noResult))
             textLabel.text = "Sorry, nothing found"
         }
         super .init(frame: .zero)

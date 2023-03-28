@@ -30,7 +30,7 @@ class WatchlistViewController: UIViewController {
     //MARK: - Private methods
     
     private func setupVC() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .secondarySystemBackground
         view.addSubview(emptyWatchlistView)
         
         //Delete BackButton title on pushed screen
@@ -44,6 +44,7 @@ class WatchlistViewController: UIViewController {
         watchlistTableView.dataSource = self
         watchlistTableView.backgroundColor = .clear
         watchlistTableView.separatorStyle = .none
+        watchlistTableView.layer.cornerRadius = 10
         
         watchlistTableView.register(
             CryptoCurrencyCell.self,
@@ -151,5 +152,18 @@ class WatchlistViewController: UIViewController {
             )
             
             self.navigationController?.pushViewController(detailsVC, animated: true)
+        }
+        
+        func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            
+            let section = indexPath.section
+            let row = indexPath.row
+            let numRowsInSection = tableView.numberOfRows(inSection: section)
+            
+            if row == numRowsInSection - 1 {
+                if let resultsCell = cell as? CryptoCurrencyCell {
+                    resultsCell.makeBottomCornersWithRadius()
+                }
+            }
         }
     }

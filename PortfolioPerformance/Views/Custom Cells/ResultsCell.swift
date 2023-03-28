@@ -96,6 +96,5 @@ class ResultsCell: UITableViewCell {
         layer.cornerRadius = 10
         layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
-
 }
 
