@@ -57,7 +57,7 @@ class MarketViewController: UIViewController {
         setupMarketCardsCollectionView()
         setupSortOptionsCollectionView()
         setupTableView()
-        addBackGroundViewForTbaleView()
+        addBackgroundToTableView()
     }
     
     //MARK: - Methods
@@ -156,7 +156,7 @@ class MarketViewController: UIViewController {
         ])
     }
     
-    private func addBackGroundViewForTbaleView() {
+    private func addBackgroundToTableView() {
         let backGroundView = UIView()
         backGroundView.backgroundColor = .systemBackground
         backGroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -306,16 +306,7 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == sortOptionsCollectionView {
-            
-            UIView.animate(withDuration: 0.5, delay: 0) {
-                self.cryptoCurrencyTableView.alpha = 0
-            }
             sortTableview(byOption: indexPath.row)
-            cryptoCurrencyTableView.alpha = 0
-            UIView.animate(withDuration: 0.5, delay: 0) {
-                self.cryptoCurrencyTableView.alpha = 1
-            }
-            
             scrollToTop()
         }
     }
