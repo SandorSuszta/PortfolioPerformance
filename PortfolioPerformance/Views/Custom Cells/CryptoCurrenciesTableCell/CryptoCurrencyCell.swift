@@ -45,6 +45,7 @@ class CryptoCurrencyCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         logoImageView.image = nil
+        layer.cornerRadius = 0
     }
     
     

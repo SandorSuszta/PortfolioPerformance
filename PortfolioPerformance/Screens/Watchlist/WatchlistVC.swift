@@ -23,15 +23,13 @@ class WatchlistViewController: UIViewController {
         updateTableWithWatchlist()
     }
     
-    override func viewDidLayoutSubviews() {
-        layoutComponents()
-    }
-    
     //MARK: - Private methods
     
     private func setupVC() {
-        view.backgroundColor = .secondarySystemBackground
         view.addSubview(emptyWatchlistView)
+        view.backgroundColor = .secondarySystemBackground
+        navigationItem.title = "Watchlist"
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         //Delete BackButton title on pushed screen
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -45,6 +43,7 @@ class WatchlistViewController: UIViewController {
         watchlistTableView.backgroundColor = .clear
         watchlistTableView.separatorStyle = .none
         watchlistTableView.layer.cornerRadius = 10
+        watchlistTableView.translatesAutoresizingMaskIntoConstraints = false
         
         watchlistTableView.register(
             CryptoCurrencyCell.self,
@@ -53,7 +52,14 @@ class WatchlistViewController: UIViewController {
     }
     
     private func setupConstraints() {
+        let padding = view.width / 20
+        
         NSLayoutConstraint.activate([
+            watchlistTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding),
+            watchlistTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding),
+            watchlistTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
+            watchlistTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
             emptyWatchlistView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyWatchlistView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             emptyWatchlistView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1 / 2),
@@ -83,15 +89,6 @@ class WatchlistViewController: UIViewController {
         watchlistVM.errorMessage?.bind { [weak self] message in
             self?.showAlert(message: message ?? "An error has occured")
         }
-    }
-    
-    private func layoutComponents() {
-        watchlistTableView.frame = CGRect(
-            x: 15,
-            y: 100,
-            width: view.width - 30,
-            height: view.height - 80
-        )
     }
 }
 
