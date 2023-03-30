@@ -2,7 +2,7 @@ import UIKit
 //TODO: - Dependency Injection: Consider using dependency injection to inject the SearchScreenViewModel instead of instantiating it directly in the view controller. This can make the code more testable and easier to maintain.
 
 enum SectionHeaderType: String {
-    case searching = "Search results"
+    case searching = ""
     case recentSearches = "Recent Searches"
     case trendingCoins = "Trending Coins"
 }
@@ -16,12 +16,9 @@ class PPSectionHeaderView: UIView {
     lazy var nameLabel = {
         let label = UILabel()
         label.textColor = .secondaryLabel
-        label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .systemGray5
-        label.layer.cornerRadius = 10
-        label.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        label.layer.masksToBounds = true
+        label.backgroundColor = .clear
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.firstLineHeadIndent = 20
@@ -48,11 +45,7 @@ class PPSectionHeaderView: UIView {
     //MARK: - Private methods
     
     private func setup() {
-        backgroundColor = .secondarySystemBackground
-        clipsToBounds = true
-        layer.cornerRadius = 10
-        layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        
+        backgroundColor = .clear
         addSubview(nameLabel)
         
         NSLayoutConstraint.activate([
@@ -76,7 +69,6 @@ class PPSectionHeaderView: UIView {
         button.backgroundColor = .clear
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        
         
         addSubview(button)
         

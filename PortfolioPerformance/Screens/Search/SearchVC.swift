@@ -26,7 +26,7 @@ class SearchScreenViewController: UIViewController {
     lazy private var searchBar = UISearchBar()
     
     private let resultsTableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
+        let table = UITableView(frame: .zero, style: .insetGrouped)
         table.backgroundColor = .clear
         table.sectionHeaderTopPadding = 0
         table.showsVerticalScrollIndicator = false
@@ -125,8 +125,8 @@ class SearchScreenViewController: UIViewController {
     private func setupConstraints() {
 
         NSLayoutConstraint.activate([
-            resultsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            resultsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            resultsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            resultsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             resultsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             resultsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
@@ -223,19 +223,6 @@ extension SearchScreenViewController: UITableViewDelegate {
             return [0, PPSectionHeaderView.preferredHeight][section]
         case .emptyWithRecents, .searching:
             return PPSectionHeaderView.preferredHeight
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        let section = indexPath.section
-        let row = indexPath.row
-        let numRowsInSection = tableView.numberOfRows(inSection: section)
-        
-        if row == numRowsInSection - 1 {
-            if let resultsCell = cell as? ResultsCell {
-                resultsCell.makeBottomCornersWithRadius()
-            }
         }
     }
     

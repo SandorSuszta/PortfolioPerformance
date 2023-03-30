@@ -295,7 +295,7 @@ class CoinDetailsVC: UIViewController {
     
     private func setupVC() {
         view.backgroundColor = .secondarySystemBackground
-        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.largeTitleDisplayMode = .never
         lineChartView.xAxis.valueFormatter = self
     }
     

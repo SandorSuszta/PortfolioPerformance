@@ -4,7 +4,7 @@ class WatchlistViewController: UIViewController {
 
     private let watchlistVM = WatchlistViewModel()
 
-    private let watchlistTableView = UITableView()
+    private let watchlistTableView = UITableView(frame: .zero, style: .insetGrouped)
 
     private let emptyWatchlistView = EmptyStateView(type: .noFavourites)
     
@@ -43,6 +43,8 @@ class WatchlistViewController: UIViewController {
         watchlistTableView.backgroundColor = .clear
         watchlistTableView.separatorStyle = .none
         watchlistTableView.layer.cornerRadius = 10
+        watchlistTableView.tableHeaderView = nil
+        watchlistTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: view.width / 20))
         watchlistTableView.translatesAutoresizingMaskIntoConstraints = false
         
         watchlistTableView.register(
@@ -52,12 +54,11 @@ class WatchlistViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        let padding = view.width / 20
         
         NSLayoutConstraint.activate([
-            watchlistTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding),
-            watchlistTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding),
-            watchlistTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
+            watchlistTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            watchlistTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            watchlistTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             watchlistTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             emptyWatchlistView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -149,18 +150,5 @@ class WatchlistViewController: UIViewController {
             )
             
             self.navigationController?.pushViewController(detailsVC, animated: true)
-        }
-        
-        func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-            
-            let section = indexPath.section
-            let row = indexPath.row
-            let numRowsInSection = tableView.numberOfRows(inSection: section)
-            
-            if row == numRowsInSection - 1 {
-                if let resultsCell = cell as? CryptoCurrencyCell {
-                    resultsCell.makeBottomCornersWithRadius()
-                }
-            }
         }
     }
