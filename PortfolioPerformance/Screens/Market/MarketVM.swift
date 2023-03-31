@@ -23,7 +23,7 @@ class MarketViewModel {
     //MARK: - Public methods
     
     public func loadGreedAndFearIndex() {
-        NetworkingManager.shared.requestGreedAndFearIndex { result in
+        NetworkingService.shared.requestGreedAndFearIndex { result in
             switch result {
             case .success(let index):
                 
@@ -43,7 +43,7 @@ class MarketViewModel {
     }
     
     public func loadGlobalData() {
-        NetworkingManager.shared.requestGlobalData { result in
+        NetworkingService.shared.requestGlobalData { result in
             switch result {
             case .success(let globalDataResponse):
                 let totalMarketCap = globalDataResponse.data.totalMarketCap["usd"] ?? 0
@@ -79,7 +79,7 @@ class MarketViewModel {
     }
     
     func loadAllCryptoCurrenciesData() {
-        NetworkingManager.shared.requestCryptoCurrenciesData { result in
+        NetworkingService.shared.requestCryptoCurrenciesData { result in
             
             switch result {
             case .success(let cryptosArray):

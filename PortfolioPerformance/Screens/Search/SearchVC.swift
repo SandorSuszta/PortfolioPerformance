@@ -209,7 +209,7 @@ extension SearchScreenViewController: UITableViewDelegate {
             
             recentSearchesHeader.buttonAction = { [weak self] in
                 self?.viewModel.clearRecentSearches()
-                UserDefaultsManager.shared.clearRecentSearchesIDs()
+                UserDefaultsService.shared.clearRecentSearchesIDs()
             }
             
             return [recentSearchesHeader,trendingCoinsHeader][section]
@@ -242,7 +242,7 @@ extension SearchScreenViewController: UITableViewDelegate {
         isSearching = false
         viewModel.clearSearchModels()
         
-        UserDefaultsManager.shared.saveToDefaults(
+        UserDefaultsService.shared.saveToDefaults(
             ID: model.id,
             forKey: DefaultsKeys.recentSearches.rawValue
         )
@@ -252,7 +252,7 @@ extension SearchScreenViewController: UITableViewDelegate {
             coinName: model.name,
             coinSymbol: model.symbol,
             logoURL: model.large,
-            isFavourite: UserDefaultsManager.shared.isInWatchlist(id: model.id)
+            isFavourite: UserDefaultsService.shared.isInWatchlist(id: model.id)
         )
         
         self.navigationController?.pushViewController(detailVC, animated: true)

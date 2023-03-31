@@ -69,13 +69,13 @@ class WatchlistViewController: UIViewController {
     }
     
     private func updateTableWithWatchlist() {
-        if UserDefaultsManager.shared.watchlistIDs.isEmpty {
+        if UserDefaultsService.shared.watchlistIDs.isEmpty {
             watchlistVM.cellViewModels.value = []
             emptyWatchlistView.isHidden = false
         } else {
             emptyWatchlistView.isHidden = true
             watchlistVM.loadWatchlistCryptoCurrenciesData(
-                list: UserDefaultsManager.shared.watchlistIDs
+                list: UserDefaultsService.shared.watchlistIDs
             )
         }
     }
@@ -122,7 +122,7 @@ class WatchlistViewController: UIViewController {
             if editingStyle == .delete {
                 guard let ID = watchlistVM.cellViewModels.value?[indexPath.row].coinModel.id else { fatalError() }
                 
-                UserDefaultsManager.shared.deleteFromDefaults(
+                UserDefaultsService.shared.deleteFromDefaults(
                     ID: ID,
                     forKey: DefaultsKeys.watchlist.rawValue
                 )
@@ -131,7 +131,7 @@ class WatchlistViewController: UIViewController {
                 
                 tableView.deleteRows(at: [indexPath], with: .left)
                 
-                if UserDefaultsManager.shared.watchlistIDs.isEmpty {
+                if UserDefaultsService.shared.watchlistIDs.isEmpty {
                     emptyWatchlistView.isHidden = false
                 }
             }
@@ -146,7 +146,7 @@ class WatchlistViewController: UIViewController {
                 coinName: currentCoinModel.name,
                 coinSymbol: currentCoinModel.symbol,
                 logoURL: currentCoinModel.image,
-                isFavourite: UserDefaultsManager.shared.isInWatchlist(id: currentCoinModel.id)
+                isFavourite: UserDefaultsService.shared.isInWatchlist(id: currentCoinModel.id)
             )
             
             self.navigationController?.pushViewController(detailsVC, animated: true)

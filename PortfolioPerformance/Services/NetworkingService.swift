@@ -1,8 +1,8 @@
 import UIKit
 
-struct NetworkingManager {
+struct NetworkingService {
     
-    static let shared = NetworkingManager()
+    static let shared = NetworkingService()
     
     private init() {}
     
@@ -174,11 +174,11 @@ struct NetworkingManager {
     }
     
     private func constructURL(for list: [String]) -> URL {
-        var leadingUrl = NetworkingManager.Constants.requestDataForListBaseUrl
+        var leadingUrl = NetworkingService.Constants.requestDataForListBaseUrl
         for coinID in list {
             leadingUrl += coinID + "%2C%20"
         }
-        let endpointString = leadingUrl + NetworkingManager.Constants.requestDataForListTrailingUrl
+        let endpointString = leadingUrl + NetworkingService.Constants.requestDataForListTrailingUrl
         guard let url = URL(string: endpointString) else { fatalError() }
         return url
     }

@@ -8,7 +8,7 @@ class WatchlistViewModel {
     
     public func loadWatchlistCryptoCurrenciesData(list: [String]) {
         
-        NetworkingManager.shared.requestDataForList(list: list) { result in
+        NetworkingService.shared.requestDataForList(list: list) { result in
             switch result {
             case .success(let coinModels):
                 //Transform array of coin models into array of cell view models

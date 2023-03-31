@@ -29,7 +29,7 @@ final class PPTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTabBar()
+        setupTabBars()
         makeTabBarTransparent()
     }
     
@@ -40,7 +40,7 @@ final class PPTabBarController: UITabBarController {
     
     //MARK: - Private methods
     
-    private func setupTabBar() {
+    private func setupTabBars() {
         var viewControllers: [UIViewController] = []
         
         for controllerType in TabBarControllerType.allCases {

@@ -6,9 +6,9 @@ enum DefaultsKeys: String {
     case recentTransactions = "recentTransactions"
 }
 
-struct UserDefaultsManager {
+struct UserDefaultsService {
     
-    static let shared = UserDefaultsManager()
+    static let shared = UserDefaultsService()
     
     private init() {}
     

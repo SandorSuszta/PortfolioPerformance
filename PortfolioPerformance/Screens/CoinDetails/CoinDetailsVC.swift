@@ -53,8 +53,9 @@ class CoinDetailsVC: UIViewController {
     
     private var coinLogoShadowView: UIImageView = {
         let view = UIImageView()
-        view.configureWithShadow()
-        view.backgroundColor = .logoBackground
+        //view.configureWithShadow()
+        view.backgroundColor = .systemBackground
+        view.layer.cornerRadius = 15
         return view
     }()
     
@@ -62,13 +63,13 @@ class CoinDetailsVC: UIViewController {
         let view = UIImageView()
         view.layer.cornerRadius = 15
         view.layer.masksToBounds = true
-        view.backgroundColor = .clear
         return view
     }()
     
     private var chartView: UIView = {
         let view = UIView()
-        view.configureWithShadow()
+        view.backgroundColor = .systemBackground
+        view.layer.cornerRadius = 15
         return view
     }()
     
@@ -78,7 +79,6 @@ class CoinDetailsVC: UIViewController {
 
     private var rangeProgressBar: RangeProgressView = {
         let bar = RangeProgressView()
-        bar.configureWithShadow()
         bar.titleLabel.text = "Day range"
         bar.progressBar.progress = 0.5
         bar.titleLabel.sizeToFit()
@@ -116,7 +116,7 @@ class CoinDetailsVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        isFavourite = UserDefaultsManager.shared.isInWatchlist(id: coinDetailsVM.coinID)
+        isFavourite = UserDefaultsService.shared.isInWatchlist(id: coinDetailsVM.coinID)
         updateFavouriteButtonImage()
     }
     
@@ -407,12 +407,12 @@ class CoinDetailsVC: UIViewController {
     @objc func favouriteButtonTapped() {
 
         if isFavourite {
-            UserDefaultsManager.shared.deleteFromDefaults(
+            UserDefaultsService.shared.deleteFromDefaults(
                 ID: coinDetailsVM.coinID,
                 forKey: DefaultsKeys.watchlist.rawValue
             )
         } else {
-            UserDefaultsManager.shared.saveToDefaults(ID: coinDetailsVM.coinID, forKey: DefaultsKeys.watchlist.rawValue)
+            UserDefaultsService.shared.saveToDefaults(ID: coinDetailsVM.coinID, forKey: DefaultsKeys.watchlist.rawValue)
         }
         
         isFavourite = !isFavourite
@@ -471,6 +471,6 @@ extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
 extension CoinDetailsVC: AxisValueFormatter, ChartViewDelegate {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         let date = Date(timeIntervalSince1970: value/1000)
-        return .stringForGraphAxis(from: date, daysInterval: currentChartTimeInterval)
+        return ""//.stringForGraphAxis(from: date, daysInterval: currentChartTimeInterval)
     }
 }

@@ -28,14 +28,14 @@ class SearchScreenViewModel {
     
     func updateRecentSearches() {
         
-        if !UserDefaultsManager.shared.recentSearchesIDs.isEmpty {
+        if !UserDefaultsService.shared.recentSearchesIDs.isEmpty {
             getRecentSearchesModels()
         }
     }
     
     func updateSearchResults(query: String) {
         
-        NetworkingManager.shared.searchWith(query: query) { result in
+        NetworkingService.shared.searchWith(query: query) { result in
             
             switch result {
             case.success(let response):
@@ -59,10 +59,10 @@ class SearchScreenViewModel {
 
     private func getRecentSearchesModels() {
         
-        guard !UserDefaultsManager.shared.recentSearchesIDs.isEmpty else { return }
+        guard !UserDefaultsService.shared.recentSearchesIDs.isEmpty else { return }
         
-        NetworkingManager.shared.requestDataForList(
-            list: UserDefaultsManager.shared.recentSearchesIDs
+        NetworkingService.shared.requestDataForList(
+            list: UserDefaultsService.shared.recentSearchesIDs
         ){
             result in
             
@@ -78,7 +78,7 @@ class SearchScreenViewModel {
                     )
                 }
                 
-                let list = UserDefaultsManager.shared.recentSearchesIDs
+                let list = UserDefaultsService.shared.recentSearchesIDs
                 
                 //Use the same order as in saved list
                 recentSearchesModels.sort {
@@ -95,7 +95,7 @@ class SearchScreenViewModel {
     
     private func getTrendingCoinsModels() {
         
-        NetworkingManager.shared.requestTrendingCoins { result in
+        NetworkingService.shared.requestTrendingCoins { result in
 
             switch result {
             case .success(let response):

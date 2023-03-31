@@ -24,7 +24,7 @@ final class CoinDetailsViewModel {
     
     //MARK: - Public methods
     func getMetricsData(coinID: String) {
-        NetworkingManager.shared.requestData(for: coinID) { result in
+        NetworkingService.shared.requestData(for: coinID) { result in
             switch result {
             case .success(let model):
                 self.coinModel = model
@@ -36,7 +36,7 @@ final class CoinDetailsViewModel {
     }
     
    func getTimeRangeDetails(coinID: String, intervalInDays: Int) {
-        NetworkingManager.shared.requestDataForChart(
+        NetworkingService.shared.requestDataForChart(
             coinID: coinID,
             intervalInDays: intervalInDays
         ){ result in

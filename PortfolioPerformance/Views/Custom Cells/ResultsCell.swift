@@ -21,7 +21,6 @@ class ResultsCell: UITableViewCell {
     
     let logoContainerView: UIView = {
         let view = UIView()
-        view.configureWithShadow()
         return view
     }()
     

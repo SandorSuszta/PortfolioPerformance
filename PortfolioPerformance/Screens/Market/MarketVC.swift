@@ -347,7 +347,7 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
             coinName: currentCoinModel.name,
             coinSymbol: currentCoinModel.symbol,
             logoURL: currentCoinModel.image,
-            isFavourite: UserDefaultsManager.shared.isInWatchlist(id: currentCoinModel.id)
+            isFavourite: UserDefaultsService.shared.isInWatchlist(id: currentCoinModel.id)
         )
         
         self.navigationController?.pushViewController(detailsVC, animated: true)

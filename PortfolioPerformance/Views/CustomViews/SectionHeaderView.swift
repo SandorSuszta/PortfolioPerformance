@@ -48,16 +48,16 @@ class PPSectionHeaderView: UIView {
         backgroundColor = .clear
         addSubview(nameLabel)
         
+        if type == .recentSearches {
+            addClearButton()
+        }
+        
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: topAnchor),
             nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
-        
-        if type == .recentSearches {
-            addClearButton()
-        }
     }
     
     private func addClearButton() {
