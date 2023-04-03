@@ -92,10 +92,16 @@ final class CoinDetailsViewModel {
     }
     
     
-    private func extractPriceSubset(from prices: [[Double]], subsetCount: Int = 60) -> [[Double]] {
+    /// Extracts a subset  from an array of prices. Makes chart look cleaner and less cluttered.
+    /// - Parameters:
+    ///   - prices: The input array of prices.
+    ///   - subsetSize: The number of elements to include in the subset. Defaults to 60.
+    /// - Returns:  A new array containing `subsetSize` elements, where each element is taken from the original array at equal intervals.
+    private func extractPriceSubset(from prices: [[Double]], subsetSize: Int = 60) -> [[Double]] {
         guard !prices.isEmpty else { return [] }
+        guard prices.count > subsetSize else { return prices }
         
-        let step = max(1, prices.count / subsetCount)
+        let step = prices.count / subsetSize
         
         return prices.enumerated().reduce(into: []) { subset, enumeratedElement in
             if enumeratedElement.offset % step == 0 {
