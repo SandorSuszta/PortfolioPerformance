@@ -7,7 +7,7 @@ extension LineChartView {
         
         let dataSet = LineChartDataSet(entries: entries)
         dataSet.drawCirclesEnabled = false // Disable data points
-        dataSet.mode = .cubicBezier
+        dataSet.mode = .linear
         dataSet.lineWidth = 1.5
         dataSet.cubicIntensity = 0.5
         dataSet.drawHorizontalHighlightIndicatorEnabled = false

@@ -470,7 +470,7 @@ extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
 
 extension CoinDetailsVC: AxisValueFormatter, ChartViewDelegate {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        let date = Date(timeIntervalSince1970: value/1000)
+        //let date = Date(timeIntervalSince1970: value/1000)
         return ""//.stringForGraphAxis(from: date, daysInterval: currentChartTimeInterval)
     }
 }

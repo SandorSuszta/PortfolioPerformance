@@ -35,15 +35,16 @@ final class CoinDetailsViewModel {
         }
     }
     
-   func getTimeRangeDetails(coinID: String, intervalInDays: Int) {
+    func getTimeRangeDetails(coinID: String, intervalInDays: Int) {
         NetworkingService.shared.requestDataForChart(
             coinID: coinID,
             intervalInDays: intervalInDays
         ){ result in
             switch result {
             case .success(let priceData):
+                
                 let rangeDetails = RangeDetailsViewModel(
-                    priceModels: priceData.prices,
+                    priceModels: self.extractPriceSubset(from: priceData.prices),
                     currentPriceValue: self.coinModel?.marketData.currentPrice["usd"] ?? 0
                 )
                 self.rangeDetailsVM.value = rangeDetails
@@ -52,7 +53,7 @@ final class CoinDetailsViewModel {
             }
         }
     }
-
+    
     func createDetailsCellsViewModels() {
         var viewModels: [DetailsCellsViewModel] = []
         viewModels.append(.init(
@@ -88,5 +89,18 @@ final class CoinDetailsViewModel {
             value: .formatedStringForATHDate(fromUTC: coinModel?.marketData.athDate["usd"] ?? "N/A")
         ))
         detailsTableViewCelsVM.value = viewModels
+    }
+    
+    
+    private func extractPriceSubset(from prices: [[Double]], subsetCount: Int = 60) -> [[Double]] {
+        guard !prices.isEmpty else { return [] }
+        
+        let step = max(1, prices.count / subsetCount)
+        
+        return prices.enumerated().reduce(into: []) { subset, enumeratedElement in
+            if enumeratedElement.offset % step == 0 {
+                subset.append(enumeratedElement.element)
+            }
+        }
     }
 }
