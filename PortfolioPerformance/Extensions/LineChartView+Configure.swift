@@ -25,7 +25,7 @@ extension LineChartView {
         xAxis.drawAxisLineEnabled = false
         rightAxis.gridColor = .clear
         legend.enabled = false // Disable legend
-        //xAxis.setLabelCount(4, force: true) // How many labels on axis
+        xAxis.setLabelCount(4, force: true) // How many labels on axis
         rightAxis.setLabelCount(4, force: false)
         xAxis.avoidFirstLastClippingEnabled = true
         

@@ -49,7 +49,6 @@ class CryptoCurrencyCell: UITableViewCell {
         layer.cornerRadius = 0
     }
     
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -66,15 +65,8 @@ class CryptoCurrencyCell: UITableViewCell {
         priceLabel.text = viewModel.currentPrice
         changeLabel.text = viewModel.priceChangePercentage24H
         changeLabel.textColor = viewModel.coinModel.priceChange24H ?? 0 >= 0 ? .nephritis : .pomergranate
-        
         logoImageView.setImage(imageUrl: viewModel.imageUrl)
         selectionStyle = .none
-    }
-    
-    func makeBottomCornersWithRadius() {
-        layer.cornerRadius = 10
-        layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        clipsToBounds = true
     }
     
     private func configureContentView() {

@@ -6,9 +6,7 @@ class CoinDetailsVC: UIViewController {
     //MARK: - Properties
     
     private let coinDetailsVM: CoinDetailsViewModel
-    
     private var currentChartTimeInterval = 1
-    
     private var isFavourite: Bool
     
     private var padding: CGFloat {
