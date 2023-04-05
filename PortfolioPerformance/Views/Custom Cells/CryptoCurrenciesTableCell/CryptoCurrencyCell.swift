@@ -5,6 +5,7 @@ class CryptoCurrencyCell: UITableViewCell {
     //MARK: - Properties
     
     static let identifier = "CryptoCurrencyCell"
+    static let prefferredHeight: CGFloat = 56
     
     private let nameLabel = PPTextLabel(allignment: .left, fontWeight: .medium)
     private let symbolLabel = PPTextLabel(textColor: .secondaryLabel, allignment: .left)
@@ -83,31 +84,29 @@ class CryptoCurrencyCell: UITableViewCell {
         logoContainerView.addSubviews(logoImageView)
         labelsContainerView.addSubviews(nameLabel, symbolLabel, priceLabel, changeLabel)
         
-        let padding = height / 3
-        
         NSLayoutConstraint.activate([
-            logoContainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            logoContainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             logoContainerView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            logoContainerView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7),
-            logoContainerView.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7 ),
+            logoContainerView.heightAnchor.constraint(equalToConstant: 36),
+            logoContainerView.widthAnchor.constraint(equalToConstant: 36),
             
             logoImageView.centerYAnchor.constraint(equalTo: logoContainerView.centerYAnchor),
             logoImageView.centerXAnchor.constraint(equalTo: logoContainerView.centerXAnchor),
-            logoImageView.heightAnchor.constraint(equalTo: logoContainerView.heightAnchor, multiplier: 0.9),
-            logoImageView.widthAnchor.constraint(equalTo: logoContainerView.widthAnchor, multiplier: 0.9),
+            logoImageView.heightAnchor.constraint(equalTo: logoContainerView.heightAnchor),
+            logoImageView.widthAnchor.constraint(equalTo: logoContainerView.widthAnchor),
             
             labelsContainerView.centerYAnchor.constraint(equalTo: logoContainerView.centerYAnchor),
-            labelsContainerView.leadingAnchor.constraint(equalTo: logoContainerView.trailingAnchor, constant: padding),
-            labelsContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            labelsContainerView.heightAnchor.constraint(equalTo: logoContainerView.heightAnchor, multiplier: 0.8),
+            labelsContainerView.leadingAnchor.constraint(equalTo: logoContainerView.trailingAnchor, constant: 16),
+            labelsContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            labelsContainerView.heightAnchor.constraint(equalTo: logoContainerView.heightAnchor),
             
             nameLabel.topAnchor.constraint(equalTo: labelsContainerView.topAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: labelsContainerView.leadingAnchor),
-            nameLabel.heightAnchor.constraint(equalTo: labelsContainerView.heightAnchor, multiplier: 0.5),
+            nameLabel.heightAnchor.constraint(equalToConstant: 18),
             
             symbolLabel.bottomAnchor.constraint(equalTo: labelsContainerView.bottomAnchor),
             symbolLabel.leadingAnchor.constraint(equalTo: labelsContainerView.leadingAnchor),
-            symbolLabel.heightAnchor.constraint(equalTo: labelsContainerView.heightAnchor, multiplier: 0.4),
+            symbolLabel.heightAnchor.constraint(equalToConstant: 16),
             
             priceLabel.topAnchor.constraint(equalTo: nameLabel.topAnchor),
             priceLabel.trailingAnchor.constraint(equalTo: labelsContainerView.trailingAnchor),
@@ -116,7 +115,6 @@ class CryptoCurrencyCell: UITableViewCell {
             changeLabel.bottomAnchor.constraint(equalTo: symbolLabel.bottomAnchor),
             changeLabel.trailingAnchor.constraint(equalTo: labelsContainerView.trailingAnchor),
             changeLabel.heightAnchor.constraint(equalTo: symbolLabel.heightAnchor),
-            
         ])
     }
 }

@@ -267,6 +267,15 @@ extension SearchScreenViewController: UITableViewDelegate {
 
 extension SearchScreenViewController: UISearchBarDelegate  {
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let query = searchBar.text, !query.isEmpty {
             isSearching = true

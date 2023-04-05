@@ -129,7 +129,7 @@ class MarketViewController: UIViewController {
             sortOptionsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             sortOptionsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             sortOptionsCollectionView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: -3),
-            sortOptionsCollectionView.heightAnchor.constraint(equalToConstant: view.height / 30)
+            sortOptionsCollectionView.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
     
@@ -354,6 +354,6 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        view.height / 15
+        CryptoCurrencyCell.prefferredHeight
     }
 }

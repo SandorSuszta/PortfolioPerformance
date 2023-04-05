@@ -2,7 +2,7 @@ import UIKit
 
 class PPTextLabel: UILabel {
     
-    init(fontSize: CGFloat = 16,
+    init(fontSize: CGFloat = 17,
          textColor: UIColor = .label,
          allignment: NSTextAlignment = .center,
          fontWeight: UIFont.Weight = .regular) {
