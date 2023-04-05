@@ -312,6 +312,8 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        guard scrollView == marketCardsCollectionView else { return }
+        
         let offset = scrollView.contentOffset.x
         let currentPage = offset == 0 ? 0 : 1
         pageControl.currentPage = currentPage
