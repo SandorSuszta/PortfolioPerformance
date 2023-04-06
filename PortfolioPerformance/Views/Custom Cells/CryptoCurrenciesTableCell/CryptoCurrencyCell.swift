@@ -7,6 +7,8 @@ class CryptoCurrencyCell: UITableViewCell {
     static let identifier = "CryptoCurrencyCell"
     static let prefferredHeight: CGFloat = 56
     
+    private var imageDownloader: ImageDownloadProtocol?
+    
     private let nameLabel = PPTextLabel(allignment: .left, fontWeight: .medium)
     private let symbolLabel = PPTextLabel(textColor: .secondaryLabel, allignment: .left)
     private let priceLabel = PPTextLabel(allignment: .right, fontWeight: .medium)
@@ -39,7 +41,7 @@ class CryptoCurrencyCell: UITableViewCell {
     //MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
         configureContentView()
     }
     
@@ -65,7 +67,16 @@ class CryptoCurrencyCell: UITableViewCell {
         priceLabel.text = viewModel.currentPrice
         changeLabel.text = viewModel.priceChangePercentage24H
         changeLabel.textColor = viewModel.coinModel.priceChange24H ?? 0 >= 0 ? .nephritis : .pomergranate
-        logoImageView.setImage(imageUrl: viewModel.imageUrl)
+        
+        imageDownloader?.loadImage(from: viewModel.imageUrl) { [weak self] result in
+            switch result {
+            case .success(let image):
+                self?.logoImageView.image = image
+            case .failure(let error):
+                    // TODO: handle error
+                print(error)
+            }
+        }
         selectionStyle = .none
     }
     
