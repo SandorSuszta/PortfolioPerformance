@@ -301,7 +301,7 @@ class CoinDetailsVC: UIViewController {
         title = coinName
         symbolLabel.text = coinSymbol.uppercased()
         symbolLabel.sizeToFit()
-        coinLogoView.setImage(imageUrl: logoUrl)
+        coinLogoView.setImage(from: logoUrl)
     }
     
     private func setUpFavouriteButton() {

@@ -45,7 +45,7 @@ class AddTransactionCell: UICollectionViewCell {
         
         self.model = model
         symbolLabel.text = model.symbol.uppercased()
-        logoView.setImage(imageUrl: model.large)
+        logoView.setImage(from: model.large)
     }
     
     //MARK: - Private methods

@@ -7,7 +7,7 @@ class CryptoCurrencyCell: UITableViewCell {
     static let identifier = "CryptoCurrencyCell"
     static let prefferredHeight: CGFloat = 56
     
-    private var imageDownloader: ImageDownloadProtocol?
+    private var imageDownloadDataTask: URLSessionDataTask?
     
     private let nameLabel = PPTextLabel(allignment: .left, fontWeight: .medium)
     private let symbolLabel = PPTextLabel(textColor: .secondaryLabel, allignment: .left)
@@ -68,15 +68,15 @@ class CryptoCurrencyCell: UITableViewCell {
         changeLabel.text = viewModel.priceChangePercentage24H
         changeLabel.textColor = viewModel.coinModel.priceChange24H ?? 0 >= 0 ? .nephritis : .pomergranate
         
-        imageDownloader?.loadImage(from: viewModel.imageUrl) { [weak self] result in
+        imageDownloadDataTask = ImageDownloader.shared.loadImage(from: viewModel.imageUrl, completion: { [weak self] result in
             switch result {
             case .success(let image):
                 self?.logoImageView.image = image
             case .failure(let error):
-                    // TODO: handle error
+                //TODO: Handle error
                 print(error)
             }
-        }
+        })
         selectionStyle = .none
     }
     

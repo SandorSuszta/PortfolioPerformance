@@ -1,24 +1,23 @@
 import UIKit
 
-protocol ImageDownloadProtocol {
-    func loadImage(from imageUrl: String, completion: @escaping (Result<UIImage, PPError>) -> Void)
-    func cancelDownload()
-}
-
-final class ImageDownloadService: ImageDownloadProtocol {
-    private var imageCache = NSCache<NSString, UIImage>()
-    private var task: URLSessionDataTask?
+final class ImageDownloader {
+    static let shared = ImageDownloader()
     
-    func loadImage(from imageUrl: String, completion: @escaping (Result<UIImage, PPError>) -> Void) {
+    private init() {}
+    
+    private var imageCache = NSCache<NSString, UIImage>()
+    
+    func loadImage(from imageUrl: String, completion: @escaping (Result<UIImage, PPError>) -> Void) -> URLSessionDataTask? {
         if let cachedImage = imageCache.object(forKey: NSString(string: imageUrl)) {
             completion(.success(cachedImage))
+            return nil
         } else {
             guard let url = URL(string: imageUrl) else {
                 completion(.failure(.invalidUrl))
-                return
+                return nil
             }
             
-            task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+            let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
                 
                 guard let data = data, error == nil else {
                     completion(.failure(.netwokingError))
@@ -36,11 +35,8 @@ final class ImageDownloadService: ImageDownloadProtocol {
                     completion(.success(image))
                 }
             }
-            task?.resume()
+            task.resume()
+            return task
         }
-    }
-    
-    func cancelDownload() {
-        task?.cancel()
     }
 }

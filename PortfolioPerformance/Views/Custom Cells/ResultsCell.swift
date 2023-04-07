@@ -88,7 +88,7 @@ class ResultsCell: UITableViewCell {
     public func configure(withModel model: SearchResult) {
         symbolLabel.text = model.symbol.uppercased()
         nameLabel.text = model.name
-        logoView.setImage(imageUrl: model.large)
+        logoView.setImage(from: model.large)
     }
     
     public func makeBottomCornersWithRadius() {

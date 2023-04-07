@@ -1,7 +1,7 @@
 import UIKit
 
 extension UIImageView {
-    func setImage(imageUrl: String) {
+    func setImage(from imageUrl: String) {
         if let cachedImage = NetworkingService.shared.cache.object(forKey: NSString(string: imageUrl)) {
             image = cachedImage
         } else {
