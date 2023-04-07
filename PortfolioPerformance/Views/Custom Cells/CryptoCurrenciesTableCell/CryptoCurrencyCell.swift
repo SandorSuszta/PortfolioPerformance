@@ -7,7 +7,7 @@ class CryptoCurrencyCell: UITableViewCell {
     static let identifier = "CryptoCurrencyCell"
     static let prefferredHeight: CGFloat = 56
     
-    private var imageDownloadDataTask: URLSessionDataTask?
+    var imageDownloader: ImageDownloaderProtocol?
     
     private let nameLabel = PPTextLabel(allignment: .left, fontWeight: .medium)
     private let symbolLabel = PPTextLabel(textColor: .secondaryLabel, allignment: .left)
@@ -48,7 +48,7 @@ class CryptoCurrencyCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         logoImageView.image = nil
-        layer.cornerRadius = 0
+        imageDownloader?.cancelDownload()
     }
     
     required init?(coder: NSCoder) {
@@ -68,7 +68,7 @@ class CryptoCurrencyCell: UITableViewCell {
         changeLabel.text = viewModel.priceChangePercentage24H
         changeLabel.textColor = viewModel.coinModel.priceChange24H ?? 0 >= 0 ? .nephritis : .pomergranate
         
-        imageDownloadDataTask = ImageDownloader.shared.loadImage(from: viewModel.imageUrl, completion: { [weak self] result in
+        imageDownloader?.loadImage(from: viewModel.imageUrl, completion: { [weak self] result in
             switch result {
             case .success(let image):
                 self?.logoImageView.image = image

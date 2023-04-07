@@ -336,6 +336,7 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cellViewModel = marketVM.cellViewModels.value?[indexPath.row] else { fatalError() }
         
+        cell.imageDownloader = ImageDownloader()
         cell.configureCell(with: cellViewModel)
         return cell
     }
