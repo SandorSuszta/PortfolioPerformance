@@ -39,7 +39,17 @@ class SearchScreenViewModel {
             
             switch result {
             case.success(let response):
-                self.searchResultCellModels.value = Array(response.coins.prefix(5))
+                let searchResults = response.coins.sorted { (result1, result2) -> Bool in
+                    
+                    let isPrefix1 = result1.symbol.lowercased().hasPrefix(query.lowercased())
+                    let isPrefix2 = result2.symbol.lowercased().hasPrefix(query.lowercased())
+                    
+                    return isPrefix1 && !isPrefix2 ? true
+                    : !isPrefix1 && isPrefix2 ? false
+                    : result1.symbol < result2.symbol
+                }
+                
+                self.searchResultCellModels.value = Array(searchResults.prefix(6))
                 
             case .failure(let error):
                 self.errorMessage.value = error.rawValue
