@@ -45,14 +45,16 @@ class CryptoCurrencyCell: UITableViewCell {
         configureContentView()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - Lifecycle
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         logoImageView.image = nil
         imageDownloader?.cancelDownload()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {

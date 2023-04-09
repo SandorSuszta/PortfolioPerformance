@@ -181,6 +181,7 @@ extension SearchScreenViewController: UITableViewDataSource {
         
         guard let model else { return UITableViewCell() }
         
+        cell.imageDownloader = ImageDownloader()
         cell.configure(withModel: model)
         
         return cell

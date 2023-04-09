@@ -5,6 +5,8 @@ class ResultsCell: UITableViewCell {
     static let identifier = "ResultsCell"
     static let preferredHeight: CGFloat = 60
     
+    var imageDownloader: ImageDownloaderProtocol?
+    
     let symbolLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .semibold)
@@ -76,7 +78,7 @@ class ResultsCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         logoView.image = nil
-        layer.cornerRadius = 0
+        imageDownloader?.cancelDownload()
     }
     
     required init?(coder: NSCoder) {
@@ -88,7 +90,16 @@ class ResultsCell: UITableViewCell {
     public func configure(withModel model: SearchResult) {
         symbolLabel.text = model.symbol.uppercased()
         nameLabel.text = model.name
-        logoView.setImage(from: model.large)
+        
+        imageDownloader?.loadImage(from: model.large, completion: { result in
+            switch result {
+            case .success(let image):
+                self.logoView.image = image
+            case .failure(let error):
+                print(error)
+                //TODO: Handle error
+            }
+        })
     }
     
     public func makeBottomCornersWithRadius() {
