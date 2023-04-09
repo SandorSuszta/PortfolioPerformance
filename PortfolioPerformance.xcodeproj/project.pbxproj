@@ -33,6 +33,7 @@
 		7955694928773472003E8A13 /* SortOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955694828773472003E8A13 /* SortOptionsCell.swift */; };
 		7955B09329DF6F8A00492059 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B09229DF6F8900492059 /* ImageDownloader.swift */; };
 		7955B09529E0B60700492059 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B09429E0B60700492059 /* ImageCacheManager.swift */; };
+		79598C5229E3239C00C9D240 /* Array+sortedByPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79598C5129E3239C00C9D240 /* Array+sortedByPrefix.swift */; };
 		795E43F62910017D0016F3C3 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795E43F52910017D0016F3C3 /* EmptyStateView.swift */; };
 		7961C37428EB2A010006B9A7 /* PPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7961C37328EB2A010006B9A7 /* PPError.swift */; };
 		796EFA3328697A91005E24AF /* MarketCardCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA3228697A90005E24AF /* MarketCardCellVM.swift */; };
@@ -111,6 +112,7 @@
 		7955694828773472003E8A13 /* SortOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionsCell.swift; sourceTree = "<group>"; };
 		7955B09229DF6F8900492059 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		7955B09429E0B60700492059 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		79598C5129E3239C00C9D240 /* Array+sortedByPrefix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+sortedByPrefix.swift"; sourceTree = "<group>"; };
 		795E43F52910017D0016F3C3 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		7961C37328EB2A010006B9A7 /* PPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPError.swift; sourceTree = "<group>"; };
 		796EFA3228697A90005E24AF /* MarketCardCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardCellVM.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			children = (
 				7986A50A28E5B02C00332A48 /* UIView */,
 				7934EFA928352A1A00CE7FD0 /* UIImageView+SetImage.swift */,
+				79598C5129E3239C00C9D240 /* Array+sortedByPrefix.swift */,
 				7982923127E673E6007ECCCD /* UIColor+CustomColors.swift */,
 				7982923327E678A5007ECCCD /* String+Formatters.swift */,
 				79807A6F28ECBA01000825B0 /* LineChartView+Configure.swift */,
@@ -599,6 +602,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7934EFA4282A824E00CE7FD0 /* ResultsCell.swift in Sources */,
+				79598C5229E3239C00C9D240 /* Array+sortedByPrefix.swift in Sources */,
 				7934EFAA28352A1A00CE7FD0 /* UIImageView+SetImage.swift in Sources */,
 				792C040928C9E62B008EE48C /* RangeProgressView.swift in Sources */,
 				796EFA3A286DDD60005E24AF /* ObservableObject.swift in Sources */,
