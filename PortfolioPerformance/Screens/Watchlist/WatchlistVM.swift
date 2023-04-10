@@ -6,6 +6,10 @@ class WatchlistViewModel {
     
     public var errorMessage: ObservableObject<String>?
     
+    init() {
+        loadWatchlistCryptoCurrenciesData(list: UserDefaultsService.shared.watchlistIDs)
+    }
+    
     public func loadWatchlistCryptoCurrenciesData(list: [String]) {
         
         NetworkingService.shared.requestDataForList(list: list) { result in
