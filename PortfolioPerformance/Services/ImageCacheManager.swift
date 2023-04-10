@@ -3,7 +3,13 @@ import UIKit
 class ImageCacheService {
     static let shared = ImageCacheService()
     
-    private let imageCache = NSCache<NSString, UIImage>()
+    private let imageCache = {
+        let cache = NSCache<NSString, UIImage>()
+        cache.countLimit = 300
+        cache.totalCostLimit = 1024 * 1024 * 100 // 100 MB
+        return cache
+    }()
+    
     
     private init() {}
     
