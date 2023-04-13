@@ -34,6 +34,7 @@
 		7955B09329DF6F8A00492059 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B09229DF6F8900492059 /* ImageDownloader.swift */; };
 		7955B09529E0B60700492059 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B09429E0B60700492059 /* ImageCacheManager.swift */; };
 		79598C5229E3239C00C9D240 /* Array+sortedByPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79598C5129E3239C00C9D240 /* Array+sortedByPrefix.swift */; };
+		795D95E429E8B0A4007555EF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795D95E329E8B0A4007555EF /* Router.swift */; };
 		795E43F62910017D0016F3C3 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795E43F52910017D0016F3C3 /* EmptyStateView.swift */; };
 		7961C37428EB2A010006B9A7 /* PPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7961C37328EB2A010006B9A7 /* PPError.swift */; };
 		796EFA3328697A91005E24AF /* MarketCardCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA3228697A90005E24AF /* MarketCardCellVM.swift */; };
@@ -113,6 +114,7 @@
 		7955B09229DF6F8900492059 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		7955B09429E0B60700492059 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		79598C5129E3239C00C9D240 /* Array+sortedByPrefix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+sortedByPrefix.swift"; sourceTree = "<group>"; };
+		795D95E329E8B0A4007555EF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		795E43F52910017D0016F3C3 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		7961C37328EB2A010006B9A7 /* PPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPError.swift; sourceTree = "<group>"; };
 		796EFA3228697A90005E24AF /* MarketCardCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardCellVM.swift; sourceTree = "<group>"; };
@@ -257,12 +259,21 @@
 		79410D8A2822938100BD9EA4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				795D95E229E8AF2C007555EF /* Networking Service */,
 				790C30C427CEA7620021658F /* UserDefaultsService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		795D95E229E8AF2C007555EF /* Networking Service */ = {
+			isa = PBXGroup;
+			children = (
 				796EFA4028733AF2005E24AF /* NetworkingService.swift */,
 				7955B09229DF6F8900492059 /* ImageDownloader.swift */,
 				7955B09429E0B60700492059 /* ImageCacheManager.swift */,
+				795D95E329E8B0A4007555EF /* Router.swift */,
 			);
-			path = Services;
+			path = "Networking Service";
 			sourceTree = "<group>";
 		};
 		7961C37528EB2A0D0006B9A7 /* Helpers */ = {
@@ -626,6 +637,7 @@
 				797303B5296B75450006CF76 /* PPSegmentedProgressBar.swift in Sources */,
 				795E43F62910017D0016F3C3 /* EmptyStateView.swift in Sources */,
 				792223F528FD7F82001B0C8C /* CoinDetailsVC.swift in Sources */,
+				795D95E429E8B0A4007555EF /* Router.swift in Sources */,
 				790C30C227C78E930021658F /* GreedAndFearModel.swift in Sources */,
 				79895E9028DB758600087A23 /* MetricsVM.swift in Sources */,
 				7982923427E678A5007ECCCD /* String+Formatters.swift in Sources */,

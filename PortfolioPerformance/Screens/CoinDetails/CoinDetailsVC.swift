@@ -51,7 +51,6 @@ class CoinDetailsVC: UIViewController {
     
     private var coinLogoShadowView: UIImageView = {
         let view = UIImageView()
-        //view.configureWithShadow()
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 15
         return view
@@ -83,7 +82,7 @@ class CoinDetailsVC: UIViewController {
         return bar
     }()
     
-    private var detailsTableView = UITableView()
+    private var detailsTableView = UITableView(frame: .zero, style: .insetGrouped)
     
     private var headerView = UIView()
     
@@ -202,9 +201,9 @@ class CoinDetailsVC: UIViewController {
         )
         
         detailsTableView.frame = CGRect(
-            x: padding,
+            x: 0,
             y: rangeProgressBar.bottom + 10,
-            width: chartView.width,
+            width: view.width,
             height: 370
         )
         
@@ -217,7 +216,7 @@ class CoinDetailsVC: UIViewController {
         
         headerNameLabel.sizeToFit()
         headerNameLabel.frame = CGRect(
-            x: 20,
+            x: 30,
             y: headerView.height/2 - headerNameLabel.height/2,
             width: headerNameLabel.width,
             height: headerNameLabel.height
@@ -225,7 +224,7 @@ class CoinDetailsVC: UIViewController {
         
         marketCapRankLabel.sizeToFit()
         marketCapRankLabel.frame = CGRect(
-            x: headerView.right - marketCapRankLabel.width - 20,
+            x: headerView.right - marketCapRankLabel.width - 30,
             y: headerNameLabel.top,
             width: marketCapRankLabel.width,
             height: marketCapRankLabel.height
@@ -419,22 +418,19 @@ class CoinDetailsVC: UIViewController {
     }
     
     private func setupTableView() {
-        DispatchQueue.main.async {
-            self.detailsTableView.dataSource = self
-            self.detailsTableView.delegate = self
-            self.detailsTableView.tableHeaderView = self.headerView
-            self.detailsTableView.configureWithShadow()
-            self.detailsTableView.clipsToBounds = false
-            self.detailsTableView.layer.masksToBounds = false
-            self.detailsTableView.separatorStyle = .singleLine
-            self.detailsTableView.separatorColor = .systemGray5
-            self.detailsTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-            self.detailsTableView.isScrollEnabled = false
-            self.detailsTableView.register(
-                DetailsCell.self,
-                forCellReuseIdentifier: DetailsCell.identifier
-            )
-        }
+        detailsTableView.dataSource = self
+        detailsTableView.delegate = self
+        detailsTableView.tableHeaderView = self.headerView
+        detailsTableView.clipsToBounds = false
+        detailsTableView.layer.masksToBounds = false
+        detailsTableView.separatorStyle = .singleLine
+        detailsTableView.separatorColor = .systemGray5
+        detailsTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        detailsTableView.isScrollEnabled = false
+        detailsTableView.register(
+            DetailsCell.self,
+            forCellReuseIdentifier: DetailsCell.identifier
+        )
     }
 }
 

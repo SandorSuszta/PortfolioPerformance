@@ -91,7 +91,6 @@ final class CoinDetailsViewModel {
         detailsTableViewCelsVM.value = viewModels
     }
     
-    
     /// Extracts a subset  from an array of prices. Makes chart look cleaner and less cluttered.
     /// - Parameters:
     ///   - prices: The input array of prices.
