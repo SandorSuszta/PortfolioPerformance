@@ -4,7 +4,7 @@ import Charts
 final class CoinDetailsViewModel {
     
     var coinID: String
-    var coinModel: SingleCoinModel?
+    var coinModel: CoinDetails?
     var marketCapRank: String {
         String(coinModel?.marketData.marketCapRank ?? 0)
     }

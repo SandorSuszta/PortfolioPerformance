@@ -4,7 +4,7 @@ class MarketViewController: UIViewController {
     
     //MARK: - Properties
     
-    private let marketVM = MarketViewModel()
+    private let marketVM = MarketViewModel(networkingService: NetworkingService())
     
     private var cardsPadding: CGFloat {
         view.width / 16

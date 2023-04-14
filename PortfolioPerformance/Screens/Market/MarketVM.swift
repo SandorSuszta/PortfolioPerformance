@@ -2,6 +2,8 @@ import Foundation
 
 class MarketViewModel {
     
+    let networkingService: NetworkingService
+    
     public var cardViewModels: ObservableObject<[MarketCardCellViewModel]> = ObservableObject(value: [])
     
     public var cellViewModels: ObservableObject<[CryptoCurrencyCellViewModel]> = ObservableObject(value:[])
@@ -14,9 +16,11 @@ class MarketViewModel {
     
     //MARK: - Init
     
-    init() {
+    init(networkingService: NetworkingService) {
+        self.networkingService = networkingService
+        
         loadGreedAndFearIndex()
-        loadGlobalData()
+        getGlobalData()
         loadAllCryptoCurrenciesData()
     }
     
@@ -42,8 +46,11 @@ class MarketViewModel {
         }
     }
     
-    public func loadGlobalData() {
-        NetworkingService.shared.requestGlobalData { result in
+    public func getGlobalData() {
+        networkingService.request(
+            router: .getGlobalData,
+            expectingType: GlobalDataResponse.self
+        ){ result in
             switch result {
             case .success(let globalDataResponse):
                 let totalMarketCap = globalDataResponse.data.totalMarketCap["usd"] ?? 0

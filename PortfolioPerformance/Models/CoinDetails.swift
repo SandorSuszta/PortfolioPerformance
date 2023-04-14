@@ -1,6 +1,6 @@
 import Foundation
 
-struct SingleCoinModel: Codable {
+struct CoinDetails: Codable {
     let id, symbol, name: String
     let welcomeDescription: Description
     let image: Image

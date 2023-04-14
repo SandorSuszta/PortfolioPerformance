@@ -1,10 +1,19 @@
 import UIKit
 
-struct NetworkingService {
+protocol NetworkingServiceProtocol {
+    
+    func request<T:Codable>(
+        url: URL?,
+        expectingType: T.Type,
+        completion: @escaping (Result<T, PPError>) -> Void
+    )
+}
+
+struct NetworkingService: NetworkingServiceProtocol {
     
     static let shared = NetworkingService()
     
-    private init() {}
+    //private init() {}
     
     var cache = NSCache<NSString, UIImage>()
     
@@ -19,7 +28,7 @@ struct NetworkingService {
     }
     
     //MARK: - Generic Request
-    private func request<T:Codable>(
+    func request<T:Codable>(
         url: URL?,
         expectingType: T.Type,
         completion: @escaping (Result<T, PPError>) -> Void
@@ -45,7 +54,40 @@ struct NetworkingService {
         task.resume()
     }
     
-    //MARK: - Greed And Fear Index
+    func request<T:Codable>(
+        router: PPRouter,
+        expectingType: T.Type,
+        completion: @escaping (Result<T, PPError>) -> Void
+    ){
+        
+        var components = URLComponents()
+        components.scheme = router.scheme
+        components.host = router.host
+        components.path = router.path
+        components.queryItems = router.parameters
+        
+        guard let url = components.url else {
+            completion(.failure(.invalidUrl))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(
+            with: url) { data, _, error in
+                 guard let data = data, error == nil  else {
+                     completion(.failure(.netwokingError))
+                     return
+                 }
+                do {
+                    let result = try JSONDecoder().decode(expectingType, from: data)
+                    completion(.success(result))
+                } catch {
+                    completion(.failure(.decodingError))
+                }
+            }
+        task.resume()
+    }
+    
+    //MARK: - Greed And Fear Index done
     func requestGreedAndFearIndex (
         completion: @escaping (Result<GreedAndFearModel, PPError>) -> Void
     ){
@@ -60,22 +102,19 @@ struct NetworkingService {
         )
     }
     
-    //MARK: - Total Market Cap
+    //MARK: - Total Market Cap done
     func requestGlobalData(
         completion: @escaping (Result<GlobalDataResponse, PPError>) -> Void
     ){
-        guard let url = URL(string: Constants.requestGlobalDataBaseUrl) else {
-            completion(.failure(.invalidUrl))
-            return
-        }
+      
         request(
-            url: url,
+            router: .getGlobalData,
             expectingType: GlobalDataResponse.self,
             completion: completion
         )
     }
     
-    //MARK: - All Crypto Data
+    //MARK: - All Crypto Data done
     func requestCryptoCurrenciesData(
         completion: @escaping (Result<[CoinModel], PPError>) -> Void
     ){
@@ -102,7 +141,7 @@ struct NetworkingService {
         )
     }
     
-    //MARK: - Chart Data
+    //MARK: - Chart Data done
     func requestDataForChart(
         coinID: String,
         intervalInDays: Int,
@@ -118,7 +157,7 @@ struct NetworkingService {
     //MARK: - Data by ID
     func requestData(
         for ID: String,
-        completion: @escaping (Result<SingleCoinModel, PPError>) -> Void
+        completion: @escaping (Result<CoinDetails, PPError>) -> Void
     ){
         let endpointString = "https://api.coingecko.com/api/v3/coins/\(ID)?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"
         
@@ -128,7 +167,7 @@ struct NetworkingService {
         }
         request(
             url: url,
-            expectingType: SingleCoinModel.self,
+            expectingType: CoinDetails.self,
             completion: completion
         )
     }

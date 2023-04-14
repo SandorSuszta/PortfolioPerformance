@@ -18,7 +18,7 @@ struct MetricsViewModel {
     public var maxSupply:String
     public var isFavourite: Bool = false
     
-    init (model: SingleCoinModel) {
+    init (model: CoinDetails) {
         self.name = model.name
         self.symbol = model.symbol
         self.imageUrl = model.image.large
