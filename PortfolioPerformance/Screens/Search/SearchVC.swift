@@ -10,7 +10,7 @@ class SearchScreenViewController: UIViewController {
         case emptyWithoutRecents
     }
     
-    private var viewModel = SearchScreenViewModel()
+    private var viewModel = SearchScreenViewModel(networkingService: NetworkingService())
     
     private var searchTimer: Timer?
     

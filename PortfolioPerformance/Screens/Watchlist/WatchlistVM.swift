@@ -1,18 +1,20 @@
 import Foundation
 
-class WatchlistViewModel {
+final class WatchlistViewModel {
+    private let networkingService: NetworkingServiceProtocol
     
     public var cellViewModels: ObservableObject<[CryptoCurrencyCellViewModel]> = ObservableObject(value:[])
     
     public var errorMessage: ObservableObject<String>?
     
-    init() {
+    init(networkingService: NetworkingServiceProtocol) {
+        self.networkingService = networkingService
         loadWatchlistCryptoCurrenciesData(list: UserDefaultsService.shared.watchlistIDs)
     }
     
     public func loadWatchlistCryptoCurrenciesData(list: [String]) {
         
-        NetworkingService.shared.requestDataForList(list: list) { result in
+        networkingService.getDataForList(ofIDs: list) { result in
             switch result {
             case .success(let coinModels):
                 //Transform array of coin models into array of cell view models

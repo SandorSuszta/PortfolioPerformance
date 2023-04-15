@@ -2,6 +2,7 @@ import Foundation
 import Charts
 
 final class CoinDetailsViewModel {
+    let networkingService: NetworkingServiceProtocol
     
     var coinID: String
     var coinModel: CoinDetails?
@@ -17,14 +18,15 @@ final class CoinDetailsViewModel {
     var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
     
     //MARK: - Init
-    init(coinID: String) {
+    init(networkingService: NetworkingServiceProtocol, coinID: String) {
         self.coinID = coinID
-        getMetricsData(coinID: coinID)
+        self.networkingService = networkingService
+        getMetricsData(for: coinID)
     }
     
     //MARK: - Public methods
-    func getMetricsData(coinID: String) {
-        NetworkingService.shared.requestData(for: coinID) { result in
+    func getMetricsData(for ID: String) {
+        networkingService.getDetailsData(for: coinID ) { result in
             switch result {
             case .success(let model):
                 self.coinModel = model
@@ -36,9 +38,9 @@ final class CoinDetailsViewModel {
     }
     
     func getTimeRangeDetails(coinID: String, intervalInDays: Int) {
-        NetworkingService.shared.requestDataForChart(
-            coinID: coinID,
-            intervalInDays: intervalInDays
+        networkingService.getChartData(
+            for: coinID,
+            inDaysInterval: intervalInDays
         ){ result in
             switch result {
             case .success(let priceData):
@@ -48,6 +50,7 @@ final class CoinDetailsViewModel {
                     currentPriceValue: self.coinModel?.marketData.currentPrice["usd"] ?? 0
                 )
                 self.rangeDetailsVM.value = rangeDetails
+                
             case .failure(let error):
                 self.errorMessage.value = error.rawValue
             }

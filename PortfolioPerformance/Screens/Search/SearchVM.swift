@@ -8,6 +8,7 @@
 import Foundation
 
 class SearchScreenViewModel {
+    let networkingService: NetworkingServiceProtocol
     
     //MARK: - Observable properties
     
@@ -19,7 +20,8 @@ class SearchScreenViewModel {
     
     //MARK: - Init
     
-    init() {
+    init(networkingService: NetworkingServiceProtocol) {
+        self.networkingService = networkingService
         updateRecentSearches()
         getTrendingCoinsModels()
     }
@@ -35,11 +37,10 @@ class SearchScreenViewModel {
     
     func updateSearchResults(query: String) {
         
-        NetworkingService.shared.searchWith(query: query) { result in
-            
+        networkingService.searchWith(query: query) { result in
             switch result {
             case.success(let response):
-                self.searchResultCellModels.value = response.coins.sortedByPrefix(query)
+                self.searchResultCellModels.value = Array(response.coins.prefix(6)).sortedByPrefix(query)
                 
             case .failure(let error):
                 self.errorMessage.value = error.rawValue
@@ -61,11 +62,7 @@ class SearchScreenViewModel {
         
         guard !UserDefaultsService.shared.recentSearchesIDs.isEmpty else { return }
         
-        NetworkingService.shared.requestDataForList(
-            list: UserDefaultsService.shared.recentSearchesIDs
-        ){
-            result in
-            
+        networkingService.getDataForList(ofIDs: UserDefaultsService.shared.recentSearchesIDs) { result in
             switch result {
             case .success(let coinModels):
                 
@@ -95,7 +92,7 @@ class SearchScreenViewModel {
     
     private func getTrendingCoinsModels() {
         
-        NetworkingService.shared.requestTrendingCoins { result in
+       networkingService.getTrendingCoins { result in
 
             switch result {
             case .success(let response):

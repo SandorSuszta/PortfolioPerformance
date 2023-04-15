@@ -278,7 +278,10 @@ class CoinDetailsVC: UIViewController {
     //MARK: - Init
     
     init(coinID: String, coinName: String, coinSymbol: String, logoURL: String, isFavourite: Bool) {
-        coinDetailsVM = CoinDetailsViewModel(coinID: coinID)
+        self.coinDetailsVM = CoinDetailsViewModel(
+            networkingService: NetworkingService(),
+            coinID: coinID
+        )
         self.isFavourite = isFavourite
         super.init(nibName: nil, bundle: nil)
         setupLabelsAndLogo(coinName: coinName, coinSymbol: coinSymbol, logoUrl: logoURL)
@@ -300,7 +303,7 @@ class CoinDetailsVC: UIViewController {
         title = coinName
         symbolLabel.text = coinSymbol.uppercased()
         symbolLabel.sizeToFit()
-        coinLogoView.setImage(from: logoUrl)
+        //coinLogoView.setImage(from: logoUrl)
     }
     
     private func setUpFavouriteButton() {

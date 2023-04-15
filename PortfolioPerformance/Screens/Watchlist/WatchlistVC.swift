@@ -2,7 +2,7 @@ import UIKit
 
 class WatchlistViewController: UIViewController {
 
-    private let watchlistVM = WatchlistViewModel()
+    private let watchlistVM = WatchlistViewModel(networkingService: NetworkingService())
 
     private let watchlistTableView = UITableView(frame: .zero, style: .insetGrouped)
 
