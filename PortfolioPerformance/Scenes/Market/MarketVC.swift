@@ -339,7 +339,7 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
             case 2:
                 tableViewSort = .topLosers
             case 3:
-                tableViewSort = .topWinners
+                tableViewSort = .topVolumes
                 
             default:
                 fatalError()
