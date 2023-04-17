@@ -59,7 +59,7 @@ class WatchlistViewController: UIViewController {
             watchlistTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             watchlistTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             watchlistTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            watchlistTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            watchlistTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             emptyWatchlistView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyWatchlistView.centerYAnchor.constraint(equalTo: view.centerYAnchor),

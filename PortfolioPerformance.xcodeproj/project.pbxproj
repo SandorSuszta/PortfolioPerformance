@@ -335,7 +335,7 @@
 			path = PortfolioPerformanceTests;
 			sourceTree = "<group>";
 		};
-		79E7A21528E5F9CD00BD5CB0 /* Screens */ = {
+		79E7A21528E5F9CD00BD5CB0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				79E7A21828E5FB4700BD5CB0 /* Market */,
@@ -343,7 +343,7 @@
 				79E7A22228E6025300BD5CB0 /* CoinDetails */,
 				7937CE1C28F6E2DB00B80C71 /* Search */,
 			);
-			path = Screens;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		79E7A21828E5FB4700BD5CB0 /* Market */ = {
@@ -431,7 +431,7 @@
 				79410D8A2822938100BD9EA4 /* Services */,
 				7982923027E3D87C007ECCCD /* Models */,
 				7982922F27E3D829007ECCCD /* Views */,
-				79E7A21528E5F9CD00BD5CB0 /* Screens */,
+				79E7A21528E5F9CD00BD5CB0 /* Scenes */,
 				7934EFA2282A72DD00CE7FD0 /* Extensions */,
 				790C30C327CEA71A0021658F /* Supporting Files */,
 				79EAFD2527B3DCDE008A6062 /* Assets.xcassets */,
