@@ -5,6 +5,7 @@ class MarketViewController: UIViewController {
     //MARK: - Properties
     
     private let viewModel: MarketViewModel
+    private var tableViewSort: PPMarketSort
     
     private var cardsPadding: CGFloat {
         view.width / 16
@@ -50,6 +51,7 @@ class MarketViewController: UIViewController {
     //MARK: - Init
     init(viewModel: MarketViewModel) {
         self.viewModel = viewModel
+        self.tableViewSort = .topCaps
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -226,26 +228,24 @@ class MarketViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearch))
     }
     
-    private func sortTableview(byOption number: Int) {
-        switch number {
-        case 0: //Top Market Cap
+    private func sortTableview(by sortOption: PPMarketSort) {
+        switch sortOption {
+        case .topCaps:
             viewModel.cellViewModels.value?.sort(by: {
                 $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0
             })
-        case 1: //Top Winners
+        case .topWinners:
             viewModel.cellViewModels.value?.sort(by: {
                 $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0
             })
-        case 2: //Top Losers
+        case .topLosers:
             viewModel.cellViewModels.value?.sort(by: {
                 $0.coinModel.priceChangePercentage24H ?? 0  < $1.coinModel.priceChangePercentage24H ?? 0
             })
-        case 3: //Top Volume
+        case .topVolumes:
             viewModel.cellViewModels.value?.sort(by: {
                 $0.coinModel.totalVolume ?? 0 > $1.coinModel.totalVolume ?? 0
             })
-        default:
-            fatalError()
         }
     }
     
@@ -331,7 +331,21 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == sortOptionsCollectionView {
-            sortTableview(byOption: indexPath.row)
+            switch indexPath.row {
+            case 0:
+                tableViewSort = .topCaps
+            case 1:
+                tableViewSort = .topWinners
+            case 2:
+                tableViewSort = .topLosers
+            case 3:
+                tableViewSort = .topWinners
+                
+            default:
+                fatalError()
+            }
+            
+            sortTableview(by: tableViewSort)
             scrollToTop()
         }
     }
