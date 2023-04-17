@@ -54,7 +54,7 @@ class MarketViewController: UIViewController {
     }
     
     convenience init() {
-        self.init(viewModel: MarketViewModel(networkingService: NetworkingService()))
+        self.init(viewModel: MarketViewModel())
     }
     
     required init?(coder: NSCoder) {

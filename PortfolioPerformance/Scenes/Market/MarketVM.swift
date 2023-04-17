@@ -22,6 +22,10 @@ class MarketViewModel {
         loadAllCryptoCurrenciesData()
     }
     
+    convenience init() {
+        self.init(networkingService: NetworkingService())
+    }
+    
     //MARK: - Public methods
     
     public func loadGreedAndFearIndex() {
