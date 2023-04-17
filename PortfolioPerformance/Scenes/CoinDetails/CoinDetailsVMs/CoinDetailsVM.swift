@@ -65,39 +65,41 @@ final class CoinDetailsViewModel {
     }
     
     func createDetailsCellsViewModels() {
-        var viewModels: [DetailsCellsViewModel] = []
-        viewModels.append(.init(
+        let viewModels: [DetailsCellsViewModel] = [
+       .init(
             name: "Market Cap Value",
             value: metricsVM.value?.marketCap ?? ""
-        ))
-        viewModels.append(.init(
+        ),
+        .init(
             name: "Volume",
             value: .bigNumberString(from: coinModel?.marketData.totalVolume["usd"] ?? 0)
-        ))
-        viewModels.append(.init(
+        ),
+        .init(
             name: "Circulating supply",
             value: .bigNumberString(from: Double(coinModel?.marketData.circulatingSupply ?? 0), style: .decimal)
-        ))
-        viewModels.append(.init(
+        ),
+        .init(
             name: "Total supply",
             value: .bigNumberString(from: Double(coinModel?.marketData.totalSupply ?? 0), style: .decimal)
-        ))
-        viewModels.append(.init(
+        ),
+        .init(
             name: "Max supply",
             value: .bigNumberString(from: Double(coinModel?.marketData.maxSupply ?? 0), style: .decimal)
-        ))
-        viewModels.append(.init(
+        ),
+        .init(
             name: "All time high",
             value: .priceString(from: coinModel?.marketData.ath["usd"] ?? 0)
-        ))
-        viewModels.append(.init(
+        ),
+        .init(
             name: "Change percentage from ATH",
             value: .percentageString(from: coinModel?.marketData.athChangePercentage["usd"] ?? 0)
-        ))
-        viewModels.append(.init(
+        ),
+        .init(
             name: "ATH date",
             value: .formatedStringForATHDate(fromUTC: coinModel?.marketData.athDate["usd"] ?? "N/A")
-        ))
+        )
+        ]
+        
         detailsTableViewCelsVM.value = viewModels
     }
     
