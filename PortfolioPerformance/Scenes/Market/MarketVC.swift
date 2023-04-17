@@ -255,7 +255,7 @@ class MarketViewController: UIViewController {
     }
     
     @objc private func didPullToRefresh() {
-        viewModel.loadAllCryptoCurrenciesData()
+        viewModel.loadAllCryptoCurrenciesData(sortOption: tableViewSort)
     }
     
 }

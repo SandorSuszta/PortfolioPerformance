@@ -86,13 +86,26 @@ class MarketViewModel {
         }
     }
     
-    func loadAllCryptoCurrenciesData() {
+    func loadAllCryptoCurrenciesData(sortOption: PPMarketSort = .topCaps) {
         networkingService.getCryptoCurrenciesData { result in
             
             switch result {
             case .success(let cryptosArray):
+                var sortedArray: [CoinModel]
+                
+                switch sortOption {
+                case .topCaps:
+                    sortedArray = cryptosArray
+                case .topWinners:
+                    sortedArray = cryptosArray.sorted { $0.priceChangePercentage24H ?? 0 > $1.priceChangePercentage24H ?? 0 }
+                case .topLosers:
+                    sortedArray = cryptosArray.sorted { $0.priceChangePercentage24H ?? 0 < $1.priceChangePercentage24H ?? 0 }
+                case .topVolumes:
+                    sortedArray = cryptosArray.sorted { $0.totalVolume ?? 0 > $1.totalVolume ?? 0 }
+                }
+                
                 //Transform array of coin models into array of cell view models
-                self.cellViewModels.value = cryptosArray.compactMap({ .init(coinModel: $0) })
+                self.cellViewModels.value = sortedArray.compactMap({ .init(coinModel: $0) })
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue
                 
