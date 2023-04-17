@@ -35,7 +35,8 @@ class MarketViewModel {
                     cellType: .greedAndFear,
                     mainMetricValue: index.data[0].value,
                     secondaryMetricValue: index.data[0].valueClassification,
-                    progressValue: (Float(index.data[0].value) ?? 0) / 100
+                    progressValue: (Float(index.data[0].value) ?? 0) / 100,
+                    isChangePositive: nil
                 )
                 
                 self.cardViewModels.value?.append(greedAndFearCellViewModel)
@@ -60,7 +61,8 @@ class MarketViewModel {
                     cellType: .totalMarketCap,
                     mainMetricValue: .bigNumberString(from: totalMarketCap),
                     secondaryMetricValue: .percentageString(from: marketCapChangeFor24H),
-                    progressValue: Float(totalMarketCap / allTimeHighMarketCap)
+                    progressValue: Float(totalMarketCap / allTimeHighMarketCap),
+                    isChangePositive: marketCapChangeFor24H > 0
                 )
                 
                 //Create view model for BTC Dominance Card
@@ -68,7 +70,9 @@ class MarketViewModel {
                     cellType: .bitcoinDominance,
                     mainMetricValue: .percentageString(from: btcDominance, positivePrefix: ""),
                     secondaryMetricValue: "",
-                    progressValue: Float(btcDominance / 100)
+                    progressValue: Float(btcDominance / 100),
+                    //TODO: Change after 24h change implemented
+                    isChangePositive: true
                 )
                 
                 //Add card view models to the observable array

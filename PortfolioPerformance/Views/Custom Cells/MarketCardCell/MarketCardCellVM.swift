@@ -1,6 +1,6 @@
 import UIKit
 
-struct MarketCardCellViewModel {
+final class MarketCardCellViewModel {
     
     public let cellType: MarketCardCellType
     
@@ -10,9 +10,17 @@ struct MarketCardCellViewModel {
     
     public let progressValue: Float
     
-    public let isChangePositive: Bool? = true
+    public let isChangePositive: Bool?
     
-    public var secondaryMetricTextColor: UIColor {
+    init(cellType: MarketCardCellType, mainMetricValue: String, secondaryMetricValue: String, progressValue: Float, isChangePositive: Bool?) {
+        self.cellType = cellType
+        self.mainMetricValue = mainMetricValue
+        self.secondaryMetricValue = secondaryMetricValue
+        self.progressValue = progressValue
+        self.isChangePositive = isChangePositive
+    }
+    
+    var secondaryMetricTextColor: UIColor {
         switch cellType {
         case .greedAndFear:
             return determineColorBasedOn(indexValue: Int(mainMetricValue) ?? 0)
