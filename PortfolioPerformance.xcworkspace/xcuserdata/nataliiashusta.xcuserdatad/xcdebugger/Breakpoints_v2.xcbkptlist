@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7B96B096-6129-4B4D-9638-988132A00042"
+            uuid = "15216A99-3F04-45C0-9372-C4C85BBCDFD3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PortfolioPerformance/Scenes/Market/MarketVM.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "getGlobalData()"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "loadAllCryptoCurrenciesData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

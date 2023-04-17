@@ -12,8 +12,6 @@ class MarketViewModel {
     
     public let sortOptionsArray = ["Highest Cap", "Top Winners", "Top Losers", "Top Volume"]
     
-    private let viewModelQueue = DispatchQueue(label: "viewModelQueue", attributes: .concurrent)
-    
     //MARK: - Init
     
     init(networkingService: NetworkingServiceProtocol) {
@@ -76,9 +74,7 @@ class MarketViewModel {
                 )
                 
                 //Add card view models to the observable array
-                self.viewModelQueue.sync {
-                    self.cardViewModels.value?.append(contentsOf: [marketCapCellViewModel,dominanceCardModel])
-                }
+                self.cardViewModels.value?.append(contentsOf: [marketCapCellViewModel,dominanceCardModel])
                 
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue

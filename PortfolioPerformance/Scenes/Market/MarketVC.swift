@@ -84,6 +84,7 @@ class MarketViewController: UIViewController {
         marketCardsCollectionView.backgroundColor = .clear
         marketCardsCollectionView.isPagingEnabled = true
         marketCardsCollectionView.showsHorizontalScrollIndicator = false
+
         marketCardsCollectionView.register(
             MarketCardMetricCell.self,
             forCellWithReuseIdentifier: MarketCardMetricCell.reuseID
@@ -143,6 +144,10 @@ class MarketViewController: UIViewController {
         cryptoCurrencyTableView.layer.cornerRadius = 15
         cryptoCurrencyTableView.translatesAutoresizingMaskIntoConstraints = false
         
+        cryptoCurrencyTableView.refreshControl = UIRefreshControl()
+        cryptoCurrencyTableView.refreshControl?.tintColor = .PPBlue
+        cryptoCurrencyTableView.refreshControl?.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        
         cryptoCurrencyTableView.register(
             CryptoCurrencyCell.self,
             forCellReuseIdentifier: CryptoCurrencyCell.identifier
@@ -174,6 +179,7 @@ class MarketViewController: UIViewController {
     private func bindViewModels() {
         marketVM.cellViewModels.bind { [weak self] _ in
             DispatchQueue.main.async {
+                self?.cryptoCurrencyTableView.refreshControl?.endRefreshing()
                 self?.cryptoCurrencyTableView.reloadData()
             }
         }
@@ -203,7 +209,7 @@ class MarketViewController: UIViewController {
     }
     
     private func addSearchButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearch))
     }
     
     private func sortTableview(byOption number: Int) {
@@ -229,10 +235,15 @@ class MarketViewController: UIViewController {
         }
     }
     
-    @objc private func searchTapped() {
+    @objc private func didTapSearch() {
         let searchVC = SearchScreenViewController()
         navigationController?.pushViewController(searchVC, animated: true)
     }
+    
+    @objc private func didPullToRefresh() {
+        marketVM.loadAllCryptoCurrenciesData()
+    }
+    
 }
 
     //MARK: - Collection View methods
