@@ -3,6 +3,7 @@ import Charts
 
 final class CoinDetailsViewModel {
     let networkingService: NetworkingServiceProtocol
+    let imageDownloader: ImageDownloaderProtocol
     
     var coinID: String
     var coinModel: CoinDetails?
@@ -18,9 +19,15 @@ final class CoinDetailsViewModel {
     var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
     
     //MARK: - Init
-    init(networkingService: NetworkingServiceProtocol, coinID: String) {
+    init(
+        networkingService: NetworkingServiceProtocol,
+        imageDownloader: ImageDownloaderProtocol,
+        coinID: String
+    ){
         self.coinID = coinID
         self.networkingService = networkingService
+        self.imageDownloader = imageDownloader
+        
         getMetricsData(for: coinID)
     }
     

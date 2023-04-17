@@ -25,7 +25,6 @@
 		7934EFA4282A824E00CE7FD0 /* ResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFA3282A824E00CE7FD0 /* ResultsCell.swift */; };
 		7934EFA6282D141B00CE7FD0 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFA5282D141B00CE7FD0 /* SearchResponse.swift */; };
 		7934EFA82835172200CE7FD0 /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFA72835172200CE7FD0 /* UIView+AddSubviews.swift */; };
-		7934EFAA28352A1A00CE7FD0 /* UIImageView+SetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFA928352A1A00CE7FD0 /* UIImageView+SetImage.swift */; };
 		7934EFBA2841600A00CE7FD0 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFB92841600A00CE7FD0 /* CustomProgressBar.swift */; };
 		7937CE1E28F6E30600B80C71 /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7937CE1D28F6E30600B80C71 /* SearchVM.swift */; };
 		79410D8D2823D3E700BD9EA4 /* UIView+Framing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79410D8C2823D3E700BD9EA4 /* UIView+Framing.swift */; };
@@ -105,7 +104,6 @@
 		7934EFA3282A824E00CE7FD0 /* ResultsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCell.swift; sourceTree = "<group>"; };
 		7934EFA5282D141B00CE7FD0 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		7934EFA72835172200CE7FD0 /* UIView+AddSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviews.swift"; sourceTree = "<group>"; };
-		7934EFA928352A1A00CE7FD0 /* UIImageView+SetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+SetImage.swift"; sourceTree = "<group>"; };
 		7934EFB92841600A00CE7FD0 /* CustomProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressBar.swift; sourceTree = "<group>"; };
 		7937CE1D28F6E30600B80C71 /* SearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVM.swift; sourceTree = "<group>"; };
 		79410D8C2823D3E700BD9EA4 /* UIView+Framing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Framing.swift"; sourceTree = "<group>"; };
@@ -206,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				7986A50A28E5B02C00332A48 /* UIView */,
-				7934EFA928352A1A00CE7FD0 /* UIImageView+SetImage.swift */,
 				79598C5129E3239C00C9D240 /* Array+sortedByPrefix.swift */,
 				7982923127E673E6007ECCCD /* UIColor+CustomColors.swift */,
 				7982923327E678A5007ECCCD /* String+Formatters.swift */,
@@ -614,7 +611,6 @@
 			files = (
 				7934EFA4282A824E00CE7FD0 /* ResultsCell.swift in Sources */,
 				79598C5229E3239C00C9D240 /* Array+sortedByPrefix.swift in Sources */,
-				7934EFAA28352A1A00CE7FD0 /* UIImageView+SetImage.swift in Sources */,
 				792C040928C9E62B008EE48C /* RangeProgressView.swift in Sources */,
 				796EFA3A286DDD60005E24AF /* ObservableObject.swift in Sources */,
 				79D5B8E628EEDABC00178402 /* UIViewController+ShowAlert.swift in Sources */,

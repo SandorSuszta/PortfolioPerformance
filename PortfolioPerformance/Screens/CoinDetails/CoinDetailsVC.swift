@@ -6,6 +6,8 @@ class CoinDetailsVC: UIViewController {
     //MARK: - Properties
     
     private let coinDetailsVM: CoinDetailsViewModel
+    private let imageDownloader: ImageDownloaderProtocol
+    
     private var currentChartTimeInterval = 1
     private var isFavourite: Bool
     
@@ -277,12 +279,21 @@ class CoinDetailsVC: UIViewController {
     
     //MARK: - Init
     
-    init(coinID: String, coinName: String, coinSymbol: String, logoURL: String, isFavourite: Bool) {
+    init(
+        coinID: String,
+        coinName: String,
+        coinSymbol: String,
+        logoURL: String,
+        isFavourite: Bool
+    ){
         self.coinDetailsVM = CoinDetailsViewModel(
             networkingService: NetworkingService(),
+            imageDownloader: ImageDownloader(),
             coinID: coinID
         )
+        
         self.isFavourite = isFavourite
+        self.imageDownloader = ImageDownloader()
         super.init(nibName: nil, bundle: nil)
         setupLabelsAndLogo(coinName: coinName, coinSymbol: coinSymbol, logoUrl: logoURL)
     }
@@ -303,7 +314,16 @@ class CoinDetailsVC: UIViewController {
         title = coinName
         symbolLabel.text = coinSymbol.uppercased()
         symbolLabel.sizeToFit()
-        //coinLogoView.setImage(from: logoUrl)
+        
+        imageDownloader.loadImage(from: logoUrl) { [weak self] result in
+            switch result {
+            case .success(let image):
+                self?.coinLogoView.image = image
+            case .failure(let error):
+                //TODO: Handle properly
+                print(error)
+            }
+        }
     }
     
     private func setUpFavouriteButton() {
