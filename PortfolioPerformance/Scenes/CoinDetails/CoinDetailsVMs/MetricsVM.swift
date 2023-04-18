@@ -32,5 +32,11 @@ struct MetricsViewModel {
         self.circulatingSupply = ""
         self.totalSupply = ""
         self.maxSupply = ""
+        
+        if let marketCapRank = model.marketData.marketCapRank {
+            self.marketCapRank = "#\(marketCapRank)"
+        } else {
+            self.marketCapRank = "N/A"
+        }
     }
 }
