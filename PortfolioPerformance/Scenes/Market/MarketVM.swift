@@ -29,14 +29,17 @@ class MarketViewModel {
     //MARK: - Public methods
     
     public func loadGreedAndFearIndex() {
-        networkingService.getGreedAndFearData { result in
+        
+        networkingService.getGreedAndFearData { [weak self] result in
+            guard let self else { return }
+            
             switch result {
             case .success(let index):
                 
                 let greedAndFearCellViewModel = MarketCardCellViewModel(
                     cellType: .greedAndFear,
                     mainMetricValue: index.data[0].value,
-                    secondaryMetricValue: index.data[0].valueClassification,
+                    secondaryMetricValue:  index.data[0].valueClassification,
                     progressValue: (Float(index.data[0].value) ?? 0) / 100,
                     isChangePositive: nil
                 )
@@ -50,7 +53,9 @@ class MarketViewModel {
     }
     
     func getGlobalData() {
-        networkingService.getGlobalData() { result in
+        networkingService.getGlobalData() { [weak self] result in
+            guard let self else { return }
+            
             switch result {
             case .success(let globalDataResponse):
                 let totalMarketCap = globalDataResponse.data.totalMarketCap["usd"] ?? 0
@@ -68,7 +73,7 @@ class MarketViewModel {
                 )
                 
                 //Create view model for BTC Dominance Card
-                let dominanceCardModel = MarketCardCellViewModel(
+                let dominanceViewModel = MarketCardCellViewModel(
                     cellType: .bitcoinDominance,
                     mainMetricValue: .percentageString(from: btcDominance, positivePrefix: ""),
                     secondaryMetricValue: "",
@@ -78,7 +83,7 @@ class MarketViewModel {
                 )
                 
                 //Add card view models to the observable array
-                self.cardViewModels.value?.append(contentsOf: [marketCapCellViewModel,dominanceCardModel])
+                self.cardViewModels.value?.append(contentsOf: [marketCapCellViewModel,dominanceViewModel])
                 
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue
@@ -87,7 +92,8 @@ class MarketViewModel {
     }
     
     func loadAllCryptoCurrenciesData(sortOption: PPMarketSort = .topCaps) {
-        networkingService.getCryptoCurrenciesData { result in
+        networkingService.getCryptoCurrenciesData { [weak self] result in
+            guard let self else { return }
             
             switch result {
             case .success(let cryptosArray):
@@ -105,7 +111,8 @@ class MarketViewModel {
                 }
                 
                 //Transform array of coin models into array of cell view models
-                self.cellViewModels.value = sortedArray.compactMap({ .init(coinModel: $0) })
+                self.cellViewModels.value = sortedArray.compactMap({ CryptoCurrencyCellViewModel(coinModel: $0)})
+                
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue
                 

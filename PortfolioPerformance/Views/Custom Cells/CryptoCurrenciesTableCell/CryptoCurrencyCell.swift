@@ -54,6 +54,10 @@ class CryptoCurrencyCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         logoImageView.image = nil
+        nameLabel.text = nil
+        symbolLabel.text = nil
+        priceLabel.text = nil
+        changeLabel.text = nil
         imageDownloader?.cancelDownload()
     }
     
