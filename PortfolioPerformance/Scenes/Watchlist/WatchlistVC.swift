@@ -34,8 +34,13 @@ class WatchlistViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         //Delete BackButton title on pushed screen
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Edit", style: .plain, target: self, action: #selector(didTapEdit)
+        )
     }
+    
+    
     
     private func setupTableView() {
         view.addSubview(watchlistTableView)
@@ -46,6 +51,7 @@ class WatchlistViewController: UIViewController {
         watchlistTableView.layer.cornerRadius = 10
         watchlistTableView.tableHeaderView = nil
         watchlistTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: view.width / 20))
+        watchlistTableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         watchlistTableView.translatesAutoresizingMaskIntoConstraints = false
         
         watchlistTableView.register(
@@ -94,20 +100,20 @@ class WatchlistViewController: UIViewController {
             self?.showAlert(message: message ?? "An error has occured")
         }
     }
+    
+    @objc func didTapEdit() {
+        watchlistTableView.isEditing = true
+    }
 }
 
-    //MARK: - Table view delegate and data source
-private extension WatchlistViewController{
-    typealias WatchlistDataSource = UITableViewDiffableDataSource<WatchlistSection, CoinModel>
-    typealias WatchlistSnapshot = NSDiffableDataSourceSnapshot<WatchlistSection, CoinModel>
+    //MARK: - TableView DataSource
+private extension WatchlistViewController {
     
-    enum WatchlistSection {
-        case main
-    }
+    typealias WatchlistSnapshot = NSDiffableDataSourceSnapshot<WatchlistSection, CoinModel>
     
     func makeDataSource() -> WatchlistDataSource {
         
-        return UITableViewDiffableDataSource<WatchlistSection,CoinModel>(tableView: watchlistTableView) { tableView, indexPath, itemIdentifier in
+        let dataSource = WatchlistDataSource(tableView: watchlistTableView) { tableView, indexPath, itemIdentifier in
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: CryptoCurrencyCell.identifier,
                 for: indexPath
@@ -120,6 +126,9 @@ private extension WatchlistViewController{
             
             return cell
         }
+        
+        dataSource.defaultRowAnimation = .automatic
+        return dataSource
     }
     
     func makeSnapshot() -> WatchlistSnapshot {
@@ -136,30 +145,8 @@ private extension WatchlistViewController{
     
 }
 
+    //MARK: - TableView Delegate
 extension WatchlistViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        view.height / 15
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            guard let ID = watchlistVM.cellViewModels.value?[indexPath.row].coinModel.id else { fatalError() }
-            
-            UserDefaultsService.shared.deleteFromDefaults(
-                ID: ID,
-                forKey: DefaultsKeys.watchlist.rawValue
-            )
-            
-            watchlistVM.cellViewModels.value?.remove(at: indexPath.row)
-            
-            tableView.deleteRows(at: [indexPath], with: .left)
-            
-            if UserDefaultsService.shared.watchlistIDs.isEmpty {
-                emptyWatchlistView.isHidden = false
-            }
-        }
-    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

@@ -53,6 +53,7 @@
 		798957C827F479DD0074CA38 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798957C727F479DD0074CA38 /* UIView+Shadow.swift */; };
 		79895E9028DB758600087A23 /* MetricsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79895E8F28DB758600087A23 /* MetricsVM.swift */; };
 		79895E9428DB773700087A23 /* RangeDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79895E9328DB773700087A23 /* RangeDetailsVM.swift */; };
+		798FEF8C29F0548A0003A68D /* WatchlistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798FEF8B29F0548A0003A68D /* WatchlistDataSource.swift */; };
 		79A5B157298276740067240A /* PPTabBarControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5B156298276740067240A /* PPTabBarControllerTests.swift */; };
 		79AAF82A28FB358A009F3B85 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AAF82928FB358A009F3B85 /* SectionHeaderView.swift */; };
 		79CF41BF28EEFF7E00CA9F51 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */; };
@@ -133,6 +134,7 @@
 		798957C727F479DD0074CA38 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
 		79895E8F28DB758600087A23 /* MetricsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsVM.swift; sourceTree = "<group>"; };
 		79895E9328DB773700087A23 /* RangeDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeDetailsVM.swift; sourceTree = "<group>"; };
+		798FEF8B29F0548A0003A68D /* WatchlistDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistDataSource.swift; sourceTree = "<group>"; };
 		79A5B14929803DBF0067240A /* PortfolioPerformanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PortfolioPerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79A5B156298276740067240A /* PPTabBarControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPTabBarControllerTests.swift; sourceTree = "<group>"; };
 		79AAF82928FB358A009F3B85 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 			children = (
 				792B0FC2287B3C6C0040B461 /* WatchlistVC.swift */,
 				792B0FC4287C85EF0040B461 /* WatchlistVM.swift */,
+				798FEF8B29F0548A0003A68D /* WatchlistDataSource.swift */,
 			);
 			path = Watchlist;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				79410D8D2823D3E700BD9EA4 /* UIView+Framing.swift in Sources */,
 				79F654EC297037F50080DEBB /* PPTextLabel.swift in Sources */,
 				79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */,
+				798FEF8C29F0548A0003A68D /* WatchlistDataSource.swift in Sources */,
 				79E7A21728E5FAF000BD5CB0 /* MarketVC.swift in Sources */,
 				797303B5296B75450006CF76 /* PPSegmentedProgressBar.swift in Sources */,
 				795E43F62910017D0016F3C3 /* EmptyStateView.swift in Sources */,
