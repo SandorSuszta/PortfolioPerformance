@@ -433,7 +433,7 @@ class CoinDetailsVC: UIViewController {
             )
         } else {
             UserDefaultsService.shared.saveTo(
-                .recentSearches,
+                .watchlist,
                 ID: coinDetailsVM.coinID
             )
         }

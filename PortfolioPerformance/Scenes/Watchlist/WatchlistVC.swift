@@ -40,8 +40,6 @@ class WatchlistViewController: UIViewController {
         )
     }
     
-    
-    
     private func setupTableView() {
         view.addSubview(watchlistTableView)
         
@@ -148,6 +146,10 @@ private extension WatchlistViewController {
 
     //MARK: - TableView Delegate
 extension WatchlistViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        CryptoCurrencyCell.prefferredHeight
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
