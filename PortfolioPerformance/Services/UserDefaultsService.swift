@@ -1,9 +1,8 @@
 import Foundation
 
-enum DefaultsKeys: String {
+enum UserDefaultDictionary: String {
     case watchlist = "watchlist"
     case recentSearches = "recentSearch"
-    case recentTransactions = "recentTransactions"
 }
 
 struct UserDefaultsService {
@@ -15,18 +14,16 @@ struct UserDefaultsService {
     private let defaults = UserDefaults.standard
     
     var watchlistIDs: [String] {
-        defaults.stringArray(forKey: DefaultsKeys.watchlist.rawValue) ?? []
+        defaults.stringArray(forKey: UserDefaultDictionary.watchlist.rawValue) ?? []
     }
     
     var recentSearchesIDs: [String] {
-        defaults.stringArray(forKey: DefaultsKeys.recentSearches.rawValue) ?? []
+        defaults.stringArray(forKey: UserDefaultDictionary.recentSearches.rawValue) ?? []
     }
     
-    var recentTransactionsIDs: [String] {
-        defaults.stringArray(forKey: DefaultsKeys.recentTransactions.rawValue ) ?? []
-    }
-    
-    func saveToDefaults(ID: String, forKey key: String) {
+    func saveTo(_ dictionary: UserDefaultDictionary, ID: String) {
+        let key = dictionary.rawValue
+        
         var currentIDs = defaults.stringArray(forKey: key) ?? []
         
         //Make sure recent ID is the last in the list
@@ -37,7 +34,9 @@ struct UserDefaultsService {
         defaults.set(currentIDs, forKey: key)
     }
     
-    func deleteFromDefaults(ID: String, forKey key: String) {
+    func deleteFrom(_ dictionary: UserDefaultDictionary, ID: String) {
+        let key = dictionary.rawValue
+        
         var currentIDs = watchlistIDs
         currentIDs.removeAll { $0 == ID }
         defaults.set(currentIDs, forKey: key)
@@ -48,6 +47,6 @@ struct UserDefaultsService {
     }
     
     func clearRecentSearchesIDs() {
-        defaults.set([], forKey: DefaultsKeys.recentSearches.rawValue)
+        defaults.set([], forKey: UserDefaultDictionary.recentSearches.rawValue)
     }
 }

@@ -427,12 +427,15 @@ class CoinDetailsVC: UIViewController {
     @objc func favouriteButtonTapped() {
 
         if isFavourite {
-            UserDefaultsService.shared.deleteFromDefaults(
-                ID: coinDetailsVM.coinID,
-                forKey: DefaultsKeys.watchlist.rawValue
+            UserDefaultsService.shared.deleteFrom(
+                .watchlist,
+                ID: coinDetailsVM.coinID
             )
         } else {
-            UserDefaultsService.shared.saveToDefaults(ID: coinDetailsVM.coinID, forKey: DefaultsKeys.watchlist.rawValue)
+            UserDefaultsService.shared.saveTo(
+                .recentSearches,
+                ID: coinDetailsVM.coinID
+            )
         }
         
         isFavourite = !isFavourite

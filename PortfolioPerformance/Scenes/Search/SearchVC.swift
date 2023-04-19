@@ -243,9 +243,9 @@ extension SearchScreenViewController: UITableViewDelegate {
         isSearching = false
         viewModel.clearSearchModels()
         
-        UserDefaultsService.shared.saveToDefaults(
-            ID: model.id,
-            forKey: DefaultsKeys.recentSearches.rawValue
+        UserDefaultsService.shared.saveTo(
+            .recentSearches,
+            ID: model.id
         )
         
         let detailVC = CoinDetailsVC(
