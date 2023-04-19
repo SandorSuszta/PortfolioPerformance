@@ -36,7 +36,7 @@ class WatchlistViewController: UIViewController {
         //Delete BackButton title on pushed screen
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "Edit", style: .plain, target: self, action: #selector(didTapEdit)
+            title: "Edit", style: .plain, target: self, action: #selector(didToggleEdit)
         )
     }
     
@@ -101,8 +101,9 @@ class WatchlistViewController: UIViewController {
         }
     }
     
-    @objc func didTapEdit() {
-        watchlistTableView.isEditing = true
+    @objc func didToggleEdit() {
+        watchlistTableView.setEditing(!watchlistTableView.isEditing, animated: true)
+        navigationItem.rightBarButtonItem?.title = watchlistTableView.isEditing ? "Done" : "Edit"
     }
 }
 
