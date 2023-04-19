@@ -3,18 +3,19 @@ import UIKit
 class WatchlistViewController: UIViewController {
     
     private lazy var dataSource: WatchlistDataSource = makeDataSource()
-
+    
     private lazy var watchlistTableView = UITableView(frame: .zero, style: .insetGrouped)
     
     private var watchlistVM = WatchlistViewModel(networkingService: NetworkingService())
-
+    
     private let emptyWatchlistView = EmptyStateView(type: .noFavourites)
     
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupVC()
+        configureVC()
+        configureNavigationController()
         setupTableView()
         setupConstraints()
         bindViewModel()
@@ -27,17 +28,24 @@ class WatchlistViewController: UIViewController {
     
     //MARK: - Private methods
     
-    private func setupVC() {
+    private func configureVC() {
         view.addSubview(emptyWatchlistView)
         view.backgroundColor = .secondarySystemBackground
+    }
+    
+    private func configureNavigationController() {
+        
         navigationItem.title = "Watchlist"
         navigationController?.navigationBar.prefersLargeTitles = true
         
         //Delete BackButton title on pushed screen
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "Edit", style: .plain, target: self, action: #selector(didToggleEdit)
-        )
+            image: .init(systemName: "square.and.pencil"),
+            style: .plain,
+            target: self,
+            action: #selector(didToggleEdit))
     }
     
     private func setupTableView() {
@@ -49,7 +57,6 @@ class WatchlistViewController: UIViewController {
         watchlistTableView.layer.cornerRadius = 10
         watchlistTableView.tableHeaderView = nil
         watchlistTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: view.width / 20))
-        watchlistTableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         watchlistTableView.translatesAutoresizingMaskIntoConstraints = false
         
         watchlistTableView.register(
@@ -101,7 +108,7 @@ class WatchlistViewController: UIViewController {
     
     @objc func didToggleEdit() {
         watchlistTableView.setEditing(!watchlistTableView.isEditing, animated: true)
-        navigationItem.rightBarButtonItem?.title = watchlistTableView.isEditing ? "Done" : "Edit"
+        navigationItem.rightBarButtonItem?.image = watchlistTableView.isEditing ? UIImage(systemName: "checkmark") : UIImage(systemName: "square.and.pencil")
     }
 }
 
@@ -147,7 +154,7 @@ private extension WatchlistViewController {
     //MARK: - TableView Delegate
 extension WatchlistViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         CryptoCurrencyCell.prefferredHeight
     }
     
