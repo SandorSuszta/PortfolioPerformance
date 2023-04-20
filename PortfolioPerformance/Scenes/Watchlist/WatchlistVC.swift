@@ -41,6 +41,8 @@ class WatchlistViewController: UIViewController {
         //Delete BackButton title on pushed screen
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .edit)
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: .init(systemName: "square.and.pencil"),
             style: .plain,

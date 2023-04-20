@@ -29,7 +29,7 @@ class CryptoCurrencyCell: UITableViewCell {
         return view
     }()
     
-    private let logoImageView: UIImageView = {
+    let logoImageView: UIImageView = {
         let image = UIImageView()
         image.clipsToBounds = true
         image.layer.cornerRadius = 10
@@ -61,8 +61,10 @@ class CryptoCurrencyCell: UITableViewCell {
         imageDownloader?.cancelDownload()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        priceLabel.isHidden = editing
+        changeLabel.isHidden = editing
     }
     
     //MARK: - Methods
@@ -89,13 +91,13 @@ class CryptoCurrencyCell: UITableViewCell {
     private func configureContentView() {
         contentView.backgroundColor = .systemBackground
         
-        addSubviews(logoContainerView, labelsContainerView)
+        contentView.addSubviews(logoContainerView, labelsContainerView)
         logoContainerView.addSubviews(logoImageView)
         labelsContainerView.addSubviews(nameLabel, symbolLabel, priceLabel, changeLabel)
         
         NSLayoutConstraint.activate([
-            logoContainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            logoContainerView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            logoContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            logoContainerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             logoContainerView.heightAnchor.constraint(equalToConstant: 36),
             logoContainerView.widthAnchor.constraint(equalToConstant: 36),
             
