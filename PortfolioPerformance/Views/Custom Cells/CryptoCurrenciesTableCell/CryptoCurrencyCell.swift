@@ -63,12 +63,14 @@ class CryptoCurrencyCell: UITableViewCell {
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        priceLabel.isHidden = editing
-        changeLabel.isHidden = editing
+        
+        UIView.animate(withDuration: 0.3) {
+            self.priceLabel.alpha = editing ? 0 : 1
+            self.changeLabel.alpha = editing ? 0 : 1
+        }
     }
     
     //MARK: - Methods
-    
     func configureCell(with viewModel: CryptoCurrencyCellViewModel) {
         nameLabel.text = viewModel.name
         symbolLabel.text = viewModel.symbol
