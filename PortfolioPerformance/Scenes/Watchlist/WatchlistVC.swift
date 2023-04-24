@@ -10,6 +10,8 @@ class WatchlistViewController: UIViewController {
     
     private let emptyWatchlistView = EmptyStateView(type: .noFavourites)
     
+    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -41,10 +43,10 @@ class WatchlistViewController: UIViewController {
         //Delete BackButton title on pushed screen
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .edit)
+        //        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .edit)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: .init(systemName: "square.and.pencil"),
+            image: .init(systemName: "pencil"),
             style: .plain,
             target: self,
             action: #selector(didToggleEdit))
@@ -65,6 +67,10 @@ class WatchlistViewController: UIViewController {
             CryptoCurrencyCell.self,
             forCellReuseIdentifier: CryptoCurrencyCell.identifier
         )
+        
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        
+        watchlistTableView.addGestureRecognizer(longPressRecognizer)
     }
     
     private func setupConstraints() {
@@ -110,7 +116,15 @@ class WatchlistViewController: UIViewController {
     
     @objc func didToggleEdit() {
         watchlistTableView.setEditing(!watchlistTableView.isEditing, animated: true)
-        navigationItem.rightBarButtonItem?.image = watchlistTableView.isEditing ? UIImage(systemName: "checkmark") : UIImage(systemName: "square.and.pencil")
+        navigationItem.rightBarButtonItem?.image = watchlistTableView.isEditing ? UIImage(systemName: "checkmark") : UIImage(systemName: "pencil")
+    }
+    
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "checkmark")
+            feedbackGenerator.impactOccurred()
+            watchlistTableView.setEditing(true, animated: true)
+        }
     }
 }
 
