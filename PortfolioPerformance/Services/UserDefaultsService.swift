@@ -49,4 +49,8 @@ struct UserDefaultsService {
     func clearRecentSearchesIDs() {
         defaults.set([], forKey: UserDefaultDictionary.recentSearches.rawValue)
     }
+    
+    func replaceWatchlist(with reorderedWatchlist: [String]) {
+        defaults.set(reorderedWatchlist, forKey: UserDefaultDictionary.watchlist.rawValue)
+    }
 }

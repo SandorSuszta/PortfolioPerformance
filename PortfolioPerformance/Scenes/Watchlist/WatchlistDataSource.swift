@@ -23,7 +23,10 @@ final class WatchlistDataSource: UITableViewDiffableDataSource<WatchlistSection,
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        print("")
+        var sourceData = UserDefaultsService.shared.watchlistIDs
+        sourceData.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+        UserDefaultsService.shared.replaceWatchlist(with: sourceData)
+        print(UserDefaultsService.shared.watchlistIDs)
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
