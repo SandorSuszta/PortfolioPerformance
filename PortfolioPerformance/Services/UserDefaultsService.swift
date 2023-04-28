@@ -50,7 +50,14 @@ struct UserDefaultsService {
         defaults.set([], forKey: UserDefaultDictionary.recentSearches.rawValue)
     }
     
-    func replaceWatchlist(with reorderedWatchlist: [String]) {
+    func reorderWatchlist(moveFrom sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard let watchlist = defaults.stringArray(forKey: UserDefaultDictionary.watchlist.rawValue) else { return }
+                                                   
+        let ID = watchlist[sourceIndexPath.row]
+        var reorderedWatchlist = watchlist
+        reorderedWatchlist.remove(at: sourceIndexPath.row)
+        reorderedWatchlist.insert(ID, at: destinationIndexPath.row)
+        
         defaults.set(reorderedWatchlist, forKey: UserDefaultDictionary.watchlist.rawValue)
     }
 }

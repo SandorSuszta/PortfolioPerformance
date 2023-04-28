@@ -43,8 +43,6 @@ class WatchlistViewController: UIViewController {
         //Delete BackButton title on pushed screen
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        //        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .edit)
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: .init(systemName: "pencil"),
             style: .plain,
@@ -150,6 +148,13 @@ private extension WatchlistViewController {
         }
         
         dataSource.defaultRowAnimation = .automatic
+        dataSource.didReorderCells = { sourceIndexPath, destinationIndexPath in
+            UserDefaultsService.shared.reorderWatchlist(moveFrom: sourceIndexPath, to: destinationIndexPath)
+            self.watchlistVM.moveCellViewModel(from: sourceIndexPath, to: destinationIndexPath)
+            UserDefaultsService.shared.reorderWatchlist(moveFrom: sourceIndexPath, to: destinationIndexPath)
+            dataSource.apply(self.makeSnapshot(), animatingDifferences: true)
+        }
+        
         return dataSource
     }
     

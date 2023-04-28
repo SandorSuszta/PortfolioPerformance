@@ -6,6 +6,8 @@ enum WatchlistSection {
 
 final class WatchlistDataSource: UITableViewDiffableDataSource<WatchlistSection, CoinModel> {
     
+    var didReorderCells: ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)?
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -23,10 +25,8 @@ final class WatchlistDataSource: UITableViewDiffableDataSource<WatchlistSection,
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        var sourceData = UserDefaultsService.shared.watchlistIDs
-        sourceData.swapAt(sourceIndexPath.row, destinationIndexPath.row)
-        UserDefaultsService.shared.replaceWatchlist(with: sourceData)
-        print(UserDefaultsService.shared.watchlistIDs)
+        
+        didReorderCells?(sourceIndexPath, destinationIndexPath)
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
