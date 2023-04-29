@@ -66,7 +66,7 @@ class SearchScreenViewModel {
             switch result {
             case .success(let coinModels):
                 
-                var recentSearchesModels: [SearchResult] = coinModels.compactMap {
+                let recentSearchesModels: [SearchResult] = coinModels.compactMap {
                     SearchResult(
                         id: $0.id,
                         name: $0.name,
@@ -78,11 +78,10 @@ class SearchScreenViewModel {
                 let list = UserDefaultsService.shared.recentSearchesIDs
                 
                 //Use the same order as in saved list
-                recentSearchesModels.sort {
-                    list.firstIndex(of: $0.id) ?? 0 > list.firstIndex(of: $1.id) ?? 0
-                }
                 
-                self.defaultCellModels.value?[0] = recentSearchesModels
+                let sortedModels = recentSearchesModels.sorted(byList: list)
+                
+                self.defaultCellModels.value?[0] = sortedModels.reversed()
                 
             case .failure(let error):
                 self.errorMessage.value = error.rawValue

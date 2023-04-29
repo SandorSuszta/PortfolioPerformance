@@ -166,9 +166,9 @@ private extension WatchlistViewController {
         
         dataSource.defaultRowAnimation = .automatic
         dataSource.didReorderCells = { sourceIndexPath, destinationIndexPath in
-            UserDefaultsService.shared.reorderWatchlist(moveFrom: sourceIndexPath, to: destinationIndexPath)
+        
             self.watchlistVM.moveCellViewModel(from: sourceIndexPath, to: destinationIndexPath)
-            UserDefaultsService.shared.reorderWatchlist(moveFrom: sourceIndexPath, to: destinationIndexPath)
+            self.watchlistStore.reorderWatchlist(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
             dataSource.apply(self.makeSnapshot(), animatingDifferences: true)
         }
         
