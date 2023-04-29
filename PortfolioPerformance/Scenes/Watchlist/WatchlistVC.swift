@@ -2,6 +2,8 @@ import UIKit
 
 class WatchlistViewController: UIViewController {
     
+    private let watchlistStore: WatchlistStoreProtocol
+    
     private lazy var dataSource: WatchlistDataSource = makeDataSource()
     
     private lazy var watchlistTableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -11,6 +13,20 @@ class WatchlistViewController: UIViewController {
     private let emptyWatchlistView = EmptyStateView(type: .noFavourites)
     
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+    
+    //MARK: - Init
+    init(watchlistStore: WatchlistStoreProtocol) {
+        self.watchlistStore = watchlistStore
+        super .init(nibName: nil, bundle: nil)
+    }
+    
+    convenience init () {
+        self.init(watchlistStore: WatchlistStore())
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - Lifecycle
     
@@ -87,13 +103,13 @@ class WatchlistViewController: UIViewController {
     }
     
     private func updateTableWithWatchlist() {
-        if UserDefaultsService.shared.watchlistIDs.isEmpty {
+        if watchlistStore.getWatchlist().isEmpty {
             watchlistVM.cellViewModels.value = []
             emptyWatchlistView.isHidden = false
         } else {
             emptyWatchlistView.isHidden = true
             watchlistVM.loadWatchlistCryptoCurrenciesData(
-                list: UserDefaultsService.shared.watchlistIDs
+                list: watchlistStore.getWatchlist()
             )
         }
     }
@@ -188,7 +204,7 @@ extension WatchlistViewController: UITableViewDelegate {
             coinName: currentCoinModel.name,
             coinSymbol: currentCoinModel.symbol,
             logoURL: currentCoinModel.image,
-            isFavourite: UserDefaultsService.shared.isInWatchlist(id: currentCoinModel.id)
+            isFavourite: watchlistStore.getWatchlist().contains(currentCoinModel.id)
         )
         
         self.navigationController?.pushViewController(detailsVC, animated: true)
