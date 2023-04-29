@@ -15,6 +15,7 @@ class WatchlistViewController: UIViewController {
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
     
     //MARK: - Init
+    
     init(watchlistStore: WatchlistStoreProtocol) {
         self.watchlistStore = watchlistStore
         super .init(nibName: nil, bundle: nil)

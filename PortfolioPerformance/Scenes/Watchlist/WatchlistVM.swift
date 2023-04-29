@@ -25,11 +25,10 @@ final class WatchlistViewModel {
         networkingService.getDataForList(ofIDs: list) { result in
             switch result {
             case .success(let coinModels):
-                let list = UserDefaultsService.shared.watchlistIDs
-                //Use the same order as in saved list
-                let sortedCoinModels = coinModels.sorted {
-                    list.firstIndex(of: $0.id) ?? 0 > list.firstIndex(of: $1.id) ?? 0
-                }
+        
+                //Use the same order as in query list
+                let sortedCoinModels = coinModels.sorted(byList: list)
+                
                 //Transform array of coin models into array of cell view models
                 let viewModels: [CryptoCurrencyCellViewModel] = sortedCoinModels.compactMap({ CryptoCurrencyCellViewModel(coinModel: $0)
                 })

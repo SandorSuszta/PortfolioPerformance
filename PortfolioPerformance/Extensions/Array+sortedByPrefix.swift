@@ -11,13 +11,13 @@ extension Array where Element == SearchResult {
     func sortedByPrefix(_ query: String) -> [SearchResult] {
         let lowercasedQuery = query.lowercased()
         
-        let comparator: (SearchResult, SearchResult) -> Bool = { (result1, result2) -> Bool in
-            let isPrefix1 = result1.symbol.lowercased().hasPrefix(lowercasedQuery)
-            let isPrefix2 = result2.symbol.lowercased().hasPrefix(lowercasedQuery)
+        let comparator: (Element, Element) -> Bool = { (element1, element2) -> Bool in
+            let isPrefix1 = element1.symbol.lowercased().hasPrefix(lowercasedQuery)
+            let isPrefix2 = element2.symbol.lowercased().hasPrefix(lowercasedQuery)
             
             return isPrefix1 && !isPrefix2 ? true
             : !isPrefix1 && isPrefix2 ? false
-            : result1.symbol < result2.symbol
+            : element1.symbol < element2.symbol
         }
         
         return self.sorted(by: comparator)

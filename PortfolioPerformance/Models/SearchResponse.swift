@@ -12,7 +12,7 @@ struct Coin: Codable {
     let item: SearchResult
 }
 
-struct SearchResult: Codable, Hashable {
+struct SearchResult: Codable, Hashable, Identifiable {
     let id: String
     let name: String
     let symbol: String
