@@ -14,7 +14,6 @@ struct WatchlistStore: WatchlistStoreProtocol {
     private let watchlistKey = PersistantDataType.watchlist.rawValue
     private let defaults = UserDefaults.standard
     
-    
     //MARK: - Methods
     
     func getWatchlist() -> [String] {

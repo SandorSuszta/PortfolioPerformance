@@ -109,8 +109,8 @@ class WatchlistViewController: UIViewController {
             emptyWatchlistView.isHidden = false
         } else {
             emptyWatchlistView.isHidden = true
-            watchlistVM.loadWatchlistCryptoCurrenciesData(
-                list: watchlistStore.getWatchlist()
+            watchlistVM.loadWatchlistDataIfNeeded(
+                watchlist: watchlistStore.getWatchlist()
             )
         }
     }
@@ -167,7 +167,7 @@ private extension WatchlistViewController {
         dataSource.defaultRowAnimation = .automatic
         dataSource.didReorderCells = { sourceIndexPath, destinationIndexPath in
         
-            self.watchlistVM.moveCellViewModel(from: sourceIndexPath, to: destinationIndexPath)
+            self.watchlistVM.reorderCellViewModels(from: sourceIndexPath, to: destinationIndexPath)
             self.watchlistStore.reorderWatchlist(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
             dataSource.apply(self.makeSnapshot(), animatingDifferences: true)
         }

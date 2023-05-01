@@ -1,10 +1,3 @@
-//
-//  SearchVM.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 12/10/2022.
-//
-
 import Foundation
 
 class SearchScreenViewModel {
