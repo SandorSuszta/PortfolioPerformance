@@ -4,6 +4,7 @@ class MarketViewController: UIViewController {
     
     //MARK: - Properties
     
+    private let coordinator: Coordinator
     private let viewModel: MarketViewModel
     private var tableViewSort: PPMarketSort
     
@@ -49,14 +50,11 @@ class MarketViewController: UIViewController {
     private let cryptoCurrencyTableView = UITableView()
     
     //MARK: - Init
-    init(viewModel: MarketViewModel) {
+    init(coordinator: Coordinator, viewModel: MarketViewModel) {
         self.viewModel = viewModel
+        self.coordinator = coordinator
         self.tableViewSort = .topCaps
         super.init(nibName: nil, bundle: nil)
-    }
-    
-    convenience init() {
-        self.init(viewModel: MarketViewModel())
     }
     
     required init?(coder: NSCoder) {

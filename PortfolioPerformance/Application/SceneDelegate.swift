@@ -3,6 +3,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var coordinator: Coordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
        
@@ -10,11 +11,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let mainTabBarVC = PPTabBarController()
-        window.rootViewController = mainTabBarVC
-        window.makeKeyAndVisible()
+        let appCoordinator = AppCoordinator(
+            window: window,
+            tabBarController: UITabBarController(),
+            watchlistStore: WatchlistStore(),
+            recentSearchesStore: RecentSearchesStore()
+        )
+        
+        appCoordinator.start()
         
         self.window = window
     }
 }
-

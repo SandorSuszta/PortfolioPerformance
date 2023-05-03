@@ -16,7 +16,7 @@ enum TabBarControllerType: CaseIterable {
     var viewController: UIViewController {
         switch self {
         case .market:
-            return MarketViewController()
+            return UIViewController()
         case .watchlist:
             return WatchlistViewController()
         }

@@ -12,6 +12,9 @@
 		79011E0029FDA86200121A81 /* Array+sortedByList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79011DFF29FDA86200121A81 /* Array+sortedByList.swift */; };
 		79011E0229FECD2B00121A81 /* RecentSearchesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79011E0129FECD2B00121A81 /* RecentSearchesStore.swift */; };
 		79011E042A002C5A00121A81 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79011E032A002C5900121A81 /* Coordinator.swift */; };
+		79011E072A0052FE00121A81 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79011E062A0052FE00121A81 /* AppCoordinator.swift */; };
+		79011E092A005C1500121A81 /* MarketCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79011E082A005C1500121A81 /* MarketCoordinator.swift */; };
+		79011E0B2A03020600121A81 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79011E0A2A03020600121A81 /* Services.swift */; };
 		790C30C227C78E930021658F /* GreedAndFearModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C127C78E930021658F /* GreedAndFearModel.swift */; };
 		790C30C527CEA7620021658F /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C30C427CEA7620021658F /* UserDefaultsService.swift */; };
 		790C350329D35FD200141887 /* ImageNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C350229D35FD200141887 /* ImageNames.swift */; };
@@ -98,6 +101,9 @@
 		79011DFF29FDA86200121A81 /* Array+sortedByList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+sortedByList.swift"; sourceTree = "<group>"; };
 		79011E0129FECD2B00121A81 /* RecentSearchesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesStore.swift; sourceTree = "<group>"; };
 		79011E032A002C5900121A81 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		79011E062A0052FE00121A81 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		79011E082A005C1500121A81 /* MarketCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCoordinator.swift; sourceTree = "<group>"; };
+		79011E0A2A03020600121A81 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		790C30C127C78E930021658F /* GreedAndFearModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedAndFearModel.swift; sourceTree = "<group>"; };
 		790C30C427CEA7620021658F /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		790C350229D35FD200141887 /* ImageNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNames.swift; sourceTree = "<group>"; };
@@ -197,12 +203,21 @@
 			path = Persistance;
 			sourceTree = "<group>";
 		};
+		79011E052A0036F900121A81 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */,
+				79011E032A002C5900121A81 /* Coordinator.swift */,
+				79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */,
+				79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */,
+				79011E062A0052FE00121A81 /* AppCoordinator.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		790C30C327CEA71A0021658F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */,
-				79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */,
-				79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -306,6 +321,7 @@
 				790C350229D35FD200141887 /* ImageNames.swift */,
 				79011DFD29FD8F4E00121A81 /* PersistantDataType.swift */,
 				79FAD73529EDB39800374272 /* PPMarketSort.swift */,
+				79011E0A2A03020600121A81 /* Services.swift */,
 			);
 			path = DataTypes;
 			sourceTree = "<group>";
@@ -379,6 +395,7 @@
 				7935579229D766190086C4F6 /* Views */,
 				79E7A21628E5FAF000BD5CB0 /* MarketVC.swift */,
 				79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */,
+				79011E082A005C1500121A81 /* MarketCoordinator.swift */,
 			);
 			path = Market;
 			sourceTree = "<group>";
@@ -436,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				79EAFD1827B3DCD9008A6062 /* PortfolioPerformance */,
+				79E7A21528E5F9CD00BD5CB0 /* Scenes */,
 				79A5B14A29803DBF0067240A /* PortfolioPerformanceTests */,
 				79EAFD1727B3DCD9008A6062 /* Products */,
 				B0174BFFD78187AFD4C31C8F /* Pods */,
@@ -455,16 +473,15 @@
 		79EAFD1827B3DCD9008A6062 /* PortfolioPerformance */ = {
 			isa = PBXGroup;
 			children = (
+				79011E052A0036F900121A81 /* Application */,
 				7961C37528EB2A0D0006B9A7 /* DataTypes */,
 				79410D8A2822938100BD9EA4 /* Services */,
 				7982923027E3D87C007ECCCD /* Models */,
 				7982922F27E3D829007ECCCD /* Views */,
-				79E7A21528E5F9CD00BD5CB0 /* Scenes */,
 				7934EFA2282A72DD00CE7FD0 /* Extensions */,
 				790C30C327CEA71A0021658F /* Supporting Files */,
 				79EAFD2527B3DCDE008A6062 /* Assets.xcassets */,
 				79EAFD2A27B3DCDE008A6062 /* Info.plist */,
-				79011E032A002C5900121A81 /* Coordinator.swift */,
 			);
 			path = PortfolioPerformance;
 			sourceTree = "<group>";
@@ -648,6 +665,7 @@
 				7955694928773472003E8A13 /* SortOptionsCell.swift in Sources */,
 				79EC45B528F0B9DC006A849A /* CustomSegmentedControl.swift in Sources */,
 				792C040628C14386008EE48C /* CoinDetailsVM.swift in Sources */,
+				79011E092A005C1500121A81 /* MarketCoordinator.swift in Sources */,
 				79011E0029FDA86200121A81 /* Array+sortedByList.swift in Sources */,
 				7934EFA82835172200CE7FD0 /* UIView+AddSubviews.swift in Sources */,
 				793332CD2948D95B005EE8A3 /* AddTransactionCell.swift in Sources */,
@@ -681,6 +699,8 @@
 				7955B09329DF6F8A00492059 /* ImageDownloader.swift in Sources */,
 				796EFA4928770D26005E24AF /* CryptoCurrencyCell.swift in Sources */,
 				7955B09529E0B60700492059 /* ImageCacheManager.swift in Sources */,
+				79011E072A0052FE00121A81 /* AppCoordinator.swift in Sources */,
+				79011E0B2A03020600121A81 /* Services.swift in Sources */,
 				79CF41BF28EEFF7E00CA9F51 /* MarketVM.swift in Sources */,
 				790C350329D35FD200141887 /* ImageNames.swift in Sources */,
 				79AAF82A28FB358A009F3B85 /* SectionHeaderView.swift in Sources */,
