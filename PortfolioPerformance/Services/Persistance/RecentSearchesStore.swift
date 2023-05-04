@@ -1,12 +1,12 @@
 import Foundation
 
-protocol RecentSearchesProtocol {
+protocol RecentSearchesStoreProtocol {
     func getRecentSearches() -> [String]
     func saveToRecentSearches(id: String)
     func clearRecentSearches()
 }
 
-struct RecentSearchesStore: RecentSearchesProtocol {
+struct RecentSearchesStore: RecentSearchesStoreProtocol {
     
     //MARK: - Properties
     

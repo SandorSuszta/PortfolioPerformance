@@ -2,12 +2,14 @@ import UIKit
 
 class AppCoordinator: Coordinator {
     
-    
     var childCoordinators: [Coordinator] = []
+    
     let window: UIWindow
+    
     let tabBarController: UITabBarController
+    
     var watchlistStore: WatchlistStoreProtocol
-    var recentSearchesStore: RecentSearchesProtocol
+    var recentSearchesStore: RecentSearchesStoreProtocol
     
     func start() {
         
@@ -28,7 +30,7 @@ class AppCoordinator: Coordinator {
         window.makeKeyAndVisible()
     }
     
-    init(window: UIWindow, tabBarController: UITabBarController, watchlistStore: WatchlistStoreProtocol, recentSearchesStore: RecentSearchesProtocol) {
+    init(window: UIWindow, tabBarController: UITabBarController, watchlistStore: WatchlistStoreProtocol, recentSearchesStore: RecentSearchesStoreProtocol) {
         self.window = window
         self.tabBarController = tabBarController
         self.watchlistStore = watchlistStore

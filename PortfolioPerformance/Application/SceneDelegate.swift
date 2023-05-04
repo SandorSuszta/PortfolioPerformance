@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let appCoordinator = AppCoordinator(
             window: window,
-            tabBarController: UITabBarController(),
+            tabBarController: PPTabBarController(),
             watchlistStore: WatchlistStore(),
             recentSearchesStore: RecentSearchesStore()
         )

@@ -3,7 +3,7 @@ import UIKit
 class MarketCoordinator: Coordinator {
     var watchlistStore: WatchlistStoreProtocol
     
-    var recentSearchesStore: RecentSearchesProtocol
+    var recentSearchesStore: RecentSearchesStoreProtocol
     
     var childCoordinators: [Coordinator] = []
     
@@ -16,7 +16,7 @@ class MarketCoordinator: Coordinator {
         navigationController.tabBarItem = UITabBarItem(title: "Market", image: .init(systemName: "star"), selectedImage: nil)
     }
     
-    init(watchlistStore: WatchlistStoreProtocol, recentSearchesStore: RecentSearchesProtocol, navigationController: UINavigationController) {
+    init(watchlistStore: WatchlistStoreProtocol, recentSearchesStore: RecentSearchesStoreProtocol, navigationController: UINavigationController) {
         self.watchlistStore = watchlistStore
         self.recentSearchesStore = recentSearchesStore
         self.navigationController = navigationController
