@@ -8,14 +8,12 @@ class AppCoordinator: Coordinator {
     
     let tabBarController: UITabBarController
     
-    var watchlistStore: WatchlistStoreProtocol
-    var recentSearchesStore: RecentSearchesStoreProtocol
+    let services: Services
     
     func start() {
         
         let marketCoordinator = MarketCoordinator(
-            watchlistStore: watchlistStore,
-            recentSearchesStore: recentSearchesStore,
+            services: services,
             navigationController: UINavigationController()
         )
         
@@ -30,40 +28,9 @@ class AppCoordinator: Coordinator {
         window.makeKeyAndVisible()
     }
     
-    init(window: UIWindow, tabBarController: UITabBarController, watchlistStore: WatchlistStoreProtocol, recentSearchesStore: RecentSearchesStoreProtocol) {
+    init(window: UIWindow, tabBarController: UITabBarController, services: Services) {
         self.window = window
         self.tabBarController = tabBarController
-        self.watchlistStore = watchlistStore
-        self.recentSearchesStore = recentSearchesStore
+        self.services = services
     }
 }
-
-//class AppCoordinator: Coordinator {
-//    var childCoordinators = [Coordinator]()
-//    var navigationController: UINavigationController?
-//    let databaseService: DatabaseService
-//    let window: UIWindow
-//
-//    init(window: UIWindow, databaseService: DatabaseService) {
-//        self.window = window
-//        self.databaseService = databaseService
-//    }
-//
-//    func start() {
-//        let tabBarController = UITabBarController()
-//
-//        let firstTabCoordinator = FirstTabCoordinator(navigationController: UINavigationController(), databaseService: databaseService)
-//        firstTabCoordinator.start()
-//        childCoordinators.append(firstTabCoordinator)
-//
-//        let secondTabCoordinator = SecondTabCoordinator(navigationController: UINavigationController(), databaseService: databaseService)
-//        secondTabCoordinator.start()
-//        childCoordinators.append(secondTabCoordinator)
-//
-//        tabBarController.viewControllers = [firstTabCoordinator.navigationController, secondTabCoordinator.navigationController]
-//
-//        window.rootViewController = tabBarController
-//        window.makeKeyAndVisible()
-//    }
-//}
-
