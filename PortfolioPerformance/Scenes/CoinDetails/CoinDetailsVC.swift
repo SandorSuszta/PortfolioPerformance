@@ -119,6 +119,13 @@ class CoinDetailsVC: UIViewController {
         updateFavouriteButtonImage()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        //Prevent strong reference cycle
+        lineChartView.xAxis.valueFormatter = nil
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
