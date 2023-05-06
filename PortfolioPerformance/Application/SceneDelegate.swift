@@ -11,11 +11,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
+        let services = Services(
+            watchlistStore: WatchlistStore(),
+            recentSearchesService: RecentSearchesStore()
+        )
+        
         let appCoordinator = AppCoordinator(
             window: window,
             tabBarController: PPTabBarController(),
-            watchlistStore: WatchlistStore(),
-            recentSearchesStore: RecentSearchesStore()
+            services: services
         )
         
         appCoordinator.start()

@@ -33,7 +33,9 @@ final class CoinDetailsViewModel {
     
     //MARK: - Public methods
     func getMetricsData(for ID: String) {
-        networkingService.getDetailsData(for: coinID ) { result in
+        networkingService.getDetailsData(for: coinID ) { [weak self] result in
+            guard let self else { return }
+            
             switch result {
             case .success(let model):
                 self.coinModel = model
@@ -48,7 +50,9 @@ final class CoinDetailsViewModel {
         networkingService.getChartData(
             for: coinID,
             inDaysInterval: intervalInDays
-        ){ result in
+        ){ [weak self] result in
+            guard let self else { return }
+            
             switch result {
             case .success(let priceData):
                 

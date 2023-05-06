@@ -4,15 +4,14 @@ class MarketCoordinator: Coordinator {
     
     let services: Services
     
-    var childCoordinators: [Coordinator] = []
-    
     var navigationController: UINavigationController
     
     func start() {
-        let marketVC = MarketViewController(coordinator: self, viewModel: MarketViewModel())
+        let marketVC = MarketViewController(coordinator: self, viewModel: MarketViewModel(networkingService: NetworkingService()))
+        
         navigationController.setViewControllers([marketVC], animated: true)
         
-        navigationController.tabBarItem = UITabBarItem(title: "Market", image: .init(systemName: "star"), selectedImage: nil)
+        navigationController.tabBarItem = AppTab.market.tabBarItem
     }
     
     init(services: Services, navigationController: UINavigationController) {

@@ -4,6 +4,8 @@ class WatchlistViewController: UIViewController {
     
     private let watchlistStore: WatchlistStoreProtocol
     
+    private let coordinator: WatchlistCoordinator
+    
     private lazy var dataSource: WatchlistDataSource = makeDataSource()
     
     private lazy var watchlistTableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -16,13 +18,10 @@ class WatchlistViewController: UIViewController {
     
     //MARK: - Init
     
-    init(watchlistStore: WatchlistStoreProtocol) {
+    init(coordinator: WatchlistCoordinator, watchlistStore: WatchlistStoreProtocol) {
+        self.coordinator = coordinator
         self.watchlistStore = watchlistStore
         super .init(nibName: nil, bundle: nil)
-    }
-    
-    convenience init () {
-        self.init(watchlistStore: WatchlistStore())
     }
     
     required init?(coder: NSCoder) {
@@ -200,14 +199,16 @@ extension WatchlistViewController: UITableViewDelegate {
         
         guard let currentCoinModel = watchlistVM.cellViewModels.value?[indexPath.row].coinModel else { fatalError("Cant get coinModel in WatclistVC")}
         
-        let detailsVC = CoinDetailsVC(
-            coinID: currentCoinModel.id,
-            coinName: currentCoinModel.name,
-            coinSymbol: currentCoinModel.symbol,
-            logoURL: currentCoinModel.image,
-            isFavourite: watchlistStore.getWatchlist().contains(currentCoinModel.id)
-        )
+        coordinator.showDetails(for: currentCoinModel)
         
-        self.navigationController?.pushViewController(detailsVC, animated: true)
+//        let detailsVC = CoinDetailsVC(
+//            coinID: currentCoinModel.id,
+//            coinName: currentCoinModel.name,
+//            coinSymbol: currentCoinModel.symbol,
+//            logoURL: currentCoinModel.image,
+//            isFavourite: watchlistStore.getWatchlist().contains(currentCoinModel.id)
+//        )
+//
+//        self.navigationController?.pushViewController(detailsVC, animated: true)
     }
 }

@@ -17,11 +17,17 @@ class AppCoordinator: Coordinator {
             navigationController: UINavigationController()
         )
         
+        let watchlistCoordinator = WatchlistCoordinator(
+            navigationController: UINavigationController(),
+            services: services)
+        
         marketCoordinator.start()
-        childCoordinators.append(marketCoordinator)
+        watchlistCoordinator.start()
+        childCoordinators = [marketCoordinator, watchlistCoordinator]
         
         tabBarController.viewControllers = [
             marketCoordinator.navigationController,
+            watchlistCoordinator.navigationController
         ]
         
         window.rootViewController = tabBarController

@@ -25,7 +25,7 @@ enum AppTab {
     var tabBarItem: UITabBarItem {
         return UITabBarItem(
             title: title,
-            image: UIImage(systemName: imageName),
+            image: UIImage(named: imageName),
             selectedImage: nil
         )
     }
