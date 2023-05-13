@@ -18,4 +18,13 @@ class MarketCoordinator: Coordinator {
         self.services = services
         self.navigationController = navigationController
     }
+    
+    func showSearch() {
+        let searchVC = SearchScreenViewController(coordinator: self)
+        navigationController.pushViewController(searchVC, animated: true)
+    }
+    
+    func showDetails(viewModel: CoinDetailsViewModel) {
+        let detailsVC = CoinDetailsVC(coinID: <#T##String#>, coinName: <#T##String#>, coinSymbol: <#T##String#>, logoURL: <#T##String#>, isFavourite: <#T##Bool#>)
+    }
 }

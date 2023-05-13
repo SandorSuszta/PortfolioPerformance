@@ -4,7 +4,7 @@ class WatchlistViewController: UIViewController {
     
     private let watchlistStore: WatchlistStoreProtocol
     
-    private let coordinator: WatchlistCoordinator
+    private let coordinator: Coordinator
     
     private lazy var dataSource: WatchlistDataSource = makeDataSource()
     
@@ -199,7 +199,10 @@ extension WatchlistViewController: UITableViewDelegate {
         
         guard let currentCoinModel = watchlistVM.cellViewModels.value?[indexPath.row].coinModel else { fatalError("Cant get coinModel in WatclistVC")}
         
-        coordinator.showDetails(for: currentCoinModel)
+        if let coordinator = self.coordinator as? WatchlistCoordinator {
+            coordinator.showDetails(for: currentCoinModel)
+        }
+        
         
 //        let detailsVC = CoinDetailsVC(
 //            coinID: currentCoinModel.id,

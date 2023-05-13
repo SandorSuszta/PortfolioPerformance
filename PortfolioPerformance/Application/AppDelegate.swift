@@ -6,14 +6,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        //Change font of NavBar Titles
-        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont.systemFont(ofSize: 26)]
+        configureNavigationBar()
         
-        // Change Back Button color
-        UINavigationBar.appearance().tintColor = .PPBlue
-        
-            
         return true
+    }
+    
+    private func configureNavigationBar() {
+        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont.systemFont(ofSize: 26)]
+        UINavigationBar.appearance().tintColor = .PPBlue
     }
 }
 

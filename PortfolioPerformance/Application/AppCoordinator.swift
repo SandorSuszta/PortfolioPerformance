@@ -23,6 +23,7 @@ class AppCoordinator: Coordinator {
         
         marketCoordinator.start()
         watchlistCoordinator.start()
+        
         childCoordinators = [marketCoordinator, watchlistCoordinator]
         
         tabBarController.viewControllers = [

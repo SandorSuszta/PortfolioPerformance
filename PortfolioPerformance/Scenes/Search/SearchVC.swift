@@ -9,8 +9,9 @@ class SearchScreenViewController: UIViewController {
         case emptyWithRecents
         case emptyWithoutRecents
     }
+    private let coordinator: Coordinator
     
-    private var viewModel = SearchScreenViewModel(networkingService: NetworkingService())
+    private let viewModel: SearchScreenViewModel
     
     private var searchTimer: Timer?
     
@@ -40,7 +41,23 @@ class SearchScreenViewController: UIViewController {
     }()
     
     private let noResultsView = EmptyStateView(type: .noSearchResults)
-        
+    
+    //MARK: - Init
+    
+    init(coordinator: Coordinator, viewModel: SearchScreenViewModel) {
+        self.coordinator = coordinator
+        self.viewModel = viewModel
+        super .init(nibName: nil, bundle: nil)
+    }
+    
+    convenience init(coordinator: Coordinator) {
+        self.init(coordinator: coordinator, viewModel: SearchScreenViewModel(networkingService: NetworkingService()))
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -247,6 +264,7 @@ extension SearchScreenViewController: UITableViewDelegate {
             .recentSearches,
             ID: model.id
         )
+        
         
         let detailVC = CoinDetailsVC(
             coinID: model.id,
