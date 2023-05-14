@@ -25,6 +25,5 @@ class MarketCoordinator: Coordinator {
     }
     
     func showDetails(viewModel: CoinDetailsViewModel) {
-        let detailsVC = CoinDetailsVC(coinID: <#T##String#>, coinName: <#T##String#>, coinSymbol: <#T##String#>, logoURL: <#T##String#>, isFavourite: <#T##Bool#>)
     }
 }

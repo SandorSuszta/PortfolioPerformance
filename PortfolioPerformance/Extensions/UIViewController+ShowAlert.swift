@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIViewController {
+extension UINavigationController {
     public func showAlert(message: String) {
         DispatchQueue.main.async {
             let alert = CustomAlertVC (text: message)

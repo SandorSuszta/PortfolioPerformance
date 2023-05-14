@@ -9,6 +9,7 @@ class SearchScreenViewController: UIViewController {
         case emptyWithRecents
         case emptyWithoutRecents
     }
+    
     private let coordinator: Coordinator
     
     private let viewModel: SearchScreenViewModel
@@ -70,6 +71,8 @@ class SearchScreenViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         viewModel.updateRecentSearches()
     }
     
@@ -135,7 +138,7 @@ class SearchScreenViewController: UIViewController {
                 return
             }
             
-            self.showAlert(message: message)
+            self.coordinator.navigationController.showAlert(message: message)
         }
     }
     

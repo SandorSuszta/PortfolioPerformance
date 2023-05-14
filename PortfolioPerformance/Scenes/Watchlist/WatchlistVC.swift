@@ -124,7 +124,7 @@ class WatchlistViewController: UIViewController {
         }
         
         watchlistVM.errorMessage?.bind { [weak self] message in
-            self?.showAlert(message: message ?? "An error has occured")
+            //self?.showAlert(message: message ?? "An error has occured")
         }
     }
     

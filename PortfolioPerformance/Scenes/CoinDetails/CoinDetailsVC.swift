@@ -280,7 +280,7 @@ class CoinDetailsVC: UIViewController {
         coinDetailsVM.errorMessage.bind { [weak self] message in
             guard let message = message else { return }
             
-            self?.showAlert(message: message)
+           // self?.showAlert(message: message)
         }
     }
     

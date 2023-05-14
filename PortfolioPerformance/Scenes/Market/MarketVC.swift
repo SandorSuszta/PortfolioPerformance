@@ -203,7 +203,7 @@ class MarketViewController: UIViewController {
             }
         }
         viewModel.errorMessage?.bind { [weak self] message in
-            self?.showAlert(message: message ?? "An error has occured")
+            //self?.showAlert(message: message ?? "An error has occured")
         }
     }
     
@@ -248,8 +248,10 @@ class MarketViewController: UIViewController {
     }
     
     @objc private func didTapSearch() {
-        let searchVC = SearchScreenViewController()
-        navigationController?.pushViewController(searchVC, animated: true)
+        
+        if let coordinator = coordinator as? MarketCoordinator {
+            coordinator.showSearch()
+        }
     }
     
     @objc private func didPullToRefresh() {
