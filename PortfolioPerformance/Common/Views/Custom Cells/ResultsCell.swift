@@ -91,7 +91,7 @@ class ResultsCell: UITableViewCell {
         symbolLabel.text = model.symbol.uppercased()
         nameLabel.text = model.name
         
-        imageDownloader?.loadImage(from: model.large, completion: { result in
+        imageDownloader?.loadImage(from: model.image, completion: { result in
             switch result {
             case .success(let image):
                 self.logoView.image = image

@@ -269,15 +269,7 @@ extension SearchScreenViewController: UITableViewDelegate {
         )
         
         
-        let detailVC = CoinDetailsVC(
-            coinID: model.id,
-            coinName: model.name,
-            coinSymbol: model.symbol,
-            logoURL: model.large,
-            isFavourite: UserDefaultsService.shared.isInWatchlist(id: model.id)
-        )
         
-        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

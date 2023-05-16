@@ -64,7 +64,7 @@ class SearchScreenViewModel {
                         id: $0.id,
                         name: $0.name,
                         symbol: $0.symbol,
-                        large: $0.image
+                        image: $0.image
                     )
                 }
                 

@@ -384,15 +384,9 @@ extension MarketViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let currentCoinModel = viewModel.cellViewModels.value?[indexPath.row].coinModel else { fatalError() }
         
-        let detailsVC = CoinDetailsVC(
-            coinID: currentCoinModel.id,
-            coinName: currentCoinModel.name,
-            coinSymbol: currentCoinModel.symbol,
-            logoURL: currentCoinModel.image,
-            isFavourite: UserDefaultsService.shared.isInWatchlist(id: currentCoinModel.id)
-        )
-        
-        self.navigationController?.pushViewController(detailsVC, animated: true)
+        if let coordinator = coordinator as? MarketCoordinator {
+            coordinator.showDetails(for: currentCoinModel)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

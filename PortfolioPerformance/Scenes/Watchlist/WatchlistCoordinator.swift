@@ -19,14 +19,18 @@ class WatchlistCoordinator: Coordinator {
         self.services = services
     }
     
-    func showDetails(for model: CoinModel) {
+    func showDetails(for representedCoin: CoinRepresenatable) {
+        let detailsVM = CoinDetailsViewModel(
+            representedCoin: representedCoin,
+            networkingService: NetworkingService(),
+            watchlistStore: services.watchlistStore
+        )
         
         let detailsVC = CoinDetailsVC(
-            coinID: model.id,
-            coinName: model.name,
-            coinSymbol: model.symbol,
-            logoURL: model.image,
-            isFavourite: services.watchlistStore.getWatchlist().contains(model.id)
+            coordinator: self,
+            viewModel: detailsVM,
+            imageDownloader: ImageDownloader(),
+            watchlistStore: services.watchlistStore
         )
         
         navigationController.pushViewController(detailsVC, animated: true)

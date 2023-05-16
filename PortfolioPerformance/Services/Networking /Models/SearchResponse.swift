@@ -16,5 +16,12 @@ struct SearchResult: Codable, Hashable, Identifiable {
     let id: String
     let name: String
     let symbol: String
-    let large: String
+    let image: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case symbol
+        case image = "large"
+    }
 }

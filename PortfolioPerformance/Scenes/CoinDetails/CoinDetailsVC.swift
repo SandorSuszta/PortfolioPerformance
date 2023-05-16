@@ -5,11 +5,12 @@ class CoinDetailsVC: UIViewController {
     
     //MARK: - Properties
     
-    private let coinDetailsVM: CoinDetailsViewModel
+    private let coordinator: Coordinator
+    private let viewModel: CoinDetailsViewModel
     private let imageDownloader: ImageDownloaderProtocol
+    private let watchlistStore: WatchlistStoreProtocol
     
     private var currentChartTimeInterval = 1
-    private var isFavourite: Bool
     
     private var padding: CGFloat {
         view.width / 20
@@ -115,7 +116,6 @@ class CoinDetailsVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        isFavourite = UserDefaultsService.shared.isInWatchlist(id: coinDetailsVM.coinID)
         updateFavouriteButtonImage()
     }
     
@@ -244,23 +244,24 @@ class CoinDetailsVC: UIViewController {
 
     private func bindViewModels() {
         
-        coinDetailsVM.metricsVM.bind { [weak self] _ in
-            guard let metrics = self?.coinDetailsVM.metricsVM.value else { return }
+        viewModel.metricsVM.bind { [weak self] _ in
+            guard let metrics = self?.viewModel.metricsVM.value else { return }
             
             DispatchQueue.main.async {
                 self?.updateCurrentPrice(with: metrics.currentPrice)
-                self?.marketCapRankLabel.text = self?.coinDetailsVM.metricsVM.value?.marketCapRank
+                self?.marketCapRankLabel.text = self?.viewModel.metricsVM.value?.marketCapRank
             }
-            self?.coinDetailsVM.createDetailsCellsViewModels()
-            self?.coinDetailsVM.getTimeRangeDetails(
-                coinID: self?.coinDetailsVM.coinID ?? "",
+            
+            self?.viewModel.createDetailsCellsViewModels()
+            self?.viewModel.getTimeRangeDetails(
+                coinID: self?.viewModel.coinID ?? "",
                 intervalInDays: self?.currentChartTimeInterval ?? 1
             )
         }
         
-        coinDetailsVM.rangeDetailsVM.bind { [weak self] _ in
+        viewModel.rangeDetailsVM.bind { [weak self] _ in
             
-            guard let rangeDetails = self?.coinDetailsVM.rangeDetailsVM.value else { return }
+            guard let rangeDetails = self?.viewModel.rangeDetailsVM.value else { return }
             
             let color: UIColor = rangeDetails.isChangePositive ? .nephritis : .pinkGlamour
             
@@ -271,38 +272,35 @@ class CoinDetailsVC: UIViewController {
             }
         }
         
-        coinDetailsVM.detailsTableViewCelsVM.bind { [weak self] _ in
+        viewModel.detailsTableViewCelsVM.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.detailsTableView.reloadData()
             }
         }
         
-        coinDetailsVM.errorMessage.bind { [weak self] message in
+        viewModel.errorMessage.bind { [weak self] message in
             guard let message = message else { return }
             
-           // self?.showAlert(message: message)
+            self?.coordinator.showAlert(message: message)
         }
     }
     
     //MARK: - Init
     
     init(
-        coinID: String,
-        coinName: String,
-        coinSymbol: String,
-        logoURL: String,
-        isFavourite: Bool
+        coordinator: Coordinator,
+        viewModel: CoinDetailsViewModel,
+        imageDownloader: ImageDownloaderProtocol,
+        watchlistStore: WatchlistStoreProtocol
     ){
-        self.coinDetailsVM = CoinDetailsViewModel(
-            networkingService: NetworkingService(),
-            imageDownloader: ImageDownloader(),
-            coinID: coinID
-        )
+        self.coordinator = coordinator
+        self.viewModel = viewModel
+        self.imageDownloader = imageDownloader
+        self.watchlistStore = watchlistStore
         
-        self.isFavourite = isFavourite
-        self.imageDownloader = ImageDownloader()
         super.init(nibName: nil, bundle: nil)
-        setupLabelsAndLogo(coinName: coinName, coinSymbol: coinSymbol, logoUrl: logoURL)
+        
+        setupLabelsAndLogo(with: viewModel.representedCoin)
     }
 
     required init?(coder: NSCoder) {
@@ -317,12 +315,12 @@ class CoinDetailsVC: UIViewController {
         lineChartView.xAxis.valueFormatter = self
     }
     
-    private func setupLabelsAndLogo(coinName: String, coinSymbol: String, logoUrl: String) {
-        title = coinName
-        symbolLabel.text = coinSymbol.uppercased()
+    private func setupLabelsAndLogo(with representedCoin: CoinRepresenatable ) {
+        title = representedCoin.name
+        symbolLabel.text = representedCoin.symbol.uppercased()
         symbolLabel.sizeToFit()
         
-        imageDownloader.loadImage(from: logoUrl) { [weak self] result in
+        imageDownloader.loadImage(from: representedCoin.image) { [weak self] result in
             switch result {
             case .success(let image):
                 self?.coinLogoView.image = image
@@ -339,7 +337,7 @@ class CoinDetailsVC: UIViewController {
     }
     
     private func updateFavouriteButtonImage() {
-        if isFavourite {
+        if viewModel.isFavourite {
             navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
             navigationItem.rightBarButtonItem?.tintColor = .systemYellow
         } else {
@@ -391,7 +389,7 @@ class CoinDetailsVC: UIViewController {
     
     private func setupSegmentedControl() {
         timeIntervalSelection = CustomSegmentedControl(
-            items: coinDetailsVM.chartIntervals,
+            items: viewModel.chartIntervals,
             defaultColor: .PPBlue
         )
         timeIntervalSelection.addTarget(self, action: #selector(didChangeSegment(_:)) , for: .valueChanged)
@@ -428,24 +426,22 @@ class CoinDetailsVC: UIViewController {
         rangeProgressBar.titleLabel.text = rangeName
         rangeProgressBar.titleLabel.sizeToFit()
         
-        coinDetailsVM.getTimeRangeDetails(coinID: coinDetailsVM.coinID, intervalInDays: currentChartTimeInterval)
+        viewModel.getTimeRangeDetails(coinID: viewModel.coinID, intervalInDays: currentChartTimeInterval)
     }
     
     @objc func favouriteButtonTapped() {
 
-        if isFavourite {
+        if viewModel.isFavourite {
             UserDefaultsService.shared.deleteFrom(
                 .watchlist,
-                ID: coinDetailsVM.coinID
+                ID: viewModel.coinID
             )
         } else {
             UserDefaultsService.shared.saveTo(
                 .watchlist,
-                ID: coinDetailsVM.coinID
+                ID: viewModel.coinID
             )
         }
-        
-        isFavourite = !isFavourite
         
         updateFavouriteButtonImage()
     }
@@ -472,7 +468,7 @@ class CoinDetailsVC: UIViewController {
 extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        coinDetailsVM.detailsTableViewCelsVM.value?.count ?? 0
+        viewModel.detailsTableViewCelsVM.value?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -482,7 +478,7 @@ extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
             for: indexPath
         ) as? DetailsCell else { return UITableViewCell() }
         
-        guard let viewModel = coinDetailsVM.detailsTableViewCelsVM.value?[indexPath.row] else { fatalError() }
+        guard let viewModel = viewModel.detailsTableViewCelsVM.value?[indexPath.row] else { fatalError() }
                 
         cell.configure(with: viewModel)
         return cell

@@ -2,43 +2,55 @@ import Foundation
 import Charts
 
 final class CoinDetailsViewModel {
-    let networkingService: NetworkingServiceProtocol
-    let imageDownloader: ImageDownloaderProtocol
     
-    var coinID: String
-    var coinModel: CoinDetails?
+    private let networkingService: NetworkingServiceProtocol
+    private let watchlistStore: WatchlistStoreProtocol
+    
+    let representedCoin: CoinRepresenatable
+    var coinDetailsModel: CoinDetails?
+    
+    var coinID: String {
+        representedCoin.id
+    }
+    
+    var isFavourite: Bool {
+        watchlistStore.getWatchlist().contains(representedCoin.id)
+    }
+    
     var marketCapRank: String {
-        String(coinModel?.marketData.marketCapRank ?? 0)
+        String(coinDetailsModel?.marketData.marketCapRank ?? 0)
     }
     let chartIntervals = ["1D", "1W", "1M", "6M", "1Y", "MAX"]
     
     //MARK: - Observable properties
+    
     var metricsVM: ObservableObject<MetricsViewModel> = ObservableObject(value: nil)
     var rangeDetailsVM: ObservableObject<RangeDetailsViewModel> = ObservableObject(value: nil)
     var detailsTableViewCelsVM: ObservableObject<[DetailsCellsViewModel]> = ObservableObject(value: [])
     var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
     
     //MARK: - Init
+    
     init(
+        representedCoin: CoinRepresenatable,
         networkingService: NetworkingServiceProtocol,
-        imageDownloader: ImageDownloaderProtocol,
-        coinID: String
+        watchlistStore: WatchlistStoreProtocol
     ){
-        self.coinID = coinID
+        self.representedCoin = representedCoin
         self.networkingService = networkingService
-        self.imageDownloader = imageDownloader
+        self.watchlistStore = watchlistStore
         
-        getMetricsData(for: coinID)
+        getMetricsData(for: representedCoin.id)
     }
     
     //MARK: - Public methods
     func getMetricsData(for ID: String) {
-        networkingService.getDetailsData(for: coinID ) { [weak self] result in
+        networkingService.getDetailsData(for: representedCoin.id ) { [weak self] result in
             guard let self else { return }
             
             switch result {
             case .success(let model):
-                self.coinModel = model
+                self.coinDetailsModel = model
                 self.metricsVM.value = MetricsViewModel(model: model)
             case .failure(let error):
                 self.errorMessage.value = error.rawValue
@@ -58,7 +70,7 @@ final class CoinDetailsViewModel {
                 
                 let rangeDetails = RangeDetailsViewModel(
                     priceModels: self.extractPriceSubset(from: priceData.prices),
-                    currentPriceValue: self.coinModel?.marketData.currentPrice["usd"] ?? 0
+                    currentPriceValue: self.coinDetailsModel?.marketData.currentPrice["usd"] ?? 0
                 )
                 self.rangeDetailsVM.value = rangeDetails
                 
@@ -70,38 +82,38 @@ final class CoinDetailsViewModel {
     
     func createDetailsCellsViewModels() {
         let viewModels: [DetailsCellsViewModel] = [
-       .init(
-            name: "Market Cap Value",
-            value: metricsVM.value?.marketCap ?? ""
-        ),
-        .init(
-            name: "Volume",
-            value: .bigNumberString(from: coinModel?.marketData.totalVolume["usd"] ?? 0)
-        ),
-        .init(
-            name: "Circulating supply",
-            value: .bigNumberString(from: Double(coinModel?.marketData.circulatingSupply ?? 0), style: .decimal)
-        ),
-        .init(
-            name: "Total supply",
-            value: .bigNumberString(from: Double(coinModel?.marketData.totalSupply ?? 0), style: .decimal)
-        ),
-        .init(
-            name: "Max supply",
-            value: .bigNumberString(from: Double(coinModel?.marketData.maxSupply ?? 0), style: .decimal)
-        ),
-        .init(
-            name: "All time high",
-            value: .priceString(from: coinModel?.marketData.ath["usd"] ?? 0)
-        ),
-        .init(
-            name: "Change percentage from ATH",
-            value: .percentageString(from: coinModel?.marketData.athChangePercentage["usd"] ?? 0)
-        ),
-        .init(
-            name: "ATH date",
-            value: .formatedStringForATHDate(fromUTC: coinModel?.marketData.athDate["usd"] ?? "N/A")
-        )
+            DetailsCellsViewModel(
+                name: "Market Cap Value",
+                value: metricsVM.value?.marketCap ?? ""
+            ),
+            DetailsCellsViewModel(
+                name: "Volume",
+                value: .bigNumberString(from: coinDetailsModel?.marketData.totalVolume["usd"] ?? 0)
+            ),
+            DetailsCellsViewModel(
+                name: "Circulating supply",
+                value: .bigNumberString(from: Double(coinDetailsModel?.marketData.circulatingSupply ?? 0), style: .decimal)
+            ),
+            DetailsCellsViewModel(
+                name: "Total supply",
+                value: .bigNumberString(from: Double(coinDetailsModel?.marketData.totalSupply ?? 0), style: .decimal)
+            ),
+            DetailsCellsViewModel(
+                name: "Max supply",
+                value: .bigNumberString(from: Double(coinDetailsModel?.marketData.maxSupply ?? 0), style: .decimal)
+            ),
+            DetailsCellsViewModel(
+                name: "All time high",
+                value: .priceString(from: coinDetailsModel?.marketData.ath["usd"] ?? 0)
+            ),
+            DetailsCellsViewModel(
+                name: "Change percentage from ATH",
+                value: .percentageString(from: coinDetailsModel?.marketData.athChangePercentage["usd"] ?? 0)
+            ),
+            DetailsCellsViewModel(
+                name: "ATH date",
+                value: .formatedStringForATHDate(fromUTC: coinDetailsModel?.marketData.athDate["usd"] ?? "N/A")
+            )
         ]
         
         detailsTableViewCelsVM.value = viewModels
