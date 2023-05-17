@@ -318,6 +318,7 @@
 		7937CE1C28F6E2DB00B80C71 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				79AE53FC2A15214F00214CB1 /* Models */,
 				7937CE1D28F6E30600B80C71 /* SearchVM.swift */,
 				79410D8E282416C000BD9EA4 /* SearchVC.swift */,
 				79AE53FA2A1428D300214CB1 /* SearchViewControllerDelegate.swift */,
@@ -386,9 +387,6 @@
 				790C30C127C78E930021658F /* GreedAndFearModel.swift */,
 				798957C127F31AE00074CA38 /* GlobalData.swift */,
 				79EAFD3427B3FDC7008A6062 /* CoinModel.swift */,
-				793262C028061135005E4D2E /* GraphEntries.swift */,
-				7934EFA5282D141B00CE7FD0 /* SearchResponse.swift */,
-				792C040C28D32D5D008EE48C /* CoinDetails.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -428,6 +426,23 @@
 				79AE53F52A140D4300214CB1 /* ChartInterval.swift */,
 			);
 			path = DataTypes;
+			sourceTree = "<group>";
+		};
+		79AE53FC2A15214F00214CB1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7934EFA5282D141B00CE7FD0 /* SearchResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		79AE53FD2A15219C00214CB1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				793262C028061135005E4D2E /* GraphEntries.swift */,
+				792C040C28D32D5D008EE48C /* CoinDetails.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		79E7A21528E5F9CD00BD5CB0 /* Scenes */ = {
@@ -484,6 +499,7 @@
 		79E7A22228E6025300BD5CB0 /* CoinDetails */ = {
 			isa = PBXGroup;
 			children = (
+				79AE53FD2A15219C00214CB1 /* Models */,
 				79AE53F72A140DFD00214CB1 /* DataTypes */,
 				7935579129D764DC0086C4F6 /* Views */,
 				792223F428FD7F82001B0C8C /* CoinDetailsVC.swift */,

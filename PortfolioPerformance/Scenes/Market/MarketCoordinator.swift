@@ -1,7 +1,7 @@
 import UIKit
 
-class MarketCoordinator: Coordinator {
-    
+class MarketCoordinator: Coordinator, SearchViewControllerDelegate {
+  
     let services: Services
     
     var navigationController: UINavigationController
@@ -25,6 +25,8 @@ class MarketCoordinator: Coordinator {
     
     func showSearch() {
         let searchVC = SearchScreenViewController(coordinator: self)
+        searchVC.delegate = self
+        
         navigationController.pushViewController(searchVC, animated: true)
     }
     
@@ -41,8 +43,6 @@ class MarketCoordinator: Coordinator {
             imageDownloader: ImageDownloader(),
             watchlistStore: services.watchlistStore
         )
-        
-        let marketVC = MarketViewController(coordinator: self, viewModel: MarketViewModel(networkingService: NetworkingService()))
         
         navigationController.pushViewController(detailsVC, animated: true)
     }

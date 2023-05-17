@@ -1,10 +1,12 @@
 import UIKit
 
 class SearchScreenViewController: UIViewController {
+    
+    weak var delegate: SearchViewControllerDelegate?
 
     //MARK: - Properties
     
-    enum SearchBarState {
+    private enum SearchBarState {
         case searching
         case emptyWithRecents
         case emptyWithoutRecents
@@ -249,16 +251,11 @@ extension SearchScreenViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        var model: SearchResult?
-        
-        if isSearching {
-            model = viewModel.searchResultCellModels.value?[indexPath.row]
-        } else {
-            model = viewModel.defaultCellModels.value?[indexPath.section][indexPath.row]
-        }
-        
-        guard let model = model else { return }
-       
+        guard let model = isSearching
+        ? viewModel.searchResultCellModels.value?[indexPath.row]
+        : viewModel.defaultCellModels.value?[indexPath.section][indexPath.row]
+        else { return }
+                
         searchBar.text = ""
         isSearching = false
         viewModel.clearSearchModels()
@@ -268,8 +265,7 @@ extension SearchScreenViewController: UITableViewDelegate {
             ID: model.id
         )
         
-        
-        
+        delegate?.showDetails(for: model)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

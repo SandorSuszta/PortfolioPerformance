@@ -1,5 +1,5 @@
 import Foundation
 
 protocol SearchViewControllerDelegate: AnyObject {
-    func didSelectCell(withSearchResult: SearchResult)
+    func showDetails(for representedCoin: CoinRepresenatable)
 }
