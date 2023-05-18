@@ -321,8 +321,9 @@ class CoinDetailsVC: UIViewController {
         symbolLabel.sizeToFit()
         
         imageDownloader.loadImage(from: representedCoin.image) { [weak self] result in
+            
             switch result {
-            case .success(let image):
+            case .success(let (_ , image)):
                 self?.coinLogoView.image = image
             case .failure(let error):
                 //TODO: Handle properly

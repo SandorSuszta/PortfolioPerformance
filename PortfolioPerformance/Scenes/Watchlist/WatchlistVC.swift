@@ -71,9 +71,10 @@ class WatchlistViewController: UIViewController {
         
         watchlistTableView.delegate = self
         watchlistTableView.backgroundColor = .clear
-        watchlistTableView.separatorStyle = .none
+        watchlistTableView.separatorStyle = .singleLine
+        watchlistTableView.separatorInset = .zero
+        watchlistTableView.separatorColor = .secondarySystemBackground
         watchlistTableView.layer.cornerRadius = 10
-        watchlistTableView.tableHeaderView = nil
         watchlistTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: view.width / 20))
         watchlistTableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -123,9 +124,9 @@ class WatchlistViewController: UIViewController {
             }
         }
         
-        watchlistVM.errorMessage?.bind { [weak self] message in
-            //self?.showAlert(message: message ?? "An error has occured")
-        }
+//        watchlistVM.errorMessage?.bind { [weak self] message in
+//            //self?.showAlert(message: message ?? "An error has occured")
+//        }
     }
     
     @objc func didToggleEdit() {

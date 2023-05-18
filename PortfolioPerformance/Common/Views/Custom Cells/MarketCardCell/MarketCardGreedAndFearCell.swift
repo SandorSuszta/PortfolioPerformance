@@ -26,11 +26,13 @@ class MarketCardGreedAndFearCell: MarketCardBaseCell {
     //MARK: - Methods
     
     public func configure(with viewModel: MarketCardCellViewModel) {
+        self.alpha = 0
         headerTitle.text = viewModel.cellType.cellTitle
         valueLabel.text = viewModel.mainMetricValue
         descriptonLabel.text = viewModel.secondaryMetricValue
         descriptonLabel.textColor = viewModel.secondaryMetricTextColor
         progressBar.setProgress(CGFloat(viewModel.progressValue))
+        self.fadeIn()
     }
     
     override func configureLayout() {

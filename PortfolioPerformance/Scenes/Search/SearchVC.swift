@@ -34,7 +34,9 @@ class SearchScreenViewController: UIViewController {
         table.backgroundColor = .clear
         table.sectionHeaderTopPadding = 0
         table.showsVerticalScrollIndicator = false
-        table.separatorColor = .clear
+        table.separatorStyle = .singleLine
+        table.separatorColor = .secondarySystemBackground
+        table.separatorInset = .zero
         table.register(
             ResultsCell.self,
             forCellReuseIdentifier: ResultsCell.identifier

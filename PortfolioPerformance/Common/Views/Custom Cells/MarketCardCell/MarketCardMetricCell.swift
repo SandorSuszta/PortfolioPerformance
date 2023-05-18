@@ -26,12 +26,14 @@ class MarketCardMetricCell: MarketCardBaseCell {
     //MARK: - Methods
     
     public func configure(with viewModel: MarketCardCellViewModel) {
+        self.alpha = 0
         headerTitle.text = viewModel.cellType.cellTitle
         valueLabel.text = viewModel.mainMetricValue
         secondaryLabel.text = viewModel.secondaryMetricValue
         secondaryLabel.textColor = viewModel.secondaryMetricTextColor
         progressBar.progressValue = CGFloat(viewModel.progressValue)
         progressBar.progressColor = viewModel.secondaryMetricTextColor
+        self.fadeIn()
     }
     
     

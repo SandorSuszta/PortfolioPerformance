@@ -77,11 +77,20 @@ class CryptoCurrencyCell: UITableViewCell {
         priceLabel.text = viewModel.currentPrice
         changeLabel.text = viewModel.priceChangePercentage24H
         changeLabel.textColor = viewModel.coinModel.priceChange24H ?? 0 >= 0 ? .nephritis : .pomergranate
-        
+
         imageDownloader?.loadImage(from: viewModel.imageUrl, completion: { [weak self] result in
+            guard let self else { return }
+            
             switch result {
-            case .success(let image):
-                self?.logoImageView.image = image
+            case .success(let (source, image)):
+                
+                switch source {
+                case .downloaded:
+                    self.logoImageView.fadeIn(image)
+                case .cached:
+                    self.logoImageView.image = image
+                }
+         
             case .failure(let error):
                 //TODO: Handle error
                 print(error)

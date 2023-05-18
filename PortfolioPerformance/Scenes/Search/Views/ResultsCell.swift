@@ -91,10 +91,18 @@ class ResultsCell: UITableViewCell {
         symbolLabel.text = model.symbol.uppercased()
         nameLabel.text = model.name
         
-        imageDownloader?.loadImage(from: model.image, completion: { result in
+        imageDownloader?.loadImage(from: model.image, completion: { [weak self] result in
+            guard let self else { return }
+            
             switch result {
-            case .success(let image):
-                self.logoView.image = image
+                
+            case .success(let (source, image)):
+                switch source {
+                case .downloaded:
+                    self.logoView.fadeIn(image)
+                case .cached:
+                    self.logoView.image = image
+                }
             case .failure(let error):
                 print(error)
                 //TODO: Handle error

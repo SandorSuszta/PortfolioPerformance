@@ -154,7 +154,9 @@ class MarketViewController: UIViewController {
         cryptoCurrencyTableView.delegate = self
         cryptoCurrencyTableView.dataSource = self
         cryptoCurrencyTableView.backgroundColor = .systemBackground
-        cryptoCurrencyTableView.separatorStyle = .none
+        cryptoCurrencyTableView.separatorStyle = .singleLine
+        cryptoCurrencyTableView.separatorInset = .zero
+        cryptoCurrencyTableView.separatorColor = .secondarySystemBackground
         cryptoCurrencyTableView.layer.cornerRadius = 15
         cryptoCurrencyTableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -202,9 +204,10 @@ class MarketViewController: UIViewController {
                 self?.marketCardsCollectionView.reloadData()
             }
         }
-        viewModel.errorMessage?.bind { [weak self] message in
-            //self?.showAlert(message: message ?? "An error has occured")
-        }
+        
+//        viewModel.errorMessage?.bind { [weak self] message in
+//            //self?.showAlert(message: message ?? "An error has occured")
+//        }
     }
     
     private func scrollToTop() {
