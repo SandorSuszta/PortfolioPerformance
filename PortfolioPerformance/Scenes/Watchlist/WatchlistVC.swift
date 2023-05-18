@@ -16,6 +16,14 @@ class WatchlistViewController: UIViewController {
     
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
     
+    private lazy var plusButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.clipsToBounds = true
+        button.setImage(UIImage(named: ImageNames.plus), for: .normal)
+        button.addTarget(self, action: #selector(plusButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     //MARK: - Init
     
     init(coordinator: WatchlistCoordinator, watchlistStore: WatchlistStoreProtocol) {
@@ -32,6 +40,7 @@ class WatchlistViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureViewHierarchy()
         configureVC()
         configureNavigationController()
         setupTableView()
@@ -45,9 +54,15 @@ class WatchlistViewController: UIViewController {
     }
     
     //MARK: - Private methods
+    private func configureViewHierarchy() {
+        view.addSubviews(
+            emptyWatchlistView,
+            watchlistTableView,
+            plusButton
+        )
+    }
     
     private func configureVC() {
-        view.addSubview(emptyWatchlistView)
         view.backgroundColor = .secondarySystemBackground
     }
     
@@ -67,7 +82,6 @@ class WatchlistViewController: UIViewController {
     }
     
     private func setupTableView() {
-        view.addSubview(watchlistTableView)
         
         watchlistTableView.delegate = self
         watchlistTableView.backgroundColor = .clear
@@ -89,6 +103,7 @@ class WatchlistViewController: UIViewController {
     }
     
     private func setupConstraints() {
+        plusButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             watchlistTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -99,7 +114,12 @@ class WatchlistViewController: UIViewController {
             emptyWatchlistView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyWatchlistView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             emptyWatchlistView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1 / 2),
-            emptyWatchlistView.heightAnchor.constraint(equalTo: emptyWatchlistView.widthAnchor)
+            emptyWatchlistView.heightAnchor.constraint(equalTo: emptyWatchlistView.widthAnchor),
+            
+            plusButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            plusButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            plusButton.widthAnchor.constraint(equalToConstant: 60),
+            plusButton.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
@@ -127,6 +147,10 @@ class WatchlistViewController: UIViewController {
 //        watchlistVM.errorMessage?.bind { [weak self] message in
 //            //self?.showAlert(message: message ?? "An error has occured")
 //        }
+    }
+    
+    @objc private func plusButtonPressed() {
+        print("thumbs up button pressed")
     }
     
     @objc func didToggleEdit() {
@@ -203,16 +227,5 @@ extension WatchlistViewController: UITableViewDelegate {
         if let coordinator = self.coordinator as? WatchlistCoordinator {
             coordinator.showDetails(for: currentCoinModel)
         }
-        
-        
-//        let detailsVC = CoinDetailsVC(
-//            coinID: currentCoinModel.id,
-//            coinName: currentCoinModel.name,
-//            coinSymbol: currentCoinModel.symbol,
-//            logoURL: currentCoinModel.image,
-//            isFavourite: watchlistStore.getWatchlist().contains(currentCoinModel.id)
-//        )
-//
-//        self.navigationController?.pushViewController(detailsVC, animated: true)
     }
 }

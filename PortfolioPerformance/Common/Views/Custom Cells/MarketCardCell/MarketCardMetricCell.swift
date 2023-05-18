@@ -58,5 +58,3 @@ class MarketCardMetricCell: MarketCardBaseCell {
         ])
     }
 }
-
-
