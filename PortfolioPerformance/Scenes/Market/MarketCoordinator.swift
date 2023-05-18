@@ -1,6 +1,6 @@
 import UIKit
 
-class MarketCoordinator: Coordinator, SearchViewControllerDelegate {
+class MarketCoordinator: Coordinator {
   
     let services: Services
     
@@ -45,5 +45,11 @@ class MarketCoordinator: Coordinator, SearchViewControllerDelegate {
         )
         
         navigationController.pushViewController(detailsVC, animated: true)
+    }
+}
+
+extension MarketCoordinator: SearchViewControllerDelegate {
+    func handleSelection(of representedCoin: CoinRepresenatable) {
+        showDetails(for: representedCoin)
     }
 }

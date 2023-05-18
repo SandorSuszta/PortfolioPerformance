@@ -149,7 +149,9 @@ class WatchlistViewController: UIViewController {
     }
     
     @objc private func plusButtonPressed() {
-        print("thumbs up button pressed")
+        if let coordinator = coordinator as? WatchlistCoordinator {
+            coordinator.showSearch()
+        }
     }
     
     @objc func didToggleEdit() {

@@ -6,6 +6,13 @@ class WatchlistCoordinator: Coordinator {
     
     let services: Services
     
+    //MARK: - Init
+    
+    init(navigationController: UINavigationController, services: Services) {
+        self.navigationController = navigationController
+        self.services = services
+    }
+    
     func start() {
         let watchlistVC = WatchlistViewController(coordinator: self, watchlistStore: services.watchlistStore)
         
@@ -14,9 +21,13 @@ class WatchlistCoordinator: Coordinator {
         navigationController.tabBarItem = AppTab.watchlist.tabBarItem
     }
     
-    init(navigationController: UINavigationController, services: Services) {
-        self.navigationController = navigationController
-        self.services = services
+    //MARK: - Methods
+    
+    func showSearch() {
+        let searchVC = SearchScreenViewController(coordinator: self)
+        searchVC.delegate = self
+        
+        navigationController.pushViewController(searchVC, animated: true)
     }
     
     func showDetails(for representedCoin: CoinRepresenatable) {
@@ -34,5 +45,14 @@ class WatchlistCoordinator: Coordinator {
         )
         
         navigationController.pushViewController(detailsVC, animated: true)
+    }
+}
+
+    //MARK: - Search Delegate Method
+
+extension WatchlistCoordinator: SearchViewControllerDelegate {
+    func handleSelection(of representedCoin: CoinRepresenatable) {
+        services.watchlistStore.saveToWatchlist(id: representedCoin.id)
+        navigationController.popViewController(animated: true)
     }
 }

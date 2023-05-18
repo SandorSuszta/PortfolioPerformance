@@ -7,6 +7,7 @@ final class PPTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBar.tintColor = .PPBlue
         makeTabBarTransparent()
         createTabBarBackgroundLayer()
     }

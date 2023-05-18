@@ -267,7 +267,7 @@ extension SearchScreenViewController: UITableViewDelegate {
             ID: model.id
         )
         
-        delegate?.showDetails(for: model)
+        delegate?.handleSelection(of: model)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
