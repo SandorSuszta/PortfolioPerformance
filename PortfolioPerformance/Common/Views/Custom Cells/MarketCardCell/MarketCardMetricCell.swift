@@ -16,6 +16,7 @@ class MarketCardMetricCell: MarketCardBaseCell {
     
     override init(frame: CGRect) {
         super .init(frame: frame)
+        self.alpha = 0
         configureLayout()
     }
     
@@ -26,7 +27,7 @@ class MarketCardMetricCell: MarketCardBaseCell {
     //MARK: - Methods
     
     public func configure(with viewModel: MarketCardCellViewModel) {
-        self.alpha = 0
+
         headerTitle.text = viewModel.cellType.cellTitle
         valueLabel.text = viewModel.mainMetricValue
         secondaryLabel.text = viewModel.secondaryMetricValue
@@ -35,9 +36,7 @@ class MarketCardMetricCell: MarketCardBaseCell {
         progressBar.progressColor = viewModel.secondaryMetricTextColor
         self.fadeIn()
     }
-    
-    
-    
+
     override func configureLayout() {
         super.configureLayout()
         contentView.addSubviews(progressBar, valueLabel, secondaryLabel)
