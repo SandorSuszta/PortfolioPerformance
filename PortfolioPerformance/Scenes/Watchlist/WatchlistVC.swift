@@ -16,9 +16,8 @@ class WatchlistViewController: UIViewController {
     
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
     
-    private lazy var plusButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.clipsToBounds = true
+    private lazy var plusButton: PPRoundedButton = {
+        let button = PPRoundedButton(type: .custom)
         button.setImage(UIImage(named: ImageNames.plus), for: .normal)
         button.addTarget(self, action: #selector(plusButtonPressed), for: .touchUpInside)
         return button
@@ -116,10 +115,10 @@ class WatchlistViewController: UIViewController {
             emptyWatchlistView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1 / 2),
             emptyWatchlistView.heightAnchor.constraint(equalTo: emptyWatchlistView.widthAnchor),
             
-            plusButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            plusButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            plusButton.widthAnchor.constraint(equalToConstant: 60),
-            plusButton.heightAnchor.constraint(equalToConstant: 60)
+            plusButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            plusButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            plusButton.widthAnchor.constraint(equalToConstant: 64),
+            plusButton.heightAnchor.constraint(equalToConstant: 64)
         ])
     }
     

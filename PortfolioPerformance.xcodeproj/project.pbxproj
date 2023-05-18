@@ -69,6 +69,7 @@
 		79AE53F92A141C8800214CB1 /* CoinRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53F82A141C8800214CB1 /* CoinRepresentable.swift */; };
 		79AE53FB2A1428D300214CB1 /* SearchViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53FA2A1428D300214CB1 /* SearchViewControllerDelegate.swift */; };
 		79AE54032A1648F100214CB1 /* ImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE54022A1648F100214CB1 /* ImageSource.swift */; };
+		79AE54052A16B6C800214CB1 /* PPRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE54042A16B6C800214CB1 /* PPRoundedButton.swift */; };
 		79CF41BF28EEFF7E00CA9F51 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */; };
 		79D5B8E428EDB85100178402 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E328EDB85100178402 /* CustomAlert.swift */; };
 		79D5B8E628EEDABC00178402 /* UIViewController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E528EEDABC00178402 /* UIViewController+ShowAlert.swift */; };
@@ -164,6 +165,7 @@
 		79AE53F82A141C8800214CB1 /* CoinRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRepresentable.swift; sourceTree = "<group>"; };
 		79AE53FA2A1428D300214CB1 /* SearchViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewControllerDelegate.swift; sourceTree = "<group>"; };
 		79AE54022A1648F100214CB1 /* ImageSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSource.swift; sourceTree = "<group>"; };
+		79AE54042A16B6C800214CB1 /* PPRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPRoundedButton.swift; sourceTree = "<group>"; };
 		79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
 		79D5B8E328EDB85100178402 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		79D5B8E528EEDABC00178402 /* UIViewController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowAlert.swift"; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				795E43F52910017D0016F3C3 /* EmptyStateView.swift */,
 				793332C6293F52C2005EE8A3 /* CustomSearchBar.swift */,
 				79F654EB297037F50080DEBB /* PPTextLabel.swift */,
+				79AE54042A16B6C800214CB1 /* PPRoundedButton.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -784,6 +787,7 @@
 				79011E042A002C5A00121A81 /* Coordinator.swift in Sources */,
 				793262C128061136005E4D2E /* GraphEntries.swift in Sources */,
 				7961C37428EB2A010006B9A7 /* PPError.swift in Sources */,
+				79AE54052A16B6C800214CB1 /* PPRoundedButton.swift in Sources */,
 				79FAD73629EDB39800374272 /* PPMarketSort.swift in Sources */,
 				79AE53F62A140D4300214CB1 /* ChartInterval.swift in Sources */,
 				79011E0229FECD2B00121A81 /* RecentSearchesStore.swift in Sources */,
