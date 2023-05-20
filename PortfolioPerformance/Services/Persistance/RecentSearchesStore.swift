@@ -10,7 +10,7 @@ struct RecentSearchesStore: RecentSearchesStoreProtocol {
     
     //MARK: - Properties
     
-    private let recentSearchesKey = PersistantDataType.recentSearches.rawValue
+    private let recentSearchesKey = PersistantDataType.recentSearches.dictionaryKey
     private let defaults = UserDefaults.standard
     
     //MARK: - Methods

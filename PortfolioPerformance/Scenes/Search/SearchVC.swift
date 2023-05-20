@@ -76,7 +76,7 @@ class SearchScreenViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        searchBar.becomeFirstResponder()
         viewModel.updateRecentSearches()
     }
     

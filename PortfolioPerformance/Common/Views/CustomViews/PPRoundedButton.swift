@@ -10,7 +10,7 @@ class PPRoundedButton: UIButton {
         
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
         layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 1)
+        layer.shadowOffset = .zero
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 3.0
     }

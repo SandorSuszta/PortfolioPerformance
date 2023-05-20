@@ -117,8 +117,8 @@ class WatchlistViewController: UIViewController {
             
             plusButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
             plusButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            plusButton.widthAnchor.constraint(equalToConstant: 64),
-            plusButton.heightAnchor.constraint(equalToConstant: 64)
+            plusButton.widthAnchor.constraint(equalToConstant: 60),
+            plusButton.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     

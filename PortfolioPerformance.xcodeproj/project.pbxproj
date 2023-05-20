@@ -41,7 +41,6 @@
 		7955694928773472003E8A13 /* SortOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955694828773472003E8A13 /* SortOptionsCell.swift */; };
 		7955B09329DF6F8A00492059 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B09229DF6F8900492059 /* ImageDownloader.swift */; };
 		7955B09529E0B60700492059 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B09429E0B60700492059 /* ImageCacheManager.swift */; };
-		79598C5229E3239C00C9D240 /* Array+sortedByPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79598C5129E3239C00C9D240 /* Array+sortedByPrefix.swift */; };
 		795D95E429E8B0A4007555EF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795D95E329E8B0A4007555EF /* Router.swift */; };
 		795E43F62910017D0016F3C3 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795E43F52910017D0016F3C3 /* EmptyStateView.swift */; };
 		7961C37428EB2A010006B9A7 /* PPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7961C37328EB2A010006B9A7 /* PPError.swift */; };
@@ -70,9 +69,10 @@
 		79AE53FB2A1428D300214CB1 /* SearchViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53FA2A1428D300214CB1 /* SearchViewControllerDelegate.swift */; };
 		79AE54032A1648F100214CB1 /* ImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE54022A1648F100214CB1 /* ImageSource.swift */; };
 		79AE54052A16B6C800214CB1 /* PPRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE54042A16B6C800214CB1 /* PPRoundedButton.swift */; };
+		79AE54092A177A7100214CB1 /* Array+SortByPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE54082A177A7100214CB1 /* Array+SortByPrefix.swift */; };
 		79CF41BF28EEFF7E00CA9F51 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */; };
 		79D5B8E428EDB85100178402 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E328EDB85100178402 /* CustomAlert.swift */; };
-		79D5B8E628EEDABC00178402 /* UIViewController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E528EEDABC00178402 /* UIViewController+ShowAlert.swift */; };
+		79D5B8E628EEDABC00178402 /* UINavigationController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E528EEDABC00178402 /* UINavigationController+ShowAlert.swift */; };
 		79D5B8E828EEE3FF00178402 /* PPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E728EEE3FF00178402 /* PPButton.swift */; };
 		79D5C6D328DC75060018B133 /* DetailsCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5C6D228DC75060018B133 /* DetailsCellVM.swift */; };
 		79E7A21728E5FAF000BD5CB0 /* MarketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7A21628E5FAF000BD5CB0 /* MarketVC.swift */; };
@@ -136,7 +136,6 @@
 		7955694828773472003E8A13 /* SortOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionsCell.swift; sourceTree = "<group>"; };
 		7955B09229DF6F8900492059 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		7955B09429E0B60700492059 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
-		79598C5129E3239C00C9D240 /* Array+sortedByPrefix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+sortedByPrefix.swift"; sourceTree = "<group>"; };
 		795D95E329E8B0A4007555EF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		795E43F52910017D0016F3C3 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		7961C37328EB2A010006B9A7 /* PPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPError.swift; sourceTree = "<group>"; };
@@ -166,9 +165,10 @@
 		79AE53FA2A1428D300214CB1 /* SearchViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewControllerDelegate.swift; sourceTree = "<group>"; };
 		79AE54022A1648F100214CB1 /* ImageSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSource.swift; sourceTree = "<group>"; };
 		79AE54042A16B6C800214CB1 /* PPRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPRoundedButton.swift; sourceTree = "<group>"; };
+		79AE54082A177A7100214CB1 /* Array+SortByPrefix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SortByPrefix.swift"; sourceTree = "<group>"; };
 		79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
 		79D5B8E328EDB85100178402 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
-		79D5B8E528EEDABC00178402 /* UIViewController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowAlert.swift"; sourceTree = "<group>"; };
+		79D5B8E528EEDABC00178402 /* UINavigationController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+ShowAlert.swift"; sourceTree = "<group>"; };
 		79D5B8E728EEE3FF00178402 /* PPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPButton.swift; sourceTree = "<group>"; };
 		79D5C6D228DC75060018B133 /* DetailsCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCellVM.swift; sourceTree = "<group>"; };
 		79E7A21628E5FAF000BD5CB0 /* MarketVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketVC.swift; sourceTree = "<group>"; };
@@ -211,7 +211,7 @@
 			children = (
 				79011E122A05998000121A81 /* DataTyoes */,
 				79011DFB29FD8E5700121A81 /* WatchlistStore.swift */,
-				79011DFD29FD8F4E00121A81 /* PersistantDataType.swift */,
+				790C30C427CEA7620021658F /* UserDefaultsService.swift */,
 				79011E0129FECD2B00121A81 /* RecentSearchesStore.swift */,
 			);
 			path = Persistance;
@@ -251,7 +251,7 @@
 		79011E122A05998000121A81 /* DataTyoes */ = {
 			isa = PBXGroup;
 			children = (
-				790C30C427CEA7620021658F /* UserDefaultsService.swift */,
+				79011DFD29FD8F4E00121A81 /* PersistantDataType.swift */,
 			);
 			path = DataTyoes;
 			sourceTree = "<group>";
@@ -262,13 +262,6 @@
 				79011E0C2A044B1F00121A81 /* AppTab.swift */,
 			);
 			path = DataTypes;
-			sourceTree = "<group>";
-		};
-		790C30C327CEA71A0021658F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		792C040728C9E5D4008EE48C /* CustomViews */ = {
@@ -292,12 +285,12 @@
 			isa = PBXGroup;
 			children = (
 				7986A50A28E5B02C00332A48 /* UIView */,
-				79598C5129E3239C00C9D240 /* Array+sortedByPrefix.swift */,
 				79011DFF29FDA86200121A81 /* Array+sortedByList.swift */,
+				79AE54082A177A7100214CB1 /* Array+SortByPrefix.swift */,
 				7982923127E673E6007ECCCD /* UIColor+CustomColors.swift */,
 				7982923327E678A5007ECCCD /* String+Formatters.swift */,
 				79807A6F28ECBA01000825B0 /* LineChartView+Configure.swift */,
-				79D5B8E528EEDABC00178402 /* UIViewController+ShowAlert.swift */,
+				79D5B8E528EEDABC00178402 /* UINavigationController+ShowAlert.swift */,
 				797303B8296DFD700006CF76 /* Int+Radiant.swift */,
 			);
 			path = Extensions;
@@ -570,7 +563,6 @@
 				79E7A21528E5F9CD00BD5CB0 /* Scenes */,
 				79410D8A2822938100BD9EA4 /* Services */,
 				7934EFA2282A72DD00CE7FD0 /* Extensions */,
-				790C30C327CEA71A0021658F /* Supporting Files */,
 				79EAFD2527B3DCDE008A6062 /* Assets.xcassets */,
 				79EAFD2A27B3DCDE008A6062 /* Info.plist */,
 			);
@@ -747,12 +739,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7934EFA4282A824E00CE7FD0 /* ResultsCell.swift in Sources */,
-				79598C5229E3239C00C9D240 /* Array+sortedByPrefix.swift in Sources */,
 				792C040928C9E62B008EE48C /* RangeProgressView.swift in Sources */,
 				796EFA3A286DDD60005E24AF /* ObservableObject.swift in Sources */,
-				79D5B8E628EEDABC00178402 /* UIViewController+ShowAlert.swift in Sources */,
+				79D5B8E628EEDABC00178402 /* UINavigationController+ShowAlert.swift in Sources */,
 				79F654EE297064B90080DEBB /* MarketCardGreedAndFearCell.swift in Sources */,
 				79410D8F282416C000BD9EA4 /* SearchVC.swift in Sources */,
+				79AE54092A177A7100214CB1 /* Array+SortByPrefix.swift in Sources */,
 				7955694928773472003E8A13 /* SortOptionsCell.swift in Sources */,
 				79EC45B528F0B9DC006A849A /* CustomSegmentedControl.swift in Sources */,
 				792C040628C14386008EE48C /* CoinDetailsVM.swift in Sources */,
@@ -1011,7 +1003,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B9D9FYA643;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PortfolioPerformance/Info.plist;
@@ -1025,7 +1017,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sandorsuszta.PortfolioPerformance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1043,7 +1035,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B9D9FYA643;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PortfolioPerformance/Info.plist;
@@ -1057,7 +1049,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sandorsuszta.PortfolioPerformance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

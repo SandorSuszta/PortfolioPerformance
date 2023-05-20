@@ -23,4 +23,3 @@ extension Array where Element == SearchResult {
         return self.sorted(by: comparator)
     }
 }
-

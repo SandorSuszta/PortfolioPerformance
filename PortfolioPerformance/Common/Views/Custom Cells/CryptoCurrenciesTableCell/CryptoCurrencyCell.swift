@@ -5,6 +5,7 @@ class CryptoCurrencyCell: UITableViewCell {
     //MARK: - Properties
     
     static let identifier = "CryptoCurrencyCell"
+    
     static let prefferredHeight: CGFloat = 56
     
     var imageDownloader: ImageDownloaderProtocol?
@@ -105,6 +106,10 @@ class CryptoCurrencyCell: UITableViewCell {
         contentView.addSubviews(logoContainerView, labelsContainerView)
         logoContainerView.addSubviews(logoImageView)
         labelsContainerView.addSubviews(nameLabel, symbolLabel, priceLabel, changeLabel)
+    
+        
+        nameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        symbolLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         
         NSLayoutConstraint.activate([
             logoContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -124,10 +129,12 @@ class CryptoCurrencyCell: UITableViewCell {
             
             nameLabel.topAnchor.constraint(equalTo: labelsContainerView.topAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: labelsContainerView.leadingAnchor),
+            nameLabel.trailingAnchor.constraint(equalTo: priceLabel.leadingAnchor, constant: -8),
             nameLabel.heightAnchor.constraint(equalToConstant: 18),
             
             symbolLabel.bottomAnchor.constraint(equalTo: labelsContainerView.bottomAnchor),
             symbolLabel.leadingAnchor.constraint(equalTo: labelsContainerView.leadingAnchor),
+            symbolLabel.trailingAnchor.constraint(lessThanOrEqualTo: changeLabel.leadingAnchor, constant: -8),
             symbolLabel.heightAnchor.constraint(equalToConstant: 16),
             
             priceLabel.topAnchor.constraint(equalTo: nameLabel.topAnchor),

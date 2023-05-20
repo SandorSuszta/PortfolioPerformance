@@ -56,6 +56,7 @@ class CoinDetailsVC: UIViewController {
         let view = UIImageView()
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 15
+        view.configureWithShadow()
         return view
     }()
     
@@ -70,6 +71,7 @@ class CoinDetailsVC: UIViewController {
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 15
+        view.configureWithShadow()
         return view
     }()
     
@@ -81,6 +83,7 @@ class CoinDetailsVC: UIViewController {
         let bar = RangeProgressView()
         bar.titleLabel.text = "Day range"
         bar.progressBar.progress = 0.5
+        bar.configureWithShadow()
         bar.titleLabel.sizeToFit()
         return bar
     }()
