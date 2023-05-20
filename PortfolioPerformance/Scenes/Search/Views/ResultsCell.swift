@@ -43,37 +43,36 @@ class ResultsCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let imageSize: CGFloat = contentView.height - 20
+        logoContainerView.translatesAutoresizingMaskIntoConstraints = false
+        logoView.translatesAutoresizingMaskIntoConstraints = false
+        symbolLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.backgroundColor = .yellow
         
-        logoContainerView.frame = CGRect(
-            x: contentView.left + 10,
-            y: 10,
-            width: imageSize,
-            height: imageSize
-        )
+        NSLayoutConstraint.activate([
         
-        logoView.frame = CGRect(
-            x: 5,
-            y: 5,
-            width: imageSize - 10,
-            height: imageSize - 10
-        )
-        
-        symbolLabel.sizeToFit()
-        symbolLabel.frame = CGRect(
-            x: logoContainerView.right + 10,
-            y: 0,
-            width: symbolLabel.width,
-            height: contentView.height
-        )
-        
-        nameLabel.frame = CGRect(
-            x: symbolLabel.right + 10,
-            y: 0,
-            width: contentView.width - logoView.width - symbolLabel.width,
-            height: contentView.height
-        )
+            logoContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            logoContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            logoContainerView.widthAnchor.constraint(equalToConstant: contentView.bounds.height - 20),
+            logoContainerView.heightAnchor.constraint(equalToConstant: contentView.bounds.height - 20),
+            
+            logoView.leadingAnchor.constraint(equalTo: logoContainerView.leadingAnchor, constant: 5),
+            logoView.topAnchor.constraint(equalTo: logoContainerView.topAnchor, constant: 5),
+            logoView.trailingAnchor.constraint(equalTo: logoContainerView.trailingAnchor, constant: -5),
+            logoView.bottomAnchor.constraint(equalTo: logoContainerView.bottomAnchor, constant: -5),
+            
+            nameLabel.leadingAnchor.constraint(equalTo: logoContainerView.trailingAnchor, constant: 10),
+            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            nameLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor),
+            
+            symbolLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 10),
+            symbolLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            symbolLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            symbolLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
+        ])
     }
+
     
     override func prepareForReuse() {
         super.prepareForReuse()

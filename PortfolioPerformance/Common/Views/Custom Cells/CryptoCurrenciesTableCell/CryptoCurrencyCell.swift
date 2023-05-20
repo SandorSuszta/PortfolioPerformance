@@ -59,6 +59,7 @@ class CryptoCurrencyCell: UITableViewCell {
         symbolLabel.text = nil
         priceLabel.text = nil
         changeLabel.text = nil
+        
         imageDownloader?.cancelDownload()
     }
     
@@ -97,6 +98,7 @@ class CryptoCurrencyCell: UITableViewCell {
                 print(error)
             }
         })
+        
         selectionStyle = .none
     }
     
@@ -134,7 +136,7 @@ class CryptoCurrencyCell: UITableViewCell {
             
             symbolLabel.bottomAnchor.constraint(equalTo: labelsContainerView.bottomAnchor),
             symbolLabel.leadingAnchor.constraint(equalTo: labelsContainerView.leadingAnchor),
-            symbolLabel.trailingAnchor.constraint(lessThanOrEqualTo: changeLabel.leadingAnchor, constant: -8),
+            symbolLabel.trailingAnchor.constraint(equalTo: changeLabel.leadingAnchor, constant: -8),
             symbolLabel.heightAnchor.constraint(equalToConstant: 16),
             
             priceLabel.topAnchor.constraint(equalTo: nameLabel.topAnchor),
