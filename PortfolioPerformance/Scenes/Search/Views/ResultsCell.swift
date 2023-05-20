@@ -38,10 +38,10 @@ class ResultsCell: UITableViewCell {
         backgroundColor = .systemBackground
         logoContainerView.addSubview(logoView)
         contentView.addSubviews(symbolLabel, nameLabel, logoContainerView)
+        viewLayout()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    func viewLayout() {
         
         logoContainerView.translatesAutoresizingMaskIntoConstraints = false
         logoView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,8 +53,8 @@ class ResultsCell: UITableViewCell {
         
             logoContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             logoContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            logoContainerView.widthAnchor.constraint(equalToConstant: contentView.bounds.height - 20),
-            logoContainerView.heightAnchor.constraint(equalToConstant: contentView.bounds.height - 20),
+            logoContainerView.heightAnchor.constraint(equalTo: contentView.heightAnchor, constant: -20),
+            logoContainerView.widthAnchor.constraint(equalTo: logoContainerView.heightAnchor),
             
             logoView.leadingAnchor.constraint(equalTo: logoContainerView.leadingAnchor, constant: 5),
             logoView.topAnchor.constraint(equalTo: logoContainerView.topAnchor, constant: 5),
