@@ -72,11 +72,7 @@ class CryptoCurrencyCell: UITableViewCell {
         }
     }
     
-    //MARK: - Private Methods
-    
-    private func configureContentView() {
-        contentView.backgroundColor = .systemBackground
-    }
+    //MARK: - API
     
     func configureCell(with viewModel: CryptoCurrencyCellViewModel) {
         nameLabel.text = viewModel.name
@@ -108,16 +104,24 @@ class CryptoCurrencyCell: UITableViewCell {
     }
 }
 
-    //MARK: - View Layout
+    //MARK: - View Layout And Configuration
 
 private extension CryptoCurrencyCell {
     
     enum Constants {
         static let viewCornerRadius  = 8.0
+        
         static let logoViewHeight    = 40.0
         static let nameLabelHeight   = 18.0
         static let symbolLabelHeight = 16.0
-        static let logoContainerViewPadding = 16.0
+        
+        static let verticalPaddingBetweenLogoTopAndNameTop = 2.0
+        static let horizontalLogoContainerViewPadding      = 16.0
+        static let horizontalPaddingBetweenLabels          = 8.0
+    }
+    
+    func configureContentView() {
+        contentView.backgroundColor = .systemBackground
     }
     
     func setupViewHierarchy() {
@@ -127,7 +131,6 @@ private extension CryptoCurrencyCell {
     }
     
     func setupViewLayout() {
-        
         logoContainerView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         labelsContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -140,7 +143,7 @@ private extension CryptoCurrencyCell {
         symbolLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         
         NSLayoutConstraint.activate([
-            logoContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            logoContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.horizontalLogoContainerViewPadding),
             logoContainerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             logoContainerView.heightAnchor.constraint(equalToConstant: Constants.logoViewHeight),
             logoContainerView.widthAnchor.constraint(equalToConstant: Constants.logoViewHeight),
@@ -151,18 +154,18 @@ private extension CryptoCurrencyCell {
             logoImageView.widthAnchor.constraint(equalTo: logoContainerView.widthAnchor),
             
             labelsContainerView.centerYAnchor.constraint(equalTo: logoContainerView.centerYAnchor),
-            labelsContainerView.leadingAnchor.constraint(equalTo: logoContainerView.trailingAnchor, constant: Constants.logoContainerViewPadding),
-            labelsContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.logoContainerViewPadding),
+            labelsContainerView.leadingAnchor.constraint(equalTo: logoContainerView.trailingAnchor, constant: Constants.horizontalLogoContainerViewPadding),
+            labelsContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.horizontalLogoContainerViewPadding),
             labelsContainerView.heightAnchor.constraint(equalTo: logoContainerView.heightAnchor),
             
-            nameLabel.topAnchor.constraint(equalTo: labelsContainerView.topAnchor, constant: 2),
+            nameLabel.topAnchor.constraint(equalTo: labelsContainerView.topAnchor, constant: Constants.verticalPaddingBetweenLogoTopAndNameTop),
             nameLabel.leadingAnchor.constraint(equalTo: labelsContainerView.leadingAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: priceLabel.leadingAnchor, constant: -8),
+            nameLabel.trailingAnchor.constraint(equalTo: priceLabel.leadingAnchor, constant: -Constants.horizontalPaddingBetweenLabels),
             nameLabel.heightAnchor.constraint(equalToConstant: Constants.nameLabelHeight),
             
-            symbolLabel.bottomAnchor.constraint(equalTo: labelsContainerView.bottomAnchor, constant: -2),
+            symbolLabel.bottomAnchor.constraint(equalTo: labelsContainerView.bottomAnchor, constant: -Constants.verticalPaddingBetweenLogoTopAndNameTop),
             symbolLabel.leadingAnchor.constraint(equalTo: labelsContainerView.leadingAnchor),
-            symbolLabel.trailingAnchor.constraint(equalTo: changeLabel.leadingAnchor, constant: -8),
+            symbolLabel.trailingAnchor.constraint(equalTo: changeLabel.leadingAnchor, constant: -Constants.horizontalPaddingBetweenLabels),
             symbolLabel.heightAnchor.constraint(equalToConstant: Constants.symbolLabelHeight),
             
             priceLabel.topAnchor.constraint(equalTo: nameLabel.topAnchor),
