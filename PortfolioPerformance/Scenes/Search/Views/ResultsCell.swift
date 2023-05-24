@@ -47,13 +47,12 @@ class ResultsCell: UITableViewCell {
         logoView.translatesAutoresizingMaskIntoConstraints = false
         symbolLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.backgroundColor = .yellow
         
         NSLayoutConstraint.activate([
         
-            logoContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            logoContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            logoContainerView.heightAnchor.constraint(equalTo: contentView.heightAnchor, constant: -20),
+            logoContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            logoContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            logoContainerView.heightAnchor.constraint(equalTo: contentView.heightAnchor, constant: -16),
             logoContainerView.widthAnchor.constraint(equalTo: logoContainerView.heightAnchor),
             
             logoView.leadingAnchor.constraint(equalTo: logoContainerView.leadingAnchor, constant: 5),
