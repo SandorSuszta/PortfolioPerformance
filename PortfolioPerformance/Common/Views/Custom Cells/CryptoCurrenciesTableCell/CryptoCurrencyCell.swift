@@ -1,6 +1,6 @@
 import UIKit
 
-class CryptoCurrencyCell: UITableViewCell {
+final class CryptoCurrencyCell: UITableViewCell {
     
     //MARK: - Properties
     
@@ -28,7 +28,7 @@ class CryptoCurrencyCell: UITableViewCell {
         return view
     }()
     
-    let logoImageView: UIImageView = {
+    private let logoImageView: UIImageView = {
         let image = UIImageView()
         image.clipsToBounds = true
         image.layer.cornerRadius = Constants.viewCornerRadius

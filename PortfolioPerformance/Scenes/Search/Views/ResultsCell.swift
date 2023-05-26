@@ -3,7 +3,8 @@ import UIKit
 class ResultsCell: UITableViewCell {
     
     static let identifier = "ResultsCell"
-    static let preferredHeight: CGFloat = 60
+    
+    static let preferredHeight: CGFloat = 64
     
     var imageDownloader: ImageDownloaderProtocol?
     
@@ -50,24 +51,22 @@ class ResultsCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
         
-            logoContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            logoContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            logoContainerView.heightAnchor.constraint(equalTo: contentView.heightAnchor, constant: -16),
+            logoContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            logoContainerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            logoContainerView.heightAnchor.constraint(equalToConstant: 40),
             logoContainerView.widthAnchor.constraint(equalTo: logoContainerView.heightAnchor),
             
-            logoView.leadingAnchor.constraint(equalTo: logoContainerView.leadingAnchor, constant: 5),
-            logoView.topAnchor.constraint(equalTo: logoContainerView.topAnchor, constant: 5),
-            logoView.trailingAnchor.constraint(equalTo: logoContainerView.trailingAnchor, constant: -5),
-            logoView.bottomAnchor.constraint(equalTo: logoContainerView.bottomAnchor, constant: -5),
+            logoView.leadingAnchor.constraint(equalTo: logoContainerView.leadingAnchor),
+            logoView.topAnchor.constraint(equalTo: logoContainerView.topAnchor),
+            logoView.trailingAnchor.constraint(equalTo: logoContainerView.trailingAnchor),
+            logoView.bottomAnchor.constraint(equalTo: logoContainerView.bottomAnchor),
             
-            nameLabel.leadingAnchor.constraint(equalTo: logoContainerView.trailingAnchor, constant: 10),
-            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: logoContainerView.trailingAnchor, constant: 16),
+            nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             nameLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor),
             
-            symbolLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 10),
-            symbolLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            symbolLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            symbolLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 8),
+            symbolLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             symbolLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
         ])
     }

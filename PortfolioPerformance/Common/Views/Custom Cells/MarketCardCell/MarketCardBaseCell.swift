@@ -10,7 +10,7 @@ enum MarketCardCellType: String {
 
 class MarketCardBaseCell: UICollectionViewCell {
     
-    let headerTitle = PPTextLabel(fontSize: 18, fontWeight: .semibold)
+    let headerTitle = PPTextLabel(fontSize: 18, fontWeight: .medium)
     
     //MARK: - Init
     

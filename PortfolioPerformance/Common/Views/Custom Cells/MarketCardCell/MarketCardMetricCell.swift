@@ -52,7 +52,7 @@ class MarketCardMetricCell: MarketCardBaseCell {
             valueLabel.centerYAnchor.constraint(equalTo: progressBar.centerYAnchor),
             valueLabel.heightAnchor.constraint(equalTo: progressBar.heightAnchor, multiplier: 0.2),
             
-            secondaryLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            secondaryLabel.centerXAnchor.constraint(equalTo: progressBar.centerXAnchor),
             secondaryLabel.topAnchor.constraint(equalTo: valueLabel.bottomAnchor),
             secondaryLabel.heightAnchor.constraint(equalTo: valueLabel.heightAnchor, multiplier: 0.7),
         ])
