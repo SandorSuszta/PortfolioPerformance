@@ -6,6 +6,8 @@ enum WatchlistSection {
 
 final class WatchlistDataSource: UITableViewDiffableDataSource<WatchlistSection, CoinModel> {
     
+    var didDeleteCells: ((_ indexPath: IndexPath) -> Void)?
+    
     var didReorderCells: ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)?
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -18,8 +20,10 @@ final class WatchlistDataSource: UITableViewDiffableDataSource<WatchlistSection,
             
             if let item = itemIdentifier(for: indexPath) {
                 snapshot.deleteItems([item])
-                UserDefaultsService.shared.deleteFrom(.watchlist, ID: item.id)
                 apply(snapshot, animatingDifferences: true)
+                
+                didDeleteCells?(indexPath)
+                UserDefaultsService.shared.deleteFrom(.watchlist, ID: item.id)
             }
         }
     }
