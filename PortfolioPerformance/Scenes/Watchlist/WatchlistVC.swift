@@ -189,15 +189,15 @@ private extension WatchlistViewController {
             return cell
         }
         
-        dataSource.defaultRowAnimation = .automatic
+        dataSource.defaultRowAnimation = .fade
         
-        dataSource.didReorderCells = { sourceIndexPath, destinationIndexPath in
+        dataSource.onMoveCell = { sourceIndexPath, destinationIndexPath in
         
             self.watchlistVM.reorderCellViewModels(from: sourceIndexPath, to: destinationIndexPath)
             self.watchlistStore.reorderWatchlist(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
         }
         
-        dataSource.didDeleteCells = { indexPath in
+        dataSource.onDeleteCell = { indexPath in
             self.watchlistVM.cellViewModels.value?.remove(at: indexPath.row)
         }
         

@@ -5,14 +5,10 @@ class SearchScreenViewController: UIViewController {
     weak var delegate: SearchViewControllerDelegate?
 
     //MARK: - Properties
-    
-    private enum SearchBarState {
-        case searching
-        case emptyWithRecents
-        case emptyWithoutRecents
-    }
-    
+
     private let coordinator: Coordinator
+    
+    private lazy var dataSource = SearchTableDataSource(tableView: resultsTableView)
     
     private let viewModel: SearchScreenViewModel
     
@@ -23,9 +19,11 @@ class SearchScreenViewController: UIViewController {
     private var searchBarState: SearchBarState {
         determineSearchBarState(
             isSearching: isSearching,
-            isRecentSearchesEmpty: viewModel.defaultCellModels.value?[0].isEmpty ?? true
+            isRecentSearchesEmpty: viewModel.isRecentSearchesEmpty
         )
     }
+    
+    //MARK: - UI Elements
     
     lazy private var searchBar = UISearchBar()
     
@@ -66,6 +64,9 @@ class SearchScreenViewController: UIViewController {
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
+        
+        //reload data
+        
         super.viewDidLoad()
         setUpViewController()
         setUpResultsTableVIew()
@@ -104,7 +105,7 @@ class SearchScreenViewController: UIViewController {
     private func setUpResultsTableVIew() {
         view.addSubview(resultsTableView)
         resultsTableView.delegate = self
-        resultsTableView.dataSource = self
+
     }
     
     private func bindViewModels() {
@@ -113,7 +114,7 @@ class SearchScreenViewController: UIViewController {
             guard let self else { return }
       
             DispatchQueue.main.async {
-                self.resultsTableView.reloadData()
+                self.reloadData()
                 
                 guard let models = self.viewModel.searchResultCellModels.value else {
                     self.noResultsView.isHidden = true
@@ -130,7 +131,7 @@ class SearchScreenViewController: UIViewController {
             guard let self = self else { return }
             
             DispatchQueue.main.async {
-                self.resultsTableView.reloadData()
+                self.reloadData()
             }
         }
         
@@ -145,6 +146,8 @@ class SearchScreenViewController: UIViewController {
             self.coordinator.navigationController.showAlert(message: message)
         }
     }
+    
+    
     
     private func setupConstraints() {
 
@@ -165,91 +168,123 @@ class SearchScreenViewController: UIViewController {
         
         switch (isSearching, isRecentSearchesEmpty) {
         case (true, _):
-            return .searching
+            return .searching(resultModels: viewModel.searchResultCellModels.value ?? [])
         case (false, false):
-            return .emptyWithRecents
+            return .emptyWithRecents(recentModels: viewModel.defaultCellModels.value?[0] ?? [],
+                                     trendingModels: viewModel.defaultCellModels.value?[1] ?? [])
         case (false, true):
-            return .emptyWithoutRecents
+            return .emptyWithoutRecents(trendingModels: viewModel.defaultCellModels.value?[1] ?? [])
         }
     }
 }
 
     //MARK: - TableView data source methods
 
-extension SearchScreenViewController: UITableViewDataSource {
+extension SearchScreenViewController {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        isSearching ? 1 : viewModel.defaultCellModels.value?.count ?? 0
-    }
+    typealias SearchScreenSnapshot = NSDiffableDataSourceSnapshot<SearchTableViewSection, SearchResult>
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    private func makeSnapshot() -> SearchScreenSnapshot {
+        var snapshot = SearchScreenSnapshot()
         
-        isSearching ? viewModel.searchResultCellModels.value?.count ?? 0 : viewModel.defaultCellModels.value?[section].count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = resultsTableView.dequeueReusableCell(
-            withIdentifier: ResultsCell.identifier,
-            for: indexPath
-        ) as? ResultsCell else { return UITableViewCell() }
-        
-        var model: SearchResult?
-        
-        if isSearching {
-            model = viewModel.searchResultCellModels.value?[indexPath.row]
-        } else {
-            model = viewModel.defaultCellModels.value?[indexPath.section][indexPath.row]
+        switch searchBarState {
+            
+        case .emptyWithRecents(let recentModels, let trendingModels):
+            snapshot.appendSections([.recentSearches, .trendingCoins])
+            snapshot.appendItems(recentModels, toSection: .recentSearches)
+            snapshot.appendItems(trendingModels, toSection: .trendingCoins)
+            
+        case .emptyWithoutRecents(let trendingModels):
+            snapshot.appendSections([.trendingCoins])
+            snapshot.appendItems(trendingModels, toSection: .trendingCoins)
+            
+        case .searching(let resultModels):
+            snapshot.appendSections([.recentSearches])
+            snapshot.appendItems(resultModels, toSection: .recentSearches)
         }
         
-        guard let model else { return UITableViewCell() }
-        
-        cell.imageDownloader = ImageDownloader()
-        cell.configure(withModel: model)
-        
-        return cell
+        return snapshot
+    }
+    
+    func reloadData() {
+        dataSource.apply(makeSnapshot(), animatingDifferences: true)
     }
 }
+
+//extension SearchScreenViewController: UITableViewDataSource {
+//
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//
+//        isSearching ? 1 : viewModel.defaultCellModels.value?.count ?? 0
+//    }
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//
+//        isSearching ? viewModel.searchResultCellModels.value?.count ?? 0 : viewModel.defaultCellModels.value?[section].count ?? 0
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        guard let cell = resultsTableView.dequeueReusableCell(
+//            withIdentifier: ResultsCell.identifier,
+//            for: indexPath
+//        ) as? ResultsCell else { return UITableViewCell() }
+//
+//        var model: SearchResult?
+//
+//        if isSearching {
+//            model = viewModel.searchResultCellModels.value?[indexPath.row]
+//        } else {
+//            model = viewModel.defaultCellModels.value?[indexPath.section][indexPath.row]
+//        }
+//
+//        guard let model else { return UITableViewCell() }
+//
+//        cell.imageDownloader = ImageDownloader()
+//        cell.configure(withModel: model)
+//
+//        return cell
+//    }
+//}
     //MARK: - TableView delegate methods
     
 extension SearchScreenViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        let trendingCoinsHeader = PPSectionHeaderView(type: .trendingCoins, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
-        
-        switch searchBarState {
-            
-        case .searching:
-            let searchingHeader = PPSectionHeaderView(type: .searching, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
-            
-            return searchingHeader
-            
-        case .emptyWithoutRecents:
-            return [nil, trendingCoinsHeader][section]
-            
-        case .emptyWithRecents:
-            let recentSearchesHeader = PPSectionHeaderView(type: .recentSearches, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
-            
-            recentSearchesHeader.buttonAction = { [weak self] in
-                self?.viewModel.clearRecentSearches()
-                UserDefaultsService.shared.clearRecentSearchesIDs()
-            }
-            
-            return [recentSearchesHeader,trendingCoinsHeader][section]
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        switch searchBarState {
-        case .emptyWithoutRecents:
-            return [0, PPSectionHeaderView.preferredHeight][section]
-        case .emptyWithRecents, .searching:
-            return PPSectionHeaderView.preferredHeight
-        }
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//
+//        let trendingCoinsHeader = PPSectionHeaderView(type: .trendingCoins, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
+//
+//        switch searchBarState {
+//
+//        case .searching:
+//            let searchingHeader = PPSectionHeaderView(type: .searching, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
+//
+//            return searchingHeader
+//
+//        case .emptyWithoutRecents:
+//            return [nil, trendingCoinsHeader][section]
+//
+//        case .emptyWithRecents:
+//            let recentSearchesHeader = PPSectionHeaderView(type: .recentSearches, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
+//
+//            recentSearchesHeader.buttonAction = { [weak self] in
+//                self?.viewModel.clearRecentSearches()
+//                UserDefaultsService.shared.clearRecentSearchesIDs()
+//            }
+//
+//            return [recentSearchesHeader,trendingCoinsHeader][section]
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//
+//        switch searchBarState {
+//        case .emptyWithoutRecents:
+//            return [0, PPSectionHeaderView.preferredHeight][section]
+//        case .emptyWithRecents, .searching:
+//            return PPSectionHeaderView.preferredHeight
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

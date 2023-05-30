@@ -70,7 +70,6 @@ class ResultsCell: UITableViewCell {
             symbolLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
         ])
     }
-
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -91,18 +90,20 @@ class ResultsCell: UITableViewCell {
         imageDownloader?.loadImage(from: model.image, completion: { [weak self] result in
             guard let self else { return }
             
-            switch result {
-                
-            case .success(let (source, image)):
-                switch source {
-                case .downloaded:
-                    self.logoView.fadeIn(image)
-                case .cached:
-                    self.logoView.image = image
+            DispatchQueue.main.async {
+                switch result {
+                    
+                case .success(let (source, image)):
+                    switch source {
+                    case .downloaded:
+                        self.logoView.fadeIn(image)
+                    case .cached:
+                        self.logoView.image = image
+                    }
+                case .failure(let error):
+                    print(error)
+                    //TODO: Handle error
                 }
-            case .failure(let error):
-                print(error)
-                //TODO: Handle error
             }
         })
     }

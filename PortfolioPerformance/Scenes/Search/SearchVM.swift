@@ -4,6 +4,9 @@ class SearchScreenViewModel {
     let networkingService: NetworkingServiceProtocol
     
     //MARK: - Observable properties
+    var isRecentSearchesEmpty: Bool {
+        defaultCellModels.value?[0].isEmpty ?? true
+    }
     
     var defaultCellModels: ObservableObject<[[SearchResult]]> = ObservableObject(value: [[],[]])
     

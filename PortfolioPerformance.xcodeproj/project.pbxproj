@@ -71,6 +71,9 @@
 		79AE54052A16B6C800214CB1 /* PPRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE54042A16B6C800214CB1 /* PPRoundedButton.swift */; };
 		79AE54092A177A7100214CB1 /* Array+SortByPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE54082A177A7100214CB1 /* Array+SortByPrefix.swift */; };
 		79CF41BF28EEFF7E00CA9F51 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */; };
+		79CFFCA62A26A59900E1E58A /* SearchBarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CFFCA52A26A59900E1E58A /* SearchBarState.swift */; };
+		79CFFCA92A26A5CA00E1E58A /* SearchTableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CFFCA82A26A5CA00E1E58A /* SearchTableViewSection.swift */; };
+		79CFFCAC2A26B1D500E1E58A /* SearchTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CFFCAB2A26B1D500E1E58A /* SearchTableDataSource.swift */; };
 		79D5B8E428EDB85100178402 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E328EDB85100178402 /* CustomAlert.swift */; };
 		79D5B8E628EEDABC00178402 /* UINavigationController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E528EEDABC00178402 /* UINavigationController+ShowAlert.swift */; };
 		79D5B8E828EEE3FF00178402 /* PPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E728EEE3FF00178402 /* PPButton.swift */; };
@@ -167,6 +170,9 @@
 		79AE54042A16B6C800214CB1 /* PPRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPRoundedButton.swift; sourceTree = "<group>"; };
 		79AE54082A177A7100214CB1 /* Array+SortByPrefix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SortByPrefix.swift"; sourceTree = "<group>"; };
 		79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
+		79CFFCA52A26A59900E1E58A /* SearchBarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarState.swift; sourceTree = "<group>"; };
+		79CFFCA82A26A5CA00E1E58A /* SearchTableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewSection.swift; sourceTree = "<group>"; };
+		79CFFCAB2A26B1D500E1E58A /* SearchTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableDataSource.swift; sourceTree = "<group>"; };
 		79D5B8E328EDB85100178402 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		79D5B8E528EEDABC00178402 /* UINavigationController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+ShowAlert.swift"; sourceTree = "<group>"; };
 		79D5B8E728EEE3FF00178402 /* PPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPButton.swift; sourceTree = "<group>"; };
@@ -317,11 +323,13 @@
 		7937CE1C28F6E2DB00B80C71 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				79CFFCA72A26A5A900E1E58A /* DataTypes */,
 				79AE54002A158B0000214CB1 /* Views */,
 				79AE53FC2A15214F00214CB1 /* Models */,
 				7937CE1D28F6E30600B80C71 /* SearchVM.swift */,
 				79410D8E282416C000BD9EA4 /* SearchVC.swift */,
 				79AE53FA2A1428D300214CB1 /* SearchViewControllerDelegate.swift */,
+				79CFFCAB2A26B1D500E1E58A /* SearchTableDataSource.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -456,6 +464,15 @@
 			isa = PBXGroup;
 			children = (
 				79AE54022A1648F100214CB1 /* ImageSource.swift */,
+			);
+			path = DataTypes;
+			sourceTree = "<group>";
+		};
+		79CFFCA72A26A5A900E1E58A /* DataTypes */ = {
+			isa = PBXGroup;
+			children = (
+				79CFFCA52A26A59900E1E58A /* SearchBarState.swift */,
+				79CFFCA82A26A5CA00E1E58A /* SearchTableViewSection.swift */,
 			);
 			path = DataTypes;
 			sourceTree = "<group>";
@@ -791,6 +808,7 @@
 				79CF41BF28EEFF7E00CA9F51 /* MarketVM.swift in Sources */,
 				790C350329D35FD200141887 /* ImageNames.swift in Sources */,
 				79AAF82A28FB358A009F3B85 /* SectionHeaderView.swift in Sources */,
+				79CFFCA62A26A59900E1E58A /* SearchBarState.swift in Sources */,
 				793332C7293F52C2005EE8A3 /* CustomSearchBar.swift in Sources */,
 				79D5B8E428EDB85100178402 /* CustomAlert.swift in Sources */,
 				797303B3296B30560006CF76 /* PPCircularProgressBar.swift in Sources */,
@@ -812,7 +830,9 @@
 				79011DFE29FD8F4E00121A81 /* PersistantDataType.swift in Sources */,
 				79D5C6D328DC75060018B133 /* DetailsCellVM.swift in Sources */,
 				79AE53FB2A1428D300214CB1 /* SearchViewControllerDelegate.swift in Sources */,
+				79CFFCA92A26A5CA00E1E58A /* SearchTableViewSection.swift in Sources */,
 				796EFA4128733AF2005E24AF /* NetworkingService.swift in Sources */,
+				79CFFCAC2A26B1D500E1E58A /* SearchTableDataSource.swift in Sources */,
 				79D5B8E828EEE3FF00178402 /* PPButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
