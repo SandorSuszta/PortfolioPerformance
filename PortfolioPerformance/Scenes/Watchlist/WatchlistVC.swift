@@ -68,7 +68,7 @@ class WatchlistViewController: UIViewController {
     private func configureNavigationController() {
         
         navigationItem.title = "Watchlist"
-        //navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         //Delete BackButton title on pushed screen
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -194,7 +194,6 @@ private extension WatchlistViewController {
         dataSource.didReorderCells = { sourceIndexPath, destinationIndexPath in
         
             self.watchlistVM.reorderCellViewModels(from: sourceIndexPath, to: destinationIndexPath)
-            dataSource.apply(self.makeSnapshot(), animatingDifferences: true)
             self.watchlistStore.reorderWatchlist(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
         }
         

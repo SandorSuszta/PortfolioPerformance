@@ -29,8 +29,21 @@ final class WatchlistDataSource: UITableViewDiffableDataSource<WatchlistSection,
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard sourceIndexPath != destinationIndexPath else { return }
         
-        didReorderCells?(sourceIndexPath, destinationIndexPath)
+        if let sourceItem = itemIdentifier(for: sourceIndexPath),
+           let destinationItem = itemIdentifier(for: destinationIndexPath) {
+            
+            var snapshot = snapshot()
+            
+             sourceIndexPath > destinationIndexPath ?
+                snapshot.moveItem(sourceItem, beforeItem: destinationItem)
+                : snapshot.moveItem(sourceItem, afterItem: destinationItem)
+            
+            apply(snapshot)
+            
+            didReorderCells?(sourceIndexPath, destinationIndexPath)
+        }
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
