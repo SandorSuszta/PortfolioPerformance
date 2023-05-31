@@ -66,10 +66,16 @@ final class CryptoCurrencyCell: UITableViewCell {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
-        UIView.animate(withDuration: 0.3) {
-            self.priceLabel.alpha = editing ? 0 : 1
-            self.changeLabel.alpha = editing ? 0 : 1
-        }
+        nameLabel.setContentCompressionResistancePriority(
+            editing ? .required : .defaultLow,
+            for: .horizontal)
+        
+        symbolLabel.setContentCompressionResistancePriority(
+            editing ? .required : .defaultLow,
+            for: .horizontal)
+        
+            self.priceLabel.alpha = editing ? 0.0 : 1.0
+            self.changeLabel.alpha = editing ? 0.0 : 1.0
     }
     
     //MARK: - API
@@ -155,17 +161,17 @@ private extension CryptoCurrencyCell {
             
             labelsContainerView.centerYAnchor.constraint(equalTo: logoContainerView.centerYAnchor),
             labelsContainerView.leadingAnchor.constraint(equalTo: logoContainerView.trailingAnchor, constant: Constants.horizontalLogoContainerViewPadding),
-            labelsContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.horizontalLogoContainerViewPadding),
+            labelsContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.horizontalLogoContainerViewPadding),
             labelsContainerView.heightAnchor.constraint(equalTo: logoContainerView.heightAnchor),
             
             nameLabel.topAnchor.constraint(equalTo: labelsContainerView.topAnchor, constant: Constants.verticalPaddingBetweenLogoTopAndNameTop),
             nameLabel.leadingAnchor.constraint(equalTo: labelsContainerView.leadingAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: priceLabel.leadingAnchor, constant: -Constants.horizontalPaddingBetweenLabels),
+            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: priceLabel.leadingAnchor, constant: -Constants.horizontalPaddingBetweenLabels),
             nameLabel.heightAnchor.constraint(equalToConstant: Constants.nameLabelHeight),
             
             symbolLabel.bottomAnchor.constraint(equalTo: labelsContainerView.bottomAnchor, constant: -Constants.verticalPaddingBetweenLogoTopAndNameTop),
             symbolLabel.leadingAnchor.constraint(equalTo: labelsContainerView.leadingAnchor),
-            symbolLabel.trailingAnchor.constraint(equalTo: changeLabel.leadingAnchor, constant: -Constants.horizontalPaddingBetweenLabels),
+            symbolLabel.trailingAnchor.constraint(lessThanOrEqualTo: priceLabel.leadingAnchor, constant: -Constants.horizontalPaddingBetweenLabels),
             symbolLabel.heightAnchor.constraint(equalToConstant: Constants.symbolLabelHeight),
             
             priceLabel.topAnchor.constraint(equalTo: nameLabel.topAnchor),
@@ -173,7 +179,7 @@ private extension CryptoCurrencyCell {
             priceLabel.heightAnchor.constraint(equalTo: nameLabel.heightAnchor),
             
             changeLabel.bottomAnchor.constraint(equalTo: symbolLabel.bottomAnchor),
-            changeLabel.trailingAnchor.constraint(equalTo: labelsContainerView.trailingAnchor),
+            changeLabel.trailingAnchor.constraint(equalTo: priceLabel.trailingAnchor),
             changeLabel.heightAnchor.constraint(equalTo: symbolLabel.heightAnchor),
         ])
     }
