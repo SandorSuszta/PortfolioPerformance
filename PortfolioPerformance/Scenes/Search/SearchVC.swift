@@ -64,9 +64,6 @@ class SearchScreenViewController: UIViewController {
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
-        
-        //reload data
-        
         super.viewDidLoad()
         setUpViewController()
         setUpResultsTableVIew()
@@ -105,7 +102,6 @@ class SearchScreenViewController: UIViewController {
     private func setUpResultsTableVIew() {
         view.addSubview(resultsTableView)
         resultsTableView.delegate = self
-
     }
     
     private func bindViewModels() {

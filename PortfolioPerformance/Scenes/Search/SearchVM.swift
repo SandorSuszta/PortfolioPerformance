@@ -18,8 +18,7 @@ class SearchScreenViewModel {
     
     init(networkingService: NetworkingServiceProtocol) {
         self.networkingService = networkingService
-        updateRecentSearches()
-        getTrendingCoinsModels()
+        fetchData()
     }
     
     //MARK: - Public methods
@@ -27,7 +26,9 @@ class SearchScreenViewModel {
     func updateRecentSearches() {
         
         if !UserDefaultsService.shared.recentSearchesIDs.isEmpty {
-            getRecentSearchesModels()
+            getRecentSearchesModels { models in
+                
+            }
         }
     }
     
@@ -53,8 +54,8 @@ class SearchScreenViewModel {
     }
     
     //MARK: - Private methods
-
-    private func getRecentSearchesModels() {
+    
+    private func getRecentSearchesModels(completion: @escaping ([SearchResult]) -> Void) {
         
         guard !UserDefaultsService.shared.recentSearchesIDs.isEmpty else { return }
         
@@ -77,7 +78,8 @@ class SearchScreenViewModel {
                 
                 let sortedModels = recentSearchesModels.sorted(byList: list)
                 
-                self.defaultCellModels.value?[0] = sortedModels.reversed()
+                completion(sortedModels)
+                //self.defaultCellModels.value?[0] = sortedModels.reversed()
                 
             case .failure(let error):
                 self.errorMessage.value = error.rawValue
@@ -85,19 +87,44 @@ class SearchScreenViewModel {
         }
     }
     
-    private func getTrendingCoinsModels() {
+    private func getTrendingCoinsModels(completion: @escaping ([SearchResult]) -> Void) {
         
-       networkingService.getTrendingCoins { result in
-
+        networkingService.getTrendingCoins { result in
+            
             switch result {
             case .success(let response):
                 let trendingCoins: [SearchResult] = response.coins.compactMap {
                     $0.item
                 }
-                self.defaultCellModels.value?[1] = trendingCoins
+                completion(trendingCoins)
+             
             case .failure(let error):
                 self.errorMessage.value = error.rawValue
             }
+        }
+    }
+    
+    private func fetchData() {
+        let dispatchGroup = DispatchGroup()
+        
+        var recentSearchesModels: [SearchResult] = []
+        var trendingCoins: [SearchResult] = []
+        
+        dispatchGroup.enter()
+        getRecentSearchesModels { models in
+            recentSearchesModels = models
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        getTrendingCoinsModels { models in
+            trendingCoins = models
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            
+            self.defaultCellModels.value = [recentSearchesModels.reversed(), trendingCoins]
         }
     }
 }
