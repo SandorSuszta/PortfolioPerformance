@@ -74,6 +74,8 @@
 		79CFFCA62A26A59900E1E58A /* SearchBarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CFFCA52A26A59900E1E58A /* SearchBarState.swift */; };
 		79CFFCA92A26A5CA00E1E58A /* SearchTableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CFFCA82A26A5CA00E1E58A /* SearchTableViewSection.swift */; };
 		79CFFCAC2A26B1D500E1E58A /* SearchTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CFFCAB2A26B1D500E1E58A /* SearchTableDataSource.swift */; };
+		79CFFCB02A274D5E00E1E58A /* MockMarketData.json in Resources */ = {isa = PBXBuildFile; fileRef = 79CFFCAF2A274D5C00E1E58A /* MockMarketData.json */; };
+		79CFFCB12A274D5E00E1E58A /* MockMarketData.json in Resources */ = {isa = PBXBuildFile; fileRef = 79CFFCAF2A274D5C00E1E58A /* MockMarketData.json */; };
 		79D5B8E428EDB85100178402 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E328EDB85100178402 /* CustomAlert.swift */; };
 		79D5B8E628EEDABC00178402 /* UINavigationController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E528EEDABC00178402 /* UINavigationController+ShowAlert.swift */; };
 		79D5B8E828EEE3FF00178402 /* PPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E728EEE3FF00178402 /* PPButton.swift */; };
@@ -173,6 +175,7 @@
 		79CFFCA52A26A59900E1E58A /* SearchBarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarState.swift; sourceTree = "<group>"; };
 		79CFFCA82A26A5CA00E1E58A /* SearchTableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewSection.swift; sourceTree = "<group>"; };
 		79CFFCAB2A26B1D500E1E58A /* SearchTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableDataSource.swift; sourceTree = "<group>"; };
+		79CFFCAF2A274D5C00E1E58A /* MockMarketData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockMarketData.json; sourceTree = "<group>"; };
 		79D5B8E328EDB85100178402 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		79D5B8E528EEDABC00178402 /* UINavigationController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+ShowAlert.swift"; sourceTree = "<group>"; };
 		79D5B8E728EEE3FF00178402 /* PPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPButton.swift; sourceTree = "<group>"; };
@@ -422,6 +425,7 @@
 		79A5B14A29803DBF0067240A /* PortfolioPerformanceTests */ = {
 			isa = PBXGroup;
 			children = (
+				79CFFCAE2A274D1B00E1E58A /* Mock */,
 				79A5B156298276740067240A /* PPTabBarControllerTests.swift */,
 			);
 			path = PortfolioPerformanceTests;
@@ -475,6 +479,14 @@
 				79CFFCA82A26A5CA00E1E58A /* SearchTableViewSection.swift */,
 			);
 			path = DataTypes;
+			sourceTree = "<group>";
+		};
+		79CFFCAE2A274D1B00E1E58A /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				79CFFCAF2A274D5C00E1E58A /* MockMarketData.json */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		79E7A21528E5F9CD00BD5CB0 /* Scenes */ = {
@@ -686,6 +698,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79CFFCB12A274D5E00E1E58A /* MockMarketData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,6 +707,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79EAFD2927B3DCDE008A6062 /* LaunchScreen.storyboard in Resources */,
+				79CFFCB02A274D5E00E1E58A /* MockMarketData.json in Resources */,
 				79EAFD2627B3DCDE008A6062 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1023,7 +1037,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = B9D9FYA643;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PortfolioPerformance/Info.plist;
@@ -1055,7 +1069,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = B9D9FYA643;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PortfolioPerformance/Info.plist;
