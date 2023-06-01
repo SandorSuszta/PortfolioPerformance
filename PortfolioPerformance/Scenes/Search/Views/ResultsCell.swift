@@ -50,6 +50,8 @@ class ResultsCell: UITableViewCell {
         symbolLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        symbolLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+       
         NSLayoutConstraint.activate([
         
             logoContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -68,7 +70,7 @@ class ResultsCell: UITableViewCell {
             
             symbolLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 8),
             symbolLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            symbolLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
+            symbolLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -16)
         ])
     }
     

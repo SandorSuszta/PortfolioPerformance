@@ -215,7 +215,6 @@ private extension WatchlistViewController {
     func reloadData() {
         dataSource.apply(makeSnapshot(), animatingDifferences: true)
     }
-    
 }
 
     //MARK: - TableView Delegate

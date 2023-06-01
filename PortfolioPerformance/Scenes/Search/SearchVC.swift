@@ -214,15 +214,11 @@ extension SearchScreenViewController {
 extension SearchScreenViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         let sectionIdentifiers = dataSource.snapshot().sectionIdentifiers
-        
         guard sectionIdentifiers.indices.contains(section) else { return nil }
-        
         let sectionIdentifier = sectionIdentifiers[section]
         
         switch sectionIdentifier {
-            
             
         case .searchResults:
             return nil
@@ -241,30 +237,30 @@ extension SearchScreenViewController: UITableViewDelegate {
             return trendingCoinsHeader
             
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        PPSectionHeaderView.preferredHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            PPSectionHeaderView.preferredHeight
-        }
+        guard let model = dataSource.itemIdentifier(for: indexPath) else { fatalError("Cant get coinModel in Search VC") }
         
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            
-            guard let model = dataSource.itemIdentifier(for: indexPath) else { fatalError("Cant get coinModel in Search VC") }
-            
-            searchBar.text = ""
-            isSearching = false
-            viewModel.clearSearchModels()
-            
-            UserDefaultsService.shared.saveTo(
-                .recentSearches,
-                ID: model.id
-            )
-            
-            delegate?.handleSelection(of: model)
-        }
+        searchBar.text = ""
+        isSearching = false
+        viewModel.clearSearchModels()
         
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            ResultsCell.preferredHeight
-        }
+        UserDefaultsService.shared.saveTo(
+            .recentSearches,
+            ID: model.id
+        )
+        
+        delegate?.handleSelection(of: model)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        ResultsCell.preferredHeight
     }
 }
     //MARK: - Search bar delegate methods
