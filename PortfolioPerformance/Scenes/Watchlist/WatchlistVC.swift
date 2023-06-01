@@ -227,7 +227,7 @@ extension WatchlistViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let currentCoinModel = watchlistVM.cellViewModels.value?[indexPath.row].coinModel else { fatalError("Cant get coinModel in WatclistVC")}
+        guard let currentCoinModel = dataSource.itemIdentifier(for: indexPath) else { fatalError("Cant get coinModel in WatclistVC")}
         
         if let coordinator = self.coordinator as? WatchlistCoordinator {
             coordinator.showDetails(for: currentCoinModel)

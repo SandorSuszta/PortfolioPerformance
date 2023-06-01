@@ -37,6 +37,7 @@ class ResultsCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .systemBackground
+        selectionStyle = .none
         logoContainerView.addSubview(logoView)
         contentView.addSubviews(symbolLabel, nameLabel, logoContainerView)
         viewLayout()

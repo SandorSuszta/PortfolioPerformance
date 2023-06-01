@@ -14,5 +14,4 @@ final class SearchTableDataSource: UITableViewDiffableDataSource<SearchTableView
         
         defaultRowAnimation = .fade
     }
-    
 }

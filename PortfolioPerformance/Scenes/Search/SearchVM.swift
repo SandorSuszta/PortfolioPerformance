@@ -27,7 +27,7 @@ class SearchScreenViewModel {
         
         if !UserDefaultsService.shared.recentSearchesIDs.isEmpty {
             getRecentSearchesModels { models in
-                
+                self.defaultCellModels.value?[0] = models.reversed()
             }
         }
     }
@@ -57,7 +57,7 @@ class SearchScreenViewModel {
     
     private func getRecentSearchesModels(completion: @escaping ([SearchResult]) -> Void) {
         
-        guard !UserDefaultsService.shared.recentSearchesIDs.isEmpty else { return }
+        guard !UserDefaultsService.shared.recentSearchesIDs.isEmpty else { return completion([]) }
         
         networkingService.getDataForList(ofIDs: UserDefaultsService.shared.recentSearchesIDs) { result in
             switch result {
@@ -72,14 +72,11 @@ class SearchScreenViewModel {
                     )
                 }
                 
-                let list = UserDefaultsService.shared.recentSearchesIDs
+                let recentSearchesList = UserDefaultsService.shared.recentSearchesIDs
                 
-                //Use the same order as in saved list
-                
-                let sortedModels = recentSearchesModels.sorted(byList: list)
+                let sortedModels = recentSearchesModels.sorted(byList: recentSearchesList)
                 
                 completion(sortedModels)
-                //self.defaultCellModels.value?[0] = sortedModels.reversed()
                 
             case .failure(let error):
                 self.errorMessage.value = error.rawValue
@@ -123,7 +120,6 @@ class SearchScreenViewModel {
         }
         
         dispatchGroup.notify(queue: .main) {
-            
             self.defaultCellModels.value = [recentSearchesModels.reversed(), trendingCoins]
         }
     }

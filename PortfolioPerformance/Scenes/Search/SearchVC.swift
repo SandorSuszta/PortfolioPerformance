@@ -81,11 +81,13 @@ class SearchScreenViewController: UIViewController {
     //MARK: - Private
     
     private func setUpViewController() {
+      
         view.backgroundColor = .secondarySystemBackground
         view.addSubview(noResultsView)
         
         //Delete BackButton title on pushed screen
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     private func setUpSearchBar() {
@@ -142,9 +144,7 @@ class SearchScreenViewController: UIViewController {
             self.coordinator.navigationController.showAlert(message: message)
         }
     }
-    
-    
-    
+
     private func setupConstraints() {
 
         NSLayoutConstraint.activate([
@@ -163,8 +163,10 @@ class SearchScreenViewController: UIViewController {
     private func determineSearchBarState(isSearching: Bool, isRecentSearchesEmpty: Bool) -> SearchBarState {
         
         switch (isSearching, isRecentSearchesEmpty) {
+            
         case (true, _):
             return .searching(resultModels: viewModel.searchResultCellModels.value ?? [])
+            
         case (false, false):
             return .emptyWithRecents(recentModels: viewModel.defaultCellModels.value?[0] ?? [],
                                      trendingModels: viewModel.defaultCellModels.value?[1] ?? [])
@@ -195,8 +197,8 @@ extension SearchScreenViewController {
             snapshot.appendItems(trendingModels, toSection: .trendingCoins)
             
         case .searching(let resultModels):
-            snapshot.appendSections([.recentSearches])
-            snapshot.appendItems(resultModels, toSection: .recentSearches)
+            snapshot.appendSections([.searchResults])
+            snapshot.appendItems(resultModels, toSection: .searchResults)
         }
         
         return snapshot
@@ -207,105 +209,64 @@ extension SearchScreenViewController {
     }
 }
 
-//extension SearchScreenViewController: UITableViewDataSource {
-//
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//
-//        isSearching ? 1 : viewModel.defaultCellModels.value?.count ?? 0
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//
-//        isSearching ? viewModel.searchResultCellModels.value?.count ?? 0 : viewModel.defaultCellModels.value?[section].count ?? 0
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        guard let cell = resultsTableView.dequeueReusableCell(
-//            withIdentifier: ResultsCell.identifier,
-//            for: indexPath
-//        ) as? ResultsCell else { return UITableViewCell() }
-//
-//        var model: SearchResult?
-//
-//        if isSearching {
-//            model = viewModel.searchResultCellModels.value?[indexPath.row]
-//        } else {
-//            model = viewModel.defaultCellModels.value?[indexPath.section][indexPath.row]
-//        }
-//
-//        guard let model else { return UITableViewCell() }
-//
-//        cell.imageDownloader = ImageDownloader()
-//        cell.configure(withModel: model)
-//
-//        return cell
-//    }
-//}
     //MARK: - TableView delegate methods
     
 extension SearchScreenViewController: UITableViewDelegate {
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//        let trendingCoinsHeader = PPSectionHeaderView(type: .trendingCoins, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
-//
-//        switch searchBarState {
-//
-//        case .searching:
-//            let searchingHeader = PPSectionHeaderView(type: .searching, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
-//
-//            return searchingHeader
-//
-//        case .emptyWithoutRecents:
-//            return [nil, trendingCoinsHeader][section]
-//
-//        case .emptyWithRecents:
-//            let recentSearchesHeader = PPSectionHeaderView(type: .recentSearches, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
-//
-//            recentSearchesHeader.buttonAction = { [weak self] in
-//                self?.viewModel.clearRecentSearches()
-//                UserDefaultsService.shared.clearRecentSearchesIDs()
-//            }
-//
-//            return [recentSearchesHeader,trendingCoinsHeader][section]
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//
-//        switch searchBarState {
-//        case .emptyWithoutRecents:
-//            return [0, PPSectionHeaderView.preferredHeight][section]
-//        case .emptyWithRecents, .searching:
-//            return PPSectionHeaderView.preferredHeight
-//        }
-//    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        guard let model = isSearching
-        ? viewModel.searchResultCellModels.value?[indexPath.row]
-        : viewModel.defaultCellModels.value?[indexPath.section][indexPath.row]
-        else { return }
-                
-        searchBar.text = ""
-        isSearching = false
-        viewModel.clearSearchModels()
+        let sectionIdentifiers = dataSource.snapshot().sectionIdentifiers
         
-        UserDefaultsService.shared.saveTo(
-            .recentSearches,
-            ID: model.id
-        )
+        guard sectionIdentifiers.indices.contains(section) else { return nil }
         
-        delegate?.handleSelection(of: model)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        ResultsCell.preferredHeight
+        let sectionIdentifier = sectionIdentifiers[section]
+        
+        switch sectionIdentifier {
+            
+            
+        case .searchResults:
+            return nil
+            
+        case .recentSearches:
+            let recentSearchesHeader = PPSectionHeaderView(type: .recentSearches, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
+            
+            recentSearchesHeader.buttonAction = { [weak self] in
+                self?.viewModel.clearRecentSearches()
+                UserDefaultsService.shared.clearRecentSearchesIDs()
+            }
+            return recentSearchesHeader
+            
+        case .trendingCoins:
+            let trendingCoinsHeader = PPSectionHeaderView(type: .trendingCoins, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
+            return trendingCoinsHeader
+            
+        }
+        
+        func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            PPSectionHeaderView.preferredHeight
+        }
+        
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            
+            guard let model = dataSource.itemIdentifier(for: indexPath) else { fatalError("Cant get coinModel in Search VC") }
+            
+            searchBar.text = ""
+            isSearching = false
+            viewModel.clearSearchModels()
+            
+            UserDefaultsService.shared.saveTo(
+                .recentSearches,
+                ID: model.id
+            )
+            
+            delegate?.handleSelection(of: model)
+        }
+        
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            ResultsCell.preferredHeight
+        }
     }
 }
-
     //MARK: - Search bar delegate methods
 
 extension SearchScreenViewController: UISearchBarDelegate  {
