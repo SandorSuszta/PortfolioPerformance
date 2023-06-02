@@ -8,13 +8,22 @@ class WatchlistViewController: UIViewController {
     
     private lazy var dataSource: WatchlistDataSource = makeDataSource()
     
-    private lazy var watchlistTableView = UITableView(frame: .zero, style: .insetGrouped)
-    
     private var watchlistVM = WatchlistViewModel(networkingService: NetworkingService())
     
     private let emptyWatchlistView = EmptyStateView(type: .noFavourites)
     
-    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+    
+    //MARK: - UI Elements
+    
+    private lazy var editButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: ImageNames.pencil), for: .normal)
+        button.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var watchlistTableView = UITableView(frame: .zero, style: .insetGrouped)
     
     private lazy var plusButton: PPRoundedButton = {
         let button = PPRoundedButton(type: .custom)
@@ -47,19 +56,23 @@ class WatchlistViewController: UIViewController {
         bindViewModel()
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateTableWithWatchlist()
     }
     
-    //MARK: - Private methods
-    private func configureViewHierarchy() {
-        view.addSubviews(
-            emptyWatchlistView,
-            watchlistTableView,
-            plusButton
-        )
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        editButton.isHidden = false
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        editButton.isHidden = true
+    }
+    
+    //MARK: - Private methods
     
     private func configureVC() {
         view.backgroundColor = .secondarySystemBackground
@@ -72,12 +85,6 @@ class WatchlistViewController: UIViewController {
         
         //Delete BackButton title on pushed screen
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: .init(systemName: "pencil"),
-            style: .plain,
-            target: self,
-            action: #selector(didToggleEdit))
     }
     
     private func setupTableView() {
@@ -101,39 +108,6 @@ class WatchlistViewController: UIViewController {
         watchlistTableView.addGestureRecognizer(longPressRecognizer)
     }
     
-    private func setupConstraints() {
-        plusButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            watchlistTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            watchlistTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            watchlistTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            watchlistTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            emptyWatchlistView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emptyWatchlistView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            emptyWatchlistView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1 / 2),
-            emptyWatchlistView.heightAnchor.constraint(equalTo: emptyWatchlistView.widthAnchor),
-            
-            plusButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            plusButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            plusButton.widthAnchor.constraint(equalToConstant: 60),
-            plusButton.heightAnchor.constraint(equalToConstant: 60)
-        ])
-    }
-    
-    private func updateTableWithWatchlist() {
-        if watchlistStore.getWatchlist().isEmpty {
-            watchlistVM.cellViewModels.value = []
-            emptyWatchlistView.isHidden = false
-        } else {
-            emptyWatchlistView.isHidden = true
-            watchlistVM.loadWatchlistDataIfNeeded(
-                watchlist: watchlistStore.getWatchlist()
-            )
-        }
-    }
-    
     private func bindViewModel() {
         watchlistVM.cellViewModels.bind { [weak self] models in
             guard let self else { return }
@@ -142,10 +116,35 @@ class WatchlistViewController: UIViewController {
                 self.reloadData()
             }
         }
+    }
+    
+        private func updateTableWithWatchlist() {
+            if watchlistStore.getWatchlist().isEmpty {
+                watchlistVM.cellViewModels.value = []
+                emptyWatchlistView.isHidden = false
+            } else {
+                emptyWatchlistView.isHidden = true
+                watchlistVM.loadWatchlistDataIfNeeded(
+                    watchlist: watchlistStore.getWatchlist()
+                )
+            }
+        }
         
-//        watchlistVM.errorMessage?.bind { [weak self] message in
-//            //self?.showAlert(message: message ?? "An error has occured")
-//        }
+        //        watchlistVM.errorMessage?.bind { [weak self] message in
+        //            //self?.showAlert(message: message ?? "An error has occured")
+        //        }
+    
+    //MARK: -  Button actions
+    
+    @objc private func editButtonPressed() {
+        watchlistTableView.setEditing(!watchlistTableView.isEditing, animated: true)
+        
+        editButton.setImage(
+            watchlistTableView.isEditing
+                ? UIImage(named: ImageNames.check)
+                : UIImage(named: ImageNames.pencil),
+            for: .normal
+        )
     }
     
     @objc private func plusButtonPressed() {
@@ -154,14 +153,13 @@ class WatchlistViewController: UIViewController {
         }
     }
     
-    @objc func didToggleEdit() {
-        watchlistTableView.setEditing(!watchlistTableView.isEditing, animated: true)
-        navigationItem.rightBarButtonItem?.image = watchlistTableView.isEditing ? UIImage(systemName: "checkmark") : UIImage(systemName: "pencil")
-    }
+    //MARK: - Gestures
     
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        guard !watchlistTableView.isEditing else { return }
+        
         if gestureRecognizer.state == .began {
-            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "checkmark")
+            editButton.setImage(UIImage(named: ImageNames.check), for: .normal )
             feedbackGenerator.impactOccurred()
             watchlistTableView.setEditing(true, animated: true)
         }
@@ -214,6 +212,49 @@ private extension WatchlistViewController {
     
     func reloadData() {
         dataSource.apply(makeSnapshot(), animatingDifferences: true)
+    }
+}
+
+    //MARK: - Setup View Layout
+
+private extension WatchlistViewController {
+    
+    private func configureViewHierarchy() {
+        view.addSubviews(
+            emptyWatchlistView,
+            watchlistTableView,
+            plusButton
+        )
+    }
+    
+    func setupConstraints() {
+        guard let navBar = navigationController?.navigationBar else { return }
+        navBar.addSubview(editButton)
+        
+        plusButton.translatesAutoresizingMaskIntoConstraints = false
+        editButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            editButton.centerYAnchor.constraint(equalTo: navBar.bottomAnchor, constant: -28  ),
+            editButton.trailingAnchor.constraint(equalTo: navBar.trailingAnchor, constant: -24),
+            editButton.widthAnchor.constraint(equalToConstant: 24),
+            editButton.heightAnchor.constraint(equalToConstant: 24),
+            
+            watchlistTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            watchlistTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            watchlistTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            watchlistTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            emptyWatchlistView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyWatchlistView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            emptyWatchlistView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1 / 2),
+            emptyWatchlistView.heightAnchor.constraint(equalTo: emptyWatchlistView.widthAnchor),
+            
+            plusButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            plusButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            plusButton.widthAnchor.constraint(equalToConstant: 60),
+            plusButton.heightAnchor.constraint(equalToConstant: 60)
+        ])
     }
 }
 

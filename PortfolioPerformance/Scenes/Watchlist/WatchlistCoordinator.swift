@@ -26,7 +26,6 @@ class WatchlistCoordinator: Coordinator {
     func showSearch() {
         let searchVC = SearchScreenViewController(coordinator: self)
         searchVC.delegate = self
-        
         navigationController.pushViewController(searchVC, animated: true)
     }
     
