@@ -114,7 +114,7 @@ class MarketViewController: UIViewController {
             marketCardsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: cardsPadding),
             marketCardsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -cardsPadding),
             marketCardsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            marketCardsCollectionView.heightAnchor.constraint(equalToConstant:  cardsWidth / 1.2 + 20),
+            marketCardsCollectionView.heightAnchor.constraint(equalToConstant:  cardsWidth / 1.2 + 28),
             
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pageControl.topAnchor.constraint(equalTo: marketCardsCollectionView.bottomAnchor, constant: -10),
@@ -144,7 +144,7 @@ class MarketViewController: UIViewController {
             sortOptionsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             sortOptionsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             sortOptionsCollectionView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: -3),
-            sortOptionsCollectionView.heightAnchor.constraint(equalToConstant: 28)
+            sortOptionsCollectionView.heightAnchor.constraint(equalToConstant: 32)
         ])
     }
     
@@ -322,7 +322,7 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
             //Sort options collection case
             return CGSize(
                 width: cardsWidth,
-                height: cardsWidth / 1.2
+                height: cardsWidth / 1.1
             )
         }
         //Sort options collection case

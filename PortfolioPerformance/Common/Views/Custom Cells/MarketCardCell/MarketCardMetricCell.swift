@@ -8,7 +8,7 @@ class MarketCardMetricCell: MarketCardBaseCell {
     
     private let valueLabel = PPTextLabel(fontSize: 22, fontWeight: .semibold)
     
-    private let secondaryLabel = PPTextLabel(fontSize: 18, fontWeight: .semibold)
+    private let secondaryLabel = PPTextLabel(fontSize: 19, fontWeight: .semibold)
     
     private let progressBar = PPCircularProgressBar(frame: .zero)
     
@@ -43,7 +43,7 @@ class MarketCardMetricCell: MarketCardBaseCell {
         
         NSLayoutConstraint.activate([
             
-            progressBar.topAnchor.constraint(equalTo: headerTitle.bottomAnchor, constant: width / 20),
+            progressBar.topAnchor.constraint(equalTo: contentView.topAnchor, constant: width / 12),
             progressBar.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.65),
             progressBar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             progressBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -53,7 +53,7 @@ class MarketCardMetricCell: MarketCardBaseCell {
             valueLabel.heightAnchor.constraint(equalTo: progressBar.heightAnchor, multiplier: 0.2),
             
             secondaryLabel.centerXAnchor.constraint(equalTo: progressBar.centerXAnchor),
-            secondaryLabel.topAnchor.constraint(equalTo: valueLabel.bottomAnchor),
+            secondaryLabel.topAnchor.constraint(equalTo: valueLabel.bottomAnchor, constant: 2),
             secondaryLabel.heightAnchor.constraint(equalTo: valueLabel.heightAnchor, multiplier: 0.7),
         ])
     }

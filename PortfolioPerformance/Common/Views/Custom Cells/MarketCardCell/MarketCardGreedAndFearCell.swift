@@ -42,10 +42,10 @@ class MarketCardGreedAndFearCell: MarketCardBaseCell {
         
         NSLayoutConstraint.activate([
             descriptonLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            descriptonLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -(height / 24)),
+            descriptonLabel.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: -(height / 8)),
             descriptonLabel.heightAnchor.constraint(equalTo: headerTitle.heightAnchor),
             
-            progressBar.topAnchor.constraint(equalTo: headerTitle.bottomAnchor, constant: width / 20),
+            progressBar.topAnchor.constraint(equalTo: contentView.topAnchor, constant: width / 12),
             progressBar.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.65),
             progressBar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             progressBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),

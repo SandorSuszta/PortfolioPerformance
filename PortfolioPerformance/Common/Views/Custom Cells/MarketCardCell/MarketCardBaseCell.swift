@@ -1,19 +1,18 @@
 import UIKit
 
 enum MarketCardCellType: String {
-    case greedAndFear = "Greed And Fear"
-    case totalMarketCap = "Total Market Cap"
-    case bitcoinDominance = "Bitcoin Dominance"
+    case greedAndFear = "Greed & Fear"
+    case totalMarketCap = "Market Cap"
+    case bitcoinDominance = "BTC Dominance"
     
     var cellTitle: String { self.rawValue }
 }
 
 class MarketCardBaseCell: UICollectionViewCell {
     
-    let headerTitle = PPTextLabel(fontSize: 18, fontWeight: .medium)
+    let headerTitle = PPTextLabel(fontSize: 18, textColor: .secondaryLabel, fontWeight: .medium)
     
     //MARK: - Init
-    
     
     override init(frame: CGRect) {
         super .init(frame: frame)
@@ -40,7 +39,7 @@ class MarketCardBaseCell: UICollectionViewCell {
         let padding = width / 15
         
         NSLayoutConstraint.activate([
-            headerTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            headerTitle.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
             headerTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             headerTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             headerTitle.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.125)
