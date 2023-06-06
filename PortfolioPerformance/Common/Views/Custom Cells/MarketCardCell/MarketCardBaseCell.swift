@@ -10,7 +10,7 @@ enum MarketCardCellType: String {
 
 class MarketCardBaseCell: UICollectionViewCell {
     
-    let headerTitle = PPTextLabel(fontSize: 18, textColor: .secondaryLabel, fontWeight: .medium)
+    let headerTitle = PPTextLabel(fontSize: 16, textColor: .secondaryLabel, fontWeight: .medium)
     
     //MARK: - Init
     
@@ -42,7 +42,7 @@ class MarketCardBaseCell: UICollectionViewCell {
             headerTitle.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
             headerTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             headerTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            headerTitle.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.125)
+            headerTitle.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.11)
         ])
     }
 }

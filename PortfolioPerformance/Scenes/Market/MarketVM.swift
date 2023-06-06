@@ -115,8 +115,34 @@ class MarketViewModel {
                 
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue
-                
             }
         }
     }
+    
+    func sortCellViewModels (by sortOption: PPMarketSort) {
+        guard var viewModels = cellViewModels.value else { return }
+        
+        switch sortOption {
+        case .topCaps:
+            viewModels.sort(by: {
+                $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0
+            })
+        case .topWinners:
+            viewModels.sort(by: {
+                $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0
+            })
+        case .topLosers:
+            viewModels.sort(by: {
+                $0.coinModel.priceChangePercentage24H ?? 0  < $1.coinModel.priceChangePercentage24H ?? 0
+            })
+        case .topVolumes:
+            viewModels.sort(by: {
+                $0.coinModel.totalVolume ?? 0 > $1.coinModel.totalVolume ?? 0
+            })
+        }
+        
+        cellViewModels.value = viewModels
+    }
 }
+
+
