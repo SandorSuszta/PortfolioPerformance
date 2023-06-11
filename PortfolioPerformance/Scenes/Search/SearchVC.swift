@@ -8,6 +8,8 @@ class SearchScreenViewController: UIViewController {
 
     private let coordinator: Coordinator
     
+    private let headerFactory: SectionHeaderFactoryProtocol
+    
     private lazy var dataSource = SearchTableDataSource(tableView: resultsTableView)
     
     private let viewModel: SearchScreenViewModel
@@ -47,14 +49,15 @@ class SearchScreenViewController: UIViewController {
     
     //MARK: - Init
     
-    init(coordinator: Coordinator, viewModel: SearchScreenViewModel) {
+    init(coordinator: Coordinator, viewModel: SearchScreenViewModel, headerFactory: SectionHeaderFactoryProtocol) {
         self.coordinator = coordinator
         self.viewModel = viewModel
+        self.headerFactory = headerFactory
         super .init(nibName: nil, bundle: nil)
     }
     
     convenience init(coordinator: Coordinator) {
-        self.init(coordinator: coordinator, viewModel: SearchScreenViewModel(networkingService: NetworkingService()))
+        self.init(coordinator: coordinator, viewModel: SearchScreenViewModel(networkingService: NetworkingService()), headerFactory: SectionHeaderFactory())
     }
     
     required init?(coder: NSCoder) {
@@ -215,37 +218,18 @@ extension SearchScreenViewController {
 extension SearchScreenViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionIdentifiers = dataSource.snapshot().sectionIdentifiers
-        guard sectionIdentifiers.indices.contains(section) else { return nil }
-        let sectionIdentifier = sectionIdentifiers[section]
+        let sections = dataSource.snapshot().sectionIdentifiers
+        guard sections.indices.contains(section) else { return nil }
+        let section = sections[section]
         
-        switch sectionIdentifier {
-            
-        case .searchResults:
-            return nil
-            
-        case .recentSearches:
-            let recentSearchesHeader = PPSectionHeaderView(
-                withTitle: SearchTableSection.recentSearches.title,
-                shouldDisplayButton: true,
-                buttonTitle: SearchTableSection.recentSearches.buttonTitle,
-                frame: CGRect(x: 0, y: 0, width: resultsTableView.width, height: PPSectionHeaderView.preferredHeight)
-            )
-            recentSearchesHeader.delegate = self
-            return recentSearchesHeader
-            
-        case .trendingCoins:
-            let trendingCoinsHeader = PPSectionHeaderView(
-                withTitle: SearchTableSection.trendingCoins.title,
-                shouldDisplayButton: false,
-                frame: CGRect(x: 0, y: 0, width: resultsTableView.width, height: PPSectionHeaderView.preferredHeight)
-            )
-            return trendingCoinsHeader
-        }
+        guard let header = headerFactory.makeHeader(for: section, tableView: tableView) else { return nil }
+        header.delegate = self
+       
+        return header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        PPSectionHeaderView.preferredHeight
+        SearchTableSectionHeader.preferredHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -307,7 +291,7 @@ extension SearchScreenViewController: UISearchBarDelegate  {
 }
 
     //MARK: - Section Header Delegate
-extension SearchScreenViewController: PPSectionHeaderViewDelegate {
+extension SearchScreenViewController: SearchTableSectionHeaderDelegate {
     func didTapButton() {
         viewModel.clearRecentSearches()
         UserDefaultsService.shared.clearRecentSearchesIDs()

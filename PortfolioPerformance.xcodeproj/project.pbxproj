@@ -65,7 +65,7 @@
 		79895E9428DB773700087A23 /* RangeDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79895E9328DB773700087A23 /* RangeDetailsVM.swift */; };
 		798FEF8C29F0548A0003A68D /* WatchlistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798FEF8B29F0548A0003A68D /* WatchlistDataSource.swift */; };
 		79A5B157298276740067240A /* PPTabBarControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5B156298276740067240A /* PPTabBarControllerTests.swift */; };
-		79AAF82A28FB358A009F3B85 /* PPSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AAF82928FB358A009F3B85 /* PPSectionHeaderView.swift */; };
+		79AAF82A28FB358A009F3B85 /* SearchTableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AAF82928FB358A009F3B85 /* SearchTableSectionHeader.swift */; };
 		79AE53F62A140D4300214CB1 /* ChartInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53F52A140D4300214CB1 /* ChartInterval.swift */; };
 		79AE53F92A141C8800214CB1 /* CoinRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53F82A141C8800214CB1 /* CoinRepresentable.swift */; };
 		79AE53FB2A1428D300214CB1 /* SearchViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53FA2A1428D300214CB1 /* SearchViewControllerDelegate.swift */; };
@@ -166,7 +166,7 @@
 		798FEF8B29F0548A0003A68D /* WatchlistDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistDataSource.swift; sourceTree = "<group>"; };
 		79A5B14929803DBF0067240A /* PortfolioPerformanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PortfolioPerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79A5B156298276740067240A /* PPTabBarControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPTabBarControllerTests.swift; sourceTree = "<group>"; };
-		79AAF82928FB358A009F3B85 /* PPSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPSectionHeaderView.swift; sourceTree = "<group>"; };
+		79AAF82928FB358A009F3B85 /* SearchTableSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableSectionHeader.swift; sourceTree = "<group>"; };
 		79AE53F52A140D4300214CB1 /* ChartInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartInterval.swift; sourceTree = "<group>"; };
 		79AE53F82A141C8800214CB1 /* CoinRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRepresentable.swift; sourceTree = "<group>"; };
 		79AE53FA2A1428D300214CB1 /* SearchViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -282,7 +282,6 @@
 				79D5B8E728EEE3FF00178402 /* PPButton.swift */,
 				79D5B8E328EDB85100178402 /* CustomAlert.swift */,
 				79EC45B428F0B9DC006A849A /* CustomSegmentedControl.swift */,
-				79AAF82928FB358A009F3B85 /* PPSectionHeaderView.swift */,
 				792B0FC6287F03080040B461 /* PPTabBarController.swift */,
 				795E43F52910017D0016F3C3 /* EmptyStateView.swift */,
 				793332C6293F52C2005EE8A3 /* CustomSearchBar.swift */,
@@ -463,6 +462,7 @@
 			isa = PBXGroup;
 			children = (
 				7934EFA3282A824E00CE7FD0 /* ResultsCell.swift */,
+				79AAF82928FB358A009F3B85 /* SearchTableSectionHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -825,7 +825,7 @@
 				79011E0B2A03020600121A81 /* Services.swift in Sources */,
 				79CF41BF28EEFF7E00CA9F51 /* MarketVM.swift in Sources */,
 				790C350329D35FD200141887 /* ImageNames.swift in Sources */,
-				79AAF82A28FB358A009F3B85 /* PPSectionHeaderView.swift in Sources */,
+				79AAF82A28FB358A009F3B85 /* SearchTableSectionHeader.swift in Sources */,
 				79CFFCA62A26A59900E1E58A /* SearchBarState.swift in Sources */,
 				793332C7293F52C2005EE8A3 /* CustomSearchBar.swift in Sources */,
 				79D5B8E428EDB85100178402 /* CustomAlert.swift in Sources */,

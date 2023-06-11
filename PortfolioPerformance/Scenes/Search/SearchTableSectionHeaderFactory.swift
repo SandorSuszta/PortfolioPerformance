@@ -1,13 +1,13 @@
 import UIKit
 
-protocol SectionHeaderFactoryProtocol: AnyObject {
-    func makeHeader(for section: SearchTableSection, tableView: UITableView) -> UIView?
+protocol SectionHeaderFactoryProtocol {
+    func makeHeader(for section: SearchTableSection, tableView: UITableView) -> SearchTableSectionHeader?
 }
 
 /// Factory class responsible for creating section header views for the search table view.
-class SectionHeaderFactory {
+final class SectionHeaderFactory: SectionHeaderFactoryProtocol {
     
-    func makeHeader(for section: SearchTableSection, tableView: UITableView) -> UIView? {
+    func makeHeader(for section: SearchTableSection, tableView: UITableView) -> SearchTableSectionHeader? {
         switch section {
         case .searchResults:
             return nil
@@ -18,22 +18,21 @@ class SectionHeaderFactory {
         }
     }
     
-    private func makeRecentSearchesHeader(tableView: UITableView) -> UIView {
-        let header = PPSectionHeaderView(
+    private func makeRecentSearchesHeader(tableView: UITableView) -> SearchTableSectionHeader {
+        let header = SearchTableSectionHeader(
             withTitle: SearchTableSection.recentSearches.title,
             shouldDisplayButton: true,
             buttonTitle: SearchTableSection.recentSearches.buttonTitle,
-            frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: PPSectionHeaderView.preferredHeight)
+            frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: SearchTableSectionHeader.preferredHeight)
         )
-        header.delegate = tableView.dataSource as? PPSectionHeaderViewDelegate
         return header
     }
     
-    private func makeTrendingCoinsHeader(tableView: UITableView) -> UIView {
-        let header = PPSectionHeaderView(
+    private func makeTrendingCoinsHeader(tableView: UITableView) -> SearchTableSectionHeader {
+        let header = SearchTableSectionHeader(
             withTitle: SearchTableSection.trendingCoins.title,
             shouldDisplayButton: false,
-            frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: PPSectionHeaderView.preferredHeight)
+            frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: SearchTableSectionHeader.preferredHeight)
         )
         return header
     }

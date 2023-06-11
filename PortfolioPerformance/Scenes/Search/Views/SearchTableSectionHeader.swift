@@ -1,15 +1,15 @@
 import UIKit
   
 /// Delegate protocol for handling button tap events in the `PPSectionHeaderView`.
-protocol PPSectionHeaderViewDelegate: AnyObject {
+protocol SearchTableSectionHeaderDelegate: AnyObject {
     func didTapButton()
 }
 
-final class PPSectionHeaderView: UIView {
+final class SearchTableSectionHeader: UIView {
     
     static let preferredHeight: CGFloat = 40
     
-    weak var delegate: PPSectionHeaderViewDelegate?
+    weak var delegate: SearchTableSectionHeaderDelegate?
     
     private let title: String
     
@@ -67,7 +67,7 @@ final class PPSectionHeaderView: UIView {
 
     //MARK: - Layou Views
 
-private extension PPSectionHeaderView {
+private extension SearchTableSectionHeader {
     enum Constants {
         static let titleFontSize: CGFloat = 16
         static let buttonTitleFontSize: CGFloat = 14
