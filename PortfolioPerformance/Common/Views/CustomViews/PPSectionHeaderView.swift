@@ -71,6 +71,7 @@ private extension PPSectionHeaderView {
     enum Constants {
         static let titleFontSize: CGFloat = 16
         static let buttonTitleFontSize: CGFloat = 14
+        static let actionButtonTrailingPadding: CGFloat = 16
     }
     
     func layoutViews() {
@@ -97,7 +98,7 @@ private extension PPSectionHeaderView {
         NSLayoutConstraint.activate([
             actionButton.topAnchor.constraint(equalTo: topAnchor),
             actionButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor)
+            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.actionButtonTrailingPadding)
         ])
     }
 }
