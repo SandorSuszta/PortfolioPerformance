@@ -29,7 +29,7 @@ final class PPSectionHeaderView: UIView {
     
     private lazy var actionButton: UIButton = {
         let button = UIButton()
-        button.setTitle(title, for: .normal)
+        button.setTitle(buttonTitle, for: .normal)
         button.setTitleColor(.secondaryLabel, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: Constants.buttonTitleFontSize, weight: .regular)
         button.titleLabel?.textAlignment = .right
@@ -71,7 +71,6 @@ private extension PPSectionHeaderView {
     enum Constants {
         static let titleFontSize: CGFloat = 16
         static let buttonTitleFontSize: CGFloat = 14
-        static let actionButtonTrailingPadding: CGFloat = 10
     }
     
     func layoutViews() {
@@ -98,8 +97,7 @@ private extension PPSectionHeaderView {
         NSLayoutConstraint.activate([
             actionButton.topAnchor.constraint(equalTo: topAnchor),
             actionButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-            //actionButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -70),
-            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.actionButtonTrailingPadding)
+            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 }

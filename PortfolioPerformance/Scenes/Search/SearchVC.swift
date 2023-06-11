@@ -104,6 +104,7 @@ class SearchScreenViewController: UIViewController {
     private func setUpResultsTableVIew() {
         view.addSubview(resultsTableView)
         resultsTableView.delegate = self
+        
     }
     
     private func bindViewModels() {
@@ -224,18 +225,22 @@ extension SearchScreenViewController: UITableViewDelegate {
             return nil
             
         case .recentSearches:
-            let recentSearchesHeader = PPSectionHeaderView(type: .recentSearches, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
-            
-            recentSearchesHeader.buttonAction = { [weak self] in
-                self?.viewModel.clearRecentSearches()
-                UserDefaultsService.shared.clearRecentSearchesIDs()
-            }
+            let recentSearchesHeader = PPSectionHeaderView(
+                withTitle: PPSectionHeader.recentSearches.title,
+                shouldDisplayButton: true,
+                buttonTitle: PPSectionHeader.recentSearches.buttonTitle,
+                frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight)
+            )
+            recentSearchesHeader.delegate = self
             return recentSearchesHeader
             
         case .trendingCoins:
-            let trendingCoinsHeader = PPSectionHeaderView(type: .trendingCoins, frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight))
+            let trendingCoinsHeader = PPSectionHeaderView(
+                withTitle: PPSectionHeader.trendingCoins.title,
+                shouldDisplayButton: false,
+                frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight)
+            )
             return trendingCoinsHeader
-            
         }
     }
     
@@ -298,5 +303,13 @@ extension SearchScreenViewController: UISearchBarDelegate  {
         let typedCharSet = CharacterSet(charactersIn: text)
         
         return allowedCharSet.isSuperset(of: typedCharSet)
+    }
+}
+
+    //MARK: - Section Header Delegate
+extension SearchScreenViewController: PPSectionHeaderViewDelegate {
+    func didTapButton() {
+        viewModel.clearRecentSearches()
+        UserDefaultsService.shared.clearRecentSearchesIDs()
     }
 }

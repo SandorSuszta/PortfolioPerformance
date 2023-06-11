@@ -1,12 +1,7 @@
-//
-//  PPButton.swift
-//  PortfolioPerformance
-//
-//  Created by Nataliia Shusta on 06/10/2022.
-//
-
 import UIKit
 
+///A custom button with pre-defined styling options.
+///Use `PPButton` to create a button with a specific background color and title. This button class provides a consistent styling with a rounded corner
 class PPButton: UIButton {
     
     //MARK: - Init

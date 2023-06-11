@@ -230,24 +230,7 @@ class MarketViewController: UIViewController {
     }
     
     private func sortTableview(by sortOption: PPMarketSort) {
-        switch sortOption {
-        case .topCaps:
-            viewModel.cellViewModels.value?.sort(by: {
-                $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0
-            })
-        case .topWinners:
-            viewModel.cellViewModels.value?.sort(by: {
-                $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0
-            })
-        case .topLosers:
-            viewModel.cellViewModels.value?.sort(by: {
-                $0.coinModel.priceChangePercentage24H ?? 0  < $1.coinModel.priceChangePercentage24H ?? 0
-            })
-        case .topVolumes:
-            viewModel.cellViewModels.value?.sort(by: {
-                $0.coinModel.totalVolume ?? 0 > $1.coinModel.totalVolume ?? 0
-            })
-        }
+        viewModel.sortCellViewModels(by: sortOption)
     }
     
     @objc private func didTapSearch() {

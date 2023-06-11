@@ -1,6 +1,8 @@
 import UIKit
 
-// Change height of progress bar, setting custom height
+/// A custom progress view that allows customization of its height.
+/// Use `CustomProgressView` to create a progress view with a custom height that differs from the standard `UIProgressView`.
+
 class CustomProgressView: UIProgressView {
     var customHeight: CGFloat = 1.0
     

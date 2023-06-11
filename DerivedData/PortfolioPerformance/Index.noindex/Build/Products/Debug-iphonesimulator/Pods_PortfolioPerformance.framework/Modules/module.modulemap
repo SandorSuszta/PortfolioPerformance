@@ -1,6 +1,0 @@
-framework module Pods_PortfolioPerformance {
-  umbrella header "Pods-PortfolioPerformance-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -1,5 +1,7 @@
 import UIKit
 
+///A custom view controller for displaying an alert with a title, text, and a close button.
+///Use `CustomAlertVC` to present a modal alert view with customizable title and text.
 class CustomAlertVC: UIViewController {
     
     public var alertText: String
