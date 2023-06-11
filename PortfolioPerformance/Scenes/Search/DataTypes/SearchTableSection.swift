@@ -1,7 +1,7 @@
 import Foundation
 
-enum PPSectionHeader {
-    case searching
+enum SearchTableSection {
+    case searchResults
     case recentSearches
     case trendingCoins
     
@@ -9,7 +9,7 @@ enum PPSectionHeader {
         switch self {
         case .recentSearches:
             return "Recent Searches"
-        case .searching:
+        case .searchResults:
             return ""
         case .trendingCoins:
             return "Trending Coins"

@@ -1,6 +1,6 @@
 import UIKit
 
-final class SearchTableDataSource: UITableViewDiffableDataSource<SearchTableViewSection, SearchResult> {
+final class SearchTableDataSource: UITableViewDiffableDataSource<SearchTableSection, SearchResult> {
     
     init(tableView: UITableView) {
         super.init(tableView: tableView) { tableView, indexPath, model in

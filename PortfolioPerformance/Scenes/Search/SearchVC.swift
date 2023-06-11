@@ -181,7 +181,7 @@ class SearchScreenViewController: UIViewController {
 
 extension SearchScreenViewController {
     
-    typealias SearchScreenSnapshot = NSDiffableDataSourceSnapshot<SearchTableViewSection, SearchResult>
+    typealias SearchScreenSnapshot = NSDiffableDataSourceSnapshot<SearchTableSection, SearchResult>
     
     private func makeSnapshot() -> SearchScreenSnapshot {
         var snapshot = SearchScreenSnapshot()
@@ -226,19 +226,19 @@ extension SearchScreenViewController: UITableViewDelegate {
             
         case .recentSearches:
             let recentSearchesHeader = PPSectionHeaderView(
-                withTitle: PPSectionHeader.recentSearches.title,
+                withTitle: SearchTableSection.recentSearches.title,
                 shouldDisplayButton: true,
-                buttonTitle: PPSectionHeader.recentSearches.buttonTitle,
-                frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight)
+                buttonTitle: SearchTableSection.recentSearches.buttonTitle,
+                frame: CGRect(x: 0, y: 0, width: resultsTableView.width, height: PPSectionHeaderView.preferredHeight)
             )
             recentSearchesHeader.delegate = self
             return recentSearchesHeader
             
         case .trendingCoins:
             let trendingCoinsHeader = PPSectionHeaderView(
-                withTitle: PPSectionHeader.trendingCoins.title,
+                withTitle: SearchTableSection.trendingCoins.title,
                 shouldDisplayButton: false,
-                frame: CGRect(x: 0, y: 0, width: view.width, height: PPSectionHeaderView.preferredHeight)
+                frame: CGRect(x: 0, y: 0, width: resultsTableView.width, height: PPSectionHeaderView.preferredHeight)
             )
             return trendingCoinsHeader
         }
