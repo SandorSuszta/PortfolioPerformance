@@ -7,7 +7,7 @@ class ErrorAlertVC: UIViewController {
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
-        view.configureWithShadow()
+        view.configureWithShadow(shadowColor: .black, shadowRadius: 20)
         return view
     }()
     
@@ -18,12 +18,11 @@ class ErrorAlertVC: UIViewController {
         return label
     }()
     
-    private let textLabel = PPTextLabel(
-        fontSize: Constants.textFontSize,
-        textColor: .label,
-        allignment: .center,
-        fontWeight: .bold
-    )
+    private let textLabel = {
+        let label = PPTextLabel(fontSize: Constants.textFontSize, textColor: .label, allignment: .center, fontWeight: .regular)
+        label.numberOfLines = 0
+        return label
+    }()
     
     private lazy var actionButton: PPButton = {
         let button = PPButton(color: .PPBlue, name: Constants.buttonTitle)
@@ -36,6 +35,7 @@ class ErrorAlertVC: UIViewController {
     init(text: String) {
         super .init(nibName: nil, bundle: nil)
         self.textLabel.text = text
+        modalPresentationStyle = .overFullScreen
     }
     
     required init?(coder: NSCoder) {
@@ -50,23 +50,13 @@ class ErrorAlertVC: UIViewController {
     }
     
     //MARK: - UI Elements Event handlers
-
-//        textLabel.text = alertTitle
-//        textLabel.textColor = .label
-//        textLabel.textAlignment = .center
-//        textLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
-//        textLabel.adjustsFontSizeToFitWidth = true
-//        textLabel.minimumScaleFactor = 0.75
-//        textLabel.numberOfLines = 0
-//        textLabel.lineBreakMode = .byWordWrapping
-//        textLabel.translatesAutoresizingMaskIntoConstraints = false
         
     @objc func didPressActionButton() {
         dismiss(animated: true)
     }
 }
 
-//MARK: - Setup Views
+    //MARK: - Setup Views
 
 private extension ErrorAlertVC {
     enum Constants {
@@ -75,11 +65,12 @@ private extension ErrorAlertVC {
         
         static let padding: CGFloat =           20
         static let smallPadding: CGFloat =      12
+        static let titleLabelHeight: CGFloat =  72
         static let buttonHeight: CGFloat =      44
         static let containerHeight: CGFloat =   220
         static let containerWidth: CGFloat =    260
         
-        static let titleText = "Oops... something went wrong"
+        static let titleText = "🚫 Oops... something went wrong"
         static let buttonTitle = "Close"
     }
     
@@ -98,11 +89,12 @@ private extension ErrorAlertVC {
             containerView.heightAnchor.constraint(equalToConstant: Constants.containerHeight),
             containerView.widthAnchor.constraint(equalToConstant: Constants.containerWidth),
             
-            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.padding),
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.smallPadding),
             titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.padding),
             titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Constants.padding),
+            titleLabel.heightAnchor.constraint(equalToConstant: Constants.titleLabelHeight),
             
-            textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.smallPadding),
+            textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             textLabel.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -Constants.smallPadding),
             textLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.padding),
             textLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Constants.padding),
