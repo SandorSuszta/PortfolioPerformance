@@ -234,9 +234,6 @@ class MarketViewController: UIViewController {
     }
     
     @objc private func didTapSearch() {
-        
-        present(ErrorAlertVC(text: "Too many attempts. Plese try later"), animated: true)
-        
         if let coordinator = coordinator as? MarketCoordinator {
             coordinator.showSearch()
         }
@@ -245,7 +242,6 @@ class MarketViewController: UIViewController {
     @objc private func didPullToRefresh() {
         viewModel.loadAllCryptoCurrenciesData(sortOption: tableViewSort)
     }
-    
 }
 
     //MARK: - Collection View methods

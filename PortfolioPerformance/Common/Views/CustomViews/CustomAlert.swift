@@ -1,6 +1,7 @@
 import UIKit
 
-class ErrorAlertVC: UIViewController {
+///A view controller that is used to present error messages to the user
+final class ErrorAlertVC: UIViewController {
 
     //MARK: - UI Eelements
     
