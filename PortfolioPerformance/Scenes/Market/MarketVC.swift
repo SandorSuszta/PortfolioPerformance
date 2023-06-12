@@ -235,7 +235,7 @@ class MarketViewController: UIViewController {
     
     @objc private func didTapSearch() {
         
-        present(ErrorAlertVC(text: "Cheers"), animated: true)
+        present(ErrorAlertVC(text: "Too many attempts. Plese try later"), animated: true)
         
         if let coordinator = coordinator as? MarketCoordinator {
             coordinator.showSearch()
