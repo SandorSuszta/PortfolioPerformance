@@ -21,13 +21,13 @@ class MarketCoordinator: Coordinator {
         navigationController.setViewControllers([marketVC], animated: true)
         
         navigationController.tabBarItem = AppTab.market.tabBarItem
+        
+        navigationController.present(ErrorAlertVC(text: "Cheers"), animated: true)
     }
     
     func showSearch() {
         let searchVC = SearchScreenViewController(coordinator: self)
         searchVC.delegate = self
-        
-        navigationController.pushViewController(searchVC, animated: true)
     }
     
     func showDetails(for representedCoin: CoinRepresenatable) {

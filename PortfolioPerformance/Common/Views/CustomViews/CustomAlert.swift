@@ -1,10 +1,6 @@
 import UIKit
 
-///A custom view controller for displaying an alert with a title, text, and a close button.
-///Use `CustomAlertVC` to present a modal alert view with customizable title and text.
-class CustomAlertVC: UIViewController {
-    
-    public var alertText: String
+class ErrorAlertVC: UIViewController {
 
     //MARK: - UI Eelements
     
@@ -14,19 +10,33 @@ class CustomAlertVC: UIViewController {
         view.layer.cornerRadius = 16
         view.layer.borderWidth = 2
         view.layer.borderColor = UIColor.PPBlue.cgColor
-  
         return view
     }()
     
-    private let titleLabel = UILabel()
-    private let textLabel = UILabel()
-    private let actionButton = PPButton(color: .PPBlue, name: "Close")
+    private let titleLabel: PPTextLabel = {
+        let label = PPTextLabel(fontSize: 18, textColor: .label, allignment: .center, fontWeight: .bold)
+        label.text = "Oops something went wrong"
+        return label
+    }()
+    
+    private let textLabel = PPTextLabel(
+        fontSize: 18,
+        textColor: .label,
+        allignment: .center,
+        fontWeight: .bold
+    )
+    
+    private lazy var actionButton: PPButton = {
+        let button = PPButton(color: .PPBlue, name: "Close")
+        button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+        return button
+    }()
     
     //MARK: - Init
     
     init(text: String) {
-        self.alertText = text
         super .init(nibName: nil, bundle: nil)
+        self.textLabel.text = text
     }
     
     required init?(coder: NSCoder) {
@@ -60,13 +70,7 @@ class CustomAlertVC: UIViewController {
     private func setupTitleLabel() {
         containerView.addSubview(titleLabel)
         
-        titleLabel.text = "Oops something went wrong"
-        titleLabel.textColor = .label
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.minimumScaleFactor = 0.9
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
@@ -79,7 +83,7 @@ class CustomAlertVC: UIViewController {
     private func setupActionButton() {
         view.addSubview(actionButton)
         
-        actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+        
         
         NSLayoutConstraint.activate([
             actionButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20),
@@ -92,7 +96,7 @@ class CustomAlertVC: UIViewController {
     private func setupTextLabel() {
         containerView.addSubview(textLabel)
         
-        textLabel.text = alertText
+        textLabel.text = alertTitle
         textLabel.textColor = .label
         textLabel.textAlignment = .center
         textLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
@@ -114,3 +118,5 @@ class CustomAlertVC: UIViewController {
         dismiss(animated: true)
     }
 }
+
+extension CustomAlert
