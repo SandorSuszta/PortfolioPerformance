@@ -6,15 +6,18 @@ class CustomAlertVC: UIViewController {
     
     public var alertText: String
 
+    //MARK: - UI Eelements
+    
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 16
         view.layer.borderWidth = 2
         view.layer.borderColor = UIColor.PPBlue.cgColor
-        view.translatesAutoresizingMaskIntoConstraints = false
+  
         return view
     }()
+    
     private let titleLabel = UILabel()
     private let textLabel = UILabel()
     private let actionButton = PPButton(color: .PPBlue, name: "Close")
@@ -31,6 +34,7 @@ class CustomAlertVC: UIViewController {
     }
     
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground.withAlphaComponent(0.75)
         setupContainerView()
@@ -40,8 +44,10 @@ class CustomAlertVC: UIViewController {
     }
     
     //MARK: - Private methods
+    
     private func setupContainerView() {
         view.addSubview(containerView)
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

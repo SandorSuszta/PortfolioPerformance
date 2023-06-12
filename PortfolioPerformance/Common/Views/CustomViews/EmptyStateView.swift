@@ -1,68 +1,59 @@
 import UIKit
 
-enum EmptyStateType {
-    case noSearchResults
-    case noFavourites
-}
-
-class EmptyStateView: UIView {
+final class EmptyStateView: UIView {
     
-    //MARK: - Properties
+    //MARK: - UI Elements
+    
     private let imageView: UIImageView
     
-    private var textLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 26, weight: .bold)
-        label.textColor = .secondaryLabel
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.5
-        label.translatesAutoresizingMaskIntoConstraints = false
-
-        return label
-    }()
+    private var titleLabel = PPTextLabel(
+        fontSize: Constants.titleFontSize,
+        textColor: .secondaryLabel,
+        allignment: .center,
+        fontWeight: .bold
+    )
     
     //MARK: - Init
-    init(type: EmptyStateType) {
-        
-        switch type {
-        case .noFavourites:
-            imageView = UIImageView(image: UIImage(named: ImageNames.noFavouirites))
-            textLabel.text = "Favourite list is empty"
-        
-        case .noSearchResults:
-            imageView = UIImageView(image: UIImage(named: ImageNames.noResult))
-            textLabel.text = "Sorry, nothing found"
-        }
+    
+    init(type: EmptyState) {
+        imageView = UIImageView(image: UIImage(named: type.imageName))
         super .init(frame: .zero)
-        setup()
+        titleLabel.text = type.title
+        setupViews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+    //MARK: - Setup Views
+
+private extension EmptyStateView {
     
-    //MARK: - Methods
-    private func setup() {
-        translatesAutoresizingMaskIntoConstraints = false
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        addSubviews(imageView, textLabel)
-        isHidden = true
-        setupConstraints()
+    enum Constants {
+        static let titleFontSize: CGFloat = 26
+        static let imageWidthToViewWidthMultiplier: CGFloat = 7 / 10
+        static let titleHeightToViewHeightMultiplier: CGFloat = 2 / 10
     }
     
-    private func setupConstraints() {
-    
+    func setupViews() {
+        addSubviews(imageView, titleLabel)
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor),
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 7 / 10),
-            imageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 7 / 10),
+            imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: Constants.imageWidthToViewWidthMultiplier),
+            imageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: Constants.imageWidthToViewWidthMultiplier),
             
-            textLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            textLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            textLabel.widthAnchor.constraint(equalTo: widthAnchor),
-            textLabel.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 2 / 10)
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            titleLabel.widthAnchor.constraint(equalTo: widthAnchor),
+            titleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Constants.titleHeightToViewHeightMultiplier)
         ])
     }
 }

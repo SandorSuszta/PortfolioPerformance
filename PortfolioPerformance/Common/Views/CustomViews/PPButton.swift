@@ -28,6 +28,5 @@ class PPButton: UIButton {
         layer.cornerRadius = 16
         titleLabel?.textColor = .white
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        translatesAutoresizingMaskIntoConstraints = false
     }
 }
