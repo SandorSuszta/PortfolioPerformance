@@ -7,27 +7,25 @@ class ErrorAlertVC: UIViewController {
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
-        view.layer.cornerRadius = 16
-        view.layer.borderWidth = 2
-        view.layer.borderColor = UIColor.PPBlue.cgColor
+        view.configureWithShadow()
         return view
     }()
     
     private let titleLabel: PPTextLabel = {
-        let label = PPTextLabel(fontSize: 18, textColor: .label, allignment: .center, fontWeight: .bold)
-        label.text = "Oops something went wrong"
+        let label = PPTextLabel(fontSize: Constants.titleFontSize, textColor: .label, allignment: .center, fontWeight: .bold)
+        label.text = Constants.titleText
         return label
     }()
     
     private let textLabel = PPTextLabel(
-        fontSize: 18,
+        fontSize: Constants.textFontSize,
         textColor: .label,
         allignment: .center,
         fontWeight: .bold
     )
     
     private lazy var actionButton: PPButton = {
-        let button = PPButton(color: .PPBlue, name: "Close")
+        let button = PPButton(color: .PPBlue, name: Constants.buttonTitle)
         button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         return button
     }()
@@ -62,8 +60,8 @@ class ErrorAlertVC: UIViewController {
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            containerView.heightAnchor.constraint(equalToConstant: 220),
-            containerView.widthAnchor.constraint(equalToConstant: 260)
+            containerView.heightAnchor.constraint(equalToConstant: Constants.containerHeight),
+            containerView.widthAnchor.constraint(equalToConstant: Constants.containerWidth)
         ])
     }
     
@@ -73,10 +71,10 @@ class ErrorAlertVC: UIViewController {
         
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            titleLabel.heightAnchor.constraint(equalToConstant: 24)
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.padding),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.padding),
+            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Constants.padding),
+            titleLabel.heightAnchor.constraint(equalToConstant: Constants.titleHeight)
         ])
     }
     
@@ -86,31 +84,31 @@ class ErrorAlertVC: UIViewController {
         
         
         NSLayoutConstraint.activate([
-            actionButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20),
-            actionButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            actionButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            actionButton.heightAnchor.constraint(equalToConstant: 44)
+            actionButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -Constants.padding),
+            actionButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.padding),
+            actionButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Constants.padding),
+            actionButton.heightAnchor.constraint(equalToConstant: Constants.buttonHeight)
         ])
     }
     
     private func setupTextLabel() {
         containerView.addSubview(textLabel)
         
-        textLabel.text = alertTitle
-        textLabel.textColor = .label
-        textLabel.textAlignment = .center
-        textLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
-        textLabel.adjustsFontSizeToFitWidth = true
-        textLabel.minimumScaleFactor = 0.75
-        textLabel.numberOfLines = 0
-        textLabel.lineBreakMode = .byWordWrapping
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
+//        textLabel.text = alertTitle
+//        textLabel.textColor = .label
+//        textLabel.textAlignment = .center
+//        textLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+//        textLabel.adjustsFontSizeToFitWidth = true
+//        textLabel.minimumScaleFactor = 0.75
+//        textLabel.numberOfLines = 0
+//        textLabel.lineBreakMode = .byWordWrapping
+//        textLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            textLabel.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -12),
-            textLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            textLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20)
+            textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.smallPadding),
+            textLabel.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -Constants.smallPadding),
+            textLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.padding),
+            textLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Constants.padding)
         ])
     }
     
@@ -119,4 +117,21 @@ class ErrorAlertVC: UIViewController {
     }
 }
 
-extension CustomAlert
+//MARK: - Setup Views
+
+private extension ErrorAlertVC {
+    enum Constants {
+        static let titleFontSize: CGFloat =     18
+        static let textFontSize: CGFloat =      16
+        
+        static let padding: CGFloat =           20
+        static let smallPadding: CGFloat =      12
+        static let titleHeight: CGFloat =       24
+        static let buttonHeight: CGFloat =      44
+        static let containerHeight: CGFloat =   220
+        static let containerWidth: CGFloat =    260
+        
+        static let titleText = "Oops something went wrong"
+        static let buttonTitle = "Close"
+    }
+}
