@@ -46,7 +46,7 @@ final class ErrorAlertVC: UIViewController {
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
-        view.backgroundColor = .systemBackground.withAlphaComponent(0.95)
+        view.backgroundColor = .systemBackground.withAlphaComponent(0.85)
         setupViews()
     }
     

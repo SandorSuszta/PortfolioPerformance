@@ -1,13 +1,5 @@
 import UIKit
 
-enum MarketCardCellType: String {
-    case greedAndFear = "Greed & Fear"
-    case totalMarketCap = "Market Cap"
-    case bitcoinDominance = "BTC Dominance"
-    
-    var cellTitle: String { self.rawValue }
-}
-
 class MarketCardBaseCell: UICollectionViewCell {
     
     let headerTitle = PPTextLabel(fontSize: 16, textColor: .secondaryLabel, fontWeight: .medium)
