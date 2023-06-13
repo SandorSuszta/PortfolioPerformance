@@ -28,7 +28,7 @@ class MarketCardMetricCell: MarketCardBaseCell {
     
     public func configure(with viewModel: MarketCardCellViewModel) {
 
-        headerTitle.text = viewModel.cellType.cellTitle
+        headerTitle.text = viewModel.cellType.title
         valueLabel.text = viewModel.mainMetricValue
         secondaryLabel.text = viewModel.secondaryMetricValue
         secondaryLabel.textColor = viewModel.secondaryMetricTextColor

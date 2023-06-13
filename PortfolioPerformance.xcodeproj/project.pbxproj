@@ -323,7 +323,7 @@
 		7935579229D766190086C4F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				79E7A21D28E5FD2800BD5CB0 /* MarketCardCell */,
+				79E7A21D28E5FD2800BD5CB0 /* MarketCardCells */,
 				797303B2296B30560006CF76 /* PPCircularProgressBar.swift */,
 				797303B4296B75450006CF76 /* PPSegmentedProgressBar.swift */,
 			);
@@ -363,6 +363,15 @@
 				795D95E229E8AF2C007555EF /* Networking  */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		79463E732A38BC4E00BAE3A3 /* DataTypes */ = {
+			isa = PBXGroup;
+			children = (
+				79463E712A38BB5D00BAE3A3 /* MarketCardCell.swift */,
+				79463E6F2A38BAC800BAE3A3 /* MarketCardCellConfigurable.swift */,
+			);
+			path = DataTypes;
 			sourceTree = "<group>";
 		};
 		795D95E229E8AF2C007555EF /* Networking  */ = {
@@ -521,18 +530,17 @@
 			path = Market;
 			sourceTree = "<group>";
 		};
-		79E7A21D28E5FD2800BD5CB0 /* MarketCardCell */ = {
+		79E7A21D28E5FD2800BD5CB0 /* MarketCardCells */ = {
 			isa = PBXGroup;
 			children = (
+				79463E732A38BC4E00BAE3A3 /* DataTypes */,
 				797303B6296C6A4C0006CF76 /* MarketCardBaseCell.swift */,
 				79F654ED297064B90080DEBB /* MarketCardGreedAndFearCell.swift */,
 				79F654EF297340670080DEBB /* MarketCardMetricCell.swift */,
 				796EFA3228697A90005E24AF /* MarketCardCellVM.swift */,
-				79463E6F2A38BAC800BAE3A3 /* MarketCardCellConfigurable.swift */,
-				79463E712A38BB5D00BAE3A3 /* MarketCardCell.swift */,
 			);
-			name = MarketCardCell;
-			path = "../../../Common/Views/Custom Cells/MarketCardCell";
+			name = MarketCardCells;
+			path = "../../../Common/Views/Custom Cells/MarketCardCells";
 			sourceTree = "<group>";
 		};
 		79E7A22028E6008400BD5CB0 /* CryptoCurrenciesTableCell */ = {

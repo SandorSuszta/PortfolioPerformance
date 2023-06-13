@@ -27,7 +27,7 @@ class MarketCardGreedAndFearCell: MarketCardBaseCell {
     //MARK: - Methods
     
     public func configure(with viewModel: MarketCardCellViewModel) {
-        headerTitle.text = viewModel.cellType.cellTitle
+        headerTitle.text = viewModel.cellType.title
         valueLabel.text = viewModel.mainMetricValue
         descriptonLabel.text = viewModel.secondaryMetricValue
         descriptonLabel.textColor = viewModel.secondaryMetricTextColor
