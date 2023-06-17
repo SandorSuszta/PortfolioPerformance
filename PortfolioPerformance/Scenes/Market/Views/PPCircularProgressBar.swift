@@ -1,5 +1,7 @@
 import UIKit
 
+/// A circular progress bar.
+/// Shows a filled portion that represents the progressvalue.
 final class PPCircularProgressBar: UIView {
     
     //MARK: - Properties
@@ -19,69 +21,60 @@ final class PPCircularProgressBar: UIView {
             progressLayer.strokeEnd = progressValue
         }
     }
-        //MARK: - Init
     
-        override init(frame: CGRect) {
-            super .init(frame: frame)
-            setupProgressBar()
-        }
-        
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-        
-        //MARK: - Lifecycle
-        
-        override func layoutSubviews() {
-            super.layoutSubviews()
-            layoutProgressBar()
-        }
-          
-        //MARK: - Public methods
+    //MARK: - Init
     
-    public func setProgress(_ progress: CGFloat, animated: Bool) {
-        
-//        if animated {
-//            let animation = CABasicAnimation(keyPath: "stroke end")
-//            animation.fromValue = 0
-//            animation.toValue = progress
-//            animation.duration = 1
-//
-//            progressLayer.add(animation, forKey: "stroke end")
-//        }
-        
+    override init(frame: CGRect) {
+        super .init(frame: frame)
+        setupProgressBar()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - Lifecycle
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layoutProgressBar()
+    }
+    
+    //MARK: - API
+    
+    func setProgress(_ progress: CGFloat) {
         progressLayer.strokeEnd = progress
     }
     
-        //MARK: - Private methods
+    //MARK: - Private methods
+    
+    private func setupProgressBar() {
+        layer.addSublayer(trackLayer)
+        layer.addSublayer(progressLayer)
+        translatesAutoresizingMaskIntoConstraints = false
         
-        private func setupProgressBar() {
-            layer.addSublayer(trackLayer)
-            layer.addSublayer(progressLayer)
-            translatesAutoresizingMaskIntoConstraints = false
-            
-            trackLayer.fillColor = UIColor.clear.cgColor
-            trackLayer.strokeColor = UIColor.secondarySystemBackground.cgColor
-            trackLayer.lineCap = .round
-            
-            progressLayer.fillColor = UIColor.clear.cgColor
-            progressLayer.lineCap = .round
-        }
+        trackLayer.fillColor = UIColor.clear.cgColor
+        trackLayer.strokeColor = UIColor.secondarySystemBackground.cgColor
+        trackLayer.lineCap = .round
         
-        private func layoutProgressBar() {
-            let lineWidth = bounds.height / 9
-            let radius = min(bounds.height, bounds.width) / 2 - lineWidth / 2
-            let center = CGPoint(x: bounds.midX, y: bounds.midY)
-            let path = UIBezierPath(
-                arcCenter: center,
-                radius: radius,
-                startAngle: -CGFloat.pi / 2,
-                endAngle: CGFloat.pi + CGFloat.pi / 2,
-                clockwise: true
-            )
-            trackLayer.path = path.cgPath
-            trackLayer.lineWidth = lineWidth
-            progressLayer.path = path.cgPath
-            progressLayer.lineWidth = lineWidth
-        }
+        progressLayer.fillColor = UIColor.clear.cgColor
+        progressLayer.lineCap = .round
     }
+    
+    private func layoutProgressBar() {
+        let lineWidth = bounds.height / 9
+        let radius = min(bounds.height, bounds.width) / 2 - lineWidth / 2
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        let path = UIBezierPath(
+            arcCenter: center,
+            radius: radius,
+            startAngle: -CGFloat.pi / 2,
+            endAngle: CGFloat.pi + CGFloat.pi / 2,
+            clockwise: true
+        )
+        trackLayer.path = path.cgPath
+        trackLayer.lineWidth = lineWidth
+        progressLayer.path = path.cgPath
+        progressLayer.lineWidth = lineWidth
+    }
+}

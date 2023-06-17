@@ -84,6 +84,7 @@
 		79D5B8E628EEDABC00178402 /* UINavigationController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E528EEDABC00178402 /* UINavigationController+ShowAlert.swift */; };
 		79D5B8E828EEE3FF00178402 /* PPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E728EEE3FF00178402 /* PPButton.swift */; };
 		79D5C6D328DC75060018B133 /* DetailsCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5C6D228DC75060018B133 /* DetailsCellVM.swift */; };
+		79E2165E2A3E260E0091DA4D /* MarketCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E2165D2A3E260E0091DA4D /* MarketCompositionalLayout.swift */; };
 		79E7A21728E5FAF000BD5CB0 /* MarketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7A21628E5FAF000BD5CB0 /* MarketVC.swift */; };
 		79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */; };
 		79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */; };
@@ -187,6 +188,7 @@
 		79D5B8E528EEDABC00178402 /* UINavigationController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+ShowAlert.swift"; sourceTree = "<group>"; };
 		79D5B8E728EEE3FF00178402 /* PPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPButton.swift; sourceTree = "<group>"; };
 		79D5C6D228DC75060018B133 /* DetailsCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCellVM.swift; sourceTree = "<group>"; };
+		79E2165D2A3E260E0091DA4D /* MarketCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCompositionalLayout.swift; sourceTree = "<group>"; };
 		79E7A21628E5FAF000BD5CB0 /* MarketVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketVC.swift; sourceTree = "<group>"; };
 		79EAFD1627B3DCD9008A6062 /* PortfolioPerformance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PortfolioPerformance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -374,6 +376,15 @@
 			path = DataTypes;
 			sourceTree = "<group>";
 		};
+		79463E742A39096800BAE3A3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */,
+				796EFA3228697A90005E24AF /* MarketCardCellVM.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		795D95E229E8AF2C007555EF /* Networking  */ = {
 			isa = PBXGroup;
 			children = (
@@ -522,10 +533,12 @@
 		79E7A21828E5FB4700BD5CB0 /* Market */ = {
 			isa = PBXGroup;
 			children = (
+				79463E732A38BC4E00BAE3A3 /* DataTypes */,
 				7935579229D766190086C4F6 /* Views */,
+				79463E742A39096800BAE3A3 /* ViewModels */,
 				79E7A21628E5FAF000BD5CB0 /* MarketVC.swift */,
-				79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */,
 				79011E082A005C1500121A81 /* MarketCoordinator.swift */,
+				79E2165D2A3E260E0091DA4D /* MarketCompositionalLayout.swift */,
 			);
 			path = Market;
 			sourceTree = "<group>";
@@ -533,11 +546,9 @@
 		79E7A21D28E5FD2800BD5CB0 /* MarketCardCells */ = {
 			isa = PBXGroup;
 			children = (
-				79463E732A38BC4E00BAE3A3 /* DataTypes */,
 				797303B6296C6A4C0006CF76 /* MarketCardBaseCell.swift */,
 				79F654ED297064B90080DEBB /* MarketCardGreedAndFearCell.swift */,
 				79F654EF297340670080DEBB /* MarketCardMetricCell.swift */,
-				796EFA3228697A90005E24AF /* MarketCardCellVM.swift */,
 			);
 			name = MarketCardCells;
 			path = "../../../Common/Views/Custom Cells/MarketCardCells";
@@ -846,6 +857,7 @@
 				790C350329D35FD200141887 /* ImageNames.swift in Sources */,
 				79AAF82A28FB358A009F3B85 /* SearchTableSectionHeader.swift in Sources */,
 				79CFFCA62A26A59900E1E58A /* SearchBarState.swift in Sources */,
+				79E2165E2A3E260E0091DA4D /* MarketCompositionalLayout.swift in Sources */,
 				793332C7293F52C2005EE8A3 /* CustomSearchBar.swift in Sources */,
 				79D5B8E428EDB85100178402 /* CustomAlert.swift in Sources */,
 				797303B3296B30560006CF76 /* PPCircularProgressBar.swift in Sources */,
@@ -1071,6 +1083,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1079,6 +1092,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sandorsuszta.PortfolioPerformance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1103,6 +1119,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1111,6 +1128,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sandorsuszta.PortfolioPerformance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
