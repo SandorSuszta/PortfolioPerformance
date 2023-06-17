@@ -1,9 +1,13 @@
 import UIKit
 
+/// A custom compositional layout for Market tab.
+/// Displays a collection view with two sections: "Market Cards" and "Crypto Coins". The "Market Cards" section displays items in a horizontal scrolling layout, while the "Crypto Coins" section displays items in a vertical layout.
+/// To use this layout, initialize an instance of `MarketCompositionalLayout` and assign it to the `collectionViewLayout` property of your `UICollectionView` instance.
 final class MarketCompositionalLayout: UICollectionViewCompositionalLayout {
     
     //MARK: - Init
     
+    /// The initializer sets up the layout by defining the sections and their layouts based on the section index.
     init() {
         super.init { sectionIndex, _ in
             let sections =  [
@@ -23,8 +27,9 @@ final class MarketCompositionalLayout: UICollectionViewCompositionalLayout {
 
 private extension MarketCompositionalLayout {
     
-    //Market Cards Section
-    
+    /// Creates and returns the layout for the "Market Cards" section.
+    ///
+    /// The "Market Cards" section displays items in a horizontal scrolling layout.
     static func makeMarketCardsSection() -> NSCollectionLayoutSection {
       
         let itemSize = NSCollectionLayoutSize(
@@ -47,8 +52,9 @@ private extension MarketCompositionalLayout {
         return section
     }
     
-    //Crypto Coins Section
-    
+    /// Creates and returns the layout for the "Crypto Coins" section.
+    ///
+    /// The "Crypto Coins" section displays items in a vertical layout.
     static func makeCryptoCoinsSection() -> NSCollectionLayoutSection {
     
         let itemSize = NSCollectionLayoutSize(
