@@ -3,6 +3,7 @@ import UIKit
 class SortOptionsCell: UICollectionViewCell {
     
     static let identifier = "SortOptionCell"
+    static let prefferedHeight: CGFloat = 44
     
     public var sortingNameLabel: UILabel = {
         let label = UILabel()

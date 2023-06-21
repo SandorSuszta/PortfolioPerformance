@@ -8,7 +8,10 @@ class MarketViewController: UIViewController {
     private let coordinator: Coordinator
     private let viewModel: MarketViewModel
     
-    private lazy var dataSource = MarketDataSource(collectionView: marketCollectionView)
+    private lazy var dataSource = MarketDataSource(
+        collectionView: marketCollectionView,
+        sortHeaderDelegate: self
+    )
 
     //MARK: - UI Elements
     
@@ -43,7 +46,7 @@ class MarketViewController: UIViewController {
         setupViewController()
         setupNavigationController()
         bindViewModels()
-        registerCells()
+        registerCellsAndHeader()
         setupMarketCollectionViewLayout()
     }
                             
@@ -101,7 +104,7 @@ class MarketViewController: UIViewController {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    private func registerCells() {
+    private func registerCellsAndHeader() {
         marketCollectionView.register(
             MarketCardMetricCell.self,
             forCellWithReuseIdentifier: MarketCardMetricCell.reuseID
@@ -114,6 +117,7 @@ class MarketViewController: UIViewController {
             CryptoCurrencyCollectionViewCell.self,
             forCellWithReuseIdentifier: CryptoCurrencyCollectionViewCell.reuseID
         )
+        marketCollectionView.register(SortSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SortSectionHeader.reuseID)
     }
     
     private func setupMarketCollectionViewLayout() {
@@ -164,11 +168,20 @@ extension MarketViewController {
     }
 }
 
-    //MARK: - CollectionView Delegate methods
+    //MARK: - CollectionView delegate methods
 
 extension MarketViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+}
+
+    //MARK: - SortSectionHeader delegate method
     
+extension MarketViewController: SortSectionHeaderDelegate {
+    
+    func didSelectSortOption(_ sortOption: CryptoCurrenciesSortOption) {
+        viewModel.sortCellViewModels(by: sortOption)
     }
 }

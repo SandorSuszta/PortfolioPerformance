@@ -91,7 +91,7 @@ class MarketViewModel {
         }
     }
     
-    func loadAllCryptoCurrenciesData(sortOption: PPMarketSort = .topCaps) {
+    func loadAllCryptoCurrenciesData(sortOption: CryptoCurrenciesSortOption = .topCaps) {
         networkingService.getCryptoCurrenciesData { [weak self] result in
             guard let self else { return }
             
@@ -119,7 +119,7 @@ class MarketViewModel {
         }
     }
     
-    func sortCellViewModels (by sortOption: PPMarketSort) {
+    func sortCellViewModels (by sortOption: CryptoCurrenciesSortOption) {
         guard var viewModels = cellViewModels.value else { return }
         
         switch sortOption {

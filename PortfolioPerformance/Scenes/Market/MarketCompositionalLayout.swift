@@ -32,14 +32,15 @@ private extension MarketCompositionalLayout {
     /// The "Market Cards" section displays items in a horizontal scrolling layout.
     static func makeMarketCardsSection() -> NSCollectionLayoutSection {
       
+        //Configure Item
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1/3),
             heightDimension: .fractionalHeight(1)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
         item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
         
+        //COnfigure group
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.95 * 3/2),
             heightDimension: .fractionalHeight(0.22)
@@ -48,6 +49,7 @@ private extension MarketCompositionalLayout {
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
         group.interItemSpacing = .fixed(16)
         
+        //Configure section
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .paging
         
@@ -58,21 +60,30 @@ private extension MarketCompositionalLayout {
     ///
     /// The "Crypto Coins" section displays items in a vertical layout.
     static func makeCryptoCoinsSection() -> NSCollectionLayoutSection {
-    
+        
+        //Configure Item
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
             heightDimension: .fractionalHeight(0.1)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
     
+        //Configure Group
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
             heightDimension: .fractionalHeight(1)
         )
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
         
+        //Configure Header
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+        let headerElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        headerElement.pinToVisibleBounds = true
+        
+        //Configure Section
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
+        section.boundarySupplementaryItems = [headerElement]
         
         return section
     }
