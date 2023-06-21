@@ -5,6 +5,8 @@ import UIKit
 ///
 final class MarketCardCellViewModel {
     
+    private let id = UUID()
+    
     let cellType: MarketCardCell
     
     let mainMetricValue: String
@@ -57,5 +59,15 @@ final class MarketCardCellViewModel {
         default:
             return .clear
         }
+    }
+}
+
+extension MarketCardCellViewModel: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func ==(lhs: MarketCardCellViewModel, rhs: MarketCardCellViewModel) -> Bool {
+        return lhs.id == rhs.id
     }
 }

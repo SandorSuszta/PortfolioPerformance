@@ -85,6 +85,10 @@
 		79D5B8E828EEE3FF00178402 /* PPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5B8E728EEE3FF00178402 /* PPButton.swift */; };
 		79D5C6D328DC75060018B133 /* DetailsCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5C6D228DC75060018B133 /* DetailsCellVM.swift */; };
 		79E2165E2A3E260E0091DA4D /* MarketCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E2165D2A3E260E0091DA4D /* MarketCompositionalLayout.swift */; };
+		79E216942A42F6330091DA4D /* MarketSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E216932A42F6330091DA4D /* MarketSection.swift */; };
+		79E216962A42F6830091DA4D /* MarketDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E216952A42F6830091DA4D /* MarketDataSource.swift */; };
+		79E216982A42FD000091DA4D /* MarketViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E216972A42FD000091DA4D /* MarketViewModel.swift */; };
+		79E2169A2A430C780091DA4D /* CryptoCurrencyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E216992A430C780091DA4D /* CryptoCurrencyCollectionViewCell.swift */; };
 		79E7A21728E5FAF000BD5CB0 /* MarketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7A21628E5FAF000BD5CB0 /* MarketVC.swift */; };
 		79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */; };
 		79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */; };
@@ -189,6 +193,10 @@
 		79D5B8E728EEE3FF00178402 /* PPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPButton.swift; sourceTree = "<group>"; };
 		79D5C6D228DC75060018B133 /* DetailsCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCellVM.swift; sourceTree = "<group>"; };
 		79E2165D2A3E260E0091DA4D /* MarketCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCompositionalLayout.swift; sourceTree = "<group>"; };
+		79E216932A42F6330091DA4D /* MarketSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketSection.swift; sourceTree = "<group>"; };
+		79E216952A42F6830091DA4D /* MarketDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDataSource.swift; sourceTree = "<group>"; };
+		79E216972A42FD000091DA4D /* MarketViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewModel.swift; sourceTree = "<group>"; };
+		79E216992A430C780091DA4D /* CryptoCurrencyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCurrencyCollectionViewCell.swift; sourceTree = "<group>"; };
 		79E7A21628E5FAF000BD5CB0 /* MarketVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketVC.swift; sourceTree = "<group>"; };
 		79EAFD1627B3DCD9008A6062 /* PortfolioPerformance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PortfolioPerformance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -328,6 +336,7 @@
 				79E7A21D28E5FD2800BD5CB0 /* MarketCardCells */,
 				797303B2296B30560006CF76 /* PPCircularProgressBar.swift */,
 				797303B4296B75450006CF76 /* PPSegmentedProgressBar.swift */,
+				79E216992A430C780091DA4D /* CryptoCurrencyCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -372,6 +381,8 @@
 			children = (
 				79463E712A38BB5D00BAE3A3 /* MarketCardCell.swift */,
 				79463E6F2A38BAC800BAE3A3 /* MarketCardCellConfigurable.swift */,
+				79E216932A42F6330091DA4D /* MarketSection.swift */,
+				79E216972A42FD000091DA4D /* MarketViewModel.swift */,
 			);
 			path = DataTypes;
 			sourceTree = "<group>";
@@ -539,6 +550,7 @@
 				79E7A21628E5FAF000BD5CB0 /* MarketVC.swift */,
 				79011E082A005C1500121A81 /* MarketCoordinator.swift */,
 				79E2165D2A3E260E0091DA4D /* MarketCompositionalLayout.swift */,
+				79E216952A42F6830091DA4D /* MarketDataSource.swift */,
 			);
 			path = Market;
 			sourceTree = "<group>";
@@ -800,6 +812,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79E216942A42F6330091DA4D /* MarketSection.swift in Sources */,
 				7934EFA4282A824E00CE7FD0 /* ResultsCell.swift in Sources */,
 				792C040928C9E62B008EE48C /* RangeProgressView.swift in Sources */,
 				796EFA3A286DDD60005E24AF /* ObservableObject.swift in Sources */,
@@ -849,6 +862,7 @@
 				79463E702A38BAC800BAE3A3 /* MarketCardCellConfigurable.swift in Sources */,
 				796EFA4928770D26005E24AF /* CryptoCurrencyCell.swift in Sources */,
 				79463E6B2A364EBF00BAE3A3 /* SearchTableSectionHeaderFactory.swift in Sources */,
+				79E216982A42FD000091DA4D /* MarketViewModel.swift in Sources */,
 				7955B09529E0B60700492059 /* ImageCacheManager.swift in Sources */,
 				79011E072A0052FE00121A81 /* AppCoordinator.swift in Sources */,
 				79011E0B2A03020600121A81 /* Services.swift in Sources */,
@@ -860,6 +874,7 @@
 				79E2165E2A3E260E0091DA4D /* MarketCompositionalLayout.swift in Sources */,
 				793332C7293F52C2005EE8A3 /* CustomSearchBar.swift in Sources */,
 				79D5B8E428EDB85100178402 /* CustomAlert.swift in Sources */,
+				79E2169A2A430C780091DA4D /* CryptoCurrencyCollectionViewCell.swift in Sources */,
 				797303B3296B30560006CF76 /* PPCircularProgressBar.swift in Sources */,
 				79AE53F92A141C8800214CB1 /* CoinRepresentable.swift in Sources */,
 				792B0FC5287C85EF0040B461 /* WatchlistVM.swift in Sources */,
@@ -871,6 +886,7 @@
 				7934EFA6282D141B00CE7FD0 /* SearchResponse.swift in Sources */,
 				790C30C527CEA7620021658F /* UserDefaultsService.swift in Sources */,
 				79F654F0297340670080DEBB /* MarketCardMetricCell.swift in Sources */,
+				79E216962A42F6830091DA4D /* MarketDataSource.swift in Sources */,
 				796EFA452876F076005E24AF /* CryptoCurrencyCellVM.swift in Sources */,
 				79463E6D2A3767E100BAE3A3 /* EmptyState.swift in Sources */,
 				796EFA3328697A91005E24AF /* MarketCardCellVM.swift in Sources */,
