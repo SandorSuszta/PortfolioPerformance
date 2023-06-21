@@ -1,5 +1,6 @@
 import Foundation
 
+
 enum MarketCardCell {
     case greedAndFear
     case totalMarketCap
