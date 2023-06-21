@@ -1,10 +1,13 @@
 import Foundation
 
+///Used as item identifier within MarketDiffableDataSource.
+///It wraps the different viewModels/models to be used in single data source
 enum MarketItemViewModel {
     case marketCard(viewModel: MarketCardCellViewModel)
     case cryptoCoinCell(model: CoinModel)
 }
 
+///Hashable conformance is required by DiffableDataSource
 extension MarketItemViewModel: Hashable {
     func hash(into hasher: inout Hasher) {
         switch self {
