@@ -20,6 +20,7 @@ class MarketViewController: UIViewController {
         collection.delegate = self
         collection.backgroundColor = .clear
         collection.showsHorizontalScrollIndicator = false
+        collection.showsVerticalScrollIndicator = false
         return collection
     }()
     
@@ -122,8 +123,8 @@ class MarketViewController: UIViewController {
         NSLayoutConstraint.activate([
             marketCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             marketCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            marketCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding),
-            marketCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding),
+            marketCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            marketCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
 
