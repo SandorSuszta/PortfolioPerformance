@@ -4,7 +4,7 @@ final class CryptoCurrencyCell: UITableViewCell {
     
     //MARK: - Properties
     
-    static let identifier = "CryptoCurrencyCell"
+    static let reuseID = "CryptoCurrencyCell"
     
     static let prefferredHeight: CGFloat = 64
     

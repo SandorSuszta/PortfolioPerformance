@@ -6,7 +6,7 @@ final class CryptoCurrencyCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
-    static let identifier = String(describing: CryptoCurrencyCollectionViewCell.self)
+    static let reuseID = String(describing: CryptoCurrencyCollectionViewCell.self)
     
     static let prefferredHeight: CGFloat = 64
     

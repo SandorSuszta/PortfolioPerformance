@@ -7,6 +7,8 @@ class MarketViewController: UIViewController {
     
     private let coordinator: Coordinator
     private let viewModel: MarketViewModel
+    
+    private lazy var dataSource = MarketDataSource(collectionView: marketCollectionView)
 
     //MARK: - UI Elements
     
@@ -18,7 +20,6 @@ class MarketViewController: UIViewController {
         collection.delegate = self
         collection.backgroundColor = .clear
         collection.showsHorizontalScrollIndicator = false
-        //TODO: - register CryptoCurrencyCells
         return collection
     }()
     
@@ -39,8 +40,9 @@ class MarketViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
+        setupNavigationController()
         bindViewModels()
-        addSearchButton()
+        registerCells()
         setupMarketCollectionViewLayout()
     }
                             
@@ -64,10 +66,6 @@ class MarketViewController: UIViewController {
     }
 
     //MARK: - Private methods
-    
-    private func reloadMarketData() {
-        
-    }
     
     private func setupNavigationController() {
         addSearchButton()
@@ -102,15 +100,30 @@ class MarketViewController: UIViewController {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
+    private func registerCells() {
+        marketCollectionView.register(
+            MarketCardMetricCell.self,
+            forCellWithReuseIdentifier: MarketCardMetricCell.reuseID
+        )
+        marketCollectionView.register(
+            MarketCardGreedAndFearCell.self,
+            forCellWithReuseIdentifier: MarketCardGreedAndFearCell.reuseID
+        )
+        marketCollectionView.register(
+            CryptoCurrencyCollectionViewCell.self,
+            forCellWithReuseIdentifier: CryptoCurrencyCollectionViewCell.reuseID
+        )
+    }
+    
     private func setupMarketCollectionViewLayout() {
         view.addSubviews(marketCollectionView)
         marketCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             marketCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            marketCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            marketCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            marketCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            marketCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            marketCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding),
+            marketCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding),
         ])
     }
 
@@ -120,6 +133,33 @@ class MarketViewController: UIViewController {
         if let coordinator = coordinator as? MarketCoordinator {
             coordinator.showSearch()
         }
+    }
+}
+
+    //MARK: - TableView data source methods
+
+extension MarketViewController {
+    
+    typealias MarketSnapshot = NSDiffableDataSourceSnapshot<MarketSection, MarketItem>
+    
+    private func makeSnapshot() -> MarketSnapshot {
+        var snapshot = MarketSnapshot()
+        
+        snapshot.appendSections([.global, .coins])
+        
+        if let cardsViewModels = viewModel.cardViewModels.value {
+            snapshot.appendItems(cardsViewModels.map { MarketItem.marketCard($0) }, toSection: .global)
+        }
+        
+        if let cellViewModels = viewModel.cellViewModels.value {
+            snapshot.appendItems(cellViewModels.map { MarketItem.cryptoCoinCell($0.coinModel)}, toSection: .coins)
+        }
+        
+        return snapshot
+    }
+    
+    private func reloadMarketData() {
+        dataSource.apply(makeSnapshot(), animatingDifferences: true)
     }
 }
 

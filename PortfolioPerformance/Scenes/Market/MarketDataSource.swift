@@ -1,7 +1,7 @@
 import UIKit
 
 /// A custom data source class for a UICollectionView. CollectionView has two different sections each with different cells and view models.
-final class MarketDataSource: UICollectionViewDiffableDataSource<MarketSection, MarketItemViewModel> {
+final class MarketDataSource: UICollectionViewDiffableDataSource<MarketSection, MarketItem> {
     
     //MARK: - Init
     
@@ -20,24 +20,34 @@ final class MarketDataSource: UICollectionViewDiffableDataSource<MarketSection, 
                 switch viewModel.cellType {
                     
                 case .bitcoinDominance, .totalMarketCap:
-                    let cell = MarketCardMetricCell()
+                    guard let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: MarketCardMetricCell.reuseID,
+                        for: indexPath
+                    ) as? MarketCardMetricCell else { return UICollectionViewCell() }
+                    
                     cell.configure(with: viewModel)
+                    cell.configureWithShadow()
                     return cell
                     
                 case .greedAndFear:
-                    let cell = MarketCardGreedAndFearCell()
+                    guard let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: MarketCardGreedAndFearCell.reuseID,
+                        for: indexPath
+                    ) as? MarketCardGreedAndFearCell else { return UICollectionViewCell() }
+                    
                     cell.configure(with: viewModel)
+                    cell.configureWithShadow()
                     return cell
                 }
                 
                 //CryptoCoins
             case .cryptoCoinCell(let model):
                 guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: CryptoCurrencyCell.identifier,
+                    withReuseIdentifier: CryptoCurrencyCollectionViewCell.reuseID,
                     for: indexPath
-                ) as? CryptoCurrencyCollectionViewCell
-                else { return UICollectionViewCell() }
+                ) as? CryptoCurrencyCollectionViewCell else { return UICollectionViewCell() }
                 
+                cell.imageDownloader = ImageDownloader()
                 cell.configureCell(with: CryptoCurrencyCellViewModel(coinModel: model))
                 return cell
             }

@@ -100,7 +100,7 @@ class WatchlistViewController: UIViewController {
         
         watchlistTableView.register(
             CryptoCurrencyCell.self,
-            forCellReuseIdentifier: CryptoCurrencyCell.identifier
+            forCellReuseIdentifier: CryptoCurrencyCell.reuseID
         )
         
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
@@ -175,7 +175,7 @@ private extension WatchlistViewController {
         
         let dataSource = WatchlistDataSource(tableView: watchlistTableView) { tableView, indexPath, itemIdentifier in
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: CryptoCurrencyCell.identifier,
+                withIdentifier: CryptoCurrencyCell.reuseID,
                 for: indexPath
             ) as? CryptoCurrencyCell else { return UITableViewCell() }
             
