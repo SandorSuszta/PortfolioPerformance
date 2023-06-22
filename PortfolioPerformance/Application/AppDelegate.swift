@@ -12,6 +12,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func configureNavigationBar() {
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithTransparentBackground()
+        //navigationBarAppearance.backgroundColor = .clear
+        
+        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        UINavigationBar.appearance().compactAppearance = navigationBarAppearance
         UINavigationBar.appearance().titleTextAttributes = [.font: UIFont.systemFont(ofSize: 26)]
         UINavigationBar.appearance().tintColor = .PPBlue
     }
