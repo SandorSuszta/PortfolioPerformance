@@ -164,7 +164,7 @@ extension MarketViewController {
     }
     
     private func reloadMarketData() {
-        dataSource.apply(makeSnapshot(), animatingDifferences: true)
+        dataSource.apply(makeSnapshot(), animatingDifferences: false)
     }
 }
 
@@ -183,5 +183,15 @@ extension MarketViewController: SortSectionHeaderDelegate {
     
     func didSelectSortOption(_ sortOption: CryptoCurrenciesSortOption) {
         viewModel.sortCellViewModels(by: sortOption)
+        
+        if isCryptoCurrencySectionOutOfViewBounds() {
+            marketCollectionView.scrollToItem(at: IndexPath(row: 0, section: 1), at: .top, animated: false)
+        }
+    }
+    
+    private func isCryptoCurrencySectionOutOfViewBounds() -> Bool {
+        guard let sectionFrame = marketCollectionView.layoutAttributesForItem(at: IndexPath(row: 0, section: 1))?.frame else { return false }
+        
+        return sectionFrame.origin.y < marketCollectionView.contentOffset.y
     }
 }
