@@ -221,8 +221,8 @@ private extension WatchlistViewController {
     
     private func configureViewHierarchy() {
         view.addSubviews(
-            emptyWatchlistView,
             watchlistTableView,
+            emptyWatchlistView,
             plusButton
         )
     }
