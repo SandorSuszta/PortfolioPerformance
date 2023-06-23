@@ -1,5 +1,6 @@
 import UIKit
 
+///This view is used as a decoration view in a `UICollectionViewCompositionalLayout` to make section have a rounded edge appearence
 final class RoundedBackgroundView: UICollectionReusableView {
     
     static let reuseID = String(describing: RoundedBackgroundView.self)
@@ -29,13 +30,18 @@ final class RoundedBackgroundView: UICollectionReusableView {
     //MARK: - Private methods
     
     private func setupViewsLayout() {
+        
+        enum Constants {
+            static let padding: CGFloat = 15
+        }
+        
         addSubview(insetView)
         insetView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            insetView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            trailingAnchor.constraint(equalTo: insetView.trailingAnchor, constant: 15),
-            insetView.topAnchor.constraint(equalTo: topAnchor),
+            insetView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.padding),
+            insetView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.padding),
+            insetView.topAnchor.constraint(equalTo: topAnchor, constant: SortSectionHeader.prefferedHeight),
             insetView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }

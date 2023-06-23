@@ -16,6 +16,8 @@ final class MarketCompositionalLayout: UICollectionViewCompositionalLayout {
             ]
             return sections[sectionIndex]
         }
+        
+        register(RoundedBackgroundView.self, forDecorationViewOfKind: RoundedBackgroundView.reuseID)
     }
     
     required init?(coder: NSCoder) {
@@ -81,9 +83,13 @@ private extension MarketCompositionalLayout {
         let headerElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         headerElement.pinToVisibleBounds = true
         
+        //BackgroundView
+        let backgroundView = NSCollectionLayoutDecorationItem.background(elementKind: RoundedBackgroundView.reuseID)
+        
         //Configure Section
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [headerElement]
+        section.decorationItems = [backgroundView]
         
         return section
     }

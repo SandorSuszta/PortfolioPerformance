@@ -7,7 +7,7 @@ protocol SortSectionHeaderDelegate: AnyObject {
 final class SortSectionHeader: UICollectionReusableView {
     
     static let reuseID = String(describing: SortSectionHeader.self)
-    static let prefferedHeight: CGFloat = 38
+    static let prefferedHeight: CGFloat = 44
     
     private var sortOptions: [CryptoCurrenciesSortOption] = []
    

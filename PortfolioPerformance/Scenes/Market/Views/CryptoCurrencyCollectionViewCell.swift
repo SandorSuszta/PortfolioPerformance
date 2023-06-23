@@ -20,13 +20,13 @@ final class CryptoCurrencyCollectionViewCell: UICollectionViewCell {
     private let logoContainerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = Constants.viewCornerRadius
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .clear
         return view
     }()
     
     private let labelsContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .clear
         return view
     }()
     
@@ -112,7 +112,7 @@ private extension CryptoCurrencyCollectionViewCell {
     }
     
     func configureContentView() {
-        contentView.backgroundColor = .systemBackground
+        contentView.backgroundColor = .clear
     }
     
     func setupViewHierarchy() {
