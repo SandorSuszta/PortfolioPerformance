@@ -7,7 +7,9 @@ protocol SortSectionHeaderDelegate: AnyObject {
 final class SortSectionHeader: UICollectionReusableView {
     
     static let reuseID = String(describing: SortSectionHeader.self)
-    static let prefferedHeight: CGFloat = 44
+    static let prefferedHeight: CGFloat = 38
+    
+    private var sortOptions: [CryptoCurrenciesSortOption] = []
    
     //MARK: - Delegate
     
@@ -16,11 +18,13 @@ final class SortSectionHeader: UICollectionReusableView {
     //MARK: - UI Elements
     
     private lazy var sortOptionsCollectionView: UICollectionView  = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeCompositionalLayout())
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = .red //!!!!!!!!!
+        collectionView.backgroundColor = .secondarySystemBackground
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(SortOptionsCell.self, forCellWithReuseIdentifier: SortOptionsCell.reuseID)
+        collectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: [])
         return collectionView
     }()
     
@@ -28,6 +32,8 @@ final class SortSectionHeader: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .secondarySystemBackground
+        sortOptions = makeCollectionDaraSource()
         setupCollectionViewLayout()
     }
     
@@ -48,5 +54,57 @@ final class SortSectionHeader: UICollectionReusableView {
             sortOptionsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             sortOptionsCollectionView.heightAnchor.constraint(equalToConstant: SortSectionHeader.prefferedHeight)
         ])
+    }
+    
+    private func makeCollectionDaraSource() -> [CryptoCurrenciesSortOption] {
+        var dataSource: [CryptoCurrenciesSortOption] = []
+        CryptoCurrenciesSortOption.allCases.forEach { dataSource.append($0) }
+        return dataSource
+    }
+    
+    private func makeCompositionalLayout() -> UICollectionViewCompositionalLayout {
+        //Configure Item
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1/4),
+            heightDimension: .fractionalHeight(0.9)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    
+        //Configure Group
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.9 * 4/3),
+            heightDimension: .fractionalHeight(1)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 4)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
+        group.interItemSpacing = .fixed(4)
+        
+        //Configure Section
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+}
+
+extension SortSectionHeader: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        sortOptions.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = sortOptionsCollectionView.dequeueReusableCell(
+            withReuseIdentifier: SortOptionsCell.reuseID,
+            for: indexPath
+        ) as? SortOptionsCell else { return UICollectionViewCell() }
+        
+        cell.setTitle(sortOptions[indexPath.row].rawValue)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        delegate?.didSelectSortOption(sortOptions[indexPath.row])
     }
 }
