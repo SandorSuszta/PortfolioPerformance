@@ -66,14 +66,14 @@ private extension MarketCompositionalLayout {
         //Configure Item
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(0.1)
+            heightDimension: .absolute(CryptoCurrencyCell.prefferredHeight)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
     
         //Configure Group
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(1)
+            heightDimension: .absolute(CryptoCurrencyCell.prefferredHeight)
         )
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
