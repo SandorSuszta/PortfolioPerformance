@@ -1,12 +1,17 @@
 import Foundation
 import UIKit
 
+protocol TabBarReselectHandler {
+    func handleReselect()
+}
+
 final class PPTabBarController: UITabBarController {
     
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        delegate = self
         tabBar.tintColor = .PPBlue
         makeTabBarTransparent()
         createTabBarBackgroundLayer()
@@ -37,5 +42,16 @@ final class PPTabBarController: UITabBarController {
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = tabBar.standardAppearance
         tabBar.isTranslucent = true
+    }
+}
+
+extension PPTabBarController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if tabBarController.selectedViewController === viewController {
+            guard let navigationController = viewController as? UINavigationController,
+                  let handler = navigationController.viewControllers.first as? TabBarReselectHandler else { return true }
+            handler.handleReselect()
+        }
+        return true
     }
 }

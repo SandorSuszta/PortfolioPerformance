@@ -195,3 +195,11 @@ extension MarketViewController: SortSectionHeaderDelegate {
         return sectionFrame.origin.y < marketCollectionView.contentOffset.y
     }
 }
+
+    //MARK: -  TabBarReselectHandler method
+
+extension MarketViewController: TabBarReselectHandler {
+    func handleReselect() {
+        marketCollectionView.setContentOffset(.zero, animated: true)
+    }
+}

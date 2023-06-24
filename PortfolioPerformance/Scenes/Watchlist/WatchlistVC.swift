@@ -274,3 +274,9 @@ extension WatchlistViewController: UITableViewDelegate {
         }
     }
 }
+
+extension WatchlistViewController: TabBarReselectHandler {
+    func handleReselect() {
+        watchlistTableView.setContentOffset(.zero, animated: true)
+    }
+}
