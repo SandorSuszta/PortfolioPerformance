@@ -1,9 +1,4 @@
-import Foundation
 import UIKit
-
-protocol TabBarReselectHandler {
-    func handleReselect()
-}
 
 final class PPTabBarController: UITabBarController {
     
