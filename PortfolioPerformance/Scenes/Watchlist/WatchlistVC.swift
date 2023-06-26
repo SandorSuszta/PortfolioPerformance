@@ -99,9 +99,7 @@ class WatchlistViewController: UIViewController {
         
         watchlistTableView.delegate = self
         watchlistTableView.backgroundColor = .clear
-        watchlistTableView.separatorStyle = .singleLine
-        watchlistTableView.separatorInset = .zero
-        watchlistTableView.separatorColor = .secondarySystemBackground
+        watchlistTableView.separatorStyle = .none
         watchlistTableView.layer.cornerRadius = 10
         watchlistTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: view.width / 20))
         watchlistTableView.translatesAutoresizingMaskIntoConstraints = false
