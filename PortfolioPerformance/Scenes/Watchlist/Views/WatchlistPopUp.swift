@@ -1,8 +1,10 @@
 import UIKit
 
-final class WatchlistPopUp: UIView {
+final class WatchlistPopUp {
     
     private let coinName : String
+    
+    let bottomConstraint: NSLayoutConstraint
     
     //MARK: - UI Elements
     
@@ -30,7 +32,9 @@ final class WatchlistPopUp: UIView {
     init(superView: UIView, coinName: String) {
         self.superView = superView
         self.coinName = coinName
-        super.init(frame: .zero)
+        bottomConstraint = view.bottomAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.bottomAnchor, constant: Constants.viewHeight)
+        
+        //super.init(frame: .zero)
         setupViewHierarchy()
         layoutViews()
         setTitle(coinName: coinName)
@@ -51,11 +55,11 @@ final class WatchlistPopUp: UIView {
 
 extension WatchlistPopUp {
     
-    private enum Constants {
+    enum Constants {
         static let imageName = "checkmark"
         
         static let viewHeight: CGFloat = 52
-        static let viewWeight: CGFloat = 232
+        static let viewWidth: CGFloat = 232
         
         static let padding: CGFloat = 16
         static let smallPadding: CGFloat = 8
@@ -78,10 +82,11 @@ extension WatchlistPopUp {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            view.centerXAnchor.constraint(equalTo: superView.centerXAnchor),
-            view.bottomAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.smallPadding),
-            view.widthAnchor.constraint(equalToConstant: Constants.viewWeight),
             view.heightAnchor.constraint(equalToConstant: Constants.viewHeight),
+            view.centerXAnchor.constraint(equalTo: superView.centerXAnchor),
+            view.widthAnchor.constraint(equalToConstant: Constants.viewWidth),
+            bottomConstraint,
+            
             
             checkmarkLogo.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.smallPadding),
             checkmarkLogo.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.smallPadding),

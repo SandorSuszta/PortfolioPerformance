@@ -289,6 +289,7 @@ extension SearchScreenViewController: UISearchBarDelegate  {
 }
 
     //MARK: - Section Header Delegate
+
 extension SearchScreenViewController: SearchTableSectionHeaderDelegate {
     func didTapButton() {
         viewModel.clearRecentSearches()

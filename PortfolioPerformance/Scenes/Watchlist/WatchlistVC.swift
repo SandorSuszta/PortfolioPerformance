@@ -67,7 +67,6 @@ class WatchlistViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateTableWithWatchlist()
-        let logo = WatchlistPopUp(superView: view, coinName: "MATIC")
     }
     
     //MARK: - Bind viewModel
@@ -254,6 +253,7 @@ extension WatchlistViewController {
 }
 
 //MARK: - TableView Delegate
+
 extension WatchlistViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

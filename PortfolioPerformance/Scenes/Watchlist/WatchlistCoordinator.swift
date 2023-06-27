@@ -45,13 +45,39 @@ class WatchlistCoordinator: Coordinator {
         
         navigationController.pushViewController(detailsVC, animated: true)
     }
+    
+    func showPopUp(on viewController: UIViewController, coinName: String) {
+        let popUp = WatchlistPopUp(superView: viewController.view, coinName: coinName)
+        viewController.view.layoutIfNeeded()
+        
+        let slideIn = {
+            popUp.bottomConstraint.constant = -WatchlistPopUp.Constants.smallPadding
+            viewController.view.layoutIfNeeded()
+        }
+        
+        let slideOutAnimation: (Bool) -> Void = { done in
+            if done {
+                UIView.animate(withDuration: 0.5, delay: 0.75) {
+                    popUp.bottomConstraint.constant = WatchlistPopUp.Constants.viewHeight
+                    viewController.view.layoutIfNeeded()
+                }
+            }
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.5, animations: slideIn, completion: slideOutAnimation)
+    }
 }
 
     //MARK: - Search Delegate Method
 
 extension WatchlistCoordinator: SearchViewControllerDelegate {
+    
     func handleSelection(of representedCoin: CoinRepresenatable) {
         services.watchlistStore.saveToWatchlist(id: representedCoin.id)
         navigationController.popViewController(animated: true)
+        
+        guard let watchlistVC = navigationController.viewControllers.first else { return }
+        
+        showPopUp(on: watchlistVC, coinName: representedCoin.symbol.uppercased())
     }
 }
