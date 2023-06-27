@@ -42,7 +42,7 @@ private extension MarketCompositionalLayout {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
         
-        //COnfigure group
+        //Configure group
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.95 * 3/2),
             heightDimension: .fractionalHeight(0.22)

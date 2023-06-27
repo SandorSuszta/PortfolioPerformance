@@ -6,6 +6,8 @@ class WatchlistViewController: UIViewController {
     
     private let coordinator: Coordinator
     
+    lazy var logo = WatchlistPopUp(superView: view, coinName: "BTC")
+    
     private lazy var dataSource: WatchlistDataSource = makeDataSource()
     
     private var watchlistVM = WatchlistViewModel(networkingService: NetworkingService())
@@ -65,6 +67,7 @@ class WatchlistViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateTableWithWatchlist()
+        let logo = WatchlistPopUp(superView: view, coinName: "MATIC")
     }
     
     //MARK: - Bind viewModel

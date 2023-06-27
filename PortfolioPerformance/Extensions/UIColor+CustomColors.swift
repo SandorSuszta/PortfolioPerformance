@@ -15,6 +15,8 @@ extension UIColor {
     static let navy = UIColor(red: 0.01, green: 0.66, blue: 0.96, alpha: 1)
     static let PPBlue = UIColor(red: 3/255, green: 169/255, blue: 244/255, alpha: 1)
     static let PPBlueBackground = UIColor(red: 227/255, green: 242/255, blue: 253/255, alpha: 1)
+    static let popUpBackground = UIColor(red: 234/255, green: 247/255, blue: 238/255, alpha: 1)
+    static let popUpBorder = UIColor(red: 219/255, green: 236/255, blue: 225/255, alpha: 1)
     
     static var PPSystemBackground: UIColor = {
         return UIColor { (traits) -> UIColor in
