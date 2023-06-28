@@ -46,25 +46,29 @@ class WatchlistCoordinator: Coordinator {
         navigationController.pushViewController(detailsVC, animated: true)
     }
     
-    func showPopUp(on viewController: UIViewController, coinName: String) {
-        let popUp = WatchlistPopUp(superView: viewController.view, coinName: coinName)
-        viewController.view.layoutIfNeeded()
+    func showPopUp(on parentViewController: UIViewController, coinName: String) {
+        let popUp = WatchlistPopUp(superView: parentViewController.view, coinName: coinName)
+        
+        // Ensure layout is up to date before animation
+        parentViewController.view.layoutIfNeeded()
         
         let slideIn = {
-            popUp.bottomConstraint.constant = -WatchlistPopUp.Constants.smallPadding
-            viewController.view.layoutIfNeeded()
+            popUp.changeBottomConstraintConstant(to: -WatchlistPopUp.Constants.smallPadding)
+            parentViewController.view.layoutIfNeeded()
         }
         
-        let slideOutAnimation: (Bool) -> Void = { done in
+        let slideOut: (Bool) -> Void = { done in
             if done {
                 UIView.animate(withDuration: 0.5, delay: 1) {
-                    popUp.bottomConstraint.constant = WatchlistPopUp.Constants.viewHeight
-                    viewController.view.layoutIfNeeded()
+                    popUp.changeBottomConstraintConstant(to: WatchlistPopUp.Constants.viewHeight)
+                    parentViewController.view.layoutIfNeeded()
+                } completion: { done in
+                    if done { popUp.removeFromSuperview() }
                 }
             }
         }
         
-        UIView.animate(withDuration: 0.5, delay: 0.5, animations: slideIn, completion: slideOutAnimation)
+        UIView.animate(withDuration: 0.5, delay: 0.5, animations: slideIn, completion: slideOut)
     }
 }
 

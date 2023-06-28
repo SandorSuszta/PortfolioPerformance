@@ -4,7 +4,7 @@ final class WatchlistPopUp {
     
     private let coinName : String
     
-    let bottomConstraint: NSLayoutConstraint
+    private let bottomConstraint: NSLayoutConstraint
     
     //MARK: - UI Elements
     
@@ -54,8 +54,17 @@ final class WatchlistPopUp {
         
         titleLabel.attributedText = attributedText
     }
+    
+    //MARK: - API
+    
+    func changeBottomConstraintConstant(to value: CGFloat ) {
+        bottomConstraint.constant = value
+    }
+    
+    func removeFromSuperview() {
+        view.removeFromSuperview()
+    }
 }
-
     //MARK: - Setup Views
 
 extension WatchlistPopUp {
