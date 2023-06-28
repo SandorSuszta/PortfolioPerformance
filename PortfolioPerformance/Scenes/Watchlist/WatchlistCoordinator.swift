@@ -57,7 +57,7 @@ class WatchlistCoordinator: Coordinator {
         
         let slideOutAnimation: (Bool) -> Void = { done in
             if done {
-                UIView.animate(withDuration: 0.5, delay: 0.75) {
+                UIView.animate(withDuration: 0.5, delay: 1) {
                     popUp.bottomConstraint.constant = WatchlistPopUp.Constants.viewHeight
                     viewController.view.layoutIfNeeded()
                 }

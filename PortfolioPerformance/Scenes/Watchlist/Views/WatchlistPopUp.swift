@@ -12,7 +12,7 @@ final class WatchlistPopUp {
     
     private let view: UIView = {
         let view  = UIView()
-        view.configureWithShadow(cornerRadius: Constants.viewCornerRadius)
+        view.layer.cornerRadius = Constants.viewCornerRadius
         view.layer.borderWidth = Constants.borderWidth
         view.layer.borderColor = UIColor.popUpBorder.cgColor
         view.backgroundColor = .popUpBackground
@@ -34,7 +34,6 @@ final class WatchlistPopUp {
         self.coinName = coinName
         bottomConstraint = view.bottomAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.bottomAnchor, constant: Constants.viewHeight)
         
-        //super.init(frame: .zero)
         setupViewHierarchy()
         layoutViews()
         setTitle(coinName: coinName)
@@ -47,7 +46,13 @@ final class WatchlistPopUp {
     //MARK: - Private
     
     private func setTitle(coinName name: String) {
-        titleLabel.text = "\(coinName) has been added to watchlist"
+        let attributedText = NSMutableAttributedString(string: "\(coinName) has been added to watchlist")
+        
+        let coinNameRange = NSRange(location: 0, length: name.count)
+        let coinNameColor = UIColor.label
+        attributedText.addAttribute(.foregroundColor, value: coinNameColor, range: coinNameRange)
+        
+        titleLabel.attributedText = attributedText
     }
 }
 
