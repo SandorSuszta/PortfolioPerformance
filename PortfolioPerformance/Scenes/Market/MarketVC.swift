@@ -170,10 +170,17 @@ extension MarketViewController {
 
     //MARK: - CollectionView delegate methods
 
-extension MarketViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension MarketViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        guard let coordinator = coordinator as? MarketCoordinator,
+              let item = dataSource.itemIdentifier(for: indexPath)
+        else { return }
+        
+        if case .cryptoCoinCell(let model) = item {
+            coordinator.showDetails(for: model)
+        }
     }
 }
 
