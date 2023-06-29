@@ -19,6 +19,7 @@ final class EmptyStateView: UIView {
         imageView = UIImageView(image: UIImage(named: type.imageName))
         super .init(frame: .zero)
         titleLabel.text = type.title
+        isHidden = true
         setupViews()
     }
     
