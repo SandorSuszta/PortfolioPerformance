@@ -9,7 +9,7 @@ class MarketCardBaseCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super .init(frame: frame)
         configureContentView()
-        contentView.configureWithShadow()
+        contentView.addShadow()
     }
     
     override func layoutSubviews() {

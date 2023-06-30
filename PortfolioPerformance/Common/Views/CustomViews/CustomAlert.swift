@@ -8,7 +8,7 @@ final class ErrorAlertVC: UIViewController {
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
-        view.configureWithShadow(shadowColor: .black, shadowRadius: 20)
+        view.addShadow(shadowColor: .black, shadowRadius: 20)
         return view
     }()
     

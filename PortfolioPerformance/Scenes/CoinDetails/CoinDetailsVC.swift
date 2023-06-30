@@ -3,18 +3,22 @@ import UIKit
 
 class CoinDetailsVC: UIViewController {
     
-    //MARK: - Properties
+    //MARK: - Dependecies
     
     private let coordinator: Coordinator
     private let viewModel: CoinDetailsViewModel
     private let imageDownloader: ImageDownloaderProtocol
     private let watchlistStore: WatchlistStoreProtocol
     
+    
+    //MARK: - Properties
+    
     private var currentChartTimeInterval = 1
     
     private var padding: CGFloat {
         view.width / 20
     }
+    //MARK: - UI Elements
     
     private var favouriteButton: UIButton = {
         let button = UIButton()
@@ -56,7 +60,7 @@ class CoinDetailsVC: UIViewController {
         let view = UIImageView()
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 15
-        view.configureWithShadow()
+        view.addShadow()
         return view
     }()
     
@@ -71,7 +75,7 @@ class CoinDetailsVC: UIViewController {
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 15
-        view.configureWithShadow()
+        view.addShadow()
         return view
     }()
     
@@ -83,12 +87,14 @@ class CoinDetailsVC: UIViewController {
         let bar = RangeProgressView()
         bar.titleLabel.text = "Day range"
         bar.progressBar.progress = 0.5
-        bar.configureWithShadow()
+        bar.addShadow()
         bar.titleLabel.sizeToFit()
         return bar
     }()
     
-    private var detailsTableView = UITableView(frame: .zero, style: .insetGrouped)
+    private var detailsTableView =
+    
+    UITableView(frame: .zero, style: .insetGrouped)
     
     private var headerView = UIView()
     
