@@ -69,7 +69,7 @@
 		798FEF8C29F0548A0003A68D /* WatchlistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798FEF8B29F0548A0003A68D /* WatchlistDataSource.swift */; };
 		79A5B157298276740067240A /* PPTabBarControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5B156298276740067240A /* PPTabBarControllerTests.swift */; };
 		79AAF82A28FB358A009F3B85 /* SearchTableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AAF82928FB358A009F3B85 /* SearchTableSectionHeader.swift */; };
-		79AE53F62A140D4300214CB1 /* ChartInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53F52A140D4300214CB1 /* ChartInterval.swift */; };
+		79AE53F62A140D4300214CB1 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53F52A140D4300214CB1 /* TimeInterval.swift */; };
 		79AE53F92A141C8800214CB1 /* CoinRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53F82A141C8800214CB1 /* CoinRepresentable.swift */; };
 		79AE53FB2A1428D300214CB1 /* SearchViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53FA2A1428D300214CB1 /* SearchViewControllerDelegate.swift */; };
 		79AE54032A1648F100214CB1 /* ImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE54022A1648F100214CB1 /* ImageSource.swift */; };
@@ -182,7 +182,7 @@
 		79A5B14929803DBF0067240A /* PortfolioPerformanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PortfolioPerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79A5B156298276740067240A /* PPTabBarControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPTabBarControllerTests.swift; sourceTree = "<group>"; };
 		79AAF82928FB358A009F3B85 /* SearchTableSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableSectionHeader.swift; sourceTree = "<group>"; };
-		79AE53F52A140D4300214CB1 /* ChartInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartInterval.swift; sourceTree = "<group>"; };
+		79AE53F52A140D4300214CB1 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		79AE53F82A141C8800214CB1 /* CoinRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRepresentable.swift; sourceTree = "<group>"; };
 		79AE53FA2A1428D300214CB1 /* SearchViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewControllerDelegate.swift; sourceTree = "<group>"; };
 		79AE54022A1648F100214CB1 /* ImageSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSource.swift; sourceTree = "<group>"; };
@@ -483,7 +483,7 @@
 		79AE53F72A140DFD00214CB1 /* DataTypes */ = {
 			isa = PBXGroup;
 			children = (
-				79AE53F52A140D4300214CB1 /* ChartInterval.swift */,
+				79AE53F52A140D4300214CB1 /* TimeInterval.swift */,
 			);
 			path = DataTypes;
 			sourceTree = "<group>";
@@ -888,7 +888,7 @@
 				7961C37428EB2A010006B9A7 /* PPError.swift in Sources */,
 				79AE54052A16B6C800214CB1 /* PPRoundedButton.swift in Sources */,
 				79FAD73629EDB39800374272 /* PPMarketSort.swift in Sources */,
-				79AE53F62A140D4300214CB1 /* ChartInterval.swift in Sources */,
+				79AE53F62A140D4300214CB1 /* TimeInterval.swift in Sources */,
 				79011E0229FECD2B00121A81 /* RecentSearchesStore.swift in Sources */,
 				7955B09329DF6F8A00492059 /* ImageDownloader.swift in Sources */,
 				79463E702A38BAC800BAE3A3 /* MarketCardCellConfigurable.swift in Sources */,

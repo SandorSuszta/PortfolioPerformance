@@ -16,12 +16,14 @@ struct CoinDetails: Codable {
     }
 }
 
-// MARK: - Image
+    // MARK: - Image
+
 struct Image: Codable {
     let thumb, small, large: String
 }
 
-// MARK: - MarketData
+    // MARK: - MarketData
+
 struct MarketData: Codable {
     let currentPrice: [String: Double]
     let ath, athChangePercentage: [String: Double]

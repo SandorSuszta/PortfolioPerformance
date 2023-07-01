@@ -2,49 +2,50 @@ import UIKit
 
 class RangeProgressView: UIView {
     
-    public var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
+        label.text = "Day range"
         label.font = .systemFont(ofSize: 14, weight: .regular)
         return label
     }()
     
-    public var leftTopLabel: UILabel = {
+    private let leftTopLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textColor = .label
         return label
     }()
     
-    public var leftBottomLabel: UILabel = {
+    private let leftBottomLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .regular)
         label.textColor = .nephritis
         return label
     }()
     
-    public var rightTopLabel: UILabel = {
+    private let rightTopLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textColor = .label
         return label
     }()
     
-    public var rightBottomLabel: UILabel = {
+    private let rightBottomLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .regular)
         label.textColor = .pomergranate
         return label
     }()
     
-    public var progressBar: CustomProgressView = {
-        let progress = CustomProgressView()
-        progress.customHeight = 12
-        progress.trackTintColor
-        = .priceRangeRed
-        progress.progressTintColor = .priceRangeGreen
-        progress.layer.cornerRadius = 6
-        progress.clipsToBounds = true
-        return progress
+    private let progressBar: CustomProgressView = {
+        let bar = CustomProgressView()
+        bar.customHeight = 12
+        bar.progress = 0.5
+        bar.trackTintColor = .priceRangeRed
+        bar.progressTintColor = .priceRangeGreen
+        bar.layer.cornerRadius = 6
+        bar.clipsToBounds = true
+        return bar
     }()
     
     //MARK: - Lifecycle
@@ -115,5 +116,20 @@ class RangeProgressView: UIView {
         leftBottomLabel.sizeToFit()
         rightTopLabel.sizeToFit()
         rightBottomLabel.sizeToFit()
+    }
+    
+    // MARK: - API
+    
+    func setTitle(_ title: String) {
+        titleLabel.text = title
+    }
+    
+    func configure(with viewModel: RangeDetailsViewModel) {
+        rightTopLabel.text = viewModel.rangeHigh
+        rightBottomLabel.text = viewModel.percentageFromHigh
+        leftTopLabel.text = viewModel.rangeLow
+        leftBottomLabel.text = viewModel.percentageFromLow
+        
+        progressBar.setProgress(viewModel.progress, animated: true)
     }
 }
