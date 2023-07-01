@@ -3,11 +3,13 @@ import Charts
 
 final class CoinDetailsViewModel {
     
+    // MARK: - Dependencies
+    
     private let networkingService: NetworkingServiceProtocol
     private let watchlistStore: WatchlistStoreProtocol
+    private let representedCoin: CoinRepresenatable
+    private var coinDetailsModel: CoinDetails?
     
-    let representedCoin: CoinRepresenatable
-    var coinDetailsModel: CoinDetails?
     
     var coinID: String {
         representedCoin.id
@@ -20,9 +22,17 @@ final class CoinDetailsViewModel {
     var marketCapRank: String {
         String(coinDetailsModel?.marketData.marketCapRank ?? 0)
     }
-    let chartIntervals = ["1D", "1W", "1M", "6M", "1Y", "MAX"]
+
+    let timeIntervals: [TimeInterval] = [
+        TimeInterval(rangeName: "Day range", segmentName: "1D", numberOfDays: 1),
+        TimeInterval(rangeName: "Week Range", segmentName: "1W", numberOfDays: 7),
+        TimeInterval(rangeName: "Month range", segmentName: "1M", numberOfDays: 30),
+        TimeInterval(rangeName: "Six month range", segmentName: "6M", numberOfDays: 183),
+        TimeInterval(rangeName: "Year range", segmentName: "1Y", numberOfDays: 360),
+        TimeInterval(rangeName: "All time range", segmentName: "MAX", numberOfDays: Int.max),
+    ]
     
-    //MARK: - Observable properties
+    //MARK: - Observables
     
     var metricsVM: ObservableObject<MetricsViewModel> = ObservableObject(value: nil)
     var rangeDetailsVM: ObservableObject<RangeDetailsViewModel> = ObservableObject(value: nil)
