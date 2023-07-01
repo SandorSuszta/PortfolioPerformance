@@ -13,8 +13,6 @@ class CoinDetailsVC: UIViewController {
     
     //MARK: - Properties
     
-    private var currentChartTimeInterval = 1
-    
     private var padding: CGFloat {
         view.width / 20
     }
@@ -85,10 +83,7 @@ class CoinDetailsVC: UIViewController {
 
     private var rangeProgressBar: RangeProgressView = {
         let bar = RangeProgressView()
-        bar.titleLabel.text = "Day range"
-        bar.progressBar.progress = 0.5
         bar.addShadow()
-        bar.titleLabel.sizeToFit()
         return bar
     }()
     
@@ -361,23 +356,6 @@ class CoinDetailsVC: UIViewController {
         priceLabel.sizeToFit()
     }
     
-    private func updatePriceRangeBar(with rangeData: RangeDetailsViewModel) {
-        
-        rangeProgressBar.rightTopLabel.text = rangeData.rangeHigh
-        rangeProgressBar.rightTopLabel.sizeToFit()
-        
-        rangeProgressBar.rightBottomLabel.text = rangeData.percentageFromHigh
-        rangeProgressBar.rightBottomLabel.sizeToFit()
-        
-        rangeProgressBar.leftTopLabel.text = rangeData.rangeLow
-        rangeProgressBar.leftTopLabel.sizeToFit()
-        
-        rangeProgressBar.leftBottomLabel.text = rangeData.percentageFromLow
-        rangeProgressBar.leftBottomLabel.sizeToFit()
-        
-        rangeProgressBar.progressBar.setProgress(rangeData.progress, animated: true)
-    }
-    
     private func updateRangeLabels(with rangeDetails: RangeDetailsViewModel) {
         priceChangeLabel.text = rangeDetails.priceChange
         priceChangeLabel.sizeToFit()
@@ -399,44 +377,29 @@ class CoinDetailsVC: UIViewController {
     
     private func setupSegmentedControl() {
         timeIntervalSelection = CustomSegmentedControl(
-            items: viewModel.chartIntervals,
+            items: viewModel.timeIntervals,
             defaultColor: .PPBlue
         )
         timeIntervalSelection.addTarget(self, action: #selector(didChangeSegment(_:)) , for: .valueChanged)
     }
     
-    @objc func didChangeSegment(_ sender: UISegmentedControl) -> Void {
-        var rangeName = ""
+    private func updateUIForSelectedTimeInterval(_ selectedTimeInterval: TimeInterval) {
+        
+        rangeProgressBar.setTitle(selectedTimeInterval.rangeName)
+        
+        viewModel.getTimeRangeDetails(
+            coinID: viewModel.coinID,
+            intervalInDays: selectedTimeInterval.numberOfDays
+        )
+        
         lineChartView.fadeOut()
         priceChangeLabel.fadeOut()
         priceChangePercentageLabel.fadeOut()
-        switch sender.selectedSegmentIndex {
-        case 0:
-            currentChartTimeInterval = 1
-            rangeName = "Day range"
-        case 1:
-            currentChartTimeInterval = 7
-            rangeName = "Week Range"
-        case 2:
-            currentChartTimeInterval = 30
-            rangeName = "Month range"
-        case 3:
-            currentChartTimeInterval = 180
-            rangeName = "Six month range"
-        case 4:
-            currentChartTimeInterval = 360
-            rangeName = "Year range"
-        case 5:
-            currentChartTimeInterval = 2000
-            rangeName = "All time range"
-        default:
-            fatalError("Invalid segment selection")
-        }
-        
-        rangeProgressBar.titleLabel.text = rangeName
-        rangeProgressBar.titleLabel.sizeToFit()
-        
-        viewModel.getTimeRangeDetails(coinID: viewModel.coinID, intervalInDays: currentChartTimeInterval)
+    }
+    
+    @objc func didChangeSegment(_ sender: UISegmentedControl) -> Void {
+        let interval = viewModel.timeIntervals[sender.selectedSegmentIndex]
+        updateUIForSelectedTimeInterval(interval)
     }
     
     @objc func favouriteButtonTapped() {
