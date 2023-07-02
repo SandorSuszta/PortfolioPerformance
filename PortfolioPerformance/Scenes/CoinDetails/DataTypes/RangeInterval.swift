@@ -1,6 +1,6 @@
 import Foundation
 
-struct TimeInterval {
+struct RangeInterval {
     let rangeName: String
     let segmentName: String
     let numberOfDays: Int

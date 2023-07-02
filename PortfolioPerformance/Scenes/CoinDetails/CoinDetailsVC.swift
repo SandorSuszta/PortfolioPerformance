@@ -13,9 +13,14 @@ class CoinDetailsVC: UIViewController {
     
     //MARK: - Properties
     
+    private var currentChartTimeInterval: RangeInterval {
+        viewModel.rangeIntervals[timeIntervalSelection.selectedSegmentIndex]
+    }
+    
     private var padding: CGFloat {
         view.width / 20
     }
+    
     //MARK: - UI Elements
     
     private var favouriteButton: UIButton = {
@@ -257,7 +262,7 @@ class CoinDetailsVC: UIViewController {
             self?.viewModel.createDetailsCellsViewModels()
             self?.viewModel.getTimeRangeDetails(
                 coinID: self?.viewModel.coinID ?? "",
-                intervalInDays: self?.currentChartTimeInterval ?? 1
+                intervalInDays: self?.currentChartTimeInterval.numberOfDays ?? 1
             )
         }
         
@@ -270,7 +275,7 @@ class CoinDetailsVC: UIViewController {
             DispatchQueue.main.async {
                 self?.updateRangeLabels(with: rangeDetails)
                 self?.lineChartView.createNewChart(entries: rangeDetails.chartEntries, color: color)
-                self?.updatePriceRangeBar(with: rangeDetails)
+                //self?.updatePriceRangeBar(with: rangeDetails)
             }
         }
         
@@ -302,7 +307,7 @@ class CoinDetailsVC: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         
-        setupLabelsAndLogo(with: viewModel.representedCoin)
+        //setupLabelsAndLogo(with: viewModel.representedCoin)
     }
 
     required init?(coder: NSCoder) {
@@ -375,13 +380,13 @@ class CoinDetailsVC: UIViewController {
     
     private func setupSegmentedControl() {
         timeIntervalSelection = CustomSegmentedControl(
-            items: viewModel.timeIntervals,
+            items: viewModel.rangeIntervals,
             defaultColor: .PPBlue
         )
         timeIntervalSelection.addTarget(self, action: #selector(didChangeSegment(_:)) , for: .valueChanged)
     }
     
-    private func updateUIForSelectedTimeInterval(_ selectedTimeInterval: TimeInterval) {
+    private func updateUIForSelectedTimeInterval(_ selectedTimeInterval: RangeInterval) {
         
         rangeProgressBar.setTitle(selectedTimeInterval.rangeName)
         
@@ -396,7 +401,7 @@ class CoinDetailsVC: UIViewController {
     }
     
     @objc func didChangeSegment(_ sender: UISegmentedControl) -> Void {
-        let interval = viewModel.timeIntervals[sender.selectedSegmentIndex]
+        let interval = viewModel.rangeIntervals[sender.selectedSegmentIndex]
         updateUIForSelectedTimeInterval(interval)
     }
     
@@ -465,10 +470,10 @@ extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
 extension CoinDetailsVC: AxisValueFormatter, ChartViewDelegate {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         let date = Date(timeIntervalSince1970: value/1000)
-        let interval = viewModel.timeIntervals[timeIntervalSelection.selectedSegmentIndex]
+       
         return .stringForGraphAxis(
             from: date,
-            daysInterval: interval.numberOfDays
+            daysInterval: currentChartTimeInterval.numberOfDays
         )
     }
 }

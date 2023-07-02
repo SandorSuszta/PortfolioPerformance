@@ -80,6 +80,29 @@ extension HighlightsView {
         priceChangePercentageLabel.translatesAutoresizingMaskIntoConstraints = false
         coinLogoShadowView.translatesAutoresizingMaskIntoConstraints = false
         
-        
+        NSLayoutConstraint.activate([
+            symbolLabel.topAnchor.constraint(equalTo: topAnchor),
+            symbolLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            symbolLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            coinLogoShadowView.topAnchor.constraint(equalTo: symbolLabel.bottomAnchor, constant: 20),
+            coinLogoShadowView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 120),
+            coinLogoShadowView.heightAnchor.constraint(equalToConstant: 84),
+            coinLogoShadowView.widthAnchor.constraint(equalToConstant: 84),
+            
+            coinLogoView.topAnchor.constraint(equalTo: coinLogoShadowView.topAnchor, constant: 8),
+            coinLogoView.leadingAnchor.constraint(equalTo: coinLogoShadowView.leadingAnchor, constant: 8),
+            coinLogoView.trailingAnchor.constraint(equalTo: coinLogoShadowView.trailingAnchor, constant: -8),
+            coinLogoView.bottomAnchor.constraint(equalTo: coinLogoShadowView.bottomAnchor, constant: -8),
+            
+            priceLabel.topAnchor.constraint(equalTo: coinLogoShadowView.topAnchor, constant: 16),
+            priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 36),
+            
+            priceChangeLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 4),
+            priceChangeLabel.leadingAnchor.constraint(equalTo: priceLabel.leadingAnchor),
+            
+            priceChangePercentageLabel.topAnchor.constraint(equalTo: priceChangeLabel.topAnchor),
+            priceChangePercentageLabel.leadingAnchor.constraint(equalTo: priceChangeLabel.leadingAnchor, constant: 4)
+        ])
     }
 }
