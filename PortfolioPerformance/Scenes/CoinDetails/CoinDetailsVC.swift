@@ -87,9 +87,7 @@ class CoinDetailsVC: UIViewController {
         return bar
     }()
     
-    private var detailsTableView =
-    
-    UITableView(frame: .zero, style: .insetGrouped)
+    private var detailsTableView = UITableView(frame: .zero, style: .insetGrouped)
     
     private var headerView = UIView()
     
@@ -467,6 +465,10 @@ extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
 extension CoinDetailsVC: AxisValueFormatter, ChartViewDelegate {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         let date = Date(timeIntervalSince1970: value/1000)
-        return .stringForGraphAxis(from: date, daysInterval: currentChartTimeInterval)
+        let interval = viewModel.timeIntervals[timeIntervalSelection.selectedSegmentIndex]
+        return .stringForGraphAxis(
+            from: date,
+            daysInterval: interval.numberOfDays
+        )
     }
 }
