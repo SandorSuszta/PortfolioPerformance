@@ -2,6 +2,8 @@ import UIKit
 
 final class HighlightsView: UIView {
     
+    static let prefferedHeight: CGFloat = 160
+    
     // MARK: - UI Elements
     
     private let symbolLabel =  PPTextLabel(
@@ -43,14 +45,38 @@ final class HighlightsView: UIView {
     
     // MARK: - Init
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(forCoin: CoinRepresenatable) {
+        super.init(frame: .zero)
+        
         setupHierarchy()
         setupLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - API
+    
+    func setSymbolName(_ symbol: String) {
+        symbolLabel.text = symbol
+    }
+    
+    func setCurrentPrice(_ price: String) {
+        priceLabel.text = price
+    }
+    
+    func setPriceChangeLabels(priceChange: String, inPercentage: String, color: UIColor) {
+        priceChangeLabel.text = priceChange
+        priceChangeLabel.textColor = color
+        
+        priceChangePercentageLabel.text = inPercentage
+        priceChangePercentageLabel.textColor = color
+    }
+
+    func setLogo(_ logo: UIImage) {
+        coinLogoView.image = logo
     }
 }
 
