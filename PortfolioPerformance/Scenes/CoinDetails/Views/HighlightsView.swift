@@ -45,9 +45,8 @@ final class HighlightsView: UIView {
     
     // MARK: - Init
     
-    init(forCoin: CoinRepresenatable) {
+    init() {
         super.init(frame: .zero)
-        
         setupHierarchy()
         setupLayout()
     }
@@ -105,6 +104,7 @@ extension HighlightsView {
         priceChangeLabel.translatesAutoresizingMaskIntoConstraints = false
         priceChangePercentageLabel.translatesAutoresizingMaskIntoConstraints = false
         coinLogoShadowView.translatesAutoresizingMaskIntoConstraints = false
+        coinLogoView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             symbolLabel.topAnchor.constraint(equalTo: topAnchor),
@@ -112,7 +112,7 @@ extension HighlightsView {
             symbolLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             coinLogoShadowView.topAnchor.constraint(equalTo: symbolLabel.bottomAnchor, constant: 20),
-            coinLogoShadowView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 120),
+            coinLogoShadowView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -36),
             coinLogoShadowView.heightAnchor.constraint(equalToConstant: 84),
             coinLogoShadowView.widthAnchor.constraint(equalToConstant: 84),
             

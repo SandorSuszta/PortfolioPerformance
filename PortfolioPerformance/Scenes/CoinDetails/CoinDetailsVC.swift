@@ -2,6 +2,7 @@ import Charts
 import UIKit
 
 class CoinDetailsVC: UIViewController {
+    typealias NumberOfDays = Int
     
     //MARK: - Dependecies
     
@@ -13,9 +14,7 @@ class CoinDetailsVC: UIViewController {
     
     //MARK: - Properties
     
-    private var currentChartTimeInterval: RangeInterval {
-        viewModel.rangeIntervals[timeIntervalSelection.selectedSegmentIndex]
-    }
+    private var currentChartTimeInterval: NumberOfDays = 1
     
     private var padding: CGFloat {
         view.width / 20
@@ -33,6 +32,8 @@ class CoinDetailsVC: UIViewController {
         scroll.showsVerticalScrollIndicator = false
         return scroll
     }()
+    
+    private let highlightsView = HighlightsView()
     
     private var symbolLabel: UILabel = {
         let label = UILabel()
@@ -114,11 +115,14 @@ class CoinDetailsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupHierarchy()
+        initialUISetup(for: viewModel.representedCoin)
         setupVC()
         setUpFavouriteButton()
         bindViewModels()
-        setupSegmentedControl()
+        //setupSegmentedControl()
         setupTableView()
+        layoutViews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -136,61 +140,13 @@ class CoinDetailsVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        view.addSubview(scrollView)
-        scrollView.addSubviews(symbolLabel, priceLabel, priceChangeLabel, priceChangePercentageLabel, coinLogoShadowView, chartView, timeIntervalSelection, rangeProgressBar, detailsTableView)
-        
-        coinLogoShadowView.addSubview(coinLogoView)
-        chartView.addSubview(lineChartView)
-        headerView.addSubviews(headerNameLabel, marketCapRankLabel)
-        
         scrollView.frame = view.bounds
         scrollView.contentSize = CGSize(width: view.width, height: 1000)
         
-        symbolLabel.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: view.width,
-            height: symbolLabel.height
-        )
-        
-        coinLogoShadowView.frame = CGRect(
-            x: view.right - 120,
-            y: symbolLabel.bottom + 20,
-            width: 85,
-            height: 85
-        )
-        
-        coinLogoView.frame = CGRect(
-            x: 10,
-            y: 10,
-            width: coinLogoShadowView.width - 20,
-            height: coinLogoShadowView.height - 20
-        )
-        
-        priceLabel.frame = CGRect(
-            x: 35,
-            y: coinLogoShadowView.top + 15,
-            width: priceLabel.width,
-            height: priceLabel.height
-        )
-        
-        priceChangeLabel.frame = CGRect(
-            x: priceLabel.left,
-            y: priceLabel.bottom + 5,
-            width: priceChangeLabel.width,
-            height: priceChangeLabel.height
-        )
-        
-        priceChangePercentageLabel.frame = CGRect(
-            x: priceChangeLabel.right + 5,
-            y: priceLabel.bottom + 5,
-            width: priceChangePercentageLabel.width,
-            height: priceChangePercentageLabel.height
-        )
         
         chartView.frame = CGRect(
             x: padding,
-            y: coinLogoShadowView.bottom + 20,
+            y: highlightsView.bottom + 20,
             width: view.width - 2 * padding,
             height: 220
         )
@@ -262,7 +218,7 @@ class CoinDetailsVC: UIViewController {
             self?.viewModel.createDetailsCellsViewModels()
             self?.viewModel.getTimeRangeDetails(
                 coinID: self?.viewModel.coinID ?? "",
-                intervalInDays: self?.currentChartTimeInterval.numberOfDays ?? 1
+                intervalInDays: self?.currentChartTimeInterval ?? 1
             )
         }
         
@@ -304,10 +260,7 @@ class CoinDetailsVC: UIViewController {
         self.viewModel = viewModel
         self.imageDownloader = imageDownloader
         self.watchlistStore = watchlistStore
-        
         super.init(nibName: nil, bundle: nil)
-        
-        //setupLabelsAndLogo(with: viewModel.representedCoin)
     }
 
     required init?(coder: NSCoder) {
@@ -322,16 +275,26 @@ class CoinDetailsVC: UIViewController {
         lineChartView.xAxis.valueFormatter = self
     }
     
-    private func setupLabelsAndLogo(with representedCoin: CoinRepresenatable ) {
-        title = representedCoin.name
-        symbolLabel.text = representedCoin.symbol.uppercased()
-        symbolLabel.sizeToFit()
-        
-        imageDownloader.loadImage(from: representedCoin.image) { [weak self] result in
+    private func initialUISetup(for coin: CoinRepresenatable) {
+        setTitle(coin.name)
+        setSymbolName(coin.symbol.uppercased())
+        setLogo(fromURL: coin.image)
+    }
+    
+    private func setTitle(_ title: String) {
+        self.title = title
+    }
+    
+    private func setSymbolName(_ symbol: String) {
+        highlightsView.setSymbolName(symbol)
+    }
+    
+    private func setLogo(fromURL url: String) {
+        imageDownloader.loadImage(from: url) { [weak self] result in
             
             switch result {
             case .success(let (_ , image)):
-                self?.coinLogoView.image = image
+                self?.highlightsView.setLogo(image)
             case .failure(let error):
                 //TODO: Handle properly
                 print(error)
@@ -473,7 +436,29 @@ extension CoinDetailsVC: AxisValueFormatter, ChartViewDelegate {
        
         return .stringForGraphAxis(
             from: date,
-            daysInterval: currentChartTimeInterval.numberOfDays
+            daysInterval: currentChartTimeInterval
         )
+    }
+}
+
+    // MARK: - Setup Views
+
+extension CoinDetailsVC {
+    private func setupHierarchy() {
+        view.addSubview(highlightsView)
+        scrollView.addSubviews( chartView, timeIntervalSelection, rangeProgressBar, detailsTableView)
+        chartView.addSubview(lineChartView)
+        headerView.addSubviews(headerNameLabel, marketCapRankLabel)
+    }
+    
+    private func layoutViews() {
+        highlightsView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            highlightsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            highlightsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            highlightsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            highlightsView.heightAnchor.constraint(equalToConstant: HighlightsView.prefferedHeight),
+        ])
     }
 }

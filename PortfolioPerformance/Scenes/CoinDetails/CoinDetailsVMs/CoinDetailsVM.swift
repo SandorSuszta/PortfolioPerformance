@@ -7,9 +7,9 @@ final class CoinDetailsViewModel {
     
     private let networkingService: NetworkingServiceProtocol
     private let watchlistStore: WatchlistStoreProtocol
-    private let representedCoin: CoinRepresenatable
     private var coinDetailsModel: CoinDetails?
     
+    let representedCoin: CoinRepresenatable
     
     var coinID: String {
         representedCoin.id
