@@ -15,17 +15,20 @@ final class HighlightsView: UIView {
     private let priceLabel =  PPTextLabel(
         fontSize: 30,
         allignment: .center,
-        fontWeight: .regular
+        fontWeight: .regular,
+        alpha: 0
     )
     
      private let priceChangeLabel =  PPTextLabel(
         fontSize: 14,
-        fontWeight: .semibold
+        fontWeight: .semibold,
+        alpha: 0
     )
     
     private let priceChangePercentageLabel =  PPTextLabel(
         fontSize: 14,
-        fontWeight: .semibold
+        fontWeight: .semibold,
+        alpha: 0
     )
     
     private var coinLogoShadowView: UIImageView = {
@@ -64,14 +67,17 @@ final class HighlightsView: UIView {
     
     func setCurrentPrice(_ price: String) {
         priceLabel.text = price
+        priceLabel.fadeIn()
     }
     
-    func setPriceChangeLabels(priceChange: String, inPercentage: String, color: UIColor) {
-        priceChangeLabel.text = priceChange
+    func setPriceChangeLabels(priceChange: String, inPercentage percentage: String, color: UIColor) {
         priceChangeLabel.textColor = color
+        priceChangeLabel.text = priceChange
+        priceChangeLabel.fadeIn()
         
-        priceChangePercentageLabel.text = inPercentage
         priceChangePercentageLabel.textColor = color
+        priceChangePercentageLabel.text = percentage
+        priceChangePercentageLabel.fadeIn()
     }
 
     func setLogo(_ logo: UIImage) {
@@ -84,7 +90,14 @@ final class HighlightsView: UIView {
 extension HighlightsView {
     
     private enum Constants {
-        
+        static let logoTopPadding: CGFloat  = 20
+        static let logoLeftPadding: CGFloat = 36
+        static let logoSize: CGFloat = 84
+        static let logoInset: CGFloat = 8
+        static let priceLabelTopPadding: CGFloat = 16
+        static let priceLabelLeftPadding: CGFloat = 36
+        static let priceChangeLabelTopPadding: CGFloat = 4
+        static let priceChangePercentageLabelLeftPadding: CGFloat = 4
     }
     
     private func setupHierarchy() {
@@ -111,24 +124,24 @@ extension HighlightsView {
             symbolLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             symbolLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            coinLogoShadowView.topAnchor.constraint(equalTo: symbolLabel.bottomAnchor, constant: 20),
-            coinLogoShadowView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -36),
-            coinLogoShadowView.heightAnchor.constraint(equalToConstant: 84),
-            coinLogoShadowView.widthAnchor.constraint(equalToConstant: 84),
+            coinLogoShadowView.topAnchor.constraint(equalTo: symbolLabel.bottomAnchor, constant: Constants.logoTopPadding),
+            coinLogoShadowView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.logoLeftPadding),
+            coinLogoShadowView.heightAnchor.constraint(equalToConstant: Constants.logoSize),
+            coinLogoShadowView.widthAnchor.constraint(equalToConstant: Constants.logoSize),
             
-            coinLogoView.topAnchor.constraint(equalTo: coinLogoShadowView.topAnchor, constant: 8),
-            coinLogoView.leadingAnchor.constraint(equalTo: coinLogoShadowView.leadingAnchor, constant: 8),
-            coinLogoView.trailingAnchor.constraint(equalTo: coinLogoShadowView.trailingAnchor, constant: -8),
-            coinLogoView.bottomAnchor.constraint(equalTo: coinLogoShadowView.bottomAnchor, constant: -8),
+            coinLogoView.topAnchor.constraint(equalTo: coinLogoShadowView.topAnchor, constant: Constants.logoInset),
+            coinLogoView.leadingAnchor.constraint(equalTo: coinLogoShadowView.leadingAnchor, constant: Constants.logoInset),
+            coinLogoView.trailingAnchor.constraint(equalTo: coinLogoShadowView.trailingAnchor, constant: -Constants.logoInset),
+            coinLogoView.bottomAnchor.constraint(equalTo: coinLogoShadowView.bottomAnchor, constant: -Constants.logoInset),
             
-            priceLabel.topAnchor.constraint(equalTo: coinLogoShadowView.topAnchor, constant: 16),
-            priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 36),
+            priceLabel.topAnchor.constraint(equalTo: coinLogoShadowView.topAnchor, constant: Constants.priceLabelTopPadding),
+            priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.priceLabelLeftPadding),
             
-            priceChangeLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 4),
+            priceChangeLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: Constants.priceChangeLabelTopPadding),
             priceChangeLabel.leadingAnchor.constraint(equalTo: priceLabel.leadingAnchor),
             
             priceChangePercentageLabel.topAnchor.constraint(equalTo: priceChangeLabel.topAnchor),
-            priceChangePercentageLabel.leadingAnchor.constraint(equalTo: priceChangeLabel.leadingAnchor, constant: 4)
+            priceChangePercentageLabel.leadingAnchor.constraint(equalTo: priceChangeLabel.trailingAnchor, constant: Constants.priceChangePercentageLabelLeftPadding)
         ])
     }
 }

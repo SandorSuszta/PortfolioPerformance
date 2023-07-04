@@ -31,7 +31,7 @@ struct RangeDetailsViewModel {
     
     var priceChangePercentage: String {
         let percentage = ((priceModels.last?[1] ?? 0) / (priceModels.first?[1] ?? 0) - 1) * 100
-        return .percentageString(from: percentage)
+        return "(" + .percentageString(from: percentage) + ")"
     }
     
     var rangeLow: String {

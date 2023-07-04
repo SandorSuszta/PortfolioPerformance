@@ -211,7 +211,7 @@ class CoinDetailsVC: UIViewController {
             guard let metrics = self?.viewModel.metricsVM.value else { return }
             
             DispatchQueue.main.async {
-                self?.updateCurrentPrice(with: metrics.currentPrice)
+                self?.highlightsView.setCurrentPrice(metrics.currentPrice)
                 self?.marketCapRankLabel.text = self?.viewModel.metricsVM.value?.marketCapRank
             }
             
@@ -276,19 +276,11 @@ class CoinDetailsVC: UIViewController {
     }
     
     private func initialUISetup(for coin: CoinRepresenatable) {
-        setTitle(coin.name)
-        setSymbolName(coin.symbol.uppercased())
+        self.title = coin.name
+        highlightsView.setSymbolName(coin.symbol.uppercased())
         setLogo(fromURL: coin.image)
     }
-    
-    private func setTitle(_ title: String) {
-        self.title = title
-    }
-    
-    private func setSymbolName(_ symbol: String) {
-        highlightsView.setSymbolName(symbol)
-    }
-    
+
     private func setLogo(fromURL url: String) {
         imageDownloader.loadImage(from: url) { [weak self] result in
             
@@ -317,28 +309,13 @@ class CoinDetailsVC: UIViewController {
         }
     }
     
-    private func updateCurrentPrice(with price: String) {
-        priceLabel.text = price
-        priceLabel.sizeToFit()
-    }
     
     private func updateRangeLabels(with rangeDetails: RangeDetailsViewModel) {
-        priceChangeLabel.text = rangeDetails.priceChange
-        priceChangeLabel.sizeToFit()
-        priceChangeLabel.alpha = 1.0
-        priceChangePercentageLabel.text = "(" + rangeDetails.priceChangePercentage + ")"
-        priceChangePercentageLabel.sizeToFit()
-        priceChangePercentageLabel.alpha = 1.0
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
-        
-        if rangeDetails.isChangePositive  {
-            priceChangeLabel.textColor = .nephritis
-            priceChangePercentageLabel.textColor = .nephritis
-        } else {
-            priceChangeLabel.textColor = .pomergranate
-            priceChangePercentageLabel.textColor = .pomergranate
-        }
+        highlightsView.setPriceChangeLabels(
+            priceChange: rangeDetails.priceChange,
+            inPercentage: rangeDetails.priceChangePercentage,
+            color: rangeDetails.isChangePositive ? .nephritis : .pomergranate
+        )
     }
     
     private func setupSegmentedControl() {
@@ -446,7 +423,7 @@ extension CoinDetailsVC: AxisValueFormatter, ChartViewDelegate {
 extension CoinDetailsVC {
     private func setupHierarchy() {
         view.addSubview(highlightsView)
-        scrollView.addSubviews( chartView, timeIntervalSelection, rangeProgressBar, detailsTableView)
+        scrollView.addSubviews(chartView, timeIntervalSelection, rangeProgressBar, detailsTableView)
         chartView.addSubview(lineChartView)
         headerView.addSubviews(headerNameLabel, marketCapRankLabel)
     }
