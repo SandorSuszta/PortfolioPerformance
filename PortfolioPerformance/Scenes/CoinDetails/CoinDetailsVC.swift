@@ -83,7 +83,7 @@ class CoinDetailsVC: UIViewController {
         return view
     }()
     
-    private var lineChartView = LineChartView()
+    private var lineChartView: any ChartProviding = ChartViewImplementation()
 
     private var timeIntervalSelection = UISegmentedControl()
 

@@ -94,7 +94,8 @@
 		79E216A42A4756A20091DA4D /* TabBarReselectHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E216A32A4756A20091DA4D /* TabBarReselectHandler.swift */; };
 		79E216A72A4B1B3B0091DA4D /* WatchlistPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E216A62A4B1B3B0091DA4D /* WatchlistPopUp.swift */; };
 		79E786D02A51F9010085D8C7 /* HighlightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E786CF2A51F9010085D8C7 /* HighlightsView.swift */; };
-		79E786D32A54BA680085D8C7 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E786D22A54BA680085D8C7 /* ChartView.swift */; };
+		79E786D32A54BA680085D8C7 /* ChartViewImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E786D22A54BA680085D8C7 /* ChartViewImplementation.swift */; };
+		79E786D72A55D19A0085D8C7 /* ChartProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E786D62A55D19A0085D8C7 /* ChartProviding.swift */; };
 		79E7A21728E5FAF000BD5CB0 /* MarketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7A21628E5FAF000BD5CB0 /* MarketVC.swift */; };
 		79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */; };
 		79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD1B27B3DCDA008A6062 /* SceneDelegate.swift */; };
@@ -208,7 +209,8 @@
 		79E216A32A4756A20091DA4D /* TabBarReselectHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarReselectHandler.swift; sourceTree = "<group>"; };
 		79E216A62A4B1B3B0091DA4D /* WatchlistPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistPopUp.swift; sourceTree = "<group>"; };
 		79E786CF2A51F9010085D8C7 /* HighlightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsView.swift; sourceTree = "<group>"; };
-		79E786D22A54BA680085D8C7 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		79E786D22A54BA680085D8C7 /* ChartViewImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewImplementation.swift; sourceTree = "<group>"; };
+		79E786D62A55D19A0085D8C7 /* ChartProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartProviding.swift; sourceTree = "<group>"; };
 		79E7A21628E5FAF000BD5CB0 /* MarketVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketVC.swift; sourceTree = "<group>"; };
 		79EAFD1627B3DCD9008A6062 /* PortfolioPerformance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PortfolioPerformance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EAFD1927B3DCDA008A6062 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -340,7 +342,7 @@
 			children = (
 				792C040828C9E62B008EE48C /* RangeProgressView.swift */,
 				79E786CF2A51F9010085D8C7 /* HighlightsView.swift */,
-				79E786D22A54BA680085D8C7 /* ChartView.swift */,
+				79E786D22A54BA680085D8C7 /* ChartViewImplementation.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -490,6 +492,7 @@
 			isa = PBXGroup;
 			children = (
 				79AE53F52A140D4300214CB1 /* RangeInterval.swift */,
+				79E786D62A55D19A0085D8C7 /* ChartProviding.swift */,
 			);
 			path = DataTypes;
 			sourceTree = "<group>";
@@ -867,13 +870,14 @@
 				798957C227F31AE00074CA38 /* GlobalData.swift in Sources */,
 				798957C827F479DD0074CA38 /* UIView+Shadow.swift in Sources */,
 				797303B7296C6A4D0006CF76 /* MarketCardBaseCell.swift in Sources */,
+				79E786D72A55D19A0085D8C7 /* ChartProviding.swift in Sources */,
 				792C040D28D32D5D008EE48C /* CoinDetails.swift in Sources */,
 				79EAFD1A27B3DCDA008A6062 /* AppDelegate.swift in Sources */,
 				79410D8D2823D3E700BD9EA4 /* UIView+Framing.swift in Sources */,
 				79F654EC297037F50080DEBB /* PPTextLabel.swift in Sources */,
 				79EAFD1C27B3DCDA008A6062 /* SceneDelegate.swift in Sources */,
 				798FEF8C29F0548A0003A68D /* WatchlistDataSource.swift in Sources */,
-				79E786D32A54BA680085D8C7 /* ChartView.swift in Sources */,
+				79E786D32A54BA680085D8C7 /* ChartViewImplementation.swift in Sources */,
 				79E2169C2A43425F0091DA4D /* SortSectionHeader.swift in Sources */,
 				79011DFC29FD8E5700121A81 /* WatchlistStore.swift in Sources */,
 				79E7A21728E5FAF000BD5CB0 /* MarketVC.swift in Sources */,
