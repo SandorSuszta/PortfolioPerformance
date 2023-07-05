@@ -2,7 +2,7 @@ import UIKit
 
 final class HighlightsView: UIView {
     
-    static let prefferedHeight: CGFloat = 160
+    static let prefferedHeight: CGFloat = 152
     
     // MARK: - UI Elements
     

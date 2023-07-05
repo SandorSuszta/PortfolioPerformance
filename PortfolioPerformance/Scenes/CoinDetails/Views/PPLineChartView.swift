@@ -1,7 +1,7 @@
 import UIKit
 import Charts
 
-final class ChartViewImplementation: LineChartView, ChartProviding {
+final class PPLineChartView: LineChartView {
     
     private var dataSet = LineChartDataSet(entries: [])
     
@@ -64,9 +64,11 @@ final class ChartViewImplementation: LineChartView, ChartProviding {
     
     // MARK: - API
     
-    func setData(_ data: [ChartDataEntry]) {
+    func setChartData(_ data: [ChartDataEntry]) {
         dataSet = LineChartDataSet(entries: data)
         self.data = LineChartData(dataSet: dataSet)
+        configure()
+        configureDataSet()
     }
     
     func setChartColor(_ color: UIColor) {

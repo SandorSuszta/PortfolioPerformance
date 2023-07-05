@@ -11,7 +11,6 @@ class CoinDetailsVC: UIViewController {
     private let imageDownloader: ImageDownloaderProtocol
     private let watchlistStore: WatchlistStoreProtocol
     
-    
     //MARK: - Properties
     
     private var currentChartTimeInterval: NumberOfDays = 1
@@ -75,7 +74,7 @@ class CoinDetailsVC: UIViewController {
         return view
     }()
     
-    private var chartView: UIView = {
+    private var chartContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 15
@@ -83,7 +82,7 @@ class CoinDetailsVC: UIViewController {
         return view
     }()
     
-    private var lineChartView: any ChartProviding = ChartViewImplementation()
+    private var lineChartView = PPLineChartView()
 
     private var timeIntervalSelection = UISegmentedControl()
 
@@ -123,6 +122,7 @@ class CoinDetailsVC: UIViewController {
         //setupSegmentedControl()
         setupTableView()
         layoutViews()
+        setChartValueFormatter(self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -134,74 +134,67 @@ class CoinDetailsVC: UIViewController {
         super.viewWillDisappear(animated)
         
         //Prevent strong reference cycle
-        lineChartView.xAxis.valueFormatter = nil
+        setChartValueFormatter(nil)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        scrollView.frame = view.bounds
-        scrollView.contentSize = CGSize(width: view.width, height: 1000)
-        
-        
-        chartView.frame = CGRect(
-            x: padding,
-            y: highlightsView.bottom + 20,
-            width: view.width - 2 * padding,
-            height: 220
-        )
-        
-        lineChartView.frame = CGRect(
-            x: 5,
-            y: 5,
-            width: chartView.width - 10,
-            height: chartView.height - 15
-        )
-     
-        timeIntervalSelection.frame = CGRect(
-            x: padding,
-            y: chartView.bottom + 10,
-            width: chartView.width,
-            height: 25
-        )
-        
-        rangeProgressBar.frame = CGRect(
-            x: padding,
-            y: timeIntervalSelection.bottom + 10,
-            width: chartView.width,
-            height: 65
-        )
-        
-        detailsTableView.frame = CGRect(
-            x: 0,
-            y: rangeProgressBar.bottom + 10,
-            width: view.width,
-            height: 370
-        )
-        
-        headerView.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: detailsTableView.width,
-            height: 40
-        )
-        
-        headerNameLabel.sizeToFit()
-        headerNameLabel.frame = CGRect(
-            x: 30,
-            y: headerView.height/2 - headerNameLabel.height/2,
-            width: headerNameLabel.width,
-            height: headerNameLabel.height
-        )
-        
-        marketCapRankLabel.sizeToFit()
-        marketCapRankLabel.frame = CGRect(
-            x: headerView.right - marketCapRankLabel.width - 30,
-            y: headerNameLabel.top,
-            width: marketCapRankLabel.width,
-            height: marketCapRankLabel.height
-        )
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//
+//        scrollView.frame = view.bounds
+//        scrollView.contentSize = CGSize(width: view.width, height: 1000)
+//
+//
+//        chartContainerView.frame = CGRect(
+//            x: padding,
+//            y: highlightsView.bottom + 20,
+//            width: view.width - 2 * padding,
+//            height: 220
+//        )
+//
+//        timeIntervalSelection.frame = CGRect(
+//            x: padding,
+//            y: ChartContainerView.bottom + 10,
+//            width: ChartContainerView.width,
+//            height: 25
+//        )
+//
+//        rangeProgressBar.frame = CGRect(
+//            x: padding,
+//            y: timeIntervalSelection.bottom + 10,
+//            width: ChartContainerView.width,
+//            height: 65
+//        )
+//
+//        detailsTableView.frame = CGRect(
+//            x: 0,
+//            y: rangeProgressBar.bottom + 10,
+//            width: view.width,
+//            height: 370
+//        )
+//
+//        headerView.frame = CGRect(
+//            x: 0,
+//            y: 0,
+//            width: detailsTableView.width,
+//            height: 40
+//        )
+//
+//        headerNameLabel.sizeToFit()
+//        headerNameLabel.frame = CGRect(
+//            x: 30,
+//            y: headerView.height/2 - headerNameLabel.height/2,
+//            width: headerNameLabel.width,
+//            height: headerNameLabel.height
+//        )
+//
+//        marketCapRankLabel.sizeToFit()
+//        marketCapRankLabel.frame = CGRect(
+//            x: headerView.right - marketCapRankLabel.width - 30,
+//            y: headerNameLabel.top,
+//            width: marketCapRankLabel.width,
+//            height: marketCapRankLabel.height
+//        )
+//    }
     
     //MARK: - Bind View Models
 
@@ -224,13 +217,18 @@ class CoinDetailsVC: UIViewController {
         
         viewModel.rangeDetailsVM.bind { [weak self] _ in
             
-            guard let rangeDetails = self?.viewModel.rangeDetailsVM.value else { return }
+            guard let self = self,
+                  let rangeDetails = self.viewModel.rangeDetailsVM.value
+            else { return }
             
             let color: UIColor = rangeDetails.isChangePositive ? .nephritis : .pinkGlamour
             
             DispatchQueue.main.async {
-                self?.updateRangeLabels(with: rangeDetails)
-                self?.lineChartView.createNewChart(entries: rangeDetails.chartEntries, color: color)
+                self.updateRangeLabels(with: rangeDetails)
+                self.lineChartView.setChartData(rangeDetails.chartEntries)
+                self.lineChartView.setChartColor(color)
+                
+                //self?.lineChartView.createNewChart(entries: rangeDetails.chartEntries, color: color)
                 //self?.updatePriceRangeBar(with: rangeDetails)
             }
         }
@@ -272,7 +270,11 @@ class CoinDetailsVC: UIViewController {
     private func setupVC() {
         view.backgroundColor = .secondarySystemBackground
         navigationItem.largeTitleDisplayMode = .never
-        lineChartView.xAxis.valueFormatter = self
+    }
+    
+    /// Sets the formatter to be used for formatting the axis labels on the chart
+    private func setChartValueFormatter(_ formatter: AxisValueFormatter?) {
+        lineChartView.xAxis.valueFormatter = formatter
     }
     
     private func initialUISetup(for coin: CoinRepresenatable) {
@@ -335,7 +337,7 @@ class CoinDetailsVC: UIViewController {
             intervalInDays: selectedTimeInterval.numberOfDays
         )
         
-        lineChartView.fadeOut()
+        //lineChartView.fadeOut()
         priceChangeLabel.fadeOut()
         priceChangePercentageLabel.fadeOut()
     }
@@ -422,20 +424,31 @@ extension CoinDetailsVC: AxisValueFormatter, ChartViewDelegate {
 
 extension CoinDetailsVC {
     private func setupHierarchy() {
-        view.addSubview(highlightsView)
-        scrollView.addSubviews(chartView, timeIntervalSelection, rangeProgressBar, detailsTableView)
-        chartView.addSubview(lineChartView)
-        headerView.addSubviews(headerNameLabel, marketCapRankLabel)
+        view.addSubviews(highlightsView, chartContainerView, lineChartView)
+        //scrollView.addSubviews(ChartContainerView, timeIntervalSelection, rangeProgressBar, detailsTableView)
+        //headerView.addSubviews(headerNameLabel, marketCapRankLabel)
     }
     
     private func layoutViews() {
         highlightsView.translatesAutoresizingMaskIntoConstraints = false
+        chartContainerView.translatesAutoresizingMaskIntoConstraints = false
+        lineChartView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             highlightsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             highlightsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             highlightsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             highlightsView.heightAnchor.constraint(equalToConstant: HighlightsView.prefferedHeight),
+            
+            chartContainerView.topAnchor.constraint(equalTo: highlightsView.bottomAnchor),
+            chartContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            chartContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            chartContainerView.heightAnchor.constraint(equalToConstant: 220),
+            
+            lineChartView.topAnchor.constraint(equalTo: chartContainerView.topAnchor, constant: 5),
+            lineChartView.leadingAnchor.constraint(equalTo: chartContainerView.leadingAnchor, constant: 5),
+            lineChartView.trailingAnchor.constraint(equalTo: chartContainerView.trailingAnchor, constant: -5),
+            lineChartView.bottomAnchor.constraint(equalTo: chartContainerView.bottomAnchor, constant: -5),
         ])
     }
 }
