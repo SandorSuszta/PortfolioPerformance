@@ -188,6 +188,7 @@ class CoinDetailsVC: UIViewController {
             DispatchQueue.main.async {
                 self.showLoadingIndicator(false)
                 self.updateRangeLabels(with: rangeDetails)
+                self.rangeProgressBar.configure(with: rangeDetails)
                 
                 self.lineChartView.setChartData(rangeDetails.chartEntries)
                 self.lineChartView.setChartColor(color)
@@ -396,9 +397,10 @@ extension CoinDetailsVC {
         
         static let segmentedControlHeight: CGFloat = 28
         static let chartViewHeight: CGFloat = 232
+        static let rangeProgressBarHeight: CGFloat = 64
     }
     private func setupHierarchy() {
-        view.addSubviews(highlightsView, chartContainerView, lineChartView, chartLoadingIndicator, timeIntervalSelection)
+        view.addSubviews(highlightsView, chartContainerView, lineChartView, chartLoadingIndicator, timeIntervalSelection, rangeProgressBar)
         //scrollView.addSubviews(ChartContainerView, timeIntervalSelection, rangeProgressBar, detailsTableView)
         //headerView.addSubviews(headerNameLabel, marketCapRankLabel)
     }
@@ -409,6 +411,7 @@ extension CoinDetailsVC {
         lineChartView.translatesAutoresizingMaskIntoConstraints = false
         timeIntervalSelection.translatesAutoresizingMaskIntoConstraints = false
         chartLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        rangeProgressBar.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             highlightsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -433,6 +436,11 @@ extension CoinDetailsVC {
             timeIntervalSelection.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.largePadding),
             timeIntervalSelection.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.largePadding),
             timeIntervalSelection.heightAnchor.constraint(equalToConstant: Constants.segmentedControlHeight),
+            
+            rangeProgressBar.topAnchor.constraint(equalTo: timeIntervalSelection.bottomAnchor, constant: Constants.standartPadding),
+            rangeProgressBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.largePadding),
+            rangeProgressBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.largePadding),
+            rangeProgressBar.heightAnchor.constraint(equalToConstant: Constants.rangeProgressBarHeight),
         ])
     }
 }

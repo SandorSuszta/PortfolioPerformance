@@ -39,11 +39,11 @@ class RangeProgressView: UIView {
     
     private let progressBar: CustomProgressView = {
         let bar = CustomProgressView()
-        bar.customHeight = 12
+        bar.customHeight = 16
         bar.progress = 0.5
         bar.trackTintColor = .priceRangeRed
         bar.progressTintColor = .priceRangeGreen
-        bar.layer.cornerRadius = 6
+        bar.layer.cornerRadius = 8
         bar.clipsToBounds = true
         return bar
     }()
