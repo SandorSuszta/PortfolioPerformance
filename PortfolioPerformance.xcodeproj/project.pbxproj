@@ -69,7 +69,7 @@
 		798FEF8C29F0548A0003A68D /* WatchlistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798FEF8B29F0548A0003A68D /* WatchlistDataSource.swift */; };
 		79A5B157298276740067240A /* PPTabBarControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5B156298276740067240A /* PPTabBarControllerTests.swift */; };
 		79AAF82A28FB358A009F3B85 /* SearchTableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AAF82928FB358A009F3B85 /* SearchTableSectionHeader.swift */; };
-		79AE53F62A140D4300214CB1 /* RangeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53F52A140D4300214CB1 /* RangeInterval.swift */; };
+		79AE53F62A140D4300214CB1 /* TimeRangeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53F52A140D4300214CB1 /* TimeRangeInterval.swift */; };
 		79AE53F92A141C8800214CB1 /* CoinRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53F82A141C8800214CB1 /* CoinRepresentable.swift */; };
 		79AE53FB2A1428D300214CB1 /* SearchViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE53FA2A1428D300214CB1 /* SearchViewControllerDelegate.swift */; };
 		79AE54032A1648F100214CB1 /* ImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE54022A1648F100214CB1 /* ImageSource.swift */; };
@@ -101,7 +101,7 @@
 		79EAFD2627B3DCDE008A6062 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79EAFD2527B3DCDE008A6062 /* Assets.xcassets */; };
 		79EAFD2927B3DCDE008A6062 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */; };
 		79EAFD3527B3FDC8008A6062 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD3427B3FDC7008A6062 /* CoinModel.swift */; };
-		79EC45B528F0B9DC006A849A /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EC45B428F0B9DC006A849A /* CustomSegmentedControl.swift */; };
+		79EC45B528F0B9DC006A849A /* PPSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EC45B428F0B9DC006A849A /* PPSegmentedControl.swift */; };
 		79F654EC297037F50080DEBB /* PPTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F654EB297037F50080DEBB /* PPTextLabel.swift */; };
 		79F654EE297064B90080DEBB /* MarketCardGreedAndFearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F654ED297064B90080DEBB /* MarketCardGreedAndFearCell.swift */; };
 		79F654F0297340670080DEBB /* MarketCardMetricCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F654EF297340670080DEBB /* MarketCardMetricCell.swift */; };
@@ -184,7 +184,7 @@
 		79A5B14929803DBF0067240A /* PortfolioPerformanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PortfolioPerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79A5B156298276740067240A /* PPTabBarControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPTabBarControllerTests.swift; sourceTree = "<group>"; };
 		79AAF82928FB358A009F3B85 /* SearchTableSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableSectionHeader.swift; sourceTree = "<group>"; };
-		79AE53F52A140D4300214CB1 /* RangeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeInterval.swift; sourceTree = "<group>"; };
+		79AE53F52A140D4300214CB1 /* TimeRangeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRangeInterval.swift; sourceTree = "<group>"; };
 		79AE53F82A141C8800214CB1 /* CoinRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRepresentable.swift; sourceTree = "<group>"; };
 		79AE53FA2A1428D300214CB1 /* SearchViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewControllerDelegate.swift; sourceTree = "<group>"; };
 		79AE54022A1648F100214CB1 /* ImageSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSource.swift; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 		79EAFD2827B3DCDE008A6062 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79EAFD2A27B3DCDE008A6062 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79EAFD3427B3FDC7008A6062 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
-		79EC45B428F0B9DC006A849A /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		79EC45B428F0B9DC006A849A /* PPSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPSegmentedControl.swift; sourceTree = "<group>"; };
 		79F654EB297037F50080DEBB /* PPTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPTextLabel.swift; sourceTree = "<group>"; };
 		79F654ED297064B90080DEBB /* MarketCardGreedAndFearCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardGreedAndFearCell.swift; sourceTree = "<group>"; };
 		79F654EF297340670080DEBB /* MarketCardMetricCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardMetricCell.swift; sourceTree = "<group>"; };
@@ -311,7 +311,7 @@
 				7934EFB92841600A00CE7FD0 /* CustomProgressBar.swift */,
 				79D5B8E728EEE3FF00178402 /* PPButton.swift */,
 				79D5B8E328EDB85100178402 /* CustomAlert.swift */,
-				79EC45B428F0B9DC006A849A /* CustomSegmentedControl.swift */,
+				79EC45B428F0B9DC006A849A /* PPSegmentedControl.swift */,
 				795E43F52910017D0016F3C3 /* EmptyStateView.swift */,
 				793332C6293F52C2005EE8A3 /* CustomSearchBar.swift */,
 				79F654EB297037F50080DEBB /* PPTextLabel.swift */,
@@ -489,7 +489,7 @@
 		79AE53F72A140DFD00214CB1 /* DataTypes */ = {
 			isa = PBXGroup;
 			children = (
-				79AE53F52A140D4300214CB1 /* RangeInterval.swift */,
+				79AE53F52A140D4300214CB1 /* TimeRangeInterval.swift */,
 			);
 			path = DataTypes;
 			sourceTree = "<group>";
@@ -857,7 +857,7 @@
 				79410D8F282416C000BD9EA4 /* SearchVC.swift in Sources */,
 				79AE54092A177A7100214CB1 /* Array+SortByPrefix.swift in Sources */,
 				7955694928773472003E8A13 /* SortOptionsCell.swift in Sources */,
-				79EC45B528F0B9DC006A849A /* CustomSegmentedControl.swift in Sources */,
+				79EC45B528F0B9DC006A849A /* PPSegmentedControl.swift in Sources */,
 				792C040628C14386008EE48C /* CoinDetailsVM.swift in Sources */,
 				79011E092A005C1500121A81 /* MarketCoordinator.swift in Sources */,
 				79011E0029FDA86200121A81 /* Array+sortedByList.swift in Sources */,
@@ -896,7 +896,7 @@
 				7961C37428EB2A010006B9A7 /* PPError.swift in Sources */,
 				79AE54052A16B6C800214CB1 /* PPRoundedButton.swift in Sources */,
 				79FAD73629EDB39800374272 /* PPMarketSort.swift in Sources */,
-				79AE53F62A140D4300214CB1 /* RangeInterval.swift in Sources */,
+				79AE53F62A140D4300214CB1 /* TimeRangeInterval.swift in Sources */,
 				79011E0229FECD2B00121A81 /* RecentSearchesStore.swift in Sources */,
 				7955B09329DF6F8A00492059 /* ImageDownloader.swift in Sources */,
 				79463E702A38BAC800BAE3A3 /* MarketCardCellConfigurable.swift in Sources */,
