@@ -38,6 +38,12 @@ class CoinDetailsVC: UIViewController {
     }()
     
     private lazy var lineChartView = PPLineChartView()
+    
+    private lazy var chartLoadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.color = .PPBlue
+        return indicator
+    }()
 
     private lazy var timeIntervalSelection: PPSegmentedControl = {
         let segmentControl = PPSegmentedControl(
@@ -84,6 +90,7 @@ class CoinDetailsVC: UIViewController {
         setupTableView()
         layoutViews()
         setChartAxisLabelsFormatter(self)
+        showLoadingIndicator(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,12 +186,14 @@ class CoinDetailsVC: UIViewController {
             let color: UIColor = rangeDetails.isChangePositive ? .nephritis : .pinkGlamour
             
             DispatchQueue.main.async {
+                self.showLoadingIndicator(false)
                 self.updateRangeLabels(with: rangeDetails)
+                
                 self.lineChartView.setChartData(rangeDetails.chartEntries)
                 self.lineChartView.setChartColor(color)
                 
-                //self?.lineChartView.createNewChart(entries: rangeDetails.chartEntries, color: color)
-                //self?.updatePriceRangeBar(with: rangeDetails)
+                self.lineChartView.fadeIn()
+                self.highlightsView.fadeInChangeLabels()
             }
         }
         
@@ -227,11 +236,6 @@ class CoinDetailsVC: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
     }
     
-    /// Sets the formatter to be used for formatting the axis labels on the chart
-    private func setChartAxisLabelsFormatter(_ formatter: AxisValueFormatter?) {
-        lineChartView.xAxis.valueFormatter = formatter
-    }
-    
     private func initialUISetup(for coin: CoinRepresenatable) {
         self.title = coin.name
         highlightsView.setSymbolName(coin.symbol.uppercased())
@@ -266,13 +270,22 @@ class CoinDetailsVC: UIViewController {
         }
     }
     
-    
     private func updateRangeLabels(with rangeDetails: RangeDetailsViewModel) {
         highlightsView.setPriceChangeLabels(
             priceChange: rangeDetails.priceChange,
             inPercentage: rangeDetails.priceChangePercentage,
             color: rangeDetails.isChangePositive ? .nephritis : .pomergranate
         )
+    }
+    
+    private func showLoadingIndicator(_ show: Bool) {
+        if show {
+            chartLoadingIndicator.startAnimating()
+            lineChartView.isHidden = true
+        } else {
+            chartLoadingIndicator.stopAnimating()
+            lineChartView.isHidden = false
+        }
     }
     
     private func updateUIForSelectedTimeInterval(_ selectedTimeInterval: TimeRangeInterval) {
@@ -285,10 +298,19 @@ class CoinDetailsVC: UIViewController {
         )
     }
     
+    /// Sets the formatter to be used for formatting the axis labels on the chart
+    private func setChartAxisLabelsFormatter(_ formatter: AxisValueFormatter?) {
+        lineChartView.xAxis.valueFormatter = formatter
+    }
+    
+    // MARK: - Selectors
+    
     @objc func didSelectRangeInterval(_ sender: UISegmentedControl) -> Void {
         let interval = viewModel.rangeIntervals[sender.selectedSegmentIndex]
         currentChartTimeInterval = interval
         updateUIForSelectedTimeInterval(interval)
+        lineChartView.fadeOut()
+        highlightsView.fadeOutChangeLabels()
     }
     
     @objc func favouriteButtonTapped() {
@@ -376,7 +398,7 @@ extension CoinDetailsVC {
         static let chartViewHeight: CGFloat = 232
     }
     private func setupHierarchy() {
-        view.addSubviews(highlightsView, chartContainerView, lineChartView, timeIntervalSelection)
+        view.addSubviews(highlightsView, chartContainerView, lineChartView, chartLoadingIndicator, timeIntervalSelection)
         //scrollView.addSubviews(ChartContainerView, timeIntervalSelection, rangeProgressBar, detailsTableView)
         //headerView.addSubviews(headerNameLabel, marketCapRankLabel)
     }
@@ -386,6 +408,7 @@ extension CoinDetailsVC {
         chartContainerView.translatesAutoresizingMaskIntoConstraints = false
         lineChartView.translatesAutoresizingMaskIntoConstraints = false
         timeIntervalSelection.translatesAutoresizingMaskIntoConstraints = false
+        chartLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             highlightsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -402,6 +425,9 @@ extension CoinDetailsVC {
             lineChartView.leadingAnchor.constraint(equalTo: chartContainerView.leadingAnchor, constant: Constants.standartPadding),
             lineChartView.trailingAnchor.constraint(equalTo: chartContainerView.trailingAnchor, constant: -Constants.standartPadding),
             lineChartView.bottomAnchor.constraint(equalTo: chartContainerView.bottomAnchor, constant: -Constants.standartPadding),
+            
+            chartLoadingIndicator.centerXAnchor.constraint(equalTo: chartContainerView.centerXAnchor),
+            chartLoadingIndicator.centerYAnchor.constraint(equalTo: chartContainerView.centerYAnchor),
             
             timeIntervalSelection.topAnchor.constraint(equalTo: lineChartView.bottomAnchor, constant: Constants.largePadding),
             timeIntervalSelection.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.largePadding),
