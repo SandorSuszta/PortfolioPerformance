@@ -94,8 +94,10 @@ class CoinDetailsVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        //Prevent strong reference cycle
-        setChartValueFormatter(nil)
+        //Prevent strong reference cycle when VC is popped
+        if self.isMovingFromParent {
+            setChartAxisLabelsFormatter(nil)
+        }
     }
     
 //    override func viewDidLayoutSubviews() {
