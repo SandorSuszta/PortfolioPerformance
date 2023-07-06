@@ -22,6 +22,7 @@ final class PPLineChartView: LineChartView {
     
     private func configure() {
         backgroundColor = .systemBackground
+        alpha = 0
         data?.setDrawValues(false)
         legend.enabled = false // Disable legend
         leftAxis.enabled = false // Disable left axis

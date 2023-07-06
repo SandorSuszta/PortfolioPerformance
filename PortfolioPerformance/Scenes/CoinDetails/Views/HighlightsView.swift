@@ -83,6 +83,16 @@ final class HighlightsView: UIView {
     func setLogo(_ logo: UIImage) {
         coinLogoView.image = logo
     }
+    
+    func fadeOutChangeLabels() {
+        priceChangeLabel.fadeOut()
+        priceChangePercentageLabel.fadeOut()
+    }
+    
+    func fadeInChangeLabels() {
+        priceChangeLabel.fadeIn()
+        priceChangePercentageLabel.fadeIn()
+    }
 }
 
     // MARK: - Setup views
