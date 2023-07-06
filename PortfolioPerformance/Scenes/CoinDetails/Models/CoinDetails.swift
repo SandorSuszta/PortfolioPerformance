@@ -63,7 +63,8 @@ struct MarketData: Codable {
     }
 }
 
-// MARK: - Description
+    // MARK: - Description
+
 struct Description: Codable {
     let en: String
 }

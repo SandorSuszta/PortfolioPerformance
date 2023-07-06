@@ -23,14 +23,7 @@ final class CoinDetailsViewModel {
         String(coinDetailsModel?.marketData.marketCapRank ?? 0)
     }
 
-    let rangeIntervals: [RangeInterval] = [
-        RangeInterval(rangeName: "Day range", segmentName: "1D", numberOfDays: 1),
-        RangeInterval(rangeName: "Week Range", segmentName: "1W", numberOfDays: 7),
-        RangeInterval(rangeName: "Month range", segmentName: "1M", numberOfDays: 30),
-        RangeInterval(rangeName: "Six month range", segmentName: "6M", numberOfDays: 183),
-        RangeInterval(rangeName: "Year range", segmentName: "1Y", numberOfDays: 360),
-        RangeInterval(rangeName: "All time range", segmentName: "MAX", numberOfDays: Int.max),
-    ]
+    let rangeIntervals = TimeRangeInterval.allCases
     
     //MARK: - Observables
     

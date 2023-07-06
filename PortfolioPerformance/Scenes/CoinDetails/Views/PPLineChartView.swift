@@ -43,7 +43,6 @@ final class PPLineChartView: LineChartView {
         dataSet.drawHorizontalHighlightIndicatorEnabled = false
         dataSet.highlightEnabled = false
         //dataSet.highlightLineWidth = 1.5
-        //dataSet.setColor(color)
     }
     
     private func disableZooming() {

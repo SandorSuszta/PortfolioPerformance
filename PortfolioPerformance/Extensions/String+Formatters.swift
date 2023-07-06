@@ -70,19 +70,18 @@ extension String {
         return formatter.string(from: NSNumber(value: formattedNumber)) ?? ""
     }
     
-    static func stringForGraphAxis(from date: Date, daysInterval: Int) -> String {
+    static func stringForGraphAxis(from date: Date, rangeInterval: TimeRangeInterval) -> String {
         let formatter = DateFormatter()
         
-        switch daysInterval {
-        case 1:
+        switch rangeInterval {
+        case .day:
             formatter.dateFormat = "HH:mm"
-        case 7, 30:
+        case .week, .month:
             formatter.dateFormat = "d MMM"
-        case 180, 360:
+        case .sixMonth, .year:
             formatter.dateFormat = "MMM yy"
-        case 2000:
+        case .max:
             formatter.dateFormat = "yyyy"
-        default: fatalError()
         }
         return formatter.string(from: date)
     }

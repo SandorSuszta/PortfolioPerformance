@@ -2,7 +2,6 @@ import Charts
 import UIKit
 
 class CoinDetailsVC: UIViewController {
-    typealias NumberOfDays = Int
     
     //MARK: - Dependecies
     
@@ -13,11 +12,7 @@ class CoinDetailsVC: UIViewController {
     
     //MARK: - Properties
     
-    private var currentChartTimeInterval: NumberOfDays = 1
-    
-    private var padding: CGFloat {
-        view.width / 20
-    }
+    private var currentChartTimeInterval: TimeRangeInterval = .day
     
     //MARK: - UI Elements
     
@@ -34,46 +29,6 @@ class CoinDetailsVC: UIViewController {
     
     private let highlightsView = HighlightsView()
     
-    private var symbolLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
-        return label
-    }()
-    
-    private var priceLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 30, weight: .regular)
-        return label
-    }()
-    
-    private var priceChangeLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
-        return label
-    }()
-    
-    private var priceChangePercentageLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
-        return label
-    }()
-    
-    private var coinLogoShadowView: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = .systemBackground
-        view.layer.cornerRadius = 15
-        view.addShadow()
-        return view
-    }()
-    
-    private var coinLogoView: UIImageView = {
-        let view = UIImageView()
-        view.layer.cornerRadius = 15
-        view.layer.masksToBounds = true
-        return view
-    }()
-    
     private var chartContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
@@ -82,9 +37,16 @@ class CoinDetailsVC: UIViewController {
         return view
     }()
     
-    private var lineChartView = PPLineChartView()
+    private lazy var lineChartView = PPLineChartView()
 
-    private var timeIntervalSelection = UISegmentedControl()
+    private lazy var timeIntervalSelection: PPSegmentedControl = {
+        let segmentControl = PPSegmentedControl(
+            items: viewModel.rangeIntervals.map { $0.segmentName },
+            backgroundColor: .PPBlue
+        )
+        segmentControl.addTarget(self, action: #selector(didSelectRangeInterval) , for: .valueChanged)
+        return segmentControl
+    }()
 
     private var rangeProgressBar: RangeProgressView = {
         let bar = RangeProgressView()
@@ -119,14 +81,13 @@ class CoinDetailsVC: UIViewController {
         setupVC()
         setUpFavouriteButton()
         bindViewModels()
-        //setupSegmentedControl()
         setupTableView()
         layoutViews()
-        setChartValueFormatter(self)
+        setChartAxisLabelsFormatter(self)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         updateFavouriteButtonImage()
     }
     
@@ -142,14 +103,6 @@ class CoinDetailsVC: UIViewController {
 //
 //        scrollView.frame = view.bounds
 //        scrollView.contentSize = CGSize(width: view.width, height: 1000)
-//
-//
-//        chartContainerView.frame = CGRect(
-//            x: padding,
-//            y: highlightsView.bottom + 20,
-//            width: view.width - 2 * padding,
-//            height: 220
-//        )
 //
 //        timeIntervalSelection.frame = CGRect(
 //            x: padding,
@@ -211,7 +164,7 @@ class CoinDetailsVC: UIViewController {
             self?.viewModel.createDetailsCellsViewModels()
             self?.viewModel.getTimeRangeDetails(
                 coinID: self?.viewModel.coinID ?? "",
-                intervalInDays: self?.currentChartTimeInterval ?? 1
+                intervalInDays: self?.currentChartTimeInterval.numberOfDays ?? 1
             )
         }
         
@@ -273,7 +226,7 @@ class CoinDetailsVC: UIViewController {
     }
     
     /// Sets the formatter to be used for formatting the axis labels on the chart
-    private func setChartValueFormatter(_ formatter: AxisValueFormatter?) {
+    private func setChartAxisLabelsFormatter(_ formatter: AxisValueFormatter?) {
         lineChartView.xAxis.valueFormatter = formatter
     }
     
@@ -320,15 +273,7 @@ class CoinDetailsVC: UIViewController {
         )
     }
     
-    private func setupSegmentedControl() {
-        timeIntervalSelection = CustomSegmentedControl(
-            items: viewModel.rangeIntervals,
-            defaultColor: .PPBlue
-        )
-        timeIntervalSelection.addTarget(self, action: #selector(didChangeSegment(_:)) , for: .valueChanged)
-    }
-    
-    private func updateUIForSelectedTimeInterval(_ selectedTimeInterval: RangeInterval) {
+    private func updateUIForSelectedTimeInterval(_ selectedTimeInterval: TimeRangeInterval) {
         
         rangeProgressBar.setTitle(selectedTimeInterval.rangeName)
         
@@ -336,14 +281,11 @@ class CoinDetailsVC: UIViewController {
             coinID: viewModel.coinID,
             intervalInDays: selectedTimeInterval.numberOfDays
         )
-        
-        //lineChartView.fadeOut()
-        priceChangeLabel.fadeOut()
-        priceChangePercentageLabel.fadeOut()
     }
     
-    @objc func didChangeSegment(_ sender: UISegmentedControl) -> Void {
+    @objc func didSelectRangeInterval(_ sender: UISegmentedControl) -> Void {
         let interval = viewModel.rangeIntervals[sender.selectedSegmentIndex]
+        currentChartTimeInterval = interval
         updateUIForSelectedTimeInterval(interval)
     }
     
@@ -415,7 +357,7 @@ extension CoinDetailsVC: AxisValueFormatter, ChartViewDelegate {
        
         return .stringForGraphAxis(
             from: date,
-            daysInterval: currentChartTimeInterval
+            rangeInterval: currentChartTimeInterval
         )
     }
 }
@@ -423,8 +365,16 @@ extension CoinDetailsVC: AxisValueFormatter, ChartViewDelegate {
     // MARK: - Setup Views
 
 extension CoinDetailsVC {
+    
+    enum Constants {
+        static let standartPadding: CGFloat = 8
+        static let largePadding: CGFloat = 16
+        
+        static let segmentedControlHeight: CGFloat = 28
+        static let chartViewHeight: CGFloat = 232
+    }
     private func setupHierarchy() {
-        view.addSubviews(highlightsView, chartContainerView, lineChartView)
+        view.addSubviews(highlightsView, chartContainerView, lineChartView, timeIntervalSelection)
         //scrollView.addSubviews(ChartContainerView, timeIntervalSelection, rangeProgressBar, detailsTableView)
         //headerView.addSubviews(headerNameLabel, marketCapRankLabel)
     }
@@ -433,6 +383,7 @@ extension CoinDetailsVC {
         highlightsView.translatesAutoresizingMaskIntoConstraints = false
         chartContainerView.translatesAutoresizingMaskIntoConstraints = false
         lineChartView.translatesAutoresizingMaskIntoConstraints = false
+        timeIntervalSelection.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             highlightsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -443,12 +394,17 @@ extension CoinDetailsVC {
             chartContainerView.topAnchor.constraint(equalTo: highlightsView.bottomAnchor),
             chartContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             chartContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            chartContainerView.heightAnchor.constraint(equalToConstant: 220),
+            chartContainerView.heightAnchor.constraint(equalToConstant: Constants.chartViewHeight),
             
-            lineChartView.topAnchor.constraint(equalTo: chartContainerView.topAnchor, constant: 5),
-            lineChartView.leadingAnchor.constraint(equalTo: chartContainerView.leadingAnchor, constant: 5),
-            lineChartView.trailingAnchor.constraint(equalTo: chartContainerView.trailingAnchor, constant: -5),
-            lineChartView.bottomAnchor.constraint(equalTo: chartContainerView.bottomAnchor, constant: -5),
+            lineChartView.topAnchor.constraint(equalTo: chartContainerView.topAnchor, constant: Constants.standartPadding),
+            lineChartView.leadingAnchor.constraint(equalTo: chartContainerView.leadingAnchor, constant: Constants.standartPadding),
+            lineChartView.trailingAnchor.constraint(equalTo: chartContainerView.trailingAnchor, constant: -Constants.standartPadding),
+            lineChartView.bottomAnchor.constraint(equalTo: chartContainerView.bottomAnchor, constant: -Constants.standartPadding),
+            
+            timeIntervalSelection.topAnchor.constraint(equalTo: lineChartView.bottomAnchor, constant: Constants.largePadding),
+            timeIntervalSelection.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.largePadding),
+            timeIntervalSelection.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.largePadding),
+            timeIntervalSelection.heightAnchor.constraint(equalToConstant: Constants.segmentedControlHeight),
         ])
     }
 }
