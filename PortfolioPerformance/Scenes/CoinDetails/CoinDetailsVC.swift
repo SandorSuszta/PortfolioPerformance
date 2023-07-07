@@ -54,7 +54,7 @@ class CoinDetailsVC: UIViewController {
         return segmentControl
     }()
 
-    private var rangeProgressBar: RangeProgressView = {
+    private var rangeProgressView: RangeProgressView = {
         let bar = RangeProgressView()
         bar.addShadow()
         return bar
@@ -170,7 +170,7 @@ class CoinDetailsVC: UIViewController {
                 self?.marketCapRankLabel.text = self?.viewModel.metricsVM.value?.marketCapRank
             }
             
-            self?.viewModel.createDetailsCellsViewModels()
+            self?.viewModel.makeDetailsCellsViewModels()
             self?.viewModel.getTimeRangeDetails(
                 coinID: self?.viewModel.coinID ?? "",
                 intervalInDays: self?.currentChartTimeInterval.numberOfDays ?? 1
@@ -188,7 +188,7 @@ class CoinDetailsVC: UIViewController {
             DispatchQueue.main.async {
                 self.showLoadingIndicator(false)
                 self.updateRangeLabels(with: rangeDetails)
-                self.rangeProgressBar.configure(with: rangeDetails)
+                self.rangeProgressView.configure(with: rangeDetails)
                 
                 self.lineChartView.setChartData(rangeDetails.chartEntries)
                 self.lineChartView.setChartColor(color)
@@ -291,7 +291,7 @@ class CoinDetailsVC: UIViewController {
     
     private func updateUIForSelectedTimeInterval(_ selectedTimeInterval: TimeRangeInterval) {
         
-        rangeProgressBar.setTitle(selectedTimeInterval.rangeName)
+        rangeProgressView.setTitle(selectedTimeInterval.rangeName)
         
         viewModel.getTimeRangeDetails(
             coinID: viewModel.coinID,
@@ -342,8 +342,8 @@ class CoinDetailsVC: UIViewController {
         detailsTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         detailsTableView.isScrollEnabled = false
         detailsTableView.register(
-            DetailsCell.self,
-            forCellReuseIdentifier: DetailsCell.identifier
+            DetailsTableViewCell.self,
+            forCellReuseIdentifier: DetailsTableViewCell.identifier
         )
     }
 }
@@ -359,9 +359,9 @@ extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: DetailsCell.identifier,
+            withIdentifier: DetailsTableViewCell.identifier,
             for: indexPath
-        ) as? DetailsCell else { return UITableViewCell() }
+        ) as? DetailsTableViewCell else { return UITableViewCell() }
         
         guard let viewModel = viewModel.detailsTableViewCelsVM.value?[indexPath.row] else { fatalError() }
                 
@@ -370,7 +370,7 @@ extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        DetailsCell.preferredHeight
+        DetailsTableViewCell.preferredHeight
     }
 }
 
@@ -397,10 +397,10 @@ extension CoinDetailsVC {
         
         static let segmentedControlHeight: CGFloat = 28
         static let chartViewHeight: CGFloat = 232
-        static let rangeProgressBarHeight: CGFloat = 64
+        static let rangeProgressViewHeight: CGFloat = 70
     }
     private func setupHierarchy() {
-        view.addSubviews(highlightsView, chartContainerView, lineChartView, chartLoadingIndicator, timeIntervalSelection, rangeProgressBar)
+        view.addSubviews(highlightsView, chartContainerView, lineChartView, chartLoadingIndicator, timeIntervalSelection, rangeProgressView)
         //scrollView.addSubviews(ChartContainerView, timeIntervalSelection, rangeProgressBar, detailsTableView)
         //headerView.addSubviews(headerNameLabel, marketCapRankLabel)
     }
@@ -411,7 +411,7 @@ extension CoinDetailsVC {
         lineChartView.translatesAutoresizingMaskIntoConstraints = false
         timeIntervalSelection.translatesAutoresizingMaskIntoConstraints = false
         chartLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
-        rangeProgressBar.translatesAutoresizingMaskIntoConstraints = false
+        rangeProgressView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             highlightsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -437,10 +437,10 @@ extension CoinDetailsVC {
             timeIntervalSelection.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.largePadding),
             timeIntervalSelection.heightAnchor.constraint(equalToConstant: Constants.segmentedControlHeight),
             
-            rangeProgressBar.topAnchor.constraint(equalTo: timeIntervalSelection.bottomAnchor, constant: Constants.standartPadding),
-            rangeProgressBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.largePadding),
-            rangeProgressBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.largePadding),
-            rangeProgressBar.heightAnchor.constraint(equalToConstant: Constants.rangeProgressBarHeight),
+            rangeProgressView.topAnchor.constraint(equalTo: timeIntervalSelection.bottomAnchor, constant: Constants.standartPadding),
+            rangeProgressView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.largePadding),
+            rangeProgressView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.largePadding),
+            rangeProgressView.heightAnchor.constraint(equalToConstant: Constants.rangeProgressViewHeight),
         ])
     }
 }

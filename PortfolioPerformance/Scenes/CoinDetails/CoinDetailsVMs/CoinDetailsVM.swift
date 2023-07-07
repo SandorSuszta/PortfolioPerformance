@@ -83,38 +83,38 @@ final class CoinDetailsViewModel {
         }
     }
     
-    func createDetailsCellsViewModels() {
+    func makeDetailsCellsViewModels() {
         let viewModels: [DetailsCellsViewModel] = [
             DetailsCellsViewModel(
-                name: "Market Cap Value",
-                value: metricsVM.value?.marketCap ?? ""
+                type: .marketCap,
+                value:metricsVM.value?.marketCap ?? ""
             ),
             DetailsCellsViewModel(
-                name: "Volume",
+                type: .volume,
                 value: .bigNumberString(from: coinDetailsModel?.marketData.totalVolume["usd"] ?? 0)
             ),
             DetailsCellsViewModel(
-                name: "Circulating supply",
+                type: .circulatingSupply,
                 value: .bigNumberString(from: Double(coinDetailsModel?.marketData.circulatingSupply ?? 0), style: .decimal)
             ),
             DetailsCellsViewModel(
-                name: "Total supply",
+                type: .totalSupply,
                 value: .bigNumberString(from: Double(coinDetailsModel?.marketData.totalSupply ?? 0), style: .decimal)
             ),
             DetailsCellsViewModel(
-                name: "Max supply",
+                type: .maxSupply,
                 value: .bigNumberString(from: Double(coinDetailsModel?.marketData.maxSupply ?? 0), style: .decimal)
             ),
             DetailsCellsViewModel(
-                name: "All time high",
+                type: .allTimeHigh,
                 value: .priceString(from: coinDetailsModel?.marketData.ath["usd"] ?? 0)
             ),
             DetailsCellsViewModel(
-                name: "Change percentage from ATH",
+                type: .changeFromATH,
                 value: .percentageString(from: coinDetailsModel?.marketData.athChangePercentage["usd"] ?? 0)
             ),
             DetailsCellsViewModel(
-                name: "ATH date",
+                type: .ATHDate,
                 value: .formatedStringForATHDate(fromUTC: coinDetailsModel?.marketData.athDate["usd"] ?? "N/A")
             )
         ]

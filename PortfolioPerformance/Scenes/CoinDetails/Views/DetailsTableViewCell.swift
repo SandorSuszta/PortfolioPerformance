@@ -1,6 +1,6 @@
 import UIKit
 
-class DetailsCell: UITableViewCell {
+final class DetailsTableViewCell: UITableViewCell {
     
     //MARK: - Properties
     

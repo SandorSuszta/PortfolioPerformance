@@ -5,41 +5,41 @@ class RangeProgressView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Day range"
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 15, weight: .regular)
         return label
     }()
     
     private let leftTopLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13, weight: .regular)
-        label.textColor = .label
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .secondaryLabel
         return label
     }()
     
     private let leftBottomLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.font = .systemFont(ofSize: 13, weight:  .regular)
         label.textColor = .nephritis
         return label
     }()
     
     private let rightTopLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13, weight: .regular)
-        label.textColor = .label
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .secondaryLabel
         return label
     }()
     
     private let rightBottomLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textColor = .pomergranate
         return label
     }()
     
     private let progressBar: CustomProgressView = {
         let bar = CustomProgressView()
-        bar.customHeight = 16
+        bar.customHeight = 14
         bar.progress = 0.5
         bar.trackTintColor = .priceRangeRed
         bar.progressTintColor = .priceRangeGreen
@@ -122,6 +122,7 @@ class RangeProgressView: UIView {
     
     func setTitle(_ title: String) {
         titleLabel.text = title
+        titleLabel.sizeToFit()
     }
     
     func configure(with viewModel: RangeDetailsViewModel) {
@@ -129,6 +130,10 @@ class RangeProgressView: UIView {
         rightBottomLabel.text = viewModel.percentageFromHigh
         leftTopLabel.text = viewModel.rangeLow
         leftBottomLabel.text = viewModel.percentageFromLow
+        rightBottomLabel.sizeToFit()
+        rightTopLabel.sizeToFit()
+        leftTopLabel.sizeToFit()
+        leftBottomLabel.sizeToFit()
         
         progressBar.setProgress(viewModel.progress, animated: true)
     }

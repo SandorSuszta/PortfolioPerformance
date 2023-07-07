@@ -26,20 +26,24 @@ final class PPLineChartView: LineChartView {
         data?.setDrawValues(false)
         legend.enabled = false // Disable legend
         leftAxis.enabled = false // Disable left axis
+        
         rightAxis.drawAxisLineEnabled = false
         rightAxis.gridColor = .clear
         rightAxis.setLabelCount(4, force: false)
+        rightAxis.labelTextColor = .secondaryLabel
+        
         xAxis.labelPosition = .bottom // Labels on the bottom
         xAxis.drawGridLinesEnabled = false // Disable vertical grids
         xAxis.drawAxisLineEnabled = false
         xAxis.setLabelCount(4, force: true) // How many labels on axis
         xAxis.avoidFirstLastClippingEnabled = true
+        xAxis.labelTextColor = .secondaryLabel
     }
     
     private func configureDataSet() {
         dataSet.drawCirclesEnabled = false // Disable data points
         dataSet.mode = .linear
-        dataSet.lineWidth = 1.5
+        dataSet.lineWidth = 2
         dataSet.cubicIntensity = 0.5
         dataSet.drawHorizontalHighlightIndicatorEnabled = false
         dataSet.highlightEnabled = false

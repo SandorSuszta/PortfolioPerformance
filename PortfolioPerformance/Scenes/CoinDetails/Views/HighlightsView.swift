@@ -2,7 +2,7 @@ import UIKit
 
 final class HighlightsView: UIView {
     
-    static let prefferedHeight: CGFloat = 152
+    static let prefferedHeight: CGFloat = 144
     
     // MARK: - UI Elements
     
@@ -101,11 +101,11 @@ extension HighlightsView {
     
     private enum Constants {
         static let logoTopPadding: CGFloat  = 20
-        static let logoLeftPadding: CGFloat = 36
+        static let logoLeftPadding: CGFloat = 32
         static let logoSize: CGFloat = 84
         static let logoInset: CGFloat = 8
         static let priceLabelTopPadding: CGFloat = 16
-        static let priceLabelLeftPadding: CGFloat = 36
+        static let priceLabelLeftPadding: CGFloat = 32
         static let priceChangeLabelTopPadding: CGFloat = 4
         static let priceChangePercentageLabelLeftPadding: CGFloat = 4
     }
