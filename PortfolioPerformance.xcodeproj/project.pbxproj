@@ -103,6 +103,7 @@
 		79EAFD2927B3DCDE008A6062 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EAFD2727B3DCDE008A6062 /* LaunchScreen.storyboard */; };
 		79EAFD3527B3FDC8008A6062 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFD3427B3FDC7008A6062 /* CoinModel.swift */; };
 		79EC45B528F0B9DC006A849A /* PPSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EC45B428F0B9DC006A849A /* PPSegmentedControl.swift */; };
+		79F22C652A5B2A42005902F9 /* DetailsTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F22C642A5B2A42005902F9 /* DetailsTableViewHeader.swift */; };
 		79F654EC297037F50080DEBB /* PPTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F654EB297037F50080DEBB /* PPTextLabel.swift */; };
 		79F654EE297064B90080DEBB /* MarketCardGreedAndFearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F654ED297064B90080DEBB /* MarketCardGreedAndFearCell.swift */; };
 		79F654F0297340670080DEBB /* MarketCardMetricCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F654EF297340670080DEBB /* MarketCardMetricCell.swift */; };
@@ -220,6 +221,7 @@
 		79EAFD2A27B3DCDE008A6062 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79EAFD3427B3FDC7008A6062 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 		79EC45B428F0B9DC006A849A /* PPSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPSegmentedControl.swift; sourceTree = "<group>"; };
+		79F22C642A5B2A42005902F9 /* DetailsTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewHeader.swift; sourceTree = "<group>"; };
 		79F654EB297037F50080DEBB /* PPTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPTextLabel.swift; sourceTree = "<group>"; };
 		79F654ED297064B90080DEBB /* MarketCardGreedAndFearCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardGreedAndFearCell.swift; sourceTree = "<group>"; };
 		79F654EF297340670080DEBB /* MarketCardMetricCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardMetricCell.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				79E786CF2A51F9010085D8C7 /* HighlightsView.swift */,
 				79E786D22A54BA680085D8C7 /* PPLineChartView.swift */,
 				792C040A28CE2941008EE48C /* DetailsTableViewCell.swift */,
+				79F22C642A5B2A42005902F9 /* DetailsTableViewHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -882,6 +885,7 @@
 				79AE54032A1648F100214CB1 /* ImageSource.swift in Sources */,
 				79895E9028DB758600087A23 /* MetricsVM.swift in Sources */,
 				7982923427E678A5007ECCCD /* String+Formatters.swift in Sources */,
+				79F22C652A5B2A42005902F9 /* DetailsTableViewHeader.swift in Sources */,
 				7937CE1E28F6E30600B80C71 /* SearchVM.swift in Sources */,
 				797303B9296DFD700006CF76 /* Int+Radiant.swift in Sources */,
 				792B0FC3287B3C6C0040B461 /* WatchlistVC.swift in Sources */,
