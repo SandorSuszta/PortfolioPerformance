@@ -1,11 +1,13 @@
 import UIKit
 
 final class DetailsTableViewHeader: UIView {
+    
+    static let prefferedHeight = 44.0
   
     // MARK: - UI Elements
     
-    let detailsLabel = PPTextLabel()
-    let marketCapRankLabel = PPTextLabel()
+    let detailsLabel = PPTextLabel(fontWeight: .medium)
+    let marketCapRankLabel = PPTextLabel(fontWeight: .medium)
     
     // MARK: - Init
     
@@ -16,6 +18,12 @@ final class DetailsTableViewHeader: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - API
+    
+    func setMarketCapRank(_ rank: String) {
+        marketCapRankLabel.text = "#\(rank)"
     }
     
     // MARK: - Private
@@ -37,11 +45,5 @@ final class DetailsTableViewHeader: UIView {
             marketCapRankLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             marketCapRankLabel.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor)
         ])
-    }
-    
-    // MARK: - API
-    
-    func setMarketCapRank(_ rank: String) {
-        marketCapRankLabel.text = "#\(rank)"
     }
 }

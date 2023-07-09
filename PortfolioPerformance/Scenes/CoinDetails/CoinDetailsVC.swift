@@ -21,18 +21,20 @@ class CoinDetailsVC: UIViewController {
         return button
     }()
     
-    private var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.showsVerticalScrollIndicator = false
+        scroll.contentSize = CGSize(width: view.width, height: 892)
         return scroll
     }()
+    
     
     private let highlightsView = HighlightsView()
     
     private var chartContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = 10
         view.addShadow()
         return view
     }()
@@ -64,7 +66,6 @@ class CoinDetailsVC: UIViewController {
         let table = UITableView(frame: .zero, style: .insetGrouped)
         table.dataSource = self
         table.delegate = self
-        table.tableHeaderView = self.headerView
         table.clipsToBounds = false
         table.layer.masksToBounds = false
         table.separatorStyle = .singleLine
@@ -77,10 +78,6 @@ class CoinDetailsVC: UIViewController {
         )
         return table
     }()
-    
-    let table = UITableView(frame: .zero, style: .insetGrouped)
-    
-    private var headerView = UIView()
     
     private var headerNameLabel: UILabel = {
         let label = UILabel()
@@ -124,58 +121,7 @@ class CoinDetailsVC: UIViewController {
             setChartAxisLabelsFormatter(nil)
         }
     }
-    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//
-//        scrollView.frame = view.bounds
-//        scrollView.contentSize = CGSize(width: view.width, height: 1000)
-//
-//        timeIntervalSelection.frame = CGRect(
-//            x: padding,
-//            y: ChartContainerView.bottom + 10,
-//            width: ChartContainerView.width,
-//            height: 25
-//        )
-//
-//        rangeProgressBar.frame = CGRect(
-//            x: padding,
-//            y: timeIntervalSelection.bottom + 10,
-//            width: ChartContainerView.width,
-//            height: 65
-//        )
-//
-//        detailsTableView.frame = CGRect(
-//            x: 0,
-//            y: rangeProgressBar.bottom + 10,
-//            width: view.width,
-//            height: 370
-//        )
-//
-//        headerView.frame = CGRect(
-//            x: 0,
-//            y: 0,
-//            width: detailsTableView.width,
-//            height: 40
-//        )
-//
-//        headerNameLabel.sizeToFit()
-//        headerNameLabel.frame = CGRect(
-//            x: 30,
-//            y: headerView.height/2 - headerNameLabel.height/2,
-//            width: headerNameLabel.width,
-//            height: headerNameLabel.height
-//        )
-//
-//        marketCapRankLabel.sizeToFit()
-//        marketCapRankLabel.frame = CGRect(
-//            x: headerView.right - marketCapRankLabel.width - 30,
-//            y: headerNameLabel.top,
-//            width: marketCapRankLabel.width,
-//            height: marketCapRankLabel.height
-//        )
-//    }
-    
+
     //MARK: - Bind View Models
 
     private func bindViewModels() {
@@ -352,7 +298,6 @@ class CoinDetailsVC: UIViewController {
     private func setupTableView() {
         detailsTableView.dataSource = self
         detailsTableView.delegate = self
-        detailsTableView.tableHeaderView = self.headerView
         detailsTableView.clipsToBounds = false
         detailsTableView.layer.masksToBounds = false
         detailsTableView.separatorStyle = .singleLine
@@ -390,6 +335,16 @@ extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         DetailsTableViewCell.preferredHeight
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = DetailsTableViewHeader()
+        header.setMarketCapRank(viewModel.marketCapRank)
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        DetailsTableViewHeader.prefferedHeight
+    }
 }
 
     //MARK: - Charts delegate
@@ -410,20 +365,23 @@ extension CoinDetailsVC: AxisValueFormatter, ChartViewDelegate {
 extension CoinDetailsVC {
     
     enum Constants {
-        static let standartPadding: CGFloat = 8
-        static let largePadding: CGFloat = 16
+        static let smallPadding: CGFloat = 8
+        static let padding: CGFloat = 12
+        static let largePadding: CGFloat = 20
         
         static let segmentedControlHeight: CGFloat = 28
         static let chartViewHeight: CGFloat = 232
         static let rangeProgressViewHeight: CGFloat = 70
     }
     private func setupHierarchy() {
-        view.addSubviews(highlightsView, chartContainerView, lineChartView, chartLoadingIndicator, timeIntervalSelection, rangeProgressView, detailsTableView)
+        view.addSubview(scrollView)
+        scrollView.addSubviews(highlightsView, chartContainerView, lineChartView, chartLoadingIndicator, timeIntervalSelection, rangeProgressView, detailsTableView)
         //scrollView.addSubviews(ChartContainerView, timeIntervalSelection, rangeProgressBar, detailsTableView)
         //headerView.addSubviews(headerNameLabel, marketCapRankLabel)
     }
     
     private func layoutViews() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         highlightsView.translatesAutoresizingMaskIntoConstraints = false
         chartContainerView.translatesAutoresizingMaskIntoConstraints = false
         lineChartView.translatesAutoresizingMaskIntoConstraints = false
@@ -433,7 +391,12 @@ extension CoinDetailsVC {
         detailsTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            highlightsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            highlightsView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             highlightsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             highlightsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             highlightsView.heightAnchor.constraint(equalToConstant: HighlightsView.prefferedHeight),
@@ -443,28 +406,28 @@ extension CoinDetailsVC {
             chartContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             chartContainerView.heightAnchor.constraint(equalToConstant: Constants.chartViewHeight),
             
-            lineChartView.topAnchor.constraint(equalTo: chartContainerView.topAnchor, constant: Constants.standartPadding),
-            lineChartView.leadingAnchor.constraint(equalTo: chartContainerView.leadingAnchor, constant: Constants.standartPadding),
-            lineChartView.trailingAnchor.constraint(equalTo: chartContainerView.trailingAnchor, constant: -Constants.standartPadding),
-            lineChartView.bottomAnchor.constraint(equalTo: chartContainerView.bottomAnchor, constant: -Constants.standartPadding),
+            lineChartView.topAnchor.constraint(equalTo: chartContainerView.topAnchor, constant: Constants.smallPadding),
+            lineChartView.leadingAnchor.constraint(equalTo: chartContainerView.leadingAnchor, constant: Constants.largePadding),
+            lineChartView.trailingAnchor.constraint(equalTo: chartContainerView.trailingAnchor, constant: -Constants.largePadding),
+            lineChartView.bottomAnchor.constraint(equalTo: chartContainerView.bottomAnchor, constant: -Constants.smallPadding),
             
             chartLoadingIndicator.centerXAnchor.constraint(equalTo: chartContainerView.centerXAnchor),
             chartLoadingIndicator.centerYAnchor.constraint(equalTo: chartContainerView.centerYAnchor),
             
-            timeIntervalSelection.topAnchor.constraint(equalTo: lineChartView.bottomAnchor, constant: Constants.largePadding),
+            timeIntervalSelection.topAnchor.constraint(equalTo: chartContainerView.bottomAnchor, constant: Constants.padding),
             timeIntervalSelection.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.largePadding),
             timeIntervalSelection.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.largePadding),
             timeIntervalSelection.heightAnchor.constraint(equalToConstant: Constants.segmentedControlHeight),
             
-            rangeProgressView.topAnchor.constraint(equalTo: timeIntervalSelection.bottomAnchor, constant: Constants.standartPadding),
+            rangeProgressView.topAnchor.constraint(equalTo: timeIntervalSelection.bottomAnchor, constant: Constants.padding),
             rangeProgressView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.largePadding),
             rangeProgressView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.largePadding),
             rangeProgressView.heightAnchor.constraint(equalToConstant: Constants.rangeProgressViewHeight),
             
-            detailsTableView.topAnchor.constraint(equalTo: rangeProgressView.bottomAnchor, constant: Constants.standartPadding),
+            detailsTableView.topAnchor.constraint(equalTo: rangeProgressView.bottomAnchor, constant: Constants.smallPadding),
             detailsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             detailsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            detailsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            detailsTableView.heightAnchor.constraint(equalToConstant: 8 * DetailsTableViewCell.preferredHeight + DetailsTableViewHeader.prefferedHeight)
         ])
     }
 }

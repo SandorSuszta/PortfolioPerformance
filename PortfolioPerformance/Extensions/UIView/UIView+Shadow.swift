@@ -5,7 +5,7 @@ extension UIView {
     public func addShadow(
         shadowColor: UIColor = .lightGray,
         shadowRadius: CGFloat = 5.0,
-        cornerRadius: CGFloat = 20
+        cornerRadius: CGFloat = 16
     ){
         self.backgroundColor = .systemBackground
         self.layer.cornerRadius = cornerRadius

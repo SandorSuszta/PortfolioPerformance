@@ -53,13 +53,13 @@ class WatchlistCoordinator: Coordinator {
         parentViewController.view.layoutIfNeeded()
         
         let slideIn = {
-            popUp.changeBottomConstraintConstant(to: -WatchlistPopUp.Constants.smallPadding)
+            popUp.changeBottomConstraintConstant(to: -WatchlistPopUp.Constants.padding)
             parentViewController.view.layoutIfNeeded()
         }
         
         let slideOut: (Bool) -> Void = { done in
             if done {
-                UIView.animate(withDuration: 0.5, delay: 1) {
+                UIView.animate(withDuration: 0.5, delay: 1.5) {
                     popUp.changeBottomConstraintConstant(to: WatchlistPopUp.Constants.viewHeight)
                     parentViewController.view.layoutIfNeeded()
                 } completion: { done in

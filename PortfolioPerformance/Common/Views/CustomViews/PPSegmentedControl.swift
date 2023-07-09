@@ -24,7 +24,7 @@ class PPSegmentedControl: UISegmentedControl {
     // MARK: - API
     
     func setBackgroundColor(_ color: UIColor) {
-            setBackgroundImage(makeImageWithColor(color), for: .selected, barMetrics: .default)
+        setBackgroundImage(makeImageWithColor(color), for: .selected, barMetrics: .default)
     }
 
     //MARK: - Private methods
@@ -45,12 +45,6 @@ class PPSegmentedControl: UISegmentedControl {
         }
         selectedImageView.layer.cornerRadius = selectedImageView.frame.height / 2
         selectedImageView.clipsToBounds = true
-        //        for (index, subview) in subviews.enumerated() {
-        //            if ((subviews[index] as? UIImageView) != nil) && index == selectedSegmentIndex {
-        //                subview.layer.cornerRadius =  subview.frame.height / 2
-        //                subview.clipsToBounds = true
-        //            }
-        //        }
     }
     
     ///Creates a 1x1 image with given color to use as a background of the segment

@@ -41,7 +41,7 @@ final class RoundedBackgroundView: UICollectionReusableView {
         NSLayoutConstraint.activate([
             insetView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.padding),
             insetView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.padding),
-            insetView.topAnchor.constraint(equalTo: topAnchor, constant: SortSectionHeader.prefferedHeight),
+            insetView.topAnchor.constraint(equalTo: topAnchor, constant: 52),
             insetView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
