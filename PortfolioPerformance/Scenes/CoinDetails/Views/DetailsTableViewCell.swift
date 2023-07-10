@@ -26,6 +26,7 @@ final class DetailsTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubviews(metricName, metricValue)
+        contentView.backgroundColor = .tertiarySystemBackground
     }
     
     required init?(coder: NSCoder) {

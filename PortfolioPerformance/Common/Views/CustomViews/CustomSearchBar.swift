@@ -21,7 +21,7 @@ class CustomSearchBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
-        addShadow(cornerRadius: 25)
+        applyShadow(cornerRadius: 25)
     }
     
     required init?(coder: NSCoder) {
@@ -29,7 +29,7 @@ class CustomSearchBar: UIView {
     }
     
     private func setUpView() {
-        backgroundColor = .systemBackground
+        backgroundColor = .tertiarySystemBackground
         addSubviews(searchIcon, searchTextField)
         setUpConstraints()
     }

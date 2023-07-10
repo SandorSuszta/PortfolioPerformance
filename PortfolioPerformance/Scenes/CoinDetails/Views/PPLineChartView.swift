@@ -21,7 +21,7 @@ final class PPLineChartView: LineChartView {
     // MARK: - Private methods
     
     private func configure() {
-        backgroundColor = .systemBackground
+        backgroundColor = .tertiarySystemBackground
         alpha = 0
         data?.setDrawValues(false)
         legend.enabled = false // Disable legend
@@ -43,7 +43,7 @@ final class PPLineChartView: LineChartView {
     private func configureDataSet() {
         dataSet.drawCirclesEnabled = false // Disable data points
         dataSet.mode = .linear
-        dataSet.lineWidth = 2
+        dataSet.lineWidth = 1.6
         dataSet.cubicIntensity = 0.5
         dataSet.drawHorizontalHighlightIndicatorEnabled = false
         dataSet.highlightEnabled = false

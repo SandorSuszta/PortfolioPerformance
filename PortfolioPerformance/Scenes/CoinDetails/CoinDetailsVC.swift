@@ -33,9 +33,9 @@ class CoinDetailsVC: UIViewController {
     
     private var chartContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 10
-        view.addShadow()
+        view.applyShadow()
+        view.backgroundColor = .tertiarySystemBackground
         return view
     }()
     
@@ -58,7 +58,8 @@ class CoinDetailsVC: UIViewController {
 
     private var rangeProgressView: RangeProgressView = {
         let bar = RangeProgressView()
-        bar.addShadow()
+        bar.applyShadow()
+        bar.backgroundColor = .tertiarySystemBackground
         return bar
     }()
     
@@ -68,10 +69,10 @@ class CoinDetailsVC: UIViewController {
         table.delegate = self
         table.clipsToBounds = false
         table.layer.masksToBounds = false
-        table.separatorStyle = .singleLine
-        table.separatorColor = .systemGray5
+        table.separatorStyle = .none
         table.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         table.isScrollEnabled = false
+        table.backgroundColor = .clear
         table.register(
             DetailsTableViewCell.self,
             forCellReuseIdentifier: DetailsTableViewCell.identifier
@@ -376,8 +377,6 @@ extension CoinDetailsVC {
     private func setupHierarchy() {
         view.addSubview(scrollView)
         scrollView.addSubviews(highlightsView, chartContainerView, lineChartView, chartLoadingIndicator, timeIntervalSelection, rangeProgressView, detailsTableView)
-        //scrollView.addSubviews(ChartContainerView, timeIntervalSelection, rangeProgressBar, detailsTableView)
-        //headerView.addSubviews(headerNameLabel, marketCapRankLabel)
     }
     
     private func layoutViews() {
@@ -407,8 +406,8 @@ extension CoinDetailsVC {
             chartContainerView.heightAnchor.constraint(equalToConstant: Constants.chartViewHeight),
             
             lineChartView.topAnchor.constraint(equalTo: chartContainerView.topAnchor, constant: Constants.smallPadding),
-            lineChartView.leadingAnchor.constraint(equalTo: chartContainerView.leadingAnchor, constant: Constants.largePadding),
-            lineChartView.trailingAnchor.constraint(equalTo: chartContainerView.trailingAnchor, constant: -Constants.largePadding),
+            lineChartView.leadingAnchor.constraint(equalTo: chartContainerView.leadingAnchor, constant: Constants.smallPadding),
+            lineChartView.trailingAnchor.constraint(equalTo: chartContainerView.trailingAnchor, constant: -Constants.smallPadding),
             lineChartView.bottomAnchor.constraint(equalTo: chartContainerView.bottomAnchor, constant: -Constants.smallPadding),
             
             chartLoadingIndicator.centerXAnchor.constraint(equalTo: chartContainerView.centerXAnchor),

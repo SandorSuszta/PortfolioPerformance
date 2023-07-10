@@ -49,7 +49,7 @@ final class SortSectionHeader: UICollectionReusableView {
         sortOptionsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            sortOptionsCollectionView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            sortOptionsCollectionView.topAnchor.constraint(equalTo: topAnchor),
             sortOptionsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             sortOptionsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             sortOptionsCollectionView.heightAnchor.constraint(equalToConstant: SortSectionHeader.prefferedHeight)

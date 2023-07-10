@@ -29,7 +29,7 @@ final class MarketDataSource: UICollectionViewDiffableDataSource<MarketSection, 
                     ) as? MarketCardMetricCell else { return UICollectionViewCell() }
                     
                     cell.configure(with: viewModel)
-                    cell.addShadow()
+                    cell.applyShadow()
                     return cell
                     
                 case .greedAndFear:
@@ -39,7 +39,7 @@ final class MarketDataSource: UICollectionViewDiffableDataSource<MarketSection, 
                     ) as? MarketCardGreedAndFearCell else { return UICollectionViewCell() }
                     
                     cell.configure(with: viewModel)
-                    cell.addShadow()
+                    cell.applyShadow()
                     return cell
                 }
                 

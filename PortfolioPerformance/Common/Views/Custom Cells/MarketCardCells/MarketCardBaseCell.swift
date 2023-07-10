@@ -9,7 +9,7 @@ class MarketCardBaseCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super .init(frame: frame)
         configureContentView()
-        contentView.addShadow()
+        contentView.applyShadow()
     }
     
     override func layoutSubviews() {
@@ -22,7 +22,7 @@ class MarketCardBaseCell: UICollectionViewCell {
     }
     
     private func configureContentView() {
-        contentView.backgroundColor = .systemBackground
+        contentView.backgroundColor = .tertiarySystemBackground
         contentView.layer.cornerRadius = 15
     }
     

@@ -52,7 +52,7 @@ class RangeProgressView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = .tertiarySystemBackground
         layer.cornerRadius = 15
         addSubviews(titleLabel, leftTopLabel, leftBottomLabel, rightTopLabel, rightBottomLabel, progressBar)
     }

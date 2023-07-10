@@ -22,9 +22,12 @@ class SortOptionsCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            contentView.backgroundColor = isSelected ? .PPBlueBackground : .clear
-            sortingNameLabel.textColor = isSelected ? .PPBlue : .systemGray
+            contentView.layer.borderWidth = isSelected ? 0.8 : 0
+            contentView.layer.borderColor = isSelected ? UIColor.timeIntervalSelectionBorderColor.cgColor : UIColor.clear.cgColor
+            contentView.backgroundColor = isSelected ? .timeIntervalSelectionBackground : .clear
+            sortingNameLabel.textColor = isSelected ? .timeIntervalSelectionTextColor : .systemGray
             sortingNameLabel.font = isSelected ? .systemFont(ofSize: 14, weight: .medium) : .systemFont(ofSize: 14, weight: .regular)
+            
         }
     }
     

@@ -18,7 +18,7 @@ final class PPTabBarController: UITabBarController {
         let layer = CAShapeLayer()
         
         layer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: tabBar.bounds.minY, width: tabBar.bounds.width, height: tabBar.bounds.height + 50), cornerRadius: 25).cgPath
-        layer.shadowColor = UIColor.lightGray.cgColor
+        layer.shadowColor = UIColor.systemGray6.cgColor
         layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
         layer.shadowRadius = 10.0
         layer.shadowOpacity = 0.3

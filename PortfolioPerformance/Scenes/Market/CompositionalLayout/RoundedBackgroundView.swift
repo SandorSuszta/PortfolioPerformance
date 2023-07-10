@@ -9,7 +9,7 @@ final class RoundedBackgroundView: UICollectionReusableView {
 
     private var insetView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .tertiarySystemBackground
         view.layer.cornerRadius = 15
         view.clipsToBounds = true
         return view
@@ -41,7 +41,7 @@ final class RoundedBackgroundView: UICollectionReusableView {
         NSLayoutConstraint.activate([
             insetView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.padding),
             insetView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.padding),
-            insetView.topAnchor.constraint(equalTo: topAnchor, constant: 52),
+            insetView.topAnchor.constraint(equalTo: topAnchor, constant: 48),
             insetView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }

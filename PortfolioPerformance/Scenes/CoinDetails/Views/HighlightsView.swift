@@ -33,15 +33,16 @@ final class HighlightsView: UIView {
     
     private var coinLogoShadowView: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 15
-        view.addShadow()
+        view.applyShadow()
+        view.backgroundColor = .tertiarySystemBackground
         return view
     }()
     
     private var coinLogoView: UIImageView = {
         let view = UIImageView()
         view.layer.cornerRadius = 15
+        view.backgroundColor = .clear
         view.layer.masksToBounds = true
         return view
     }()

@@ -24,19 +24,21 @@ class ResultsCell: UITableViewCell {
     
     let logoContainerView: UIView = {
         let view = UIView()
+        view.backgroundColor = .tertiarySystemBackground
         return view
     }()
     
     let logoView: UIImageView = {
         let logoView = UIImageView()
         logoView.layer.cornerRadius = 10
+        logoView.backgroundColor = .clear
         logoView.clipsToBounds = true
         return logoView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .systemBackground
+        backgroundColor = .tertiarySystemBackground
         selectionStyle = .none
         logoContainerView.addSubview(logoView)
         contentView.addSubviews(symbolLabel, nameLabel, logoContainerView)

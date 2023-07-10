@@ -18,13 +18,13 @@ final class CryptoCurrencyCell: UITableViewCell {
     private let logoContainerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = Constants.viewCornerRadius
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .tertiarySystemBackground
         return view
     }()
     
     private let labelsContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .tertiarySystemBackground
         return view
     }()
     
@@ -127,7 +127,8 @@ private extension CryptoCurrencyCell {
     }
     
     func configureContentView() {
-        contentView.backgroundColor = .systemBackground
+        backgroundColor = .tertiarySystemBackground
+        contentView.backgroundColor = .tertiarySystemBackground
     }
     
     func setupViewHierarchy() {

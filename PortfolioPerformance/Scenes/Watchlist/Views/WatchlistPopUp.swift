@@ -22,7 +22,7 @@ final class WatchlistPopUp {
     private let checkmarkLogo = UIImageView(image: UIImage(named: Constants.imageName))
     
     private let titleLabel: PPTextLabel = {
-        let label = PPTextLabel(textColor: .secondaryLabel)
+        let label = PPTextLabel(textColor: .gray.withAlphaComponent(0.8))
         label.numberOfLines = 2
         return label
     }()
@@ -49,7 +49,7 @@ final class WatchlistPopUp {
         let attributedText = NSMutableAttributedString(string: "\(coinName) has been added to watchlist")
         
         let coinNameRange = NSRange(location: 0, length: name.count)
-        let coinNameColor = UIColor.label
+        let coinNameColor = UIColor.black
         attributedText.addAttribute(.foregroundColor, value: coinNameColor, range: coinNameRange)
         
         titleLabel.attributedText = attributedText

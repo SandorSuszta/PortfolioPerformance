@@ -23,12 +23,6 @@ extension UIColor {
             return traits.userInterfaceStyle == .light ? .systemBackground : .secondarySystemBackground
         }
     }()
-
-    static var PPSecondarySystemBackground: UIColor = {
-        return UIColor { (traits) -> UIColor in
-            return traits.userInterfaceStyle == .light ? .secondarySystemBackground : .systemBackground
-        }
-    }()
     
     static var favouriteButtonColor: UIColor = {
         return UIColor { (traits) -> UIColor in
@@ -38,7 +32,7 @@ extension UIColor {
     
     static var priceRangeRed: UIColor = {
         return UIColor { (traits) -> UIColor in
-            return traits.userInterfaceStyle == .light ? .pomergranate.withAlphaComponent(0.7) : .pomergranate
+            return traits.userInterfaceStyle == .light ? .pomergranate.withAlphaComponent(0.7) : .pomergranate.withAlphaComponent(0.6)
         }
     }()
     
@@ -48,9 +42,21 @@ extension UIColor {
         }
     }()
     
-    static var logoBackground: UIColor = {
+    static var timeIntervalSelectionBackground: UIColor = {
         return UIColor { (traits) -> UIColor in
-            return traits.userInterfaceStyle == .light ? .systemBackground : .systemFill
+            return traits.userInterfaceStyle == .light ? .PPBlueBackground : .tertiarySystemBackground
+        }
+    }()
+    
+    static var timeIntervalSelectionTextColor: UIColor = {
+        return UIColor { (traits) -> UIColor in
+            return traits.userInterfaceStyle == .light ? PPBlue : .white
+        }
+    }()
+    
+    static var timeIntervalSelectionBorderColor: UIColor = {
+        return UIColor { (traits) -> UIColor in
+            return traits.userInterfaceStyle == .light ? PPBlue.withAlphaComponent(0.1) : .quaternarySystemFill
         }
     }()
 }

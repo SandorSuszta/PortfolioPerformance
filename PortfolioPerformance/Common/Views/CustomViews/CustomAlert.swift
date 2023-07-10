@@ -7,8 +7,8 @@ final class ErrorAlertVC: UIViewController {
     
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
-        view.addShadow(shadowColor: .black, shadowRadius: 20)
+        view.backgroundColor = .tertiarySystemBackground
+        view.applyShadow(shadowColor: .black, shadowRadius: 20)
         return view
     }()
     
@@ -46,7 +46,7 @@ final class ErrorAlertVC: UIViewController {
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
-        view.backgroundColor = .systemBackground.withAlphaComponent(0.85)
+        view.backgroundColor = .tertiarySystemBackground.withAlphaComponent(0.85)
         setupViews()
     }
     
