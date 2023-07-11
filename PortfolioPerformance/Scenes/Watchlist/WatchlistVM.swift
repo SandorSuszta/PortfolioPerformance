@@ -17,7 +17,27 @@ final class WatchlistViewModel {
         loadWatchlistDataIfNeeded(watchlist: UserDefaultsService.shared.watchlistIDs)
     }
     
-    //MARK: - Methods
+    //MARK: - API
+    
+    func sortCellViewModels(by option: WatchlistSortOption) {
+        guard let viewModels = cellViewModels.value else { return }
+        let sortedCellViewModels: [CryptoCurrencyCellViewModel]
+        
+        switch option {
+        case .custom:
+            sortedCellViewModels = viewModels.sorted(by: sortByPositionInWatchlist)
+        case .alphabetical:
+            sortedCellViewModels = viewModels.sorted { $0.name < $1.name }
+        case .topMarketCap:
+            sortedCellViewModels = viewModels.sorted { $0.coinModel.marketCap ?? 0 < $1.coinModel.marketCap ?? 0 }
+        case .topWinners:
+            sortedCellViewModels = viewModels.sorted { $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0 }
+        case .topLosers:
+            sortedCellViewModels = viewModels.sorted { $0.coinModel.priceChangePercentage24H ?? 0 < $1.coinModel.priceChangePercentage24H ?? 0 }
+        }
+        
+        cellViewModels.value = sortedCellViewModels
+    }
     
     func reorderCellViewModels(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         guard let cellViewModel = cellViewModels.value?[sourceIndexPath.row] else { return }
@@ -47,5 +67,17 @@ final class WatchlistViewModel {
                 self.errorMessage?.value = error.rawValue
             }
         }
+    }
+    
+    // MARK: - API
+    
+    private func sortByPositionInWatchlist(_ element1: CryptoCurrencyCellViewModel, _ element2: CryptoCurrencyCellViewModel) -> Bool {
+        let watchlist = UserDefaultsService.shared.watchlistIDs
+        
+        guard let index1 = watchlist.firstIndex(of: element1.coinModel.id),
+              let index2 = watchlist.firstIndex(of: element2.coinModel.id)
+        else { return false }
+        
+        return index1 < index2
     }
 }

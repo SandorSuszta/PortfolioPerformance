@@ -1,6 +1,6 @@
 import Foundation
 
-enum WatchlistSortOptions {
+enum WatchlistSortOption {
     
     case custom, alphabetical, topMarketCap, topWinners, topLosers
 }
