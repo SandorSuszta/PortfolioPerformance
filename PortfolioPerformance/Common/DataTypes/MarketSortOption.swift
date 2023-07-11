@@ -1,6 +1,6 @@
 import Foundation
 
-enum CryptoCurrenciesSortOption: String, CaseIterable {
+enum MarketSortOption: String, CaseIterable {
     case topCaps = "Highest Cap"
     case topWinners = "Top Winners"
     case topLosers = "Top Losers"

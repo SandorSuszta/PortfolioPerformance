@@ -28,7 +28,7 @@ class MarketViewModel {
     
     //MARK: - Public methods
     
-    public func loadGreedAndFearIndex() {
+    func loadGreedAndFearIndex() {
         
         networkingService.getGreedAndFearData { [weak self] result in
             guard let self else { return }
@@ -91,7 +91,7 @@ class MarketViewModel {
         }
     }
     
-    func loadAllCryptoCurrenciesData(sortOption: CryptoCurrenciesSortOption = .topCaps) {
+    func loadAllCryptoCurrenciesData(sortOption: MarketSortOption = .topCaps) {
         networkingService.getCryptoCurrenciesData { [weak self] result in
             guard let self else { return }
             
@@ -119,7 +119,7 @@ class MarketViewModel {
         }
     }
     
-    func sortCellViewModels (by sortOption: CryptoCurrenciesSortOption) {
+    func sortCellViewModels (by sortOption: MarketSortOption) {
         guard var viewModels = cellViewModels.value else { return }
         
         switch sortOption {

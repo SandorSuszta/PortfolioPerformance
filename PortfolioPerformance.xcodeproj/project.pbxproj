@@ -42,6 +42,7 @@
 		79463E6D2A3767E100BAE3A3 /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79463E6C2A3767E100BAE3A3 /* EmptyState.swift */; };
 		79463E702A38BAC800BAE3A3 /* MarketCardCellConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79463E6F2A38BAC800BAE3A3 /* MarketCardCellConfigurable.swift */; };
 		79463E722A38BB5D00BAE3A3 /* MarketCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79463E712A38BB5D00BAE3A3 /* MarketCardCell.swift */; };
+		794B99762A5DE6DA00E0DAD8 /* WatchlistSortOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794B99752A5DE6DA00E0DAD8 /* WatchlistSortOptions.swift */; };
 		794D7EAC2A362F2000E058C0 /* SearchTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794D7EAB2A362F2000E058C0 /* SearchTableSection.swift */; };
 		7955694928773472003E8A13 /* SortOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955694828773472003E8A13 /* SortOptionsCell.swift */; };
 		7955B09329DF6F8A00492059 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B09229DF6F8900492059 /* ImageDownloader.swift */; };
@@ -107,7 +108,7 @@
 		79F654EC297037F50080DEBB /* PPTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F654EB297037F50080DEBB /* PPTextLabel.swift */; };
 		79F654EE297064B90080DEBB /* MarketCardGreedAndFearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F654ED297064B90080DEBB /* MarketCardGreedAndFearCell.swift */; };
 		79F654F0297340670080DEBB /* MarketCardMetricCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F654EF297340670080DEBB /* MarketCardMetricCell.swift */; };
-		79FAD73629EDB39800374272 /* PPMarketSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FAD73529EDB39800374272 /* PPMarketSort.swift */; };
+		79FAD73629EDB39800374272 /* MarketSortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FAD73529EDB39800374272 /* MarketSortOption.swift */; };
 		BD5BB1D85BE4860692A3E4E3 /* Pods_PortfolioPerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74D4B989C78136C941766DBA /* Pods_PortfolioPerformance.framework */; };
 /* End PBXBuildFile section */
 
@@ -158,6 +159,7 @@
 		79463E6C2A3767E100BAE3A3 /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
 		79463E6F2A38BAC800BAE3A3 /* MarketCardCellConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardCellConfigurable.swift; sourceTree = "<group>"; };
 		79463E712A38BB5D00BAE3A3 /* MarketCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardCell.swift; sourceTree = "<group>"; };
+		794B99752A5DE6DA00E0DAD8 /* WatchlistSortOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistSortOptions.swift; sourceTree = "<group>"; };
 		794D7EAB2A362F2000E058C0 /* SearchTableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableSection.swift; sourceTree = "<group>"; };
 		7955694828773472003E8A13 /* SortOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionsCell.swift; sourceTree = "<group>"; };
 		7955B09229DF6F8900492059 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
@@ -225,7 +227,7 @@
 		79F654EB297037F50080DEBB /* PPTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPTextLabel.swift; sourceTree = "<group>"; };
 		79F654ED297064B90080DEBB /* MarketCardGreedAndFearCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardGreedAndFearCell.swift; sourceTree = "<group>"; };
 		79F654EF297340670080DEBB /* MarketCardMetricCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardMetricCell.swift; sourceTree = "<group>"; };
-		79FAD73529EDB39800374272 /* PPMarketSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPMarketSort.swift; sourceTree = "<group>"; };
+		79FAD73529EDB39800374272 /* MarketSortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketSortOption.swift; sourceTree = "<group>"; };
 		B8B5BAB03702C474AC2D3057 /* Pods-PortfolioPerformance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioPerformance.release.xcconfig"; path = "Target Support Files/Pods-PortfolioPerformance/Pods-PortfolioPerformance.release.xcconfig"; sourceTree = "<group>"; };
 		DAF2DF6FAD6F9CBBDD1DF765 /* Pods-PortfolioPerformance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioPerformance.debug.xcconfig"; path = "Target Support Files/Pods-PortfolioPerformance/Pods-PortfolioPerformance.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -416,6 +418,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		794B99742A5DE6BE00E0DAD8 /* DataTypes */ = {
+			isa = PBXGroup;
+			children = (
+				794B99752A5DE6DA00E0DAD8 /* WatchlistSortOptions.swift */,
+			);
+			path = DataTypes;
+			sourceTree = "<group>";
+		};
 		795D95E229E8AF2C007555EF /* Networking  */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,7 +445,7 @@
 				7961C37328EB2A010006B9A7 /* PPError.swift */,
 				796EFA39286DDD60005E24AF /* ObservableObject.swift */,
 				790C350229D35FD200141887 /* ImageNames.swift */,
-				79FAD73529EDB39800374272 /* PPMarketSort.swift */,
+				79FAD73529EDB39800374272 /* MarketSortOption.swift */,
 				79011E0A2A03020600121A81 /* Services.swift */,
 				79463E6C2A3767E100BAE3A3 /* EmptyState.swift */,
 			);
@@ -630,6 +640,7 @@
 		79E7A22428E602FC00BD5CB0 /* Watchlist */ = {
 			isa = PBXGroup;
 			children = (
+				794B99742A5DE6BE00E0DAD8 /* DataTypes */,
 				79E216A52A4B1A9B0091DA4D /* Views */,
 				792B0FC2287B3C6C0040B461 /* WatchlistVC.swift */,
 				792B0FC4287C85EF0040B461 /* WatchlistVM.swift */,
@@ -882,6 +893,7 @@
 				790C30C227C78E930021658F /* GreedAndFearModel.swift in Sources */,
 				79E216A42A4756A20091DA4D /* TabBarReselectHandler.swift in Sources */,
 				79011E372A067C1000121A81 /* WatchlistCoordinator.swift in Sources */,
+				794B99762A5DE6DA00E0DAD8 /* WatchlistSortOptions.swift in Sources */,
 				79AE54032A1648F100214CB1 /* ImageSource.swift in Sources */,
 				79895E9028DB758600087A23 /* MetricsVM.swift in Sources */,
 				7982923427E678A5007ECCCD /* String+Formatters.swift in Sources */,
@@ -894,7 +906,7 @@
 				793262C128061136005E4D2E /* GraphEntries.swift in Sources */,
 				7961C37428EB2A010006B9A7 /* PPError.swift in Sources */,
 				79AE54052A16B6C800214CB1 /* PPRoundedButton.swift in Sources */,
-				79FAD73629EDB39800374272 /* PPMarketSort.swift in Sources */,
+				79FAD73629EDB39800374272 /* MarketSortOption.swift in Sources */,
 				79AE53F62A140D4300214CB1 /* TimeRangeInterval.swift in Sources */,
 				79011E0229FECD2B00121A81 /* RecentSearchesStore.swift in Sources */,
 				7955B09329DF6F8A00492059 /* ImageDownloader.swift in Sources */,

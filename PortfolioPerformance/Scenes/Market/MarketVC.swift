@@ -188,7 +188,7 @@ extension MarketViewController: UICollectionViewDelegate {
     
 extension MarketViewController: SortSectionHeaderDelegate {
     
-    func didSelectSortOption(_ sortOption: CryptoCurrenciesSortOption) {
+    func didSelectSortOption(_ sortOption: MarketSortOption) {
         viewModel.sortCellViewModels(by: sortOption)
         
         if isCryptoCurrencySectionOutOfViewBounds() {

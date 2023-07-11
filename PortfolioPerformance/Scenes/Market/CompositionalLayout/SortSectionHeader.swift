@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SortSectionHeaderDelegate: AnyObject {
-    func didSelectSortOption(_ sortOption: CryptoCurrenciesSortOption)
+    func didSelectSortOption(_ sortOption: MarketSortOption)
 }
 
 final class SortSectionHeader: UICollectionReusableView {
@@ -9,7 +9,7 @@ final class SortSectionHeader: UICollectionReusableView {
     static let reuseID = String(describing: SortSectionHeader.self)
     static let prefferedHeight: CGFloat = 44
     
-    private var sortOptions: [CryptoCurrenciesSortOption] = []
+    private var sortOptions: [MarketSortOption] = []
    
     //MARK: - Delegate
     
@@ -56,9 +56,9 @@ final class SortSectionHeader: UICollectionReusableView {
         ])
     }
     
-    private func makeCollectionDaraSource() -> [CryptoCurrenciesSortOption] {
-        var dataSource: [CryptoCurrenciesSortOption] = []
-        CryptoCurrenciesSortOption.allCases.forEach { dataSource.append($0) }
+    private func makeCollectionDaraSource() -> [MarketSortOption] {
+        var dataSource: [MarketSortOption] = []
+        MarketSortOption.allCases.forEach { dataSource.append($0) }
         return dataSource
     }
     
