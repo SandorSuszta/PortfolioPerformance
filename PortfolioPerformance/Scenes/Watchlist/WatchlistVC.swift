@@ -110,10 +110,6 @@ class WatchlistViewController: UIViewController {
             CryptoCurrencyCell.self,
             forCellReuseIdentifier: CryptoCurrencyCell.reuseID
         )
-        
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        
-        watchlistTableView.addGestureRecognizer(longPressRecognizer)
     }
     
     private func updateTableWithWatchlist() {
@@ -143,18 +139,6 @@ class WatchlistViewController: UIViewController {
     @objc private func plusButtonPressed() {
         if let coordinator = coordinator as? WatchlistCoordinator {
             coordinator.showSearch()
-        }
-    }
-    
-    //MARK: - Gestures
-    
-    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        guard !watchlistTableView.isEditing else { return }
-        
-        if gestureRecognizer.state == .began {
-            navigationItem.rightBarButtonItem = doneBarButton
-            feedbackGenerator.impactOccurred()
-            watchlistTableView.setEditing(true, animated: true)
         }
     }
 }
@@ -268,6 +252,8 @@ extension WatchlistViewController: UITableViewDelegate {
             coordinator.showDetails(for: currentCoinModel)
         }
     }
+    
+    
 }
 
 extension WatchlistViewController: TabBarReselectHandler {
