@@ -117,9 +117,18 @@ class CoinDetailsVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        //Prevent strong reference cycle, set nil only when popped
+        // Prevent strong reference cycle, set nil only when popped
         if self.isMovingFromParent {
             setChartAxisLabelsFormatter(nil)
+        }
+    }
+        
+        // Handle shadow colors are not updated automatically when theme is changed
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            updateShadowsColor()
         }
     }
 
@@ -267,6 +276,12 @@ class CoinDetailsVC: UIViewController {
     /// Sets the formatter to be used for formatting the axis labels on the chart
     private func setChartAxisLabelsFormatter(_ formatter: AxisValueFormatter?) {
         lineChartView.xAxis.valueFormatter = formatter
+    }
+    
+    private func updateShadowsColor() {
+        chartContainerView.applyShadow()
+        rangeProgressView.applyShadow()
+        highlightsView.applyShadowToLogoContainer()
     }
     
     // MARK: - Selectors

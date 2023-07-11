@@ -36,7 +36,7 @@ class PPSegmentedControl: UISegmentedControl {
         setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
         setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
         setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .selected)
-        setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray], for: .normal)
+        setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.secondaryLabel], for: .normal)
     }
     
     private func setRoundedCornersForSelectedSegment() {

@@ -5,6 +5,8 @@ final class PPLineChartView: LineChartView {
     
     private var dataSet = LineChartDataSet(entries: [])
     
+    private var mainColor: UIColor?
+    
     // MARK: - Init
     
     init() {
@@ -16,6 +18,18 @@ final class PPLineChartView: LineChartView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Lifecycle
+    
+    // Handle gradient color are not updated automatically when theme is changed
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            guard let mainColor else { return }
+            addGradient(mainColor: mainColor)
+        }
     }
     
     // MARK: - Private methods
@@ -78,5 +92,6 @@ final class PPLineChartView: LineChartView {
     func setChartColor(_ color: UIColor) {
         dataSet.setColor(color)
         addGradient(mainColor: color)
+        mainColor = color
     }
 }

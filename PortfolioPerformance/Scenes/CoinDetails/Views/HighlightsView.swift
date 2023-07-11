@@ -94,6 +94,10 @@ final class HighlightsView: UIView {
         priceChangeLabel.fadeIn()
         priceChangePercentageLabel.fadeIn()
     }
+    
+    func applyShadowToLogoContainer() {
+        coinLogoShadowView.applyShadow()
+    }
 }
 
     // MARK: - Setup views

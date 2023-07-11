@@ -18,6 +18,17 @@ class SortOptionsCell: UICollectionViewCell {
         return label
     }()
     
+    //MARK: - Init
+    
+    override init(frame: CGRect) {
+        super .init(frame: frame)
+        configureContentView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - Lifecycle
     
     override var isSelected: Bool {
@@ -31,15 +42,12 @@ class SortOptionsCell: UICollectionViewCell {
         }
     }
     
-    //MARK: - Init
-    
-    override init(frame: CGRect) {
-        super .init(frame: frame)
-        configureContentView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            contentView.layer.borderColor = isSelected ? UIColor.timeIntervalSelectionBorderColor.cgColor : UIColor.clear.cgColor
+        }
     }
     
     //MARK: - API
@@ -61,4 +69,6 @@ class SortOptionsCell: UICollectionViewCell {
             sortingNameLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor)
         ])
     }
+    
+    
 }

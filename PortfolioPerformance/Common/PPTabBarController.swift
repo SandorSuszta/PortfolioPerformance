@@ -2,21 +2,8 @@ import UIKit
 
 final class PPTabBarController: UITabBarController {
     
-    //MARK: - Lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        delegate = self
-        tabBar.tintColor = .PPBlue
-        makeTabBarTransparent()
-        createTabBarBackgroundLayer()
-    }
-    
-    //MARK: - Private methods
-    
-    private func createTabBarBackgroundLayer() {
+    private lazy var backgroundLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
-        
         layer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: tabBar.bounds.minY, width: tabBar.bounds.width, height: tabBar.bounds.height + 50), cornerRadius: 25).cgPath
         layer.shadowColor = UIColor.systemGray6.cgColor
         layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
@@ -27,8 +14,31 @@ final class PPTabBarController: UITabBarController {
         layer.isHidden = false
         layer.masksToBounds = false
         layer.fillColor = UIColor.secondarySystemBackground.cgColor
-
-        tabBar.layer.insertSublayer(layer, at: 0)
+        return layer
+    }()
+    
+    // MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        delegate = self
+        tabBar.tintColor = .PPBlue
+        makeTabBarTransparent()
+        addBackgroundLayer()
+    }
+    
+    // Handle background layer color is not updated automatically when theme is changed
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            updateBackgroundLayerAppearance()
+        }
+    }
+    
+    //MARK: - Private methods
+    
+    private func addBackgroundLayer() {
+        tabBar.layer.insertSublayer(backgroundLayer, at: 0)
     }
     
     private func makeTabBarTransparent() {
@@ -37,6 +47,11 @@ final class PPTabBarController: UITabBarController {
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = tabBar.standardAppearance
         tabBar.isTranslucent = true
+    }
+    
+    func updateBackgroundLayerAppearance() {
+        backgroundLayer.fillColor = UIColor.secondarySystemBackground.cgColor
+        backgroundLayer.shadowColor = UIColor.systemGray6.cgColor
     }
 }
 

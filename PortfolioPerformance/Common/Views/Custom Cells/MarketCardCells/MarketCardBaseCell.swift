@@ -21,6 +21,17 @@ class MarketCardBaseCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            contentView.applyShadow()
+        }
+    }
+    
+    // MARK: - Private
+    
     private func configureContentView() {
         contentView.backgroundColor = .tertiarySystemBackground
         contentView.layer.cornerRadius = 15
