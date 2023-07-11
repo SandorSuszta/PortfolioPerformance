@@ -10,6 +10,8 @@ final class WatchlistDataSource: UITableViewDiffableDataSource<WatchlistSection,
     
     var onMoveCell: ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)?
     
+    var canMoveCells: Bool = true
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return tableView.isEditing
     }
@@ -47,6 +49,6 @@ final class WatchlistDataSource: UITableViewDiffableDataSource<WatchlistSection,
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        true
+        canMoveCells
     }
 }

@@ -6,15 +6,13 @@ class WatchlistViewController: UIViewController {
     
     private let coordinator: Coordinator
     
-    lazy var logo = WatchlistPopUp(superView: view, coinName: "BTC")
-    
     private lazy var dataSource: WatchlistDataSource = makeDataSource()
     
-    private var watchlistVM = WatchlistViewModel(networkingService: NetworkingService())
-    
-    private let emptyWatchlistView = EmptyStateView(type: .noFavourites)
+    private var viewModel = WatchlistViewModel(networkingService: NetworkingService())
     
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+    
+    private var selectedSortOption: WatchlistSortOption = .custom
     
     //MARK: - UI Elements
     
@@ -38,6 +36,8 @@ class WatchlistViewController: UIViewController {
         target: self,
         action: #selector(editButtonPressed)
     )
+    
+    private let emptyWatchlistView = EmptyStateView(type: .noFavourites)
     
     //MARK: - Init
     
@@ -72,7 +72,7 @@ class WatchlistViewController: UIViewController {
     //MARK: - Bind viewModel
     
     private func bindViewModel() {
-        watchlistVM.cellViewModels.bind { [weak self] models in
+        viewModel.cellViewModels.bind { [weak self] models in
             guard let self else { return }
             
             DispatchQueue.main.async {
@@ -95,6 +95,7 @@ class WatchlistViewController: UIViewController {
         //Delete BackButton title on pushed screen
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = editBarButton
+        navigationItem.leftBarButtonItem = makeSortButton()
     }
     
     private func setupTableView() {
@@ -114,11 +115,11 @@ class WatchlistViewController: UIViewController {
     
     private func updateTableWithWatchlist() {
         if watchlistStore.getWatchlist().isEmpty {
-            watchlistVM.cellViewModels.value = []
+            viewModel.cellViewModels.value = []
             emptyWatchlistView.isHidden = false
         } else {
             emptyWatchlistView.isHidden = true
-            watchlistVM.loadWatchlistDataIfNeeded(
+            viewModel.loadWatchlistDataIfNeeded(
                 watchlist: watchlistStore.getWatchlist()
             )
         }
@@ -143,6 +144,44 @@ class WatchlistViewController: UIViewController {
     }
 }
 
+    // MARK: - Sort UIMenu
+
+extension WatchlistViewController {
+    
+    private func makeSortButton() -> UIBarButtonItem {
+        let sortButton = UIButton(type: .system)
+           sortButton.setTitle(selectedSortOption.name, for: .normal)
+           sortButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+           sortButton.semanticContentAttribute = .forceRightToLeft
+        
+        return UIBarButtonItem(
+            title: selectedSortOption.name,
+            menu: makeSortMenu()
+        )
+    }
+    
+    private func makeSortMenu() -> UIMenu {
+       UIMenu(
+        title: WatchlistSortOption.sortMenuName,
+        children: [
+            makeActionForOption(.custom),
+            makeActionForOption(.alphabetical),
+            makeActionForOption(.topMarketCap),
+            makeActionForOption(.topWinners),
+            makeActionForOption(.topLosers)
+        ])
+    }
+    
+    private func makeActionForOption(_ option: WatchlistSortOption) -> UIAction {
+        UIAction(title: option.name, image: option.logo) { _ in
+            self.viewModel.sortCellViewModels(by: option)
+            self.selectedSortOption = option
+            self.navigationItem.leftBarButtonItem?.title = option.name
+            self.dataSource.canMoveCells = option == .custom
+        }
+    }
+}
+
 //MARK: - TableView DataSource
 
 extension WatchlistViewController {
@@ -157,7 +196,7 @@ extension WatchlistViewController {
                 for: indexPath
             ) as? CryptoCurrencyCell else { return UITableViewCell() }
             
-            guard let cellViewModel = self.watchlistVM.cellViewModels.value?[indexPath.row] else { fatalError() }
+            guard let cellViewModel = self.viewModel.cellViewModels.value?[indexPath.row] else { fatalError() }
             
             cell.imageDownloader = ImageDownloader()
             cell.configureCell(with: cellViewModel)
@@ -169,19 +208,19 @@ extension WatchlistViewController {
         
         dataSource.onMoveCell = { sourceIndexPath, destinationIndexPath in
             
-            self.watchlistVM.reorderCellViewModels(from: sourceIndexPath, to: destinationIndexPath)
+            self.viewModel.reorderCellViewModels(from: sourceIndexPath, to: destinationIndexPath)
             self.watchlistStore.reorderWatchlist(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
         }
         
         dataSource.onDeleteCell = { indexPath in
-            self.watchlistVM.cellViewModels.value?.remove(at: indexPath.row)
+            self.viewModel.cellViewModels.value?.remove(at: indexPath.row)
         }
         
         return dataSource
     }
     
     private func makeSnapshot() -> WatchlistSnapshot {
-        let coinModels = watchlistVM.cellViewModels.value?.map({ $0.coinModel })
+        let coinModels = viewModel.cellViewModels.value?.map({ $0.coinModel })
         var snapshot = WatchlistSnapshot()
         snapshot.appendSections([.main])
         snapshot.appendItems(coinModels ?? [], toSection: .main)
@@ -252,8 +291,6 @@ extension WatchlistViewController: UITableViewDelegate {
             coordinator.showDetails(for: currentCoinModel)
         }
     }
-    
-    
 }
 
 extension WatchlistViewController: TabBarReselectHandler {

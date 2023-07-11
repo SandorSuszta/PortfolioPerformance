@@ -29,7 +29,7 @@ final class WatchlistViewModel {
         case .alphabetical:
             sortedCellViewModels = viewModels.sorted { $0.name < $1.name }
         case .topMarketCap:
-            sortedCellViewModels = viewModels.sorted { $0.coinModel.marketCap ?? 0 < $1.coinModel.marketCap ?? 0 }
+            sortedCellViewModels = viewModels.sorted { $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0 }
         case .topWinners:
             sortedCellViewModels = viewModels.sorted { $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0 }
         case .topLosers:
