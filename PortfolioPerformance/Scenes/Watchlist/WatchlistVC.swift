@@ -106,7 +106,7 @@ class WatchlistViewController: UIViewController {
         watchlistTableView.layer.cornerRadius = 10
         watchlistTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: view.width / 20))
         watchlistTableView.translatesAutoresizingMaskIntoConstraints = false
-        
+        watchlistTableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: 60))
         watchlistTableView.register(
             CryptoCurrencyCell.self,
             forCellReuseIdentifier: CryptoCurrencyCell.reuseID
@@ -120,7 +120,7 @@ class WatchlistViewController: UIViewController {
         } else {
             emptyWatchlistView.isHidden = true
             viewModel.loadWatchlistDataIfNeeded(
-                watchlist: watchlistStore.getWatchlist()
+                watchlist: watchlistStore.getWatchlist(), sortOption: selectedSortOption
             )
         }
     }
@@ -149,21 +149,14 @@ class WatchlistViewController: UIViewController {
 extension WatchlistViewController {
     
     private func makeSortButton() -> UIBarButtonItem {
-        let sortButton = UIButton(type: .system)
-           sortButton.setTitle(selectedSortOption.name, for: .normal)
-           sortButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-           sortButton.semanticContentAttribute = .forceRightToLeft
-        
         return UIBarButtonItem(
-            title: selectedSortOption.name,
+            title: selectedSortOption.name + " \u{25BE}",
             menu: makeSortMenu()
         )
     }
     
     private func makeSortMenu() -> UIMenu {
-       UIMenu(
-        title: WatchlistSortOption.sortMenuName,
-        children: [
+       UIMenu(children: [
             makeActionForOption(.custom),
             makeActionForOption(.alphabetical),
             makeActionForOption(.topMarketCap),
@@ -176,7 +169,7 @@ extension WatchlistViewController {
         UIAction(title: option.name, image: option.logo) { _ in
             self.viewModel.sortCellViewModels(by: option)
             self.selectedSortOption = option
-            self.navigationItem.leftBarButtonItem?.title = option.name
+            self.navigationItem.leftBarButtonItem?.title = option.name + " \u{25BE}"
             self.dataSource.canMoveCells = option == .custom
         }
     }

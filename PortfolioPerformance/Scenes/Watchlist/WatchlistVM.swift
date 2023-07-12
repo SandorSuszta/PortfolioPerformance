@@ -14,13 +14,49 @@ final class WatchlistViewModel {
     
     init(networkingService: NetworkingServiceProtocol) {
         self.networkingService = networkingService
-        loadWatchlistDataIfNeeded(watchlist: UserDefaultsService.shared.watchlistIDs)
+        loadWatchlistDataIfNeeded(watchlist: UserDefaultsService.shared.watchlistIDs, sortOption: .custom)
     }
     
     //MARK: - API
     
     func sortCellViewModels(by option: WatchlistSortOption) {
         guard let viewModels = cellViewModels.value else { return }
+        cellViewModels.value = sorted(viewModels, by: option)
+    }
+    
+    func reorderCellViewModels(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard let cellViewModel = cellViewModels.value?[sourceIndexPath.row] else { return }
+        cellViewModels.value?.remove(at: sourceIndexPath.row)
+        cellViewModels.value?.insert(cellViewModel, at: destinationIndexPath.row)
+    }
+    
+    func loadWatchlistDataIfNeeded(watchlist: [String], sortOption: WatchlistSortOption) {
+        
+        guard cachedWatchlist != watchlist else { return }
+        
+        networkingService.getDataForList(ofIDs: watchlist) { result in
+            switch result {
+            case .success(let coinModels):
+                
+                //Transform array of coin models into array of cell view models
+                let viewModels: [CryptoCurrencyCellViewModel] = coinModels.compactMap({ CryptoCurrencyCellViewModel(coinModel: $0)
+                })
+                
+                let sortedViewModels = self.sorted(viewModels, by: sortOption)
+                
+                self.cellViewModels.value = sortedViewModels
+                self.cachedWatchlist = watchlist
+                
+            case .failure(let error):
+                self.errorMessage?.value = error.rawValue
+            }
+        }
+    }
+    
+    // MARK: - API
+    
+    private func sorted(_ viewModels: [CryptoCurrencyCellViewModel], by option: WatchlistSortOption) -> [CryptoCurrencyCellViewModel] {
+        
         let sortedCellViewModels: [CryptoCurrencyCellViewModel]
         
         switch option {
@@ -36,40 +72,8 @@ final class WatchlistViewModel {
             sortedCellViewModels = viewModels.sorted { $0.coinModel.priceChangePercentage24H ?? 0 < $1.coinModel.priceChangePercentage24H ?? 0 }
         }
         
-        cellViewModels.value = sortedCellViewModels
+        return sortedCellViewModels
     }
-    
-    func reorderCellViewModels(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard let cellViewModel = cellViewModels.value?[sourceIndexPath.row] else { return }
-        cellViewModels.value?.remove(at: sourceIndexPath.row)
-        cellViewModels.value?.insert(cellViewModel, at: destinationIndexPath.row)
-    }
-    
-    func loadWatchlistDataIfNeeded(watchlist: [String]) {
-        
-        guard cachedWatchlist != watchlist else { return }
-        
-        networkingService.getDataForList(ofIDs: watchlist) { result in
-            switch result {
-            case .success(let coinModels):
-        
-                //Use the same order as in query list
-                let sortedCoinModels = coinModels.sorted(byList: watchlist)
-                
-                //Transform array of coin models into array of cell view models
-                let viewModels: [CryptoCurrencyCellViewModel] = sortedCoinModels.compactMap({ CryptoCurrencyCellViewModel(coinModel: $0)
-                })
-                
-                self.cellViewModels.value = viewModels
-                self.cachedWatchlist = watchlist
-                
-            case .failure(let error):
-                self.errorMessage?.value = error.rawValue
-            }
-        }
-    }
-    
-    // MARK: - API
     
     private func sortByPositionInWatchlist(_ element1: CryptoCurrencyCellViewModel, _ element2: CryptoCurrencyCellViewModel) -> Bool {
         let watchlist = UserDefaultsService.shared.watchlistIDs
