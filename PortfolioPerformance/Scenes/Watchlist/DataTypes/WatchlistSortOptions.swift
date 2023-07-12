@@ -53,7 +53,6 @@ enum WatchlistSortOption {
                 return index1 < index2
             }
             return sortComparator
-            
         }
     }
 }

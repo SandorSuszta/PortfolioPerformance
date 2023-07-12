@@ -4,9 +4,9 @@ class WatchlistViewController: UIViewController {
     
     private let coordinator: Coordinator
     
-    private lazy var dataSource: WatchlistDataSource = makeDataSource()
+    private var viewModel: WatchlistViewModel
     
-    private var viewModel = WatchlistViewModel()
+    private lazy var dataSource: WatchlistDataSource = makeDataSource()
     
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
     
@@ -134,7 +134,6 @@ class WatchlistViewController: UIViewController {
     
     @objc private func editButtonPressed() {
         watchlistTableView.setEditing(!watchlistTableView.isEditing, animated: true)
-        
         navigationItem.rightBarButtonItem = watchlistTableView.isEditing ? doneBarButton : editBarButton
     }
     
