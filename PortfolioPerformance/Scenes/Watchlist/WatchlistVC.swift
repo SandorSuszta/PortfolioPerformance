@@ -2,17 +2,15 @@ import UIKit
 
 class WatchlistViewController: UIViewController {
     
-    private let watchlistStore: WatchlistStoreProtocol
-    
     private let coordinator: Coordinator
     
     private lazy var dataSource: WatchlistDataSource = makeDataSource()
     
-    private var viewModel = WatchlistViewModel(networkingService: NetworkingService())
+    private var viewModel = WatchlistViewModel()
     
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
     
-    private var selectedSortOption: WatchlistSortOption = .custom
+    private var selectedSortOption: WatchlistSortOption
     
     //MARK: - UI Elements
     
@@ -41,10 +39,15 @@ class WatchlistViewController: UIViewController {
     
     //MARK: - Init
     
-    init(coordinator: WatchlistCoordinator, watchlistStore: WatchlistStoreProtocol) {
+    init(coordinator: WatchlistCoordinator, viewModel: WatchlistViewModel) {
         self.coordinator = coordinator
-        self.watchlistStore = watchlistStore
+        self.viewModel = viewModel
+        self.selectedSortOption = .customList(viewModel.watchlist)
         super .init(nibName: nil, bundle: nil)
+    }
+    
+    convenience init(coordinator: WatchlistCoordinator) {
+        self.init(coordinator: coordinator, viewModel: WatchlistViewModel())
     }
     
     required init?(coder: NSCoder) {
@@ -114,14 +117,12 @@ class WatchlistViewController: UIViewController {
     }
     
     private func updateTableWithWatchlist() {
-        if watchlistStore.getWatchlist().isEmpty {
+        if viewModel.isWatchlistEmpty {
             viewModel.cellViewModels.value = []
             emptyWatchlistView.isHidden = false
         } else {
             emptyWatchlistView.isHidden = true
-            viewModel.loadWatchlistDataIfNeeded(
-                watchlist: watchlistStore.getWatchlist(), sortOption: selectedSortOption
-            )
+            viewModel.loadWatchlistData(forSortOption: selectedSortOption)
         }
     }
     
@@ -156,8 +157,8 @@ extension WatchlistViewController {
     }
     
     private func makeSortMenu() -> UIMenu {
-       UIMenu(children: [
-            makeActionForOption(.custom),
+        UIMenu(children: [
+            makeActionForOption(.customList(viewModel.watchlist)),
             makeActionForOption(.alphabetical),
             makeActionForOption(.topMarketCap),
             makeActionForOption(.topWinners),
@@ -170,7 +171,12 @@ extension WatchlistViewController {
             self.viewModel.sortCellViewModels(by: option)
             self.selectedSortOption = option
             self.navigationItem.leftBarButtonItem?.title = option.name + " \u{25BE}"
-            self.dataSource.canMoveCells = option == .custom
+            
+            if case .customList(_) = option {
+                self.dataSource.canMoveCells = true
+            } else {
+                self.dataSource.canMoveCells = false
+            }
         }
     }
 }
@@ -202,7 +208,7 @@ extension WatchlistViewController {
         dataSource.onMoveCell = { sourceIndexPath, destinationIndexPath in
             
             self.viewModel.reorderCellViewModels(from: sourceIndexPath, to: destinationIndexPath)
-            self.watchlistStore.reorderWatchlist(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
+            self.viewModel.reorderWatchlist(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
         }
         
         dataSource.onDeleteCell = { indexPath in

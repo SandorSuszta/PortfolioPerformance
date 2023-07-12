@@ -2,19 +2,36 @@ import Foundation
 
 final class WatchlistViewModel {
     
-    //MARK: - Properties
+    private var cachedWatchlist: [String]?
+    
+    var watchlist: [String] {
+        watchlistStore.watchlist
+    }
+    
+    var isWatchlistEmpty: Bool {
+        watchlistStore.watchlist.isEmpty
+    }
+    
+    // MARK: - Dependencies
     
     private let networkingService: NetworkingServiceProtocol
-    private var cachedWatchlist: [String]?
+    private let watchlistStore: WatchlistStoreProtocol
+    
+    // MARK: - Observables
     
     public var cellViewModels: ObservableObject<[CryptoCurrencyCellViewModel]> = ObservableObject(value:[])
     public var errorMessage: ObservableObject<String>?
     
     //MARK: - Init
     
-    init(networkingService: NetworkingServiceProtocol) {
+    init(networkingService: NetworkingServiceProtocol, watchlistStore: WatchlistStoreProtocol) {
         self.networkingService = networkingService
-        loadWatchlistDataIfNeeded(watchlist: UserDefaultsService.shared.watchlistIDs, sortOption: .custom)
+        self.watchlistStore = watchlistStore
+        loadWatchlistData(forSortOption: .customList(watchlistStore.watchlist))
+    }
+    
+    convenience init() {
+        self.init(networkingService: NetworkingService(), watchlistStore: WatchlistStore())
     }
     
     //MARK: - API
@@ -30,7 +47,11 @@ final class WatchlistViewModel {
         cellViewModels.value?.insert(cellViewModel, at: destinationIndexPath.row)
     }
     
-    func loadWatchlistDataIfNeeded(watchlist: [String], sortOption: WatchlistSortOption) {
+    func reorderWatchlist(sourceIndex: Int, destinationIndex: Int) {
+        watchlistStore.reorderWatchlist(sourceIndex: sourceIndex, destinationIndex: destinationIndex)
+    }
+    
+    func loadWatchlistData(forSortOption option: WatchlistSortOption) {
         
         guard cachedWatchlist != watchlist else { return }
         
@@ -42,10 +63,10 @@ final class WatchlistViewModel {
                 let viewModels: [CryptoCurrencyCellViewModel] = coinModels.compactMap({ CryptoCurrencyCellViewModel(coinModel: $0)
                 })
                 
-                let sortedViewModels = self.sorted(viewModels, by: sortOption)
+                let sortedViewModels = self.sorted(viewModels, by: option)
                 
                 self.cellViewModels.value = sortedViewModels
-                self.cachedWatchlist = watchlist
+                self.cachedWatchlist = self.watchlist
                 
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue
@@ -53,14 +74,14 @@ final class WatchlistViewModel {
         }
     }
     
-    // MARK: - API
+    // MARK: - Private
     
     private func sorted(_ viewModels: [CryptoCurrencyCellViewModel], by option: WatchlistSortOption) -> [CryptoCurrencyCellViewModel] {
         
         let sortedCellViewModels: [CryptoCurrencyCellViewModel]
         
         switch option {
-        case .custom:
+        case .customList:
             sortedCellViewModels = viewModels.sorted(by: sortByPositionInWatchlist)
         case .alphabetical:
             sortedCellViewModels = viewModels.sorted { $0.name < $1.name }

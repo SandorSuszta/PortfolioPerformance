@@ -16,7 +16,7 @@ final class CoinDetailsViewModel {
     }
     
     var isFavourite: Bool {
-        watchlistStore.getWatchlist().contains(representedCoin.id)
+        watchlistStore.watchlist.contains(representedCoin.id)
     }
     
     var marketCapRank: String {

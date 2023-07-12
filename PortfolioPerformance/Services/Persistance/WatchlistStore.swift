@@ -1,7 +1,8 @@
 import Foundation
 
 protocol WatchlistStoreProtocol {
-    func getWatchlist() -> [String]
+    var watchlist: [String] { get }
+    
     func saveToWatchlist(id: String)
     func deleteFromWatchlist(id: String)
     func reorderWatchlist(sourceIndex: Int, destinationIndex: Int)
@@ -16,7 +17,7 @@ struct WatchlistStore: WatchlistStoreProtocol {
     
     //MARK: - Methods
     
-    func getWatchlist() -> [String] {
+    var watchlist: [String] {
         defaults.stringArray(forKey: watchlistKey) ?? []
     }
     

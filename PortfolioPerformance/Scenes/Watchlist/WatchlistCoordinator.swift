@@ -14,7 +14,7 @@ class WatchlistCoordinator: Coordinator {
     }
     
     func start() {
-        let watchlistVC = WatchlistViewController(coordinator: self, watchlistStore: services.watchlistStore)
+        let watchlistVC = WatchlistViewController(coordinator: self)
         
         navigationController.setViewControllers([watchlistVC], animated: true)
         
