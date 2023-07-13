@@ -27,7 +27,7 @@ final class WatchlistViewModel {
     init(networkingService: NetworkingServiceProtocol, watchlistStore: WatchlistStoreProtocol) {
         self.networkingService = networkingService
         self.watchlistStore = watchlistStore
-        loadWatchlistData(forSortOption: .customList(watchlistStore.watchlist))
+        loadWatchlistData(forSortOption: .custom)
     }
     
     convenience init() {
@@ -38,7 +38,7 @@ final class WatchlistViewModel {
     
     func sortCellViewModels(by option: WatchlistSortOption) {
         guard let viewModels = cellViewModels.value else { return }
-        cellViewModels.value = viewModels.sorted(by: option.sortComparator)
+        cellViewModels.value = sorted(viewModels, by: option)
     }
     
     func reorderCellViewModels(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -52,7 +52,6 @@ final class WatchlistViewModel {
     }
     
     func loadWatchlistData(forSortOption option: WatchlistSortOption) {
-        
         guard cachedWatchlist != watchlist else { return }
         
         networkingService.getDataForList(ofIDs: watchlist) { result in
@@ -63,7 +62,7 @@ final class WatchlistViewModel {
                 let viewModels: [CryptoCurrencyCellViewModel] = coinModels.compactMap({ CryptoCurrencyCellViewModel(coinModel: $0)
                 })
                 
-                let sortedViewModels = viewModels.sorted(by: option.sortComparator)
+                let sortedViewModels = self.sorted(viewModels, by: option)
                 
                 self.cellViewModels.value = sortedViewModels
                 self.cachedWatchlist = self.watchlist
@@ -71,6 +70,32 @@ final class WatchlistViewModel {
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue
             }
+        }
+    }
+    
+    private func sorted(_ viewModels: [CryptoCurrencyCellViewModel], by option: WatchlistSortOption) -> [CryptoCurrencyCellViewModel] {
+        
+        switch option {
+        case .alphabetical:
+            return viewModels.sorted { $0.name < $1.name }
+        case .topMarketCap:
+            return viewModels.sorted { $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0 }
+        case .topWinners:
+            return viewModels.sorted { $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0 }
+        case .topLosers:
+            return viewModels.sorted { $0.coinModel.priceChangePercentage24H ?? 0 < $1.coinModel.priceChangePercentage24H ?? 0 }
+        case .custom:
+            /// Custom case sorts viewModels in same order as saved in watchlist
+
+            let sortComparator: (CryptoCurrencyCellViewModel, CryptoCurrencyCellViewModel) -> Bool = { (element1, element2) in
+                guard let index1 = self.watchlist.firstIndex(of: element1.coinModel.id),
+                      let index2 = self.watchlist.firstIndex(of: element2.coinModel.id)
+                else { return false }
+                
+                return index1 < index2
+            }
+            
+            return viewModels.sorted(by: sortComparator)
         }
     }
 }

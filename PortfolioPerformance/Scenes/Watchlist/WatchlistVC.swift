@@ -42,7 +42,7 @@ class WatchlistViewController: UIViewController {
     init(coordinator: WatchlistCoordinator, viewModel: WatchlistViewModel) {
         self.coordinator = coordinator
         self.viewModel = viewModel
-        self.selectedSortOption = .customList(viewModel.watchlist)
+        self.selectedSortOption = .custom
         super .init(nibName: nil, bundle: nil)
     }
     
@@ -69,7 +69,7 @@ class WatchlistViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateTableWithWatchlist()
+        updateTableWithCurrentWatchlist()
     }
     
     //MARK: - Bind viewModel
@@ -116,7 +116,7 @@ class WatchlistViewController: UIViewController {
         )
     }
     
-    private func updateTableWithWatchlist() {
+    private func updateTableWithCurrentWatchlist() {
         if viewModel.isWatchlistEmpty {
             viewModel.cellViewModels.value = []
             emptyWatchlistView.isHidden = false
@@ -150,14 +150,14 @@ extension WatchlistViewController {
     
     private func makeSortButton() -> UIBarButtonItem {
         return UIBarButtonItem(
-            title: selectedSortOption.name + " \u{25BE}",
-            menu: makeSortMenu()
+            title: "\(selectedSortOption.name) \(Constants.arrowDown)",
+            menu: makeSortMenu(currentWatchlist: viewModel.watchlist)
         )
     }
     
-    private func makeSortMenu() -> UIMenu {
+    private func makeSortMenu(currentWatchlist: [String]) -> UIMenu {
         UIMenu(children: [
-            makeActionForOption(.customList(viewModel.watchlist)),
+            makeActionForOption(.custom),
             makeActionForOption(.alphabetical),
             makeActionForOption(.topMarketCap),
             makeActionForOption(.topWinners),
@@ -166,16 +166,13 @@ extension WatchlistViewController {
     }
     
     private func makeActionForOption(_ option: WatchlistSortOption) -> UIAction {
+        
         UIAction(title: option.name, image: option.logo) { _ in
+            self.navigationItem.leftBarButtonItem?.title = "\(option.name) \(Constants.arrowDown)"
             self.viewModel.sortCellViewModels(by: option)
             self.selectedSortOption = option
-            self.navigationItem.leftBarButtonItem?.title = option.name + " \u{25BE}"
             
-            if case .customList(_) = option {
-                self.dataSource.canMoveCells = true
-            } else {
-                self.dataSource.canMoveCells = false
-            }
+            self.dataSource.canMoveCells = option == .custom ? true : false
         }
     }
 }
@@ -235,6 +232,9 @@ extension WatchlistViewController {
 extension WatchlistViewController {
     
     enum Constants {
+        static let arrowDown = "\u{25BE}"
+        static let customSortButtonName = "Custom"
+        
         static let watchlistWidthToViewWidth: CGFloat = 1 / 2
         
         static let plusButtonRadius: CGFloat = 60
