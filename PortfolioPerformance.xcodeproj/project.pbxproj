@@ -76,6 +76,8 @@
 		79AE54032A1648F100214CB1 /* ImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE54022A1648F100214CB1 /* ImageSource.swift */; };
 		79AE54052A16B6C800214CB1 /* PPRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE54042A16B6C800214CB1 /* PPRoundedButton.swift */; };
 		79AE54092A177A7100214CB1 /* Array+SortByPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE54082A177A7100214CB1 /* Array+SortByPrefix.swift */; };
+		79C0D4A72A61DE07003E337E /* MarketCardsSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C0D4A62A61DE07003E337E /* MarketCardsSectionViewModel.swift */; };
+		79C0D4A92A61E4B3003E337E /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C0D4A82A61E4B3003E337E /* Cell.swift */; };
 		79CF41BF28EEFF7E00CA9F51 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */; };
 		79CFFCA62A26A59900E1E58A /* SearchBarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CFFCA52A26A59900E1E58A /* SearchBarState.swift */; };
 		79CFFCAC2A26B1D500E1E58A /* SearchTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CFFCAB2A26B1D500E1E58A /* SearchTableDataSource.swift */; };
@@ -194,6 +196,8 @@
 		79AE54022A1648F100214CB1 /* ImageSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSource.swift; sourceTree = "<group>"; };
 		79AE54042A16B6C800214CB1 /* PPRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPRoundedButton.swift; sourceTree = "<group>"; };
 		79AE54082A177A7100214CB1 /* Array+SortByPrefix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SortByPrefix.swift"; sourceTree = "<group>"; };
+		79C0D4A62A61DE07003E337E /* MarketCardsSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardsSectionViewModel.swift; sourceTree = "<group>"; };
+		79C0D4A82A61E4B3003E337E /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
 		79CFFCA52A26A59900E1E58A /* SearchBarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarState.swift; sourceTree = "<group>"; };
 		79CFFCAB2A26B1D500E1E58A /* SearchTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableDataSource.swift; sourceTree = "<group>"; };
@@ -405,6 +409,7 @@
 				79463E6F2A38BAC800BAE3A3 /* MarketCardCellConfigurable.swift */,
 				79E216932A42F6330091DA4D /* MarketSection.swift */,
 				79E216972A42FD000091DA4D /* MarketItem.swift */,
+				79C0D4A62A61DE07003E337E /* MarketCardsSectionViewModel.swift */,
 			);
 			path = DataTypes;
 			sourceTree = "<group>";
@@ -444,6 +449,7 @@
 			children = (
 				7961C37328EB2A010006B9A7 /* PPError.swift */,
 				796EFA39286DDD60005E24AF /* ObservableObject.swift */,
+				79C0D4A82A61E4B3003E337E /* Cell.swift */,
 				790C350229D35FD200141887 /* ImageNames.swift */,
 				79FAD73529EDB39800374272 /* MarketSortOption.swift */,
 				79011E0A2A03020600121A81 /* Services.swift */,
@@ -855,6 +861,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79C0D4A72A61DE07003E337E /* MarketCardsSectionViewModel.swift in Sources */,
 				79E216942A42F6330091DA4D /* MarketSection.swift in Sources */,
 				7934EFA4282A824E00CE7FD0 /* ResultsCell.swift in Sources */,
 				792C040928C9E62B008EE48C /* RangeProgressView.swift in Sources */,
@@ -895,6 +902,7 @@
 				79011E372A067C1000121A81 /* WatchlistCoordinator.swift in Sources */,
 				794B99762A5DE6DA00E0DAD8 /* WatchlistSortOptions.swift in Sources */,
 				79AE54032A1648F100214CB1 /* ImageSource.swift in Sources */,
+				79C0D4A92A61E4B3003E337E /* Cell.swift in Sources */,
 				79895E9028DB758600087A23 /* MetricsVM.swift in Sources */,
 				7982923427E678A5007ECCCD /* String+Formatters.swift in Sources */,
 				79F22C652A5B2A42005902F9 /* DetailsTableViewHeader.swift in Sources */,

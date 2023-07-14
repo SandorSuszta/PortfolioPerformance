@@ -3,8 +3,8 @@ import Foundation
 ///Used as item identifier within MarketDiffableDataSource.
 ///It wraps the different viewModels/models to be used in single data source
 enum MarketItem {
-    case marketCard(MarketCardCellViewModel)
-    case cryptoCoinCell(CoinModel)
+    case marketCard(Cell<MarketCardCellViewModel>)
+    case cryptoCoinCell(Cell<CoinModel>)
 }
 
 ///Hashable conformance is required by DiffableDataSource

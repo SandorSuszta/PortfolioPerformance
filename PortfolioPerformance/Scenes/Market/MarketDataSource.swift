@@ -18,27 +18,35 @@ final class MarketDataSource: UICollectionViewDiffableDataSource<MarketSection, 
             switch item {
                 
                 //Market Cards
-            case .marketCard(let viewModel):
+            case .marketCard(let cell):
                 
-                switch viewModel.cellType {
+                switch cell {
                     
-                case .bitcoinDominance, .totalMarketCap:
-                    guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: MarketCardMetricCell.reuseID,
-                        for: indexPath
-                    ) as? MarketCardMetricCell else { return UICollectionViewCell() }
+                case .item(let viewModel):
                     
-                    cell.configure(with: viewModel)
-                    return cell
+                    switch viewModel.cellType {
+                        
+                    case .bitcoinDominance, .totalMarketCap:
+                        guard let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: MarketCardMetricCell.reuseID,
+                            for: indexPath
+                        ) as? MarketCardMetricCell else { return UICollectionViewCell() }
+                        
+                        cell.configure(with: viewModel)
+                        return cell
+                        
+                    case .greedAndFear:
+                        guard let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: MarketCardGreedAndFearCell.reuseID,
+                            for: indexPath
+                        ) as? MarketCardGreedAndFearCell else { return UICollectionViewCell() }
+                        
+                        cell.configure(with: viewModel)
+                        return cell
+                    }
                     
-                case .greedAndFear:
-                    guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: MarketCardGreedAndFearCell.reuseID,
-                        for: indexPath
-                    ) as? MarketCardGreedAndFearCell else { return UICollectionViewCell() }
-                    
-                    cell.configure(with: viewModel)
-                    return cell
+                case .loading(index: indexPath):
+                    return UICollectionViewCell()
                 }
                 
                 //CryptoCoins
