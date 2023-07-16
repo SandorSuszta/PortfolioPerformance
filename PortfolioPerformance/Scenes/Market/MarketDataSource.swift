@@ -17,53 +17,14 @@ final class MarketDataSource: UICollectionViewDiffableDataSource<MarketSection, 
             
             switch item {
                 
-                //Market Cards
             case .marketCard(let cell):
+                return MarketDataSource.makeMarketCardCell(collectionView: collectionView, indexPath: indexPath, cell: cell)
                 
-                switch cell {
-                    
-                case .item(let viewModel):
-                    
-                    switch viewModel.cellType {
-                        
-                    case .bitcoinDominance, .totalMarketCap:
-                        guard let cell = collectionView.dequeueReusableCell(
-                            withReuseIdentifier: MarketCardMetricCell.reuseID,
-                            for: indexPath
-                        ) as? MarketCardMetricCell else { return UICollectionViewCell() }
-                        
-                        cell.configure(with: viewModel)
-                        return cell
-                        
-                    case .greedAndFear:
-                        guard let cell = collectionView.dequeueReusableCell(
-                            withReuseIdentifier: MarketCardGreedAndFearCell.reuseID,
-                            for: indexPath
-                        ) as? MarketCardGreedAndFearCell else { return UICollectionViewCell() }
-                        
-                        cell.configure(with: viewModel)
-                        return cell
-                    }
-                    
-                case .loading(index: indexPath):
-                    return UICollectionViewCell()
-                }
-                
-                //CryptoCoins
-            case .cryptoCoinCell(let model):
-                guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: CryptoCurrencyCollectionViewCell.reuseID,
-                    for: indexPath
-                ) as? CryptoCurrencyCollectionViewCell else { return UICollectionViewCell() }
-                
-                cell.imageDownloader = ImageDownloader()
-                cell.configureCell(with: CryptoCurrencyCellViewModel(coinModel: model))
-                return cell
+            case .cryptoCoinCell(let cell):
+                return MarketDataSource.makeCryptoCoinCell(collectionView: collectionView, indexPath: indexPath, cell: cell)
             }
         }
     }
-    
-    
     //MARK: - Data Source methods
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -76,5 +37,70 @@ final class MarketDataSource: UICollectionViewDiffableDataSource<MarketSection, 
         
         headerView.delegate = sortHeaderDelegate
         return headerView
+    }
+}
+    
+extension MarketDataSource {
+    
+    // MARK: - MarketCardCell factory method
+    
+    private static func makeMarketCardCell(
+        collectionView: UICollectionView,
+        indexPath: IndexPath,
+        cell: CellState<MarketCardCellViewModel>
+    ) -> UICollectionViewCell {
+        
+        switch cell {
+            
+        case .data(let viewModel):
+            
+            switch viewModel.cellType {
+                
+            case .bitcoinDominance, .totalMarketCap:
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: MarketCardMetricCell.reuseID,
+                    for: indexPath
+                ) as? MarketCardMetricCell else { return UICollectionViewCell() }
+                
+                cell.configure(with: viewModel)
+                return cell
+                
+            case .greedAndFear:
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: MarketCardGreedAndFearCell.reuseID,
+                    for: indexPath
+                ) as? MarketCardGreedAndFearCell else { return UICollectionViewCell() }
+                
+                cell.configure(with: viewModel)
+                return cell
+            }
+            
+        case .loading:
+            return UICollectionViewCell()
+        }
+    }
+    
+    // MARK: - CryptoCoinCell factory method
+    
+    private static func makeCryptoCoinCell(
+        collectionView: UICollectionView,
+        indexPath: IndexPath,
+        cell: CellState<CoinModel>
+    ) -> UICollectionViewCell {
+        
+        switch cell {
+        case .data(let model):
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: CryptoCurrencyCollectionViewCell.reuseID,
+                for: indexPath
+            ) as? CryptoCurrencyCollectionViewCell else { return UICollectionViewCell() }
+            
+            cell.imageDownloader = ImageDownloader()
+            cell.configureCell(with: CryptoCurrencyCellViewModel(coinModel: model))
+            return cell
+            
+        case .loading:
+            return UICollectionViewCell()
+        }
     }
 }

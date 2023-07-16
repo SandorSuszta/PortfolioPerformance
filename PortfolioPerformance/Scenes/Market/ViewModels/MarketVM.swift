@@ -4,13 +4,11 @@ class MarketViewModel {
     
     let networkingService: NetworkingServiceProtocol
     
-    public var cardViewModels: ObservableObject<[MarketCardCellViewModel]> = ObservableObject(value: [])
+    public var marketCardsSectionViewModel: ObservableObject<MarketCardsSectionViewModel> = ObservableObject(value: .loading)
     
-    public var cellViewModels: ObservableObject<[CryptoCurrencyCellViewModel]> = ObservableObject(value:[])
+    public var cryptoCoinsSectionViewModel: ObservableObject<CryptoCoinsSectorViewModel> = ObservableObject(value: .loading)
     
     public var errorMessage: ObservableObject<String>?
-    
-    public let sortOptionsArray = ["Highest Cap", "Top Winners", "Top Losers", "Top Volume"]
     
     //MARK: - Init
     
@@ -44,7 +42,7 @@ class MarketViewModel {
                     isChangePositive: nil
                 )
                 
-                self.cardViewModels.value?.append(greedAndFearCellViewModel)
+                self.marketCardsSectionViewModel.value?.append(greedAndFearCellViewModel)
                 
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue
@@ -83,7 +81,7 @@ class MarketViewModel {
                 )
                 
                 //Add card view models to the observable array
-                self.cardViewModels.value?.append(contentsOf: [marketCapCellViewModel,dominanceViewModel])
+                self.marketCardsSectionViewModel.value?.append(contentsOf: [marketCapCellViewModel,dominanceViewModel])
                 
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue
@@ -111,7 +109,10 @@ class MarketViewModel {
                 }
                 
                 //Transform array of coin models into array of cell view models
-                self.cellViewModels.value = sortedArray.compactMap({ CryptoCurrencyCellViewModel(coinModel: $0)})
+                let viewModels = sortedArray.compactMap { CryptoCurrencyCellViewModel(coinModel: $0) }
+                
+                self.cryptoCoinsSectionViewModel.value = .cellViewModels(viewModels)
+               
                 
             case .failure(let error):
                 self.errorMessage?.value = error.rawValue

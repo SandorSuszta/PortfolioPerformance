@@ -53,12 +53,12 @@ class MarketViewController: UIViewController {
     //MARK: - Bind view models
     
     private func bindViewModels() {
-        viewModel.cellViewModels.bind { [weak self] _ in
+        viewModel.marketCardsSectionViewModel.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.reloadMarketData()
             }
         }
-        viewModel.cardViewModels.bind { [weak self] _ in
+        viewModel.cryptoCoinsSectionViewModel.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.reloadMarketData()
             }
@@ -152,7 +152,17 @@ extension MarketViewController {
         
         snapshot.appendSections([.global, .coins])
         
-        if let cardsViewModels = viewModel.cardViewModels.value {
+        switch viewModel.cryptoCoinsSectionViewModel.value {
+        case .loading:
+            let loadingCells = (0...10).map { MarketItem.cryptoCoinCell(.loading(index: $0)) }
+            snapshot.appendItems(loadingCells)
+        case .cellViewModels(let viewModels):
+            let cryptoCoinCells = viewModels.map { MarketItem.cryptoCoinCell(.data(<#T##CoinModel#>))}
+            snapshot.appendItems(viewMod)
+        }
+        
+        
+        if let cardsViewModels = viewModel.marketCardsSectionViewModel.value {
             snapshot.appendItems(cardsViewModels.map { MarketItem.marketCard($0) }, toSection: .global)
         }
         
@@ -178,7 +188,7 @@ extension MarketViewController: UICollectionViewDelegate {
               let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
         
-        if case .cryptoCoinCell(let model) = item {
+        if case .cryptoCoinCell(.data(let model) ) = item {
             coordinator.showDetails(for: model)
         }
     }
