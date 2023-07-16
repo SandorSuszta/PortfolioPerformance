@@ -27,10 +27,10 @@ final class CoinDetailsViewModel {
     
     //MARK: - Observables
     
-    var metricsVM: ObservableObject<MetricsViewModel> = ObservableObject(value: nil)
-    var rangeDetailsVM: ObservableObject<RangeDetailsViewModel> = ObservableObject(value: nil)
-    var detailsTableViewCelsVM: ObservableObject<[DetailsCellsViewModel]> = ObservableObject(value: [])
-    var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
+    var metricsVM: ObservableObject<MetricsViewModel> = ObservableObject(value: .loading)
+    var rangeDetailsVM: ObservableObject<RangeDetailsViewModel> = ObservableObject(value: .loading)
+    var detailsTableViewCelsVM: ObservableObject<[DetailsCellsViewModel]> = ObservableObject(value: .loading)
+    var errorMessage: ObservableObject<String> = ObservableObject(value: .noData)
     
     //MARK: - Init
     
@@ -54,9 +54,11 @@ final class CoinDetailsViewModel {
             switch result {
             case .success(let model):
                 self.coinDetailsModel = model
-                self.metricsVM.value = MetricsViewModel(model: model)
+                self.metricsVM.value = .data(MetricsViewModel(model: model))
+                
+                
             case .failure(let error):
-                self.errorMessage.value = error.rawValue
+                self.errorMessage.value = .data(error.rawValue)
             }
         }
     }
@@ -75,19 +77,22 @@ final class CoinDetailsViewModel {
                     priceModels: self.extractPriceSubset(from: priceData.prices),
                     currentPriceValue: self.coinDetailsModel?.marketData.currentPrice["usd"] ?? 0
                 )
-                self.rangeDetailsVM.value = rangeDetails
+                self.rangeDetailsVM.value = .data(rangeDetails)
                 
             case .failure(let error):
-                self.errorMessage.value = error.rawValue
+                self.errorMessage.value = .data(error.rawValue)
             }
         }
     }
     
-    func makeDetailsCellsViewModels() {
+    func makeDetailsCellsViewModels(metricViewModel: MetricsViewModel) {
+        
+        if case =
+        
         let viewModels: [DetailsCellsViewModel] = [
             DetailsCellsViewModel(
                 type: .marketCap,
-                value:metricsVM.value?.marketCap ?? ""
+                value: metricsVM.value.marketCap
             ),
             DetailsCellsViewModel(
                 type: .volume,
@@ -119,7 +124,7 @@ final class CoinDetailsViewModel {
             )
         ]
         
-        detailsTableViewCelsVM.value = viewModels
+        detailsTableViewCelsVM.value = .data(viewModels)
     }
     
     /// Extracts a subset  from an array of prices. Makes chart look cleaner and less cluttered.

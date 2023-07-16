@@ -1,9 +1,6 @@
 import Foundation
 
 enum MarketCardsSectionViewModel {
-    case noData
     case loading
-    case items([MarketCardCellViewModel])
+    case cellViewModels([MarketCardCellViewModel])
 }
-
-

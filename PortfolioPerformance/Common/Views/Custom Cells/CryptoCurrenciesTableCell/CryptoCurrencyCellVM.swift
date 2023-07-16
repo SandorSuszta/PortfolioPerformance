@@ -41,3 +41,13 @@ class CryptoCurrencyCellViewModel {
         self.coinModel = coinModel
     }
 }
+
+extension CryptoCurrencyCellViewModel: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(coinModel)
+    }
+    
+    static func ==(lhs: CryptoCurrencyCellViewModel, rhs: CryptoCurrencyCellViewModel) -> Bool {
+        return lhs.coinModel == rhs.coinModel
+    }
+}

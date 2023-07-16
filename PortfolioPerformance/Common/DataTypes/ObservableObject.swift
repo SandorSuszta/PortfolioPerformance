@@ -1,20 +1,28 @@
 import Foundation
 
 final class ObservableObject<T> {
-    var value: T? {
+    
+    var value: ObservableValue<T> {
         didSet{
             listener?(value)
         }
     }
     
-    var listener: ((T?) -> Void)?
+    var listener: ((ObservableValue<T>) -> Void)?
     
-    init(value: T?) {
+    init(value: ObservableValue<T>) {
         self.value = value
     }
     
-   func bind(listener: @escaping (T?) -> Void) {
+   func bind(listener: @escaping (ObservableValue<T>) -> Void) {
         listener(value)
         self.listener = listener
     }
+}
+
+
+enum ObservableValue<T> {
+    case noData
+    case loading
+    case data(T)
 }
