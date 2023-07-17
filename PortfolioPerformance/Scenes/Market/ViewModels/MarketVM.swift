@@ -4,8 +4,7 @@ class MarketViewModel {
     
     let networkingService: NetworkingServiceProtocol
     
-    public var marketCardsSectionViewModel: ObservableObject<MarketCardsSectionViewModel> = ObservableObject(value: .loading)
-    
+    public var marketCardsViewModelsState: ObservableState<[MarketCardCellViewModel]> = ObservableState(state: .loading)
     public var cryptoCoinsSectionViewModel: ObservableObject<CryptoCoinsSectorViewModel> = ObservableObject(value: .loading)
     
     public var errorMessage: ObservableObject<String>?

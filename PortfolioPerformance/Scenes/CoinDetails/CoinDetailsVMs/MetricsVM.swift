@@ -1,5 +1,10 @@
 import Foundation
 
+enum MetricsViewModelState {
+    case loading
+    case dataReceived(MetricsViewModel)
+}
+
 struct MetricsViewModel {
     
     public var name: String

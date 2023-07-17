@@ -1,5 +1,10 @@
 import Foundation
 
+enum DetailsCellsViewModelsState {
+    case loading
+    case dataReceived([DetailsCellsViewModel])
+}
+
 struct DetailsCellsViewModel {
     let name: String
     let value: String

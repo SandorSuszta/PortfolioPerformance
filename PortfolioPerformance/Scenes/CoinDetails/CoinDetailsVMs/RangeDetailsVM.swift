@@ -1,6 +1,11 @@
 import Foundation
 import Charts
 
+enum RangeDetailsViewModelState {
+    case loading
+    case dataReceived(RangeDetailsViewModel)
+}
+
 struct RangeDetailsViewModel {
     
     //MARK: - Private Properties
