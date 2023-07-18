@@ -1,5 +1,10 @@
 import UIKit
 
+enum MarketCardCellsViewModelState {
+    case loading
+    case dataReceied([MarketCardCellViewModel])
+}
+
 /// A view model is designed to work with specific cell types defined in the `MarketCardCell` enum.
 /// The view model assumes that the `UIColor` extension with color properties like `.nephritis`, `.pomergranate`, etc., is available.
 ///

@@ -1,6 +1,6 @@
 import Foundation
 
-enum CryptoCoinsSectorViewModel {
-    case loading
-    case cellViewModels([CryptoCurrencyCellViewModel])
+enum CryptoCoinCell: Hashable {
+    case loading(index: Int)
+    case dataReceived(CryptoCurrencyCellViewModel)
 }

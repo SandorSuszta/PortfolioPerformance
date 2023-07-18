@@ -30,7 +30,7 @@ final class CoinDetailsViewModel {
     var metricsViewModelState: ObservableObject<MetricsViewModelState> = ObservableObject(value: .loading)
     var rangeDetailsViewModelState: ObservableObject<RangeDetailsViewModelState> = ObservableObject(value: .loading)
     var detailsCellViewModelsState: ObservableObject<DetailsCellsViewModelsState> = ObservableObject(value: .loading)
-    var errorsState: ObservableObject<ErrorState> = ObservableObject(value: .nRK: - Init
+    var errorsState: ObservableObject<ErrorState> = ObservableObject(value: .noErrors)
     
     init(
         representedCoin: CoinRepresenatable,

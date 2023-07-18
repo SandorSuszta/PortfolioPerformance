@@ -1,6 +1,11 @@
 import Foundation
 
-class CryptoCurrencyCellViewModel {
+enum CryptoCurrencyCellViewModelState {
+    case loading
+    case dataReceived([CryptoCurrencyCellViewModel])
+}
+
+final class CryptoCurrencyCellViewModel {
 
     let coinModel: CoinModel
     

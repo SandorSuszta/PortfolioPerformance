@@ -1,13 +1,15 @@
 import Foundation
 
-class MarketViewModel {
+final class MarketViewModel {
     
-    let networkingService: NetworkingServiceProtocol
+    private let networkingService: NetworkingServiceProtocol
     
-    public var marketCardsViewModelsState: ObservableState<[MarketCardCellViewModel]> = ObservableState(state: .loading)
-    public var cryptoCoinsSectionViewModel: ObservableObject<CryptoCoinsSectorViewModel> = ObservableObject(value: .loading)
+    var marketCards: ObservableObject<[MarketCard]> = ObservableObject(
+        value: [.loading(index: 0), .loading(index: 1), .loading(index: 2)]
+    )
+    var cryptoCoinsViewModelsState: ObservableObject<CryptoCurrencyCellViewModelState> = ObservableObject(value: .loading)
     
-    public var errorMessage: ObservableObject<String>?
+    var errorMessage: ObservableObject<ErrorState> = ObservableObject(value: .noErrors)
     
     //MARK: - Init
     
@@ -41,10 +43,10 @@ class MarketViewModel {
                     isChangePositive: nil
                 )
                 
-                self.marketCardsSectionViewModel.value?.append(greedAndFearCellViewModel)
+                self.marketCards.value[0] = .dataReceived(greedAndFearCellViewModel)
                 
             case .failure(let error):
-                self.errorMessage?.value = error.rawValue
+                self.errorMessage.value = .error(error)
             }
         }
     }
@@ -80,10 +82,11 @@ class MarketViewModel {
                 )
                 
                 //Add card view models to the observable array
-                self.marketCardsSectionViewModel.value?.append(contentsOf: [marketCapCellViewModel,dominanceViewModel])
+                self.marketCards.value[1] = .dataReceived(marketCapCellViewModel)
+                self.marketCards.value[2] = .dataReceived(dominanceViewModel)
                 
             case .failure(let error):
-                self.errorMessage?.value = error.rawValue
+                self.errorMessage.value = .error(error)
             }
         }
     }
@@ -110,38 +113,40 @@ class MarketViewModel {
                 //Transform array of coin models into array of cell view models
                 let viewModels = sortedArray.compactMap { CryptoCurrencyCellViewModel(coinModel: $0) }
                 
-                self.cryptoCoinsSectionViewModel.value = .cellViewModels(viewModels)
+                self.cryptoCoinsViewModelsState.value = .dataReceived(viewModels)
                
                 
             case .failure(let error):
-                self.errorMessage?.value = error.rawValue
+                self.errorMessage.value = .error(error)
             }
         }
     }
     
     func sortCellViewModels (by sortOption: MarketSortOption) {
-        guard var viewModels = cellViewModels.value else { return }
-        
-        switch sortOption {
-        case .topCaps:
-            viewModels.sort(by: {
-                $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0
-            })
-        case .topWinners:
-            viewModels.sort(by: {
-                $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0
-            })
-        case .topLosers:
-            viewModels.sort(by: {
-                $0.coinModel.priceChangePercentage24H ?? 0  < $1.coinModel.priceChangePercentage24H ?? 0
-            })
-        case .topVolumes:
-            viewModels.sort(by: {
-                $0.coinModel.totalVolume ?? 0 > $1.coinModel.totalVolume ?? 0
-            })
+        if case let .dataReceived(viewModels)  = cryptoCoinsViewModelsState.value {
+            var sortedViewModels = viewModels
+            
+            switch sortOption {
+            case .topCaps:
+                sortedViewModels.sort(by: {
+                    $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0
+                })
+            case .topWinners:
+                sortedViewModels.sort(by: {
+                    $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0
+                })
+            case .topLosers:
+                sortedViewModels.sort(by: {
+                    $0.coinModel.priceChangePercentage24H ?? 0  < $1.coinModel.priceChangePercentage24H ?? 0
+                })
+            case .topVolumes:
+                sortedViewModels.sort(by: {
+                    $0.coinModel.totalVolume ?? 0 > $1.coinModel.totalVolume ?? 0
+                })
+            }
+            
+            cryptoCoinsViewModelsState.value = .dataReceived(sortedViewModels)
         }
-        
-        cellViewModels.value = viewModels
     }
 }
 

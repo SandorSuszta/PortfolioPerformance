@@ -1,6 +1,6 @@
 import Foundation
 
-enum MarketCardsSectionViewModel {
-    case loading
-    case cellViewModels([MarketCardCellViewModel])
+enum MarketCard: Hashable {
+    case loading(index: Int)
+    case dataReceived(MarketCardCellViewModel)
 }

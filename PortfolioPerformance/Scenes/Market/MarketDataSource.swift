@@ -17,11 +17,11 @@ final class MarketDataSource: UICollectionViewDiffableDataSource<MarketSection, 
             
             switch item {
                 
-            case .marketCard(let cell):
-                return MarketDataSource.makeMarketCardCell(collectionView: collectionView, indexPath: indexPath, cell: cell)
+            case .marketCard(let card):
+                return MarketDataSource.makeMarketCardCell(collectionView: collectionView, indexPath: indexPath, item: card)
                 
             case .cryptoCoinCell(let cell):
-                return MarketDataSource.makeCryptoCoinCell(collectionView: collectionView, indexPath: indexPath, cell: cell)
+                return MarketDataSource.makeCryptoCoinCell(collectionView: collectionView, indexPath: indexPath, item: cell)
             }
         }
     }
@@ -47,12 +47,12 @@ extension MarketDataSource {
     private static func makeMarketCardCell(
         collectionView: UICollectionView,
         indexPath: IndexPath,
-        cell: CellState<MarketCardCellViewModel>
+        item: MarketCard
     ) -> UICollectionViewCell {
         
-        switch cell {
+        switch item {
             
-        case .data(let viewModel):
+        case .dataReceived(let viewModel):
             
             switch viewModel.cellType {
                 
@@ -85,18 +85,18 @@ extension MarketDataSource {
     private static func makeCryptoCoinCell(
         collectionView: UICollectionView,
         indexPath: IndexPath,
-        cell: CellState<CoinModel>
+        item: CryptoCoinCell
     ) -> UICollectionViewCell {
         
-        switch cell {
-        case .data(let model):
+        switch item {
+        case .dataReceived(let viewModel):
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: CryptoCurrencyCollectionViewCell.reuseID,
                 for: indexPath
             ) as? CryptoCurrencyCollectionViewCell else { return UICollectionViewCell() }
             
             cell.imageDownloader = ImageDownloader()
-            cell.configureCell(with: CryptoCurrencyCellViewModel(coinModel: model))
+            cell.configureCell(with: viewModel)
             return cell
             
         case .loading:
