@@ -22,7 +22,7 @@ final class MarketViewModel {
     }
     
     convenience init() {
-        self.init(networkingService: NetworkingService())
+        self.init(networkingService: DefaultNetworkingService())
     }
     
     //MARK: - Public methods

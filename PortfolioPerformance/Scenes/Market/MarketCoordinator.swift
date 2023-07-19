@@ -16,7 +16,7 @@ class MarketCoordinator: Coordinator {
     //MARK: - Methods
     
     func start() {
-        let marketVC = MarketViewController(coordinator: self, viewModel: MarketViewModel(networkingService: NetworkingService()))
+        let marketVC = MarketViewController(coordinator: self, viewModel: MarketViewModel(networkingService: DefaultNetworkingService()))
         
         navigationController.setViewControllers([marketVC], animated: true)
         navigationController.tabBarItem = AppTab.market.tabBarItem
@@ -31,7 +31,7 @@ class MarketCoordinator: Coordinator {
     func showDetails(for representedCoin: CoinRepresenatable) {
         let detailsVM = CoinDetailsViewModel(
             representedCoin: representedCoin,
-            networkingService: NetworkingService(),
+            networkingService: DefaultNetworkingService(),
             watchlistStore: services.watchlistStore
         )
         

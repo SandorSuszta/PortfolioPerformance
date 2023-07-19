@@ -11,7 +11,7 @@ protocol NetworkingServiceProtocol {
     func getTrendingCoins(completion: @escaping (Result<TrendingResponse, PPError>) -> Void)
 }
 
-struct NetworkingService: NetworkingServiceProtocol {
+struct DefaultNetworkingService: NetworkingServiceProtocol {
 
     //MARK: - Greed And Fear Index done
     func getGreedAndFearData (completion: @escaping (Result<GreedAndFearModel, PPError>) -> Void) {
@@ -102,7 +102,7 @@ struct NetworkingService: NetworkingServiceProtocol {
 }
 
 //MARK: - Private 
-private extension NetworkingService {
+private extension DefaultNetworkingService {
     
     func request<T:Codable>(
         router: PPRouter,

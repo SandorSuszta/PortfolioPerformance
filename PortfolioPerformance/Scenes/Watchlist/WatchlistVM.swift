@@ -31,7 +31,7 @@ final class WatchlistViewModel {
     }
     
     convenience init() {
-        self.init(networkingService: NetworkingService(), watchlistStore: WatchlistStore())
+        self.init(networkingService: DefaultNetworkingService(), watchlistStore: WatchlistStore())
     }
     
     //MARK: - API

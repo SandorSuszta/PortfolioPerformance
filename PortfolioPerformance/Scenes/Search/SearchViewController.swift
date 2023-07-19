@@ -62,7 +62,7 @@ class SearchScreenViewController: UIViewController {
     }
     
     convenience init(coordinator: Coordinator) {
-        self.init(coordinator: coordinator, viewModel: SearchScreenViewModel(networkingService: NetworkingService()), headerFactory: SectionHeaderFactory())
+        self.init(coordinator: coordinator, viewModel: SearchScreenViewModel(networkingService: DefaultNetworkingService()), headerFactory: SectionHeaderFactory())
     }
     
     required init?(coder: NSCoder) {

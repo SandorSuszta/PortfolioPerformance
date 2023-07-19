@@ -1,34 +1,42 @@
 import Foundation
 
 class SearchScreenViewModel {
-    let networkingService: NetworkingServiceProtocol
     
-    //MARK: - Observable properties
     var isRecentSearchesEmpty: Bool {
-        defaultCellModels.value?[0].isEmpty ?? true
+        recentSearchesRepository.isRecentSearchesEmpty
     }
     
-    var defaultCellModels: ObservableObject<[[SearchResult]]> = ObservableObject(value: [[],[]])
+    // MARK: - Dependencies
     
-    var searchResultCellModels: ObservableObject<[SearchResult]> = ObservableObject(value: nil)
+    let networkingService: NetworkingServiceProtocol
+    let recentSearchesRepository: RecentSearchesRepositoryProtocol
     
-    var errorMessage: ObservableObject<String> = ObservableObject(value: nil)
+    //MARK: - Observables
+    
+    var recentSearchesModels: ObservableObject<[SearchResult]> = ObservableObject(value: [])
+    var trendingCoinsModels: ObservableObject<[SearchResult]> = ObservableObject(value: [])
+    var searchResultCellModels: ObservableObject<[SearchResult]> = ObservableObject(value: [])
+    var errorMessage: ObservableObject<ErrorState> = ObservableObject(value: .noErrors)
     
     //MARK: - Init
     
-    init(networkingService: NetworkingServiceProtocol) {
+    init(networkingService: NetworkingServiceProtocol, recentSearchesRepository: RecentSearchesRepositoryProtocol) {
         self.networkingService = networkingService
+        self.recentSearchesRepository = recentSearchesRepository
         fetchData()
     }
     
-    //MARK: - Public methods
+    convenience init() {
+        self.init(networkingService: DefaultNetworkingService(), recentSearchesRepository: DefaultRecentSearchesRepository())
+    }
+    
+    //MARK: - Interface
     
     func updateRecentSearches() {
-        
-        if !UserDefaultsService.shared.recentSearchesIDs.isEmpty {
-            getRecentSearchesModels { models in
-                self.defaultCellModels.value?[0] = models.reversed()
-            }
+        isRecentSearchesEmpty
+        ? recentSearchesModels = ObservableObject(value: [])
+        : getRecentSearchesModels { models in
+            self.recentSearchesModels.value = models.reversed()
         }
     }
     
@@ -40,17 +48,18 @@ class SearchScreenViewModel {
                 self.searchResultCellModels.value = Array(response.coins.prefix(6)).sortedByPrefix(query)
                 
             case .failure(let error):
-                self.errorMessage.value = error.rawValue
+                self.errorMessage.value = .error(error)
             }
         }
     }
     
     func clearSearchModels() {
-        self.searchResultCellModels.value = nil
+        searchResultCellModels.value = []
     }
     
     func clearRecentSearches() {
-        defaultCellModels.value?[0] = []
+        recentSearchesModels.value = []
+        recentSearchesRepository.clearRecentSearches()
     }
     
     //MARK: - Private methods
@@ -79,7 +88,7 @@ class SearchScreenViewModel {
                 completion(sortedModels)
                 
             case .failure(let error):
-                self.errorMessage.value = error.rawValue
+                self.errorMessage.value = .error(error)
             }
         }
     }
@@ -96,7 +105,7 @@ class SearchScreenViewModel {
                 completion(trendingCoins)
              
             case .failure(let error):
-                self.errorMessage.value = error.rawValue
+                self.errorMessage.value = .error(error)
             }
         }
     }
@@ -104,12 +113,12 @@ class SearchScreenViewModel {
     private func fetchData() {
         let dispatchGroup = DispatchGroup()
         
-        var recentSearchesModels: [SearchResult] = []
+        var recentSearches: [SearchResult] = []
         var trendingCoins: [SearchResult] = []
         
         dispatchGroup.enter()
         getRecentSearchesModels { models in
-            recentSearchesModels = models
+            recentSearches = models
             dispatchGroup.leave()
         }
         
@@ -120,7 +129,7 @@ class SearchScreenViewModel {
         }
         
         dispatchGroup.notify(queue: .main) {
-            self.defaultCellModels.value = [recentSearchesModels.reversed(), trendingCoins]
+            (self.recentSearchesModels.value, self.trendingCoinsModels.value) = (recentSearches, trendingCoins)
         }
     }
 }

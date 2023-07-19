@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let services = Services(
             watchlistStore: WatchlistStore(),
-            recentSearchesService: RecentSearchesStore()
+            recentSearchesService: DefaultRecentSearchesRepository()
         )
         
         let appCoordinator = AppCoordinator(

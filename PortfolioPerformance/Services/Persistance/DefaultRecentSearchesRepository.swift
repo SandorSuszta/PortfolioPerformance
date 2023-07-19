@@ -1,22 +1,31 @@
 import Foundation
 
-protocol RecentSearchesStoreProtocol {
-    func getRecentSearches() -> [String]
+protocol RecentSearchesRepositoryProtocol {
+    var recentSearches: [String] { get }
+    var isRecentSearchesEmpty: Bool { get }
+    
     func saveToRecentSearches(id: String)
     func clearRecentSearches()
 }
 
-struct RecentSearchesStore: RecentSearchesStoreProtocol {
+struct DefaultRecentSearchesRepository: RecentSearchesRepositoryProtocol {
     
     //MARK: - Properties
     
     private let recentSearchesKey = PersistantDataType.recentSearches.dictionaryKey
     private let defaults = UserDefaults.standard
     
-    //MARK: - Methods
+    //MARK: - API
     
-    func getRecentSearches() -> [String] {
+    var recentSearches: [String] {
         defaults.stringArray(forKey: recentSearchesKey) ?? []
+    }
+    
+    var isRecentSearchesEmpty: Bool {
+        guard let recentSearches = defaults.stringArray(forKey: recentSearchesKey)
+        else { return false }
+        
+        return recentSearches.isEmpty
     }
     
     func saveToRecentSearches(id: String) {

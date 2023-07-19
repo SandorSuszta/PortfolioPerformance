@@ -32,7 +32,7 @@ class WatchlistCoordinator: Coordinator {
     func showDetails(for representedCoin: CoinRepresenatable) {
         let detailsVM = CoinDetailsViewModel(
             representedCoin: representedCoin,
-            networkingService: NetworkingService(),
+            networkingService: DefaultNetworkingService(),
             watchlistStore: services.watchlistStore
         )
         
