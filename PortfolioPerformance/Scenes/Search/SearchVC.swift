@@ -1,5 +1,12 @@
 import UIKit
 
+enum SearchState {
+    case initialLoading
+    case idle(recentSearches: [SearchResult], trendingCoins: [SearchResult])
+    case searching
+    case searchResults([SearchResult])
+}
+
 class SearchScreenViewController: UIViewController {
     
     weak var delegate: SearchViewControllerDelegate?
