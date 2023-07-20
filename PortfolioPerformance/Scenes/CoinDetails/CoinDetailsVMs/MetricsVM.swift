@@ -6,24 +6,26 @@ enum MetricsViewModelState {
 }
 
 struct MetricsViewModel {
+    let model: CoinDetails
     
-    public var name: String
-    public var symbol: String
-    public var imageUrl: String
-    public var imageData: Data? = nil
-    public var currentPrice: String
-    public var athPrice: String
-    public var athChangePercentage: String
-    public var athDate: String
-    public var marketCap: String
-    public var marketCapRank: String
-    public var volume: String
-    public var circulatingSupply: String
-    public var totalSupply: String
-    public var maxSupply:String
-    public var isFavourite: Bool = false
+    let name: String
+    let symbol: String
+    let imageUrl: String
+    let imageData: Data? = nil
+    let currentPrice: String
+    let athPrice: String
+    let athChangePercentage: String
+    let athDate: String
+    let marketCap: String
+    var marketCapRank: String
+    let volume: String
+    let circulatingSupply: String
+    let totalSupply: String
+    let maxSupply:String
+    let isFavourite: Bool = false
     
     init (model: CoinDetails) {
+        self.model = model
         self.name = model.name
         self.symbol = model.symbol
         self.imageUrl = model.image.large
