@@ -76,7 +76,11 @@ extension MarketDataSource {
             }
             
         case .loading:
-            return UICollectionViewCell()
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: MarketCardMetricCell.reuseID,
+                for: indexPath
+            ) as? MarketCardMetricCell else { return UICollectionViewCell() }
+            return cell
         }
     }
     
@@ -88,19 +92,15 @@ extension MarketDataSource {
         item: CryptoCoinCell
     ) -> UICollectionViewCell {
         
-        switch item {
-        case .dataReceived(let viewModel):
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: CryptoCurrencyCollectionViewCell.reuseID,
                 for: indexPath
             ) as? CryptoCurrencyCollectionViewCell else { return UICollectionViewCell() }
             
+        if case .dataReceived(let viewModel) = item {
             cell.imageDownloader = ImageDownloader()
             cell.configureCell(with: viewModel)
-            return cell
-            
-        case .loading:
-            return UICollectionViewCell()
         }
+            return cell
     }
 }
