@@ -136,52 +136,67 @@ class CoinDetailsVC: UIViewController {
 
     private func bindViewModels() {
         
-        viewModel.metricsVM.bind { [weak self] _ in
-            guard let metrics = self?.viewModel.metricsVM.value else { return }
+        viewModel.metricsViewModelState.bind { [weak self] state in
+            guard let self else { return }
             
-            DispatchQueue.main.async {
-                self?.highlightsView.setCurrentPrice(metrics.currentPrice)
-                self?.marketCapRankLabel.text = self?.viewModel.metricsVM.value?.marketCapRank
-            }
-            
-            self?.viewModel.makeDetailsCellsViewModels()
-            self?.viewModel.getTimeRangeDetails(
-                coinID: self?.viewModel.coinID ?? "",
-                intervalInDays: self?.currentChartTimeInterval.numberOfDays ?? 1
-            )
-        }
-        
-        viewModel.rangeDetailsVM.bind { [weak self] _ in
-            
-            guard let self = self,
-                  let rangeDetails = self.viewModel.rangeDetailsVM.value
-            else { return }
-            
-            let color: UIColor = rangeDetails.isChangePositive ? .nephritis : .pinkGlamour
-            
-            DispatchQueue.main.async {
-                self.showLoadingIndicator(false)
-                self.updateRangeLabels(with: rangeDetails)
-                self.rangeProgressView.configure(with: rangeDetails)
+            switch state {
+            case .loading:
+                break
+            case .dataReceived(let metricsViewModel):
+                DispatchQueue.main.async {
+                    self.highlightsView.setCurrentPrice(metricsViewModel.currentPrice)
+                    self.marketCapRankLabel.text = metricsViewModel.marketCapRank
+                }
+                self.viewModel.makeDetailsCellsViewModels(metricsModel: metricsViewModel.model)
+                self.viewModel.getTimeRangeDetails(
+                    coinID: self.viewModel.coinID,
+                    intervalInDays: self.currentChartTimeInterval.numberOfDays
+                )
                 
-                self.lineChartView.setChartData(rangeDetails.chartEntries)
-                self.lineChartView.setChartColor(color)
-                
-                self.lineChartView.fadeIn()
-                self.highlightsView.fadeInChangeLabels()
             }
         }
         
-        viewModel.detailsTableViewCelsVM.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.detailsTableView.reloadData()
-            }
-        }
-        
-        viewModel.errorMessage.bind { [weak self] message in
-            guard let message = message else { return }
+        viewModel.rangeDetailsViewModelState.bind { [weak self] state in
+            guard let self else { return }
             
-            self?.coordinator.showAlert(message: message)
+            switch state {
+            case .loading:
+                break
+            case .dataReceived(let rangeDetails):
+                let color: UIColor = rangeDetails.isChangePositive ? .nephritis : .pinkGlamour
+                
+                DispatchQueue.main.async {
+                    self.showLoadingIndicator(false)
+                    self.updateRangeLabels(with: rangeDetails)
+                    self.rangeProgressView.configure(with: rangeDetails)
+                    
+                    self.lineChartView.setChartData(rangeDetails.chartEntries)
+                    self.lineChartView.setChartColor(color)
+                    
+                    self.lineChartView.fadeIn()
+                    self.highlightsView.fadeInChangeLabels()
+                }
+                
+            }
+        }
+        
+        viewModel.detailsCellViewModels.bind { [weak self] state in
+            guard let self else { return }
+            
+            DispatchQueue.main.async {
+                self.detailsTableView.reloadData()
+            }
+        }
+        
+        viewModel.errorsState.bind { [weak self] errorState in
+            guard let self else { return }
+            
+            switch errorState {
+            case .noErrors:
+                break
+            case .error(let error):
+                self.coordinator.showAlert(message: error.rawValue)
+            }
         }
     }
     
@@ -332,7 +347,7 @@ class CoinDetailsVC: UIViewController {
 extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.detailsTableViewCelsVM.value?.count ?? 0
+        viewModel.detailsCellViewModels.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -342,7 +357,7 @@ extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
             for: indexPath
         ) as? DetailsTableViewCell else { return UITableViewCell() }
         
-        guard let viewModel = viewModel.detailsTableViewCelsVM.value?[indexPath.row] else { fatalError() }
+       let viewModel = viewModel.detailsCellViewModels.value[indexPath.row]
                 
         cell.configure(with: viewModel)
         return cell
@@ -354,7 +369,11 @@ extension CoinDetailsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = DetailsTableViewHeader()
-        header.setMarketCapRank(viewModel.marketCapRank)
+        
+        if case .dataReceived(let metricsVM) = viewModel.metricsViewModelState.value {
+            header.setMarketCapRank(metricsVM.marketCapRank)
+        }
+        
         return header
     }
     
