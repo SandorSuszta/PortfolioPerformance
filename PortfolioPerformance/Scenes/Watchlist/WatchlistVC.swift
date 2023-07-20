@@ -69,7 +69,7 @@ class WatchlistViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateTableWithCurrentWatchlist()
+        
     }
     
     //MARK: - Bind viewModel
@@ -191,7 +191,7 @@ extension WatchlistViewController {
                 for: indexPath
             ) as? CryptoCurrencyCell else { return UITableViewCell() }
             
-            guard let cellViewModel = self.viewModel.cellViewModels.value?[indexPath.row] else { fatalError() }
+            let cellViewModel = self.viewModel.cellViewModels.value[indexPath.row]
             
             cell.imageDownloader = ImageDownloader()
             cell.configureCell(with: cellViewModel)
@@ -208,17 +208,17 @@ extension WatchlistViewController {
         }
         
         dataSource.onDeleteCell = { indexPath in
-            self.viewModel.cellViewModels.value?.remove(at: indexPath.row)
+            self.viewModel.cellViewModels.value.remove(at: indexPath.row)
         }
         
         return dataSource
     }
     
     private func makeSnapshot() -> WatchlistSnapshot {
-        let coinModels = viewModel.cellViewModels.value?.map({ $0.coinModel })
+        let coinModels = viewModel.cellViewModels.value.map({ $0.coinModel })
         var snapshot = WatchlistSnapshot()
         snapshot.appendSections([.main])
-        snapshot.appendItems(coinModels ?? [], toSection: .main)
+        snapshot.appendItems(coinModels, toSection: .main)
         return snapshot
     }
     

@@ -1,15 +1,11 @@
 import Foundation
 
-class SearchScreenViewModel {
-    
-    var isRecentSearchesEmpty: Bool {
-        recentSearchesRepository.isRecentSearchesEmpty
-    }
+final class SearchScreenViewModel {
     
     // MARK: - Dependencies
     
-    let networkingService: NetworkingServiceProtocol
-    let recentSearchesRepository: RecentSearchesRepositoryProtocol
+    private let networkingService: NetworkingServiceProtocol
+    private let recentSearchesRepository: RecentSearchesRepositoryProtocol
     
     //MARK: - Observables
     
@@ -31,6 +27,10 @@ class SearchScreenViewModel {
     }
     
     //MARK: - Interface
+    
+    var isRecentSearchesEmpty: Bool {
+        recentSearchesRepository.isRecentSearchesEmpty
+    }
     
     func updateRecentSearches() {
         isRecentSearchesEmpty

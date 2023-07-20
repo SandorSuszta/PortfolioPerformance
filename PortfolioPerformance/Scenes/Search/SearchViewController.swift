@@ -1,36 +1,23 @@
 import UIKit
 
-enum SearchState {
-    case initialLoading
-    case idle(recentSearches: [SearchResult], trendingCoins: [SearchResult])
-    case searching
-    case searchResults([SearchResult])
-}
-
-class SearchScreenViewController: UIViewController {
-    
-    weak var delegate: SearchViewControllerDelegate?
-
-    //MARK: - Properties
-
-    private let coordinator: Coordinator
-    
-    private let headerFactory: SectionHeaderFactoryProtocol
+final class SearchScreenViewController: UIViewController {
     
     private lazy var dataSource = SearchTableDataSource(tableView: resultsTableView)
-    
-    private let viewModel: SearchScreenViewModel
-    
     private var searchTimer: Timer?
     
-    private var isSearching: Bool = false
-    
-    private var searchBarState: SearchBarState {
-        determineSearchBarState(
-            isSearching: isSearching,
-            isRecentSearchesEmpty: viewModel.isRecentSearchesEmpty
-        )
+    private var state: SearchState = .idle {
+        didSet {
+            updateUI()
+        }
     }
+    
+    weak var delegate: SearchViewControllerDelegate?
+    
+    //MARK: - Dependencies
+    
+    private let coordinator: Coordinator
+    private let headerFactory: SectionHeaderFactoryProtocol
+    private let viewModel: SearchScreenViewModel
     
     //MARK: - UI Elements
     
@@ -62,7 +49,7 @@ class SearchScreenViewController: UIViewController {
     }
     
     convenience init(coordinator: Coordinator) {
-        self.init(coordinator: coordinator, viewModel: SearchScreenViewModel(networkingService: DefaultNetworkingService()), headerFactory: SectionHeaderFactory())
+        self.init(coordinator: coordinator, viewModel: SearchScreenViewModel(), headerFactory: SectionHeaderFactory())
     }
     
     required init?(coder: NSCoder) {
@@ -85,8 +72,11 @@ class SearchScreenViewController: UIViewController {
         searchBar.becomeFirstResponder()
         viewModel.updateRecentSearches()
     }
-    
-    //MARK: - Private
+}
+
+    // MARK: - Private
+
+extension SearchScreenViewController {
     
     private func setUpViewController() {
       
@@ -112,48 +102,8 @@ class SearchScreenViewController: UIViewController {
     private func setUpResultsTableVIew() {
         view.addSubview(resultsTableView)
         resultsTableView.delegate = self
-        
     }
     
-    private func bindViewModels() {
-        
-        viewModel.searchResultCellModels.bind { [weak self] _ in
-            guard let self else { return }
-      
-            DispatchQueue.main.async {
-                self.reloadData()
-                
-                guard let models = self.viewModel.searchResultCellModels.value else {
-                    self.noResultsView.isHidden = true
-                    return
-                }
-                
-                if models.isEmpty {
-                    self.noResultsView.isHidden = false
-                }
-            }
-        }
-        
-        viewModel.defaultCellModels.bind { [weak self] _ in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                self.reloadData()
-            }
-        }
-        
-        viewModel.errorMessage.bind { [weak self] message in
-            guard
-                let self = self,
-                let message = message
-            else {
-                return
-            }
-            
-            self.coordinator.navigationController.showAlert(message: message)
-        }
-    }
-
     private func setupConstraints() {
 
         NSLayoutConstraint.activate([
@@ -168,23 +118,52 @@ class SearchScreenViewController: UIViewController {
             noResultsView.heightAnchor.constraint(equalTo: noResultsView.widthAnchor)
         ])
     }
+}
     
-    private func determineSearchBarState(isSearching: Bool, isRecentSearchesEmpty: Bool) -> SearchBarState {
+    // MARK: - Bind View Models
+
+extension SearchScreenViewController {
+    
+    private func bindViewModels() {
         
-        switch (isSearching, isRecentSearchesEmpty) {
+        viewModel.searchResultCellModels.bind { [weak self] _ in
+            guard let self else { return }
             
-        case (true, _):
-            return .searching(resultModels: viewModel.searchResultCellModels.value ?? [])
+            let searchResultModels = self.viewModel.searchResultCellModels.value
             
-        case (false, false):
-            return .emptyWithRecents(recentModels: viewModel.defaultCellModels.value?[0] ?? [],
-                                     trendingModels: viewModel.defaultCellModels.value?[1] ?? [])
-        case (false, true):
-            return .emptyWithoutRecents(trendingModels: viewModel.defaultCellModels.value?[1] ?? [])
+            self.state = searchResultModels.isEmpty ? .idle : .searchResults(searchResultModels)
+            
+            DispatchQueue.main.async {
+                self.noResultsView.isHidden = self.viewModel.searchResultCellModels.value.isEmpty
+            }
+            self.updateUI()
+        }
+        
+        viewModel.recentSearchesModels.bind { [weak self] _ in
+            guard let self = self else { return }
+            self.state = .idle
+            self.updateUI()
+        }
+        
+        viewModel.trendingCoinsModels.bind { [weak self] _ in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                //self.updateUI()
+            }
+        }
+        
+        viewModel.errorMessage.bind { [weak self] error in
+            guard let self = self else { return }
+            
+            switch error {
+            case .noErrors:
+                break
+            case .error(let error):
+                self.coordinator.navigationController.showAlert(message: error.rawValue)
+            }
         }
     }
 }
-
     //MARK: - TableView data source methods
 
 extension SearchScreenViewController {
@@ -193,31 +172,36 @@ extension SearchScreenViewController {
     
     private func makeSnapshot() -> SearchScreenSnapshot {
         var snapshot = SearchScreenSnapshot()
+        let trendingModels = viewModel.trendingCoinsModels.value
+        let recentModels = viewModel.recentSearchesModels.value
         
-        switch searchBarState {
+        switch state {
             
-        case .emptyWithRecents(let recentModels, let trendingModels):
-            snapshot.appendSections([.recentSearches, .trendingCoins])
-            snapshot.appendItems(recentModels, toSection: .recentSearches)
-            snapshot.appendItems(trendingModels, toSection: .trendingCoins)
-            
-        case .emptyWithoutRecents(let trendingModels):
-            snapshot.appendSections([.trendingCoins])
-            snapshot.appendItems(trendingModels, toSection: .trendingCoins)
-            
-        case .searching(let resultModels):
+        case .idle:
+            if viewModel.isRecentSearchesEmpty {
+                snapshot.appendSections([.trendingCoins])
+                snapshot.appendItems(trendingModels, toSection: .trendingCoins)
+            } else {
+                snapshot.appendSections([.recentSearches, .trendingCoins])
+                snapshot.appendItems(recentModels, toSection: .recentSearches)
+                snapshot.appendItems(trendingModels, toSection: .trendingCoins)
+            }
+        case .searchResults(let resultModels):
             snapshot.appendSections([.searchResults])
             snapshot.appendItems(resultModels, toSection: .searchResults)
+        case .initialLoading, .searching:
+            snapshot.appendSections([])
         }
         
         return snapshot
     }
     
-    func reloadData() {
-        dataSource.apply(makeSnapshot(), animatingDifferences: true)
+    func updateUI() {
+        DispatchQueue.main.async {
+            self.dataSource.apply(self.makeSnapshot(), animatingDifferences: true)
+        }
     }
 }
-
     //MARK: - TableView delegate methods
     
 extension SearchScreenViewController: UITableViewDelegate {
@@ -242,7 +226,9 @@ extension SearchScreenViewController: UITableViewDelegate {
         guard let model = dataSource.itemIdentifier(for: indexPath) else { fatalError("Cant get coinModel in Search VC") }
         
         searchBar.text = ""
-        isSearching = false
+        
+        //state = .idle
+        
         viewModel.clearSearchModels()
         
         UserDefaultsService.shared.saveTo(
@@ -272,7 +258,7 @@ extension SearchScreenViewController: UISearchBarDelegate  {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let query = searchBar.text, !query.isEmpty {
-            isSearching = true
+            //state = .searching
             noResultsView.isHidden = true
             
             searchTimer?.invalidate()
@@ -280,7 +266,7 @@ extension SearchScreenViewController: UISearchBarDelegate  {
                 self.viewModel.updateSearchResults(query: query)
             }
         } else {
-            isSearching = false
+            //state = .idle
             viewModel.clearSearchModels()
         }
     }
