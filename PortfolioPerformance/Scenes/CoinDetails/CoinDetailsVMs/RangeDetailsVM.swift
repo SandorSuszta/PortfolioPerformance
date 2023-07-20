@@ -12,7 +12,13 @@ struct RangeDetailsViewModel {
     
     private let priceModels: [[Double]]
     
-    private let currentPriceValue: Double
+    private var chartData: [[Double]] {
+        extractPriceSubset(from: priceModels)
+    }
+    
+    private var currentPriceValue: Double {
+        priceModels.last?[1] ?? 0
+    }
     
     private var lowestPriceValue: Double {
         let minPriceModel = priceModels.min { $0[1] < $1[1] }
@@ -71,9 +77,8 @@ struct RangeDetailsViewModel {
     
     //MARK: - Init
     
-    init(priceModels: [[Double]], currentPriceValue: Double ) {
+    init(priceModels: [[Double]]) {
         self.priceModels = priceModels
-        self.currentPriceValue = currentPriceValue
     }
     
     //MARK: - Private methods
@@ -85,5 +90,23 @@ struct RangeDetailsViewModel {
             chartDataEntries.append(entry)
         }
         return chartDataEntries
+    }
+    
+    /// Extracts a subset  from an array of prices. Makes chart look cleaner and less cluttered.
+    /// - Parameters:
+    ///   - prices: The input array of prices.
+    ///   - subsetSize: The number of elements to include in the subset. Defaults to 60.
+    /// - Returns:  A new array containing `subsetSize` elements, where each element is taken from the original array at equal intervals.
+    private func extractPriceSubset(from prices: [[Double]], subsetSize: Int = 60) -> [[Double]] {
+        guard !prices.isEmpty else { return [] }
+        guard prices.count > subsetSize else { return prices }
+        
+        let step = prices.count / subsetSize
+        
+        return prices.enumerated().reduce(into: []) { subset, enumeratedElement in
+            if enumeratedElement.offset % step == 0 {
+                subset.append(enumeratedElement.element)
+            }
+        }
     }
 }

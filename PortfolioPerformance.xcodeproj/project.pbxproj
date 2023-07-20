@@ -81,7 +81,7 @@
 		79C0D4AB2A632169003E337E /* CryptoCoinsSectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C0D4AA2A632169003E337E /* CryptoCoinsSectorViewModel.swift */; };
 		79C0D4AF2A65868C003E337E /* ErrorsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C0D4AE2A65868C003E337E /* ErrorsState.swift */; };
 		79CF41BF28EEFF7E00CA9F51 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */; };
-		79CFFCA62A26A59900E1E58A /* SearchBarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CFFCA52A26A59900E1E58A /* SearchBarState.swift */; };
+		79CFFCA62A26A59900E1E58A /* SearchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CFFCA52A26A59900E1E58A /* SearchState.swift */; };
 		79CFFCAC2A26B1D500E1E58A /* SearchTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CFFCAB2A26B1D500E1E58A /* SearchTableDataSource.swift */; };
 		79CFFCB02A274D5E00E1E58A /* MockMarketData.json in Resources */ = {isa = PBXBuildFile; fileRef = 79CFFCAF2A274D5C00E1E58A /* MockMarketData.json */; };
 		79CFFCB12A274D5E00E1E58A /* MockMarketData.json in Resources */ = {isa = PBXBuildFile; fileRef = 79CFFCAF2A274D5C00E1E58A /* MockMarketData.json */; };
@@ -203,7 +203,7 @@
 		79C0D4AA2A632169003E337E /* CryptoCoinsSectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCoinsSectorViewModel.swift; sourceTree = "<group>"; };
 		79C0D4AE2A65868C003E337E /* ErrorsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsState.swift; sourceTree = "<group>"; };
 		79CF41BE28EEFF7E00CA9F51 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
-		79CFFCA52A26A59900E1E58A /* SearchBarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarState.swift; sourceTree = "<group>"; };
+		79CFFCA52A26A59900E1E58A /* SearchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchState.swift; sourceTree = "<group>"; };
 		79CFFCAB2A26B1D500E1E58A /* SearchTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableDataSource.swift; sourceTree = "<group>"; };
 		79CFFCAF2A274D5C00E1E58A /* MockMarketData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockMarketData.json; sourceTree = "<group>"; };
 		79D5B8E328EDB85100178402 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
@@ -560,7 +560,7 @@
 		79CFFCA72A26A5A900E1E58A /* DataTypes */ = {
 			isa = PBXGroup;
 			children = (
-				79CFFCA52A26A59900E1E58A /* SearchBarState.swift */,
+				79CFFCA52A26A59900E1E58A /* SearchState.swift */,
 				794D7EAB2A362F2000E058C0 /* SearchTableSection.swift */,
 			);
 			path = DataTypes;
@@ -937,7 +937,7 @@
 				79463E722A38BB5D00BAE3A3 /* MarketCardCell.swift in Sources */,
 				790C350329D35FD200141887 /* ImageNames.swift in Sources */,
 				79AAF82A28FB358A009F3B85 /* SearchTableSectionHeader.swift in Sources */,
-				79CFFCA62A26A59900E1E58A /* SearchBarState.swift in Sources */,
+				79CFFCA62A26A59900E1E58A /* SearchState.swift in Sources */,
 				79E2165E2A3E260E0091DA4D /* MarketCompositionalLayout.swift in Sources */,
 				793332C7293F52C2005EE8A3 /* CustomSearchBar.swift in Sources */,
 				79D5B8E428EDB85100178402 /* CustomAlert.swift in Sources */,
@@ -1172,7 +1172,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.37;
+				MARKETING_VERSION = 1.38;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sandorsuszta.PortfolioPerformance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1208,7 +1208,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.37;
+				MARKETING_VERSION = 1.38;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sandorsuszta.PortfolioPerformance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

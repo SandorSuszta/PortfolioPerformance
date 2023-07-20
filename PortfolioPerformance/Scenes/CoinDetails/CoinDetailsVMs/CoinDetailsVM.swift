@@ -7,7 +7,7 @@ final class CoinDetailsViewModel {
     
     private let networkingService: NetworkingServiceProtocol
     private let watchlistStore: WatchlistStoreProtocol
-    private var coinDetailsModel: CoinDetails?
+    //private var coinDetailsModel: CoinDetails?
     
     let representedCoin: CoinRepresenatable
     
@@ -18,10 +18,6 @@ final class CoinDetailsViewModel {
     var isFavourite: Bool {
         watchlistStore.watchlist.contains(representedCoin.id)
     }
-    
-    var marketCapRank: String {
-        String(coinDetailsModel?.marketData.marketCapRank ?? 0)
-    }
 
     let rangeIntervals = TimeRangeInterval.allCases
     
@@ -29,7 +25,7 @@ final class CoinDetailsViewModel {
     
     var metricsViewModelState: ObservableObject<MetricsViewModelState> = ObservableObject(value: .loading)
     var rangeDetailsViewModelState: ObservableObject<RangeDetailsViewModelState> = ObservableObject(value: .loading)
-    var detailsCellViewModelsState: ObservableObject<DetailsCellsViewModelsState> = ObservableObject(value: .loading)
+    var detailsCellViewModels: ObservableObject<[DetailsCellsViewModel]> = ObservableObject(value: [])
     var errorsState: ObservableObject<ErrorState> = ObservableObject(value: .noErrors)
     
     init(
@@ -40,7 +36,7 @@ final class CoinDetailsViewModel {
         self.representedCoin = representedCoin
         self.networkingService = networkingService
         self.watchlistStore = watchlistStore
-        
+        makeDetailsCellsViewModels(metricsModel: nil)
         getMetricsData(for: representedCoin.id)
     }
     
@@ -52,7 +48,7 @@ final class CoinDetailsViewModel {
             
             switch result {
             case .success(let model):
-                self.coinDetailsModel = model
+                //self.coinDetailsModel = model
                 self.metricsViewModelState.value = .dataReceived(MetricsViewModel(model: model))
                 
             case .failure(let error):
@@ -70,12 +66,7 @@ final class CoinDetailsViewModel {
             
             switch result {
             case .success(let priceData):
-                
-                let rangeDetails = RangeDetailsViewModel(
-                    priceModels: self.extractPriceSubset(from: priceData.prices),
-                    currentPriceValue: self.coinDetailsModel?.marketData.currentPrice["usd"] ?? 0
-                )
-                self.rangeDetailsViewModelState.value = .dataReceived(rangeDetails)
+                self.rangeDetailsViewModelState.value = .dataReceived(RangeDetailsViewModel(priceModels: priceData.prices))
                 
             case .failure(let error):
                 self.errorsState.value = .error(error)
@@ -83,64 +74,43 @@ final class CoinDetailsViewModel {
         }
     }
     
-    func makeDetailsCellsViewModels(metricsViewModelState : MetricsViewModelState) {
-
-        if case .dataReceived(let metricsVM) = metricsViewModelState {
-            
-            let viewModels: [DetailsCellsViewModel] = [
-                DetailsCellsViewModel(
-                    type: .marketCap,
-                    value: metricsVM.marketCap
-                ),
-                DetailsCellsViewModel(
-                    type: .volume,
-                    value: .bigNumberString(from: coinDetailsModel?.marketData.totalVolume["usd"] ?? 0)
-                ),
-                DetailsCellsViewModel(
-                    type: .circulatingSupply,
-                    value: .bigNumberString(from: Double(coinDetailsModel?.marketData.circulatingSupply ?? 0), style: .decimal)
-                ),
-                DetailsCellsViewModel(
-                    type: .totalSupply,
-                    value: .bigNumberString(from: Double(coinDetailsModel?.marketData.totalSupply ?? 0), style: .decimal)
-                ),
-                DetailsCellsViewModel(
-                    type: .maxSupply,
-                    value: .bigNumberString(from: Double(coinDetailsModel?.marketData.maxSupply ?? 0), style: .decimal)
-                ),
-                DetailsCellsViewModel(
-                    type: .allTimeHigh,
-                    value: .priceString(from: coinDetailsModel?.marketData.ath["usd"] ?? 0)
-                ),
-                DetailsCellsViewModel(
-                    type: .changeFromATH,
-                    value: .percentageString(from: coinDetailsModel?.marketData.athChangePercentage["usd"] ?? 0)
-                ),
-                DetailsCellsViewModel(
-                    type: .ATHDate,
-                    value: .formatedStringForATHDate(fromUTC: coinDetailsModel?.marketData.athDate["usd"] ?? "N/A")
-                )
-            ]
-            
-            detailsCellViewModelsState.value = .dataReceived(viewModels)
-        }
-    }
-    
-    /// Extracts a subset  from an array of prices. Makes chart look cleaner and less cluttered.
-    /// - Parameters:
-    ///   - prices: The input array of prices.
-    ///   - subsetSize: The number of elements to include in the subset. Defaults to 60.
-    /// - Returns:  A new array containing `subsetSize` elements, where each element is taken from the original array at equal intervals.
-    private func extractPriceSubset(from prices: [[Double]], subsetSize: Int = 60) -> [[Double]] {
-        guard !prices.isEmpty else { return [] }
-        guard prices.count > subsetSize else { return prices }
+    func makeDetailsCellsViewModels(metricsModel: CoinDetails?) {
         
-        let step = prices.count / subsetSize
+        let viewModels: [DetailsCellsViewModel] = [
+            DetailsCellsViewModel(
+                type: .marketCap,
+                value: .bigNumberString(from: metricsModel?.marketData.marketCap["usd"] ?? 0)
+            ),
+            DetailsCellsViewModel(
+                type: .volume,
+                value: .bigNumberString(from: metricsModel?.marketData.totalVolume["usd"] ?? 0)
+            ),
+            DetailsCellsViewModel(
+                type: .circulatingSupply,
+                value: .bigNumberString(from: Double(metricsModel?.marketData.circulatingSupply ?? 0), style: .decimal)
+            ),
+            DetailsCellsViewModel(
+                type: .totalSupply,
+                value: .bigNumberString(from: Double(metricsModel?.marketData.totalSupply ?? 0), style: .decimal)
+            ),
+            DetailsCellsViewModel(
+                type: .maxSupply,
+                value: .bigNumberString(from: Double(metricsModel?.marketData.maxSupply ?? 0), style: .decimal)
+            ),
+            DetailsCellsViewModel(
+                type: .allTimeHigh,
+                value: .priceString(from: metricsModel?.marketData.ath["usd"] ?? 0)
+            ),
+            DetailsCellsViewModel(
+                type: .changeFromATH,
+                value: .percentageString(from: metricsModel?.marketData.athChangePercentage["usd"] ?? 0)
+            ),
+            DetailsCellsViewModel(
+                type: .ATHDate,
+                value: .formatedStringForATHDate(fromUTC: metricsModel?.marketData.athDate["usd"] ?? "N/A")
+            )
+        ]
         
-        return prices.enumerated().reduce(into: []) { subset, enumeratedElement in
-            if enumeratedElement.offset % step == 0 {
-                subset.append(enumeratedElement.element)
-            }
-        }
+        detailsCellViewModels.value = viewModels
     }
 }

@@ -37,14 +37,13 @@ final class WatchlistViewModel {
     //MARK: - API
     
     func sortCellViewModels(by option: WatchlistSortOption) {
-        guard let viewModels = cellViewModels.value else { return }
-        cellViewModels.value = sorted(viewModels, by: option)
+        cellViewModels.value = sorted(cellViewModels.value, by: option)
     }
     
     func reorderCellViewModels(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard let cellViewModel = cellViewModels.value?[sourceIndexPath.row] else { return }
-        cellViewModels.value?.remove(at: sourceIndexPath.row)
-        cellViewModels.value?.insert(cellViewModel, at: destinationIndexPath.row)
+        let cellViewModel = cellViewModels.value[sourceIndexPath.row]
+        cellViewModels.value.remove(at: sourceIndexPath.row)
+        cellViewModels.value.insert(cellViewModel, at: destinationIndexPath.row)
     }
     
     func reorderWatchlist(sourceIndex: Int, destinationIndex: Int) {
