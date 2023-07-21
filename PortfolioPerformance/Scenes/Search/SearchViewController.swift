@@ -69,8 +69,14 @@ final class SearchScreenViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        searchBar.becomeFirstResponder()
         viewModel.updateRecentSearches()
+        searchBar.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        state = .idle
+        searchBar.resignFirstResponder()
     }
 }
 
@@ -127,30 +133,27 @@ extension SearchScreenViewController {
     private func bindViewModels() {
         
         viewModel.searchResultCellModels.bind { [weak self] _ in
-            guard let self else { return }
+            guard let self,
+                  let searchResultModels = self.viewModel.searchResultCellModels.value
+            else { return }
             
-            let searchResultModels = self.viewModel.searchResultCellModels.value
-            
-            self.state = searchResultModels.isEmpty ? .idle : .searchResults(searchResultModels)
-            
-            DispatchQueue.main.async {
-                self.noResultsView.isHidden = self.viewModel.searchResultCellModels.value.isEmpty
-            }
+            self.state = searchResultModels.isEmpty ? .noResults : .searchResults(searchResultModels)
+
             self.updateUI()
         }
         
         viewModel.recentSearchesModels.bind { [weak self] _ in
             guard let self = self else { return }
-            self.state = .idle
+
             self.updateUI()
         }
         
-        viewModel.trendingCoinsModels.bind { [weak self] _ in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                //self.updateUI()
-            }
-        }
+//        viewModel.trendingCoinsModels.bind { [weak self] _ in
+//            guard let self = self else { return }
+//            DispatchQueue.main.async {
+//                //self.updateUI()
+//            }
+//        }
         
         viewModel.errorMessage.bind { [weak self] error in
             guard let self = self else { return }
@@ -180,16 +183,16 @@ extension SearchScreenViewController {
         case .idle:
             if viewModel.isRecentSearchesEmpty {
                 snapshot.appendSections([.trendingCoins])
-                snapshot.appendItems(trendingModels, toSection: .trendingCoins)
+                snapshot.appendItems(trendingModels ?? [], toSection: .trendingCoins)
             } else {
                 snapshot.appendSections([.recentSearches, .trendingCoins])
-                snapshot.appendItems(recentModels, toSection: .recentSearches)
-                snapshot.appendItems(trendingModels, toSection: .trendingCoins)
+                snapshot.appendItems(recentModels ?? [], toSection: .recentSearches)
+                snapshot.appendItems(trendingModels ?? [], toSection: .trendingCoins)
             }
         case .searchResults(let resultModels):
             snapshot.appendSections([.searchResults])
             snapshot.appendItems(resultModels, toSection: .searchResults)
-        case .initialLoading, .searching:
+        case .noResults, .searching:
             snapshot.appendSections([])
         }
         
@@ -197,7 +200,15 @@ extension SearchScreenViewController {
     }
     
     func updateUI() {
+        
         DispatchQueue.main.async {
+            switch self.state {
+            case .noResults:
+                self.noResultsView.isHidden = false
+            case .searchResults, .idle, .searching:
+                self.noResultsView.isHidden = true
+            }
+            
             self.dataSource.apply(self.makeSnapshot(), animatingDifferences: true)
         }
     }
@@ -227,10 +238,6 @@ extension SearchScreenViewController: UITableViewDelegate {
         
         searchBar.text = ""
         
-        //state = .idle
-        
-        viewModel.clearSearchModels()
-        
         UserDefaultsService.shared.saveTo(
             .recentSearches,
             ID: model.id
@@ -258,16 +265,14 @@ extension SearchScreenViewController: UISearchBarDelegate  {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let query = searchBar.text, !query.isEmpty {
-            //state = .searching
-            noResultsView.isHidden = true
             
             searchTimer?.invalidate()
+            //state = .searching
             searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
                 self.viewModel.updateSearchResults(query: query)
             }
         } else {
-            //state = .idle
-            viewModel.clearSearchModels()
+            state = .idle
         }
     }
     

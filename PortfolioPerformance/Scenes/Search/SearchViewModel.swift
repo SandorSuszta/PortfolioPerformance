@@ -9,9 +9,9 @@ final class SearchScreenViewModel {
     
     //MARK: - Observables
     
-    var recentSearchesModels: ObservableObject<[SearchResult]> = ObservableObject(value: [])
-    var trendingCoinsModels: ObservableObject<[SearchResult]> = ObservableObject(value: [])
-    var searchResultCellModels: ObservableObject<[SearchResult]> = ObservableObject(value: [])
+    var recentSearchesModels: ObservableObject<[SearchResult]?> = ObservableObject(value: nil)
+    var trendingCoinsModels: ObservableObject<[SearchResult]?> = ObservableObject(value: nil)
+    var searchResultCellModels: ObservableObject<[SearchResult]?> = ObservableObject(value: nil)
     var errorMessage: ObservableObject<ErrorState> = ObservableObject(value: .noErrors)
     
     //MARK: - Init
@@ -118,7 +118,7 @@ final class SearchScreenViewModel {
         
         dispatchGroup.enter()
         getRecentSearchesModels { models in
-            recentSearches = models
+            recentSearches = models.reversed()
             dispatchGroup.leave()
         }
         
