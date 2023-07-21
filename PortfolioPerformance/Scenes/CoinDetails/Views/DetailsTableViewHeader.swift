@@ -23,7 +23,7 @@ final class DetailsTableViewHeader: UIView {
     // MARK: - API
     
     func setMarketCapRank(_ rank: String) {
-        marketCapRankLabel.text = "#\(rank)"
+        marketCapRankLabel.text = "\(rank)"
     }
     
     // MARK: - Private

@@ -72,7 +72,7 @@ struct RangeDetailsViewModel {
     }
     
     var chartEntries: [ChartDataEntry] {
-        convertPricesToChartEntries(priceModels: priceModels)
+        convertPricesToChartEntries(priceModels: chartData)
     }
     
     //MARK: - Init
