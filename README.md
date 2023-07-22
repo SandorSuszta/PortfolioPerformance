@@ -1,4 +1,6 @@
 # Portfolio Performance
+<img width="100%" alt="PP Collage" src="https://github.com/SandorSuszta/PortfolioPerformance/assets/47697501/1db45944-8595-44c7-b539-e57f4487578a">
+
 Overview the crypto market , follow your favourite coins
 
 Built using programmatic UI and MVVM 
