@@ -1,6 +1,6 @@
 import Foundation
 
 enum MarketCard: Hashable {
-    case loading(index: Int)
+    case loading
     case dataReceived(MarketCardCellViewModel)
 }

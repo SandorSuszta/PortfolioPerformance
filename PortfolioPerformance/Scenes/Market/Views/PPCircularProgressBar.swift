@@ -54,7 +54,7 @@ final class PPCircularProgressBar: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         
         trackLayer.fillColor = UIColor.clear.cgColor
-        trackLayer.strokeColor = UIColor.secondarySystemBackground.cgColor
+        trackLayer.strokeColor = UIColor.tertiarySystemBackground.cgColor
         trackLayer.lineCap = .round
         
         progressLayer.fillColor = UIColor.clear.cgColor

@@ -5,7 +5,7 @@ final class MarketViewModel {
     private let networkingService: NetworkingServiceProtocol
     
     var marketCards: ObservableObject<[MarketCard]> = ObservableObject(
-        value: [.loading(index: 0), .loading(index: 1), .loading(index: 2)]
+        value: [.loading, .loading, .loading]
     )
     var cryptoCoinsViewModelsState: ObservableObject<CryptoCurrencyCellViewModelState> = ObservableObject(value: .loading)
     
@@ -25,7 +25,7 @@ final class MarketViewModel {
         self.init(networkingService: DefaultNetworkingService())
     }
     
-    //MARK: - Public methods
+    //MARK: - API
     
     func loadGreedAndFearIndex() {
         
@@ -43,7 +43,8 @@ final class MarketViewModel {
                     isChangePositive: nil
                 )
                 
-                self.marketCards.value[0] = .dataReceived(greedAndFearCellViewModel)
+                
+                self.updateViewModels(withCards: [.dataReceived(greedAndFearCellViewModel)])
                 
             case .failure(let error):
                 self.errorMessage.value = .error(error)
@@ -81,9 +82,10 @@ final class MarketViewModel {
                     isChangePositive: true
                 )
                 
-                //Add card view models to the observable array
-                self.marketCards.value[1] = .dataReceived(marketCapCellViewModel)
-                self.marketCards.value[2] = .dataReceived(dominanceViewModel)
+                self.updateViewModels(withCards: [
+                    .dataReceived(marketCapCellViewModel),
+                    .dataReceived(dominanceViewModel)
+                ])
                 
             case .failure(let error):
                 self.errorMessage.value = .error(error)
@@ -147,6 +149,24 @@ final class MarketViewModel {
             
             cryptoCoinsViewModelsState.value = .dataReceived(sortedViewModels)
         }
+    }
+    
+    // MARK: - Private
+    
+    
+    ///The function updates market cards with new data, ensuring that the number of cards displayed is equal to the targetCardsCount (which is 3 in this implementation) by adding loading cards if needed.
+    
+    private func updateViewModels(withCards dataCards: [MarketCard]) {
+        var cardsWithData = marketCards.value.filter { $0 != .loading}
+        cardsWithData.append(contentsOf: dataCards)
+        
+        let targetCardsCount = 3
+        let loadingCardsCountToAdd = max(0, targetCardsCount - cardsWithData.count)
+        
+        let loadingCardsToAdd = Array(repeating: MarketCard.loading, count: loadingCardsCountToAdd)
+        
+        
+        marketCards.value = cardsWithData + loadingCardsToAdd
     }
 }
 

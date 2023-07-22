@@ -154,8 +154,8 @@ extension MarketViewController {
         
         viewModel.marketCards.value.forEach { card in
             switch card {
-            case .loading(let index):
-                snapshot.appendItems([MarketItem.marketCard(.loading(index: index))], toSection: .global)
+            case .loading:
+                snapshot.appendItems([MarketItem.marketCard(.loading)], toSection: .global)
             case .dataReceived(let viewModel):
                 snapshot.appendItems([MarketItem.marketCard(.dataReceived(viewModel))], toSection: .global)
             }
