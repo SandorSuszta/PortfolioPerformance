@@ -5,7 +5,7 @@ final class MarketViewModel {
     private let networkingService: NetworkingServiceProtocol
     
     var marketCards: ObservableObject<[MarketCard]> = ObservableObject(
-        value: [.loading, .loading, .loading]
+        value: [.loading(id: UUID()), .loading(id: UUID()), .loading(id: UUID())]
     )
     var cryptoCoinsViewModelsState: ObservableObject<CryptoCurrencyCellViewModelState> = ObservableObject(value: .loading)
     
@@ -157,13 +157,19 @@ final class MarketViewModel {
     ///The function updates market cards with new data, ensuring that the number of cards displayed is equal to the targetCardsCount (which is 3 in this implementation) by adding loading cards if needed.
     
     private func updateViewModels(withCards dataCards: [MarketCard]) {
-        var cardsWithData = marketCards.value.filter { $0 != .loading}
+        var cardsWithData = marketCards.value.filter { card in
+                if case .loading = card {
+                    return false
+                }
+                return true
+            }
+
         cardsWithData.append(contentsOf: dataCards)
         
         let targetCardsCount = 3
         let loadingCardsCountToAdd = max(0, targetCardsCount - cardsWithData.count)
         
-        let loadingCardsToAdd = Array(repeating: MarketCard.loading, count: loadingCardsCountToAdd)
+        let loadingCardsToAdd = Array(repeating: MarketCard.loading(id: UUID()), count: loadingCardsCountToAdd)
         
         
         marketCards.value = cardsWithData + loadingCardsToAdd
