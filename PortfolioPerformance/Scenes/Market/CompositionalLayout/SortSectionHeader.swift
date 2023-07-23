@@ -65,23 +65,23 @@ final class SortSectionHeader: UICollectionReusableView {
     private func makeCompositionalLayout() -> UICollectionViewCompositionalLayout {
         //Configure Item
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1/4),
+            widthDimension: .estimated(1/4),
             heightDimension: .fractionalHeight(0.9)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
     
         //Configure Group
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.9 * 4/3),
+            widthDimension: .estimated(100),
             heightDimension: .fractionalHeight(1)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 4)
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
-        group.interItemSpacing = .fixed(4)
+        group.interItemSpacing = .fixed(8)
         
         //Configure Section
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
         
         return UICollectionViewCompositionalLayout(section: section)
     }

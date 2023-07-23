@@ -63,12 +63,10 @@ class SortOptionsCell: UICollectionViewCell {
         
         contentView.addSubview(sortingNameLabel)
         NSLayoutConstraint.activate([
-            sortingNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            sortingNameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            sortingNameLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5),
-            sortingNameLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor)
+            sortingNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            sortingNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            sortingNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            sortingNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
         ])
     }
-    
-    
 }
