@@ -20,7 +20,7 @@ final class WatchlistViewModel {
     // MARK: - Observables
     
     public var cellViewModels: ObservableObject<[CryptoCurrencyCellViewModel]> = ObservableObject(value:[])
-    public var errorMessage: ObservableObject<String>?
+    public var errorMessage: ObservableObject<ErrorState> = ObservableObject(value: .noErrors)
     
     //MARK: - Init
     
@@ -67,7 +67,7 @@ final class WatchlistViewModel {
                 self.cachedWatchlist = self.watchlist
                 
             case .failure(let error):
-                self.errorMessage?.value = error.rawValue
+                self.errorMessage.value = .error(error)
             }
         }
     }

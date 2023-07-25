@@ -155,16 +155,7 @@ extension SearchScreenViewController {
 //            }
 //        }
         
-        viewModel.errorMessage.bind { [weak self] error in
-            guard let self = self else { return }
-            
-            switch error {
-            case .noErrors:
-                break
-            case .error(let error):
-                self.coordinator.navigationController.showAlert(message: error.rawValue)
-            }
-        }
+        
     }
 }
     //MARK: - TableView data source methods
