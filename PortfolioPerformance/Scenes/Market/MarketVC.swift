@@ -66,7 +66,7 @@ class MarketViewController: UIViewController {
             }
         }
         
-        viewModel.errorMessage.bind { [weak self] error in
+        viewModel.errorsState.bind { [weak self] error in
             guard let self = self else { return }
             
             switch error {

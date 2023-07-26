@@ -7,7 +7,6 @@ final class CoinDetailsViewModel {
     
     private let networkingService: NetworkingServiceProtocol
     private let watchlistStore: WatchlistStoreProtocol
-    //private var coinDetailsModel: CoinDetails?
     
     let representedCoin: CoinRepresenatable
     
@@ -37,18 +36,17 @@ final class CoinDetailsViewModel {
         self.networkingService = networkingService
         self.watchlistStore = watchlistStore
         makeDetailsCellsViewModels(metricsModel: nil)
-        getMetricsData(for: representedCoin.id)
+        getMetricsData()
     }
     
     //MARK: - API
     
-    func getMetricsData(for ID: String) {
+    func getMetricsData() {
         networkingService.getDetailsData(for: representedCoin.id ) { [weak self] result in
             guard let self else { return }
             
             switch result {
             case .success(let model):
-                //self.coinDetailsModel = model
                 self.metricsViewModelState.value = .dataReceived(MetricsViewModel(model: model))
                 
             case .failure(let error):
@@ -72,6 +70,10 @@ final class CoinDetailsViewModel {
                 self.errorsState.value = .error(error)
             }
         }
+    }
+    
+    func resetError() {
+        errorsState.value = .noErrors
     }
     
     func makeDetailsCellsViewModels(metricsModel: CoinDetails?) {

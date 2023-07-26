@@ -188,14 +188,17 @@ class CoinDetailsVC: UIViewController {
             }
         }
         
-        viewModel.errorsState.bind { [weak self] errorState in
-            guard let self else { return }
+        viewModel.errorsState.bind { [weak self] error in
+            guard let self = self else { return }
             
-            switch errorState {
+            switch error {
             case .noErrors:
                 break
             case .error(let error):
-                self.coordinator.showAlert(message: error.rawValue)
+                self.coordinator.navigationController.showAlert(
+                    message: error.rawValue,
+                    retryHandler: self
+                )
             }
         }
     }
@@ -462,5 +465,12 @@ extension CoinDetailsVC {
             detailsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             detailsTableView.heightAnchor.constraint(equalToConstant: 8 * DetailsTableViewCell.preferredHeight + DetailsTableViewHeader.prefferedHeight)
         ])
+    }
+}
+
+extension CoinDetailsVC: ErrorAlertDelegate {
+    func didPressRetry() {
+        viewModel.resetError()
+        viewModel.getMetricsData()
     }
 }

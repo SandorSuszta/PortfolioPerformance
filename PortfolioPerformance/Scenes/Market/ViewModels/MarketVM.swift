@@ -9,7 +9,7 @@ final class MarketViewModel {
     )
     var cryptoCoinsViewModelsState: ObservableObject<CryptoCurrencyCellViewModelState> = ObservableObject(value: .loading)
     
-    var errorMessage: ObservableObject<ErrorState> = ObservableObject(value: .noErrors)
+    var errorsState: ObservableObject<ErrorState> = ObservableObject(value: .noErrors)
     
     //MARK: - Init
     
@@ -58,7 +58,7 @@ final class MarketViewModel {
     }
     
     func resetError() {
-        errorMessage.value = .noErrors
+        errorsState.value = .noErrors
     }
     
     // MARK: - Private
@@ -83,7 +83,7 @@ final class MarketViewModel {
                 self.updateViewModels(withCards: [.dataReceived(greedAndFearCellViewModel)])
                 
             case .failure(let error):
-                self.errorMessage.value = .error(error)
+                self.errorsState.value = .error(error)
             }
         }
     }
@@ -124,7 +124,7 @@ final class MarketViewModel {
                 ])
                 
             case .failure(let error):
-                self.errorMessage.value = .error(error)
+                self.errorsState.value = .error(error)
             }
         }
     }
@@ -155,7 +155,7 @@ final class MarketViewModel {
                
                 
             case .failure(let error):
-                self.errorMessage.value = .error(error)
+                self.errorsState.value = .error(error)
             }
         }
     }

@@ -12,7 +12,7 @@ final class SearchScreenViewModel {
     var recentSearchesModels: ObservableObject<[SearchResult]?> = ObservableObject(value: nil)
     var trendingCoinsModels: ObservableObject<[SearchResult]?> = ObservableObject(value: nil)
     var searchResultCellModels: ObservableObject<[SearchResult]?> = ObservableObject(value: nil)
-    var errorMessage: ObservableObject<ErrorState> = ObservableObject(value: .noErrors)
+    var errorsState: ObservableObject<ErrorState> = ObservableObject(value: .noErrors)
     
     //MARK: - Init
     
@@ -71,7 +71,7 @@ final class SearchScreenViewModel {
                 self.searchResultCellModels.value = Array(response.coins.prefix(6)).sortedByPrefix(query)
                 
             case .failure(let error):
-                self.errorMessage.value = .error(error)
+                self.errorsState.value = .error(error)
             }
         }
     }
@@ -86,7 +86,7 @@ final class SearchScreenViewModel {
     }
     
     func resetError() {
-        errorMessage.value = .noErrors
+        errorsState.value = .noErrors
     }
     
     //MARK: - Private methods
@@ -115,7 +115,7 @@ final class SearchScreenViewModel {
                 completion(sortedModels)
                 
             case .failure(let error):
-                self.errorMessage.value = .error(error)
+                self.errorsState.value = .error(error)
             }
         }
     }
@@ -132,7 +132,7 @@ final class SearchScreenViewModel {
                 completion(trendingCoins)
              
             case .failure(let error):
-                self.errorMessage.value = .error(error)
+                self.errorsState.value = .error(error)
             }
         }
     }
