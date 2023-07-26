@@ -32,6 +32,29 @@ final class SearchScreenViewModel {
         recentSearchesRepository.isRecentSearchesEmpty
     }
     
+    func fetchData() {
+        let dispatchGroup = DispatchGroup()
+        
+        var recentSearches: [SearchResult] = []
+        var trendingCoins: [SearchResult] = []
+        
+        dispatchGroup.enter()
+        getRecentSearchesModels { models in
+            recentSearches = models.reversed()
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        getTrendingCoinsModels { models in
+            trendingCoins = models
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            (self.recentSearchesModels.value, self.trendingCoinsModels.value) = (recentSearches, trendingCoins)
+        }
+    }
+    
     func updateRecentSearches() {
         isRecentSearchesEmpty
         ? recentSearchesModels = ObservableObject(value: [])
@@ -60,6 +83,10 @@ final class SearchScreenViewModel {
     func clearRecentSearches() {
         recentSearchesModels.value = []
         recentSearchesRepository.clearRecentSearches()
+    }
+    
+    func resetError() {
+        errorMessage.value = .noErrors
     }
     
     //MARK: - Private methods
@@ -107,29 +134,6 @@ final class SearchScreenViewModel {
             case .failure(let error):
                 self.errorMessage.value = .error(error)
             }
-        }
-    }
-    
-    private func fetchData() {
-        let dispatchGroup = DispatchGroup()
-        
-        var recentSearches: [SearchResult] = []
-        var trendingCoins: [SearchResult] = []
-        
-        dispatchGroup.enter()
-        getRecentSearchesModels { models in
-            recentSearches = models.reversed()
-            dispatchGroup.leave()
-        }
-        
-        dispatchGroup.enter()
-        getTrendingCoinsModels { models in
-            trendingCoins = models
-            dispatchGroup.leave()
-        }
-        
-        dispatchGroup.notify(queue: .main) {
-            (self.recentSearchesModels.value, self.trendingCoinsModels.value) = (recentSearches, trendingCoins)
         }
     }
 }

@@ -138,26 +138,32 @@ extension SearchScreenViewController {
             else { return }
             
             self.state = searchResultModels.isEmpty ? .noResults : .searchResults(searchResultModels)
-
+            
             self.updateUI()
         }
         
         viewModel.recentSearchesModels.bind { [weak self] _ in
             guard let self = self else { return }
-
+            
             self.updateUI()
         }
         
-//        viewModel.trendingCoinsModels.bind { [weak self] _ in
-//            guard let self = self else { return }
-//            DispatchQueue.main.async {
-//                //self.updateUI()
-//            }
-//        }
-        
-        
+        viewModel.errorMessage.bind { [weak self] error in
+            guard let self = self else { return }
+            
+            switch error {
+            case .noErrors:
+                break
+            case .error(let error):
+                self.coordinator.navigationController.showAlert(
+                    message: error.rawValue,
+                    retryHandler: self
+                )
+            }
+        }
     }
 }
+
     //MARK: - TableView data source methods
 
 extension SearchScreenViewController {
@@ -283,5 +289,13 @@ extension SearchScreenViewController: SearchTableSectionHeaderDelegate {
     func didTapButton() {
         viewModel.clearRecentSearches()
         UserDefaultsService.shared.clearRecentSearchesIDs()
+    }
+}
+
+extension SearchScreenViewController: ErrorAlertDelegate {
+    func didPressRetry() {
+        viewModel.resetError()
+        viewModel.fetchData()
+        searchBar.text = ""
     }
 }

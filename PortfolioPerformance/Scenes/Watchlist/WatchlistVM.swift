@@ -72,6 +72,12 @@ final class WatchlistViewModel {
         }
     }
     
+    func resetError() {
+        errorMessage.value = .noErrors
+    }
+    
+    // MARK: - Private
+    
     private func sorted(_ viewModels: [CryptoCurrencyCellViewModel], by option: WatchlistSortOption) -> [CryptoCurrencyCellViewModel] {
         
         switch option {

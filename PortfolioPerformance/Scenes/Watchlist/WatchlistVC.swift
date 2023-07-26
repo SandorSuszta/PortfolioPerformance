@@ -309,6 +309,7 @@ extension WatchlistViewController: TabBarReselectHandler {
 
 extension  WatchlistViewController: ErrorAlertDelegate {
     func didPressRetry() {
+        viewModel.resetError()
         viewModel.loadWatchlistData(forSortOption: selectedSortOption)
     }
 }

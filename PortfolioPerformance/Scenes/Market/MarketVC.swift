@@ -232,6 +232,7 @@ extension MarketViewController: TabBarReselectHandler {
 
 extension MarketViewController: ErrorAlertDelegate {
     func didPressRetry() {
+        viewModel.resetError()
         viewModel.loadMarketData(sortedBy: selectedSortOption)
     }
 }

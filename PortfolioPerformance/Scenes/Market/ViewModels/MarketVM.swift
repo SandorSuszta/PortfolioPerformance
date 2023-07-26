@@ -57,6 +57,10 @@ final class MarketViewModel {
         }
     }
     
+    func resetError() {
+        errorMessage.value = .noErrors
+    }
+    
     // MARK: - Private
     
     private func loadGreedAndFearIndex() {
