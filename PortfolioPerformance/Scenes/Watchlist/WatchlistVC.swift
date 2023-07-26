@@ -90,7 +90,10 @@ class WatchlistViewController: UIViewController {
             case .noErrors:
                 break
             case .error(let error):
-                self.coordinator.navigationController.showAlert(message: error.rawValue)
+                self.coordinator.navigationController.showAlert(
+                    message: error.rawValue,
+                    retryHandler: self
+                )
             }
         }
     }
@@ -301,5 +304,11 @@ extension WatchlistViewController: UITableViewDelegate {
 extension WatchlistViewController: TabBarReselectHandler {
     func handleReselect() {
         watchlistTableView.setContentOffset(.zero, animated: true)
+    }
+}
+
+extension  WatchlistViewController: ErrorAlertDelegate {
+    func didPressRetry() {
+        viewModel.loadWatchlistData(forSortOption: selectedSortOption)
     }
 }

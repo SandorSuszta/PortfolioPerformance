@@ -17,7 +17,6 @@ class WatchlistCoordinator: Coordinator {
         let watchlistVC = WatchlistViewController(coordinator: self)
         
         navigationController.setViewControllers([watchlistVC], animated: true)
-        
         navigationController.tabBarItem = AppTab.watchlist.tabBarItem
     }
     

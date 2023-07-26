@@ -44,6 +44,10 @@ class MarketCoordinator: Coordinator {
         
         navigationController.pushViewController(detailsVC, animated: true)
     }
+    
+    func showError() {
+        
+    }
 }
 
 extension MarketCoordinator: SearchViewControllerDelegate {

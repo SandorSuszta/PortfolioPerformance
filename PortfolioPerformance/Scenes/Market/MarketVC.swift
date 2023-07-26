@@ -64,16 +64,18 @@ class MarketViewController: UIViewController {
             }
         }
         
-        viewModel.errorMessage.bind { [weak self] error in
-            guard let self = self else { return }
-            
-            switch error {
-            case .noErrors:
-                break
-            case .error(let error):
-                self.coordinator.navigationController.showAlert(message: error.rawValue)
-            }
-        }
+//        viewModel.errorMessage.bind { [weak self] error in
+//            guard let self = self else { return }
+//            
+//            switch error {
+//            case .noErrors:
+//                break
+//            case .error(let error):
+////                self.coordinator.navigationController.showAlert(
+////                    message: error.rawValue
+////                )
+//            }
+//        }
     }
 
     //MARK: - Private methods
