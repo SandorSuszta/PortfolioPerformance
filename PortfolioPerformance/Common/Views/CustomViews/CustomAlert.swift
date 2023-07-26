@@ -1,7 +1,13 @@
 import UIKit
 
+protocol ErrorAlertDelegate: AnyObject {
+    func didPressRetry()
+}
+
 ///A view controller that is used to present error messages to the user
 final class ErrorAlertVC: UIViewController {
+    
+    weak var delegate: ErrorAlertDelegate?
 
     //MARK: - UI Eelements
     
@@ -53,6 +59,7 @@ final class ErrorAlertVC: UIViewController {
     //MARK: - UI Elements Event handlers
         
     @objc func didPressActionButton() {
+        delegate?.didPressRetry()
         dismiss(animated: true)
     }
 }
@@ -72,7 +79,7 @@ private extension ErrorAlertVC {
         static let containerWidth: CGFloat =    260
         
         static let titleText = "🚫 Oops... something went wrong"
-        static let buttonTitle = "Close"
+        static let buttonTitle = "Retry"
     }
     
     func setupViews() {
