@@ -3,16 +3,18 @@ import UIKit
 
 class MarketViewController: UIViewController {
     
+    private lazy var dataSource = MarketDataSource(
+        collectionView: marketCollectionView,
+        sortHeaderDelegate: self
+    )
+    
+    private var selectedSortOption: MarketSortOption = .topCaps
+    
     //MARK: - Dependencies
     
     private let coordinator: Coordinator
     private let viewModel: MarketViewModel
     
-    private lazy var dataSource = MarketDataSource(
-        collectionView: marketCollectionView,
-        sortHeaderDelegate: self
-    )
-
     //MARK: - UI Elements
     
     private lazy var marketCollectionView: UICollectionView = {
@@ -49,7 +51,7 @@ class MarketViewController: UIViewController {
         registerCellsAndHeader()
         setupMarketCollectionViewLayout()
     }
-                            
+                       
     //MARK: - Bind view models
     
     private func bindViewModels() {
@@ -64,18 +66,19 @@ class MarketViewController: UIViewController {
             }
         }
         
-//        viewModel.errorMessage.bind { [weak self] error in
-//            guard let self = self else { return }
-//            
-//            switch error {
-//            case .noErrors:
-//                break
-//            case .error(let error):
-////                self.coordinator.navigationController.showAlert(
-////                    message: error.rawValue
-////                )
-//            }
-//        }
+        viewModel.errorMessage.bind { [weak self] error in
+            guard let self = self else { return }
+            
+            switch error {
+            case .noErrors:
+                break
+            case .error(let error):
+                self.coordinator.navigationController.showAlert(
+                    message: error.rawValue,
+                    retryHandler: self
+                )
+            }
+        }
     }
 
     //MARK: - Private methods
@@ -101,10 +104,6 @@ class MarketViewController: UIViewController {
         titleView.addSubview(imageView)
         self.navigationItem.titleView = titleView
     }
-    
-//    private func sortTableview(by sortOption: PPMarketSort) {
-//        viewModel.sortCellViewModels(by: sortOption)
-//    }
     
     private func setupViewController() {
         view.backgroundColor = .secondarySystemBackground
@@ -209,6 +208,7 @@ extension MarketViewController: SortSectionHeaderDelegate {
     
     func didSelectSortOption(_ sortOption: MarketSortOption) {
         viewModel.sortCellViewModels(by: sortOption)
+        selectedSortOption = sortOption
         
         if isCryptoCurrencySectionOutOfViewBounds() {
             marketCollectionView.scrollToItem(at: IndexPath(row: 0, section: 1), at: .top, animated: false)
@@ -227,5 +227,11 @@ extension MarketViewController: SortSectionHeaderDelegate {
 extension MarketViewController: TabBarReselectHandler {
     func handleReselect() {
         marketCollectionView.setContentOffset(.zero, animated: true)
+    }
+}
+
+extension MarketViewController: ErrorAlertDelegate {
+    func didPressRetry() {
+        viewModel.loadMarketData(sortedBy: selectedSortOption)
     }
 }

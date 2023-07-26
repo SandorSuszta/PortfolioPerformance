@@ -15,10 +15,7 @@ final class MarketViewModel {
     
     init(networkingService: NetworkingServiceProtocol) {
         self.networkingService = networkingService
-        
-        loadGreedAndFearIndex()
-        getGlobalData()
-        loadAllCryptoCurrenciesData()
+        loadMarketData(sortedBy: .topCaps)
     }
     
     convenience init() {
@@ -27,7 +24,42 @@ final class MarketViewModel {
     
     //MARK: - API
     
-    func loadGreedAndFearIndex() {
+    func loadMarketData(sortedBy sortOption: MarketSortOption) {
+        loadGreedAndFearIndex()
+        getGlobalData()
+        loadAllCryptoCurrenciesData(sortedBy: sortOption)
+    }
+    
+    func sortCellViewModels (by sortOption: MarketSortOption) {
+        if case let .dataReceived(viewModels)  = cryptoCoinsViewModelsState.value {
+            var sortedViewModels = viewModels
+            
+            switch sortOption {
+            case .topCaps:
+                sortedViewModels.sort(by: {
+                    $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0
+                })
+            case .topWinners:
+                sortedViewModels.sort(by: {
+                    $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0
+                })
+            case .topLosers:
+                sortedViewModels.sort(by: {
+                    $0.coinModel.priceChangePercentage24H ?? 0  < $1.coinModel.priceChangePercentage24H ?? 0
+                })
+            case .topVolumes:
+                sortedViewModels.sort(by: {
+                    $0.coinModel.totalVolume ?? 0 > $1.coinModel.totalVolume ?? 0
+                })
+            }
+            
+            cryptoCoinsViewModelsState.value = .dataReceived(sortedViewModels)
+        }
+    }
+    
+    // MARK: - Private
+    
+    private func loadGreedAndFearIndex() {
         
         networkingService.getGreedAndFearData { [weak self] result in
             guard let self else { return }
@@ -52,7 +84,7 @@ final class MarketViewModel {
         }
     }
     
-    func getGlobalData() {
+    private func getGlobalData() {
         networkingService.getGlobalData() { [weak self] result in
             guard let self else { return }
             
@@ -93,7 +125,7 @@ final class MarketViewModel {
         }
     }
     
-    func loadAllCryptoCurrenciesData(sortOption: MarketSortOption = .topCaps) {
+    private func loadAllCryptoCurrenciesData(sortedBy sortOption: MarketSortOption = .topCaps) {
         networkingService.getCryptoCurrenciesData { [weak self] result in
             guard let self else { return }
             
@@ -101,7 +133,7 @@ final class MarketViewModel {
             case .success(let cryptosArray):
                 var sortedArray: [CoinModel]
                 
-                switch sortOption {
+                switch sortOption  {
                 case .topCaps:
                     sortedArray = cryptosArray
                 case .topWinners:
@@ -123,36 +155,6 @@ final class MarketViewModel {
             }
         }
     }
-    
-    func sortCellViewModels (by sortOption: MarketSortOption) {
-        if case let .dataReceived(viewModels)  = cryptoCoinsViewModelsState.value {
-            var sortedViewModels = viewModels
-            
-            switch sortOption {
-            case .topCaps:
-                sortedViewModels.sort(by: {
-                    $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0
-                })
-            case .topWinners:
-                sortedViewModels.sort(by: {
-                    $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0
-                })
-            case .topLosers:
-                sortedViewModels.sort(by: {
-                    $0.coinModel.priceChangePercentage24H ?? 0  < $1.coinModel.priceChangePercentage24H ?? 0
-                })
-            case .topVolumes:
-                sortedViewModels.sort(by: {
-                    $0.coinModel.totalVolume ?? 0 > $1.coinModel.totalVolume ?? 0
-                })
-            }
-            
-            cryptoCoinsViewModelsState.value = .dataReceived(sortedViewModels)
-        }
-    }
-    
-    // MARK: - Private
-    
     
     ///The function updates market cards with new data, ensuring that the number of cards displayed is equal to the targetCardsCount (which is 3 in this implementation) by adding loading cards if needed.
     

@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             services: services
         )
         
-        appCoordinator.start()
+        appCoordinator.startApp()
         
         self.window = window
     }

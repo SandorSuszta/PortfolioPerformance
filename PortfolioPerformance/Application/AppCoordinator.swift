@@ -10,7 +10,7 @@ class AppCoordinator {
     
     let services: Services
     
-    func start() {
+    func startApp() {
         
         let marketCoordinator = MarketCoordinator(
             services: services,
