@@ -4,6 +4,8 @@ final class WatchlistViewModel {
     
     private var cachedWatchlist: [String]?
     
+    private(set) var selectedSortOption: WatchlistSortOption = .custom
+    
     var watchlist: [String] {
         watchlistStore.watchlist
     }
@@ -27,7 +29,7 @@ final class WatchlistViewModel {
     init(networkingService: NetworkingServiceProtocol, watchlistStore: WatchlistStoreProtocol) {
         self.networkingService = networkingService
         self.watchlistStore = watchlistStore
-        loadWatchlistData(forSortOption: .custom)
+        loadWatchlistData()
     }
     
     convenience init() {
@@ -36,7 +38,8 @@ final class WatchlistViewModel {
     
     //MARK: - API
     
-    func sortCellViewModels(by option: WatchlistSortOption) {
+    func sortOptionDidChange(to option: WatchlistSortOption) {
+        selectedSortOption = option
         cellViewModels.value = sorted(cellViewModels.value, by: option)
     }
     
@@ -50,7 +53,7 @@ final class WatchlistViewModel {
         watchlistStore.reorderWatchlist(sourceIndex: sourceIndex, destinationIndex: destinationIndex)
     }
     
-    func loadWatchlistData(forSortOption option: WatchlistSortOption) {
+    func loadWatchlistData() {
         guard cachedWatchlist != watchlist else { return }
         
         networkingService.getDataForList(ofIDs: watchlist) { result in
@@ -61,7 +64,7 @@ final class WatchlistViewModel {
                 let viewModels: [CryptoCurrencyCellViewModel] = coinModels.compactMap({ CryptoCurrencyCellViewModel(coinModel: $0)
                 })
                 
-                let sortedViewModels = self.sorted(viewModels, by: option)
+                let sortedViewModels = self.sorted(viewModels, by: self.selectedSortOption)
                 
                 self.cellViewModels.value = sortedViewModels
                 self.cachedWatchlist = self.watchlist
@@ -102,5 +105,12 @@ final class WatchlistViewModel {
             
             return viewModels.sorted(by: sortComparator)
         }
+    }
+}
+
+extension  WatchlistViewModel: ErrorAlertDelegate {
+    func didPressRetry() {
+        errorsState.value = .noErrors
+        loadWatchlistData()
     }
 }

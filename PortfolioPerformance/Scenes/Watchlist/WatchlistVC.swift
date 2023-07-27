@@ -10,8 +10,6 @@ class WatchlistViewController: UIViewController {
     
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
     
-    private var selectedSortOption: WatchlistSortOption
-    
     //MARK: - UI Elements
     
     private lazy var watchlistTableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -42,7 +40,6 @@ class WatchlistViewController: UIViewController {
     init(coordinator: WatchlistCoordinator, viewModel: WatchlistViewModel) {
         self.coordinator = coordinator
         self.viewModel = viewModel
-        self.selectedSortOption = .custom
         super .init(nibName: nil, bundle: nil)
     }
     
@@ -92,7 +89,7 @@ class WatchlistViewController: UIViewController {
             case .error(let error):
                 self.coordinator.navigationController.showAlert(
                     message: error.rawValue,
-                    retryHandler: self
+                    retryHandler: self.viewModel
                 )
             }
         }
@@ -136,7 +133,7 @@ class WatchlistViewController: UIViewController {
             emptyWatchlistView.isHidden = false
         } else {
             emptyWatchlistView.isHidden = true
-            viewModel.loadWatchlistData(forSortOption: selectedSortOption)
+            viewModel.loadWatchlistData()
         }
     }
     
@@ -160,7 +157,7 @@ extension WatchlistViewController {
     
     private func makeSortButton() -> UIBarButtonItem {
         return UIBarButtonItem(
-            title: "\(selectedSortOption.name) \(Constants.arrowDown)",
+            title: "\(viewModel.selectedSortOption.name) \(Constants.arrowDown)",
             menu: makeSortMenu(currentWatchlist: viewModel.watchlist)
         )
     }
@@ -179,8 +176,7 @@ extension WatchlistViewController {
         
         UIAction(title: option.name, image: option.logo) { _ in
             self.navigationItem.leftBarButtonItem?.title = "\(option.name) \(Constants.arrowDown)"
-            self.viewModel.sortCellViewModels(by: option)
-            self.selectedSortOption = option
+            self.viewModel.sortOptionDidChange(to: option)
             
             self.dataSource.canMoveCells = option == .custom ? true : false
         }
@@ -304,12 +300,5 @@ extension WatchlistViewController: UITableViewDelegate {
 extension WatchlistViewController: TabBarReselectHandler {
     func handleReselect() {
         watchlistTableView.setContentOffset(.zero, animated: true)
-    }
-}
-
-extension  WatchlistViewController: ErrorAlertDelegate {
-    func didPressRetry() {
-        viewModel.resetError()
-        viewModel.loadWatchlistData(forSortOption: selectedSortOption)
     }
 }
