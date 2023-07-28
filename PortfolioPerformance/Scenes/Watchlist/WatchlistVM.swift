@@ -21,8 +21,8 @@ final class WatchlistViewModel {
     
     // MARK: - Observables
     
-    public var cellViewModels: ObservableObject<[CryptoCurrencyCellViewModel]> = ObservableObject(value:[])
-    public var errorsState: ObservableObject<ErrorState> = ObservableObject(value: .noErrors)
+    var cellViewModels: ObservableObject<[CryptoCurrencyCellViewModel]> = ObservableObject(value:[])
+    var errorsState: ObservableObject<ErrorState> = ObservableObject(value: .noErrors)
     
     //MARK: - Init
     
@@ -54,7 +54,10 @@ final class WatchlistViewModel {
     }
     
     func loadWatchlistData() {
-        guard cachedWatchlist != watchlist else { return }
+        guard cachedWatchlist != watchlist else {
+            cellViewModels.value = cellViewModels.value
+            return
+        }
         
         networkingService.getDataForList(ofIDs: watchlist) { result in
             switch result {

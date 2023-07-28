@@ -33,6 +33,17 @@ class WatchlistViewController: UIViewController {
         action: #selector(editButtonPressed)
     )
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.tintColor = .PPBlue
+        control.addTarget(
+            self,
+            action: #selector(handlePullToRefresh),
+            for: .valueChanged
+        )
+        return control
+    }()
+    
     private let emptyWatchlistView = EmptyStateView(type: .noFavourites)
     
     //MARK: - Init
@@ -77,6 +88,7 @@ class WatchlistViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
         
@@ -137,7 +149,7 @@ class WatchlistViewController: UIViewController {
         }
     }
     
-    //MARK: -  Button actions
+    //MARK: -  Selectors
     
     @objc private func editButtonPressed() {
         watchlistTableView.setEditing(!watchlistTableView.isEditing, animated: true)
@@ -148,6 +160,10 @@ class WatchlistViewController: UIViewController {
         if let coordinator = coordinator as? WatchlistCoordinator {
             coordinator.showSearch()
         }
+    }
+    
+    @objc private func handlePullToRefresh() {
+        viewModel.loadWatchlistData()
     }
 }
 
@@ -253,6 +269,7 @@ extension WatchlistViewController {
             emptyWatchlistView,
             plusButton
         )
+        watchlistTableView.addSubview(refreshControl)
     }
     
     private func setupConstraints() {

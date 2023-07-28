@@ -31,6 +31,7 @@ class MarketViewController: UIViewController {
     
     private lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
+        control.tintColor = .PPBlue
         control.addTarget(
             self,
             action: #selector(handlePullToRefresh),
