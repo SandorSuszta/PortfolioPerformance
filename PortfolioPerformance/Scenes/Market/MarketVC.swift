@@ -29,6 +29,16 @@ class MarketViewController: UIViewController {
         return collection
     }()
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.addTarget(
+            self,
+            action: #selector(handlePullToRefresh),
+            for: .valueChanged
+        )
+        return control
+    }()
+    
     //MARK: - Init
     
     init(coordinator: Coordinator, viewModel: MarketViewModel) {
@@ -58,11 +68,13 @@ class MarketViewController: UIViewController {
         viewModel.marketCards.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.reloadMarketData()
+                self?.refreshControl.endRefreshing()
             }
         }
         viewModel.cryptoCoinsViewModelsState.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.reloadMarketData()
+                self?.refreshControl.endRefreshing()
             }
         }
         
@@ -130,6 +142,7 @@ class MarketViewController: UIViewController {
     
     private func setupMarketCollectionViewLayout() {
         view.addSubviews(marketCollectionView)
+        marketCollectionView.addSubview(refreshControl)
         marketCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -146,6 +159,11 @@ class MarketViewController: UIViewController {
         if let coordinator = coordinator as? MarketCoordinator {
             coordinator.showSearch()
         }
+    }
+    
+    @objc private func handlePullToRefresh() {
+        
+        viewModel.loadMarketData(sortedBy: selectedSortOption)
     }
 }
 
