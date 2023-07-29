@@ -24,10 +24,21 @@ class CoinDetailsVC: UIViewController {
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.showsVerticalScrollIndicator = false
+        scroll.refreshControl = refreshControl
         scroll.contentSize = CGSize(width: view.width, height: 892)
         return scroll
     }()
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.tintColor = .PPBlue
+        control.addTarget(
+            self,
+            action: #selector(handlePullToRefresh),
+            for: .valueChanged
+        )
+        return control
+    }()
     
     private let highlightsView = HighlightsView()
     
@@ -146,6 +157,7 @@ class CoinDetailsVC: UIViewController {
                 DispatchQueue.main.async {
                     self.highlightsView.setCurrentPrice(metricsViewModel.currentPrice)
                     self.marketCapRankLabel.text = metricsViewModel.marketCapRank
+                    self.refreshControl.endRefreshing()
                 }
                 self.viewModel.makeDetailsCellsViewModels(metricsModel: metricsViewModel.model)
                 self.viewModel.getTimeRangeDetails(
@@ -302,6 +314,21 @@ class CoinDetailsVC: UIViewController {
         highlightsView.applyShadowToLogoContainer()
     }
     
+    private func setupTableView() {
+        detailsTableView.dataSource = self
+        detailsTableView.delegate = self
+        detailsTableView.clipsToBounds = false
+        detailsTableView.layer.masksToBounds = false
+        detailsTableView.separatorStyle = .singleLine
+        detailsTableView.separatorColor = .systemGray5
+        detailsTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        detailsTableView.isScrollEnabled = false
+        detailsTableView.register(
+            DetailsTableViewCell.self,
+            forCellReuseIdentifier: DetailsTableViewCell.identifier
+        )
+    }
+    
     // MARK: - Selectors
     
     @objc func didSelectRangeInterval(_ sender: UISegmentedControl) -> Void {
@@ -325,23 +352,11 @@ class CoinDetailsVC: UIViewController {
                 ID: viewModel.coinID
             )
         }
-        
         updateFavouriteButtonImage()
     }
-    
-    private func setupTableView() {
-        detailsTableView.dataSource = self
-        detailsTableView.delegate = self
-        detailsTableView.clipsToBounds = false
-        detailsTableView.layer.masksToBounds = false
-        detailsTableView.separatorStyle = .singleLine
-        detailsTableView.separatorColor = .systemGray5
-        detailsTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        detailsTableView.isScrollEnabled = false
-        detailsTableView.register(
-            DetailsTableViewCell.self,
-            forCellReuseIdentifier: DetailsTableViewCell.identifier
-        )
+
+    @objc func handlePullToRefresh() {
+        viewModel.getMetricsData()
     }
 }
 
