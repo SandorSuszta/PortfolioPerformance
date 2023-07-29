@@ -225,8 +225,6 @@ extension WatchlistViewController {
         dataSource.defaultRowAnimation = .fade
         
         dataSource.onMoveCell = { sourceIndexPath, destinationIndexPath in
-            
-            self.viewModel.reorderCellViewModels(from: sourceIndexPath, to: destinationIndexPath)
             self.viewModel.reorderWatchlist(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
         }
         

@@ -43,13 +43,8 @@ final class WatchlistViewModel {
         cellViewModels.value = sorted(cellViewModels.value, by: option)
     }
     
-    func reorderCellViewModels(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let cellViewModel = cellViewModels.value[sourceIndexPath.row]
-        cellViewModels.value.remove(at: sourceIndexPath.row)
-        cellViewModels.value.insert(cellViewModel, at: destinationIndexPath.row)
-    }
-    
     func reorderWatchlist(sourceIndex: Int, destinationIndex: Int) {
+        reorderCellViewModels(from: sourceIndex, to: destinationIndex)
         watchlistStore.reorderWatchlist(sourceIndex: sourceIndex, destinationIndex: destinationIndex)
     }
     
@@ -79,6 +74,12 @@ final class WatchlistViewModel {
     }
     
     // MARK: - Private
+    
+    private func reorderCellViewModels(from sourceIndex: Int, to destinationIndex: Int) {
+        let cellViewModel = cellViewModels.value[sourceIndex]
+        cellViewModels.value.remove(at: sourceIndex)
+        cellViewModels.value.insert(cellViewModel, at: destinationIndex)
+    }
     
     private func sorted(_ viewModels: [CryptoCurrencyCellViewModel], by option: WatchlistSortOption) -> [CryptoCurrencyCellViewModel] {
         
