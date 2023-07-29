@@ -1,8 +1,8 @@
 class Services {
-    let watchlistStore: WatchlistStore
+    let watchlistStore: DefaultWatchlistStore
     let recentSearchesService: DefaultRecentSearchesRepository
     
-    init(watchlistStore: WatchlistStore, recentSearchesService: DefaultRecentSearchesRepository) {
+    init(watchlistStore: DefaultWatchlistStore, recentSearchesService: DefaultRecentSearchesRepository) {
         self.watchlistStore = watchlistStore
         self.recentSearchesService = recentSearchesService
     }

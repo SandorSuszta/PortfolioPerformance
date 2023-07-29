@@ -76,7 +76,7 @@ class WatchlistCoordinator: Coordinator {
 extension WatchlistCoordinator: SearchViewControllerDelegate {
     
     func handleSelection(of representedCoin: CoinRepresenatable) {
-        services.watchlistStore.saveToWatchlist(id: representedCoin.id)
+        services.watchlistStore.save(id: representedCoin.id)
         navigationController.popViewController(animated: true)
         
         guard let watchlistVC = navigationController.viewControllers.first else { return }

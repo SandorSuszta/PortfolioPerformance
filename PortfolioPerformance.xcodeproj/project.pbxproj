@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		79011DFC29FD8E5700121A81 /* WatchlistStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79011DFB29FD8E5700121A81 /* WatchlistStore.swift */; };
+		79011DFC29FD8E5700121A81 /* DefaultWatchlistStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79011DFB29FD8E5700121A81 /* DefaultWatchlistStore.swift */; };
 		79011DFE29FD8F4E00121A81 /* PersistantDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79011DFD29FD8F4E00121A81 /* PersistantDataType.swift */; };
 		79011E0029FDA86200121A81 /* Array+sortedByList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79011DFF29FDA86200121A81 /* Array+sortedByList.swift */; };
 		79011E0229FECD2B00121A81 /* DefaultRecentSearchesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79011E0129FECD2B00121A81 /* DefaultRecentSearchesRepository.swift */; };
@@ -128,7 +128,7 @@
 
 /* Begin PBXFileReference section */
 		74D4B989C78136C941766DBA /* Pods_PortfolioPerformance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PortfolioPerformance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		79011DFB29FD8E5700121A81 /* WatchlistStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistStore.swift; sourceTree = "<group>"; };
+		79011DFB29FD8E5700121A81 /* DefaultWatchlistStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWatchlistStore.swift; sourceTree = "<group>"; };
 		79011DFD29FD8F4E00121A81 /* PersistantDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistantDataType.swift; sourceTree = "<group>"; };
 		79011DFF29FDA86200121A81 /* Array+sortedByList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+sortedByList.swift"; sourceTree = "<group>"; };
 		79011E0129FECD2B00121A81 /* DefaultRecentSearchesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecentSearchesRepository.swift; sourceTree = "<group>"; };
@@ -263,7 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				79011E122A05998000121A81 /* DataTyoes */,
-				79011DFB29FD8E5700121A81 /* WatchlistStore.swift */,
+				79011DFB29FD8E5700121A81 /* DefaultWatchlistStore.swift */,
 				790C30C427CEA7620021658F /* UserDefaultsService.swift */,
 				79011E0129FECD2B00121A81 /* DefaultRecentSearchesRepository.swift */,
 			);
@@ -897,7 +897,7 @@
 				798FEF8C29F0548A0003A68D /* WatchlistDataSource.swift in Sources */,
 				79E786D32A54BA680085D8C7 /* PPLineChartView.swift in Sources */,
 				79E2169C2A43425F0091DA4D /* SortSectionHeader.swift in Sources */,
-				79011DFC29FD8E5700121A81 /* WatchlistStore.swift in Sources */,
+				79011DFC29FD8E5700121A81 /* DefaultWatchlistStore.swift in Sources */,
 				79E7A21728E5FAF000BD5CB0 /* MarketVC.swift in Sources */,
 				797303B5296B75450006CF76 /* PPSegmentedProgressBar.swift in Sources */,
 				795E43F62910017D0016F3C3 /* EmptyStateView.swift in Sources */,

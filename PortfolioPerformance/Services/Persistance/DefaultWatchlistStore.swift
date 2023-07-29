@@ -1,14 +1,14 @@
 import Foundation
 
-protocol WatchlistStoreProtocol {
+protocol WatchlistStore {
     var watchlist: [String] { get }
     
-    func saveToWatchlist(id: String)
-    func deleteFromWatchlist(id: String)
+    func save(id: String)
+    func delete(id: String)
     func reorderWatchlist(sourceIndex: Int, destinationIndex: Int)
 }
 
-struct WatchlistStore: WatchlistStoreProtocol {
+struct DefaultWatchlistStore: WatchlistStore {
     
     //MARK: - Properties
     
@@ -21,7 +21,7 @@ struct WatchlistStore: WatchlistStoreProtocol {
         defaults.stringArray(forKey: watchlistKey) ?? []
     }
     
-    func saveToWatchlist(id: String) {
+    func save(id: String) {
         var currentIDs = defaults.stringArray(forKey: watchlistKey) ?? []
         
         //Make sure recent ID is the last in the list
@@ -32,7 +32,7 @@ struct WatchlistStore: WatchlistStoreProtocol {
         defaults.set(currentIDs, forKey: watchlistKey)
     }
     
-    func deleteFromWatchlist(id: String) {
+    func delete(id: String) {
         var currentWatchlist = defaults.stringArray(forKey: watchlistKey)
         
         currentWatchlist?.removeAll { $0 == id }

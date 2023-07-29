@@ -12,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         let services = Services(
-            watchlistStore: WatchlistStore(),
+            watchlistStore: DefaultWatchlistStore(),
             recentSearchesService: DefaultRecentSearchesRepository()
         )
         

@@ -17,7 +17,7 @@ final class WatchlistViewModel {
     // MARK: - Dependencies
     
     private let networkingService: NetworkingServiceProtocol
-    private let watchlistStore: WatchlistStoreProtocol
+    private let watchlistStore: WatchlistStore
     
     // MARK: - Observables
     
@@ -26,14 +26,14 @@ final class WatchlistViewModel {
     
     //MARK: - Init
     
-    init(networkingService: NetworkingServiceProtocol, watchlistStore: WatchlistStoreProtocol) {
+    init(networkingService: NetworkingServiceProtocol, watchlistStore: WatchlistStore) {
         self.networkingService = networkingService
         self.watchlistStore = watchlistStore
         loadWatchlistData()
     }
     
     convenience init() {
-        self.init(networkingService: DefaultNetworkingService(), watchlistStore: WatchlistStore())
+        self.init(networkingService: DefaultNetworkingService(), watchlistStore: DefaultWatchlistStore())
     }
     
     //MARK: - API

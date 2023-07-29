@@ -8,7 +8,7 @@ class CoinDetailsVC: UIViewController {
     private let coordinator: Coordinator
     private let viewModel: CoinDetailsViewModel
     private let imageDownloader: ImageDownloaderProtocol
-    private let watchlistStore: WatchlistStoreProtocol
+    private let watchlistStore: WatchlistStore
     
     //MARK: - Properties
     
@@ -221,7 +221,7 @@ class CoinDetailsVC: UIViewController {
         coordinator: Coordinator,
         viewModel: CoinDetailsViewModel,
         imageDownloader: ImageDownloaderProtocol,
-        watchlistStore: WatchlistStoreProtocol
+        watchlistStore: WatchlistStore
     ){
         self.coordinator = coordinator
         self.viewModel = viewModel
@@ -340,18 +340,7 @@ class CoinDetailsVC: UIViewController {
     }
     
     @objc func favouriteButtonTapped() {
-
-        if viewModel.isFavourite {
-            UserDefaultsService.shared.deleteFrom(
-                .watchlist,
-                ID: viewModel.coinID
-            )
-        } else {
-            UserDefaultsService.shared.saveTo(
-                .watchlist,
-                ID: viewModel.coinID
-            )
-        }
+        viewModel.isFavourite ? watchlistStore.delete(id: viewModel.coinID) : watchlistStore.save(id: viewModel.coinID)
         updateFavouriteButtonImage()
     }
 
