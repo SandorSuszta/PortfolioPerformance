@@ -76,10 +76,6 @@ final class SearchScreenViewModel {
         }
     }
     
-    func clearSearchModels() {
-        searchResultCellModels.value = []
-    }
-    
     func clearRecentSearches() {
         recentSearchesModels.value = []
         recentSearchesRepository.clearRecentSearches()
