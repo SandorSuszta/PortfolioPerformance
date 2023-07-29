@@ -87,8 +87,8 @@ class WatchlistViewController: UIViewController {
             guard let self else { return }
             
             DispatchQueue.main.async {
-                self.reloadData()
                 self.refreshControl.endRefreshing()
+                self.reloadData()
             }
         }
         
@@ -129,6 +129,7 @@ class WatchlistViewController: UIViewController {
         watchlistTableView.delegate = self
         watchlistTableView.backgroundColor = .clear
         watchlistTableView.separatorStyle = .none
+        watchlistTableView.refreshControl = refreshControl
         watchlistTableView.layer.cornerRadius = 10
         watchlistTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: view.width / 20))
         watchlistTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -269,7 +270,6 @@ extension WatchlistViewController {
             emptyWatchlistView,
             plusButton
         )
-        watchlistTableView.addSubview(refreshControl)
     }
     
     private func setupConstraints() {

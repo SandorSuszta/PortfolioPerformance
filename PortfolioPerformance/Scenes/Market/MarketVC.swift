@@ -26,6 +26,7 @@ class MarketViewController: UIViewController {
         collection.backgroundColor = .clear
         collection.showsHorizontalScrollIndicator = false
         collection.showsVerticalScrollIndicator = false
+        collection.refreshControl = refreshControl
         return collection
     }()
     
@@ -143,7 +144,6 @@ class MarketViewController: UIViewController {
     
     private func setupMarketCollectionViewLayout() {
         view.addSubviews(marketCollectionView)
-        marketCollectionView.addSubview(refreshControl)
         marketCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
