@@ -8,8 +8,6 @@ class MarketViewController: UIViewController {
         sortHeaderDelegate: self
     )
     
-    private var selectedSortOption: MarketSortOption = .topCaps
-    
     //MARK: - Dependencies
     
     private let coordinator: Coordinator
@@ -164,7 +162,7 @@ class MarketViewController: UIViewController {
     
     @objc private func handlePullToRefresh() {
         
-        viewModel.loadMarketData(sortedBy: selectedSortOption)
+        viewModel.loadMarketData()
     }
 }
 
@@ -226,8 +224,7 @@ extension MarketViewController: UICollectionViewDelegate {
 extension MarketViewController: SortSectionHeaderDelegate {
     
     func didSelectSortOption(_ sortOption: MarketSortOption) {
-        viewModel.sortCellViewModels(by: sortOption)
-        selectedSortOption = sortOption
+        viewModel.setSelectedSortOption(sortOption)
         
         if isCryptoCurrencySectionOutOfViewBounds() {
             marketCollectionView.scrollToItem(at: IndexPath(row: 0, section: 1), at: .top, animated: false)
@@ -252,6 +249,6 @@ extension MarketViewController: TabBarReselectHandler {
 extension MarketViewController: ErrorAlertDelegate {
     func didPressRetry() {
         viewModel.resetError()
-        viewModel.loadMarketData(sortedBy: selectedSortOption)
+        viewModel.loadMarketData()
     }
 }

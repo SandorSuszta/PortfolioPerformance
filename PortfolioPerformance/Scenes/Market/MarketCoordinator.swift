@@ -8,7 +8,7 @@ class MarketCoordinator: Coordinator {
     
     //MARK: - Init
     
-    init(services: Services, navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, services: Services) {
         self.services = services
         self.navigationController = navigationController
     }

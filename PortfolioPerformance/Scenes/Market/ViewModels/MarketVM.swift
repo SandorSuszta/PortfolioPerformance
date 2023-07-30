@@ -2,7 +2,17 @@ import Foundation
 
 final class MarketViewModel {
     
+    private var selectedSortOption: MarketSortOption = .topCaps {
+        didSet {
+            sortCellViewModels(by: selectedSortOption)
+        }
+    }
+    
+    // MARK: - Dependencies
+    
     private let networkingService: NetworkingServiceProtocol
+    
+    // MARK: - Observables
     
     var marketCards: ObservableObject<[MarketCard]> = ObservableObject(
         value: [.loading(id: UUID()), .loading(id: UUID()), .loading(id: UUID())]
@@ -15,7 +25,7 @@ final class MarketViewModel {
     
     init(networkingService: NetworkingServiceProtocol) {
         self.networkingService = networkingService
-        loadMarketData(sortedBy: .topCaps)
+        loadMarketData()
     }
     
     convenience init() {
@@ -24,37 +34,14 @@ final class MarketViewModel {
     
     //MARK: - API
     
-    func loadMarketData(sortedBy sortOption: MarketSortOption) {
+    func loadMarketData() {
         loadGreedAndFearIndex()
         getGlobalData()
-        loadAllCryptoCurrenciesData(sortedBy: sortOption)
+        loadAllCryptoCurrenciesData(sortedBy: selectedSortOption)
     }
     
-    func sortCellViewModels (by sortOption: MarketSortOption) {
-        if case let .dataReceived(viewModels)  = cryptoCoinsViewModelsState.value {
-            var sortedViewModels = viewModels
-            
-            switch sortOption {
-            case .topCaps:
-                sortedViewModels.sort(by: {
-                    $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0
-                })
-            case .topWinners:
-                sortedViewModels.sort(by: {
-                    $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0
-                })
-            case .topLosers:
-                sortedViewModels.sort(by: {
-                    $0.coinModel.priceChangePercentage24H ?? 0  < $1.coinModel.priceChangePercentage24H ?? 0
-                })
-            case .topVolumes:
-                sortedViewModels.sort(by: {
-                    $0.coinModel.totalVolume ?? 0 > $1.coinModel.totalVolume ?? 0
-                })
-            }
-            
-            cryptoCoinsViewModelsState.value = .dataReceived(sortedViewModels)
-        }
+    func setSelectedSortOption(_ option: MarketSortOption) {
+        selectedSortOption = option
     }
     
     func resetError() {
@@ -179,6 +166,33 @@ final class MarketViewModel {
         
         
         marketCards.value = cardsWithData + loadingCardsToAdd
+    }
+    
+    private func sortCellViewModels (by sortOption: MarketSortOption) {
+        if case let .dataReceived(viewModels)  = cryptoCoinsViewModelsState.value {
+            var sortedViewModels = viewModels
+            
+            switch sortOption {
+            case .topCaps:
+                sortedViewModels.sort(by: {
+                    $0.coinModel.marketCap ?? 0 > $1.coinModel.marketCap ?? 0
+                })
+            case .topWinners:
+                sortedViewModels.sort(by: {
+                    $0.coinModel.priceChangePercentage24H ?? 0 > $1.coinModel.priceChangePercentage24H ?? 0
+                })
+            case .topLosers:
+                sortedViewModels.sort(by: {
+                    $0.coinModel.priceChangePercentage24H ?? 0  < $1.coinModel.priceChangePercentage24H ?? 0
+                })
+            case .topVolumes:
+                sortedViewModels.sort(by: {
+                    $0.coinModel.totalVolume ?? 0 > $1.coinModel.totalVolume ?? 0
+                })
+            }
+            
+            cryptoCoinsViewModelsState.value = .dataReceived(sortedViewModels)
+        }
     }
 }
 

@@ -13,13 +13,14 @@ class AppCoordinator {
     func startApp() {
         
         let marketCoordinator = MarketCoordinator(
-            services: services,
-            navigationController: UINavigationController()
+            navigationController: UINavigationController(),
+            services: services
         )
         
         let watchlistCoordinator = WatchlistCoordinator(
             navigationController: UINavigationController(),
-            services: services)
+            services: services
+        )
         
         marketCoordinator.start()
         watchlistCoordinator.start()
