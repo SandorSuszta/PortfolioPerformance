@@ -6,7 +6,7 @@ final class CoinDetailsViewModel {
     // MARK: - Dependencies
     
     private let networkingService: NetworkingServiceProtocol
-    private let watchlistStore: WatchlistStore
+    private let watchlistStore: WatchlistRepository
     
     let representedCoin: CoinRepresenatable
     
@@ -30,7 +30,7 @@ final class CoinDetailsViewModel {
     init(
         representedCoin: CoinRepresenatable,
         networkingService: NetworkingServiceProtocol,
-        watchlistStore: WatchlistStore
+        watchlistStore: WatchlistRepository
     ){
         self.representedCoin = representedCoin
         self.networkingService = networkingService

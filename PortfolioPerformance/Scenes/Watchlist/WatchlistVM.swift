@@ -7,17 +7,17 @@ final class WatchlistViewModel {
     private(set) var selectedSortOption: WatchlistSortOption = .custom
     
     var watchlist: [String] {
-        watchlistStore.watchlist
+        watchlistRepository.watchlist
     }
     
     var isWatchlistEmpty: Bool {
-        watchlistStore.watchlist.isEmpty
+        watchlistRepository.watchlist.isEmpty
     }
     
     // MARK: - Dependencies
     
     private let networkingService: NetworkingServiceProtocol
-    private let watchlistStore: WatchlistStore
+    private let watchlistRepository: WatchlistRepository
     
     // MARK: - Observables
     
@@ -26,9 +26,9 @@ final class WatchlistViewModel {
     
     //MARK: - Init
     
-    init(networkingService: NetworkingServiceProtocol, watchlistStore: WatchlistStore) {
+    init(networkingService: NetworkingServiceProtocol, watchlistStore: WatchlistRepository) {
         self.networkingService = networkingService
-        self.watchlistStore = watchlistStore
+        self.watchlistRepository = watchlistStore
         loadWatchlistData()
     }
     
@@ -43,9 +43,13 @@ final class WatchlistViewModel {
         cellViewModels.value = sorted(cellViewModels.value, by: option)
     }
     
+    func deleteFromWatchlist(_ id: String) {
+        watchlistRepository.delete(id: id)
+    }
+    
     func reorderWatchlist(sourceIndex: Int, destinationIndex: Int) {
         reorderCellViewModels(from: sourceIndex, to: destinationIndex)
-        watchlistStore.reorderWatchlist(sourceIndex: sourceIndex, destinationIndex: destinationIndex)
+        watchlistRepository.reorderWatchlist(sourceIndex: sourceIndex, destinationIndex: destinationIndex)
     }
     
     func loadWatchlistData() {
@@ -54,7 +58,7 @@ final class WatchlistViewModel {
             return
         }
         
-        networkingService.getDataForList(ofIDs: watchlist) { result in
+        networkingService.getDataFor(IDs: watchlist) { result in
             switch result {
             case .success(let coinModels):
                 

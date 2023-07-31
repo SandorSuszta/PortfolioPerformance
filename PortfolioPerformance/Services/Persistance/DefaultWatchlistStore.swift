@@ -1,6 +1,6 @@
 import Foundation
 
-protocol WatchlistStore {
+protocol WatchlistRepository {
     var watchlist: [String] { get }
     
     func save(id: String)
@@ -8,7 +8,7 @@ protocol WatchlistStore {
     func reorderWatchlist(sourceIndex: Int, destinationIndex: Int)
 }
 
-struct DefaultWatchlistStore: WatchlistStore {
+struct DefaultWatchlistStore: WatchlistRepository {
     
     //MARK: - Properties
     

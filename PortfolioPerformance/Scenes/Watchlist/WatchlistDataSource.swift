@@ -6,7 +6,7 @@ enum WatchlistSection {
 
 final class WatchlistDataSource: UITableViewDiffableDataSource<WatchlistSection, CoinModel> {
     
-    var onDeleteCell: ((_ indexPath: IndexPath) -> Void)?
+    var onDeleteCell: ((_ indexPath: IndexPath, _ id: String) -> Void)?
     
     var onMoveCell: ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)?
     
@@ -24,8 +24,8 @@ final class WatchlistDataSource: UITableViewDiffableDataSource<WatchlistSection,
                 snapshot.deleteItems([item])
                 apply(snapshot, animatingDifferences: true)
                 
-                onDeleteCell?(indexPath)
-                UserDefaultsService.shared.deleteFrom(.watchlist, ID: item.id)
+                onDeleteCell?(indexPath, item.id)
+                
             }
         }
     }

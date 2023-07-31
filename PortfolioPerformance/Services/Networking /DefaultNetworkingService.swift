@@ -4,7 +4,7 @@ protocol NetworkingServiceProtocol {
     func getGreedAndFearData (completion: @escaping (Result<GreedAndFearModel, PPError>) -> Void)
     func getCryptoCurrenciesData(completion: @escaping (Result<[CoinModel], PPError>) -> Void)
     func getGlobalData(completion: @escaping (Result<GlobalDataResponse, PPError>) -> Void)
-    func getDataForList(ofIDs IDs: [String], completion: @escaping (Result<[CoinModel], PPError>) -> Void)
+    func getDataFor(IDs: [String], completion: @escaping (Result<[CoinModel], PPError>) -> Void)
     func getChartData(for ID: String, inDaysInterval interval: Int, completion: @escaping (Result<PriceModels, PPError>) -> Void)
     func getDetailsData(for ID: String, completion: @escaping (Result<CoinDetails, PPError>) -> Void)
     func searchWith(query: String, completion: @escaping (Result<SearchResponse, PPError>) -> Void)
@@ -41,8 +41,8 @@ struct DefaultNetworkingService: NetworkingServiceProtocol {
     }
     
     //MARK: - Crypto Data For Watchlist done
-    func getDataForList(
-        ofIDs IDs: [String],
+    func getDataFor(
+        IDs: [String],
         completion: @escaping (Result<[CoinModel], PPError>) -> Void
     ){
         request(

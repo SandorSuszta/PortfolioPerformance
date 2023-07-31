@@ -8,7 +8,7 @@ class CoinDetailsVC: UIViewController {
     private let coordinator: Coordinator
     private let viewModel: CoinDetailsViewModel
     private let imageDownloader: ImageDownloaderProtocol
-    private let watchlistStore: WatchlistStore
+    private let watchlistStore: WatchlistRepository
     
     //MARK: - Properties
     
@@ -221,7 +221,7 @@ class CoinDetailsVC: UIViewController {
         coordinator: Coordinator,
         viewModel: CoinDetailsViewModel,
         imageDownloader: ImageDownloaderProtocol,
-        watchlistStore: WatchlistStore
+        watchlistStore: WatchlistRepository
     ){
         self.coordinator = coordinator
         self.viewModel = viewModel

@@ -228,7 +228,8 @@ extension WatchlistViewController {
             self.viewModel.reorderWatchlist(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
         }
         
-        dataSource.onDeleteCell = { indexPath in
+        dataSource.onDeleteCell = { indexPath, id in
+            self.viewModel.deleteFromWatchlist(id)
             self.viewModel.cellViewModels.value.remove(at: indexPath.row)
         }
         
