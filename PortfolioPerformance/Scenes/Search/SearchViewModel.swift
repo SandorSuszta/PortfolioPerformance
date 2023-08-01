@@ -40,7 +40,7 @@ final class SearchScreenViewModel {
         
         dispatchGroup.enter()
         getRecentSearchesModels { models in
-            recentSearches = models.reversed()
+            recentSearches = models
             dispatchGroup.leave()
         }
         
@@ -59,7 +59,7 @@ final class SearchScreenViewModel {
         isRecentSearchesEmpty
         ? recentSearchesModels = ObservableObject(value: [])
         : getRecentSearchesModels { models in
-            self.recentSearchesModels.value = models.reversed()
+            self.recentSearchesModels.value = models
         }
     }
     
@@ -85,13 +85,17 @@ final class SearchScreenViewModel {
         errorsState.value = .noErrors
     }
     
+    func saveSearch(id: String) {
+        recentSearchesRepository.saveToRecentSearches(id: id)
+    }
+    
     //MARK: - Private methods
     
     private func getRecentSearchesModels(completion: @escaping ([SearchResult]) -> Void) {
         
-        guard !UserDefaultsService.shared.recentSearchesIDs.isEmpty else { return completion([]) }
+        guard !recentSearchesRepository.isRecentSearchesEmpty else { return completion([]) }
         
-        networkingService.getDataForList(ofIDs: UserDefaultsService.shared.recentSearchesIDs) { result in
+        networkingService.getDataFor(IDs: recentSearchesRepository.recentSearches) { result in
             switch result {
             case .success(let coinModels):
                 
@@ -104,9 +108,8 @@ final class SearchScreenViewModel {
                     )
                 }
                 
-                let recentSearchesList = UserDefaultsService.shared.recentSearchesIDs
-                
-                let sortedModels = recentSearchesModels.sorted(byList: recentSearchesList)
+                let recentSearches = self.recentSearchesRepository.recentSearches
+                let sortedModels = recentSearchesModels.sorted(byList: recentSearches)
                 
                 completion(sortedModels)
                 

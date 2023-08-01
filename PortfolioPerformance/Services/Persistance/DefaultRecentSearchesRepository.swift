@@ -35,6 +35,7 @@ struct DefaultRecentSearchesRepository: RecentSearchesRepositoryProtocol {
         if let indexOfID = currentRecentSearches.firstIndex(of: id) {
             currentRecentSearches.remove(at: indexOfID)
         }
+        
         currentRecentSearches.insert(id, at: 0)
         defaults.set(currentRecentSearches, forKey: recentSearchesKey)
     }

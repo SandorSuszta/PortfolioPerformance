@@ -235,10 +235,7 @@ extension SearchScreenViewController: UITableViewDelegate {
         
         searchBar.text = ""
         
-        UserDefaultsService.shared.saveTo(
-            .recentSearches,
-            ID: model.id
-        )
+        viewModel.saveSearch(id: model.id)
         
         delegate?.handleSelection(of: model)
     }
@@ -288,7 +285,6 @@ extension SearchScreenViewController: UISearchBarDelegate  {
 extension SearchScreenViewController: SearchTableSectionHeaderDelegate {
     func didTapButton() {
         viewModel.clearRecentSearches()
-        UserDefaultsService.shared.clearRecentSearchesIDs()
     }
 }
 
