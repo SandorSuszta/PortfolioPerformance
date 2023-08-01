@@ -3,7 +3,6 @@ import UIKit
 class MarketCoordinator: Coordinator {
   
     let services: Services
-    
     var navigationController: UINavigationController
     
     //MARK: - Init

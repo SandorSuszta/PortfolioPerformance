@@ -271,12 +271,7 @@ extension SearchScreenViewController: UISearchBarDelegate  {
     }
     
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
-        let allowedChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        let allowedCharSet = CharacterSet(charactersIn: allowedChars)
-        let typedCharSet = CharacterSet(charactersIn: text)
-        
-        return allowedCharSet.isSuperset(of: typedCharSet)
+        CharacterSet(charactersIn: text).isSubset(of: CharacterSet.alphanumerics)
     }
 }
 
