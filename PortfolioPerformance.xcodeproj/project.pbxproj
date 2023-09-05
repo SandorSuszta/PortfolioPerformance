@@ -36,6 +36,7 @@
 		7934EFA82835172200CE7FD0 /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFA72835172200CE7FD0 /* UIView+AddSubviews.swift */; };
 		7934EFBA2841600A00CE7FD0 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934EFB92841600A00CE7FD0 /* CustomProgressBar.swift */; };
 		7937CE1E28F6E30600B80C71 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7937CE1D28F6E30600B80C71 /* SearchViewModel.swift */; };
+		793A3E152AA6525700B26A28 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793A3E142AA6525700B26A28 /* HTTPClient.swift */; };
 		79410D8D2823D3E700BD9EA4 /* UIView+Framing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79410D8C2823D3E700BD9EA4 /* UIView+Framing.swift */; };
 		79410D8F282416C000BD9EA4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79410D8E282416C000BD9EA4 /* SearchViewController.swift */; };
 		79463E6B2A364EBF00BAE3A3 /* SearchTableSectionHeaderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79463E6A2A364EBF00BAE3A3 /* SearchTableSectionHeaderFactory.swift */; };
@@ -157,6 +158,7 @@
 		7934EFA72835172200CE7FD0 /* UIView+AddSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviews.swift"; sourceTree = "<group>"; };
 		7934EFB92841600A00CE7FD0 /* CustomProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressBar.swift; sourceTree = "<group>"; };
 		7937CE1D28F6E30600B80C71 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		793A3E142AA6525700B26A28 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		79410D8C2823D3E700BD9EA4 /* UIView+Framing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Framing.swift"; sourceTree = "<group>"; };
 		79410D8E282416C000BD9EA4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		79463E6A2A364EBF00BAE3A3 /* SearchTableSectionHeaderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableSectionHeaderFactory.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 				7955B09229DF6F8900492059 /* ImageDownloader.swift */,
 				7955B09429E0B60700492059 /* ImageCacheManager.swift */,
 				795D95E329E8B0A4007555EF /* Router.swift */,
+				793A3E142AA6525700B26A28 /* HTTPClient.swift */,
 			);
 			path = "Networking ";
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 			files = (
 				79C0D4A72A61DE07003E337E /* MarketCardsSectionViewModel.swift in Sources */,
 				79E216942A42F6330091DA4D /* MarketSection.swift in Sources */,
+				793A3E152AA6525700B26A28 /* HTTPClient.swift in Sources */,
 				7934EFA4282A824E00CE7FD0 /* ResultsCell.swift in Sources */,
 				792C040928C9E62B008EE48C /* RangeProgressView.swift in Sources */,
 				796EFA3A286DDD60005E24AF /* ObservableObject.swift in Sources */,
