@@ -15,7 +15,7 @@ import Foundation
      }
  } */
  
-struct GreedAndFearModel: Codable {
+struct GreedAndFear: Codable {
     let name: String
     let data: [Index]
 }
