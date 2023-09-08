@@ -1,7 +1,7 @@
 import UIKit
 
 protocol NetworkingServiceProtocol {
-    func getGreedAndFearData (completion: @escaping (Result<GreedAndFearModel, PPError>) -> Void)
+    func getGreedAndFearData (completion: @escaping (Result<GreedAndFear, PPError>) -> Void)
     func getCryptoCurrenciesData(completion: @escaping (Result<[CoinModel], PPError>) -> Void)
     func getGlobalData(completion: @escaping (Result<GlobalDataResponse, PPError>) -> Void)
     func getDataFor(IDs: [String], completion: @escaping (Result<[CoinModel], PPError>) -> Void)
@@ -14,10 +14,10 @@ protocol NetworkingServiceProtocol {
 struct DefaultNetworkingService: NetworkingServiceProtocol {
 
     //MARK: - Greed And Fear Index done
-    func getGreedAndFearData (completion: @escaping (Result<GreedAndFearModel, PPError>) -> Void) {
+    func getGreedAndFearData (completion: @escaping (Result<GreedAndFear, PPError>) -> Void) {
         request(
             router: .getGreedAndFear,
-            expectingType: GreedAndFearModel.self,
+            expectingType: GreedAndFear.self,
             completion: completion
         )
     }
