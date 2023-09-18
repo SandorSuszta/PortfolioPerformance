@@ -1,7 +1,13 @@
 import UIKit
 
-class ImageCacheService {
-    static let shared = ImageCacheService()
+protocol ImageCacheProtocol {
+    func getImage(for url: String) -> UIImage?
+    func setImage(_ image: UIImage, for url: String)
+}
+
+final class ImageCache: ImageCacheProtocol {
+    
+    static let shared = ImageCache()
     
     private let imageCache = {
         let cache = NSCache<NSString, UIImage>()

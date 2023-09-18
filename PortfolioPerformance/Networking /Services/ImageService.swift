@@ -1,19 +1,19 @@
 import UIKit
 
-protocol ImageDownloaderProtocol {
+protocol ImageServiceProtocol {
     
     func loadImage(from imageUrl: String, completion: @escaping (Result<(ImageSource, UIImage), PPError>) -> Void)
     
     func cancelDownload()
 }
 
-final class ImageDownloader: ImageDownloaderProtocol {
+final class ImageService: ImageServiceProtocol {
 
     private var dataTask: URLSessionDataTask?
     
-    func loadImage(from imageUrl: String, completion: @escaping (Result<(ImageSource, UIImage), PPError>) -> Void){
+    func loadImage(from imageUrl: String, completion: @escaping (Result<(ImageSource, UIImage), PPError>) -> Void) {
         
-        if let image = ImageCacheService.shared.getImage(for: imageUrl) {
+        if let image = ImageCache.shared.getImage(for: imageUrl) {
             completion(.success((.cached, image)))
             return
         } else {
@@ -34,7 +34,7 @@ final class ImageDownloader: ImageDownloaderProtocol {
                     return
                 }
                 
-                ImageCacheService.shared.setImage(image, for: imageUrl)
+                ImageCache.shared.setImage(image, for: imageUrl)
                 
                 DispatchQueue.main.async {
                     completion(.success((.downloaded, image)))

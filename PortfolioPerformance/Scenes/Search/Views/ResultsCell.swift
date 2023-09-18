@@ -6,7 +6,7 @@ class ResultsCell: UITableViewCell {
     
     static let preferredHeight: CGFloat = 64
     
-    var imageDownloader: ImageDownloaderProtocol?
+    var imageDownloader: ImageServiceProtocol?
     
     let symbolLabel: UILabel = {
         let label = UILabel()

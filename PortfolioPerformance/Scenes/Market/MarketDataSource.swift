@@ -98,7 +98,7 @@ extension MarketDataSource {
             ) as? CryptoCurrencyCollectionViewCell else { return UICollectionViewCell() }
             
         if case .dataReceived(let viewModel) = item {
-            cell.imageDownloader = ImageDownloader()
+            cell.imageDownloader = ImageService()
             cell.configureCell(with: viewModel)
         }
             return cell

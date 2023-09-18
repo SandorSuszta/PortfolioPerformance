@@ -37,7 +37,7 @@ class MarketCoordinator: Coordinator {
         let detailsVC = CoinDetailsVC(
             coordinator: self,
             viewModel: detailsVM,
-            imageDownloader: ImageDownloader(),
+            imageDownloader: ImageService(),
             watchlistStore: services.watchlistStore
         )
         

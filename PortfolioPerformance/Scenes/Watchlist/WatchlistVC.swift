@@ -216,7 +216,7 @@ extension WatchlistViewController {
             
             let cellViewModel = self.viewModel.cellViewModels.value[indexPath.row]
             
-            cell.imageDownloader = ImageDownloader()
+            cell.imageDownloader = ImageService()
             cell.configureCell(with: cellViewModel)
             
             return cell

@@ -6,7 +6,7 @@ final class SearchTableDataSource: UITableViewDiffableDataSource<SearchTableSect
         super.init(tableView: tableView) { tableView, indexPath, model in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ResultsCell.identifier) as? ResultsCell else { return UITableViewCell() }
             
-            cell.imageDownloader = ImageDownloader()
+            cell.imageDownloader = ImageService()
             cell.configure(withModel: model)
         
             return cell

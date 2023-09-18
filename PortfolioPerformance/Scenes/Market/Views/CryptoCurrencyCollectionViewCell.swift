@@ -10,7 +10,7 @@ final class CryptoCurrencyCollectionViewCell: UICollectionViewCell {
     
     static let prefferredHeight: CGFloat = 64
     
-    var imageDownloader: ImageDownloaderProtocol?
+    var imageDownloader: ImageServiceProtocol?
     
     private let nameLabel = PPTextLabel(allignment: .left, fontWeight: .medium)
     private let symbolLabel = PPTextLabel(textColor: .secondaryLabel, allignment: .left)
