@@ -4,7 +4,7 @@ final class SearchScreenViewModel {
     
     // MARK: - Dependencies
     
-    private let networkingService: NetworkingServiceProtocol
+    private let searchService: SearchCryptocurrencyServiceProtocol
     private let recentSearchesRepository: RecentSearchesRepositoryProtocol
     
     //MARK: - Observables
@@ -16,14 +16,11 @@ final class SearchScreenViewModel {
     
     //MARK: - Init
     
-    init(networkingService: NetworkingServiceProtocol, recentSearchesRepository: RecentSearchesRepositoryProtocol) {
-        self.networkingService = networkingService
+    init(searchService: SearchCryptocurrencyServiceProtocol,
+         recentSearchesRepository: RecentSearchesRepositoryProtocol) {
+        self.searchService = searchService
         self.recentSearchesRepository = recentSearchesRepository
         fetchData()
-    }
-    
-    convenience init() {
-        self.init(networkingService: DefaultNetworkingService(), recentSearchesRepository: DefaultRecentSearchesRepository())
     }
     
     //MARK: - Interface

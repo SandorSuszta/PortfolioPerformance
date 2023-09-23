@@ -1,6 +1,6 @@
 import UIKit
 
 enum ImageSource {
-    case downloaded
-    case cached
+    case downloaded(image: UIImage)
+    case cached(image: UIImage)
 }

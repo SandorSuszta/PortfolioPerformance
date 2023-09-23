@@ -1,8 +1,8 @@
 import UIKit
 
-protocol ImageCacheProtocol {
+protocol ImageService {
     func getImage(for url: String) -> UIImage?
-    func setImage(_ image: UIImage, for url: String)
+    func saveImage(_ image: UIImage, for url: String)
 }
 
 final class ImageCache: ImageCacheProtocol {

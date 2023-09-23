@@ -10,9 +10,7 @@ final class HTTPClient: HTTPClientProtocol {
     }
     
     // MARK: - API
-    
-    
-    
+
     func performRequest<T: Decodable>(url: URL?, responseType: T.Type, completionHandler: @escaping (Result<T, Error>) -> Void) {
         
         guard let url else {

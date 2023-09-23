@@ -61,6 +61,7 @@
 		796EFA4128733AF2005E24AF /* DefaultNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA4028733AF2005E24AF /* DefaultNetworkingService.swift */; };
 		796EFA452876F076005E24AF /* CryptoCurrencyCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA442876F076005E24AF /* CryptoCurrencyCellVM.swift */; };
 		796EFA4928770D26005E24AF /* CryptoCurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EFA4828770D26005E24AF /* CryptoCurrencyCell.swift */; };
+		7971767C2ABCDDEE0054918F /* HTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971767B2ABCDDEE0054918F /* HTTPClientTests.swift */; };
 		797303B3296B30560006CF76 /* PPCircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797303B2296B30560006CF76 /* PPCircularProgressBar.swift */; };
 		797303B5296B75450006CF76 /* PPSegmentedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797303B4296B75450006CF76 /* PPSegmentedProgressBar.swift */; };
 		797303B7296C6A4D0006CF76 /* MarketCardBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797303B6296C6A4C0006CF76 /* MarketCardBaseCell.swift */; };
@@ -198,6 +199,7 @@
 		796EFA4028733AF2005E24AF /* DefaultNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkingService.swift; sourceTree = "<group>"; };
 		796EFA442876F076005E24AF /* CryptoCurrencyCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCurrencyCellVM.swift; sourceTree = "<group>"; };
 		796EFA4828770D26005E24AF /* CryptoCurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCurrencyCell.swift; sourceTree = "<group>"; };
+		7971767B2ABCDDEE0054918F /* HTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientTests.swift; sourceTree = "<group>"; };
 		797303B2296B30560006CF76 /* PPCircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPCircularProgressBar.swift; sourceTree = "<group>"; };
 		797303B4296B75450006CF76 /* PPSegmentedProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPSegmentedProgressBar.swift; sourceTree = "<group>"; };
 		797303B6296C6A4C0006CF76 /* MarketCardBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCardBaseCell.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 				79FEC5BC2AB8B2F40011AF0D /* Services */,
 				79AE54012A1648D800214CB1 /* DataTypes */,
 				7982923027E3D87C007ECCCD /* Models */,
+				7955B09229DF6F8900492059 /* ImageService.swift */,
 				796EFA4028733AF2005E24AF /* DefaultNetworkingService.swift */,
 				795D95E329E8B0A4007555EF /* Router.swift */,
 				7917F7002AA914510006C3E3 /* CryptocurrencyService.swift */,
@@ -539,6 +542,7 @@
 		79A5B14A29803DBF0067240A /* PortfolioPerformanceTests */ = {
 			isa = PBXGroup;
 			children = (
+				7971767B2ABCDDEE0054918F /* HTTPClientTests.swift */,
 				79CFFCAE2A274D1B00E1E58A /* Mock */,
 				79A5B156298276740067240A /* PPTabBarControllerTests.swift */,
 			);
@@ -736,7 +740,6 @@
 				79FEC5C22AB8B5D30011AF0D /* CryptocurrencyDetailsService.swift */,
 				79FEC5C42AB8B9440011AF0D /* CryptocurrencySearchService.swift */,
 				79FEC5C82AB8BC3A0011AF0D /* CryptoCurrencyListService.swift */,
-				7955B09229DF6F8900492059 /* ImageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -915,6 +918,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7971767C2ABCDDEE0054918F /* HTTPClientTests.swift in Sources */,
 				79A5B157298276740067240A /* PPTabBarControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
