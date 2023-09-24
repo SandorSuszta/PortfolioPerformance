@@ -1,10 +1,5 @@
 import UIKit
 
-protocol ImageService {
-    func getImage(for url: String) -> UIImage?
-    func saveImage(_ image: UIImage, for url: String)
-}
-
 final class ImageCache: ImageCacheProtocol {
     
     static let shared = ImageCache()

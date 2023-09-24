@@ -7,10 +7,7 @@ protocol ImageServiceProtocol {
     func cancelFetching()
 }
 
-protocol ImageRepository {
-    func fetchImage(for imageUrl: String) -> UIImage?
-    func saveImage(_ image: UIImage, for imageUrl: String)
-}
+
 
 final class NSCacheImageRepository: ImageRepository {
     
