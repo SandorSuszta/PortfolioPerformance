@@ -80,7 +80,7 @@ final class CryptoCurrencyCell: UITableViewCell {
     
     //MARK: - API
     
-    func configureCell(with viewModel: CryptoCurrencyCellViewModel) {
+    func configureCell(with viewModel: CryptoCurrencyItemViewModel) {
         nameLabel.text = viewModel.name
         symbolLabel.text = viewModel.symbol
         priceLabel.text = viewModel.currentPrice

@@ -1,11 +1,6 @@
 import Foundation
 
-enum CryptoCurrencyCellViewModelState {
-    case loading
-    case dataReceived([CryptoCurrencyCellViewModel])
-}
-
-final class CryptoCurrencyCellViewModel {
+final class CryptoCurrencyItemViewModel {
 
     let coinModel: CoinModel
     
@@ -47,12 +42,12 @@ final class CryptoCurrencyCellViewModel {
     }
 }
 
-extension CryptoCurrencyCellViewModel: Hashable {
+extension CryptoCurrencyItemViewModel: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(coinModel)
     }
     
-    static func ==(lhs: CryptoCurrencyCellViewModel, rhs: CryptoCurrencyCellViewModel) -> Bool {
+    static func ==(lhs: CryptoCurrencyItemViewModel, rhs: CryptoCurrencyItemViewModel) -> Bool {
         return lhs.coinModel == rhs.coinModel
     }
 }
