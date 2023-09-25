@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ImageRepository {
+protocol ImagesRepository: Cancellable {
     
     func getImageData(
         for utlPath: String,

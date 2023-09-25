@@ -9,8 +9,7 @@ protocol ImageServiceProtocol {
 
 
 
-final class NSCacheImageRepository: ImageRepository {
-    
+final class NSCacheImageRepository: ImagesRepository {
     private let imageCache = {
         let cache = NSCache<NSString, UIImage>()
         cache.countLimit = 300
@@ -18,11 +17,11 @@ final class NSCacheImageRepository: ImageRepository {
         return cache
     }()
     
-    func fetchImage(for imageUrl: String) -> UIImage? {
+    func getImageData(for imageUrl: String) -> Data? {
         return imageCache.object(forKey: NSString(string: imageUrl))
     }
     
-    func saveImage(_ image: UIImage, for imageUrl: String) {
+    func saveImageData(_ imageData: Data, for imageUrl: String) {
         imageCache.setObject(image, forKey: NSString(string: imageUrl))
     }
 }

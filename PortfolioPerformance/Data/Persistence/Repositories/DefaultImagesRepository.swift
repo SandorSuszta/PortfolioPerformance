@@ -1,6 +1,6 @@
 import Foundation
 
-final class DefaultImageRepository: ImageRepository {
+final class DefaultImageRepository: ImagesRepository {
     private let httpClient: HTTPClient
     private let imagesCache: ImagesStorage
     
@@ -17,8 +17,8 @@ final class DefaultImageRepository: ImageRepository {
         
         if let data = imagesCache.getImageData(for: urlPath) {
             completion(.success(data))
-        } else {
             
+        } else {
             let url = URL(string: urlPath)
             
             httpClient.performRequest(
@@ -31,5 +31,9 @@ final class DefaultImageRepository: ImageRepository {
     
     func saveImageData(_ imageData: Data, for urlPath: String) {
         imagesCache.save(imageData, for: urlPath)
+    }
+    
+    func cancel() {
+        httpClient.cancel()
     }
 }

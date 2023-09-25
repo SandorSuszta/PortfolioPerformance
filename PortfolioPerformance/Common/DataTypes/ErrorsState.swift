@@ -1,6 +1,6 @@
 import Foundation
 
-enum ErrorState {
+enum ErrorStatus {
     case noErrors
-    case error(PPError)
+    case error(Error)
 }

@@ -2,6 +2,7 @@ import Foundation
 
 final class HTTPClient: HTTPClientProtocol {
     private let parser: JSONParserProtocol
+    private var dataTask: URLSessionDataTask?
     
     // MARK: - Init
     
@@ -18,7 +19,7 @@ final class HTTPClient: HTTPClientProtocol {
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil  else {
                 completionHandler(.failure(PPError.netwokingError))
                 return
@@ -31,5 +32,13 @@ final class HTTPClient: HTTPClientProtocol {
                 completionHandler(.failure(PPError.decodingError))
             }
         }
+        dataTask?.resume()
+    }
+}
+
+extension HTTPClient: Cancellable {
+    func cancel() {
+        dataTask?.cancel()
+        dataTask = nil
     }
 }
